@@ -334,6 +334,7 @@
                                 <button type="button" class="col-lg-6 col-xl-6 col-sm-12 col-12 btn btn-outline-info px-5 radius-30 sw_mode_Manual" style="font-size:20px">โหมดสั่งงานด้วยตนเอง</button>
                             </div>
                         </div>
+                        </div>
                             <!-- <div class="card-body"> -->
                     <div class="row">
                         <?php for($i = 1; $i <= 12; $i++){ if(
