@@ -57,12 +57,10 @@
         </thead>
         <tbody>
             <?php
-                $i = 1;
                 $sql = "SELECT data_timestamp, $sting_channrl
                 FROM tb_data_sensor WHERE data_sn = '$house_master' AND data_timestamp BETWEEN '$start_day' AND '$stop_day' AND mod(minute(`data_time`),'$sel_all_every') = 0
                             ORDER BY data_timestamp ";
                 $stmt = $dbcon->query($sql);
-                $data0 = [];
                 $j=count($ch_value[3]);
                 while ($row = $stmt->fetch()) {
                     echo '<tr>
