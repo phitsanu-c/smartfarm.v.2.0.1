@@ -639,6 +639,6 @@ echo json_encode([
     'meter_mode' => $meter_mode,
     'meterImg' => $meterImg,
     'meterUnit' => $meterUnit,
-    'time_update' => $row_9[0]
-    // 'ddd'=> 'asss'
+    'time_update' => $row_9[0],
+    'theme' => $_SESSION["login_theme"]
 ]);

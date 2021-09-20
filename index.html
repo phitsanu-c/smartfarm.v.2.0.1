@@ -638,11 +638,17 @@
                                     function onConnectionLost(responseObject) {
                                         if (responseObject.errorCode !== 0) {
                                             console.log("Connection Lost: " + responseObject.errorMessage);
-                                            location.reload();
+                                            connect();
+                                            // location.reload();
                                             // window.alert("Someone else took my websocket!\nRefresh to take it back.");
                                         }
                                     }
                                     // +++++++++------------+++++++++++
+                                    const myArr = res.theme.split(" ");
+                                    // alert(myArr[0])
+                                    if (myArr[0] === "dark-theme") {
+                                        am4core.useTheme(am4themes_dark);
+                                    }
                                     am4core.useTheme(am4themes_animated);
                                     var chart = am4core.create("chart_realtime", am4charts.XYChart);
                                     chart.dateFormatter.inputDateFormat = "yyyy/MM/dd - HH:mm";
@@ -1168,70 +1174,72 @@
                         }
                     });
                     // Report ------------------
-                    $(".memu_report").click(function() {
+                    // $(".memu_report").click(function() {
+                    $(".te_st").html(res.s_master.site_name);
+                    $(".te_ht").html(res.s_master.house_name);
+                    $.ajax({
+                        url: "views/report_sensor.php",
+                        method: "post",
+                        data: {
+                            house_master: house_master,
+                            dashStatus: res.dashStatus,
+                            dashName: res.dashName,
+                            dashSncanel: res.dashSncanel,
+                            dashMode: res.dashMode,
+                            dashUnit: res.dashUnit
+                        },
+                        // dataType: "json",
+                        success: function(resp) {
+                            $("#report_sensor").html(resp);
+                        }
+                    });
+
+                    // var countStatus_con = countElement(1, controlstatus);
+
+                    // function countElement(item, array) {
+                    //     var count = 0;
+                    //     $.each(array, function(i, v) {
+                    //         if (v === item) count++;
+                    //     });
+                    //     return count;
+                    // }
+                    if (count_stcont == 0) {
+                        $(".r_reControl").hide();
+                        $(".r_reAutoControl").hide();
+                    } else {
+                        $(".r_reControl").show();
+                        $(".r_reAutoControl").show();
+
+                        // $(".r_reControl").click(function() {
                         $.ajax({
-                            url: "views/report_sensor.php",
+                            url: "views/report_control.php",
                             method: "post",
                             data: {
                                 house_master: house_master,
-                                dashStatus: res.dashStatus,
-                                dashName: res.dashName,
-                                dashSncanel: res.dashSncanel,
-                                dashMode: res.dashMode,
-                                dashUnit: res.dashUnit
+                                controlstatus: JSON.stringify(res.controlstatus),
+                                conttrolname: JSON.stringify(res.conttrolname)
                             },
                             // dataType: "json",
                             success: function(resp) {
-                                $("#report_sensor").html(resp);
+                                $("#report_control").html(resp);
                             }
                         });
-
-                        // var countStatus_con = countElement(1, controlstatus);
-
-                        // function countElement(item, array) {
-                        //     var count = 0;
-                        //     $.each(array, function(i, v) {
-                        //         if (v === item) count++;
-                        //     });
-                        //     return count;
-                        // }
-                        if (count_stcont == 0) {
-                            $(".r_reControl").hide();
-                            $(".r_reAutoControl").hide();
-                        } else {
-                            $(".r_reControl").show();
-                            $(".r_reAutoControl").show();
-
-                            // $(".r_reControl").click(function() {
-                            $.ajax({
-                                url: "views/report_control.php",
-                                method: "post",
-                                data: {
-                                    house_master: house_master,
-                                    controlstatus: JSON.stringify(res.controlstatus),
-                                    conttrolname: JSON.stringify(res.conttrolname)
-                                },
-                                // dataType: "json",
-                                success: function(resp) {
-                                    $("#report_control").html(resp);
-                                }
-                            });
-                            // });
-                            $.ajax({
-                                url: "views/report_controlAuto.php",
-                                method: "post",
-                                data: {
-                                    house_master: house_master,
-                                    controlstatus: res.controlstatus,
-                                    conttrolname: res.conttrolname
-                                },
-                                // dataType: "json",
-                                success: function(resp) {
-                                    $("#report_controlAuto").html(resp);
-                                }
-                            });
-                        }
-                    });
+                        // });
+                        $.ajax({
+                            url: "views/report_controlAuto.php",
+                            method: "post",
+                            data: {
+                                house_master: house_master,
+                                controlstatus: res.controlstatus,
+                                conttrolname: res.conttrolname
+                            },
+                            // dataType: "json",
+                            success: function(resp) {
+                                $("#report_controlAuto").html(resp);
+                            }
+                        });
+                    }
+                    // });
 
                 }
             });
