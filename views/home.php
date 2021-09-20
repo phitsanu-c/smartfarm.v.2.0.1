@@ -125,18 +125,18 @@
                             <h5 class="text-center">สภาพอากาศจากกรมอุตุนิยมวิทยา</h5>
                             <div class="row">
                                 <div class="col-lg-4 col-xl-4 col-sm-6 text-center">
-                                    <img src="" class="weather-icon" alt="Weather Icon" style="height: 40%; width: 40%;" /><br>
-                                    <span class="mb-0 text-primary weather-description capitalize"></span>
+                                    <img src="" class="weather-icon" alt="Weather Icon" style=" width: 30%;" /><br>
+                                    <span class="mb-0 text-primary weather-description capitalize"></span><br>
                                 </div>
                                 <div class="col-lg-4 col-xl-4 col-sm-6 text-center">
                                     <h6 class="mb-0">อุณหภูมิ</h6><br>
                                     <h6 class="mb-0 font-semibold text-primary weather-temperature"></h6><br>
-                                    <h6 class="mb-0 text-primary"> (<span class="weather-min-temperature"></span> - <span class="weather-max-temperature"></span>)</h6>
+                                    <h6 class="mb-0 text-primary"> (<span class="weather-min-temperature"></span> - <span class="weather-max-temperature"></span>)</h6><br>
                                 </div>
                                 <!-- <hr/> -->
                                 <div class="col-lg-4 col-xl-4 col-sm-6 text-center">
                                     <h6 class="mb-0">ความชื้นในอากาศ</h6><br>
-                                    <h6 class="mb-0 text-primary weather-humidity"></h6>
+                                    <h6 class="mb-0 text-primary weather-humidity"></h6><br>
                                 </div>
                                 <div class="col-lg-4 col-xl-4 col-sm-6 text-center">
                                     <h6 class="mb-0">ความเร็วลม</h6><br>
