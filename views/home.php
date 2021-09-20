@@ -328,10 +328,10 @@
                         <h4 class="card-title text-center"><b>ระบบควบคุม </b></h4>
                         <div class="row g-2">
                             <div class="col-lg-6 col-xl-6 col-sm-12 col-12" >
-                                <button type="button" class="col-lg-6 offset-lg-6 col-xl-6 offset-xl-6 col-sm-12 col-12 btn btn-outline-success px-5 radius-30 sw_mode_Auto" style="font-size:20px">โหมดตั้งเวลา</button>
+                                <button type="button" class="col-lg-6 offset-lg-6 col-xl-6 offset-xl-6 col-sm-12 col-12 btn btn-outline-success px-5 radius-30 sw_mode_Auto" style="font-size:18px">โหมดตั้งเวลา</button>
                             </div>
                             <div class="col-lg-6 col-xl-6 col-sm-12 col-12">
-                                <button type="button" class="col-lg-6 col-xl-6 col-sm-12 col-12 btn btn-outline-info px-5 radius-30 sw_mode_Manual" style="font-size:20px">โหมดสั่งงานด้วยตนเอง</button>
+                                <button type="button" class="col-lg-6 col-xl-6 col-sm-12 col-12 btn btn-outline-info px-5 radius-30 sw_mode_Manual" style="font-size:18px">โหมดสั่งงานด้วยตนเอง</button>
                             </div>
                         </div>
                         </div>
