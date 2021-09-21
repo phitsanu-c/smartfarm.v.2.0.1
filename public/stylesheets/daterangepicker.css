@@ -411,5 +411,6 @@
     }
     .daterangepicker .drp-calendar.left {
         clear: none !important;
+        color: #000;
     }
 }
