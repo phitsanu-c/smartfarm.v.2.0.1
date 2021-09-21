@@ -61,13 +61,13 @@
         $co = $row_site["site_id"];
     ?>
         <div class="col">
-            <div class="card" style="padding: 1.25rem;">
+            <div class="card" style="padding: 1.25rem; height:440px; border-radius:20px">
                 <img src="public/images/site/<?= $row_site["site_img"] ?>" style="height: 20vh; width: 100%;" class="card-img-top img-fluid" alt="site01">
                 <!-- <div class="card"> -->
                 <h5 class="card-title text-bold text-center" style="margin-top: 15px">SITE :
                     <B><B><?= $row_site["site_name"] ?></B></B>
                 </h5>
-                <div class="d-grid">
+                <div class="d-grid" style="overflow:auto; padding-left:10px; padding-right:10px;" id="style-3">
                 <?php 
                     $stmt2 = $dbcon->query("SELECT * FROM tb2_house WHERE house_siteID ='$co'");
                     foreach ($stmt2 as $row) {
