@@ -1,18 +1,20 @@
 <?php
-    // $controlstatus = $_POST['controlstatus'];
+    // $controlstatus = json_encode($_POST['controlstatus']);
     // $conttrolname = $_POST['conttrolname'];
     // $count_dash = array_count_values($dashMode)['1'];
     // print_r( array_count_values($dashStatus) );
 // echo array_count_values($controlstatus)['0'];
+// echo json_encode($controlstatus);
 // exit();
+
 ?>
 <div class="d-sm-flex">
     <div class="col-lg-7 col-xl-7 col-sm-12">
         <div class="row">
-            <button type="button" class="col-xl-2 col-sm-4 btn btn-outline-secondary px-2 r_all" house_master="<?= $_POST['house_master'] ?>" status="<?= $_POST['controlstatus'] ?>" name='<?= $_POST["conttrolname"] ?>' mode="all">ทั้งหมด</button>
-            <button type="button" class="col-xl-2 col-sm-4 btn btn-outline-secondary px-2 r_day" house_master="<?= $_POST['house_master'] ?>" status="<?= $_POST['controlstatus'] ?>" name='<?= $_POST["conttrolname"] ?>' mode="day">1 วัน</button>
-            <button type="button" class="col-xl-2 col-sm-4 btn btn-outline-secondary px-2 r_week" house_master="<?= $_POST['house_master'] ?>" status="<?= $_POST['controlstatus'] ?>" name='<?= $_POST["conttrolname"] ?>' mode="week">1 สัปดาห์</button>
-            <button type="button" class="col-xl-2 col-sm-6 btn btn-outline-secondary px-2 r_month" house_master="<?= $_POST['house_master'] ?>" status="<?= $_POST['controlstatus'] ?>" name='<?= $_POST["conttrolname"] ?>' mode="month">1 เดือน</button>
+            <button type="button" class="col-xl-2 col-sm-4 btn btn-outline-secondary px-2 r_all" mode="all">ทั้งหมด</button>
+            <button type="button" class="col-xl-2 col-sm-4 btn btn-outline-secondary px-2 r_day" mode="day">1 วัน</button>
+            <button type="button" class="col-xl-2 col-sm-4 btn btn-outline-secondary px-2 r_week" mode="week">1 สัปดาห์</button>
+            <button type="button" class="col-xl-2 col-sm-6 btn btn-outline-secondary px-2 r_month" mode="month">1 เดือน</button>
             <button type="button" class="col-xl-2 col-sm-6 btn btn-outline-secondary px-2 r_from_to">กำหนดเอง</button>
         </div>
     </div>
@@ -85,42 +87,18 @@
     $('.r_end').on('apply.daterangepicker', function(ev, picker) {
         $(this).val(picker.startDate.format('YYYY/MM/DD - HH:mm'));
     });
-    // ch_radio('temp');
+
     $(".r_all").click(function() {
-        report_control_table(
-        $(this).attr("house_master"),
-        $.parseJSON($(this).attr("status")),
-        $.parseJSON($(this).attr("name")),
-        $(this).attr("mode"),
-        $(".r_start").val(),
-        $(".r_end").val());
+        report_control_table($(this).attr("mode"), $(".r_start").val(), $(".r_end").val());
     });
     $(".r_day").click(function() {
-        report_control_table(
-        $(this).attr("house_master"),
-        $.parseJSON($(this).attr("status")),
-        $.parseJSON($(this).attr("name")),
-        $(this).attr("mode"),
-        $(".r_start").val(),
-        $(".r_end").val());
+        report_control_table($(this).attr("mode"), $(".r_start").val(), $(".r_end").val());
     });
     $(".r_week").click(function() {
-        report_control_table(
-        $(this).attr("house_master"),
-        $.parseJSON($(this).attr("status")),
-        $.parseJSON($(this).attr("name")),
-        $(this).attr("mode"),
-        $(".r_start").val(),
-        $(".r_end").val());
+        report_control_table($(this).attr("mode"), $(".r_start").val(), $(".r_end").val());
     });
     $(".r_month").click(function() {
-        report_control_table(
-        $(this).attr("house_master"),
-        $.parseJSON($(this).attr("status")),
-        $.parseJSON($(this).attr("name")),
-        $(this).attr("mode"),
-        $(".r_start").val(),
-        $(".r_end").val());
+        report_control_table($(this).attr("mode"), $(".r_start").val(), $(".r_end").val());
     });
     $(".r_from_to").click(function() {
         $("#modal_fromto").modal("show");
@@ -153,53 +131,49 @@
             $(".r_end").removeClass('is-invalid');
         }
         $("#modal_fromto").modal("hide");
-        report_control_table( $(this).attr("house_master"),
-            $.parseJSON($(this).attr("status")),
-            $.parseJSON($(this).attr("name")),
-            "from_to", $(".r_start").val(), $(".r_end").val()
-        );
+        report_control_table("from_to", $(".r_start").val(), $(".r_end").val());
     });
-    function report_control_table(key1,key2,key3,key4,key5,key6){
+    function report_control_table(key1,key2,key3){
         var loading = verticalNoTitle();
         $.ajax({
             type: "POST",
             url: "routes/report_controlTable.php",
             data: {
-                house_master: key1,
-                status : key2,
-                name : key3,
-                mode : key4,
-                r_start : key5,
-                r_end : key6
+                house_master: '<?= $_POST["house_master"] ?>',
+                status : '<?= $_POST["controlstatus"] ?>',
+                name : '<?= $_POST["conttrolname"] ?>',
+                mode : key1,
+                r_start : key2,
+                r_end : key3
             },
             // dataType: 'json',
             success: function(res) {
                 $("#rept_control").html(res);
-                if (key4 === "all") {
+                if (key1 === "all") {
                     $(".r_all").addClass("active");
                     $(".r_day").removeClass("active");
                     $(".r_week").removeClass("active");
                     $(".r_month").removeClass("active");
                     $(".r_from_to").removeClass("active");
-                }else if(key4 === "day"){
+                }else if(key1 === "day"){
                     $(".r_all").removeClass("active");
                     $(".r_day").addClass("active");
                     $(".r_week").removeClass("active");
                     $(".r_month").removeClass("active");
                     $(".r_from_to").removeClass("active");
-                }else if(key4 === "week"){
+                }else if(key1 === "week"){
                     $(".r_all").removeClass("active");
                     $(".r_day").removeClass("active");
                     $(".r_week").addClass("active");
                     $(".r_month").removeClass("active");
                     $(".r_from_to").removeClass("active");
-                }else if(key4 === "month"){
+                }else if(key1 === "month"){
                     $(".r_all").removeClass("active");
                     $(".r_day").removeClass("active");
                     $(".r_week").removeClass("active");
                     $(".r_month").addClass("active");
                     $(".r_from_to").removeClass("active");
-                }else if(key4 === "from_to"){
+                }else if(key1 === "from_to"){
                     $(".r_all").removeClass("active");
                     $(".r_day").removeClass("active");
                     $(".r_week").removeClass("active");
