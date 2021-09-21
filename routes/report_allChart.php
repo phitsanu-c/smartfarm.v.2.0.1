@@ -56,47 +56,47 @@ $j=count($ch_value[3]);
 while ($row = $stmt->fetch()) {
    //  echo $row['name']."<br />\n";
    // $data0["count"] = $j;
-   $data0["timestamp"][] = substr($row[0], 0 ,18);
-   $data0["data_1"][] = $row[1];
-   if($j >= 2){$data0["data_2"][] = $row[2];}
-   if($j >= 3){$data0["data_3"][] = $row[3];}
-   if($j >= 4){$data0["data_4"][] = $row[4];}
-   if($j >= 5){$data0["data_5"][] = $row[5];}
-   if($j >= 6){$data0["data_6"][] = $row[6];}
-   if($j >= 7){$data0["data_7"][] = $row[7];}
-   if($j >= 8){$data0["data_8"][] = $row[8];}
-   if($j >= 9){$data0["data_9"][] = $row[9];}
-   if($j >= 10){$data0["data_10"][] = $row[10];}
-   if($j >= 11){$data0["data_11"][] = $row[11];}
-   if($j >= 12){$data0["data_12"][] = $row[12];}
-   if($j >= 13){$data0["data_13"][] = $row[13];}
-   if($j >= 14){$data0["data_14"][] = $row[14];}
-   if($j >= 15){$data0["data_15"][] = $row[15];}
-   if($j >= 16){$data0["data_16"][] = $row[16];}
-   if($j >= 17){$data0["data_17"][] = $row[17];}
-   if($j >= 18){$data0["data_18"][] = $row[18];}
-   if($j >= 19){$data0["data_19"][] = $row[19];}
-   if($j >= 20){$data0["data_20"][] = $row[20];}
-   if($j >= 21){$data0["data_21"][] = $row[21];}
-   if($j >= 22){$data0["data_22"][] = $row[22];}
-   if($j >= 23){$data0["data_23"][] = $row[23];}
-   if($j >= 24){$data0["data_24"][] = $row[24];}
-   if($j >= 25){$data0["data_25"][] = $row[25];}
-   if($j >= 26){$data0["data_26"][] = $row[26];}
-   if($j >= 27){$data0["data_27"][] = $row[27];}
-   if($j >= 28){$data0["data_28"][] = $row[28];}
-   if($j >= 29){$data0["data_29"][] = $row[29];}
-   if($j >= 30){$data0["data_30"][] = $row[30];}
-   if($j >= 31){$data0["data_31"][] = $row[31];}
-   if($j >= 32){$data0["data_32"][] = $row[32];}
-   if($j >= 33){$data0["data_33"][] = $row[33];}
-   if($j >= 34){$data0["data_34"][] = $row[34];}
-   if($j >= 35){$data0["data_35"][] = $row[35];}
-   if($j >= 36){$data0["data_36"][] = $row[36];}
-   if($j >= 37){$data0["data_37"][] = $row[37];}
-   if($j >= 38){$data0["data_38"][] = $row[38];}
-   if($j >= 39){$data0["data_39"][] = $row[39];}
-   if($j >= 40){$data0["data_40"][] = $row[40];}
+   // $data0["timestamp"][] = substr($row[0], 0 ,10).' '.substr($row[0], 14 ,18);
+   $data0["data_1"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[1]];
+   if($j >= 2){$data0["data_2"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[2]];}
+   if($j >= 3){$data0["data_3"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[3]];}
+   if($j >= 4){$data0["data_4"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[4]];}
+   if($j >= 5){$data0["data_5"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[5]];}
+   if($j >= 6){$data0["data_6"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[6]];}
+   if($j >= 7){$data0["data_7"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[7]];}
+   if($j >= 8){$data0["data_8"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[8]];}
+   if($j >= 9){$data0["data_9"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[9]];}
+   if($j >= 10){$data0["data_10"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[10]];}
+   if($j >= 11){$data0["data_11"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[11]];}
+   if($j >= 12){$data0["data_12"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[12]];}
+   if($j >= 13){$data0["data_13"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[13]];}
+   if($j >= 14){$data0["data_14"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[14]];}
+   if($j >= 15){$data0["data_15"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[15]];}
+   if($j >= 16){$data0["data_16"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[16]];}
+   if($j >= 17){$data0["data_17"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[17]];}
+   if($j >= 18){$data0["data_18"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[18]];}
+   if($j >= 19){$data0["data_19"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[19]];}
+   if($j >= 20){$data0["data_20"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[20]];}
+   if($j >= 21){$data0["data_21"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[21]];}
+   if($j >= 22){$data0["data_22"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[22]];}
+   if($j >= 23){$data0["data_23"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[23]];}
+   if($j >= 24){$data0["data_24"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[24]];}
+   if($j >= 25){$data0["data_25"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[25]];}
+   if($j >= 26){$data0["data_26"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[26]];}
+   if($j >= 27){$data0["data_27"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[27]];}
+   if($j >= 28){$data0["data_28"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[28]];}
+   if($j >= 29){$data0["data_29"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[29]];}
+   if($j >= 30){$data0["data_30"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[30]];}
+   if($j >= 31){$data0["data_31"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[31]];}
+   if($j >= 32){$data0["data_32"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[32]];}
+   if($j >= 33){$data0["data_33"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[33]];}
+   if($j >= 34){$data0["data_34"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[34]];}
+   if($j >= 35){$data0["data_35"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[35]];}
+   if($j >= 36){$data0["data_36"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[36]];}
+   if($j >= 37){$data0["data_37"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[37]];}
+   if($j >= 38){$data0["data_38"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[38]];}
+   if($j >= 39){$data0["data_39"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[39]];}
+   if($j >= 40){$data0["data_40"][] = [substr($row[0], 0 ,10).' '.substr($row[0], 13 ,18), $row[40]];}
    // $data0[] = $row;
 }
 

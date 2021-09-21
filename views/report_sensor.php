@@ -638,7 +638,7 @@
                     }else{
                         var theme = '';
                     }
-                    // console.log(res[1])
+                    // console.log(res)
                     // alert(ch_value[1][1])
                     var data_chart = [];
                     // var c_unit = [];
@@ -678,9 +678,14 @@
                             data: ch_value[2]
                         },
                         xAxis: {
-                            type: 'category',
-                            data: res.data.timestamp,
-                            boundaryGap: false
+                            type: 'time',//'category',
+                            boundaryGap: false,
+                            axisLabel: {
+                                formatter: (function(value){
+                                    return moment(value).format('YYYY/MM/DD HH:mm:ss');
+                                })
+                            },
+                            // data: res.data.timestamp,
                         },
                         yAxis: {
                             type: 'value',
@@ -698,7 +703,7 @@
                             type: 'inside',
                             start: 0,
                             end: 100
-                        }, {
+                            }, {
                             start: 0,
                             end: 100
                         }],
