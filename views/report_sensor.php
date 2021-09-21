@@ -551,7 +551,7 @@
                 $("input[name='checkbox_light[]']:checked").map(function (){
                     checked.push($(this).val());
                     if($(this).attr("d_mode") == 5 || $(this).attr("d_mode") == 7){
-                        d_name.push($(this).attr("d_name")+" (µmol m^2 s^-1)");//(µmol m[baseline-shift: super; font-size: 10;]-2[baseline-shift: baseline;]s[baseline-shift: super; font-size: 10;]-1[baseline-shift: baseline;])");
+                        d_name.push($(this).attr("d_name"));//(µmol m[baseline-shift: super; font-size: 10;]-2[baseline-shift: baseline;]s[baseline-shift: super; font-size: 10;]-1[baseline-shift: baseline;])");
                     }else{
                         d_name.push($(this).attr("d_name"));
                     }
@@ -660,6 +660,20 @@
                     // return false;
                     var myChart = echarts.init(document.getElementById('report_chart'), theme);
                     // var unt = "µmol m[baseline-shift: super; font-size: 10;]-2[baseline-shift: baseline;]s[baseline-shift: super; font-size: 10;]-1[baseline-shift: baseline;]";
+                    if(ch_value[3][(0)] == 1){
+                        var unt = "℃";
+                    }else if(ch_value[3][(0)] == 2){
+                        var unt = "%Rh";
+                    }else if(ch_value[3][(0)] == 3){
+                        var unt = "%";
+                    }else if(ch_value[3][(0)] == 4 || ch_value[3][(0)] == 6 ){
+                        var unt = "KLux";
+                    }else if(ch_value[3][(0)] == 5 || ch_value[3][(0)] == 7){
+                        var unt = "µmol m^2 s^(-1)";
+                    }else{
+                        var unt = "W";
+                    }
+                    // alert(ch_value[3][(0)])
                     // specify chart configuration item and data
                     var option = {
                         title: {
@@ -689,7 +703,7 @@
                         },
                         yAxis: {
                             type: 'value',
-                            // name: unt//'µmol m<sup>-2</sup>s<sup>-1</sup>',
+                            name: unt//'µmol m<sup>-2</sup>s<sup>-1</sup>',
                             // axisLabel : {
                             //     formatter: '{value} (µmol m<sup>-2</sup>s<sup>-1</sup>)'
                             // }
