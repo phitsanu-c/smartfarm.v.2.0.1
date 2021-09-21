@@ -647,7 +647,7 @@
                                 name: ch_value[2][(k-1)],
                                 type: 'line',
                                 showSymbol: false,
-                                areaStyle: {},
+                                // areaStyle: {},
                                 data: res.data['data_'+k]
                         })
                     }

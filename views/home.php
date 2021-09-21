@@ -125,14 +125,15 @@
                             <h5 class="text-center">สภาพอากาศจากกรมอุตุนิยมวิทยา</h5>
                             <div class="row">
                                 <div class="col-lg-4 col-xl-4 col-sm-6 text-center">
-                                    <img src="" class="weather-icon" alt="Weather Icon" style=" width: 30%;" /><br>
-                                    <span class="mb-0 text-primary weather-description capitalize"></span><br>
-                                </div>
-                                <div class="col-lg-4 col-xl-4 col-sm-6 text-center">
                                     <h6 class="mb-0">อุณหภูมิ</h6><br>
                                     <h6 class="mb-0 font-semibold text-primary weather-temperature"></h6><br>
                                     <h6 class="mb-0 text-primary"> (<span class="weather-min-temperature"></span> - <span class="weather-max-temperature"></span>)</h6><br>
                                 </div>
+                                <div class="col-lg-4 col-xl-4 col-sm-6 text-center">
+                                    <img src="" class="weather-icon" alt="Weather Icon" style=" width: 30%;" /><br>
+                                    <span class="text-primary weather-description capitalize"></span><br><br>
+                                </div>
+                                
                                 <!-- <hr/> -->
                                 <div class="col-lg-4 col-xl-4 col-sm-6 text-center">
                                     <h6 class="mb-0">ความชื้นในอากาศ</h6><br>
@@ -168,8 +169,8 @@
                                         <div class="card-body border radius-10 shadow-none mb-3">
                                             <div class="row g-0">
                                                 <div class="d-flex">
-                                                    <h6 class="card-title mt-2"><B><?= $dashName[$i] ?></B></h6>
-                                                    <div class="ms-auto image-popups">
+                                                    <h6 class="card-title mt-2 "><B><?= $dashName[$i] ?></B></h6>
+                                                    <div class="ms-auto mt-2 image-popups">
                                                         <?php if($_POST["ingMap"][$i] != ""){
                                                             echo '<a href="public/images/img_map/'.$_POST["ingMap"][$i].'"><i class="lni lni-map-marker"></i></a>';
                                                         }?>
