@@ -18,7 +18,7 @@
     }
 </style>
 <div class="d-sm-flex">
-    <div class="col-lg-6 col-xl-6 col-sm-12">
+    <div class="col-lg-6 col-xl-6 col-sm-12 mb-2 ">
         <div class="row">
             <button type="button" class="col-sm-3 btn btn-outline-secondary px-2 all_day">1 วัน</button>
             <button type="button" class="col-sm-3 btn btn-outline-secondary px-2 all_week">1 สัปดาห์</button>
