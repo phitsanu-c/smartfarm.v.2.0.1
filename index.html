@@ -217,32 +217,37 @@
                     <div class="col-12 col-lg-12 col-xl-12 d-flex">
                         <div class="card w-100 radius-10">
                             <div class="card-body">
-                                <ul class="nav nav-pills mb-1" role="tablist">
-                                    <li class="nav-item col-sm-12 mb-1" role="presentation">
-                                        <a class="nav-link active" data-bs-toggle="pill" href="#primary-pills-home" role="tab" aria-selected="true" style="border: 1px solid transparent; border-color: #6c757d;">
-                                            <div class="d-flex  text-center">
-                                                <!-- <div class="tab-icon"><i class='bx bx-home font-18 me-1'></i></div> -->
-                                                <div class="tab-title">ข้อมูลเซ็นเซอร์</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item col-sm-6 mb-1" role="presentation">
-                                        <a class="nav-link r_reControl" data-bs-toggle="pill" href="#primary-pills-profile" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
-                                            <div class="d-flex align-items-center">
-                                                <!-- <div class="tab-icon"><i class='bx bx-user-pin font-18 me-1'></i></div> -->
-                                                <div class="tab-title">ประวัติระบบควบคุม</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item col-sm-6 mb-1" role="presentation">
-                                        <a class="nav-link r_reAutoControl" data-bs-toggle="pill" href="#primary-pills-contact" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
-                                            <div class="d-flex align-items-center">
-                                                <!-- <div class="tab-icon"><i class='bx bx-microphone font-18 me-1'></i></div> -->
-                                                <div class="tab-title">ประวัติการตั้งเวลา</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
+                                <div class="row">
+                                    <div class="col-12 col-lg-4 col-xl-4">
+                                        <ul class="nav nav-pills mb-1" role="tablist">
+                                            <li class="nav-item col-12 col-lg-4 col-xl-4 mb-1" role="presentation">
+                                                <a class="nav-link active" data-bs-toggle="pill" href="#primary-pills-home" role="tab" aria-selected="true" style="border: 1px solid transparent; border-color: #6c757d;">
+                                                    <div class="d-flex text-center">
+                                                        <!-- <div class="tab-icon"><i class='bx bx-home font-18 me-1'></i></div> -->
+                                                        <div class="tab-title">ข้อมูลเซ็นเซอร์</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item col-6 col-lg-4 col-xl-4 mb-1" role="presentation">
+                                                <a class="nav-link r_reControl" data-bs-toggle="pill" href="#primary-pills-profile" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
+                                                    <div class="d-flex align-items-center">
+                                                        <!-- <div class="tab-icon"><i class='bx bx-user-pin font-18 me-1'></i></div> -->
+                                                        <div class="tab-title">ประวัติระบบควบคุม</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item col-6 col-lg-4 col-xl-4 mb-1" role="presentation">
+                                                <a class="nav-link r_reAutoControl" data-bs-toggle="pill" href="#primary-pills-contact" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
+                                                    <div class="d-flex align-items-center">
+                                                        <!-- <div class="tab-icon"><i class='bx bx-microphone font-18 me-1'></i></div> -->
+                                                        <div class="tab-title">ประวัติการตั้งเวลา</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
                                 <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="primary-pills-home" role="tabpanel">
                                         <div id="report_sensor"></div>

@@ -181,7 +181,7 @@
                                                 </div>
                                                 <div class="col-8 text-center">
                                                     <!-- <div class=""> -->
-                                                        <h6 class="card-text dash_data_1_<?= $i ?>"></h6>
+                                                        <h6 class="card-text dash_data_1_<?= $i ?>" style="<?php if(array_count_values($dashStatus)['1'] <= 2){ echo 'font-size:30px; margin-top:50px';}else{echo ' margin-top:30px';}?>"></h6>
                                                     <!-- </div> -->
                                                 </div>
                                             </div>
