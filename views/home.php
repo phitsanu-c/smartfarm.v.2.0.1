@@ -329,7 +329,7 @@
                         <h4 class="card-title text-center"><b>ระบบควบคุม </b></h4>
                         <div class="row g-2">
                             <div class="col-lg-6 col-xl-6 col-sm-12 col-12" >
-                                <button type="button" class="col-lg-6 offset-lg-6 col-xl-6 offset-xl-6 col-sm-12 col-12 btn btn-outline-success px-5 radius-30 sw_mode_Auto" style="font-size:18px">โหมดตั้งเวลา</button>
+                                <button type="button" class="col-lg-6 offset-lg-6 col-xl-6 offset-xl-6 col-sm-12 col-12 btn btn-outline-success px-5 radius-30 sw_mode_Auto" style="font-size:18px"><?php if($s_master["house_master"] == "KMUMT001"){echo "โหมดอัตโนมัติ";}else{echo "โหมดตั้งเวลา";} ?></button>
                             </div>
                             <div class="col-lg-6 col-xl-6 col-sm-12 col-12">
                                 <button type="button" class="col-lg-6 col-xl-6 col-sm-12 col-12 btn btn-outline-info px-5 radius-30 sw_mode_Manual" style="font-size:18px">โหมดสั่งงานด้วยตนเอง</button>
@@ -408,368 +408,406 @@
                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="row g-3" id="seve_auto" onsubmit="return false">
-                            <input type="hidden" class="channel" id="channel">
-                            <div class="border p-4 rounded mb-3 time_loop">
-                                <div class="d-flex mb-2">
-                                <B>TIMER Loop</B>
-                                    <div class="sw_toggle ms-auto">
-                                        <input class="input_check" type="checkbox" id="sw_7" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                        <div class="seve_auto">
+                            <form class="row g-3" id="seve_auto" onsubmit="return false">
+                                <input type="hidden" class="channel" id="channel">
+                                <div class="border p-4 rounded mb-3 time_loop">
+                                    <div class="d-flex mb-2">
+                                    <B>TIMER Loop</B>
+                                        <div class="sw_toggle ms-auto">
+                                            <input class="input_check" type="checkbox" id="sw_7" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 m-t-0">
+                                            <div class="form-group text-left">
+                                                <div class="row">
+                                                    <div class="col-md-3 align-vertical-center">
+                                                        <small class="form-control-feedback"> START </small>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <select id="time_s_7" class="form-select input_time">
+                                                            <option value="">Select</option>
+                                                            <option value="06:00">06:00</option>
+                                                            <option value="07:00">07:00</option>
+                                                            <option value="08:00">08:00</option>
+                                                            <option value="09:00">09:00</option>
+                                                            <option value="10:00">10:00</option>
+                                                            <option value="11:00">11:00</option>
+                                                            <option value="12:00">12:00</option>
+                                                            <option value="13:00">13:00</option>
+                                                            <option value="14:00">14:00</option>
+                                                            <option value="15:00">15:00</option>
+                                                            <option value="16:00">16:00</option>
+                                                            <option value="17:00">17:00</option>
+                                                        </select>
+                                                        <div class="invalid-feedback">กรุณาระบุเวลาเริ่มต้น</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 m-t-0">
+                                            <div class="form-group text-left">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <small class="form-control-feedback"> END </small>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <select id="time_e_7" class="form-select input_time">
+                                                            <option value="">Select</option>
+                                                            <option value="07:00">07:00</option>
+                                                            <option value="08:00">08:00</option>
+                                                            <option value="09:00">09:00</option>
+                                                            <option value="10:00">10:00</option>
+                                                            <option value="11:00">11:00</option>
+                                                            <option value="12:00">12:00</option>
+                                                            <option value="13:00">13:00</option>
+                                                            <option value="14:00">14:00</option>
+                                                            <option value="15:00">15:00</option>
+                                                            <option value="16:00">16:00</option>
+                                                            <option value="17:00">17:00</option>
+                                                            <option value="18:00">18:00</option>
+                                                        </select>
+                                                        <div class="invalid-feedback">กรุณาระบุเวลาสิ้นสุด</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 m-t-0">
+                                            <div class="form-group text-left">
+                                                <div class="row">
+                                                    <div class="col-md-3 align-vertical-center">
+                                                        <small class="form-control-feedback"> ON </small>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <select id="time_on_7" class="form-select input_time">
+                                                            <option value="">Select</option>
+                                                            <option value="5">5 min.</option>
+                                                            <option value="10">10 min.</option>
+                                                            <option value="15">15 min.</option>
+                                                            <option value="20">20 min.</option>
+                                                            <option value="25">25 min.</option>
+                                                            <option value="30">30 min.</option>
+                                                        </select>
+                                                        <div class="invalid-feedback">กรุณาระบุเวลาทำงาน</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 m-t-0">
+                                            <div class="form-group text-left">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <small class="form-control-feedback"> OFF </small>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <select id="time_off_7" class="form-select input_time">
+                                                            <option value="">Select</option>
+                                                            <option value="5">5 min.</option>
+                                                            <option value="10">10 min.</option>
+                                                            <option value="15">15 min.</option>
+                                                            <option value="20">20 min.</option>
+                                                            <option value="25">25 min.</option>
+                                                            <option value="30">30 min.</option>
+                                                        </select>
+                                                        <div class="invalid-feedback">กรุณาระบุเวลาหยุดทำงาน</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="border p-4 rounded">
+                                    <div class="d-flex mb-2">
+                                        <B>TIMER 1</B>
+                                        <div class="sw_toggle ms-auto">
+                                            <input class="input_check" type="checkbox" id="sw_1" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 m-t-0">
+                                            <div class="form-group text-left">
+                                                <div class="row">
+                                                    <div class="col-md-3 align-vertical-center">
+                                                        <small class="form-control-feedback start_7"> START </small>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <input type="time" id="time_s_1" class="form-control input_time">
+                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 m-t-0">
+                                            <div class="form-group text-left">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <small class="form-control-feedback end_7"> END </small>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <input type="time" id="time_e_1" class="form-control input_time">
+                                                        <select id="time_se_1" class="form-select input_time">
+                                                            <option value="0">0 : Close 0%</option>
+                                                            <option value="1">1 : Close 25%</option>
+                                                            <option value="2">2 : Close 50%</option>
+                                                            <option value="3">3 : Close 75%</option>
+                                                            <option value="4">4 : Close 100%</option>
+                                                        </select>
+                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <div class="d-flex mb-2">
+                                        <B>TIMER 2</B>
+                                        <div class="sw_toggle ms-auto">
+                                            <input class="input_check" type="checkbox" id="sw_2" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                        </div>
+                                    </div>
+                                    <div class="row m-t-10 ">
+                                        <div class="col-6 m-t-0">
+                                            <div class="form-group text-left">
+                                                <div class="row">
+                                                    <div class="col-md-3 align-vertical-center">
+                                                        <small class="form-control-feedback start_7"> START </small>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <input type="time" id="time_s_2" class="form-control input_time">
+                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 m-t-0">
+                                            <div class="form-group text-left">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <small class="form-control-feedback end_7"> END </small>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <input type="time" id="time_e_2" class="form-control input_time">
+                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
+                                                        <select id="time_se_2" class="form-select input_time">
+                                                            <option value="0">0 : Close 0%</option>
+                                                            <option value="1">1 : Close 25%</option>
+                                                            <option value="2">2 : Close 50%</option>
+                                                            <option value="3">3 : Close 75%</option>
+                                                            <option value="4">4 : Close 100%</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <div class="d-flex mb-2">
+                                        <B>TIMER 3</B>
+                                        <div class="sw_toggle ms-auto">
+                                            <input class="input_check" type="checkbox" id="sw_3" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                        </div>
+                                    </div>
+                                    <div class="row m-t-10 ">
+                                        <div class="col-6 m-t-0">
+                                            <div class="form-group text-left">
+                                                <div class="row">
+                                                    <div class="col-md-3 align-vertical-center">
+                                                        <small class="form-control-feedback start_7"> START </small>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <input type="time" id="time_s_3" class="form-control input_time">
+                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 m-t-0">
+                                            <div class="form-group text-left">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <small class="form-control-feedback end_7"> END </small>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <input type="time" id="time_e_3" class="form-control input_time">
+                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
+                                                        <select id="time_se_3" class="form-select input_time">
+                                                            <option value="0">0 : Close 0%</option>
+                                                            <option value="1">1 : Close 25%</option>
+                                                            <option value="2">2 : Close 50%</option>
+                                                            <option value="3">3 : Close 75%</option>
+                                                            <option value="4">4 : Close 100%</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <div class="d-flex mb-2">
+                                        <B>TIMER 4</B>
+                                        <div class="sw_toggle ms-auto">
+                                            <input class="input_check" type="checkbox" id="sw_4" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                        </div>
+                                    </div>
+                                    <div class="row m-t-10 ">
+                                        <div class="col-6 m-t-0">
+                                        <div class="form-group text-left">
+                                                <div class="row">
+                                                    <div class="col-md-3 align-vertical-center">
+                                                        <small class="form-control-feedback start_7"> START </small>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <input type="time" id="time_s_4" class="form-control input_time">
+                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 m-t-0">
+                                            <div class="form-group text-left">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <small class="form-control-feedback end_7"> END </small>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <input type="time" id="time_e_4" class="form-control input_time">
+                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
+                                                        <select id="time_se_4" class="form-select input_time">
+                                                            <option value="0">0 : Close 0%</option>
+                                                            <option value="1">1 : Close 25%</option>
+                                                            <option value="2">2 : Close 50%</option>
+                                                            <option value="3">3 : Close 75%</option>
+                                                            <option value="4">4 : Close 100%</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <div class="d-flex mb-2">
+                                        <B>TIMER 5</B>
+                                        <div class="sw_toggle ms-auto">
+                                            <input class="input_check" type="checkbox" id="sw_5" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                        </div>
+                                    </div>
+                                    <div class="row m-t-10 ">
+                                        <div class="col-6 m-t-0">
+                                        <div class="form-group text-left">
+                                                <div class="row">
+                                                    <div class="col-md-3 align-vertical-center">
+                                                        <small class="form-control-feedback start_7"> START </small>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <input type="time" id="time_s_5" class="form-control input_time">
+                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 m-t-0">
+                                            <div class="form-group text-left">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <small class="form-control-feedback end_7"> END </small>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <input type="time" id="time_e_5" class="form-control input_time">
+                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
+                                                        <select id="time_se_5" class="form-select input_time">
+                                                            <option value="0">0 : Close 0%</option>
+                                                            <option value="1">1 : Close 25%</option>
+                                                            <option value="2">2 : Close 50%</option>
+                                                            <option value="3">3 : Close 75%</option>
+                                                            <option value="4">4 : Close 100%</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <div class="d-flex mb-2">
+                                        <B>TIMER 6</B>
+                                        <div class="sw_toggle ms-auto">
+                                            <input class="input_check" type="checkbox" id="sw_6" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                        </div>
+                                    </div>
+                                    <div class="row m-t-10 ">
+                                        <div class="col-6 m-t-0">
+                                        <div class="form-group text-left">
+                                                <div class="row">
+                                                    <div class="col-md-3 align-vertical-center">
+                                                        <small class="form-control-feedback start_7"> START </small>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <input type="time" id="time_s_6" class="form-control input_time">
+                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 m-t-0">
+                                            <div class="form-group text-left">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <small class="form-control-feedback end_7"> END </small>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <input type="time" id="time_e_6" class="form-control input_time">
+                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
+                                                        <select id="time_se_6" class="form-select input_time">
+                                                            <option value="0">0 : Close 0%</option>
+                                                            <option value="1">1 : Close 25%</option>
+                                                            <option value="2">2 : Close 50%</option>
+                                                            <option value="3">3 : Close 75%</option>
+                                                            <option value="4">4 : Close 100%</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-6 m-t-0">
-                                        <div class="form-group text-left">
-                                            <div class="row">
-                                                <div class="col-md-3 align-vertical-center">
-                                                    <small class="form-control-feedback"> START </small>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <select id="time_s_7" class="form-select input_time">
-                                                        <option value="">Select</option>
-                                                        <option value="06:00">06:00</option>
-                                                        <option value="07:00">07:00</option>
-                                                        <option value="08:00">08:00</option>
-                                                        <option value="09:00">09:00</option>
-                                                        <option value="10:00">10:00</option>
-                                                        <option value="11:00">11:00</option>
-                                                        <option value="12:00">12:00</option>
-                                                        <option value="13:00">13:00</option>
-                                                        <option value="14:00">14:00</option>
-                                                        <option value="15:00">15:00</option>
-                                                        <option value="16:00">16:00</option>
-                                                        <option value="17:00">17:00</option>
-                                                    </select>
-                                                    <div class="invalid-feedback">กรุณาระบุเวลาเริ่มต้น</div>
-                                                </div>
+                            </from>
+                        </div>
+                        <div class="seve_auto_kmutt">
+                            <form class="row g-3" id="seve_auto_kmutt">
+                                <!-- <div class="tab-pane show active ridge" role="tabpanel"> -->
+                                    <div class="row">
+                                        <div class="container col-md-12">
+                                            <div class="text-center"><br>
+                                                <h5>Soil moisture (%)</h5>
+                                                <h6>ON - OFF Dripper 1</h6>
+                                                <input type="text" class="range_control range_control1"/>
+                                            </div>
+                                        </div>
+                                        <div class="container col-md-12">
+                                            <div class="text-center"><br>
+                                                <h5>Soil moisture (%)</h5>
+                                                <h6>ON - OFF Dripper 2</h6>
+                                                <input type="text" class="range_control range_control2"/>
+                                            </div>
+                                        </div>
+                                        <div class="container col-md-12">
+                                            <div class="text-center"><br>
+                                                <h5>temperature (℃)</h5>
+                                                <h6>ON - OFF Foggy inside and Sprinkler outside</h6>
+                                                <input type="text" class="range_control range_control3"/>
+                                            </div>
+                                        </div>
+                                        <div class="container col-md-12">
+                                            <div class="text-center"><br>
+                                                <h5>Light intensity (KLux)</h5>
+                                                <h6>ON - OFF Slan</h6>
+                                                <input type="text" class="range_control range_control5" />
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6 m-t-0">
-                                        <div class="form-group text-left">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <small class="form-control-feedback"> END </small>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <select id="time_e_7" class="form-select input_time">
-                                                        <option value="">Select</option>
-                                                        <option value="07:00">07:00</option>
-                                                        <option value="08:00">08:00</option>
-                                                        <option value="09:00">09:00</option>
-                                                        <option value="10:00">10:00</option>
-                                                        <option value="11:00">11:00</option>
-                                                        <option value="12:00">12:00</option>
-                                                        <option value="13:00">13:00</option>
-                                                        <option value="14:00">14:00</option>
-                                                        <option value="15:00">15:00</option>
-                                                        <option value="16:00">16:00</option>
-                                                        <option value="17:00">17:00</option>
-                                                        <option value="18:00">18:00</option>
-                                                    </select>
-                                                    <div class="invalid-feedback">กรุณาระบุเวลาสิ้นสุด</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 m-t-0">
-                                        <div class="form-group text-left">
-                                            <div class="row">
-                                                <div class="col-md-3 align-vertical-center">
-                                                    <small class="form-control-feedback"> ON </small>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <select id="time_on_7" class="form-select input_time">
-                                                        <option value="">Select</option>
-                                                        <option value="5">5 min.</option>
-                                                        <option value="10">10 min.</option>
-                                                        <option value="15">15 min.</option>
-                                                        <option value="20">20 min.</option>
-                                                        <option value="25">25 min.</option>
-                                                        <option value="30">30 min.</option>
-                                                    </select>
-                                                    <div class="invalid-feedback">กรุณาระบุเวลาทำงาน</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 m-t-0">
-                                        <div class="form-group text-left">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <small class="form-control-feedback"> OFF </small>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <select id="time_off_7" class="form-select input_time">
-                                                        <option value="">Select</option>
-                                                        <option value="5">5 min.</option>
-                                                        <option value="10">10 min.</option>
-                                                        <option value="15">15 min.</option>
-                                                        <option value="20">20 min.</option>
-                                                        <option value="25">25 min.</option>
-                                                        <option value="30">30 min.</option>
-                                                    </select>
-                                                    <div class="invalid-feedback">กรุณาระบุเวลาหยุดทำงาน</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>    
-                            </div>
-                            <div class="border p-4 rounded">
-                                <div class="d-flex mb-2">
-                                    <B>TIMER 1</B>
-                                    <div class="sw_toggle ms-auto">
-                                        <input class="input_check" type="checkbox" id="sw_1" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6 m-t-0">
-                                        <div class="form-group text-left">
-                                            <div class="row">
-                                                <div class="col-md-3 align-vertical-center">
-                                                    <small class="form-control-feedback start_7"> START </small>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <input type="time" id="time_s_1" class="form-control input_time">
-                                                    <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 m-t-0">
-                                        <div class="form-group text-left">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <small class="form-control-feedback end_7"> END </small>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <input type="time" id="time_e_1" class="form-control input_time">
-                                                    <select id="time_se_1" class="form-select input_time">
-                                                        <option value="0">0 : Close 0%</option>
-                                                        <option value="1">1 : Close 25%</option>
-                                                        <option value="2">2 : Close 50%</option>
-                                                        <option value="3">3 : Close 75%</option>
-                                                        <option value="4">4 : Close 100%</option>
-                                                    </select>
-                                                    <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr/>
-                                <div class="d-flex mb-2">
-                                    <B>TIMER 2</B>
-                                    <div class="sw_toggle ms-auto">
-                                        <input class="input_check" type="checkbox" id="sw_2" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                    </div>
-                                </div>
-                                <div class="row m-t-10 ">
-                                    <div class="col-6 m-t-0">
-                                        <div class="form-group text-left">
-                                            <div class="row">
-                                                <div class="col-md-3 align-vertical-center">
-                                                    <small class="form-control-feedback start_7"> START </small>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <input type="time" id="time_s_2" class="form-control input_time">
-                                                    <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 m-t-0">
-                                        <div class="form-group text-left">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <small class="form-control-feedback end_7"> END </small>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <input type="time" id="time_e_2" class="form-control input_time">
-                                                    <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                    <select id="time_se_2" class="form-select input_time">
-                                                        <option value="0">0 : Close 0%</option>
-                                                        <option value="1">1 : Close 25%</option>
-                                                        <option value="2">2 : Close 50%</option>
-                                                        <option value="3">3 : Close 75%</option>
-                                                        <option value="4">4 : Close 100%</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr/>
-                                <div class="d-flex mb-2">
-                                    <B>TIMER 3</B>
-                                    <div class="sw_toggle ms-auto">
-                                        <input class="input_check" type="checkbox" id="sw_3" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                    </div>
-                                </div>
-                                <div class="row m-t-10 ">
-                                    <div class="col-6 m-t-0">
-                                        <div class="form-group text-left">
-                                            <div class="row">
-                                                <div class="col-md-3 align-vertical-center">
-                                                    <small class="form-control-feedback start_7"> START </small>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <input type="time" id="time_s_3" class="form-control input_time">
-                                                    <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 m-t-0">
-                                        <div class="form-group text-left">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <small class="form-control-feedback end_7"> END </small>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <input type="time" id="time_e_3" class="form-control input_time">
-                                                    <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                    <select id="time_se_3" class="form-select input_time">
-                                                        <option value="0">0 : Close 0%</option>
-                                                        <option value="1">1 : Close 25%</option>
-                                                        <option value="2">2 : Close 50%</option>
-                                                        <option value="3">3 : Close 75%</option>
-                                                        <option value="4">4 : Close 100%</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr/>
-                                <div class="d-flex mb-2">
-                                    <B>TIMER 4</B>
-                                    <div class="sw_toggle ms-auto">
-                                        <input class="input_check" type="checkbox" id="sw_4" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                    </div>
-                                </div>
-                                <div class="row m-t-10 ">
-                                    <div class="col-6 m-t-0">
-                                    <div class="form-group text-left">
-                                            <div class="row">
-                                                <div class="col-md-3 align-vertical-center">
-                                                    <small class="form-control-feedback start_7"> START </small>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <input type="time" id="time_s_4" class="form-control input_time">
-                                                    <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 m-t-0">
-                                        <div class="form-group text-left">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <small class="form-control-feedback end_7"> END </small>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <input type="time" id="time_e_4" class="form-control input_time">
-                                                    <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                    <select id="time_se_4" class="form-select input_time">
-                                                        <option value="0">0 : Close 0%</option>
-                                                        <option value="1">1 : Close 25%</option>
-                                                        <option value="2">2 : Close 50%</option>
-                                                        <option value="3">3 : Close 75%</option>
-                                                        <option value="4">4 : Close 100%</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr/>
-                                <div class="d-flex mb-2">
-                                    <B>TIMER 5</B>
-                                    <div class="sw_toggle ms-auto">
-                                        <input class="input_check" type="checkbox" id="sw_5" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                    </div>
-                                </div>
-                                <div class="row m-t-10 ">
-                                    <div class="col-6 m-t-0">
-                                    <div class="form-group text-left">
-                                            <div class="row">
-                                                <div class="col-md-3 align-vertical-center">
-                                                    <small class="form-control-feedback start_7"> START </small>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <input type="time" id="time_s_5" class="form-control input_time">
-                                                    <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 m-t-0">
-                                        <div class="form-group text-left">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <small class="form-control-feedback end_7"> END </small>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <input type="time" id="time_e_5" class="form-control input_time">
-                                                    <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                    <select id="time_se_5" class="form-select input_time">
-                                                        <option value="0">0 : Close 0%</option>
-                                                        <option value="1">1 : Close 25%</option>
-                                                        <option value="2">2 : Close 50%</option>
-                                                        <option value="3">3 : Close 75%</option>
-                                                        <option value="4">4 : Close 100%</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr/>
-                                <div class="d-flex mb-2">
-                                    <B>TIMER 6</B>
-                                    <div class="sw_toggle ms-auto">
-                                        <input class="input_check" type="checkbox" id="sw_6" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                    </div>
-                                </div>
-                                <div class="row m-t-10 ">
-                                    <div class="col-6 m-t-0">
-                                    <div class="form-group text-left">
-                                            <div class="row">
-                                                <div class="col-md-3 align-vertical-center">
-                                                    <small class="form-control-feedback start_7"> START </small>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <input type="time" id="time_s_6" class="form-control input_time">
-                                                    <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 m-t-0">
-                                        <div class="form-group text-left">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <small class="form-control-feedback end_7"> END </small>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <input type="time" id="time_e_6" class="form-control input_time">
-                                                    <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                    <select id="time_se_6" class="form-select input_time">
-                                                        <option value="0">0 : Close 0%</option>
-                                                        <option value="1">1 : Close 25%</option>
-                                                        <option value="2">2 : Close 50%</option>
-                                                        <option value="3">3 : Close 75%</option>
-                                                        <option value="4">4 : Close 100%</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </from>
+                                <!-- </div> -->
+                            </form>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="save_auto_cont" class="btn btn-success waves-light">
@@ -927,16 +965,16 @@
             // client.subscribe(house_master + "/1/data_update/data_filter", options);
             // if (Contstatus !== 0) {
 
-            // if (house_master !== "KMUMT001") {
+            if (house_master !== "KMUMT001") {
                 client.subscribe(house_master + "/1/control/time_control", options);
-            // } else {
-            //     client.subscribe(house_master + "/1/control/mode", options);
+            } else {
+                client.subscribe(house_master + "/1/control/mode", options);
             //     client.subscribe(house_master + "/1/control/control_st_1", options);
             //     client.subscribe(house_master + "/1/control/control_st_2", options);
             //     client.subscribe(house_master + "/1/control/control_st_3", options);
             //     client.subscribe(house_master + "/1/control/control_st_4", options);
             //     client.subscribe(house_master + "/1/control/control_st_5", options);
-            // }
+            }
         }
 
         function onFail(context) {
@@ -1015,27 +1053,47 @@
             $(".Dsw_manual_1").click(function() {
                 setTimeout(function(){
                     // alert($(".sw_manual_1").prop('checked'));
-                    switch_control(sta = $(".sw_manual_1").prop('checked'), sw_name = "sw_manual_1", ch_name='<?= $conttrolname[1] ?>', mqtt_ch_name = "dripper_1", mqtt_name_us = "user_control" );
+                    if (house_master !== "KMUMT001") {
+                        switch_control(sta = $(".sw_manual_1").prop('checked'), sw_name = "sw_manual_1", ch_name='<?= $conttrolname[1] ?>', mqtt_ch_name = "dripper_1", mqtt_name_us = "user_control" );
+                    }else{
+                        switch_control(sta = $(".sw_manual_1").prop('checked'), sw_name = "sw_manual_1", ch_name='<?= $conttrolname[1] ?>', mqtt_ch_name = "control_st_1", mqtt_name_us = "control_user" );
+                    }
                 }, 100);
             });
             $(".Dsw_manual_2").click(function() {
                 setTimeout(function(){
-                    switch_control(sta = $(".sw_manual_2").prop('checked'), sw_name = "sw_manual_2", ch_name='<?= $conttrolname[2] ?>', mqtt_ch_name = "dripper_2", mqtt_name_us = "user_control" );
+                    if (house_master !== "KMUMT001") {
+                        switch_control(sta = $(".sw_manual_2").prop('checked'), sw_name = "sw_manual_2", ch_name='<?= $conttrolname[2] ?>', mqtt_ch_name = "dripper_2", mqtt_name_us = "user_control" );
+                    }else{
+                        switch_control(sta = $(".sw_manual_2").prop('checked'), sw_name = "sw_manual_2", ch_name='<?= $conttrolname[2] ?>', mqtt_ch_name = "control_st_2", mqtt_name_us = "control_user" );
+                    }
                 }, 100);
             });
             $(".Dsw_manual_3").click(function() {
                 setTimeout(function(){
-                    switch_control(sta = $(".sw_manual_3").prop('checked'), sw_name = "sw_manual_3", ch_name='<?= $conttrolname[3] ?>', mqtt_ch_name = "dripper_3", mqtt_name_us = "user_control" );
+                    if (house_master !== "KMUMT001") {
+                        switch_control(sta = $(".sw_manual_3").prop('checked'), sw_name = "sw_manual_3", ch_name='<?= $conttrolname[3] ?>', mqtt_ch_name = "dripper_3", mqtt_name_us = "user_control" );
+                    }else{
+                        switch_control(sta = $(".sw_manual_3").prop('checked'), sw_name = "sw_manual_3", ch_name='<?= $conttrolname[3] ?>', mqtt_ch_name = "control_st_3", mqtt_name_us = "control_user" );
+                    }
                 }, 100);
             });
             $(".Dsw_manual_4").click(function() {
                 setTimeout(function(){
-                    switch_control(sta = $(".sw_manual_4").prop('checked'), sw_name = "sw_manual_4", ch_name='<?= $conttrolname[4] ?>', mqtt_ch_name = "dripper_4", mqtt_name_us = "user_control" );
+                    if (house_master !== "KMUMT001") {
+                        switch_control(sta = $(".sw_manual_4").prop('checked'), sw_name = "sw_manual_4", ch_name='<?= $conttrolname[4] ?>', mqtt_ch_name = "dripper_4", mqtt_name_us = "user_control" );
+                    }else{
+                        switch_control(sta = $(".sw_manual_4").prop('checked'), sw_name = "sw_manual_4", ch_name='<?= $conttrolname[4] ?>', mqtt_ch_name = "control_st_4", mqtt_name_us = "control_user" );
+                    }
                 }, 100);
             });
             $(".Dsw_manual_5").click(function() {
                 setTimeout(function(){
-                    switch_control(sta = $(".sw_manual_5").prop('checked'), sw_name = "sw_manual_5", ch_name='<?= $conttrolname[5] ?>', mqtt_ch_name = "dripper_5", mqtt_name_us = "user_control" );
+                    if (house_master !== "KMUMT001") {
+                        switch_control(sta = $(".sw_manual_5").prop('checked'), sw_name = "sw_manual_5", ch_name='<?= $conttrolname[5] ?>', mqtt_ch_name = "dripper_5", mqtt_name_us = "user_control" );
+                    }else{
+                        switch_control(sta = $(".sw_manual_5").prop('checked'), sw_name = "sw_manual_5", ch_name='<?= $conttrolname[5] ?>', mqtt_ch_name = "control_st_5", mqtt_name_us = "control_user" );
+                    }
                 }, 100);
             });
             $(".Dsw_manual_6").click(function() {
@@ -1094,7 +1152,11 @@
                 }, 100);
             });
             function switch_control(sta, sw_name, ch_name, mqtt_ch_name, mqtt_name_us) {
-                if(sta === false){var sw_sta = "ปิด"; var mess = "OFF";}else{var sw_sta = "เปิด";var mess = "ON";}
+                if (house_master !== "KMUMT001") {
+                    if(sta === false){var sw_sta = "ปิด"; var mess = "OFF";}else{var sw_sta = "เปิด";var mess = "ON";}
+                }else{
+                    if(sta === false){var sw_sta = "ปิด"; var mess = "off";}else{var sw_sta = "เปิด";var mess = "on";}
+                }
                 swal({
                     title: 'คุณต้องการ ' + sw_sta + ' ' + ch_name + ' ?',
                     // text: "คุณต้องการเปลี่ยนไปใช้โหมด Manual !!!",
@@ -1162,42 +1224,295 @@
             }
             // ------- Switch control --------------
             $("#save_auto_cont").click(function(){
-                var channel = $(".channel").val();
-                // alert(channel)
-                if(channel == 9){
-                    if($("#sw_7").prop('checked') == true){
-                        if($("#time_s_7").val() === ""){
-                            $('#time_s_7').addClass('is-invalid')
-                            return false;
+                if (house_master !== "KMUMT001") {
+                    var channel = $(".channel").val();
+                    // alert(channel)
+                    if(channel == 9){
+                        if($("#sw_7").prop('checked') == true){
+                            if($("#time_s_7").val() === ""){
+                                $('#time_s_7').addClass('is-invalid')
+                                return false;
+                            }else{
+                                $('#time_s_7').removeClass('is-invalid')
+                            }
+                            if($("#time_e_7").val() === ""){
+                                $('#time_e_7').addClass('is-invalid')
+                                return false;
+                            }else{
+                                $('#time_e_7').removeClass('is-invalid')
+                            }
+                            if($("#time_s_7").val() >= $("#time_e_7").val()){
+                                swal_c(type = 'error', title = 'Error...', text = 'TIMMER LOOP : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
+                                $('#time_s_7').addClass('is-invalid')
+                                $('#time_e_7').addClass('is-invalid')
+                                return false;
+                            }else{
+                                $('#time_s_7').removeClass('is-invalid')
+                                $('#time_e_7').removeClass('is-invalid')
+                            }
+                            if($("#time_on_7").val() === ""){
+                                $('#time_on_7').addClass('is-invalid')
+                                return false;
+                            }else{
+                                $('#time_on_7').removeClass('is-invalid')
+                            }
+                            if($("#time_off_7").val() === ""){
+                                $('#time_off_7').addClass('is-invalid')
+                                return false;
+                            }else{
+                                $('#time_off_7').removeClass('is-invalid')
+                            }
                         }else{
-                            $('#time_s_7').removeClass('is-invalid')
+                            if($("#sw_1").prop('checked') == true){
+                                if($("#time_s_1").val() === ""){
+                                    $('#time_s_1').addClass('is-invalid')
+                                    return false;
+                                }else{
+                                    $('#time_s_1').removeClass('is-invalid')
+                                }
+                                if($("#time_e_1").val() === ""){
+                                    $('#time_e_1').addClass('is-invalid')
+                                    return false;
+                                }else{
+                                    $('#time_e_1').removeClass('is-invalid')
+                                }
+                                if($("#time_s_1").val() >= $("#time_e_1").val()){
+                                    swal_c(type = 'error', title = 'Error...', text = 'TIMMER 1 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
+                                    $('#time_s_1').addClass('is-invalid')
+                                    $('#time_e_1').addClass('is-invalid')
+                                    return false;
+                                }else{
+                                    $('#time_s_1').removeClass('is-invalid')
+                                    $('#time_e_1').removeClass('is-invalid')
+                                }
+                            }
+                            if($("#sw_2").prop('checked') == true){
+                                if($("#time_s_2").val() === ""){
+                                    $('#time_s_2').addClass('is-invalid')
+                                    return false;
+                                }else{
+                                    $('#time_s_2').removeClass('is-invalid')
+                                }
+                                if($("#time_e_2").val() === ""){
+                                    $('#time_e_2').addClass('is-invalid')
+                                    return false;
+                                }else{
+                                    $('#time_e_2').removeClass('is-invalid')
+                                }
+                                if($("#time_s_2").val() >= $("#time_e_2").val()){
+                                    swal_c(type = 'error', title = 'Error...', text = 'TIMMER 2 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
+                                    $('#time_s_2').addClass('is-invalid')
+                                    $('#time_e_2').addClass('is-invalid')
+                                    return false;
+                                }else{
+                                    $('#time_s_2').removeClass('is-invalid')
+                                    $('#time_e_2').removeClass('is-invalid')
+                                }
+                            }
+                            if($("#sw_3").prop('checked') == true){
+                                if($("#time_s_3").val() === ""){
+                                    $('#time_s_3').addClass('is-invalid')
+                                    return false;
+                                }else{
+                                    $('#time_s_3').removeClass('is-invalid')
+                                }
+                                if($("#time_e_3").val() === ""){
+                                    $('#time_e_3').addClass('is-invalid')
+                                    return false;
+                                }else{
+                                    $('#time_e_3').removeClass('is-invalid')
+                                }
+                                if($("#time_s_3").val() >= $("#time_e_3").val()){
+                                    swal_c(type = 'error', title = 'Error...', text = 'TIMMER 3 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
+                                    $('#time_s_3').addClass('is-invalid')
+                                    $('#time_e_3').addClass('is-invalid')
+                                    return false;
+                                }else{
+                                    $('#time_s_3').removeClass('is-invalid')
+                                    $('#time_e_3').removeClass('is-invalid')
+                                }
+                            }
+                            if($("#sw_4").prop('checked') == true){
+                                if($("#time_s_4").val() === ""){
+                                    $('#time_s_4').addClass('is-invalid')
+                                    return false;
+                                }else{
+                                    $('#time_s_4').removeClass('is-invalid')
+                                }
+                                if($("#time_e_4").val() === ""){
+                                    $('#time_e_4').addClass('is-invalid')
+                                    return false;
+                                }else{
+                                    $('#time_e_4').removeClass('is-invalid')
+                                }
+                                if($("#time_s_4").val() >= $("#time_e_4").val()){
+                                    swal_c(type = 'error', title = 'Error...', text = 'TIMMER 4 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
+                                    $('#time_s_4').addClass('is-invalid')
+                                    $('#time_e_4').addClass('is-invalid')
+                                    return false;
+                                }else{
+                                    $('#time_s_4').removeClass('is-invalid')
+                                    $('#time_e_4').removeClass('is-invalid')
+                                }
+                            }
+                            if($("#sw_5").prop('checked') == true){
+                                if($("#time_s_5").val() === ""){
+                                    $('#time_s_5').addClass('is-invalid')
+                                    return false;
+                                }else{
+                                    $('#time_s_5').removeClass('is-invalid')
+                                }
+                                if($("#time_e_5").val() === ""){
+                                    $('#time_e_5').addClass('is-invalid')
+                                    return false;
+                                }else{
+                                    $('#time_e_5').removeClass('is-invalid')
+                                }
+                                if($("#time_s_5").val() >= $("#time_e_5").val()){
+                                    swal_c(type = 'error', title = 'Error...', text = 'TIMMER 5 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
+                                    $('#time_s_5').addClass('is-invalid')
+                                    $('#time_e_5').addClass('is-invalid')
+                                    return false;
+                                }else{
+                                    $('#time_s_5').removeClass('is-invalid')
+                                    $('#time_e_5').removeClass('is-invalid')
+                                }
+                            }
+                            if($("#sw_6").prop('checked') == true){
+                                if($("#time_s_6").val() === ""){
+                                    $('#time_s_6').addClass('is-invalid')
+                                    return false;
+                                }else{
+                                    $('#time_s_6').removeClass('is-invalid')
+                                }
+                                if($("#time_e_6").val() === ""){
+                                    $('#time_e_6').addClass('is-invalid')
+                                    return false;
+                                }else{
+                                    $('#time_e_6').removeClass('is-invalid')
+                                }
+                                if($("#time_s_6").val() >= $("#time_e_6").val()){
+                                    swal_c(type = 'error', title = 'Error...', text = 'TIMMER 6 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
+                                    $('#time_s_6').addClass('is-invalid')
+                                    $('#time_e_6').addClass('is-invalid')
+                                    return false;
+                                }else{
+                                    $('#time_s_6').removeClass('is-invalid')
+                                    $('#time_e_6').removeClass('is-invalid')
+                                }
+                            }
                         }
-                        if($("#time_e_7").val() === ""){
-                            $('#time_e_7').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_e_7').removeClass('is-invalid')
+                    }else if(channel == 11){
+                        var minsToAdd = 15;
+                        var newTime_d2 = new Date(new Date("1970/01/01 " + $("#time_s_1").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
+                        var newTime_d3 = new Date(new Date("1970/01/01 " + $("#time_s_2").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
+                        var newTime_d4 = new Date(new Date("1970/01/01 " + $("#time_s_3").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
+                        var newTime_d5 = new Date(new Date("1970/01/01 " + $("#time_s_4").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
+                        var newTime_d6 = new Date(new Date("1970/01/01 " + $("#time_s_5").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
+                        
+                            // ----------
+                        if($("#sw_1").prop('checked') == true){
+                            if($("#time_s_1").val() === ""){
+                                $('#time_s_1').addClass('is-invalid')
+                                return false;
+                            }else{
+                                $('#time_s_1').removeClass('is-invalid')
+                            }
                         }
-                        if($("#time_s_7").val() >= $("#time_e_7").val()){
-                            swal_c(type = 'error', title = 'Error...', text = 'TIMMER LOOP : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
-                            $('#time_s_7').addClass('is-invalid')
-                            $('#time_e_7').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_7').removeClass('is-invalid')
-                            $('#time_e_7').removeClass('is-invalid')
+                        if($("#sw_2").prop('checked') == true){
+                            if($("#time_s_2").val() === ""){
+                                $('#time_s_2').addClass('is-invalid')
+                                return false;
+                            }else if($("#time_s_2").val() <= newTime_d2){
+                                swal_c(type = 'error', title = 'Error...', text = '<b>TIMMER 2 : TIME </b> ต้องมากกว่า <b>' + newTime_d2 + '</b> !');
+                                $("#time_s_2").addClass("is-invalid");
+                                return false;
+                            }else{
+                                $('#time_s_2').removeClass('is-invalid')
+                            }
+                            if($("#time_se_1").val() == $("#time_se_2").val()){
+                                swal_c(type = 'error', title = 'Error...', text = '<b> LEVEL : TIMMER 2 </b> ต้องไม่เท่ากับ <b> LEVEL : TIMMER 1 </b> !');
+                                $("#time_se_2").addClass("is-invalid");
+                                return false;
+                            }else{
+                                $("#time_se_2").removeClass("is-invalid");
+                            }
                         }
-                        if($("#time_on_7").val() === ""){
-                            $('#time_on_7').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_on_7').removeClass('is-invalid')
+                        if($("#sw_3").prop('checked') == true){
+                            if($("#time_s_3").val() === ""){
+                                $('#time_s_3').addClass('is-invalid')
+                                return false;
+                            }else if($("#time_s_3").val() <= newTime_d3){
+                                swal_c(type = 'error', title = 'Error...', text = '<b>TIMMER 3 : TIME </b> เวลาต้องมากกว่า <b>' + newTime_d3 + '</b> !');
+                                $("#time_s_3").addClass("is-invalid");
+                                return false;
+                            }else{
+                                $('#time_s_3').removeClass('is-invalid')
+                            }
+                            if($("#time_se_2").val() == $("#time_se_3").val()){
+                                swal_c(type = 'error', title = 'Error...', text = '<b> LEVEL : TIMMER 3 </b> ต้องไม่เท่ากับ <b> LEVEL : TIMMER 2 </b> !');
+                                $("#time_se_3").addClass("is-invalid");
+                                return false;
+                            }else{
+                                $("#time_se_3").removeClass("is-invalid");
+                            }
                         }
-                        if($("#time_off_7").val() === ""){
-                            $('#time_off_7').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_off_7').removeClass('is-invalid')
+                        if($("#sw_4").prop('checked') == true){
+                            if($("#time_s_4").val() === ""){
+                                $('#time_s_4').addClass('is-invalid')
+                                return false;
+                            }else if($("#time_s_4").val() <= newTime_d4){
+                                swal_c(type = 'error', title = 'Error...', text = '<b>TIMMER 4 : TIME </b> เวลาต้องมากกว่า <b>' + newTime_d4 + '</b> !');
+                                $("#time_s_4").addClass("is-invalid");
+                                return false;
+                            }else{
+                                $('#time_s_4').removeClass('is-invalid')
+                            }
+                            if($("#time_se_3").val() == $("#time_se_4").val()){
+                                swal_c(type = 'error', title = 'Error...', text = '<b> LEVEL : TIMMER 4 </b> ต้องไม่เท่ากับ <b> LEVEL : TIMMER 3 </b> !');
+                                $("#time_se_4").addClass("is-invalid");
+                                return false;
+                            }else{
+                                $("#time_se_4").removeClass("is-invalid");
+                            }
+                        }
+                        if($("#sw_5").prop('checked') == true){
+                            if($("#time_s_5").val() === ""){
+                                $('#time_s_5').addClass('is-invalid')
+                                return false;
+                            }else if($("#time_s_5").val() <= newTime_d5){
+                                swal_c(type = 'error', title = 'Error...', text = '<b>TIMMER 5 : TIME </b> เวลาต้องมากกว่า <b>' + newTime_d5 + '</b> !');
+                                $("#time_s_5").addClass("is-invalid");
+                                return false;
+                            }else{
+                                $('#time_s_5').removeClass('is-invalid')
+                            }
+                            if($("#time_se_4").val() == $("#time_se_5").val()){
+                                swal_c(type = 'error', title = 'Error...', text = '<b> LEVEL : TIMMER 5 </b> ต้องไม่เท่ากับ <b> LEVEL : TIMMER 4 </b> !');
+                                $("#time_se_5").addClass("is-invalid");
+                                return false;
+                            }else{
+                                $("#time_se_5").removeClass("is-invalid");
+                            }
+                        }
+                        if($("#sw_6").prop('checked') == true){
+                            if($("#time_s_6").val() === ""){
+                                $('#time_s_6').addClass('is-invalid')
+                                return false;
+                            }else if($("#time_s_6").val() <= newTime_d6){
+                                swal_c(type = 'error', title = 'Error...', text = '<b>TIMMER 6 : TIME </b> เวลาต้องมากกว่า <b>' + newTime_d6 + '</b> !');
+                                $("#time_s_6").addClass("is-invalid");
+                                return false;
+                            }else{
+                                $('#time_s_6').removeClass('is-invalid')
+                            }
+                            if($("#time_se_5").val() == $("#time_se_6").val()){
+                                swal_c(type = 'error', title = 'Error...', text = '<b> LEVEL : TIMMER 6 </b> ต้องไม่เท่ากับ <b> LEVEL : TIMMER 5 </b> !');
+                                $("#time_se_6").addClass("is-invalid");
+                                return false;
+                            }else{
+                                $("#time_se_6").removeClass("is-invalid");
+                            }
                         }
                     }else{
                         if($("#sw_1").prop('checked') == true){
@@ -1339,341 +1654,219 @@
                             }
                         }
                     }
-                }else if(channel == 11){
-                    var minsToAdd = 15;
-                    var newTime_d2 = new Date(new Date("1970/01/01 " + $("#time_s_1").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
-                    var newTime_d3 = new Date(new Date("1970/01/01 " + $("#time_s_2").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
-                    var newTime_d4 = new Date(new Date("1970/01/01 " + $("#time_s_3").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
-                    var newTime_d5 = new Date(new Date("1970/01/01 " + $("#time_s_4").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
-                    var newTime_d6 = new Date(new Date("1970/01/01 " + $("#time_s_5").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
-                    
-                        // ----------
-                    if($("#sw_1").prop('checked') == true){
-                        if($("#time_s_1").val() === ""){
-                            $('#time_s_1').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_1').removeClass('is-invalid')
-                        }
+                    function swal_c(type, title, text) {
+                        Swal({
+                            type: type,
+                            title: title,
+                            html: text,
+                            allowOutsideClick: false
+                        });
                     }
-                    if($("#sw_2").prop('checked') == true){
-                        if($("#time_s_2").val() === ""){
-                            $('#time_s_2').addClass('is-invalid')
-                            return false;
-                        }else if($("#time_s_2").val() <= newTime_d2){
-                            swal_c(type = 'error', title = 'Error...', text = '<b>TIMMER 2 : TIME </b> ต้องมากกว่า <b>' + newTime_d2 + '</b> !');
-                            $("#time_s_2").addClass("is-invalid");
-                            return false;
-                        }else{
-                            $('#time_s_2').removeClass('is-invalid')
+                    swal({
+                        title: 'บันทึกการเปลี่ยนแปลง',
+                        text: "คุณต้องการบันทึกการเปลี่ยนแปลง ?",
+                        type: 'warning',
+                        allowOutsideClick: false,
+                        showCancelButton: true,
+                        confirmButtonColor: '#32CD32',
+                        cancelButtonColor: '#FF3333',
+                        confirmButtonText: 'ไช่',
+                        cancelButtonText: 'ยกเลิก'
+                    }).then((result) => {
+                        if (result.value) {
+                            if ($("#sw_1").prop('checked') == true) { var sw_1 = 1; } else { var sw_1 = 0; }
+                            if ($("#sw_2").prop('checked') == true) { var sw_2 = 1; } else { var sw_2 = 0; }
+                            if ($("#sw_3").prop('checked') == true) { var sw_3 = 1; } else { var sw_3 = 0; }
+                            if ($("#sw_4").prop('checked') == true) { var sw_4 = 1; } else { var sw_4 = 0; }
+                            if ($("#sw_5").prop('checked') == true) { var sw_5 = 1; } else { var sw_5 = 0; }
+                            if ($("#sw_6").prop('checked') == true) { var sw_6 = 1; } else { var sw_6 = 0; }
+                            if ($("#sw_7").prop('checked') == true) { var sw_7 = 1; } else { var sw_7 = 0; }
+                            if (message.destinationName == house_master + "/1/control/time_control") {
+                                var result = message.payloadString;
+                                var parseJSON = $.parseJSON(result);
+                                // console.log(parseJSON);
+                                // return false;
+                                $.ajax({
+                                    type: "POST",
+                                    url: "routes/save_autoControl.php",
+                                    data: {
+                                        house_master: house_master,
+                                        channel     : $("#channel").val(),
+                                        sw_1 : sw_1,
+                                        sw_2 : sw_2,
+                                        sw_3 : sw_3,
+                                        sw_4 : sw_4,
+                                        sw_5 : sw_5,
+                                        sw_6 : sw_6,
+                                        sw_7 : sw_7,
+                                        s_1 : $("#time_s_1").val(),
+                                        s_2 : $("#time_s_2").val(),
+                                        s_3 : $("#time_s_3").val(),
+                                        s_4 : $("#time_s_4").val(),
+                                        s_5 : $("#time_s_5").val(),
+                                        s_6 : $("#time_s_6").val(),
+                                        s_7 : $("#time_s_7").val(),
+                                        e_1 : $("#time_e_1").val(),
+                                        e_2 : $("#time_e_2").val(),
+                                        e_3 : $("#time_e_3").val(),
+                                        e_4 : $("#time_e_4").val(),
+                                        e_5 : $("#time_e_5").val(),
+                                        e_6 : $("#time_e_6").val(),
+                                        e_7 : $("#time_e_7").val(),
+                                        on_7 : $("#time_on_7").val(),
+                                        off_7 : $("#time_off_7").val(),
+                                        se_1 : $("#time_se_1").val(),
+                                        se_2 : $("#time_se_2").val(),
+                                        se_3 : $("#time_se_3").val(),
+                                        se_4 : $("#time_se_4").val(),
+                                        se_5 : $("#time_se_5").val(),
+                                        se_6 : $("#time_se_6").val()
+                                    },
+                                    dataType: 'json',
+                                    success: function(res) {
+                                        // console.log(res.data)
+                                        if(res.status === "Insert_Success"){
+                                            $("#Modal_Auto_control").modal("hide");
+                                            $.extend(parseJSON, res.data);
+                                            var json_msg = JSON.stringify(parseJSON);
+                                            // console.log(parseJSON)
+                                            message = new Paho.MQTT.Message(json_msg);
+                                            message.destinationName = house_master + "/1/control/time_control";
+                                            message.qos = 1;
+                                            message.retained = true;
+                                            client.send(message);
+                                        
+                                            swal({
+                                                title: 'บันทึกข้อมูลสำเร็จ',
+                                                type: 'success',
+                                                allowOutsideClick: false,
+                                                confirmButtonColor: '#32CD32'
+                                            });
+                                        }else{
+                                            swal({
+                                                title: 'Error !',
+                                                text: "เกิดข้อผิดพลาด ?",
+                                                type: 'error',
+                                                allowOutsideClick: false,
+                                                confirmButtonColor: '#32CD32'
+                                            }).then((result) => {
+                                                if (result.value) {
+                                                    location.reload();
+                                                    return false;
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+                            }
                         }
-                        if($("#time_se_1").val() == $("#time_se_2").val()){
-                            swal_c(type = 'error', title = 'Error...', text = '<b> LEVEL : TIMMER 2 </b> ต้องไม่เท่ากับ <b> LEVEL : TIMMER 1 </b> !');
-                            $("#time_se_2").addClass("is-invalid");
-                            return false;
-                        }else{
-                            $("#time_se_2").removeClass("is-invalid");
-                        }
-                    }
-                    if($("#sw_3").prop('checked') == true){
-                        if($("#time_s_3").val() === ""){
-                            $('#time_s_3').addClass('is-invalid')
-                            return false;
-                        }else if($("#time_s_3").val() <= newTime_d3){
-                            swal_c(type = 'error', title = 'Error...', text = '<b>TIMMER 3 : TIME </b> เวลาต้องมากกว่า <b>' + newTime_d3 + '</b> !');
-                            $("#time_s_3").addClass("is-invalid");
-                            return false;
-                        }else{
-                            $('#time_s_3').removeClass('is-invalid')
-                        }
-                        if($("#time_se_2").val() == $("#time_se_3").val()){
-                            swal_c(type = 'error', title = 'Error...', text = '<b> LEVEL : TIMMER 3 </b> ต้องไม่เท่ากับ <b> LEVEL : TIMMER 2 </b> !');
-                            $("#time_se_3").addClass("is-invalid");
-                            return false;
-                        }else{
-                            $("#time_se_3").removeClass("is-invalid");
-                        }
-                    }
-                    if($("#sw_4").prop('checked') == true){
-                        if($("#time_s_4").val() === ""){
-                            $('#time_s_4').addClass('is-invalid')
-                            return false;
-                        }else if($("#time_s_4").val() <= newTime_d4){
-                            swal_c(type = 'error', title = 'Error...', text = '<b>TIMMER 4 : TIME </b> เวลาต้องมากกว่า <b>' + newTime_d4 + '</b> !');
-                            $("#time_s_4").addClass("is-invalid");
-                            return false;
-                        }else{
-                            $('#time_s_4').removeClass('is-invalid')
-                        }
-                        if($("#time_se_3").val() == $("#time_se_4").val()){
-                            swal_c(type = 'error', title = 'Error...', text = '<b> LEVEL : TIMMER 4 </b> ต้องไม่เท่ากับ <b> LEVEL : TIMMER 3 </b> !');
-                            $("#time_se_4").addClass("is-invalid");
-                            return false;
-                        }else{
-                            $("#time_se_4").removeClass("is-invalid");
-                        }
-                    }
-                    if($("#sw_5").prop('checked') == true){
-                        if($("#time_s_5").val() === ""){
-                            $('#time_s_5').addClass('is-invalid')
-                            return false;
-                        }else if($("#time_s_5").val() <= newTime_d5){
-                            swal_c(type = 'error', title = 'Error...', text = '<b>TIMMER 5 : TIME </b> เวลาต้องมากกว่า <b>' + newTime_d5 + '</b> !');
-                            $("#time_s_5").addClass("is-invalid");
-                            return false;
-                        }else{
-                            $('#time_s_5').removeClass('is-invalid')
-                        }
-                        if($("#time_se_4").val() == $("#time_se_5").val()){
-                            swal_c(type = 'error', title = 'Error...', text = '<b> LEVEL : TIMMER 5 </b> ต้องไม่เท่ากับ <b> LEVEL : TIMMER 4 </b> !');
-                            $("#time_se_5").addClass("is-invalid");
-                            return false;
-                        }else{
-                            $("#time_se_5").removeClass("is-invalid");
-                        }
-                    }
-                    if($("#sw_6").prop('checked') == true){
-                        if($("#time_s_6").val() === ""){
-                            $('#time_s_6').addClass('is-invalid')
-                            return false;
-                        }else if($("#time_s_6").val() <= newTime_d6){
-                            swal_c(type = 'error', title = 'Error...', text = '<b>TIMMER 6 : TIME </b> เวลาต้องมากกว่า <b>' + newTime_d6 + '</b> !');
-                            $("#time_s_6").addClass("is-invalid");
-                            return false;
-                        }else{
-                            $('#time_s_6').removeClass('is-invalid')
-                        }
-                        if($("#time_se_5").val() == $("#time_se_6").val()){
-                            swal_c(type = 'error', title = 'Error...', text = '<b> LEVEL : TIMMER 6 </b> ต้องไม่เท่ากับ <b> LEVEL : TIMMER 5 </b> !');
-                            $("#time_se_6").addClass("is-invalid");
-                            return false;
-                        }else{
-                            $("#time_se_6").removeClass("is-invalid");
-                        }
-                    }
-                }else{
-                    if($("#sw_1").prop('checked') == true){
-                        if($("#time_s_1").val() === ""){
-                            $('#time_s_1').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_1').removeClass('is-invalid')
-                        }
-                        if($("#time_e_1").val() === ""){
-                            $('#time_e_1').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_e_1').removeClass('is-invalid')
-                        }
-                        if($("#time_s_1").val() >= $("#time_e_1").val()){
-                            swal_c(type = 'error', title = 'Error...', text = 'TIMMER 1 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
-                            $('#time_s_1').addClass('is-invalid')
-                            $('#time_e_1').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_1').removeClass('is-invalid')
-                            $('#time_e_1').removeClass('is-invalid')
-                        }
-                    }
-                    if($("#sw_2").prop('checked') == true){
-                        if($("#time_s_2").val() === ""){
-                            $('#time_s_2').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_2').removeClass('is-invalid')
-                        }
-                        if($("#time_e_2").val() === ""){
-                            $('#time_e_2').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_e_2').removeClass('is-invalid')
-                        }
-                        if($("#time_s_2").val() >= $("#time_e_2").val()){
-                            swal_c(type = 'error', title = 'Error...', text = 'TIMMER 2 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
-                            $('#time_s_2').addClass('is-invalid')
-                            $('#time_e_2').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_2').removeClass('is-invalid')
-                            $('#time_e_2').removeClass('is-invalid')
-                        }
-                    }
-                    if($("#sw_3").prop('checked') == true){
-                        if($("#time_s_3").val() === ""){
-                            $('#time_s_3').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_3').removeClass('is-invalid')
-                        }
-                        if($("#time_e_3").val() === ""){
-                            $('#time_e_3').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_e_3').removeClass('is-invalid')
-                        }
-                        if($("#time_s_3").val() >= $("#time_e_3").val()){
-                            swal_c(type = 'error', title = 'Error...', text = 'TIMMER 3 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
-                            $('#time_s_3').addClass('is-invalid')
-                            $('#time_e_3').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_3').removeClass('is-invalid')
-                            $('#time_e_3').removeClass('is-invalid')
-                        }
-                    }
-                    if($("#sw_4").prop('checked') == true){
-                        if($("#time_s_4").val() === ""){
-                            $('#time_s_4').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_4').removeClass('is-invalid')
-                        }
-                        if($("#time_e_4").val() === ""){
-                            $('#time_e_4').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_e_4').removeClass('is-invalid')
-                        }
-                        if($("#time_s_4").val() >= $("#time_e_4").val()){
-                            swal_c(type = 'error', title = 'Error...', text = 'TIMMER 4 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
-                            $('#time_s_4').addClass('is-invalid')
-                            $('#time_e_4').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_4').removeClass('is-invalid')
-                            $('#time_e_4').removeClass('is-invalid')
-                        }
-                    }
-                    if($("#sw_5").prop('checked') == true){
-                        if($("#time_s_5").val() === ""){
-                            $('#time_s_5').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_5').removeClass('is-invalid')
-                        }
-                        if($("#time_e_5").val() === ""){
-                            $('#time_e_5').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_e_5').removeClass('is-invalid')
-                        }
-                        if($("#time_s_5").val() >= $("#time_e_5").val()){
-                            swal_c(type = 'error', title = 'Error...', text = 'TIMMER 5 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
-                            $('#time_s_5').addClass('is-invalid')
-                            $('#time_e_5').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_5').removeClass('is-invalid')
-                            $('#time_e_5').removeClass('is-invalid')
-                        }
-                    }
-                    if($("#sw_6").prop('checked') == true){
-                        if($("#time_s_6").val() === ""){
-                            $('#time_s_6').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_6').removeClass('is-invalid')
-                        }
-                        if($("#time_e_6").val() === ""){
-                            $('#time_e_6').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_e_6').removeClass('is-invalid')
-                        }
-                        if($("#time_s_6").val() >= $("#time_e_6").val()){
-                            swal_c(type = 'error', title = 'Error...', text = 'TIMMER 6 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
-                            $('#time_s_6').addClass('is-invalid')
-                            $('#time_e_6').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_6').removeClass('is-invalid')
-                            $('#time_e_6').removeClass('is-invalid')
-                        }
-                    }
-                }
-                function swal_c(type, title, text) {
-                    Swal({
-                        type: type,
-                        title: title,
-                        html: text,
-                        allowOutsideClick: false
                     });
-                }
-                swal({
-                    title: 'บันทึกการเปลี่ยนแปลง',
-                    text: "คุณต้องการบันทึกการเปลี่ยนแปลง ?",
-                    type: 'warning',
-                    allowOutsideClick: false,
-                    showCancelButton: true,
-                    confirmButtonColor: '#32CD32',
-                    cancelButtonColor: '#FF3333',
-                    confirmButtonText: 'ไช่',
-                    cancelButtonText: 'ยกเลิก'
-                }).then((result) => {
-                    if (result.value) {
-                        if ($("#sw_1").prop('checked') == true) { var sw_1 = 1; } else { var sw_1 = 0; }
-                        if ($("#sw_2").prop('checked') == true) { var sw_2 = 1; } else { var sw_2 = 0; }
-                        if ($("#sw_3").prop('checked') == true) { var sw_3 = 1; } else { var sw_3 = 0; }
-                        if ($("#sw_4").prop('checked') == true) { var sw_4 = 1; } else { var sw_4 = 0; }
-                        if ($("#sw_5").prop('checked') == true) { var sw_5 = 1; } else { var sw_5 = 0; }
-                        if ($("#sw_6").prop('checked') == true) { var sw_6 = 1; } else { var sw_6 = 0; }
-                        if ($("#sw_7").prop('checked') == true) { var sw_7 = 1; } else { var sw_7 = 0; }
-                        if (message.destinationName == house_master + "/1/control/time_control") {
-                            var result = message.payloadString;
-                            var parseJSON = $.parseJSON(result);
-                            // console.log(parseJSON);
-                            // return false;
+                }else{ // =KMUMT001
+                    var Rmx1 = $(".range_control1").val().split(";");
+                    var Rmx2 = $(".range_control2").val().split(";");
+                    var Rmx3 = $(".range_control3").val().split(";");
+                    var Rmx5 = $(".range_control5").val().split(";");
+                    if(Rmx1[0] == Rmx1[1]){
+                        swal_c(type = 'error', title = 'Error...', text = 'Soil moisture 1 : <b>ความชื้นเริ่มต้นต้องน้อยกว่าความชื้นสิ้นสุด</b> !');
+                        return false;
+                    }
+                    if(Rmx2[0] == Rmx2[1]){
+                        swal_c(type = 'error', title = 'Error...', text = 'Soil moisture 2 : <b>ความชื้นเริ่มต้นต้องน้อยกว่าความชื้นสิ้นสุด</b> !');
+                        return false;
+                    }
+                    if(Rmx3[0] == Rmx3[1]){
+                        swal_c(type = 'error', title = 'Error...', text = 'Temperature : <b>อุณหภูมิเริ่มต้นต้องน้อยกว่าอุณหภูมิสิ้นสุด</b> !');
+                        return false;
+                    }if(Rmx5[0] == Rmx5[1]){
+                        swal_c(type = 'error', title = 'Error...', text = 'Light intensity  : <b>ความเข้มแสงเริ่มต้นต้องน้อยกว่าความเข้มแสงสิ้นสุด</b> !');
+                        return false;
+                    }
+                    function swal_c(type, title, text) {
+                        Swal({
+                            type: type,
+                            title: title,
+                            html: text,
+                            allowOutsideClick: false
+                        });
+                    }
+                    swal({
+                        title: 'บันทึกการเปลี่ยนแปลง',
+                        text: "คุณต้องการบันทึกการเปลี่ยนแปลง ?",
+                        type: 'warning',
+                        allowOutsideClick: false,
+                        showCancelButton: true,
+                        confirmButtonColor: '#32CD32',
+                        cancelButtonColor: '#FF3333',
+                        confirmButtonText: 'ไช่',
+                        cancelButtonText: 'ยกเลิก'
+                    }).then((result) => {
+                        if (result.value) {
                             $.ajax({
-                                type: "POST",
                                 url: "routes/save_autoControl.php",
+                                method: "post",
                                 data: {
                                     house_master: house_master,
-                                    channel     : $("#channel").val(),
-                                    sw_1 : sw_1,
-                                    sw_2 : sw_2,
-                                    sw_3 : sw_3,
-                                    sw_4 : sw_4,
-                                    sw_5 : sw_5,
-                                    sw_6 : sw_6,
-                                    sw_7 : sw_7,
-                                    s_1 : $("#time_s_1").val(),
-                                    s_2 : $("#time_s_2").val(),
-                                    s_3 : $("#time_s_3").val(),
-                                    s_4 : $("#time_s_4").val(),
-                                    s_5 : $("#time_s_5").val(),
-                                    s_6 : $("#time_s_6").val(),
-                                    s_7 : $("#time_s_7").val(),
-                                    e_1 : $("#time_e_1").val(),
-                                    e_2 : $("#time_e_2").val(),
-                                    e_3 : $("#time_e_3").val(),
-                                    e_4 : $("#time_e_4").val(),
-                                    e_5 : $("#time_e_5").val(),
-                                    e_6 : $("#time_e_6").val(),
-                                    e_7 : $("#time_e_7").val(),
-                                    on_7 : $("#time_on_7").val(),
-                                    off_7 : $("#time_off_7").val(),
-                                    se_1 : $("#time_se_1").val(),
-                                    se_2 : $("#time_se_2").val(),
-                                    se_3 : $("#time_se_3").val(),
-                                    se_4 : $("#time_se_4").val(),
-                                    se_5 : $("#time_se_5").val(),
-                                    se_6 : $("#time_se_6").val()
+                                    A1: $(".range_control1").val(),
+                                    A2: $(".range_control2").val(),
+                                    A3: $(".range_control3").val(),
+                                    A5: $(".range_control5").val()
                                 },
-                                dataType: 'json',
+                                dataType: "json",
                                 success: function(res) {
-                                    // console.log(res.data)
-                                    if(res.status === "Insert_Success"){
-                                        $("#Modal_Auto_control").modal("hide");
-                                        $.extend(parseJSON, res.data);
-                                        var json_msg = JSON.stringify(parseJSON);
-                                        // console.log(parseJSON)
-                                        message = new Paho.MQTT.Message(json_msg);
-                                        message.destinationName = house_master + "/1/control/time_control";
-                                        message.qos = 1;
+                                    $("#Modal_Auto_control").modal("hide");
+                                    console.log(res);
+                                    if (res === "Success") {
+                                        message = new Paho.MQTT.Message(Rmx1[0]);
+                                        message.destinationName = house_master + "/1/data_config/data_config_sprinnker_base_down";
                                         message.retained = true;
                                         client.send(message);
-                                    
-                                        swal({
+
+                                        message = new Paho.MQTT.Message(Rmx1[1]);
+                                        message.destinationName = house_master + "/1/data_config/data_config_sprinnker_base_up";
+                                        message.retained = true;
+                                        client.send(message);
+
+                                        message = new Paho.MQTT.Message(Rmx2[0]);
+                                        message.destinationName = house_master + "/1/data_config/data_config_sprinnker_down";
+                                        message.retained = true;
+                                        client.send(message);
+
+                                        message = new Paho.MQTT.Message(Rmx2[1]);
+                                        message.destinationName = house_master + "/1/data_config/data_config_sprinnker_up";
+                                        message.retained = true;
+                                        client.send(message);
+
+                                        message = new Paho.MQTT.Message(Rmx3[0]);
+                                        message.destinationName = house_master + "/1/data_config/data_config_foggy_down";
+                                        message.retained = true;
+                                        client.send(message);
+
+                                        message = new Paho.MQTT.Message(Rmx3[1]);
+                                        message.destinationName = house_master + "/1/data_config/data_config_foggy_up";
+                                        message.retained = true;
+                                        client.send(message);
+
+                                        message = new Paho.MQTT.Message(Rmx3[0]);
+                                        message.destinationName = house_master + "/1/data_config/data_config_sprinnker_top_down";
+                                        message.retained = true;
+                                        client.send(message);
+
+                                        message = new Paho.MQTT.Message(Rmx3[1]);
+                                        message.destinationName = house_master + "/1/data_config/data_config_sprinnker_top_up";
+                                        message.retained = true;
+                                        client.send(message);
+
+                                        message = new Paho.MQTT.Message(Rmx5[0]);
+                                        message.destinationName = house_master + "/1/data_config/data_config_slan_down";
+                                        message.retained = true;
+                                        client.send(message);
+
+                                        message = new Paho.MQTT.Message(Rmx5[1]);
+                                        message.destinationName = house_master + "/1/data_config/data_config_slan_up";
+                                        message.retained = true;
+                                        client.send(message);
+
+                                    swal({
                                             title: 'บันทึกข้อมูลสำเร็จ',
                                             type: 'success',
                                             allowOutsideClick: false,
@@ -1696,446 +1889,589 @@
                                 }
                             });
                         }
-                    }
-                });
+                    });
+                }
             }); // exit_save_Auto
         } // exit_message
         connect();
     }
 
     $(".sw_auto").click(function () { 
-        $('#time_s_1').removeClass('is-invalid');
-        $('#time_e_1').removeClass('is-invalid');
-        $('#time_s_2').removeClass('is-invalid');
-        $('#time_e_2').removeClass('is-invalid');
-        $('#time_s_3').removeClass('is-invalid');
-        $('#time_e_3').removeClass('is-invalid');
-        $('#time_s_4').removeClass('is-invalid');
-        $('#time_e_4').removeClass('is-invalid');
-        $('#time_s_5').removeClass('is-invalid');
-        $('#time_e_5').removeClass('is-invalid');
-        $('#time_s_6').removeClass('is-invalid');
-        $('#time_e_6').removeClass('is-invalid');
-        $('#time_s_7').removeClass('is-invalid');
-        $('#time_e_7').removeClass('is-invalid');
-        $('#time_on_7').removeClass('is-invalid');
-        $('#time_off_7').removeClass('is-invalid');
-        $("#time_se_1").removeClass("is-invalid");
-        $("#time_se_2").removeClass("is-invalid");
-        $("#time_se_3").removeClass("is-invalid");
-        $("#time_se_4").removeClass("is-invalid");
-        $("#time_se_5").removeClass("is-invalid");
-        $("#time_se_6").removeClass("is-invalid");
-        $("#save_auto_cont").hide();
-        $('.input_check').off('change');
-        $(".modal_autoText").html('ตั้งค่า '+$(this).attr("name"));
-        var channel = $(this).attr("id");
-        // alert(channel);
-        $.ajax({
-            url: "routes/get_auto_control.php",
-            method: "post",
-            data: { 
-                house_master: house_master,
-                channel : channel
-            },
-            dataType: "json",
-            success: function(res) {
-                $(".channel").val(channel);
-                // alert(channel)
-                console.log(res)
-                
-                if(channel != 9){
-                    $(".time_loop").hide();
-                }else{
-                    $(".time_loop").show();
-                    if(res.st_7 == 0){
-                        $("#sw_7").bootstrapToggle('off');
-                        $("#time_s_7").prop('disabled', true).val(res.t_s_7);
-                        $("#time_e_7").prop('disabled', true).val(res.t_e_7);
-                        $("#time_on_7").prop('disabled', true).val(res.t_on_7);
-                        $("#time_off_7").prop('disabled', true).val(res.t_off_7);
-                    }else{
-                        $("#sw_7").bootstrapToggle('on');
-                        $("#time_s_7").prop('disabled', false).val(res.t_s_7);
-                        $("#time_e_7").prop('disabled', false).val(res.t_e_7);
-                        $("#time_on_7").prop('disabled', false).val(res.t_on_7);
-                        $("#time_off_7").prop('disabled', false).val(res.t_off_7);
-                    }
-                }
-                if(channel == 11){
-                    $(".start_7").html("TIME");
-                    $(".end_7").html("LEVEL");
-                    $("#time_se_1").show();
-                    $("#time_se_2").show();
-                    $("#time_se_3").show();
-                    $("#time_se_4").show();
-                    $("#time_se_5").show();
-                    $("#time_se_6").show();
-                    $("#time_e_1").hide();
-                    $("#time_e_2").hide();
-                    $("#time_e_3").hide();
-                    $("#time_e_4").hide();
-                    $("#time_e_5").hide();
-                    $("#time_e_6").hide();
-                    if(res.st_1 == 0){
-                        $("#sw_1").bootstrapToggle('off');
-                        $("#time_s_1").prop('disabled', true).val("");
-                        $("#time_se_1").prop('disabled', true).val("0");
-                        $("#sw_2").bootstrapToggle('disable');
-                        $("#sw_3").bootstrapToggle('disable');
-                        $("#sw_4").bootstrapToggle('disable');
-                        $("#sw_5").bootstrapToggle('disable');
-                        $("#sw_6").bootstrapToggle('disable');
-                    }else{
-                        $("#sw_1").bootstrapToggle('on');
-                        $("#time_s_1").prop('disabled', false).val(res.t_s_1);
-                        $("#time_se_1").prop('disabled', false).val(res.t_e_1);
-                        $("#sw_2").bootstrapToggle('enable');
-                        $("#sw_3").bootstrapToggle('disable');
-                        $("#sw_4").bootstrapToggle('disable');
-                        $("#sw_5").bootstrapToggle('disable');
-                        $("#sw_6").bootstrapToggle('disable');
-                    }
-                    if(res.st_2 == 0){
-                        $("#sw_2").bootstrapToggle('off');
-                        $("#time_s_2").prop('disabled', true).val("");
-                        $("#time_se_2").prop('disabled', true).val("0");
-                        $("#sw_3").bootstrapToggle('disable');
-                        $("#sw_4").bootstrapToggle('disable');
-                        $("#sw_5").bootstrapToggle('disable');
-                        $("#sw_6").bootstrapToggle('disable');
-                    }else{
-                        $("#sw_2").bootstrapToggle('on');
-                        $("#time_s_2").prop('disabled', false).val(res.t_s_2);
-                        $("#time_se_2").prop('disabled', false).val(res.t_e_2);
-                        $("#sw_3").bootstrapToggle('enable');
-                        $("#sw_4").bootstrapToggle('disable');
-                        $("#sw_5").bootstrapToggle('disable');
-                        $("#sw_6").bootstrapToggle('disable');
-                    }
-                    if(res.st_3 == 0){
-                        $("#sw_3").bootstrapToggle('off');
-                        $("#time_s_3").prop('disabled', true).val("");
-                        $("#time_se_3").prop('disabled', true).val("0");
-                        $("#sw_4").bootstrapToggle('disable');
-                        $("#sw_5").bootstrapToggle('disable');
-                        $("#sw_6").bootstrapToggle('disable');
-                    }else{
-                        $("#sw_3").bootstrapToggle('on');
-                        $("#time_s_3").prop('disabled', false).val(res.t_s_3);
-                        $("#time_se_3").prop('disabled', false).val(res.t_e_3);
-                        $("#sw_4").bootstrapToggle('enable');
-                        $("#sw_5").bootstrapToggle('disable');
-                        $("#sw_6").bootstrapToggle('disable');
-                    }
-                    if(res.st_4 == 0){
-                        $("#sw_4").bootstrapToggle('off');
-                        $("#time_s_4").prop('disabled', true).val("");
-                        $("#time_se_4").prop('disabled', true).val("0");
-                        $("#sw_5").bootstrapToggle('disable');
-                        $("#sw_6").bootstrapToggle('disable');
-                    }else{
-                        $("#sw_4").bootstrapToggle('on');
-                        $("#time_s_4").prop('disabled', false).val(res.t_s_4);
-                        $("#time_se_4").prop('disabled', false).val(res.t_e_4);
-                        $("#sw_5").bootstrapToggle('enable');
-                        $("#sw_6").bootstrapToggle('disable');
-                    }
-                    if(res.st_5 == 0){
-                        $("#sw_5").bootstrapToggle('off');
-                        $("#time_s_5").prop('disabled', true).val("");
-                        $("#time_se_5").prop('disabled', true).val("0");
-                        $("#sw_6").bootstrapToggle('disable');
-                    }else{
-                        $("#sw_5").bootstrapToggle('on');
-                        $("#time_s_5").prop('disabled', false).val(res.t_s_5);
-                        $("#time_se_5").prop('disabled', false).val(res.t_e_5);
-                        $("#sw_6").bootstrapToggle('enable');
-                    }
-                    if(res.st_6 == 0){
-                        $("#sw_6").bootstrapToggle('off');
-                        $("#time_s_6").prop('disabled', true).val("");
-                        $("#time_se_6").prop('disabled', true).val("0");
-                    }else{
-                        $("#sw_6").bootstrapToggle('on');
-                        $("#time_s_6").prop('disabled', false).val(res.t_s_6);
-                        $("#time_se_6").prop('disabled', false).val(res.t_e_6);
-                    }
-                }else{
-                    $(".start_7").html("START");
-                    $(".end_7").html("END");
-                    $("#sw_1").bootstrapToggle('enable');
-                    $("#sw_2").bootstrapToggle('enable');
-                    $("#sw_3").bootstrapToggle('enable');
-                    $("#sw_4").bootstrapToggle('enable');
-                    $("#sw_5").bootstrapToggle('enable');
-                    $("#sw_6").bootstrapToggle('enable');
-                    $("#time_e_1").show();
-                    $("#time_e_2").show();
-                    $("#time_e_3").show();
-                    $("#time_e_4").show();
-                    $("#time_e_5").show();
-                    $("#time_e_6").show();
-                    $("#time_se_1").hide();
-                    $("#time_se_2").hide();
-                    $("#time_se_3").hide();
-                    $("#time_se_4").hide();
-                    $("#time_se_5").hide();
-                    $("#time_se_6").hide();
+        if (house_master !== "KMUMT001") {
+            $(".seve_auto").show();
+            $(".seve_auto_kmutt").hide();
+            $('#time_s_1').removeClass('is-invalid');
+            $('#time_e_1').removeClass('is-invalid');
+            $('#time_s_2').removeClass('is-invalid');
+            $('#time_e_2').removeClass('is-invalid');
+            $('#time_s_3').removeClass('is-invalid');
+            $('#time_e_3').removeClass('is-invalid');
+            $('#time_s_4').removeClass('is-invalid');
+            $('#time_e_4').removeClass('is-invalid');
+            $('#time_s_5').removeClass('is-invalid');
+            $('#time_e_5').removeClass('is-invalid');
+            $('#time_s_6').removeClass('is-invalid');
+            $('#time_e_6').removeClass('is-invalid');
+            $('#time_s_7').removeClass('is-invalid');
+            $('#time_e_7').removeClass('is-invalid');
+            $('#time_on_7').removeClass('is-invalid');
+            $('#time_off_7').removeClass('is-invalid');
+            $("#time_se_1").removeClass("is-invalid");
+            $("#time_se_2").removeClass("is-invalid");
+            $("#time_se_3").removeClass("is-invalid");
+            $("#time_se_4").removeClass("is-invalid");
+            $("#time_se_5").removeClass("is-invalid");
+            $("#time_se_6").removeClass("is-invalid");
+            $("#save_auto_cont").hide();
+            $('.input_check').off('change');
+            $(".modal_autoText").html('ตั้งค่า '+$(this).attr("name"));
+            var channel = $(this).attr("id");
+            // alert(channel);
+            $.ajax({
+                url: "routes/get_auto_control.php",
+                method: "post",
+                data: { 
+                    house_master: house_master,
+                    channel : channel
+                },
+                dataType: "json",
+                success: function(res) {
+                    $(".channel").val(channel);
+                    // alert(channel)
+                    console.log(res)
                     
-                    if(res.st_1 == 0){
-                        $("#sw_1").bootstrapToggle('off');
-                        $("#time_s_1").prop('disabled', true).val("");
-                        $("#time_e_1").prop('disabled', true).val("");
+                    if(channel != 9){
+                        $(".time_loop").hide();
                     }else{
-                        $("#sw_1").bootstrapToggle('on');
-                        $("#time_s_1").prop('disabled', false).val(res.t_s_1);
-                        $("#time_e_1").prop('disabled', false).val(res.t_e_1);
-                    }
-                    if(res.st_2 == 0){
-                        $("#sw_2").bootstrapToggle('off');
-                        $("#time_s_2").prop('disabled', true).val("");
-                        $("#time_e_2").prop('disabled', true).val("");
-                    }else{
-                        $("#sw_2").bootstrapToggle('on');
-                        $("#time_s_2").prop('disabled', false).val(res.t_s_2);
-                        $("#time_e_2").prop('disabled', false).val(res.t_e_2);
-                    }
-                    if(res.st_3 == 0){
-                        $("#sw_3").bootstrapToggle('off');
-                        $("#time_s_3").prop('disabled', true).val("");
-                        $("#time_e_3").prop('disabled', true).val("");
-                    }else{
-                        $("#sw_3").bootstrapToggle('on');
-                        $("#time_s_3").prop('disabled', false).val(res.t_s_3);
-                        $("#time_e_3").prop('disabled', false).val(res.t_e_3);
-                    }
-                    if(res.st_4 == 0){
-                        $("#sw_4").bootstrapToggle('off');
-                        $("#time_s_4").prop('disabled', true).val("");
-                        $("#time_e_4").prop('disabled', true).val("");
-                    }else{
-                        $("#sw_4").bootstrapToggle('on');
-                        $("#time_s_4").prop('disabled', false).val(res.t_s_4);
-                        $("#time_e_4").prop('disabled', false).val(res.t_e_4);
-                    }
-                    if(res.st_5 == 0){
-                        $("#sw_5").bootstrapToggle('off');
-                        $("#time_s_5").prop('disabled', true).val("");
-                        $("#time_e_5").prop('disabled', true).val("");
-                    }else{
-                        $("#sw_5").bootstrapToggle('on');
-                        $("#time_s_5").prop('disabled', false).val(res.t_s_5);
-                        $("#time_e_5").prop('disabled', false).val(res.t_e_5);
-                    }
-                    if(res.st_6 == 0){
-                        $("#sw_6").bootstrapToggle('off');
-                        $("#time_s_6").prop('disabled', true).val("");
-                        $("#time_e_6").prop('disabled', true).val("");
-                    }else{
-                        $("#sw_6").bootstrapToggle('on');
-                        $("#time_s_6").prop('disabled', false).val(res.t_s_6);
-                        $("#time_e_6").prop('disabled', false).val(res.t_e_6);
-                    }
-                }
-                $("#Modal_Auto_control").modal("show");
-                
-                $('.input_check').change(function() {
-                    var input_num = this.id.split("_");
-                    // alert(Number(input_num[1]));
-                    if(channel == 11){ // slan
-                        if ($(this).prop('checked') === true) {
-                            $("#time_s_" + Number(input_num[1])).prop('disabled', false).val(eval("res.t_s_" + Number(input_num[1])));
-                            $("#time_se_" + Number(input_num[1])).prop('disabled', false).val(eval("res.t_e_" + Number(input_num[1])));
-                            $("#sw_" +(Number(input_num[1]) + 1)).bootstrapToggle('enable');
-                            for (var t = (Number(input_num[1]+1)); t <= 6; t++) {
-                                $("#sw_" +(t+1)).bootstrapToggle('off').bootstrapToggle('disable')
-                            }
+                        $(".time_loop").show();
+                        if(res.st_7 == 0){
+                            $("#sw_7").bootstrapToggle('off');
+                            $("#time_s_7").prop('disabled', true).val(res.t_s_7);
+                            $("#time_e_7").prop('disabled', true).val(res.t_e_7);
+                            $("#time_on_7").prop('disabled', true).val(res.t_on_7);
+                            $("#time_off_7").prop('disabled', true).val(res.t_off_7);
                         }else{
-                            $("#time_s_" + Number(input_num[1])).prop('disabled', true).val("");
-                            $("#time_se_" + Number(input_num[1])).prop('disabled', true).val("0");
-                            for (var t = Number(input_num[1]); t <= 6; t++) {
-                                $("#sw_" +(t + 1)).bootstrapToggle('off').bootstrapToggle('disable');
-                            }
+                            $("#sw_7").bootstrapToggle('on');
+                            $("#time_s_7").prop('disabled', false).val(res.t_s_7);
+                            $("#time_e_7").prop('disabled', false).val(res.t_e_7);
+                            $("#time_on_7").prop('disabled', false).val(res.t_on_7);
+                            $("#time_off_7").prop('disabled', false).val(res.t_off_7);
                         }
-
-                    }else if(channel == 9){ // foggy
-                        if (Number(input_num[1]) == 7) { // sw_7
-                            if ($(this).prop('checked') === true) { // on 7
-                                $("#time_s_7").prop('disabled', false).val(res.t_s_7);
-                                $("#time_e_7").prop('disabled', false).val(res.t_s_7);
-                                $("#time_on_7").prop('disabled', false).val(res.t_on_7);
-                                $("#time_off_7").prop('disabled', false).val(res.t_off_7);
-                                $("#sw_1").bootstrapToggle('off');
-                                $("#sw_2").bootstrapToggle('off');
-                                $("#sw_3").bootstrapToggle('off');
-                                $("#sw_4").bootstrapToggle('off');
-                                $("#sw_5").bootstrapToggle('off');
-                                $("#sw_6").bootstrapToggle('off');
-                            }else{ // off_7
-                                $("#time_s_7").prop('disabled', true).val("");
-                                $("#time_e_7").prop('disabled', true).val("");
-                                $("#time_on_7").prop('disabled', true).val("");
-                                $("#time_off_7").prop('disabled', true).val("");
+                    }
+                    if(channel == 11){
+                        $(".start_7").html("TIME");
+                        $(".end_7").html("LEVEL");
+                        $("#time_se_1").show();
+                        $("#time_se_2").show();
+                        $("#time_se_3").show();
+                        $("#time_se_4").show();
+                        $("#time_se_5").show();
+                        $("#time_se_6").show();
+                        $("#time_e_1").hide();
+                        $("#time_e_2").hide();
+                        $("#time_e_3").hide();
+                        $("#time_e_4").hide();
+                        $("#time_e_5").hide();
+                        $("#time_e_6").hide();
+                        if(res.st_1 == 0){
+                            $("#sw_1").bootstrapToggle('off');
+                            $("#time_s_1").prop('disabled', true).val("");
+                            $("#time_se_1").prop('disabled', true).val("0");
+                            $("#sw_2").bootstrapToggle('disable');
+                            $("#sw_3").bootstrapToggle('disable');
+                            $("#sw_4").bootstrapToggle('disable');
+                            $("#sw_5").bootstrapToggle('disable');
+                            $("#sw_6").bootstrapToggle('disable');
+                        }else{
+                            $("#sw_1").bootstrapToggle('on');
+                            $("#time_s_1").prop('disabled', false).val(res.t_s_1);
+                            $("#time_se_1").prop('disabled', false).val(res.t_e_1);
+                            $("#sw_2").bootstrapToggle('enable');
+                            $("#sw_3").bootstrapToggle('disable');
+                            $("#sw_4").bootstrapToggle('disable');
+                            $("#sw_5").bootstrapToggle('disable');
+                            $("#sw_6").bootstrapToggle('disable');
+                        }
+                        if(res.st_2 == 0){
+                            $("#sw_2").bootstrapToggle('off');
+                            $("#time_s_2").prop('disabled', true).val("");
+                            $("#time_se_2").prop('disabled', true).val("0");
+                            $("#sw_3").bootstrapToggle('disable');
+                            $("#sw_4").bootstrapToggle('disable');
+                            $("#sw_5").bootstrapToggle('disable');
+                            $("#sw_6").bootstrapToggle('disable');
+                        }else{
+                            $("#sw_2").bootstrapToggle('on');
+                            $("#time_s_2").prop('disabled', false).val(res.t_s_2);
+                            $("#time_se_2").prop('disabled', false).val(res.t_e_2);
+                            $("#sw_3").bootstrapToggle('enable');
+                            $("#sw_4").bootstrapToggle('disable');
+                            $("#sw_5").bootstrapToggle('disable');
+                            $("#sw_6").bootstrapToggle('disable');
+                        }
+                        if(res.st_3 == 0){
+                            $("#sw_3").bootstrapToggle('off');
+                            $("#time_s_3").prop('disabled', true).val("");
+                            $("#time_se_3").prop('disabled', true).val("0");
+                            $("#sw_4").bootstrapToggle('disable');
+                            $("#sw_5").bootstrapToggle('disable');
+                            $("#sw_6").bootstrapToggle('disable');
+                        }else{
+                            $("#sw_3").bootstrapToggle('on');
+                            $("#time_s_3").prop('disabled', false).val(res.t_s_3);
+                            $("#time_se_3").prop('disabled', false).val(res.t_e_3);
+                            $("#sw_4").bootstrapToggle('enable');
+                            $("#sw_5").bootstrapToggle('disable');
+                            $("#sw_6").bootstrapToggle('disable');
+                        }
+                        if(res.st_4 == 0){
+                            $("#sw_4").bootstrapToggle('off');
+                            $("#time_s_4").prop('disabled', true).val("");
+                            $("#time_se_4").prop('disabled', true).val("0");
+                            $("#sw_5").bootstrapToggle('disable');
+                            $("#sw_6").bootstrapToggle('disable');
+                        }else{
+                            $("#sw_4").bootstrapToggle('on');
+                            $("#time_s_4").prop('disabled', false).val(res.t_s_4);
+                            $("#time_se_4").prop('disabled', false).val(res.t_e_4);
+                            $("#sw_5").bootstrapToggle('enable');
+                            $("#sw_6").bootstrapToggle('disable');
+                        }
+                        if(res.st_5 == 0){
+                            $("#sw_5").bootstrapToggle('off');
+                            $("#time_s_5").prop('disabled', true).val("");
+                            $("#time_se_5").prop('disabled', true).val("0");
+                            $("#sw_6").bootstrapToggle('disable');
+                        }else{
+                            $("#sw_5").bootstrapToggle('on');
+                            $("#time_s_5").prop('disabled', false).val(res.t_s_5);
+                            $("#time_se_5").prop('disabled', false).val(res.t_e_5);
+                            $("#sw_6").bootstrapToggle('enable');
+                        }
+                        if(res.st_6 == 0){
+                            $("#sw_6").bootstrapToggle('off');
+                            $("#time_s_6").prop('disabled', true).val("");
+                            $("#time_se_6").prop('disabled', true).val("0");
+                        }else{
+                            $("#sw_6").bootstrapToggle('on');
+                            $("#time_s_6").prop('disabled', false).val(res.t_s_6);
+                            $("#time_se_6").prop('disabled', false).val(res.t_e_6);
+                        }
+                    }else{
+                        $(".start_7").html("START");
+                        $(".end_7").html("END");
+                        $("#sw_1").bootstrapToggle('enable');
+                        $("#sw_2").bootstrapToggle('enable');
+                        $("#sw_3").bootstrapToggle('enable');
+                        $("#sw_4").bootstrapToggle('enable');
+                        $("#sw_5").bootstrapToggle('enable');
+                        $("#sw_6").bootstrapToggle('enable');
+                        $("#time_e_1").show();
+                        $("#time_e_2").show();
+                        $("#time_e_3").show();
+                        $("#time_e_4").show();
+                        $("#time_e_5").show();
+                        $("#time_e_6").show();
+                        $("#time_se_1").hide();
+                        $("#time_se_2").hide();
+                        $("#time_se_3").hide();
+                        $("#time_se_4").hide();
+                        $("#time_se_5").hide();
+                        $("#time_se_6").hide();
+                        
+                        if(res.st_1 == 0){
+                            $("#sw_1").bootstrapToggle('off');
+                            $("#time_s_1").prop('disabled', true).val("");
+                            $("#time_e_1").prop('disabled', true).val("");
+                        }else{
+                            $("#sw_1").bootstrapToggle('on');
+                            $("#time_s_1").prop('disabled', false).val(res.t_s_1);
+                            $("#time_e_1").prop('disabled', false).val(res.t_e_1);
+                        }
+                        if(res.st_2 == 0){
+                            $("#sw_2").bootstrapToggle('off');
+                            $("#time_s_2").prop('disabled', true).val("");
+                            $("#time_e_2").prop('disabled', true).val("");
+                        }else{
+                            $("#sw_2").bootstrapToggle('on');
+                            $("#time_s_2").prop('disabled', false).val(res.t_s_2);
+                            $("#time_e_2").prop('disabled', false).val(res.t_e_2);
+                        }
+                        if(res.st_3 == 0){
+                            $("#sw_3").bootstrapToggle('off');
+                            $("#time_s_3").prop('disabled', true).val("");
+                            $("#time_e_3").prop('disabled', true).val("");
+                        }else{
+                            $("#sw_3").bootstrapToggle('on');
+                            $("#time_s_3").prop('disabled', false).val(res.t_s_3);
+                            $("#time_e_3").prop('disabled', false).val(res.t_e_3);
+                        }
+                        if(res.st_4 == 0){
+                            $("#sw_4").bootstrapToggle('off');
+                            $("#time_s_4").prop('disabled', true).val("");
+                            $("#time_e_4").prop('disabled', true).val("");
+                        }else{
+                            $("#sw_4").bootstrapToggle('on');
+                            $("#time_s_4").prop('disabled', false).val(res.t_s_4);
+                            $("#time_e_4").prop('disabled', false).val(res.t_e_4);
+                        }
+                        if(res.st_5 == 0){
+                            $("#sw_5").bootstrapToggle('off');
+                            $("#time_s_5").prop('disabled', true).val("");
+                            $("#time_e_5").prop('disabled', true).val("");
+                        }else{
+                            $("#sw_5").bootstrapToggle('on');
+                            $("#time_s_5").prop('disabled', false).val(res.t_s_5);
+                            $("#time_e_5").prop('disabled', false).val(res.t_e_5);
+                        }
+                        if(res.st_6 == 0){
+                            $("#sw_6").bootstrapToggle('off');
+                            $("#time_s_6").prop('disabled', true).val("");
+                            $("#time_e_6").prop('disabled', true).val("");
+                        }else{
+                            $("#sw_6").bootstrapToggle('on');
+                            $("#time_s_6").prop('disabled', false).val(res.t_s_6);
+                            $("#time_e_6").prop('disabled', false).val(res.t_e_6);
+                        }
+                    }
+                    $("#Modal_Auto_control").modal("show");
+                    
+                    $('.input_check').change(function() {
+                        var input_num = this.id.split("_");
+                        // alert(Number(input_num[1]));
+                        if(channel == 11){ // slan
+                            if ($(this).prop('checked') === true) {
+                                $("#time_s_" + Number(input_num[1])).prop('disabled', false).val(eval("res.t_s_" + Number(input_num[1])));
+                                $("#time_se_" + Number(input_num[1])).prop('disabled', false).val(eval("res.t_e_" + Number(input_num[1])));
+                                $("#sw_" +(Number(input_num[1]) + 1)).bootstrapToggle('enable');
+                                for (var t = (Number(input_num[1]+1)); t <= 6; t++) {
+                                    $("#sw_" +(t+1)).bootstrapToggle('off').bootstrapToggle('disable')
+                                }
+                            }else{
+                                $("#time_s_" + Number(input_num[1])).prop('disabled', true).val("");
+                                $("#time_se_" + Number(input_num[1])).prop('disabled', true).val("0");
+                                for (var t = Number(input_num[1]); t <= 6; t++) {
+                                    $("#sw_" +(t + 1)).bootstrapToggle('off').bootstrapToggle('disable');
+                                }
                             }
-                        }else{ // sw_!7
-                            if ($(this).prop('checked') === true) { // on
-                                $("#sw_7").bootstrapToggle('off'); 
+
+                        }else if(channel == 9){ // foggy
+                            if (Number(input_num[1]) == 7) { // sw_7
+                                if ($(this).prop('checked') === true) { // on 7
+                                    $("#time_s_7").prop('disabled', false).val(res.t_s_7);
+                                    $("#time_e_7").prop('disabled', false).val(res.t_s_7);
+                                    $("#time_on_7").prop('disabled', false).val(res.t_on_7);
+                                    $("#time_off_7").prop('disabled', false).val(res.t_off_7);
+                                    $("#sw_1").bootstrapToggle('off');
+                                    $("#sw_2").bootstrapToggle('off');
+                                    $("#sw_3").bootstrapToggle('off');
+                                    $("#sw_4").bootstrapToggle('off');
+                                    $("#sw_5").bootstrapToggle('off');
+                                    $("#sw_6").bootstrapToggle('off');
+                                }else{ // off_7
+                                    $("#time_s_7").prop('disabled', true).val("");
+                                    $("#time_e_7").prop('disabled', true).val("");
+                                    $("#time_on_7").prop('disabled', true).val("");
+                                    $("#time_off_7").prop('disabled', true).val("");
+                                }
+                            }else{ // sw_!7
+                                if ($(this).prop('checked') === true) { // on
+                                    $("#sw_7").bootstrapToggle('off'); 
+                                    $("#time_s_" + Number(input_num[1])).prop('disabled', false).val(eval("res.t_s_" + Number(input_num[1])));
+                                    $("#time_e_" + Number(input_num[1])).prop('disabled', false).val(eval("res.t_s_" + Number(input_num[1])));
+                                }else{ // off
+                                    $("#time_s_" + Number(input_num[1])).prop('disabled', true).val("");
+                                    $("#time_e_" + Number(input_num[1])).prop('disabled', true).val("");
+                                }
+                            }
+                        }else{ // != foggy != slan
+                            if ($(this).prop('checked') === true) {
                                 $("#time_s_" + Number(input_num[1])).prop('disabled', false).val(eval("res.t_s_" + Number(input_num[1])));
                                 $("#time_e_" + Number(input_num[1])).prop('disabled', false).val(eval("res.t_s_" + Number(input_num[1])));
-                            }else{ // off
+                            }else{
                                 $("#time_s_" + Number(input_num[1])).prop('disabled', true).val("");
                                 $("#time_e_" + Number(input_num[1])).prop('disabled', true).val("");
                             }
                         }
-                    }else{ // != foggy != slan
-                        if ($(this).prop('checked') === true) {
-                            $("#time_s_" + Number(input_num[1])).prop('disabled', false).val(eval("res.t_s_" + Number(input_num[1])));
-                            $("#time_e_" + Number(input_num[1])).prop('disabled', false).val(eval("res.t_s_" + Number(input_num[1])));
+                        btn_save_show();
+                    });
+                    $(".input_time").change(function() {
+                        btn_save_show();
+                    });
+
+                    function btn_save_show(){
+                        if(channel == 9){
+                            var df_data = {
+                                sw_1 : res.st_1,
+                                sw_2 : res.st_2,
+                                sw_3 : res.st_3,
+                                sw_4 : res.st_4,
+                                sw_5 : res.st_5,
+                                sw_6 : res.st_6,
+                                sw_7 : res.st_7,
+                                s_1  : res.t_s_1,
+                                s_2  : res.t_s_2,
+                                s_3  : res.t_s_3,
+                                s_4  : res.t_s_4,
+                                s_5  : res.t_s_5,
+                                s_6  : res.t_s_6,
+                                s_7  : res.t_s_7,
+                                e_1  : res.t_e_1,
+                                e_2  : res.t_e_2,
+                                e_3  : res.t_e_3,
+                                e_4  : res.t_e_4,
+                                e_5  : res.t_e_5,
+                                e_6  : res.t_e_6,
+                                e_7  : res.t_e_7,
+                                on_7  : res.t_on_7,
+                                off_7  : res.t_off_7
+                            };
                         }else{
-                            $("#time_s_" + Number(input_num[1])).prop('disabled', true).val("");
-                            $("#time_e_" + Number(input_num[1])).prop('disabled', true).val("");
+                            var df_data = {
+                                sw_1 : res.st_1,
+                                sw_2 : res.st_2,
+                                sw_3 : res.st_3,
+                                sw_4 : res.st_4,
+                                sw_5 : res.st_5,
+                                sw_6 : res.st_6,
+                                s_1  : res.t_s_1,
+                                s_2  : res.t_s_2,
+                                s_3  : res.t_s_3,
+                                s_4  : res.t_s_4,
+                                s_5  : res.t_s_5,
+                                s_6  : res.t_s_6,
+                                e_1  : res.t_e_1,
+                                e_2  : res.t_e_2,
+                                e_3  : res.t_e_3,
+                                e_4  : res.t_e_4,
+                                e_5  : res.t_e_5,
+                                e_6  : res.t_e_6
+                            };
+                        }
+                        if ($("#sw_1").prop('checked') == true) { var sw_1 = "1"; } else { var sw_1 = "0"; }
+                        if ($("#sw_2").prop('checked') == true) { var sw_2 = "1"; } else { var sw_2 = "0"; }
+                        if ($("#sw_3").prop('checked') == true) { var sw_3 = "1"; } else { var sw_3 = "0"; }
+                        if ($("#sw_4").prop('checked') == true) { var sw_4 = "1"; } else { var sw_4 = "0"; }
+                        if ($("#sw_5").prop('checked') == true) { var sw_5 = "1"; } else { var sw_5 = "0"; }
+                        if ($("#sw_6").prop('checked') == true) { var sw_6 = "1"; } else { var sw_6 = "0"; }
+                        if ($("#sw_7").prop('checked') == true) { var sw_7 = "1"; } else { var sw_7 = "0"; }
+                        if(channel == 9){
+                            var date_chack = {
+                                sw_1 : sw_1,
+                                sw_2 : sw_2,
+                                sw_3 : sw_3,
+                                sw_4 : sw_4,
+                                sw_5 : sw_5,
+                                sw_6 : sw_6,
+                                sw_7 : sw_7,
+                                s_1 : $("#time_s_1").val(),
+                                s_2 : $("#time_s_2").val(),
+                                s_3 : $("#time_s_3").val(),
+                                s_4 : $("#time_s_4").val(),
+                                s_5 : $("#time_s_5").val(),
+                                s_6 : $("#time_s_6").val(),
+                                s_7 : $("#time_s_7").val(),
+                                e_1 : $("#time_e_1").val(),
+                                e_2 : $("#time_e_2").val(),
+                                e_3 : $("#time_e_3").val(),
+                                e_4 : $("#time_e_4").val(),
+                                e_5 : $("#time_e_5").val(),
+                                e_6 : $("#time_e_6").val(),
+                                e_7 : $("#time_e_7").val(),
+                                on_7 : $("#time_on_7").val(),
+                                off_7 : $("#time_off_7").val()
+                            };
+                        }else if(channel == 11){
+                            var date_chack = {
+                                sw_1 : sw_1,
+                                sw_2 : sw_2,
+                                sw_3 : sw_3,
+                                sw_4 : sw_4,
+                                sw_5 : sw_5,
+                                sw_6 : sw_6,
+                                s_1 : $("#time_s_1").val(),
+                                s_2 : $("#time_s_2").val(),
+                                s_3 : $("#time_s_3").val(),
+                                s_4 : $("#time_s_4").val(),
+                                s_5 : $("#time_s_5").val(),
+                                s_6 : $("#time_s_6").val(),
+                                e_1 : $("#time_se_1").val(),
+                                e_2 : $("#time_se_2").val(),
+                                e_3 : $("#time_se_3").val(),
+                                e_4 : $("#time_se_4").val(),
+                                e_5 : $("#time_se_5").val(),
+                                e_6 : $("#time_se_6").val()
+                            };
+                        }else{
+                            var date_chack = {
+                                sw_1 : sw_1,
+                                sw_2 : sw_2,
+                                sw_3 : sw_3,
+                                sw_4 : sw_4,
+                                sw_5 : sw_5,
+                                sw_6 : sw_6,
+                                s_1 : $("#time_s_1").val(),
+                                s_2 : $("#time_s_2").val(),
+                                s_3 : $("#time_s_3").val(),
+                                s_4 : $("#time_s_4").val(),
+                                s_5 : $("#time_s_5").val(),
+                                s_6 : $("#time_s_6").val(),
+                                e_1 : $("#time_e_1").val(),
+                                e_2 : $("#time_e_2").val(),
+                                e_3 : $("#time_e_3").val(),
+                                e_4 : $("#time_e_4").val(),
+                                e_5 : $("#time_e_5").val(),
+                                e_6 : $("#time_e_6").val()
+                            };
+                        }
+                        if(JSON.stringify(df_data) == JSON.stringify(date_chack)){
+                            $("#save_auto_cont").hide();
+                        }else{
+                            $("#save_auto_cont").show();
                         }
                     }
-                    btn_save_show();
-                });
-                $(".input_time").change(function() {
-                    btn_save_show();
-                });
-
-                function btn_save_show(){
-                    if(channel == 9){
-                        var df_data = {
-                            sw_1 : res.st_1,
-                            sw_2 : res.st_2,
-                            sw_3 : res.st_3,
-                            sw_4 : res.st_4,
-                            sw_5 : res.st_5,
-                            sw_6 : res.st_6,
-                            sw_7 : res.st_7,
-                            s_1  : res.t_s_1,
-                            s_2  : res.t_s_2,
-                            s_3  : res.t_s_3,
-                            s_4  : res.t_s_4,
-                            s_5  : res.t_s_5,
-                            s_6  : res.t_s_6,
-                            s_7  : res.t_s_7,
-                            e_1  : res.t_e_1,
-                            e_2  : res.t_e_2,
-                            e_3  : res.t_e_3,
-                            e_4  : res.t_e_4,
-                            e_5  : res.t_e_5,
-                            e_6  : res.t_e_6,
-                            e_7  : res.t_e_7,
-                            on_7  : res.t_on_7,
-                            off_7  : res.t_off_7
+                }// succress
+            });
+        }else{
+            $(".seve_auto").hide();
+            $(".seve_auto_kmutt").show();
+            $("#save_auto_cont").hide();
+            $('.input_check').off('change');
+            $(".modal_autoText").html('ตั้งค่าโหมดอัตโนมัติ');
+            var channel = $(this).attr("id");
+            $.ajax({
+                url: "routes/get_auto_control.php",
+                method: "post",
+                data: { 
+                    house_master: house_master
+                },
+                dataType: "json",
+                success: function(res) {
+                    // console.log(res)
+                    $("#Modal_Auto_control").modal("show");
+                    // var max_min = res.max_min;
+                    kmutt_auto_mode(
+                        min1 = res.maxmin_min_1, min2 = res.maxmin_min_2, min3 = res.maxmin_min_3, min5 = res.maxmin_min_5,
+                        max1 = res.maxmin_max_1, max2 = res.maxmin_max_2, max3 = res.maxmin_max_3, max5 = res.maxmin_max_5,
+                        disb = false
+                    );
+                    
+                    $(".range_control").change(function () { 
+                        btn_save_show();
+                    });
+                    function btn_save_show(){
+                        var df_maxmin = {
+                            min_1 : res.maxmin_min_1,
+                            min_2 : res.maxmin_min_2,
+                            min_3 : res.maxmin_min_3,
+                            // min_4 : res.maxmin_min_4,
+                            min_5 : res.maxmin_min_5,
+                            max_1 : res.maxmin_max_1,
+                            max_2 : res.maxmin_max_2,
+                            max_3 : res.maxmin_max_3,
+                            // max_4 : res.maxmin_max_4,
+                            max_5 : res.maxmin_max_5
                         };
-                    }else{
-                        var df_data = {
-                            sw_1 : res.st_1,
-                            sw_2 : res.st_2,
-                            sw_3 : res.st_3,
-                            sw_4 : res.st_4,
-                            sw_5 : res.st_5,
-                            sw_6 : res.st_6,
-                            s_1  : res.t_s_1,
-                            s_2  : res.t_s_2,
-                            s_3  : res.t_s_3,
-                            s_4  : res.t_s_4,
-                            s_5  : res.t_s_5,
-                            s_6  : res.t_s_6,
-                            e_1  : res.t_e_1,
-                            e_2  : res.t_e_2,
-                            e_3  : res.t_e_3,
-                            e_4  : res.t_e_4,
-                            e_5  : res.t_e_5,
-                            e_6  : res.t_e_6
+                        var Rmx1 = $(".range_control1").val().split(";");
+                        var Rmx2 = $(".range_control2").val().split(";");
+                        var Rmx3 = $(".range_control3").val().split(";");
+                        var Rmx5 = $(".range_control5").val().split(";");
+                        var n_maxmin = {
+                            min_1 : Rmx1[0],
+                            min_2 : Rmx2[0],
+                            min_3 : Rmx3[0],
+                            min_5 : Rmx5[0],
+                            max_1 : Rmx1[1],
+                            max_2 : Rmx2[1],
+                            max_3 : Rmx3[1],
+                            max_5 : Rmx5[1]
                         };
-                    }
-                    if ($("#sw_1").prop('checked') == true) { var sw_1 = "1"; } else { var sw_1 = "0"; }
-                    if ($("#sw_2").prop('checked') == true) { var sw_2 = "1"; } else { var sw_2 = "0"; }
-                    if ($("#sw_3").prop('checked') == true) { var sw_3 = "1"; } else { var sw_3 = "0"; }
-                    if ($("#sw_4").prop('checked') == true) { var sw_4 = "1"; } else { var sw_4 = "0"; }
-                    if ($("#sw_5").prop('checked') == true) { var sw_5 = "1"; } else { var sw_5 = "0"; }
-                    if ($("#sw_6").prop('checked') == true) { var sw_6 = "1"; } else { var sw_6 = "0"; }
-                    if ($("#sw_7").prop('checked') == true) { var sw_7 = "1"; } else { var sw_7 = "0"; }
-                    if(channel == 9){
-                        var date_chack = {
-                            sw_1 : sw_1,
-                            sw_2 : sw_2,
-                            sw_3 : sw_3,
-                            sw_4 : sw_4,
-                            sw_5 : sw_5,
-                            sw_6 : sw_6,
-                            sw_7 : sw_7,
-                            s_1 : $("#time_s_1").val(),
-                            s_2 : $("#time_s_2").val(),
-                            s_3 : $("#time_s_3").val(),
-                            s_4 : $("#time_s_4").val(),
-                            s_5 : $("#time_s_5").val(),
-                            s_6 : $("#time_s_6").val(),
-                            s_7 : $("#time_s_7").val(),
-                            e_1 : $("#time_e_1").val(),
-                            e_2 : $("#time_e_2").val(),
-                            e_3 : $("#time_e_3").val(),
-                            e_4 : $("#time_e_4").val(),
-                            e_5 : $("#time_e_5").val(),
-                            e_6 : $("#time_e_6").val(),
-                            e_7 : $("#time_e_7").val(),
-                            on_7 : $("#time_on_7").val(),
-                            off_7 : $("#time_off_7").val()
-                        };
-                    }else if(channel == 11){
-                        var date_chack = {
-                            sw_1 : sw_1,
-                            sw_2 : sw_2,
-                            sw_3 : sw_3,
-                            sw_4 : sw_4,
-                            sw_5 : sw_5,
-                            sw_6 : sw_6,
-                            s_1 : $("#time_s_1").val(),
-                            s_2 : $("#time_s_2").val(),
-                            s_3 : $("#time_s_3").val(),
-                            s_4 : $("#time_s_4").val(),
-                            s_5 : $("#time_s_5").val(),
-                            s_6 : $("#time_s_6").val(),
-                            e_1 : $("#time_se_1").val(),
-                            e_2 : $("#time_se_2").val(),
-                            e_3 : $("#time_se_3").val(),
-                            e_4 : $("#time_se_4").val(),
-                            e_5 : $("#time_se_5").val(),
-                            e_6 : $("#time_se_6").val()
-                        };
-                    }else{
-                        var date_chack = {
-                            sw_1 : sw_1,
-                            sw_2 : sw_2,
-                            sw_3 : sw_3,
-                            sw_4 : sw_4,
-                            sw_5 : sw_5,
-                            sw_6 : sw_6,
-                            s_1 : $("#time_s_1").val(),
-                            s_2 : $("#time_s_2").val(),
-                            s_3 : $("#time_s_3").val(),
-                            s_4 : $("#time_s_4").val(),
-                            s_5 : $("#time_s_5").val(),
-                            s_6 : $("#time_s_6").val(),
-                            e_1 : $("#time_e_1").val(),
-                            e_2 : $("#time_e_2").val(),
-                            e_3 : $("#time_e_3").val(),
-                            e_4 : $("#time_e_4").val(),
-                            e_5 : $("#time_e_5").val(),
-                            e_6 : $("#time_e_6").val()
-                        };
-                    }
-                    if(JSON.stringify(df_data) == JSON.stringify(date_chack)){
-                        $("#save_auto_cont").hide();
-                    }else{
-                        $("#save_auto_cont").show();
+                        if(JSON.stringify(df_maxmin) == JSON.stringify(n_maxmin)){
+                            $("#save_auto_cont").hide();
+                        }else{
+                            $("#save_auto_cont").show();
+                        }
                     }
                 }
-            }// succress
-        });
+            });
+            
+            function kmutt_auto_mode(min1, min2, min3, min5, max1, max2, max3, max5, disb) {
+                var $range1 = $(".range_control1"),
+                    range_instance1;
+                $range1.ionRangeSlider({
+                    type: "double",
+                    min: 0,
+                    max: 100,
+                    from: min1,
+                    to: max1,
+                    grid: true,
+                    // disable: true
+                    // onChange: function(data) {
+                    //     console.log(data);
+                    // },
+                });
+                range_instance1 = $range1.data("ionRangeSlider");
+                range_instance1.update({
+                    from: min1,
+                    to: max1,
+                    "disable": disb
+                });
+
+                var $range2 = $(".range_control2"),
+                    range_instance2;
+                $range2.ionRangeSlider({
+                    type: "double",
+                    min: 0,
+                    max: 100,
+                    from: min2,
+                    to: max2,
+                    grid: true,
+                    // disable: true
+                });
+                range_instance2 = $range2.data("ionRangeSlider");
+                range_instance2.update({
+                    from: min2,
+                    to: max2,
+                    "disable": disb
+                });
+
+                var $range3 = $(".range_control3"),
+                    range_instance3;
+                $range3.ionRangeSlider({
+                    type: "double",
+                    min: 0,
+                    max: 100,
+                    from: min3,
+                    to: max3,
+                    grid: true,
+                    // disable: true
+                });
+                range_instance3 = $range3.data("ionRangeSlider");
+                range_instance3.update({
+                    from: min3,
+                    to: max3,
+                    "disable": disb
+                });
+
+                var $range5 = $(".range_control5"),
+                    range_instance5;
+                $range5.ionRangeSlider({
+                    type: "double",
+                    min: 0,
+                    max: 100,
+                    from: min5,
+                    to: max5,
+                    grid: true,
+                    // disable: true
+                });
+                range_instance5 = $range5.data("ionRangeSlider");
+                range_instance5.update({
+                    from: min5,
+                    to: max5,
+                    "disable": disb
+                });
+            }
+        }
     });
 
     

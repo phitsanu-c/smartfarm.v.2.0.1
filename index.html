@@ -28,7 +28,6 @@
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> -->
     <link rel="stylesheet" href="public/stylesheets/daterangepicker.css">
 
-
     <link href="public/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
     <!-- <link rel="stylesheet" href="public/plugins/datatables/datatables.net.1.10.25.css"> -->
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"> -->
@@ -39,6 +38,9 @@
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script> -->
     <!-- Popup CSS -->
     <link href="public/plugins/Magnific-Popup-master/dist/magnific-popup.css" rel="stylesheet">
+    <!--Range slider CSS -->
+    <link href="public/plugins/ion-rangeslider/css/ion.rangeSlider.css" rel="stylesheet">
+    <link href="public/plugins/ion-rangeslider/css/ion.rangeSlider.skinModern.css" rel="stylesheet">
     <title>Smart Green House by AI 5.0 AGRICULTURE INNOVATION</title>
     <style>
         .chartdiv {
@@ -276,7 +278,7 @@
         <!--End Back To Top Button-->
         <footer class="page-footer">
             <!-- <button class="aaa">zzzzzzzzzzzzzz</button> -->
-            <p class="mb-0">© 2021 Smart Green House.V1.4.1</p>
+            <p class="mb-0">© 2021 Smart Green House.V2.0.1</p>
         </footer>
     </div>
     <!--end wrapper-->
@@ -424,6 +426,9 @@
     <!-- Magnific popup JavaScript -->
     <script src="public/plugins/Magnific-Popup-master/dist/jquery.magnific-popup.min.js"></script>
     <script src="public/plugins/Magnific-Popup-master/dist/jquery.magnific-popup-init.js"></script>
+    <!-- Range slider  -->
+    <script src="public/plugins/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider.min.js"></script>
+    <script src="public/plugins/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider-init.js"></script>
     <script>
         // alert(house_master);
         if (house_master != '') {
@@ -750,12 +755,12 @@
                                         if (message.destinationName == house_master + "/1/data_update/data_filter") {
                                             var result = message.payloadString;
                                             var parseJSON = $.parseJSON(result);
-                                            console.log(parseJSON);
+                                            // console.log(parseJSON);
                                             if (house_master === "KMUMT001") {
                                                 var p_json = parseJSON['data_update']['data'][0];
                                                 var data_array = p_json['data'];
                                                 // console.log(parseJSON);
-                                                console.log(p_json);
+                                                console.log(data_array);
 
                                                 // console.log(loading);
                                                 // -------------------------------------------------------------
@@ -767,6 +772,13 @@
                                                 // console.log(Sncanel.sncanel_1_1.substring(7));
                                                 // $("#time_stamp").html("Data update : "+time_stmap);
                                                 // return false;
+                                                let strdate = new Date();
+                                                var strNdate = moment(new Date()).add(-10, 'minutes').format('YYYY/MM/DD');
+                                                if (time_update.substring(0, 10) == strNdate || p_json['date'] == strNdate) {
+                                                    $(".status_timeUpdate").removeClass("text-danger").addClass("text-success").html("ออนไลน์")
+                                                } else {
+                                                    $(".status_timeUpdate").removeClass("text-success").addClass("text-danger").html("ออฟไลน์")
+                                                }
                                             } else {
                                                 // console.log(loading);// != KMUMT001
                                                 // -------------------------------------------------------------
@@ -786,7 +798,7 @@
                                                 // alert(time_update.substring(0, 10) + ' ' + parseJSON['date'] + " " + strNdate)
                                             }
                                             // console.log(parseJSON);
-                                            console.log(dashImg[1]);
+                                            // console.log(dashImg[1]);
                                             var sn_unit = [];
                                             var data_dash = [];
                                             var new_chart = [];
@@ -890,10 +902,11 @@
                                                     $(".dash_data_wd").html('ตะวันออก');
                                                 }
                                             }
+
                                             $('.weather-temperature').openWeather({
                                                 key: 'c9d49310f8023ee2617a7634de23c2aa',
-                                                lat: res.s_master.site_Latitude, //site_Longitude
-                                                lng: res.s_master.site_Longitude,
+                                                lat: '13.576', //res.s_master.site_Latitude, //site_Longitude
+                                                lng: '100.442', //res.s_master.site_Longitude,
                                                 // city: 'Los Angeles',
                                                 descriptionTarget: '.weather-description',
                                                 windSpeedTarget: '.weather-wind-speed',
@@ -915,6 +928,7 @@
                                                     $('.weather-wrapper').remove();
                                                 }
                                             });
+                                            // alert(res.s_master.site_Longitude)
 
                                             // var new_chart2 = [];
                                             // new_chart2.push(parseJSON['date_time']);
@@ -935,224 +949,309 @@
                                                 new_6: new_chart[5]
                                             });
                                         }
-                                        if (message.destinationName == house_master + "/1/control/json_control_filter") {
-                                            // alert(count_stcont)
-                                            // return false;
-                                            if (count_stcont !== 0) {
-                                                var result = message.payloadString;
-                                                var parseJSON = $.parseJSON(result);
-                                                var data_array = parseJSON.control_status;
-                                                console.log(parseJSON);
+                                        // control
+                                        if (house_master !== "KMUMT001") {
+                                            if (message.destinationName == house_master + "/1/control/json_control_filter") {
+                                                // alert(count_stcont)
+                                                // return false;
+                                                if (count_stcont !== 0) {
+                                                    var result = message.payloadString;
+                                                    var parseJSON = $.parseJSON(result);
+                                                    var data_array = parseJSON.control_status;
+                                                    console.log(parseJSON);
 
-                                                if (data_array.Mode === "Auto") { //Auto
+                                                    if (data_array.Mode === "Auto") { //Auto
+                                                        $(".sw_mode_Manual").removeClass("active");
+                                                        $(".sw_mode_Auto").addClass("active");
+                                                        $(".sw_manual").hide();
+                                                        $(".sw_auto").show();
+                                                    } else if (data_array.Mode === "Manual") {
+                                                        $(".sw_mode_Auto").removeClass("active");
+                                                        $(".sw_mode_Manual").addClass("active");
+                                                        $(".sw_manual").show();
+                                                        $(".sw_auto").hide();
+                                                    }
+                                                    // alert(imgCon['drip_1'][1])
+                                                    // dripper_1
+                                                    if (controlStatus[1] == 1) {
+                                                        if (data_array.dripper_1 === "OFF") {
+                                                            $(".dash_img_con_1").attr("src", "public/images/control/" + imgCon['drip_1'][1]);
+                                                            $(".sw_manual_1").bootstrapToggle('off');
+                                                        } else {
+                                                            $(".dash_img_con_1").attr("src", "public/images/control/" + imgCon['drip_1'][0]);
+                                                            $(".sw_manual_1").bootstrapToggle('on');
+                                                        }
+                                                        // cont_dash_show(img_c = "dash_img_con_1", c_dash = data_array.dripper_1, c_img_off = imgCon['drip_1'][1], c_img_on = imgCon['drip_1'][0], ch = '1');
+                                                    }
+
+                                                    // dripper_2
+                                                    if (controlStatus[2] == 1) {
+                                                        if (data_array.dripper_2 === "OFF") {
+                                                            $(".dash_img_con_2").attr("src", "public/images/control/" + imgCon['drip_2'][1]);
+                                                            $(".sw_manual_2").bootstrapToggle('off');
+                                                        } else {
+                                                            $(".dash_img_con_2").attr("src", "public/images/control/" + imgCon['drip_2'][0]);
+                                                            $(".sw_manual_2").bootstrapToggle('on');
+                                                        }
+                                                        // cont_dash_show(img_c = "dash_img_con_2", c_dash = data_array.dripper_2, c_img_off = imgCon['drip_2'][1], c_img_on = imgCon['drip_2'][0], ch = '2');
+                                                    }
+                                                    // dripper_3
+                                                    if (controlStatus[3] == 1) {
+                                                        if (data_array.dripper_3 === "OFF") {
+                                                            $(".dash_img_con_3").attr("src", "public/images/control/" + imgCon['drip_3'][1]);
+                                                            $(".sw_manual_3").bootstrapToggle('off');
+                                                        } else {
+                                                            $(".dash_img_con_3").attr("src", "public/images/control/" + imgCon['drip_3'][0]);
+                                                            $(".sw_manual_3").bootstrapToggle('on');
+                                                        }
+                                                        // cont_dash_show(img_c = "dash_img_con_3", c_dash = data_array.dripper_3, c_img_off = imgCon['drip_3'][1], c_img_on = imgCon['drip_3'][0], ch = '3');
+                                                    }
+                                                    // dripper_4
+                                                    if (controlStatus[4] == 1) {
+                                                        if (data_array.dripper_4 === "OFF") {
+                                                            $(".dash_img_con_4").attr("src", "public/images/control/" + imgCon['drip_4'][1]);
+                                                            $(".sw_manual_4").bootstrapToggle('off');
+                                                        } else {
+                                                            $(".dash_img_con_4").attr("src", "public/images/control/" + imgCon['drip_4'][0]);
+                                                            $(".sw_manual_4").bootstrapToggle('on');
+                                                        }
+                                                        // cont_dash_show(img_c = "dash_img_con_4", c_dash = data_array.dripper_4, c_img_off = imgCon['drip_4'][1], c_img_on = imgCon['drip_4'][0], ch = '4');
+                                                    }
+                                                    // dripper_5
+                                                    if (controlStatus[5] == 1) {
+                                                        if (data_array.dripper_5 === "OFF") {
+                                                            $(".dash_img_con_5").attr("src", "public/images/control/" + imgCon['drip_5'][1]);
+                                                            $(".sw_manual_5").bootstrapToggle('off');
+                                                        } else {
+                                                            $(".dash_img_con_5").attr("src", "public/images/control/" + imgCon['drip_5'][0]);
+                                                            $(".sw_manual_5").bootstrapToggle('on');
+                                                        }
+                                                        // cont_dash_show(img_c = "dash_img_con_5", c_dash = data_array.dripper_5, c_img_off = imgCon['drip_5'][1], c_img_on = imgCon['drip_5'][0], ch = '5');
+                                                    }
+                                                    // dripper_6
+                                                    if (controlStatus[6] == 1) {
+                                                        if (data_array.dripper_6 === "OFF") {
+                                                            $(".dash_img_con_6").attr("src", "public/images/control/" + imgCon['drip_6'][1]);
+                                                            $(".sw_manual_6").bootstrapToggle('off');
+                                                        } else {
+                                                            $(".dash_img_con_6").attr("src", "public/images/control/" + imgCon['drip_6'][0]);
+                                                            $(".sw_manual_6").bootstrapToggle('on');
+                                                        }
+                                                        // cont_dash_show(img_c = "dash_img_con_6", c_dash = data_array.dripper_6, c_img_off = imgCon['drip_6'][1], c_img_on = imgCon['drip_6'][0], ch = '6');
+                                                    }
+                                                    // dripper_7
+                                                    if (controlStatus[7] == 1) {
+                                                        if (data_array.dripper_7 === "OFF") {
+                                                            $(".dash_img_con_7").attr("src", "public/images/control/" + imgCon['drip_7'][1]);
+                                                            $(".sw_manual_7").bootstrapToggle('off');
+                                                        } else {
+                                                            $(".dash_img_con_7").attr("src", "public/images/control/" + imgCon['drip_7'][0]);
+                                                            $(".sw_manual_7").bootstrapToggle('on');
+                                                        }
+                                                        // cont_dash_show(img_c = "dash_img_con_7", c_dash = data_array.dripper_7, c_img_off = imgCon['drip_7'][1], c_img_on = imgCon['drip_7'][0], ch = '7');
+                                                    }
+                                                    // dripper_8
+                                                    if (controlStatus[8] == 1) {
+                                                        if (data_array.dripper_8 === "OFF") {
+                                                            $(".dash_img_con_8").attr("src", "public/images/control/" + imgCon['drip_8'][1]);
+                                                            $(".sw_manual_8").bootstrapToggle('off');
+                                                        } else {
+                                                            $(".dash_img_con_8").attr("src", "public/images/control/" + imgCon['drip_8'][0]);
+                                                            $(".sw_manual_8").bootstrapToggle('on');
+                                                        }
+                                                        // cont_dash_show(img_c = "dash_img_con_8", c_dash = data_array.dripper_8, c_img_off = imgCon['drip_8'][1], c_img_on = imgCon['drip_8'][0], ch = '8');
+                                                    }
+                                                    // foggy
+                                                    if (controlStatus[9] == 1) {
+                                                        if (data_array.foggy === "OFF") {
+                                                            $(".dash_img_con_9").attr("src", "public/images/control/" + imgCon['foggy'][1]);
+                                                            $(".sw_manual_9").bootstrapToggle('off');
+                                                        } else {
+                                                            $(".dash_img_con_9").attr("src", "public/images/control/" + imgCon['foggy'][0]);
+                                                            $(".sw_manual_9").bootstrapToggle('on');
+                                                        }
+                                                        // cont_dash_show(img_c = "dash_img_con_9", c_dash = data_array.foggy, c_img_off = imgCon['foggy'][1], c_img_on = imgCon['foggy'][0], ch = '9');
+                                                    }
+                                                    // fan
+                                                    if (controlStatus[10] == 1) {
+                                                        if (data_array.fan === "OFF") {
+                                                            $(".dash_img_con_10").attr("src", "public/images/control/" + imgCon['fan'][1]);
+                                                            $(".sw_manual_10").bootstrapToggle('off');
+                                                        } else {
+                                                            $(".dash_img_con_10").attr("src", "public/images/control/" + imgCon['fan'][0]);
+                                                            $(".sw_manual_10").bootstrapToggle('on');
+                                                        }
+                                                        // cont_dash_show(img_c = "dash_img_con_10", c_dash = data_array.fan, c_img_off = imgCon['fan'][1], c_img_on = imgCon['fan'][1], ch = '10');
+                                                    }
+
+                                                    //Slan
+                                                    if (controlStatus[11] == 1) {
+                                                        if (data_array.shader === "0") {
+                                                            $(".dash_img_con_11").attr("src", "public/images/control/" + imgCon['shader'][0], ch = '11');
+                                                        } else if (data_array.shader === "1") {
+                                                            $(".dash_img_con_11").attr("src", "public/images/control/" + imgCon['shader'][1], ch = '11');
+                                                        } else if (data_array.shader === "2") {
+                                                            $(".dash_img_con_11").attr("src", "public/images/control/" + imgCon['shader'][2], ch = '11');
+                                                        } else if (data_array.shader === "3") {
+                                                            $(".dash_img_con_11").attr("src", "public/images/control/" + imgCon['shader'][3], ch = '11');
+                                                        } else if (data_array.shader === "4") {
+                                                            $(".dash_img_con_11").attr("src", "public/images/control/" + imgCon['shader'][4], ch = '11');
+                                                        }
+
+                                                        // modal_manual
+                                                        if (data_array["shader"] == 0) {
+                                                            var shader_slw = "0 : ปิด 100%";
+                                                            $(".sw_shader0").addClass("active");
+                                                            $(".sw_shader1").removeClass("active");
+                                                            $(".sw_shader2").removeClass("active");
+                                                            $(".sw_shader3").removeClass("active");
+                                                            $(".sw_shader4").removeClass("active");
+                                                        }
+                                                        if (data_array["shader"] == 1) {
+                                                            var shader_slw = "1 : เปิด 25%";
+                                                            $(".sw_shader0").removeClass("active");
+                                                            $(".sw_shader1").addClass("active");
+                                                            $(".sw_shader2").removeClass("active");
+                                                            $(".sw_shader3").removeClass("active");
+                                                            $(".sw_shader4").removeClass("active");
+                                                        }
+                                                        if (data_array["shader"] == 2) {
+                                                            var shader_slw = "2 : เปิด 50%";
+                                                            $(".sw_shader0").removeClass("active");
+                                                            $(".sw_shader1").removeClass("active");
+                                                            $(".sw_shader2").addClass("active");
+                                                            $(".sw_shader3").removeClass("active");
+                                                            $(".sw_shader4").removeClass("active");
+                                                        }
+                                                        if (data_array["shader"] == 3) {
+                                                            var shader_slw = "3 : เปิด 75%";
+                                                            $(".sw_shader0").removeClass("active");
+                                                            $(".sw_shader1").removeClass("active");
+                                                            $(".sw_shader2").removeClass("active");
+                                                            $(".sw_shader3").addClass("active");
+                                                            $(".sw_shader4").removeClass("active");
+                                                        }
+                                                        if (data_array["shader"] == 4) {
+                                                            var shader_slw = "4 : เปิด 100%";
+                                                            $(".sw_shader0").removeClass("active");
+                                                            $(".sw_shader1").removeClass("active");
+                                                            $(".sw_shader2").removeClass("active");
+                                                            $(".sw_shader3").removeClass("active");
+                                                            $(".sw_shader4").addClass("active");
+                                                        }
+                                                        $(".shader_slw").html(shader_slw);
+                                                    } else {
+                                                        $(".dash_c11").hide();
+                                                    }
+
+                                                    // fertilizer
+                                                    if (controlStatus[12] == 1) {
+                                                        if (data_array.fertilizer === "OFF") {
+                                                            $(".dash_img_con_12").attr("src", "public/images/control/" + imgCon['fertilizer'][1]);
+                                                            $(".sw_manual_12").bootstrapToggle('off');
+                                                        } else {
+                                                            $(".dash_img_con_12").attr("src", "public/images/control/" + imgCon['fertilizer'][0]);
+                                                            $(".sw_manual_12").bootstrapToggle('on');
+                                                        }
+                                                        // cont_dash_show(img_c = "dash_img_con_12", c_dash = data_array.fertilizer, c_img_off = imgCon['fertilizer'][1], c_img_on = imgCon['fertilizer'][0], ch = '12');
+                                                    }
+
+                                                    function cont_dash_show(img_c, c_dash, c_img_off, c_img_on, ch) {
+                                                        console.log(c_dash)
+                                                        if (c_dash === "OFF") {
+                                                            $("." + img_c).attr("src", "public/images/control/" + c_img_off);
+                                                            $(".sw_manual_" + ch).bootstrapToggle('on');
+                                                        } else if (c_dash === "ON") {
+                                                            $("." + img_c).attr("src", "public/images/control/" + c_img_on);
+                                                            $(".sw_manual_1").bootstrapToggle('on');
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        } else { // KMUMT001
+                                            // mode_Auto_Manual
+                                            if (message.destinationName == "KMUMT001/1/control/mode") {
+                                                var cont_status = message.payloadString;
+                                                if (cont_status === "on") { //Auto
                                                     $(".sw_mode_Manual").removeClass("active");
                                                     $(".sw_mode_Auto").addClass("active");
                                                     $(".sw_manual").hide();
                                                     $(".sw_auto").show();
-                                                } else if (data_array.Mode === "Manual") {
+                                                } else {
                                                     $(".sw_mode_Auto").removeClass("active");
                                                     $(".sw_mode_Manual").addClass("active");
                                                     $(".sw_manual").show();
                                                     $(".sw_auto").hide();
                                                 }
-                                                // alert(imgCon['drip_1'][1])
-                                                // dripper_1
-                                                if (controlStatus[1] == 1) {
-                                                    if (data_array.dripper_1 === "OFF") {
+                                            }
+                                            // mode_Control_1
+                                            if (controlStatus[1] == 1) {
+                                                if (message.destinationName == "KMUMT001/1/control/control_st_1") {
+                                                    var cont_status = message.payloadString;
+                                                    if (cont_status === "off") {
                                                         $(".dash_img_con_1").attr("src", "public/images/control/" + imgCon['drip_1'][1]);
                                                         $(".sw_manual_1").bootstrapToggle('off');
                                                     } else {
                                                         $(".dash_img_con_1").attr("src", "public/images/control/" + imgCon['drip_1'][0]);
                                                         $(".sw_manual_1").bootstrapToggle('on');
                                                     }
-                                                    // cont_dash_show(img_c = "dash_img_con_1", c_dash = data_array.dripper_1, c_img_off = imgCon['drip_1'][1], c_img_on = imgCon['drip_1'][0], ch = '1');
                                                 }
+                                            }
 
-                                                // dripper_2
-                                                if (controlStatus[2] == 1) {
-                                                    if (data_array.dripper_2 === "OFF") {
+                                            // mode_Control_2
+                                            if (controlStatus[2] == 1) {
+                                                if (message.destinationName == "KMUMT001/1/control/control_st_2") {
+                                                    var cont_status = message.payloadString;
+                                                    if (cont_status === "off") {
                                                         $(".dash_img_con_2").attr("src", "public/images/control/" + imgCon['drip_2'][1]);
                                                         $(".sw_manual_2").bootstrapToggle('off');
                                                     } else {
                                                         $(".dash_img_con_2").attr("src", "public/images/control/" + imgCon['drip_2'][0]);
                                                         $(".sw_manual_2").bootstrapToggle('on');
                                                     }
-                                                    // cont_dash_show(img_c = "dash_img_con_2", c_dash = data_array.dripper_2, c_img_off = imgCon['drip_2'][1], c_img_on = imgCon['drip_2'][0], ch = '2');
                                                 }
-                                                // dripper_3
-                                                if (controlStatus[3] == 1) {
-                                                    if (data_array.dripper_3 === "OFF") {
+                                            }
+                                            // mode_Control_3
+                                            if (controlStatus[3] == 1) {
+                                                if (message.destinationName == "KMUMT001/1/control/control_st_3") {
+                                                    var cont_status = message.payloadString;
+                                                    if (cont_status === "off") {
                                                         $(".dash_img_con_3").attr("src", "public/images/control/" + imgCon['drip_3'][1]);
                                                         $(".sw_manual_3").bootstrapToggle('off');
                                                     } else {
                                                         $(".dash_img_con_3").attr("src", "public/images/control/" + imgCon['drip_3'][0]);
                                                         $(".sw_manual_3").bootstrapToggle('on');
                                                     }
-                                                    // cont_dash_show(img_c = "dash_img_con_3", c_dash = data_array.dripper_3, c_img_off = imgCon['drip_3'][1], c_img_on = imgCon['drip_3'][0], ch = '3');
                                                 }
-                                                // dripper_4
-                                                if (controlStatus[4] == 1) {
-                                                    if (data_array.dripper_4 === "OFF") {
+                                            }
+                                            // mode_Control_4
+                                            if (controlStatus[4] == 1) {
+                                                if (message.destinationName == "KMUMT001/1/control/control_st_4") {
+                                                    var cont_status = message.payloadString;
+                                                    if (cont_status === "off") {
                                                         $(".dash_img_con_4").attr("src", "public/images/control/" + imgCon['drip_4'][1]);
                                                         $(".sw_manual_4").bootstrapToggle('off');
                                                     } else {
                                                         $(".dash_img_con_4").attr("src", "public/images/control/" + imgCon['drip_4'][0]);
                                                         $(".sw_manual_4").bootstrapToggle('on');
                                                     }
-                                                    // cont_dash_show(img_c = "dash_img_con_4", c_dash = data_array.dripper_4, c_img_off = imgCon['drip_4'][1], c_img_on = imgCon['drip_4'][0], ch = '4');
                                                 }
-                                                // dripper_5
-                                                if (controlStatus[5] == 1) {
-                                                    if (data_array.dripper_5 === "OFF") {
+                                            }
+
+                                            // mode_Control_5
+                                            if (controlStatus[5] == 1) {
+                                                if (message.destinationName == "KMUMT001/1/control/control_st_5") {
+                                                    var cont_status = message.payloadString;
+                                                    if (cont_status === "off") {
                                                         $(".dash_img_con_5").attr("src", "public/images/control/" + imgCon['drip_5'][1]);
                                                         $(".sw_manual_5").bootstrapToggle('off');
                                                     } else {
                                                         $(".dash_img_con_5").attr("src", "public/images/control/" + imgCon['drip_5'][0]);
                                                         $(".sw_manual_5").bootstrapToggle('on');
                                                     }
-                                                    // cont_dash_show(img_c = "dash_img_con_5", c_dash = data_array.dripper_5, c_img_off = imgCon['drip_5'][1], c_img_on = imgCon['drip_5'][0], ch = '5');
-                                                }
-                                                // dripper_6
-                                                if (controlStatus[6] == 1) {
-                                                    if (data_array.dripper_6 === "OFF") {
-                                                        $(".dash_img_con_6").attr("src", "public/images/control/" + imgCon['drip_6'][1]);
-                                                        $(".sw_manual_6").bootstrapToggle('off');
-                                                    } else {
-                                                        $(".dash_img_con_6").attr("src", "public/images/control/" + imgCon['drip_6'][0]);
-                                                        $(".sw_manual_6").bootstrapToggle('on');
-                                                    }
-                                                    // cont_dash_show(img_c = "dash_img_con_6", c_dash = data_array.dripper_6, c_img_off = imgCon['drip_6'][1], c_img_on = imgCon['drip_6'][0], ch = '6');
-                                                }
-                                                // dripper_7
-                                                if (controlStatus[7] == 1) {
-                                                    if (data_array.dripper_7 === "OFF") {
-                                                        $(".dash_img_con_7").attr("src", "public/images/control/" + imgCon['drip_7'][1]);
-                                                        $(".sw_manual_7").bootstrapToggle('off');
-                                                    } else {
-                                                        $(".dash_img_con_7").attr("src", "public/images/control/" + imgCon['drip_7'][0]);
-                                                        $(".sw_manual_7").bootstrapToggle('on');
-                                                    }
-                                                    // cont_dash_show(img_c = "dash_img_con_7", c_dash = data_array.dripper_7, c_img_off = imgCon['drip_7'][1], c_img_on = imgCon['drip_7'][0], ch = '7');
-                                                }
-                                                // dripper_8
-                                                if (controlStatus[8] == 1) {
-                                                    if (data_array.dripper_8 === "OFF") {
-                                                        $(".dash_img_con_8").attr("src", "public/images/control/" + imgCon['drip_8'][1]);
-                                                        $(".sw_manual_8").bootstrapToggle('off');
-                                                    } else {
-                                                        $(".dash_img_con_8").attr("src", "public/images/control/" + imgCon['drip_8'][0]);
-                                                        $(".sw_manual_8").bootstrapToggle('on');
-                                                    }
-                                                    // cont_dash_show(img_c = "dash_img_con_8", c_dash = data_array.dripper_8, c_img_off = imgCon['drip_8'][1], c_img_on = imgCon['drip_8'][0], ch = '8');
-                                                }
-                                                // foggy
-                                                if (controlStatus[9] == 1) {
-                                                    if (data_array.foggy === "OFF") {
-                                                        $(".dash_img_con_9").attr("src", "public/images/control/" + imgCon['foggy'][1]);
-                                                        $(".sw_manual_9").bootstrapToggle('off');
-                                                    } else {
-                                                        $(".dash_img_con_9").attr("src", "public/images/control/" + imgCon['foggy'][0]);
-                                                        $(".sw_manual_9").bootstrapToggle('on');
-                                                    }
-                                                    // cont_dash_show(img_c = "dash_img_con_9", c_dash = data_array.foggy, c_img_off = imgCon['foggy'][1], c_img_on = imgCon['foggy'][0], ch = '9');
-                                                }
-                                                // fan
-                                                if (controlStatus[10] == 1) {
-                                                    if (data_array.fan === "OFF") {
-                                                        $(".dash_img_con_10").attr("src", "public/images/control/" + imgCon['fan'][1]);
-                                                        $(".sw_manual_10").bootstrapToggle('off');
-                                                    } else {
-                                                        $(".dash_img_con_10").attr("src", "public/images/control/" + imgCon['fan'][0]);
-                                                        $(".sw_manual_10").bootstrapToggle('on');
-                                                    }
-                                                    // cont_dash_show(img_c = "dash_img_con_10", c_dash = data_array.fan, c_img_off = imgCon['fan'][1], c_img_on = imgCon['fan'][1], ch = '10');
-                                                }
-
-                                                //Slan
-                                                if (controlStatus[11] == 1) {
-                                                    if (data_array.shader === "0") {
-                                                        $(".dash_img_con_11").attr("src", "public/images/control/" + imgCon['shader'][0], ch = '11');
-                                                    } else if (data_array.shader === "1") {
-                                                        $(".dash_img_con_11").attr("src", "public/images/control/" + imgCon['shader'][1], ch = '11');
-                                                    } else if (data_array.shader === "2") {
-                                                        $(".dash_img_con_11").attr("src", "public/images/control/" + imgCon['shader'][2], ch = '11');
-                                                    } else if (data_array.shader === "3") {
-                                                        $(".dash_img_con_11").attr("src", "public/images/control/" + imgCon['shader'][3], ch = '11');
-                                                    } else if (data_array.shader === "4") {
-                                                        $(".dash_img_con_11").attr("src", "public/images/control/" + imgCon['shader'][4], ch = '11');
-                                                    }
-
-                                                    // modal_manual
-                                                    if (data_array["shader"] == 0) {
-                                                        var shader_slw = "0 : ปิด 100%";
-                                                        $(".sw_shader0").addClass("active");
-                                                        $(".sw_shader1").removeClass("active");
-                                                        $(".sw_shader2").removeClass("active");
-                                                        $(".sw_shader3").removeClass("active");
-                                                        $(".sw_shader4").removeClass("active");
-                                                    }
-                                                    if (data_array["shader"] == 1) {
-                                                        var shader_slw = "1 : เปิด 25%";
-                                                        $(".sw_shader0").removeClass("active");
-                                                        $(".sw_shader1").addClass("active");
-                                                        $(".sw_shader2").removeClass("active");
-                                                        $(".sw_shader3").removeClass("active");
-                                                        $(".sw_shader4").removeClass("active");
-                                                    }
-                                                    if (data_array["shader"] == 2) {
-                                                        var shader_slw = "2 : เปิด 50%";
-                                                        $(".sw_shader0").removeClass("active");
-                                                        $(".sw_shader1").removeClass("active");
-                                                        $(".sw_shader2").addClass("active");
-                                                        $(".sw_shader3").removeClass("active");
-                                                        $(".sw_shader4").removeClass("active");
-                                                    }
-                                                    if (data_array["shader"] == 3) {
-                                                        var shader_slw = "3 : เปิด 75%";
-                                                        $(".sw_shader0").removeClass("active");
-                                                        $(".sw_shader1").removeClass("active");
-                                                        $(".sw_shader2").removeClass("active");
-                                                        $(".sw_shader3").addClass("active");
-                                                        $(".sw_shader4").removeClass("active");
-                                                    }
-                                                    if (data_array["shader"] == 4) {
-                                                        var shader_slw = "4 : เปิด 100%";
-                                                        $(".sw_shader0").removeClass("active");
-                                                        $(".sw_shader1").removeClass("active");
-                                                        $(".sw_shader2").removeClass("active");
-                                                        $(".sw_shader3").removeClass("active");
-                                                        $(".sw_shader4").addClass("active");
-                                                    }
-                                                    $(".shader_slw").html(shader_slw);
-                                                } else {
-                                                    $(".dash_c11").hide();
-                                                }
-
-                                                // fertilizer
-                                                if (controlStatus[12] == 1) {
-                                                    if (data_array.fertilizer === "OFF") {
-                                                        $(".dash_img_con_12").attr("src", "public/images/control/" + imgCon['fertilizer'][1]);
-                                                        $(".sw_manual_12").bootstrapToggle('off');
-                                                    } else {
-                                                        $(".dash_img_con_12").attr("src", "public/images/control/" + imgCon['fertilizer'][0]);
-                                                        $(".sw_manual_12").bootstrapToggle('on');
-                                                    }
-                                                    // cont_dash_show(img_c = "dash_img_con_12", c_dash = data_array.fertilizer, c_img_off = imgCon['fertilizer'][1], c_img_on = imgCon['fertilizer'][0], ch = '12');
-                                                }
-
-                                                function cont_dash_show(img_c, c_dash, c_img_off, c_img_on, ch) {
-                                                    console.log(c_dash)
-                                                    if (c_dash === "OFF") {
-                                                        $("." + img_c).attr("src", "public/images/control/" + c_img_off);
-                                                        $(".sw_manual_" + ch).bootstrapToggle('on');
-                                                    } else if (c_dash === "ON") {
-                                                        $("." + img_c).attr("src", "public/images/control/" + c_img_on);
-                                                        $(".sw_manual_1").bootstrapToggle('on');
-                                                    }
                                                 }
                                             }
                                         }
-
                                     } // exit_message
                                     connect();
                                     // ------zz

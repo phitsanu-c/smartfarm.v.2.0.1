@@ -219,7 +219,7 @@
                                                                 <td class="text-center">' . $row["site_internet"] . '</td>
                                                                 <td class="text-center">' . $row["site_internetO"] . '</td>
                                                                 <td class="text-center">' . $row["login_user"] . '</td>
-                                                                <td class="text-center">' . $row["sote_timestamp"] . '</td>
+                                                                <td class="text-center">' . $row["site_timestamp"] . '</td>
                                                                 <td  class="text-center">
                                                                     <div class="buttons">
                                                                         <a href="javascript:void(0)" class="text-info edit_site" 
