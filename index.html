@@ -223,27 +223,21 @@
                                     <div class="col-12 col-lg-8 col-xl-8">
                                         <ul class="nav nav-pills mb-1" role="tablist">
                                             <li class="nav-item col-12 col-lg-4 col-xl-4 mb-1" role="presentation">
-                                                <a class="nav-link active" data-bs-toggle="pill" href="#primary-pills-home" role="tab" aria-selected="true" style="border: 1px solid transparent; border-color: #6c757d;">
-                                                    <div class="d-flex text-center">
-                                                        <!-- <div class="tab-icon"><i class='bx bx-home font-18 me-1'></i></div> -->
-                                                        <div class="tab-title">ข้อมูลเซ็นเซอร์</div>
-                                                    </div>
+                                                <a class="nav-link active text-center" data-bs-toggle="pill" href="#primary-pills-home" role="tab" aria-selected="true" style="border: 1px solid transparent; border-color: #6c757d;">
+                                                    <div class="tab-title">ข้อมูลเซ็นเซอร์</div>
                                                 </a>
                                             </li>
                                             <li class="nav-item col-12 col-sm-6 col-lg-4 col-xl-4 mb-1" role="presentation">
-                                                <a class="nav-link r_reControl" data-bs-toggle="pill" href="#primary-pills-profile" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
-                                                    <div class="d-flex align-items-center">
-                                                        <!-- <div class="tab-icon"><i class='bx bx-user-pin font-18 me-1'></i></div> -->
-                                                        <div class="tab-title">ประวัติระบบควบคุม</div>
-                                                    </div>
+                                                <a class="nav-link r_reControl text-center" data-bs-toggle="pill" href="#primary-pills-profile" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
+                                                    <div class="tab-title">ประวัติระบบควบคุม</div>
                                                 </a>
                                             </li>
                                             <li class="nav-item col-12 col-sm-6 col-lg-4 col-xl-4 mb-1" role="presentation">
-                                                <a class="nav-link r_reAutoControl" data-bs-toggle="pill" href="#primary-pills-contact" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
-                                                    <div class="d-flex align-items-center">
-                                                        <!-- <div class="tab-icon"><i class='bx bx-microphone font-18 me-1'></i></div> -->
-                                                        <div class="tab-title">ประวัติการตั้งเวลา</div>
-                                                    </div>
+                                                <a class="nav-link r_reAutoControl text-center" data-bs-toggle="pill" href="#primary-pills-contact" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
+                                                    <!-- <div class="d-flex align-items-center"> -->
+                                                    <!-- <div class="tab-icon"><i class='bx bx-microphone font-18 me-1'></i></div> -->
+                                                    <div class="tab-title title_km"></div>
+                                                    <!-- </div> -->
                                                 </a>
                                             </li>
                                         </ul>
@@ -432,6 +426,11 @@
     <script>
         // alert(house_master);
         if (house_master != '') {
+            if (house_master !== "KMUMT001") {
+                $(".title_km").html("ประวัติการตั้งเวลา");
+            } else {
+                $(".title_km").html("ประวัติการตั้งค่าโหมดอัตโนมัติ");
+            }
             $.ajax({
                 url: "routes/get_dash.php",
                 method: "post",
@@ -1327,19 +1326,40 @@
                             }
                         });
                         // });
-                        $.ajax({
-                            url: "views/report_controlAuto.php",
-                            method: "post",
-                            data: {
-                                house_master: house_master,
-                                controlstatus: res.controlstatus,
-                                conttrolname: res.conttrolname
-                            },
-                            // dataType: "json",
-                            success: function(resp) {
-                                $("#report_controlAuto").html(resp);
-                            }
-                        });
+                        if (house_master !== "KMUMT001") {
+                            $.ajax({
+                                url: "views/report_controlAuto.php",
+                                method: "post",
+                                data: {
+                                    house_master: house_master,
+                                    controlstatus: res.controlstatus,
+                                    conttrolname: res.conttrolname
+                                },
+                                // dataType: "json",
+                                success: function(resp) {
+                                    $("#report_controlAuto").html(resp);
+                                }
+                            });
+                        } else {
+                            $(".r_reAutoControl").click(function() {
+                                setTimeout(function() {
+                                    $.ajax({
+                                        url: "views/report_controlAuto.php",
+                                        method: "post",
+                                        data: {
+                                            house_master: house_master,
+                                            controlstatus: res.controlstatus,
+                                            conttrolname: res.conttrolname
+                                        },
+                                        // dataType: "json",
+                                        success: function(resp) {
+                                            $("#report_controlAuto").html(resp);
+                                        }
+                                    });
+
+                                }, 1000);
+                            });
+                        }
                     }
                     // });
 
