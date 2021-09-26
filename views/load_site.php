@@ -60,7 +60,7 @@
     foreach ($site_stmt as $row_site) {
         $co = $row_site["site_id"];
     ?>
-        <div class="col load-site">
+        <div class="col-12 col-sm-12 col-md-4 col-lg-4  col-xl-3  load-site">
             <div class="card" style="padding: 1.25rem; height:440px; border-radius:20px">
                 <img src="public/images/site/<?= $row_site["site_img"] ?>" style="height: 20vh; width: 100%;" class="card-img-top img-fluid" alt="site01">
                 <!-- <div class="card"> -->
