@@ -19,8 +19,8 @@ if (isset($_POST['Username'])) {
             $query->execute();
             $row_count = $query->fetch(PDO::FETCH_BOTH);
             // echo $count_User["login_id"];
-            // $_SESSION["login_email"] = $row_count["login_email"];
-            // $_SESSION["login_tel"] = $row_count["login_tel"];
+            $_SESSION["login_email"] = $row_count["login_email"];
+            $_SESSION["login_tel"] = $row_count["login_tel"];
             if ($row_count == false) {
                 echo json_encode(['status_login'  => "No user"], JSON_UNESCAPED_UNICODE);
                 exit();
@@ -77,7 +77,9 @@ if (isset($_SESSION["Username"])) {
         'count_house'   => $_SESSION['count_house'],
         'master'        => $_SESSION['master'],
         'count_statusUser' => $_SESSION['count_statusUser'],
-        'theme' => $_SESSION["login_theme"]
+        'theme' => $_SESSION["login_theme"],
+        'email' => $_SESSION["login_email"],
+        'tel' => $_SESSION["login_tel"]
     ], JSON_UNESCAPED_UNICODE);
 } else {
     echo json_encode(['username'  => ""]);

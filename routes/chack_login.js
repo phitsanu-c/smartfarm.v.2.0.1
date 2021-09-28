@@ -101,6 +101,13 @@ $.getJSON('routes/login.php', function(msg) {
         $("#minimaltheme").attr('checked', false);
     }
     $("#theme").addClass(msg.theme);
+    $(".btn_modal_sg").click(function() {
+        $(".sg_name").val(msg.username);
+        $(".sg_tel").val(msg.tel);
+        $(".sg_email").val(msg.email);
+        $(".sg_text").val("");
+        $("#modal_sg").modal("show");
+    });
 });
 
 // logout
