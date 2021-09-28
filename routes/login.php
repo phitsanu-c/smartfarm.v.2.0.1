@@ -19,8 +19,6 @@ if (isset($_POST['Username'])) {
             $query->execute();
             $row_count = $query->fetch(PDO::FETCH_BOTH);
             // echo $count_User["login_id"];
-            $_SESSION["login_email"] = $row_count["login_email"];
-            $_SESSION["login_tel"] = $row_count["login_tel"];
             if ($row_count == false) {
                 echo json_encode(['status_login'  => "No user"], JSON_UNESCAPED_UNICODE);
                 exit();
@@ -38,6 +36,9 @@ if (isset($_POST['Username'])) {
                 // $_SESSION["status_login"] = "login";
                 // $_SESSION["pages"] = "1";
             }
+            
+            $_SESSION["login_email"] = $row_count["login_email"];
+            $_SESSION["login_tel"] = $row_count["login_tel"];
             if($_SESSION["login_status"] != 1){
                 $rowc = $dbcon->query("SELECT COUNT('userST_loginID') FROM `tb3_userst` WHERE `userST_loginID`='$login_userid'")->fetch();
                 $rwcstu = $dbcon->query("SELECT COUNT('userST_id') FROM `tb3_userst` WHERE `userST_loginID`='$login_userid' AND userST_user_status=2")->fetch();

@@ -40,7 +40,7 @@
         $mail->addAddress("kittiphat.b@fuji-innovation.com"); // Send to mail
         $mail->addAddress("nunn98842@gmail.com"); // Send to mail
         $mail->addReplyTo($_POST["sg_email"], $_POST["sg_name"]);
-        $mail->Subject = "<b>ปัญหาและข้อเสนอแนะ</b>";
+        $mail->Subject = "ปัญหาและข้อเสนอแนะ";
         // $mail->Body = $_POST["sg_text"];
 
         $mail->msgHTML("

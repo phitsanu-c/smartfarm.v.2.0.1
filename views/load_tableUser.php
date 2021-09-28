@@ -8,8 +8,8 @@ $siteID = $_GET["siteID"];
 // $site_df = $dbcon->query("SELECT * FROM tb_site WHERE site_id = '$user_siteID'")->fetch();
 ?>
 
-<div class="table-responsive">
-    <table class="table table-striped">
+<div class="table-responsive m-t-10">
+    <table id="tb_users" class="table table-striped table-bordered dataTable" style="width:100%">
         <thead>
             <tr>
                 <th class="text-center">#</th>
@@ -578,5 +578,26 @@ $siteID = $_GET["siteID"];
                 });
             }
         });
+    });
+    
+    $('#tb_users').DataTable( {
+        "scrollY": 330,
+        "scrollX": true,
+        "scrollCollapse": false,
+        "paging":    false,
+        "searching": false,
+        "order": [
+            [0, "desc"]
+        ],
+        "columnDefs": [
+            {
+            // "targets": [ 1 ],
+            // render: $.fn.dataTable.render.moment( 'X', 'YYYY/MM/DD' ),
+            // "render": $.fn.dataTable.render.moment( 'YYYY/MM/DD' ),
+            "visible": false,
+            "searchable": false
+            },
+            
+        ],
     });
 </script>

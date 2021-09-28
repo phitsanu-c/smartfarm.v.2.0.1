@@ -45,7 +45,6 @@ if($_POST['house_master'] != "KMUMT001"){
         });
     </script>
 <?php }else{?>
-    
     <div class="table-responsive m-t-10">
         <table id="table_" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <!-- <table id="table_" class="table table-striped table-bordered dataTable" style="width:100%"> -->
