@@ -567,6 +567,47 @@
 </div>
 <script>
     var pt = '<?= $_POST["pt"] ?>';
+    $(".pt_st").click(function () { 
+        $.ajax({
+            url: "views/setting_profile.php",
+            method: "post",
+            data: {
+                // s_master: res.s_master,
+                pt: 2
+            },
+            // dataType: "json",
+            success: function(resp) {
+                $("#pills-profile").html(resp);
+            }
+        });
+    });
+    $(".pt_ht").click(function () { 
+        $.ajax({
+            url: "views/setting_profile.php",
+            method: "post",
+            data: {
+                pt: 3
+            },
+            // dataType: "json",
+            success: function(resp) {
+                $("#pills-profile").html(resp);
+            }
+        });
+    });
+    
+    $(".pt_ust").click(function () { 
+        $.ajax({
+            url: "views/setting_profile.php",
+            method: "post",
+            data: {
+                pt: 4
+            },
+            // dataType: "json",
+            success: function(resp) {
+                $("#pills-profile").html(resp);
+            }
+        });
+    });
     if (pt == 1) {
         $(".title_ht").html("ข้อมูลผู้ใช้งาน");
         $(".pt_pt").addClass("active");
