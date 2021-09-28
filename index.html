@@ -218,22 +218,29 @@
                             <div class="card-body p-5">
                                 <form class="row g-3" id="suggestion_form">
                                     <div class="col-md-12">
+                                        <label for="inputLastName1" class="form-label">หัวข้อ</label>
+                                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class='bx bxs-user'></i></span>
+                                            <input type="text" class="form-control border-start-0 sg_title" name="sg_title" placeholder="หัวข้อ" />
+                                            <div class="invalid-feedback">กรุณาระบุหัวข้อ</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
                                         <label for="inputLastName1" class="form-label">ชื่อ - นามสกุล</label>
                                         <div class="input-group"> <span class="input-group-text bg-transparent"><i class='bx bxs-user'></i></span>
-                                            <input type="text" class="form-control border-start-0 sg_name" name="sg_name" placeholder="First Name" />
+                                            <input type="text" class="form-control border-start-0 sg_name" name="sg_name" placeholder="ชื่อ - นามสกุล" />
                                             <div class="invalid-feedback">กรุณาระบุชื่อ - นามสกุล</div>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <label for="inputPhoneNo" class="form-label">เบอร์ติดต่อ</label>
                                         <div class="input-group"> <span class="input-group-text bg-transparent"><i class='bx bxs-microphone' ></i></span>
-                                            <input type="text" class="form-control border-start-0 sg_tel" name="sg_tel" placeholder="Phone No" />
+                                            <input type="text" class="form-control border-start-0 sg_tel" name="sg_tel" placeholder="เบอร์ติดต่อ" />
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <label for="inputEmailAddress" class="form-label">อีเมลล์</label>
                                         <div class="input-group"> <span class="input-group-text bg-transparent"><i class='bx bxs-message' ></i></span>
-                                            <input type="text" class="form-control border-start-0 sg_email" name="sg_email" placeholder="Email Address" />
+                                            <input type="text" class="form-control border-start-0 sg_email" name="sg_email" placeholder="อีเมลล์" />
                                             <div class="invalid-feedback">กรุณาระบุอีเมลล์</div>
                                         </div>
                                     </div>
@@ -247,7 +254,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" id="submit_suggestion_modal" class="btn btn-success waves-light">
-                                <i class="fadeIn animated bx bx-check"></i> ตกลง
+                                <i class="fadeIn animated bx bx-check"></i> ส่งข้อมูล
                             </button>
                             <button type="button" class="btn btn-danger waves-effect" data-bs-dismiss="modal">
                                 <i class="fadeIn animated bx bx-window-close"></i> ยกเลิก
@@ -1368,6 +1375,12 @@
         });
 
         $("#submit_suggestion_modal").click(function() {
+            if ($(".sg_title").val() === "") {
+                $(".sg_title").addClass("is-invalid");
+                return false;
+            } else {
+                $(".sg_title").removeClass("is-invalid");
+            }
             if ($(".sg_name").val() === "") {
                 $(".sg_name").addClass("is-invalid");
                 return false;
