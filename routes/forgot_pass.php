@@ -22,8 +22,8 @@
         $mail->isSMTP();
         $mail->Host = "smtp.office365.com";
         $mail->SMTPAuth = true;
-        $mail->Username = "tanagorn.e@fuji-innovation.com"; // enter your email address
-        $mail->Password = "Playboy032-4"; // enter your password
+        $mail->Username = "phitsanu.c@fuji-innovation.com"; // enter your email address
+        $mail->Password = "nu4321Nu"; // enter your password
         $mail->Port = 587;
         $mail->SMTPSecure = "tls";
 

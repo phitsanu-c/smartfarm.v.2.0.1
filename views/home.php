@@ -59,49 +59,49 @@
                     <div class="card radius-10 shadow-none">
                         <div class="card-body border radius-10 shadow-none mb-3">
                             <div class="col-12">
-                                <div class="card-body radius-10 shadow-none">
+                                <!-- <div class="card-body radius-10 shadow-none"> -->
                                     <div class="d-flex">
                                         <h5>ที่ตั้ง : <b><?= $s_master["site_address"] ?></b></h5>
                                     </div>
-                                </div>
+                                <!-- </div> -->
                             </div>
                             <div class="col-12">
-                                <div class="card-body radius-10 shadow-none">
+                                <!-- <div class="card-body radius-10 shadow-none"> -->
                                     <div class="d-flex">
                                         <h5>สถานะโรงเรือน : <b class="status_timeUpdate"></b></h5>
                                     </div>
-                                </div>
+                                <!-- </div> -->
                             </div>
                             <div class="col-12">
-                                <div class="card-body radius-10 shadow-none">
+                                <!-- <div class="card-body radius-10 shadow-none"> -->
                                     <div class="d-flex">
                                         <h5>ขนาดโรงเรือน : <b><?= substr($s_master["house_image"],9,13) ?></b> เมตร</h5>
                                     </div>
-                                </div>
+                                <!-- </div> -->
                             </div>
                             <div class="col-12">
-                                <div class="card-body radius-10 shadow-none">
+                                <!-- <div class="card-body radius-10 shadow-none"> -->
                                     <div class="d-flex">
                                         <h5>ระบบอินเตอร์เน็ต : <b>Internet SIM</b></h5>
                                     </div>
-                                </div>
+                                <!-- </div> -->
                             </div>
                             <div class="col-12">
-                                <div class="card-body radius-10 shadow-none">
+                                <!-- <div class="card-body radius-10 shadow-none"> -->
                                     <div class="d-flex">
                                         <h5>หมายเลขอินเตอร์เน็ต : <b><?= $s_master["site_internet"] ?></b></h5>
                                     </div>
-                                </div>
+                                <!-- </div> -->
                             </div>
                             <div class="col-12">
-                                <div class="card-body radius-10 shadow-none">
+                                <!-- <div class="card-body radius-10 shadow-none"> -->
                                     <div class="d-flex">
                                         <h5>วันหมดอายุ : <b><?= $s_master["site_internetO"] ?></b></h5>
                                     </div>
-                                </div>
+                                <!-- </div> -->
                             </div>
                             <div class="col-12">
-                                <div class="card-body radius-10 shadow-none">
+                                <!-- <div class="card-body radius-10 shadow-none"> -->
                                     <div class="d-flex">
                                         <h5>จุดติดตั้งเซ็นเซอร์ : <b class="image-popups">
                                         <?php if($s_master["house_img_map"] != ""){
@@ -109,7 +109,7 @@
                                                         }else{echo "-";}?>
                                             </b></h5>
                                     </div>
-                                </div>
+                                <!-- </div> -->
                             </div>
                         </div>
                     </div>
@@ -119,9 +119,8 @@
         <div class="col-12 col-lg-8 col-xl-8 d-flex">
             <div class="card w-100 radius-10">
                 <div class="card-body"> 
-                    <div class="card radius-10 border shadow-none">
+                    <!-- <div class="card radius-10 border shadow-none">
                         <div class="card-body">
-                            <!--  -->
                             <h5 class="text-center">สภาพอากาศจากกรมอุตุนิยมวิทยา</h5>
                             <div class="row">
                                 <div class="col-lg-4 col-xl-4 col-sm-6 text-center">
@@ -133,8 +132,6 @@
                                     <img src="" class="weather-icon" alt="Weather Icon" style=" width: 30%;" /><br>
                                     <span class="text-primary weather-description capitalize"></span><br><br>
                                 </div>
-                                
-                                <!-- <hr/> -->
                                 <div class="col-lg-4 col-xl-4 col-sm-6 text-center">
                                     <h6 class="mb-0">ความชื้นในอากาศ</h6><br>
                                     <h6 class="mb-0 text-primary weather-humidity"></h6><br>
@@ -143,7 +140,6 @@
                                     <h6 class="mb-0">ความเร็วลม</h6><br>
                                     <h6 class="mb-0 text-primary weather-wind-speed"></h6>
                                 </div>
-                                <!-- <hr/> -->
                                 <div class="col-lg-4 col-xl-4 col-sm-6 text-center">
                                     <h6 class="mb-0">พระอาทิตย์ขึ้น</h6><br>
                                     <h6 class="mb-0 text-primary weather-sunrise"></h6>
@@ -153,9 +149,8 @@
                                     <h6 class="mb-0 text-primary weather-sunset"></h6>
                                 </div>
                             </div>
-                            <!--  -->
                         </div>
-                    </div><br/>
+                    </div><br/> -->
                     <div class="card radius-10 border shadow-none">
                         <div class="card-body">
                             <div class="row">
@@ -898,14 +893,15 @@
                                         </div>
                                     </a>
                                 </li>';
-                            }else{echo '
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link btn_ch_p" data-bs-toggle="pill" href="" role="tab" aria-selected="true">
-                                        <div class="d-flex align-items-center">
-                                            <div class="tab-title">พลังงาน</div>
-                                        </div>
-                                    </a>
-                                </li>';
+                            }else{
+                                // echo '
+                                // <li class="nav-item" role="presentation">
+                                //     <a class="nav-link btn_ch_p" data-bs-toggle="pill" href="" role="tab" aria-selected="true">
+                                //         <div class="d-flex align-items-center">
+                                //             <div class="tab-title">พลังงาน</div>
+                                //         </div>
+                                //     </a>
+                                // </li>';
                             }
                         }
                         ?>
