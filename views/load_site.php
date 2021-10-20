@@ -29,35 +29,35 @@
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-4">
                 
                 
-        <?php
-    session_start();
-    require '../routes/connectdb.php';
-    $url_host = 'http://' . $_SERVER['HTTP_HOST'];
-    $url_part = explode("/", $_SERVER["PHP_SELF"]);
-    $url_link = $url_host . '/' . $url_part[1];
-    // echo $url_part[1];
-    // exit();
-    $login_userid = $_SESSION['user_id'];
-    // $_SESSION["Username"] ;
-    // $_SESSION["login_status"]  ;
+    <?php
+        session_start();
+        require '../routes/connectdb.php';
+        $url_host = 'http://' . $_SERVER['HTTP_HOST'];
+        $url_part = explode("/", $_SERVER["PHP_SELF"]);
+        $url_link = $url_host . '/' . $url_part[1];
+        // echo $url_part[1];
+        // exit();
+        $login_userid = $_SESSION['user_id'];
+        // $_SESSION["Username"] ;
+        // $_SESSION["login_status"]  ;
 
-    function encode($string)
-    {
-        return str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($string . 'zasn'));
-    }
+        function encode($string)
+        {
+            return str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($string . 'zasn'));
+        }
 
-    // function decode($string) {
-    //     return base64_decode(str_replace(['-','_'], ['+','/'], $string));
-    // }
+        // function decode($string) {
+        //     return base64_decode(str_replace(['-','_'], ['+','/'], $string));
+        // }
 
-    if ($_SESSION["login_status"] != 1) {
-        $site_stmt = $dbcon->query("SELECT * FROM `tb3_userst`INNER JOIN tb2_login ON tb3_userst.userST_loginID = tb2_login.login_id INNER JOIN tb2_site ON tb3_userst.userST_siteID = tb2_site.site_id WHERE tb3_userst.userST_loginID = '$login_userid' GROUP BY userST_siteID ");
-    } else {
-        $site_stmt = $dbcon->query("SELECT * FROM tb2_site ");
-    }
-    $i = 1;
-    // $row_site = $site_stmt->fetch(PDO::FETCH_BOTH);
-    foreach ($site_stmt as $row_site) {
+        if ($_SESSION["login_status"] != 1) {
+            $site_stmt = $dbcon->query("SELECT * FROM `tb3_userst`INNER JOIN tb2_login ON tb3_userst.userST_loginID = tb2_login.login_id INNER JOIN tb2_site ON tb3_userst.userST_siteID = tb2_site.site_id WHERE tb3_userst.userST_loginID = '$login_userid' GROUP BY userST_siteID ");
+        } else {
+            $site_stmt = $dbcon->query("SELECT * FROM tb2_site ");
+        }
+        $i = 1;
+        // $row_site = $site_stmt->fetch(PDO::FETCH_BOTH);
+        foreach ($site_stmt as $row_site) {
         $co = $row_site["site_id"];
     ?>
         <div class="col-12 col-sm-12 col-md-4 col-lg-4  col-xl-3  load-site">

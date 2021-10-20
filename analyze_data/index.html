@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Loading -->
+    <link rel="stylesheet" type="text/css" href="../public/plugins/Customizable-Loading-Modal-Plugin/css/modal-loading.css">
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Analyze Data</h4>
+            <!-- <p class="card-text">Text</p> -->
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xl-7 mx-auto">
+                        <div class="card border-top border-0 border-4 border-primary">
+                            <div class="card-body p-5">
+                                <div class="card-title d-flex align-items-center">
+                                    <div><i class="bx bxs-user me-1 font-22 text-primary"></i>
+                                    </div>
+                                    <h5 class="mb-0 text-primary">Data Count</h5>
+                                </div>
+                                <hr>
+                                <form class="row g-3" id="from_1" onSubmit="return false;">
+                                    <div class="col-md-6">
+                                        <label for="inputFirstName" class="form-label">serial</label>
+                                        <input type="text" class="form-control" name="serial" id="serial" value="KO7MT001" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inputLastName" class="form-label">month</label>
+                                        <input type="month" class="form-control" name="month" id="month" required>
+                                    </div>
+                                    <!-- <div class="col-md-6">
+                                        <label for="inputEmail" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="inputEmail">
+                                    </div> -->
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary px-5">submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><br>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xl-7 mx-auto">
+                        <div class="card border-top border-0 border-4 border-primary">
+                            <div class="card-body p-5">
+                                <div class="card-title d-flex align-items-center">
+                                    <div><i class="bx bxs-user me-1 font-22 text-primary"></i>
+                                    </div>
+                                    <h5 class="mb-0 text-primary">Analyze Sensor</h5>
+                                </div>
+                                <hr>
+                                <form class="row g-3" id="from_2" onSubmit="return false;">
+                                    <div class="col-md-6">
+                                        <label for="inputFirstName" class="form-label">serial</label>
+                                        <input type="text" class="form-control" name="serial2" id="serial2" value="KO7MT001" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inputLastName" class="form-label">month</label>
+                                        <input type="month" class="form-control" name="month2" id="month2" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary px-5">submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted ">
+            Footer
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Date time Picker -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <!-- Loading -->
+    <script type="text/javascript" src="../public/plugins/Customizable-Loading-Modal-Plugin/js/modal-loading.js"></script>
+    <!-- sweetalert2 -->
+    <script src="../public/plugins/sweetalert2-7.28.12/dist/sweetalert2.all.min.js"></script>
+    <script>
+        $("#from_1").submit(function() {
+            // alert(moment($("#month").val()).format('YYYY'))
+            var getDay = getDaysInMonth(moment($("#month").val()).format('M'), moment($("#month").val()).format('YYYY'));
+            // alert(getDay)
+            if ($("#serial").val() !== "" && $("#month").val() !== "") {
+                var loading = verticalNoTitle();
+                $.ajax({
+                    type: "POST",
+                    url: "count_data.php",
+                    data: {
+                        sn: $("#serial").val(),
+                        getDay: getDay,
+                        month: moment($("#month").val()).format('M'),
+                        year: moment($("#month").val()).format('YYYY')
+                    },
+                    dataType: 'json',
+                    success: function(res) {
+                        // console.log(res.data)
+                        loadingOut(loading);
+                        setTimeout(function() {
+                            if (res.status === "success") {
+                                swal({
+                                    title: 'บันทึกข้อมูลสำเร็จ.',
+                                    // text: "" + sw_name + " ?",
+                                    type: 'success',
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: '#32CD32'
+                                });
+                            }
+                            if (res.status === "มีรายชื่อนี้แล้ว") {
+                                swal({
+                                    title: 'มีข้อมูลในเดือนนี้แล้ว !',
+                                    // text: "" + sw_name + " ?",
+                                    type: 'warning',
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: '#32CD32'
+                                });
+                                return false;
+                            }
+                            if (res.status === "No data") {
+                                swal({
+                                    title: 'ไม่มีข้อมูลในเดือนนี้ !',
+                                    // text: "" + sw_name + " ?",
+                                    type: 'warning',
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: '#32CD32'
+                                });
+                                return false;
+                            }
+                        }, 1000);
+                    }
+                });
+            }
+        });
+
+        $("#from_2").submit(function() {
+            // alert(moment($("#month").val()).format('YYYY'))
+            var getDay = getDaysInMonth(moment($("#month2").val()).format('M'), moment($("#month2").val()).format('YYYY'));
+            // alert(getDay)
+            if ($("#serial2").val() !== "" && $("#month2").val() !== "") {
+                var loading = verticalNoTitle();
+                $.ajax({
+                    type: "POST",
+                    url: "count_sensor.php",
+                    data: {
+                        sn: $("#serial2").val(),
+                        getDay: getDay,
+                        month: moment($("#month2").val()).format('M'),
+                        year: moment($("#month2").val()).format('YYYY')
+                    },
+                    dataType: 'json',
+                    success: function(res) {
+                        // console.log(res.data)
+                        loadingOut(loading);
+                        setTimeout(function() {
+                            if (res.status === "success") {
+                                swal({
+                                    title: 'บันทึกข้อมูลสำเร็จ.',
+                                    // text: "" + sw_name + " ?",
+                                    type: 'success',
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: '#32CD32'
+                                });
+                            }
+                            if (res.status === "มีรายชื่อนี้แล้ว") {
+                                swal({
+                                    title: 'มีข้อมูลในเดือนนี้แล้ว !',
+                                    // text: "" + sw_name + " ?",
+                                    type: 'warning',
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: '#32CD32'
+                                });
+                                return false;
+                            }
+                            if (res.status === "No data") {
+                                swal({
+                                    title: 'ไม่มีข้อมูลในเดือนนี้ !',
+                                    // text: "" + sw_name + " ?",
+                                    type: 'warning',
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: '#32CD32'
+                                });
+                                return false;
+                            }
+                        }, 1000);
+                    }
+                });
+            }
+        });
+
+        function getDaysInMonth(month, year) {
+            // Here January is 1 based
+            //Day 0 is the last day in the previous month
+            return new Date(year, month, 0).getDate();
+            // Here January is 0 based
+            // return new Date(year, month+1, 0).getDate();
+        };
+
+
+        function verticalNoTitle() {
+            var loading = new Loading({
+                discription: 'Loading...',
+                defaultApply: true,
+            });
+            return loading;
+            // loadingOut(loading);
+        }
+
+        function loadingOut(loading) {
+            setTimeout(() => loading.out(), 100);
+        }
+    </script>
+</body>
+
+</html>

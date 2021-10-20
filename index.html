@@ -62,8 +62,7 @@
                 <div>
                     <h4 class="logo-text">Smart Greenhouse</h4>
                 </div>
-                <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
-                </div>
+                <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i></div>
             </div>
             <!--navigation-->
             <ul class="metismenu" id="menu">
@@ -129,8 +128,7 @@
                             <li>
                                 <div class="dropdown-divider mb-0"></div>
                             </li>
-                            <li><a class="dropdown-item logout" href="javascript:;"><i class='bx bx-log-out-circle'></i><span>ลงชื่อออก</span></a>
-                            </li>
+                            <li><a class="dropdown-item logout" href="javascript:;"><i class='bx bx-log-out-circle'></i><span>ลงชื่อออก</span></a></li>
                         </ul>
                     </div>
                 </nav>
@@ -807,64 +805,113 @@
                                                     $(".dash_img_" + i).attr("src", "public/images/Sensor/" + dashImg[i]);
 
                                                     // show_dash(unit = dashUnit[i],snmode = dashMode[i]);
-
-                                                    if (dashMode[i] === "7") { // µmol / KLux
-                                                        $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>' + '<br>' + (data_array[dashSncanel[i]] / 1000).toFixed(1) + " KLux");
-                                                    } else if (dashMode[i] === "6") {
-                                                        $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>');
-                                                    } else if (dashMode[i] === "5") {
-                                                        $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 1000).toFixed(1) + " KLux" + '<br>' + (data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>');
-                                                    } else {
-                                                        if (data_array[dashSncanel[i]] >= 1000) {
-                                                            data_dash[i] = (data_array[dashSncanel[i]] / 1000).toFixed(1);
-                                                            sn_unit[i] = 'K' + dashUnit[i];
-                                                        } else if (data_array[dashSncanel[i]] >= 1000000) {
-                                                            data_dash[i] = (data_array[dashSncanel[i]] / 1000).toFixed(1);
-                                                            sn_unit[i] = 'M' + dashUnit[i];
+                                                    if (house_master !== "KMUMT001") {
+                                                        if (dashMode[i] === "7") { // µmol / KLux
+                                                            $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>' + '<br>' + (data_array[dashSncanel[i]] / 1000).toFixed(1) + " KLux");
+                                                        } else if (dashMode[i] === "6") {
+                                                            $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>');
+                                                        } else if (dashMode[i] === "5") {
+                                                            $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 1000).toFixed(1) + " KLux" + '<br>' + (data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>');
                                                         } else {
-                                                            data_dash[i] = (data_array[dashSncanel[i]] * 1).toFixed(1);
-                                                            if (dashUnit[i] === "1") {
-                                                                sn_unit[i] = "℃";
+                                                            if (data_array[dashSncanel[i]] >= 1000) {
+                                                                data_dash[i] = (data_array[dashSncanel[i]] / 1000).toFixed(1);
+                                                                sn_unit[i] = 'K' + dashUnit[i];
+                                                            } else if (data_array[dashSncanel[i]] >= 1000000) {
+                                                                data_dash[i] = (data_array[dashSncanel[i]] / 1000).toFixed(1);
+                                                                sn_unit[i] = 'M' + dashUnit[i];
                                                             } else {
-                                                                sn_unit[i] = dashUnit[i];
+                                                                data_dash[i] = (data_array[dashSncanel[i]] * 1).toFixed(1);
+                                                                if (dashUnit[i] === "1") {
+                                                                    sn_unit[i] = "℃";
+                                                                } else {
+                                                                    sn_unit[i] = dashUnit[i];
+                                                                }
+                                                                $(".dash_data_1_" + i).html(data_dash[i] + " " + sn_unit[i]);
                                                             }
-                                                            $(".dash_data_1_" + i).html(data_dash[i] + " " + sn_unit[i]);
+                                                        }
+                                                        // ++++++++++
+                                                        if ($(".btn_ch_t").hasClass("active") == true) {
+                                                            if (dashMode[i] === "1") {
+                                                                new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
+                                                            }
+                                                        }
+                                                        if ($(".btn_ch_h").hasClass("active") == true) {
+                                                            if (dashMode[i] === "2") {
+                                                                new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
+                                                            }
+                                                        }
+                                                        if ($(".btn_ch_s").hasClass("active") == true) {
+                                                            if (dashMode[i] === "3") {
+                                                                new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
+                                                            }
+                                                        }
+                                                        if ($(".btn_ch_l").hasClass("active") == true) {
+                                                            if (dashMode[i] === "4" || dashMode[i] === "5") {
+                                                                new_chart.push((data_array[dashSncanel[i]] / 1000).toFixed(1));
+                                                            }
+                                                            if (dashMode[i] === "6" || dashMode[i] === "7") {
+                                                                new_chart.push((data_array[dashSncanel[i]] / 54).toFixed(1));
+                                                            }
+                                                        }
+                                                        if ($(".btn_ch_p").hasClass("active") == true) {
+                                                            if (dashMode[i] === "10") {
+                                                                new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
+                                                            }
+                                                        }
+                                                    } else {
+                                                        if (dashMode[i] === "7") { // µmol / KLux
+                                                            $(".dash_data_1_" + i).html((data_array["data_st" + dashSncanel[i].substring(7)] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>' + '<br>' + (data_array[dashSncanel[i]] / 1000).toFixed(1) + " KLux");
+                                                        } else if (dashMode[i] === "6") {
+                                                            $(".dash_data_1_" + i).html((data_array["data_st" + dashSncanel[i].substring(7)] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>');
+                                                        } else if (dashMode[i] === "5") {
+                                                            $(".dash_data_1_" + i).html((data_array["data_st" + dashSncanel[i].substring(7)] / 1000).toFixed(1) + " KLux" + '<br>' + (data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>');
+                                                        } else {
+                                                            if (data_array["data_st" + dashSncanel[i].substring(7)] >= 1000) {
+                                                                data_dash[i] = (data_array["data_st" + dashSncanel[i].substring(7)] / 1000).toFixed(1);
+                                                                sn_unit[i] = 'K' + dashUnit[i];
+                                                            } else if (data_array["data_st" + dashSncanel[i].substring(7)] >= 1000000) {
+                                                                data_dash[i] = (data_array["data_st" + dashSncanel[i].substring(7)] / 1000).toFixed(1);
+                                                                sn_unit[i] = 'M' + dashUnit[i];
+                                                            } else {
+                                                                data_dash[i] = (data_array["data_st" + dashSncanel[i].substring(7)] * 1).toFixed(1);
+                                                                if (dashUnit[i] === "1") {
+                                                                    sn_unit[i] = "℃";
+                                                                } else {
+                                                                    sn_unit[i] = dashUnit[i];
+                                                                }
+                                                                $(".dash_data_1_" + i).html(data_dash[i] + " " + sn_unit[i]);
+                                                            }
+                                                        }
+                                                        // ++++++++++
+                                                        if ($(".btn_ch_t").hasClass("active") == true) {
+                                                            if (dashMode[i] === "1") {
+                                                                new_chart.push((data_array["data_st" + dashSncanel[i].substring(7)] * 1).toFixed(1));
+                                                            }
+                                                        }
+                                                        if ($(".btn_ch_h").hasClass("active") == true) {
+                                                            if (dashMode[i] === "2") {
+                                                                new_chart.push((data_array["data_st" + dashSncanel[i].substring(7)] * 1).toFixed(1));
+                                                            }
+                                                        }
+                                                        if ($(".btn_ch_s").hasClass("active") == true) {
+                                                            if (dashMode[i] === "3") {
+                                                                new_chart.push((data_array["data_st" + dashSncanel[i].substring(7)] * 1).toFixed(1));
+                                                            }
+                                                        }
+                                                        if ($(".btn_ch_l").hasClass("active") == true) {
+                                                            if (dashMode[i] === "4" || dashMode[i] === "5") {
+                                                                new_chart.push((data_array["data_st" + dashSncanel[i].substring(7)] / 1000).toFixed(1));
+                                                            }
+                                                            if (dashMode[i] === "6" || dashMode[i] === "7") {
+                                                                new_chart.push((data_array["data_st" + dashSncanel[i].substring(7)] / 54).toFixed(1));
+                                                            }
+                                                        }
+                                                        if ($(".btn_ch_p").hasClass("active") == true) {
+                                                            if (dashMode[i] === "10") {
+                                                                new_chart.push((data_array["data_st" + dashSncanel[i].substring(7)] * 1).toFixed(1));
+                                                            }
                                                         }
                                                     }
-                                                    // ++++++++++
-                                                    if ($(".btn_ch_t").hasClass("active") == true) {
-                                                        if (dashMode[i] === "1") {
-                                                            new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
-                                                        }
-                                                    }
-                                                    if ($(".btn_ch_h").hasClass("active") == true) {
-                                                        if (dashMode[i] === "2") {
-                                                            new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
-                                                        }
-                                                    }
-                                                    if ($(".btn_ch_s").hasClass("active") == true) {
-                                                        if (dashMode[i] === "3") {
-                                                            new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
-                                                        }
-                                                    }
-                                                    if ($(".btn_ch_l").hasClass("active") == true) {
-                                                        if (dashMode[i] === "4" || dashMode[i] === "5") {
-                                                            new_chart.push((data_array[dashSncanel[i]] / 1000).toFixed(1));
-                                                        }
-                                                        if (dashMode[i] === "6" || dashMode[i] === "7") {
-                                                            new_chart.push((data_array[dashSncanel[i]] / 54).toFixed(1));
-                                                        }
-                                                    }
-                                                    if ($(".btn_ch_p").hasClass("active") == true) {
-                                                        if (dashMode[i] === "10") {
-                                                            new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
-                                                        }
-                                                    }
-                                                    // for (var a = 1; a <= array_realCh.length; a++) {
-                                                    //     if (dashMode[i] === "1") {
-                                                    //         new_chart.push(data_dash[i]);
-                                                    //     }
-                                                    // }
                                                 }
                                             }
 

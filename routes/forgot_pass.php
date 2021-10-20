@@ -1,11 +1,11 @@
 <?php
     session_start();
     require "connectdb.php";
-    require_once "../public/plugins/PHPMailer/PHPMailer.php";
-    require_once "../public/plugins/PHPMailer/SMTP.php";
-    require_once "../public/plugins/PHPMailer/Exception.php";
+    // require_once "../public/plugins/PHPMailer/PHPMailer.php";
+    // require_once "../public/plugins/PHPMailer/SMTP.php";
+    // require_once "../public/plugins/PHPMailer/Exception.php";
 
-    use PHPMailer\PHPMailer\PHPMailer;
+    // use PHPMailer\PHPMailer\PHPMailer;
 
     $post_email = $_POST["email"];
     $chack_email = $dbcon->query("SELECT COUNT('login_id') FROM tb2_login WHERE login_email = '$post_email' ")->fetch();
@@ -16,44 +16,44 @@
         $row = $dbcon->query("SELECT * FROM tb2_login WHERE login_email = '$post_email' ")->fetch();
         
         
-        $mail = new PHPMailer();
+        // $mail = new PHPMailer();
 
-        // SMTP Settings
-        $mail->isSMTP();
-        $mail->Host = "smtp.office365.com";
-        $mail->SMTPAuth = true;
-        $mail->Username = "phitsanu.c@fuji-innovation.com"; // enter your email address
-        $mail->Password = "nu4321Nu"; // enter your password
-        $mail->Port = 587;
-        $mail->SMTPSecure = "tls";
+        // // SMTP Settings
+        // $mail->isSMTP();
+        // $mail->Host = "smtp.office365.com";
+        // $mail->SMTPAuth = true;
+        // $mail->Username = "phitsanu.c@fuji-innovation.com"; // enter your email address
+        // $mail->Password = "nu4321Nu"; // enter your password
+        // $mail->Port = 587;
+        // $mail->SMTPSecure = "tls";
 
-        //Email Settings
-        $mail->isHTML(true);
-        $mail->setFrom("support@fuji-innovation.com", "Support Smart Greenhouse");
-        $mail->addAddress($post_email); // Send to mail
+        // //Email Settings
+        // $mail->isHTML(true);
+        // $mail->setFrom("support@fuji-innovation.com", "Support Smart Greenhouse");
+        // $mail->addAddress($post_email); // Send to mail
   
-        // $mail->addReplyTo($_POST["sg_email"], $_POST["sg_name"]);
-        $mail->Subject = "แจ้งข้อมูลรหัสผ่าน";
-        // $mail->Body = $_POST["sg_text"];
+        // // $mail->addReplyTo($_POST["sg_email"], $_POST["sg_name"]);
+        // $mail->Subject = "แจ้งข้อมูลรหัสผ่าน";
+        // // $mail->Body = $_POST["sg_text"];
 
-        $mail->msgHTML("
-                        <b>ข้อมูลของคุณ </b> <br/> 
-                        <b>Username : </b>".$row["login_user"]."<br /> 
-                        <b>Password : </b>".$row["login_pa"]."<br /> <br /> ");
+        // $mail->msgHTML("
+        //                 <b>ข้อมูลของคุณ </b> <br/> 
+        //                 <b>Username : </b>".$row["login_user"]."<br /> 
+        //                 <b>Password : </b>".$row["login_pa"]."<br /> <br /> ");
 
-        $mail->CharSet = 'UTF-8';
+        // $mail->CharSet = 'UTF-8';
 
-        if($mail->send()) {
+        // if($mail->send()) {
             $status = "success";
             $response = "Email was sented";
             echo json_encode(['status' => "success","status_Email" => $status, "response" => $response], JSON_UNESCAPED_UNICODE );
-            exit();
-        } else {
-            $status = "failed";
-            $response = "Something is wrong" . $mail->ErrorInfo;
-            echo json_encode(['status' => "success", "status_Email" => $status, "response" => $response], JSON_UNESCAPED_UNICODE );
-            exit();
-        }
+        //     exit();
+        // } else {
+        //     $status = "failed";
+        //     $response = "Something is wrong" . $mail->ErrorInfo;
+        //     echo json_encode(['status' => "success", "status_Email" => $status, "response" => $response], JSON_UNESCAPED_UNICODE );
+        //     exit();
+        // }
     }
    
     

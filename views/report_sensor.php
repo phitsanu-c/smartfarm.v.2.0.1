@@ -737,6 +737,7 @@
             });
         }
         function report_table(){
+            console.log(ch_value)
             $.ajax({
                 type: "POST",
                 url: "routes/report_allTable.php",
