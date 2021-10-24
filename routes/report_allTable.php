@@ -20,7 +20,12 @@
     $data_channel = [];
     for($i=0; $i < count($ch_value[3]); $i++){
         if ($ch_value[3][$i] == 4 || $ch_value[3][$i] == 5) {
-            $data_channel[] = 'round('.$ch_value[1][$i].'/1000, 1) AS data_cn'.($i+1);
+            if($house_master == 'KMUMT001'){
+                $data_channel[] = 'round('.$ch_value[1][$i].', 1) AS data_cn'.($i+1);
+            }else{
+                $data_channel[] = 'round('.$ch_value[1][$i].'/1000, 1) AS data_cn'.($i+1);
+            }
+            
         } elseif ($ch_value[3][$i] == 6 || $ch_value[3][$i] == 7) {
             $data_channel[] = 'round('.$ch_value[1][$i].'/54, 1) AS data_cn'.($i+1);
         } else {

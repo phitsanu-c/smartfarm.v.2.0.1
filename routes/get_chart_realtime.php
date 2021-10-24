@@ -5,6 +5,8 @@
     $start_day = date("Y/m/d - H:i:s", strtotime('-1 day'));//'-6 hour'));
     $stop_day = date("Y/m/d - H:i:s");
     $channel = implode(", ", $_POST["array_realCh"]);
+   //  echo $channel;
+   //  exit();
     // for($i = 1; $i <= count($_POST["array_realCh"]); $i++){
     //     $channel[] = 'round('.$_POST['array_realCh'][($i-1)].', 1) AS new_'.$i.')';
     // }

@@ -503,34 +503,23 @@
                                 array_realChT.push(dashSncanel[i]);
                                 array_realnameT.push(dashName[i]);
                                 unit_T.push("℃");
-                            }
-                        }
-                    }
-                    for (var i = 1; i <= 40; i++) {
-                        if (dashStatus[i] == 1) {
-                            if (dashMode[i] == 2) {
+                            } else if (dashMode[i] == 2) {
                                 hum_c.push(1);
                                 array_realChH.push(dashSncanel[i]);
                                 array_realnameH.push(dashName[i]);
                                 unit_H.push("%Rh");
-                            }
-                        }
-                    }
-                    for (var i = 1; i <= 40; i++) {
-                        if (dashStatus[i] == 1) {
-                            if (dashMode[i] == 3) {
+                            } else if (dashMode[i] == 3) {
                                 soil_c.push(1);
                                 array_realChS.push(dashSncanel[i]);
                                 array_realnameS.push(dashName[i]);
                                 unit_H.push("%");
-                            }
-                        }
-                    }
-                    for (var i = 1; i <= 40; i++) {
-                        if (dashStatus[i] == 1) {
-                            if (dashMode[i] == 4 || dashMode[i] == 5) {
+                            } else if (dashMode[i] == 4 || dashMode[i] == 5) {
                                 light_c.push(1);
-                                array_realChL.push(dashSncanel[i] + "/1000");
+                                if (house_master !== "KMUMT001") {
+                                    array_realChL.push(dashSncanel[i] + "/1000");
+                                } else {
+                                    array_realChL.push(dashSncanel[i]);
+                                }
                                 array_realnameL.push(dashName[i]);
                                 unit_L.push("KLux");
                             } else if (dashMode[i] == 6 || dashMode[i] == 7) {
@@ -538,12 +527,7 @@
                                 array_realChL.push(dashSncanel[i] + "/54");
                                 array_realnameL.push(dashName[i]);
                                 unit_L.push("µmol m[baseline-shift: super; font-size: 10;]-2[baseline-shift: baseline;]s[baseline-shift: super; font-size: 10;]-1[baseline-shift: baseline;]");
-                            }
-                        }
-                    }
-                    for (var i = 1; i <= 40; i++) {
-                        if (dashStatus[i] == 1) {
-                            if (dashMode[i] == 10) {
+                            } else if (dashMode[i] == 10) {
                                 power_c.push(1);
                                 array_realChP.push(dashSncanel[i]);
                                 array_realnameP.push("กำลังไฟฟ้า");
@@ -577,7 +561,6 @@
                         // dataType: "json",
                         success: function(res_dash) {
                             $("#pills-selectHome").html(res_dash);
-
 
                             chack_realtime();
 
@@ -695,6 +678,11 @@
                                     for (var a = 1; a <= array_realCh.length; a++) {
                                         new_array_realCh.push('round(' + array_realCh[(a - 1)] + ', 1) AS new_' + a);
                                     }
+                                    console.log([
+                                        'nn', $(".btn_ch_l").hasClass("active"),
+                                        new_array_realCh
+                                    ]);
+                                    // return false
                                     $.ajax({
                                         url: 'routes/get_chart_realtime.php',
                                         method: "post",
@@ -762,6 +750,7 @@
 
                                                 // console.log(loading);
                                                 // -------------------------------------------------------------
+                                                var chart_timestamp = p_json['date_time'];
                                                 var time_t = p_json['time'];
                                                 var ntime = time_t.substring(0, 5);
                                                 $(".date").html(p_json['date']);
@@ -780,6 +769,7 @@
                                             } else {
                                                 // console.log(loading);// != KMUMT001
                                                 // -------------------------------------------------------------
+                                                var chart_timestamp = parseJSON['date_time'];
                                                 var time_t = parseJSON['time'];
                                                 var ntime = time_t.substring(0, 5);
                                                 $(".date").html(parseJSON['date']);
@@ -797,6 +787,7 @@
                                             }
                                             // console.log(parseJSON);
                                             // console.log(dashImg[1]);
+
                                             var sn_unit = [];
                                             var data_dash = [];
                                             var new_chart = [];
@@ -858,13 +849,15 @@
                                                                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
                                                             }
                                                         }
-                                                    } else {
+                                                    } else { //=== KMUMT001
                                                         if (dashMode[i] === "7") { // µmol / KLux
                                                             $(".dash_data_1_" + i).html((data_array["data_st" + dashSncanel[i].substring(7)] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>' + '<br>' + (data_array[dashSncanel[i]] / 1000).toFixed(1) + " KLux");
                                                         } else if (dashMode[i] === "6") {
                                                             $(".dash_data_1_" + i).html((data_array["data_st" + dashSncanel[i].substring(7)] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>');
                                                         } else if (dashMode[i] === "5") {
                                                             $(".dash_data_1_" + i).html((data_array["data_st" + dashSncanel[i].substring(7)] / 1000).toFixed(1) + " KLux" + '<br>' + (data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>');
+                                                        } else if (dashMode[i] === "4") {
+                                                            $(".dash_data_1_" + i).html((data_array["data_st" + dashSncanel[i].substring(7)]).toFixed(1) + " KLux");
                                                         } else {
                                                             if (data_array["data_st" + dashSncanel[i].substring(7)] >= 1000) {
                                                                 data_dash[i] = (data_array["data_st" + dashSncanel[i].substring(7)] / 1000).toFixed(1);
@@ -900,7 +893,7 @@
                                                         }
                                                         if ($(".btn_ch_l").hasClass("active") == true) {
                                                             if (dashMode[i] === "4" || dashMode[i] === "5") {
-                                                                new_chart.push((data_array["data_st" + dashSncanel[i].substring(7)] / 1000).toFixed(1));
+                                                                new_chart.push((data_array["data_st" + dashSncanel[i].substring(7)]).toFixed(1));
                                                             }
                                                             if (dashMode[i] === "6" || dashMode[i] === "7") {
                                                                 new_chart.push((data_array["data_st" + dashSncanel[i].substring(7)] / 54).toFixed(1));
@@ -978,23 +971,492 @@
                                             // alert(res.s_master.site_Longitude)
 
                                             // var new_chart2 = [];
-                                            // new_chart2.push(parseJSON['date_time']);
+                                            // new_chart2.push(chart_timestamp);
                                             // for (var s = 1; s <= array_realCh.length; s++) {
                                             //     new_chart2.push({
                                             //         ['new_' + s]: new_chart[s - 1]
                                             //     });
                                             // }
-                                            console.log(new_chart)
-                                                // console.log(new_chart2)
-                                            chart.addData({
-                                                data_timestamp: parseJSON['date_time'],
-                                                new_1: new_chart[0],
-                                                new_2: new_chart[1],
-                                                new_3: new_chart[2],
-                                                new_4: new_chart[3],
-                                                new_5: new_chart[4],
-                                                new_6: new_chart[5]
-                                            });
+                                            console.log('new_chart=' + new_chart.length)
+                                                // console.log(new_chart)
+                                            if (new_chart.length == 1) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                });
+                                            } else if (new_chart.length == 2) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                });
+                                            } else if (new_chart.length == 2) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                });
+                                            } else if (new_chart.length == 3) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                    new_3: new_chart[2],
+                                                });
+                                            } else if (new_chart.length == 4) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                    new_3: new_chart[2],
+                                                    new_4: new_chart[3],
+                                                });
+                                            } else if (new_chart.length == 5) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                    new_3: new_chart[2],
+                                                    new_4: new_chart[3],
+                                                    new_5: new_chart[4],
+                                                });
+                                            } else if (new_chart.length == 6) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                    new_3: new_chart[2],
+                                                    new_4: new_chart[3],
+                                                    new_5: new_chart[4],
+                                                    new_6: new_chart[5],
+                                                });
+                                            } else if (new_chart.length == 7) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                    new_3: new_chart[2],
+                                                    new_4: new_chart[3],
+                                                    new_5: new_chart[4],
+                                                    new_6: new_chart[5],
+                                                    new_7: new_chart[6],
+                                                });
+                                            } else if (new_chart.length == 8) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                    new_3: new_chart[2],
+                                                    new_4: new_chart[3],
+                                                    new_5: new_chart[4],
+                                                    new_6: new_chart[5],
+                                                    new_7: new_chart[6],
+                                                    new_8: new_chart[7]
+                                                });
+                                            } else if (new_chart.length == 9) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                    new_3: new_chart[2],
+                                                    new_4: new_chart[3],
+                                                    new_5: new_chart[4],
+                                                    new_6: new_chart[5],
+                                                    new_7: new_chart[6],
+                                                    new_8: new_chart[7],
+                                                    new_9: new_chart[8]
+                                                });
+                                            } else if (new_chart.length == 10) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                    new_3: new_chart[2],
+                                                    new_4: new_chart[3],
+                                                    new_5: new_chart[4],
+                                                    new_6: new_chart[5],
+                                                    new_7: new_chart[6],
+                                                    new_8: new_chart[7],
+                                                    new_9: new_chart[8],
+                                                    new_10: new_chart[9]
+                                                });
+                                            } else if (new_chart.length == 11) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                    new_3: new_chart[2],
+                                                    new_4: new_chart[3],
+                                                    new_5: new_chart[4],
+                                                    new_6: new_chart[5],
+                                                    new_7: new_chart[6],
+                                                    new_8: new_chart[7],
+                                                    new_9: new_chart[8],
+                                                    new_10: new_chart[9],
+                                                    new_11: new_chart[10]
+                                                });
+                                            } else if (new_chart.length == 12) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                    new_3: new_chart[2],
+                                                    new_4: new_chart[3],
+                                                    new_5: new_chart[4],
+                                                    new_6: new_chart[5],
+                                                    new_7: new_chart[6],
+                                                    new_8: new_chart[7],
+                                                    new_9: new_chart[8],
+                                                    new_10: new_chart[9],
+                                                    new_11: new_chart[10],
+                                                    new_12: new_chart[11]
+                                                });
+                                            } else if (new_chart.length == 13) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                    new_3: new_chart[2],
+                                                    new_4: new_chart[3],
+                                                    new_5: new_chart[4],
+                                                    new_6: new_chart[5],
+                                                    new_7: new_chart[6],
+                                                    new_8: new_chart[7],
+                                                    new_9: new_chart[8],
+                                                    new_10: new_chart[9],
+                                                    new_11: new_chart[10],
+                                                    new_12: new_chart[11],
+                                                    new_13: new_chart[12]
+                                                });
+                                            } else if (new_chart.length == 14) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                    new_3: new_chart[2],
+                                                    new_4: new_chart[3],
+                                                    new_5: new_chart[4],
+                                                    new_6: new_chart[5],
+                                                    new_7: new_chart[6],
+                                                    new_8: new_chart[7],
+                                                    new_9: new_chart[8],
+                                                    new_10: new_chart[9],
+                                                    new_11: new_chart[10],
+                                                    new_12: new_chart[11],
+                                                    new_13: new_chart[12],
+                                                    new_14: new_chart[13]
+                                                });
+                                            } else if (new_chart.length == 15) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                    new_3: new_chart[2],
+                                                    new_4: new_chart[3],
+                                                    new_5: new_chart[4],
+                                                    new_6: new_chart[5],
+                                                    new_7: new_chart[6],
+                                                    new_8: new_chart[7],
+                                                    new_9: new_chart[8],
+                                                    new_10: new_chart[9],
+                                                    new_11: new_chart[10],
+                                                    new_12: new_chart[11],
+                                                    new_13: new_chart[12],
+                                                    new_14: new_chart[13],
+                                                    new_15: new_chart[14]
+                                                });
+                                            } else if (new_chart.length == 16) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                    new_3: new_chart[2],
+                                                    new_4: new_chart[3],
+                                                    new_5: new_chart[4],
+                                                    new_6: new_chart[5],
+                                                    new_7: new_chart[6],
+                                                    new_8: new_chart[7],
+                                                    new_9: new_chart[8],
+                                                    new_10: new_chart[9],
+                                                    new_11: new_chart[10],
+                                                    new_12: new_chart[11],
+                                                    new_13: new_chart[12],
+                                                    new_14: new_chart[13],
+                                                    new_15: new_chart[14],
+                                                    new_16: new_chart[15]
+                                                });
+                                            } else if (new_chart.length == 17) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                    new_3: new_chart[2],
+                                                    new_4: new_chart[3],
+                                                    new_5: new_chart[4],
+                                                    new_6: new_chart[5],
+                                                    new_7: new_chart[6],
+                                                    new_8: new_chart[7],
+                                                    new_9: new_chart[8],
+                                                    new_10: new_chart[9],
+                                                    new_11: new_chart[10],
+                                                    new_12: new_chart[11],
+                                                    new_13: new_chart[12],
+                                                    new_14: new_chart[13],
+                                                    new_15: new_chart[14],
+                                                    new_16: new_chart[15],
+                                                    new_17: new_chart[16]
+                                                });
+                                            } else if (new_chart.length == 18) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                    new_3: new_chart[2],
+                                                    new_4: new_chart[3],
+                                                    new_5: new_chart[4],
+                                                    new_6: new_chart[5],
+                                                    new_7: new_chart[6],
+                                                    new_8: new_chart[7],
+                                                    new_9: new_chart[8],
+                                                    new_10: new_chart[9],
+                                                    new_11: new_chart[10],
+                                                    new_12: new_chart[11],
+                                                    new_13: new_chart[12],
+                                                    new_14: new_chart[13],
+                                                    new_15: new_chart[14],
+                                                    new_16: new_chart[15],
+                                                    new_17: new_chart[16],
+                                                    new_18: new_chart[17]
+                                                });
+                                            } else if (new_chart.length == 19) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                    new_3: new_chart[2],
+                                                    new_4: new_chart[3],
+                                                    new_5: new_chart[4],
+                                                    new_6: new_chart[5],
+                                                    new_7: new_chart[6],
+                                                    new_8: new_chart[7],
+                                                    new_9: new_chart[8],
+                                                    new_10: new_chart[9],
+                                                    new_11: new_chart[10],
+                                                    new_12: new_chart[11],
+                                                    new_13: new_chart[12],
+                                                    new_14: new_chart[13],
+                                                    new_15: new_chart[14],
+                                                    new_16: new_chart[15],
+                                                    new_17: new_chart[16],
+                                                    new_18: new_chart[17],
+                                                    new_19: new_chart[18]
+                                                });
+                                            } else if (new_chart.length == 20) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                    new_3: new_chart[2],
+                                                    new_4: new_chart[3],
+                                                    new_5: new_chart[4],
+                                                    new_6: new_chart[5],
+                                                    new_7: new_chart[6],
+                                                    new_8: new_chart[7],
+                                                    new_9: new_chart[8],
+                                                    new_10: new_chart[9],
+                                                    new_11: new_chart[10],
+                                                    new_12: new_chart[11],
+                                                    new_13: new_chart[12],
+                                                    new_14: new_chart[13],
+                                                    new_15: new_chart[14],
+                                                    new_16: new_chart[15],
+                                                    new_17: new_chart[16],
+                                                    new_18: new_chart[17],
+                                                    new_19: new_chart[18],
+                                                    new_20: new_chart[19]
+                                                });
+                                            } else if (new_chart.length == 21) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                    new_3: new_chart[2],
+                                                    new_4: new_chart[3],
+                                                    new_5: new_chart[4],
+                                                    new_6: new_chart[5],
+                                                    new_7: new_chart[6],
+                                                    new_8: new_chart[7],
+                                                    new_9: new_chart[8],
+                                                    new_10: new_chart[9],
+                                                    new_11: new_chart[10],
+                                                    new_12: new_chart[11],
+                                                    new_13: new_chart[12],
+                                                    new_14: new_chart[13],
+                                                    new_15: new_chart[14],
+                                                    new_16: new_chart[15],
+                                                    new_17: new_chart[16],
+                                                    new_18: new_chart[17],
+                                                    new_19: new_chart[18],
+                                                    new_20: new_chart[19],
+                                                    new_21: new_chart[20]
+                                                });
+                                            } else if (new_chart.length == 22) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                    new_3: new_chart[2],
+                                                    new_4: new_chart[3],
+                                                    new_5: new_chart[4],
+                                                    new_6: new_chart[5],
+                                                    new_7: new_chart[6],
+                                                    new_8: new_chart[7],
+                                                    new_9: new_chart[8],
+                                                    new_10: new_chart[9],
+                                                    new_11: new_chart[10],
+                                                    new_12: new_chart[11],
+                                                    new_13: new_chart[12],
+                                                    new_14: new_chart[13],
+                                                    new_15: new_chart[14],
+                                                    new_16: new_chart[15],
+                                                    new_17: new_chart[16],
+                                                    new_18: new_chart[17],
+                                                    new_19: new_chart[18],
+                                                    new_20: new_chart[19],
+                                                    new_21: new_chart[20],
+                                                    new_22: new_chart[21]
+                                                });
+                                            } else if (new_chart.length == 23) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                    new_3: new_chart[2],
+                                                    new_4: new_chart[3],
+                                                    new_5: new_chart[4],
+                                                    new_6: new_chart[5],
+                                                    new_7: new_chart[6],
+                                                    new_8: new_chart[7],
+                                                    new_9: new_chart[8],
+                                                    new_10: new_chart[9],
+                                                    new_11: new_chart[10],
+                                                    new_12: new_chart[11],
+                                                    new_13: new_chart[12],
+                                                    new_14: new_chart[13],
+                                                    new_15: new_chart[14],
+                                                    new_16: new_chart[15],
+                                                    new_17: new_chart[16],
+                                                    new_18: new_chart[17],
+                                                    new_19: new_chart[18],
+                                                    new_20: new_chart[19],
+                                                    new_21: new_chart[20],
+                                                    new_22: new_chart[21],
+                                                    new_23: new_chart[22]
+                                                });
+                                            } else if (new_chart.length == 24) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                    new_3: new_chart[2],
+                                                    new_4: new_chart[3],
+                                                    new_5: new_chart[4],
+                                                    new_6: new_chart[5],
+                                                    new_7: new_chart[6],
+                                                    new_8: new_chart[7],
+                                                    new_9: new_chart[8],
+                                                    new_10: new_chart[9],
+                                                    new_11: new_chart[10],
+                                                    new_12: new_chart[11],
+                                                    new_13: new_chart[12],
+                                                    new_14: new_chart[13],
+                                                    new_15: new_chart[14],
+                                                    new_16: new_chart[15],
+                                                    new_17: new_chart[16],
+                                                    new_18: new_chart[17],
+                                                    new_19: new_chart[18],
+                                                    new_20: new_chart[19],
+                                                    new_21: new_chart[20],
+                                                    new_22: new_chart[21],
+                                                    new_23: new_chart[22],
+                                                    new_24: new_chart[23]
+                                                });
+                                            } else if (new_chart.length == 25) {
+                                                chart.addData({
+                                                    data_timestamp: chart_timestamp,
+                                                    new_1: new_chart[0],
+                                                    new_2: new_chart[1],
+                                                    new_3: new_chart[2],
+                                                    new_4: new_chart[3],
+                                                    new_5: new_chart[4],
+                                                    new_6: new_chart[5],
+                                                    new_7: new_chart[6],
+                                                    new_8: new_chart[7],
+                                                    new_9: new_chart[8],
+                                                    new_10: new_chart[9],
+                                                    new_11: new_chart[10],
+                                                    new_12: new_chart[11],
+                                                    new_13: new_chart[12],
+                                                    new_14: new_chart[13],
+                                                    new_15: new_chart[14],
+                                                    new_16: new_chart[15],
+                                                    new_17: new_chart[16],
+                                                    new_18: new_chart[17],
+                                                    new_19: new_chart[18],
+                                                    new_20: new_chart[19],
+                                                    new_21: new_chart[20],
+                                                    new_22: new_chart[21],
+                                                    new_23: new_chart[22],
+                                                    new_24: new_chart[23],
+                                                    new_25: new_chart[24]
+                                                });
+                                            }
+                                            console.log(chart.data)
+                                                // else if (new_chart.length == 40) {
+                                                //     chart.addData({
+                                                //         data_timestamp: chart_timestamp,
+                                                //         new_1: new_chart[0],
+                                                //         new_2: new_chart[1],
+                                                //         new_3: new_chart[2],
+                                                //         new_4: new_chart[3],
+                                                //         new_5: new_chart[4],
+                                                //         new_6: new_chart[5],
+                                                //         new_7: new_chart[6],
+                                                //         new_8: new_chart[7],
+                                                //         new_9: new_chart[8],
+                                                //         new_10: new_chart[9],
+                                                //         new_11: new_chart[10],
+                                                //         new_12: new_chart[11],
+                                                //         new_13: new_chart[12],
+                                                //         new_14: new_chart[13],
+                                                //         new_15: new_chart[14],
+                                                //         new_16: new_chart[15],
+                                                //         new_17: new_chart[16],
+                                                //         new_18: new_chart[17],
+                                                //         new_19: new_chart[18],
+                                                //         new_20: new_chart[19],
+                                                //         new_21: new_chart[20],
+                                                //         new_22: new_chart[21],
+                                                //         new_23: new_chart[22],
+                                                //         new_24: new_chart[23],
+                                                //         new_25: new_chart[24],
+                                                //         new_26: new_chart[25],
+                                                //         new_27: new_chart[26],
+                                                //         new_28: new_chart[27],
+                                                //         new_29: new_chart[28],
+                                                //         new_30: new_chart[29],
+                                                //         new_31: new_chart[30],
+                                                //         new_32: new_chart[31],
+                                                //         new_33: new_chart[32],
+                                                //         new_34: new_chart[33],
+                                                //         new_35: new_chart[34],
+                                                //         new_36: new_chart[35],
+                                                //         new_37: new_chart[36],
+                                                //         new_38: new_chart[37],
+                                                //         new_39: new_chart[38],
+                                                //         new_40: new_chart[39]
+                                                //     });
+                                                // }
                                         }
                                         // control
                                         if (house_master !== "KMUMT001") {

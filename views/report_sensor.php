@@ -115,26 +115,11 @@
                     if($dashStatus[$i] == 1){
                         if($dashMode[$i] == 1){
                             $data_count1[] = $i;
-                        }
-                    }
-                }
-                for($i=1; $i <= 40; $i++ ){
-                    if($dashStatus[$i] == 1){
-                        if($dashMode[$i] == 2){
+                        }else if($dashMode[$i] == 2){
                             $data_count2[] = $i;
-                        }
-                    }
-                }
-                for($i=1; $i <= 40; $i++ ){
-                    if($dashStatus[$i] == 1){
-                        if($dashMode[$i] == 3){
+                        }else if($dashMode[$i] == 3){
                             $data_count3[] = $i;
-                        }
-                    }
-                }
-                for($i=1; $i <= 40; $i++ ){
-                    if($dashStatus[$i] == 1){
-                        if($dashMode[$i] == 4 || $dashMode[$i] == 5 || $dashMode[$i] == 6 || $dashMode[$i] == 7){
+                        }else if($dashMode[$i] == 4 || $dashMode[$i] == 5 || $dashMode[$i] == 6 || $dashMode[$i] == 7){
                             $data_count4[] = $i;
                         }
                     }
@@ -232,10 +217,10 @@
                         <div class="col-lg-3 col-xl-3 col-sm-12 d-flex">
                             <div class="card-body border radius-10 shadow-none mb-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" name="radio_c" id="radio_light" type="radio" onchange="ch_radio('light')" <?php if($c_count4 == 4){echo 'checked';}?>>
+                                    <input class="form-check-input" name="radio_c" id="radio_light" type="radio" onchange="ch_radio('light')" <?php if($c_count1 == 0 && $c_count2 == 0 && $c_count3 == 0 && $c_count4 == 4){echo 'checked';}?>>
                                     <h5>ความเข้มแสง</h5>
                                     <div class="form-check mb-3">
-                                        <input type="checkbox" class="form-check-input" name="checkbox_all_light" onchange="checkbox_all('light')" <?php if($c_count4 == 4){echo 'checked';}?>>
+                                        <input type="checkbox" class="form-check-input" name="checkbox_all_light" onchange="checkbox_all('light')" <?php if($c_count1 == 0 && $c_count2 == 0 && $c_count3 == 0 && $c_count4 == 4){echo 'checked';}?>>
                                         <label class="form-check-label">เลือกทั้งหมด</label>
                                     </div>
                                     <hr/>
