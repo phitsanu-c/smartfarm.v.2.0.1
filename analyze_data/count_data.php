@@ -48,7 +48,7 @@
             while ($row = $stmt->fetch()) {
                 // echo $date.' - '.$row['data_date'].", ".$house_master.", ".$row['count_data']."<br />\n";
                 // exit();
-                if ($dbcon->prepare("INSERT INTO `tb_analyzedata`(`analyzeData_date`, `analyzeData_sn`, `analyzeData_count`) VALUES (:p1, :p2, :p3)")->execute(['p1'=>$row['data_date'], 'p2'=>$house_master, 'p3'=>$row['count_data']]) === TRUE) {
+                if ($dbcon->prepare("INSERT INTO `tb_analyzedata`(`analyzeData_date`, `analyzeData_sn`, `analyzeData_count`) VALUES (:p1, :p2, :p3)")->execute(['p1'=>$date, 'p2'=>$house_master, 'p3'=>$row['count_data']]) === TRUE) {
                     if($i == $_POST["getDay"]){
                         echo json_encode(['status'=>"success"]);
                     }
