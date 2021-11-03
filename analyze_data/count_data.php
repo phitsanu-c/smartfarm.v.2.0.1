@@ -34,15 +34,15 @@
                 echo json_encode(['status' => "มีรายชื่อนี้แล้ว"], JSON_UNESCAPED_UNICODE );
             }
         }else{
-            $stmt2 = $dbcon->query("SELECT count(data_id) AS count_data FROM tb_data_sensor WHERE data_sn = '$house_master' AND data_date ='$date'")->fetch();
-            if($stmt2[0] == 0){
-                if($i == $_POST["getDay"]){
-                    echo json_encode(['status' => "No data",$stmt2[0]], JSON_UNESCAPED_UNICODE );                    
-                }else{
-                    echo json_encode(['status' => "No data",$stmt2[0]], JSON_UNESCAPED_UNICODE ); 
-                }
-                exit();
-            }
+            // $stmt2 = $dbcon->query("SELECT count(data_id) AS count_data FROM tb_data_sensor WHERE data_sn = '$house_master' AND data_date ='$date'")->fetch();
+            // if($stmt2[0] == 0){
+            //     if($i == $_POST["getDay"]){
+            //         echo json_encode(['status' => "No data",$stmt2[0]], JSON_UNESCAPED_UNICODE );                    
+            //     }else{
+            //         echo json_encode(['status' => "No data",$stmt2[0]], JSON_UNESCAPED_UNICODE ); 
+            //     }
+            //     exit();
+            // }
             $sql = "SELECT data_date, count(data_id) AS count_data FROM tb_data_sensor WHERE data_sn = '$house_master' AND data_date ='$date' ";
             $stmt = $dbcon->query($sql);
             while ($row = $stmt->fetch()) {

@@ -101,9 +101,11 @@
                     <div class="ms-auto">
                         <label class="form-check-label" for="flexSwitchCheckCheckedDanger">แสดงข้อมูล : </label>
                         <select id="sel_all_every" class="form-check-label">
-                            <option value="1">ทุก ๆ 1 นาที</option>
-                            <option value="5">ทุก ๆ 5 นาที</option>
-                            <option value="10">ทุก ๆ 10 นาที</option>
+                            <?php if($_POST["house_master"] != "KMUMT001"){
+                                echo '<option value="1">ทุก ๆ 1 นาที</option>
+                                    <option value="5">ทุก ๆ 5 นาที</option>
+                                    <option value="10">ทุก ๆ 10 นาที</option>';
+                            }?>
                             <option value="15">ทุก ๆ 15 นาที</option>
                             <option value="30">ทุก ๆ 30 นาที</option>
                             <option value="60">ทุก ๆ 1 ชั่วโมง</option>
