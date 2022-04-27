@@ -80,27 +80,33 @@ $.getJSON('routes/login.php', function(msg) {
     // alert(n_theme[0])
     // theme
     if (msg.theme === "dark-theme") {
-        $("#lightmode").attr('checked', false);
-        $("#darkmode").attr('checked', true);
-        $("#semidark").attr('checked', false);
-        $("#minimaltheme").attr('checked', false);
-    } else if (msg.theme === "semi-dark") {
-        $("#lightmode").attr('checked', false);
-        $("#darkmode").attr('checked', false);
-        $("#semidark").attr('checked', true);
-        $("#minimaltheme").attr('checked', false);
-    } else if (msg.theme === "minimal-theme") {
-        $("#lightmode").attr('checked', false);
-        $("#darkmode").attr('checked', false);
-        $("#semidark").attr('checked', false);
-        $("#minimaltheme").attr('checked', true);
+        $("#toggleTheme").attr('checked', true);
     } else {
-        $("#lightmode").attr('checked', true);
-        $("#darkmode").attr('checked', false);
-        $("#semidark").attr('checked', false);
-        $("#minimaltheme").attr('checked', false);
+        $("#toggleTheme").attr('checked', false);
     }
-    $("#theme").addClass(msg.theme);
+    $("html").attr("class", msg.theme)
+    // if (msg.theme === "dark-theme") {
+    //     $("#lightmode").attr('checked', false);
+    //     $("#darkmode").attr('checked', true);
+    //     $("#semidark").attr('checked', false);
+    //     $("#minimaltheme").attr('checked', false);
+    // } else if (msg.theme === "semi-dark") {
+    //     $("#lightmode").attr('checked', false);
+    //     $("#darkmode").attr('checked', false);
+    //     $("#semidark").attr('checked', true);
+    //     $("#minimaltheme").attr('checked', false);
+    // } else if (msg.theme === "minimal-theme") {
+    //     $("#lightmode").attr('checked', false);
+    //     $("#darkmode").attr('checked', false);
+    //     $("#semidark").attr('checked', false);
+    //     $("#minimaltheme").attr('checked', true);
+    // } else {
+    //     $("#lightmode").attr('checked', true);
+    //     $("#darkmode").attr('checked', false);
+    //     $("#semidark").attr('checked', false);
+    //     $("#minimaltheme").attr('checked', false);
+    // }
+    // $("#theme").addClass(msg.theme);
     $(".btn_modal_sg").click(function() {
         $(".sg_name").val(msg.username);
         $(".sg_tel").val(msg.tel);
@@ -152,4 +158,24 @@ function verticalNoTitle() {
 
 function loadingOut(loading) {
     setTimeout(() => loading.out(), 100);
+}
+function toggleTheme(val) {
+    if (val === true) {
+        $("html").addClass('dark-theme');
+        var theme = 'dark-theme';
+    } else {
+        $("html").attr("class", "color-sidebar sidebarcolor2 color-header headercolor2")
+        var theme = "color-sidebar sidebarcolor2 color-header headercolor2";
+    }
+    $.ajax({
+        url: "routes/setting_theme.php",
+        method: "post",
+        data: {
+            theme: theme
+        },
+        // dataType: "json",
+        success: function(resp) {
+
+        }
+    });
 }

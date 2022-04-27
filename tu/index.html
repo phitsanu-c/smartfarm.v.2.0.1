@@ -42,12 +42,11 @@
     <link href="../public/plugins/ion-rangeslider/css/ion.rangeSlider.css" rel="stylesheet">
     <link href="../public/plugins/ion-rangeslider/css/ion.rangeSlider.skinModern.css" rel="stylesheet">
     <title>Smart Green House by AI 5.0 AGRICULTURE INNOVATION</title>
-    <style>
-        .chartdiv {
-            width: 100%;
-            height: 400px;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/css.css">
+    
+    <script src="../public/javascripts/jquery.min.js"></script>
+    <script src="../public/javascripts/decode.js"></script>
+    <script src="assets/js/chack_login.js"></script>
 </head>
 
 <body>
@@ -130,6 +129,10 @@
                             </li>
                             <li><a class="dropdown-item logout" href="javascript:;"><i class='bx bx-log-out-circle'></i><span>ลงชื่อออก</span></a></li>
                         </ul>
+                        <label id="switch2" class="switch2">
+                            <input type="checkbox" id="toggleTheme" onchange="toggleTheme($(this).prop('checked'))" >
+                            <span class="slider2 round"></span>
+                        </label>
                     </div>
                 </nav>
             </div>
@@ -276,7 +279,7 @@
     </div>
     <!--end wrapper-->
     <!--start switcher-->
-    <div class="switcher-wrapper">
+    <!-- <div class="switcher-wrapper">
         <div class="switcher-btn"> <i class='bx bx-cog bx-spin'></i>
         </div>
         <div class="switcher-body">
@@ -369,16 +372,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--end switcher-->
     <!-- Bootstrap JS -->
     <script src="../public/javascripts/bootstrap.bundle.min.js"></script>
-    <!--plugins-->
-    <script src="../public/javascripts/jquery.min.js"></script>
-    <script src="../public/javascripts/decode.js"></script>
-
-    <script src="assets/js/chack_login.js"></script>
-    
+   
     <script src="../public/plugins/simplebar/js/simplebar.min.js"></script>
     <script src="../public/plugins/metismenu/js/metisMenu.min.js"></script>
     <script src="../public/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
