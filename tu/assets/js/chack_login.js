@@ -24,7 +24,7 @@ $.getJSON('../routes/login.php', function(msg) {
 
     $("#pills-selectReport").hide();
     if (msg.status === '1') { //besige user
-        $("#pills-selectSite").load('../views/load_site.php');
+        $("#pills-selectSite").load('assets/pages/load_site.php');
         // $("#pills-selectHome").load('views/home.php');
         if (house_master === '') {
             $('.memu_sel').show().addClass("mm-active");
@@ -51,7 +51,7 @@ $.getJSON('../routes/login.php', function(msg) {
             }
             // $("#pills-selectHome").load('views/home.php');
         } else {
-            $("#pills-selectSite").load('../views/load_site.php');
+            $("#pills-selectSite").load('assets/pages/load_site.php');
             if (house_master === '') {
                 $('.memu_sel').show().addClass("mm-active");
                 $("#pills-selectSite").show();

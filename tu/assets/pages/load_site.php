@@ -31,11 +31,12 @@
                 
     <?php
         session_start();
-        require '../routes/connectdb.php';
+        require '../../../routes/connectdb.php';
         $url_host = 'http://' . $_SERVER['HTTP_HOST'];
         $url_part = explode("/", $_SERVER["PHP_SELF"]);
         $url_link = $url_host . '/' . $url_part[1];
-        // echo $url_part[1];
+        $url_link2 = $url_host . '/' . $url_part[1]. '/' . $url_part[2]. '/' . $url_part[3];
+        // echo $url_part[3];
         // exit();
         $login_userid = $_SESSION['user_id'];
         // $_SESSION["Username"] ;
@@ -62,7 +63,7 @@
     ?>
         <div class="col-12 col-sm-12 col-md-4 col-lg-4  col-xl-3  load-site">
             <div class="card" style="padding: 1.25rem; height:440px; border-radius:20px">
-                <img src="public/images/site/<?= $row_site["site_img"] ?>" style="height: 20vh; width: 100%;" class="card-img-top img-fluid" alt="site01">
+                <img src="../public/images/site/<?= $row_site["site_img"] ?>" style="height: 20vh; width: 100%;" class="card-img-top img-fluid" alt="site01">
                 <!-- <div class="card"> -->
                 <h5 class="card-title text-bold text-center" style="margin-top: 15px">SITE :
                     <B><B><?= $row_site["site_name"] ?></B></B>
@@ -71,7 +72,11 @@
                 <?php 
                     $stmt2 = $dbcon->query("SELECT * FROM tb2_house WHERE house_siteID ='$co'");
                     foreach ($stmt2 as $row) {
-                        echo '<a class="btn btn-outline-info px-5 radius-30" style="margin-top: 10px" href="'. $url_link .'#'. encode($row["house_master"]) .'">'. $row["house_name"].'</a>';
+                        if($row["house_master"] == "TURMT"){
+                            echo '<a class="btn btn-outline-info px-5 radius-30" style="margin-top: 10px" href="'. $url_link .'#'. encode($row["house_master"]) .'">'. $row["house_name"].'</a>';
+                        }else{
+                            echo '<a class="btn btn-outline-info px-5 radius-30" style="margin-top: 10px" href="../'. $url_link .'#'. encode($row["house_master"]) .'">'. $row["house_name"].'</a>';
+                        }
                     }
                 ?>
                 </div>
