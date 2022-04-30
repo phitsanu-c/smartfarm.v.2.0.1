@@ -914,7 +914,7 @@
 </div>
 <script>
     var house_master = '<?= $s_master["house_master"] ?>';
-    var login_user = '<?= $_SESSION["Username"] ?>';
+    var login_user = '<?= $_SESSION["account_user"] ?>';
     // alert(house_master)
     // return false;
     // ----------------------------------------------------------------------

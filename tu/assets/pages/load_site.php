@@ -75,7 +75,7 @@
                         if($row["house_master"] == "TURMT"){
                             echo '<a class="btn btn-outline-info px-5 radius-30" style="margin-top: 10px" href="'. $url_link .'#'. encode($row["house_master"]) .'">'. $row["house_name"].'</a>';
                         }else{
-                            echo '<a class="btn btn-outline-info px-5 radius-30" style="margin-top: 10px" href="../'. $url_link .'#'. encode($row["house_master"]) .'">'. $row["house_name"].'</a>';
+                            echo '<a class="btn btn-outline-info px-5 radius-30" style="margin-top: 10px" href="'. $url_link .'#'. encode($row["house_master"]) .'">'. $row["house_name"].'</a>';
                         }
                     }
                 ?>

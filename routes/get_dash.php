@@ -608,7 +608,11 @@ if ($meter_status[7] == 1) {
     $meterUnit['Unit_wind_speed'] = "";
 }
 $row_9 = $dbcon->query("SELECT `data_timestamp` FROM `tb_data_sensor` WHERE `data_sn`= '$house_master' ORDER BY `data_id` DESC LIMIT 1")->fetch();
- 
+ if($row_9 == false){
+     $r = false;
+ }else{
+     $r = $row_9[0];
+ }
 echo json_encode([
     's_master'=> $row_s_master,
     'dashStatus'=> $dashStatus,
@@ -639,6 +643,6 @@ echo json_encode([
     'meter_mode' => $meter_mode,
     'meterImg' => $meterImg,
     'meterUnit' => $meterUnit,
-    'time_update' => $row_9[0],
+    'time_update' => $r,
     'theme' => $_SESSION["login_theme"]
 ]);

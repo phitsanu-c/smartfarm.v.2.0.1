@@ -143,7 +143,13 @@
             </div>
             <!--navigation-->
             <ul class="metismenu" id="menu">
-                <li class="memu_sel">
+                <li class="memu_site">
+                    <a href="javascript:;">
+                        <div class="parent-icon"><i class='lni-map-marker'></i></div>
+                        <div class="menu-title">สถานที่</div>
+                    </a>
+                </li>
+                <li class="memu_house">
                     <a href="javascript:;">
                         <div class="parent-icon"><i class='lni lni-home'></i></div>
                         <div class="menu-title">โรงเรือน</div>
@@ -218,7 +224,7 @@
         <!--end header -->
         <!--start page wrapper -->
         <div class="page-wrapper">
-            <div id="pills-selectSite"></div>
+            <div id="load_pages"></div>
             <div id="pills-selectHome"></div>
             <div id="pills-selectReport">
                 <div class="page-content">
@@ -504,7 +510,7 @@
     <script src="public/plugins/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider.min.js"></script>
     <script src="public/plugins/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider-init.js"></script>
     <script>
-        // alert(house_master);
+        // alert(a[1]);
         if (house_master != '') {
             if (house_master !== "KMUMT001") {
                 $(".title_km").html("ประวัติการตั้งเวลา");
@@ -842,11 +848,14 @@
                                                 // return false;
                                                 let strdate = new Date();
                                                 var strNdate = moment(new Date()).add(-10, 'minutes').format('YYYY/MM/DD');
-                                                if (time_update.substring(0, 10) == strNdate || p_json['date'] == strNdate) {
-                                                    $(".status_timeUpdate").removeClass("text-danger").addClass("text-success").html("ออนไลน์")
-                                                } else {
-                                                    $(".status_timeUpdate").removeClass("text-success").addClass("text-danger").html("ออฟไลน์")
+                                                if (time_update != "false"){
+                                                    if (time_update.substring(0, 10) == strNdate || p_json['date'] == strNdate) {
+                                                        $(".status_timeUpdate").removeClass("text-danger").addClass("text-success").html("ออนไลน์")
+                                                    } else {
+                                                        $(".status_timeUpdate").removeClass("text-success").addClass("text-danger").html("ออฟไลน์")
+                                                    }
                                                 }
+                                                
                                             } else {
                                                 // console.log(loading);// != KMUMT001
                                                 // -------------------------------------------------------------
@@ -859,11 +868,14 @@
                                                 var data_array = parseJSON['data'];
                                                 let strdate = new Date();
                                                 var strNdate = moment(new Date()).add(-10, 'minutes').format('YYYY/MM/DD');
-                                                if (time_update.substring(0, 10) == strNdate || parseJSON['date'] == strNdate) {
-                                                    $(".status_timeUpdate").removeClass("text-danger").addClass("text-success").html("ออนไลน์")
-                                                } else {
-                                                    $(".status_timeUpdate").removeClass("text-success").addClass("text-danger").html("ออฟไลน์")
+                                                if (time_update != false){
+                                                    if (time_update.substring(0, 10) == strNdate || parseJSON['date'] == strNdate) {
+                                                        $(".status_timeUpdate").removeClass("text-danger").addClass("text-success").html("ออนไลน์")
+                                                    } else {
+                                                        $(".status_timeUpdate").removeClass("text-success").addClass("text-danger").html("ออฟไลน์")
+                                                    }
                                                 }
+                                                
                                                 // alert(time_update.substring(0, 10) + ' ' + parseJSON['date'] + " " + strNdate)
                                             }
                                             // console.log(parseJSON);

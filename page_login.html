@@ -28,7 +28,7 @@
         // console.log(window.location.href.split('/')[3]);
         $.getJSON('routes/login.php', function(msg) {
             console.log(msg)
-            if (msg.username !== '') {
+            if (msg.name_login !== '') {
                 window.location.replace('index.html');
             }
         });
@@ -57,9 +57,9 @@
                                                 <div class="font-35 text-danger"><i class='bx bxs-message-square-x'></i>
                                                 </div>
                                                 <div class="ms-3">
-                                                    <h6 class="mb-0 text-danger">Username หรือ Password ไม่ถูกตัอง !!!
+                                                    <h6 class="mb-0 text-danger">ชื่อผู้ใช้/อีเมลล์ หรือรหัสผ่านไม่ถูกตัอง !!!
                                                     </h6>
-                                                    <div>กรุณาระบุ Username หรือ Password ใหม่</div>
+                                                    <div>กรุณาระบุ ชื่อผู้ใช้/อีเมลล์ หรือรหัสผ่านใหม่</div>
                                                 </div>
                                             </div>
                                             <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
@@ -76,17 +76,17 @@
                                     <!-- <hr/> -->
                                 </div>
                                 <div class="form-body">
-                                    <form class="row g-3" id="login" onsubmit="return false">
+                                    <form class="row g-3" id="login">
                                         <div class="col-12">
-                                            <label for="Username" class="form-label">Username</label>
-                                            <input type="text" class="form-control" name="Username" id="Username" placeholder="Enter Username" />
-                                            <div class="invalid-feedback">กรุณาระบุ Username</div>
+                                            <label for="name" class="form-label">ชื่อผู้ใช้/อีเมลล์</label>
+                                            <input type="text" class="form-control" name="name" placeholder="ชื่อผู้ใช้/อีเมลล์" />
+                                            <div class="invalid-feedback">กรุณาระบุชื่อผู้ใช้/อีเมลล์</div>
                                         </div>
                                         <div class="col-12">
-                                            <label for="Password" class="form-label">Password</label>
+                                            <label for="pass" class="form-label">รหัสผ่าน</label>
                                             <div class="input-group" id="show_hide_password">
-                                                <input type="password" class="form-control border-end-0" name="Password" id="Password" placeholder="Enter Password" /> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
-                                                <div class="invalid-feedback">กรุณาระบุ Password</div>
+                                                <input type="password" class="form-control border-end-0" name="pass" placeholder="รหัสผ่าน" /> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
+                                                <div class="invalid-feedback">กรุณาระบุรหัสผ่าน</div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -98,7 +98,7 @@
                                         <div class="col-md-6 text-end btn_forgot "> <a href="javascript:; ">ลืมรหัสผ่าน ?</a></div>
                                         <div class="col-12">
                                             <div class="d-grid">
-                                                <button type="submit" class="btn btn-primary"><i class="bx bxs-lock-open"></i>Sign in</button>
+                                                <button type="submit" class="btn btn-primary"><i class="bx bxs-lock-open"></i>เข้าสู่ระบบ</button>
                                             </div>
                                         </div>
                                     </form>
@@ -140,8 +140,10 @@
     <script src="public/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
     <!-- sweetalert2 -->
     <script src="public/plugins/sweetalert2-7.28.12/dist/sweetalert2.all.min.js"></script>
-    <!--Password show & hide js -->
+    <!--app JS-->
+    <script src="public/javascripts/app.js"></script>
     <script>
+        // alert(document.URL.substring(0, document.URL.length-15))
         $(".page-login").show();
         $(".page-forgot").hide();
         $(".btn_forgot").click(function() {
@@ -229,46 +231,61 @@
                 })
         })()
         $('.l_err').hide();
-        $('#login').submit(function() {
-            if ($("#Username").val() === '' || $("#Password").val() === '') {
-                $('#Username').addClass('is-invalid')
-                $('#Password').addClass('is-invalid')
+        $('#login').submit(function (e) {
+            e.preventDefault();
+            if ($([this.name]).val() === "" && $([this.pass]).val() === "") {
+                $([this.name]).addClass('is-invalid')
+                $([this.pass]).addClass('is-invalid')
                 return false;
             }
-            if ($("#Username").val() === '') {
-                $('#Username').addClass('is-invalid')
-                return false;
-            } else {
-                $('#Username').removeClass('is-invalid')
-            }
-            if ($("#Password").val() === '') {
-                $('#Password').addClass('is-invalid')
+            if ($([this.name]).val() === '') {
+                $([this.name]).addClass('is-invalid')
                 return false;
             } else {
-                $('#Password').removeClass('is-invalid')
+                $([this.name]).removeClass('is-invalid')
             }
-            // alert($(this).attr('Username'))
+            if ($([this.pass]).val() === '') {
+                $([this.pass]).addClass('is-invalid')
+                return false;
+            } else {
+                $([this.pass]).removeClass('is-invalid')
+            }
+            // if ($([this.name]).val() === "" || $([this.pass]).val() === "") {
+            //     return false;
+            // }
+            if (isValidEmailAddress($([this.name]).val())) {
+                var status = "email";
+            } else {
+                var status = "user";
+            }
+            // alert($([this.name]).val())
             $.ajax({
                 type: "POST",
                 url: "routes/login.php",
-                data: $(this).serialize(),
+                data: $(this).serialize()+ '&status=' + status,
                 dataType: 'json',
                 success: function(res) {
                     console.log(res)
-                    if (res.status_login === 'No user') {
+                    if (res.name_login === 'No user') {
                         $('.l_err').show();
-                    } else if (res.status_login != '') {
-                        window.location.href = "index.html";
+                        return false;
+                    } else if (res.name_login != '') {
+                        // alert(res.name_login)
+                       window.location.href = document.URL.substring(0, document.URL.length-15);
+                       return false;
                     }
                 },
                 error: function(data) {
 
                 }
             });
+            // chack enail
+            function isValidEmailAddress(emailAddress) {
+                var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+                return pattern.test(emailAddress);
+            }
         });
     </script>
-    <!--app JS-->
-    <script src="public/javascripts/app.js"></script>
 </body>
 
 </html>

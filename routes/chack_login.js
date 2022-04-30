@@ -1,78 +1,111 @@
-var house_master = $.base64.decode(window.location.hash.substring(1)).substring(0, 8);
+var url = $.base64.decode(window.location.hash.substring(1))
+if(url === ""){
+    url = ',,'.split(',')
+}else{
+    url = url.split(',')
+}
+var house_master = url[1].substring(0, 8);
+// alert(url)
 console.log(house_master);
 // console.log($.base64.encode('TSPWM001zasn'));
 // console.log($.base64.decode('S083TVQwMDF6YXNu'))
 // Chack user_status
+
 $.getJSON('routes/login.php', function(msg) {
     console.log(msg);
     // return false;
     $(".user-img").attr("src", "public/images/users/" + msg.image);
-    $(".user_name").html(msg.username);
+    $(".user_name").html(msg.name_login);
     $(".INuser_name").val(msg.username);
     // console.log(msg.pages);
-    if (msg.username === "") {
+    if (msg.name_login === "") {
         window.location.href = "page_login.html";
         return false;
     }
 
     // console.log(msg.date_start);
-    if (msg.date_start != new Date().getDate()) {
-        logout();
-        return false;
+    // if (msg.date_start != new Date().getDate()) {
+        // logout();
+        // return false;
         // console.log(window.location.pathname);
-    }
-
-    $("#pills-selectReport").hide();
-    if (msg.status === '1') { //besige user
-        $("#pills-selectSite").load('views/load_site.php');
-        // $("#pills-selectHome").load('views/home.php');
-        if (house_master === '') {
-            $('.memu_sel').show().addClass("mm-active");
-            $("#pills-selectSite").show();
+    // }
+    if(msg.count_statusUser === "supperadmin" || msg.count_statusUser > 1){
+        if(url[0] === ''){
+            $(".memu_site").addClass("mm-active")
+            $("#load_pages").load('views/pages_site.php');
+            $(".memu_house").hide();
             $(".memu_dash").hide();
-            $("#pills-selectHome").hide();
-            $(".memu_control").hide();
             $(".memu_report").hide();
-        } else {
-            $('.memu_sel').show().removeClass("mm-active");
-            $("#pills-selectSite").hide();
-            $(".memu_dash").show().addClass("mm-active");
-            $("#pills-selectHome").show();
-        }
-    } else {
-        if (msg.count_house == 1) {
-            $("#pills-selectSite").load('views/home.php');
-            $('.memu_sel').hide();
-            if (house_master === '') {
-                window.location.href = 'index.html#' + $.base64.encode(msg.master.house_master + 'zasn');
-                $(".memu_dash").addClass("mm-active");
-            } else {
-                $(".memu_dash").addClass("mm-active");
-            }
-            // $("#pills-selectHome").load('views/home.php');
-        } else {
-            $("#pills-selectSite").load('views/load_site.php');
-            if (house_master === '') {
-                $('.memu_sel').show().addClass("mm-active");
-                $("#pills-selectSite").show();
+        }else{
+            if(url[1] === '' || url[1].length >= 8){
+            }else{
+                
+                $(".memu_site").removeClass("mm-active")
+                $(".memu_house").show().addClass("mm-active")
                 $(".memu_dash").hide();
-                $("#pills-selectHome").hide();
-                $(".memu_control").hide();
                 $(".memu_report").hide();
-                $("#pills-selectReport").hide();
-            } else {
-                // $("#pills-selectSite").load('views/home.php');
-                $('.memu_sel').show().removeClass("mm-active");
-                $(".memu_dash").show().addClass("mm-active");
-                $("#pills-selectSite").hide();
+                $("#load_pages").load('views/pages_house.php?s='+url[0]);
             }
         }
+        
+    }else{
+        $(".memu_site").hide()
+        $(".memu_house").addClass("mm-active")
     }
-    if (msg.count_statusUser === "0") {
-        $(".dpd_setSite").hide();
-        $(".dpd_setHoune").hide();
-        $(".dpd_setting").hide();
-    }
+    $("#pills-selectReport").hide();
+    
+    // return false;
+    // if (msg.status === '1') { //besige user
+    //     $("#pills-selectSite").load('views/load_site.php');
+    //     // $("#pills-selectHome").load('views/home.php');
+    //     if (house_master === '') {
+    //         $('.memu_sel').show().addClass("mm-active");
+    //         $("#pills-selectSite").show();
+    //         $(".memu_dash").hide();
+    //         $("#pills-selectHome").hide();
+    //         $(".memu_control").hide();
+    //         $(".memu_report").hide();
+    //     } else {
+    //         $('.memu_sel').show().removeClass("mm-active");
+    //         $("#pills-selectSite").hide();
+    //         $(".memu_dash").show().addClass("mm-active");
+    //         $("#pills-selectHome").show();
+    //     }
+    // } else {
+    //     if (msg.count_house == 1) {
+    //         $("#pills-selectSite").load('views/home.php');
+    //         $('.memu_sel').hide();
+    //         if (house_master === '') {
+    //             window.location.href = 'index.html#' + $.base64.encode(msg.master.house_master + 'zasn');
+    //             $(".memu_dash").addClass("mm-active");
+    //         } else {
+    //             $(".memu_dash").addClass("mm-active");
+    //         }
+    //         // $("#pills-selectHome").load('views/home.php');
+    //     } else {
+    //         $("#pills-selectSite").load('views/load_site.php');
+    //         if (house_master === '') {
+    //             $('.memu_sel').show().addClass("mm-active");
+    //             $("#pills-selectSite").show();
+    //             $(".memu_dash").hide();
+    //             $("#pills-selectHome").hide();
+    //             $(".memu_control").hide();
+    //             $(".memu_report").hide();
+    //             $("#pills-selectReport").hide();
+    //         } else {
+    //             // $("#pills-selectSite").load('views/home.php');
+    //             $('.memu_sel').show().removeClass("mm-active");
+    //             $(".memu_dash").show().addClass("mm-active");
+    //             $("#pills-selectSite").hide();
+    //         }
+    //     }
+    // }
+    return false;
+    // if (msg.count_statusUser === "0") {
+    //     $(".dpd_setSite").hide();
+    //     $(".dpd_setHoune").hide();
+    //     $(".dpd_setting").hide();
+    // }
     // var n_theme = msg.theme.split(" ");
     // if (n_theme[0] === 'color-sidebar') {
 
