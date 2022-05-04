@@ -17,7 +17,7 @@
     <script src="public/javascripts/pace.min.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="public/stylesheets/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap">
+    <link rel="stylesheet" href="public/stylesheets/font.css">
     <link rel="stylesheet" href="public/stylesheets/app.css">
     <link rel="stylesheet" href="public/stylesheets/icons.css">
     <!-- Theme Style CSS -->
@@ -159,16 +159,21 @@
                     <a href="javascript:;">
                         <div class="parent-icon"><i class='lni lni-graph'></i>
                         </div>
-                        <div class="menu-title">แดชบอร์ด
+                        <div class="menu-title">แดชบอร์ด </div>
+                    </a>
+                </li>
+                <li class="memu_compare">
+                    <a href="javascript:;">
+                        <div class="parent-icon"><i class='lni lni-popup'></i>
                         </div>
+                        <div class="menu-title">เปรียบเทียบข้อมูล </div>
                     </a>
                 </li>
                 <li class="memu_report">
                     <a href="javascript:;">
                         <div class="parent-icon"><i class='lni lni-popup'></i>
                         </div>
-                        <div class="menu-title">รายงาน
-                        </div>
+                        <div class="menu-title">รายงาน </div>
                     </a>
                 </li>
             </ul>
@@ -225,7 +230,7 @@
         <!--start page wrapper -->
         <div class="page-wrapper">
             <div id="load_pages"></div>
-            <div id="pills-selectHome"></div>
+            <!-- <div id="pills-selectHome"></div> -->
             <div id="pills-selectReport">
                 <div class="page-content">
                     <!--breadcrumb-->
@@ -287,8 +292,7 @@
                     </div>
                 </div>
             </div>
-            <div id="pills-profile">
-            </div>
+            <!-- <div id="pills-profile"></div> -->
             <!--  -->
 
             <!-- Modal -->
@@ -363,7 +367,7 @@
     </div>
     <!--end wrapper-->
     <!--start switcher-->
-    <div class="switcher-wrapper">
+    <!-- <div class="switcher-wrapper">
         <div class="switcher-btn"> <i class='bx bx-cog bx-spin'></i>
         </div>
         <div class="switcher-body">
@@ -456,7 +460,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--end switcher-->
     <!-- Bootstrap JS -->
     <script src="public/javascripts/bootstrap.bundle.min.js"></script>
@@ -510,13 +514,16 @@
     <script src="public/plugins/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider.min.js"></script>
     <script src="public/plugins/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider-init.js"></script>
     <script>
-        // alert(a[1]);
-        if (house_master != '') {
-            if (house_master !== "KMUMT001") {
+        if (house_master.length == 8) {
+            $(".memu_dash").show().addClass("mm-active");
+            $(".memu_report").show();
+            if(house_master.substring(0, 3) != "TUS"){
+                if (house_master !== "KMUMT001") {
                 $(".title_km").html("ประวัติการตั้งเวลา");
             } else {
                 $(".title_km").html("ประวัติการตั้งค่าโหมดอัตโนมัติ");
             }
+            // return false;
             $.ajax({
                 url: "routes/get_dash.php",
                 method: "post",
@@ -1968,6 +1975,13 @@
 
                 }
             });
+        
+            }else{}
+            // alert(house_master.length);
+            
+        }else{
+            $(".memu_dash").hide()
+            $(".memu_report").hide();
         }
     </script>
 

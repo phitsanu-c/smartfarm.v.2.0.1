@@ -26,10 +26,27 @@
     <script>
         // var house_master = $.base64.decode(window.location.hash.substring(1)).substring(0, 8);
         // console.log(window.location.href.split('/')[3]);
-        $.getJSON('routes/login.php', function(msg) {
-            console.log(msg)
-            if (msg.name_login !== '') {
-                window.location.replace('index.html');
+        $.getJSON('routes/login.php', function(res) {
+            console.log(res)
+            if (res.name_login !== '') {
+                if(res.sn === ""){
+                    window.location.href = document.URL.substring(0, document.URL.length-15);
+                }else{
+                    // alert(res.sn['count_house'])
+                    // if(res.sn['count_site'] == 1){ // 1 site
+                        // if(res.sn['count_house'] == 1){ // 1 site 1 house
+                            // if(res.sn['master'].substring(0, 3) == "TUS"){
+                                // window.location.href = document.URL.substring(0, document.URL.length-15)+"/tu/#"+res.sn['en_url'];
+                            // }else{
+                                window.location.href = document.URL.substring(0, document.URL.length-15)+"#"+res.sn['en_url'];
+                            // }
+                        // }else{ // 1 site > 1 house
+                            // window.location.href = document.URL.substring(0, document.URL.length-15)+"#"+res.sn['en_url'];
+                        // }
+                    // }else{ // > 1 site
+                        // window.location.href = document.URL.substring(0, document.URL.length-15)+"#"+res.sn['en_url'];
+                    // }
+                }
             }
         });
     </script>
@@ -271,8 +288,24 @@
                         return false;
                     } else if (res.name_login != '') {
                         // alert(res.name_login)
-                       window.location.href = document.URL.substring(0, document.URL.length-15);
-                       return false;
+                        if(res.sn['account_status'] == 1){
+                            window.location.href = document.URL.substring(0, document.URL.length-15);
+                        }else{
+                            // alert(res.sn['count_house'])
+                            // if(res.sn['count_site'] == 1){ // 1 site
+                            //     if(res.sn['count_house'] == 1){ // 1 site 1 house
+                                    // if(res.sn['master'].substring(0, 3) == "TUS"){
+                                    //     window.location.href = document.URL.substring(0, document.URL.length-15)+"/tu/#"+res.sn['en_url'];
+                                    // }else{
+                                        window.location.href = document.URL.substring(0, document.URL.length-15)+"#"+res.sn['en_url'];
+                                    // }
+                            //     }else{ // 1 site > 1 house
+                            //         window.location.href = document.URL.substring(0, document.URL.length-15)+"#"+res.sn['en_url'];
+                            //     }
+                            // }else{ // > 1 site
+                            //     window.location.href = document.URL.substring(0, document.URL.length-15)+"#"+res.sn['en_url'];
+                            // }
+                        }
                     }
                 },
                 error: function(data) {

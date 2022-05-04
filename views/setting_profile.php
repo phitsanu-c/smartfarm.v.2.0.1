@@ -1,7 +1,7 @@
 <?php
     session_start();
     require "../routes/connectdb.php";
-    $user_id = $_SESSION['user_id'];
+    $user_id = $_SESSION['account_id'];
     $query = $dbcon->query("SELECT * FROM tb2_login WHERE login_id = '$user_id' ")->fetch();
     // print_r($query);
     // echo $query;

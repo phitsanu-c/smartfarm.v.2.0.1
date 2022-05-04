@@ -35,7 +35,7 @@
         $url_host = 'http://' . $_SERVER['HTTP_HOST'];
         $url_part = explode("/", $_SERVER["PHP_SELF"]);
         $url_link = $url_host . '/' . $url_part[1];
-        // echo $url_part[1];
+        // echo $url_link[1];
         // exit();
         $login_userid = $_SESSION['user_id'];
         // $_SESSION["Username"] ;

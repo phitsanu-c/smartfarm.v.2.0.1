@@ -31,7 +31,7 @@
                 
     <?php
         session_start();
-        require '../routes/connectdb.php';
+        require '../../../routes/connectdb.php';
         $url_host = 'http://' . $_SERVER['HTTP_HOST'];
         $url_part = explode("/", $_SERVER["PHP_SELF"]);
         $url_link = $url_host . '/' . $url_part[1];
@@ -63,21 +63,22 @@
             }else{
                 $count_house = $dbcon->query("SELECT count(userST_houseID) FROM tbn_userst WHERE userST_accountID = '$accountID' AND userST_siteID ='$siteID'")->fetch(PDO::FETCH_BOTH);
             }
+            // echo $url_link .'/tu/#'.encode($row_["site_id"].',');
     ?>
         <div class="col-12 col-sm-12 col-md-4 col-lg-4  col-xl-3">
             <a href="
                 <?php 
                     if($count_house[0] != 1){ 
-                        echo $url_link .'#'.encode($row_["site_id"].',');
+                        echo $url_link .'/tu/#'.encode($row_["site_id"].',');
                     }else{ 
-                        // if(substr($row_["house_master"],0,2) == "TUS"){
-                        //     echo $url_link .'/tu/#'.encode($row_["site_id"].','.$row_["house_master"]);
-                        // }else{
+                        if(substr($row_["house_master"],0,2) == "TUS"){
+                            echo $url_link .'/tu/#'.encode($row_["site_id"].','.$row_["house_master"]);
+                        }else{
                             echo $url_link .'#'.encode($row_["site_id"].','.$row_["house_master"]);
-                        // }
+                        }
                     } ?>">
                 <div class="card" style="padding: 1.25rem; height:300px; border-radius:20px">
-                    <img src="public/images/site/<?= $row_["site_img"] ?>" style="height: 20vh; width: 100%;" class="card-img-top img-fluid" alt="site01">
+                    <img src="../public/images/site/<?= $row_["site_img"] ?>" style="height: 20vh; width: 100%;" class="card-img-top img-fluid" alt="site01">
                     <!-- <div class="card"> -->
                     <h6 class="card-title text-bold text-center" style="margin-top: 15px">สถานที่ : <B><?= $row_["site_name"] ?></B></h6>
                     <h6 class="card-title text-bold text-center" style="margin-top: 10px">ที่ตั้ง : <B><?= $row_["site_address"] ?></B></h6>
@@ -102,3 +103,6 @@
          
     </div>   
 </div>
+<script>
+    // al
+</script>

@@ -10,7 +10,7 @@
                 
     <?php
         session_start();
-        require '../routes/connectdb.php';
+        require '../../../routes/connectdb.php';
         $url_host = 'http://' . $_SERVER['HTTP_HOST'];
         $url_part = explode("/", $_SERVER["PHP_SELF"]);
         $url_link = $url_host . '/' . $url_part[1];
@@ -31,7 +31,7 @@
 
         if ($_SESSION["sn"]['account_status'] == 1) {
             $site_stmt = $dbcon->query("SELECT * FROM tbn_house WHERE house_siteID = '$siteID' ");
-        } else if ($_SESSION["sn"]['account_status'] >1) {
+        } else {
             $site_stmt = $dbcon->query("SELECT * FROM tbn_userst INNER JOIN tbn_house ON tbn_userst.userST_houseID = tbn_house.house_id WHERE  tbn_userst.userST_accountID='$accountID' AND tbn_userst.userST_siteID = '$siteID' GROUP BY `userST_houseID` ");
         }
         $i = 1;
@@ -41,16 +41,9 @@
             // echo substr($row_["house_master"],0,3);
     ?>
         <div class="col-12 col-sm-12 col-md-4 col-lg-4  col-xl-3">
-            <a href="
-                <?php 
-                    // if(substr($row_["house_master"],0,3) == "TUS"){
-                    //     echo $url_link .'/tu/#'.encode($row_["house_siteID"].','.$row_["house_master"]);
-                    // }else{
-                        echo $url_link .'#'.encode($row_["house_siteID"].','.$row_["house_master"]);
-                    // } 
-                ?>">
+            <a href="<?php echo $url_link .'#'.encode($row_["house_siteID"].','.$row_["house_master"]); //if(substr($row_["house_master"],0,3) == "TUS"){ echo $url_link .'/tu/#'.encode($row_["house_siteID"].','.$row_["house_master"]);}else{echo $url_link .'#'.encode($row_["house_siteID"].','.$row_["house_master"]);} ?>">
                 <div class="card" style="padding: 1.25rem; height:300px; border-radius:20px">
-                    <img src="<?php if($row_["house_img"] == ""){echo "public/images/default.jpg";}else{echo "public/images/house/".$row_["house_img"];} ?>" style="height: 20vh; width: 100%;" class="card-img-top img-fluid" alt="site01">
+                    <img src="<?php if($row_["house_img"] == ""){echo "../public/images/default.jpg";}else{echo "public/images/house/".$row_["house_img"];} ?>" style="height: 20vh; width: 100%;" class="card-img-top img-fluid" alt="site01">
                     <!-- <div class="card"> -->
                     <h6 class="card-title text-bold text-center" style="margin-top: 15px">ชื่อ : <B><?= $row_["house_name"] ?></B></h6>
                     <h6 class="card-title text-bold text-center" style="margin-top: 10px">ขนาด : <B><?= substr($row_["house_size"],9,13) ?></B></h6>
