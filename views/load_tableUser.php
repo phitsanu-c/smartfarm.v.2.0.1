@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 require "../routes/connectdb.php";
 $user_id = $_SESSION['user_id'];
 $siteID = $_GET["siteID"];

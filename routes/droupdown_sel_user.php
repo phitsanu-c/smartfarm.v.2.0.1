@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    // session_start();
 require "connectdb.php";
 $houseID = $_GET["houseID"];
     echo '<option value="0">เลือกผู้ใช้งาน</option>';

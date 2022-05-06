@@ -9,7 +9,7 @@
                 
                 
     <?php
-        session_start();
+        // session_start();
         require '../routes/connectdb.php';
         $url_host = 'http://' . $_SERVER['HTTP_HOST'];
         $url_part = explode("/", $_SERVER["PHP_SELF"]);

@@ -1,5 +1,5 @@
 <?php
-    // session_start();
+    session_start();
     
         // $db["host"] = "103.2.115.246";
     $db["host"] = "localhost";

@@ -6,7 +6,7 @@
 </style>
 <div class="page-content">
 <?php
-    session_start();
+    // session_start();
     $s_master = $_POST["s_master"];
     $s_master = $_POST['s_master'];
     $dashStatus = $_POST['dashStatus'];

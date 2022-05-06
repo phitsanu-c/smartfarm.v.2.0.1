@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 require "connectdb.php";
 $house_master = $_POST["house_master"];
 // $channel = $_POST["channel"];

@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    // session_start();
     require "connectdb.php";
     // require_once "../public/plugins/PHPMailer/PHPMailer.php";
     // require_once "../public/plugins/PHPMailer/SMTP.php";
