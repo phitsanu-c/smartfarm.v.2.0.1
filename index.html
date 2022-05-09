@@ -481,14 +481,7 @@
                         var meterUnit = res.meterUnit;
                         var time_update = res.time_update;
 
-                        function getArraySum(a) {
-                            // count array
-                            var total = 0;
-                            for (var i in a) {
-                                total += a[i];
-                            }
-                            return total;
-                        }
+                        
 
                         var array_realChT = [];
                         var array_realnameT = [];
@@ -553,7 +546,7 @@
 
                         var count_stcont = getArraySum(controlStatus);
                         var meter_count = getArraySum(meter_status);
-                        // alert(login_user);
+                        alert(meter_count);
                         $.ajax({
                             url: "views/pagex_dashboard.php",
                             method: "post",
@@ -1907,140 +1900,27 @@
                     },
                     dataType: "json",
                     success: function(res) {
-                        console.log(res);
+                        // console.log(res);
+                        // var config_sn = res.config_sn
+                        // var s = res.controlstatus;
+                        // console.log(s);
+                        // console.log(getArraySum(res.controlstatus));
+                        // alert(getArraySum(res.controlStatus))
+                    
+        
                         $.ajax({
                             url: "routes/tu/pagex_dashboard.php",
                             method: "post",
                             data: {
                                 s_master: res.s_master,
                                 config_sn: res.config_sn,
+                                config_cn: res.config_cn,
+                                count_cn: getArraySum(res.controlstatus)
                             },
                             // dataType: "json",
                             success: function(res_dash) {
                                 $("#load_pages").html(res_dash);
-                                // ++++++--------+++++++++
-                                // Global variables
-                                var client = null;
-                                // These are configs
-                                var hostname = "203.150.37.144"; //'103.2.115.15'; // 203.150.37.144   decccloud.com
-                                var port = "8083";
-                                var clientId = "mqtt_js_3074" + parseInt(Math.random() * 100000, 10);
-                                var count = 0;
-
-                                function connect() {
-                                    client = new Paho.MQTT.Client(hostname, Number(port), clientId);
-                                    console.info('Connecting to Server: Hostname: ', hostname, '. Port: ', port, '. Client ID: ', clientId);
-
-                                    client.onConnectionLost = onConnectionLost;
-                                    client.onMessageArrived = onMessageArrived;
-
-                                    var options = {
-                                        onSuccess: onConnect, // after connected, subscribes
-                                        onFailure: onFail // useful for logging / debugging
-                                    };
-                                    // connect the client
-                                    client.connect(options);
-                                    console.info('Connecting...');
-                                }
-                                // ---------------------------------------------------------------------------------------
-
-                                function onConnect(context) {
-                                    console.log("Client Connected");
-                                    // And subscribe to our topics	-- both with the same callback function
-                                    options = {
-                                        qos: 1,
-                                        onSuccess: function(context) {
-                                            // console.log("ไม่สามารถเชื่อมต่อกับ เครื่อง ได้ !!!!");
-                                            // setInterval(function() {
-                                            //     location.reload();
-                                            // }, 30000);
-                                            console.log("subscribed");
-                                        }
-                                    }
-                                    client.subscribe(house_master + "/data_sensor/realtime", options);
-                                    client.subscribe(house_master + "/1/control/json_control_filter", options);
-                                }
-
-                                function onFail(context) {
-                                    location.reload();
-                                }
-
-                                function onConnectionLost(responseObject) {
-                                    if (responseObject.errorCode !== 0) {
-                                        console.log("Connection Lost: " + responseObject.errorMessage);
-                                        connect();
-                                        // location.reload();
-                                        // window.alert("Someone else took my websocket!\nRefresh to take it back.");
-                                    }
-                                }
-                                // +++++++++------------+++++++++++
-                                function onMessageArrived(message) {
-                                    if (message.destinationName == house_master + "/data_sensor/realtime") {
-                                        var result = message.payloadString;
-                                        var parseJSON = $.parseJSON(result);
-                                        console.log(parseJSON)
-                                        // if (dashStatus[i] == 1) {
-                                        //     $(".dash_img_" + i).attr("src", "public/images/Sensor/" + dashImg[i]);
-
-                                        //     // show_dash(unit = dashUnit[i],snmode = dashMode[i]);
-                                        //     if (house_master !== "KMUMT001") {
-                                        //         if (dashMode[i] === "7") { // µmol / KLux
-                                        //             $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>' + '<br>' + (data_array[dashSncanel[i]] / 1000).toFixed(1) + " KLux");
-                                        //         } else if (dashMode[i] === "6") {
-                                        //             $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>');
-                                        //         } else if (dashMode[i] === "5") {
-                                        //             $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 1000).toFixed(1) + " KLux" + '<br>' + (data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>');
-                                        //         } else {
-                                        //             if (data_array[dashSncanel[i]] >= 1000) {
-                                        //                 data_dash[i] = (data_array[dashSncanel[i]] / 1000).toFixed(1);
-                                        //                 sn_unit[i] = 'K' + dashUnit[i];
-                                        //             } else if (data_array[dashSncanel[i]] >= 1000000) {
-                                        //                 data_dash[i] = (data_array[dashSncanel[i]] / 1000).toFixed(1);
-                                        //                 sn_unit[i] = 'M' + dashUnit[i];
-                                        //             } else {
-                                        //                 data_dash[i] = (data_array[dashSncanel[i]] * 1).toFixed(1);
-                                        //                 if (dashUnit[i] === "1") {
-                                        //                     sn_unit[i] = "℃";
-                                        //                 } else {
-                                        //                     sn_unit[i] = dashUnit[i];
-                                        //                 }
-                                        //                 $(".dash_data_1_" + i).html(data_dash[i] + " " + sn_unit[i]);
-                                        //             }
-                                        //         }
-                                        //         // ++++++++++
-                                        //         if ($(".btn_ch_t").hasClass("active") == true) {
-                                        //             if (dashMode[i] === "1") {
-                                        //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
-                                        //             }
-                                        //         }
-                                        //         if ($(".btn_ch_h").hasClass("active") == true) {
-                                        //             if (dashMode[i] === "2") {
-                                        //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
-                                        //             }
-                                        //         }
-                                        //         if ($(".btn_ch_s").hasClass("active") == true) {
-                                        //             if (dashMode[i] === "3") {
-                                        //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
-                                        //             }
-                                        //         }
-                                        //         if ($(".btn_ch_l").hasClass("active") == true) {
-                                        //             if (dashMode[i] === "4" || dashMode[i] === "5") {
-                                        //                 new_chart.push((data_array[dashSncanel[i]] / 1000).toFixed(1));
-                                        //             }
-                                        //             if (dashMode[i] === "6" || dashMode[i] === "7") {
-                                        //                 new_chart.push((data_array[dashSncanel[i]] / 54).toFixed(1));
-                                        //             }
-                                        //         }
-                                        //         if ($(".btn_ch_p").hasClass("active") == true) {
-                                        //             if (dashMode[i] === "10") {
-                                        //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
-                                        //             }
-                                        //         }
-                                        //     }
-                   
-                                    }
-                                }// exit_message
-                                connect();
+                                
                             }
                         });
                     }
@@ -2049,6 +1929,14 @@
         }else{ // No sn
             $(".memu_dash").hide()
             $(".memu_report").hide();
+        }
+        function getArraySum(a) {
+            // count array
+            var total = 0;
+            for (var i in a) {
+                total += a[i];
+            }
+            return total;
         }
     </script>
 
