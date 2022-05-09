@@ -3,7 +3,7 @@
     
         // $db["host"] = "103.2.115.246";
     $db["host"] = "203.159.93.76";
-    $db["user"] = "root";
+    $db["user"] = "root2";
     $db["pass"] = "67235520";
     $db["name"] = "smartfarm_2020_05"; //"inet_mqtt_smart_farm"; //"smart_farm_mqtt";
 
