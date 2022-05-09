@@ -158,7 +158,7 @@
                     </div><br/> -->
                     <div class="card radius-10 border shadow-none">
                         <div class="card-body">
-                            <h5 class="text-center">ข้อมูลเซ็นเซอร์</h5>
+                            <h5 class="text-center">ข้อมูลเซ็นเซอร์นอกโรงเรือน</h5>
                             <div class="row text-center">
                                 <?php for($i = 1; $i <= 3; $i++){
                                     if($config_sn['sn_status_'.$i] == 1){ ?>
@@ -178,6 +178,11 @@
                                     </div>
                                 <?php } } ?>
                             </div>
+                        </div>
+                    </div>
+                    <div class="card radius-10 border shadow-none">
+                        <div class="card-body">
+                            <h5 class="text-center">ข้อมูลเซ็นเซอร์ในโรงเรือน</h5>
                             <div class="row text-center">
                                 <?php for($i = 4; $i <= 7; $i++){
                                     if($config_sn['sn_status_'.$i] == 1){ ?>
@@ -191,7 +196,7 @@
                                                     }?>
                                                 </div>
                                             </div>
-                                            <img src="" alt="..." class="dash_img_<?= $i ?>"  style="width:80%; margin-top:10px; text-align: center!important;">
+                                            <img src="" alt="..." class="dash_img_<?= $i ?>"  style="width:90px; margin-top:10px; text-align: center!important;">
                                             <h6 class="card-text text-center dash_data__<?= $i ?>" style="margin-top:20px"></h6>
                                         </div>
                                     </div>
@@ -208,16 +213,17 @@
         <div class="col-12 col-lg-12 col-xl-12 d-flex">
             <div class="card w-100 radius-10">
                 <div class="card-body">
-                    <div class="card-body">
+                    <div class="card-body text-center">
                         <h4 class="card-title text-center"><b>ระบบควบคุม </b></h4>
-                        <div class="row g-2">
-                            <div class="col-lg-6 col-xl-6 col-sm-12 col-12" >
-                                <button type="button" class="col-lg-6 offset-lg-6 col-xl-6 offset-xl-6 col-sm-12 col-12 btn btn-outline-success px-5 radius-30 sw_mode_Auto" style="font-size:18px">โหมดอัตโนมัติ</button>
-                            </div>
-                            <div class="col-lg-6 col-xl-6 col-sm-12 col-12">
+                        <!-- <h5 class="card-title text-center"><b>โหมดอัตโนมัติ </b></h5> -->
+                        <!-- <div class="row g-2"> -->
+                            <!-- <div class="col-lg-6 col-xl-6 col-sm-12 col-12" > -->
+                                <button type="button" class="btn btn-outline-success px-5 radius-30 sw_mode_Auto active" style="font-size:18px">โหมดอัตโนมัติ</button>
+                            <!-- </div> -->
+                            <!-- <div class="col-lg-6 col-xl-6 col-sm-12 col-12">
                                 <button type="button" class="col-lg-6 col-xl-6 col-sm-12 col-12 btn btn-outline-info px-5 radius-30 sw_mode_Manual" style="font-size:18px">โหมดสั่งงานด้วยตนเอง</button>
-                            </div>
-                        </div>
+                            </div> -->
+                        <!-- </div> -->
                     </div>
                     <div class="row">
                         <?php for($i = 1; $i <= 12; $i++){ if(
@@ -226,12 +232,6 @@
                                 <div class="card-body border radius-10 shadow-none mb-3">
                                     <div class="d-flex">
                                         <h5 class="mb-0 mmn"><b><?= $config_cn['cn_name_'.$i] ?></b></h5>
-                                        <div class="ms-auto">
-                                            <div class="sw_manual Dsw_manual_<?= $i ?>">
-                                                <input type="checkbox" class="sw_manual_<?= $i ?>" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-size="xs" data-style="ios">
-                                            </div>
-                                            <a class="font-20 sw_auto" href="javascript:;" id="<?= $i ?>" name="<?= $config_cn['cn_name_'.$i] ?>">	<i class="lni lni-cog"></i> </a>
-                                        </div>
                                     </div>
                                     <div class="text-center">
                                         <img class="dash_img_con_<?= $i ?>" width="185">
