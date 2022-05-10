@@ -359,13 +359,13 @@
     }
     
     html.dark-theme .sidebar-wrapper {
-        background: #0D0B3E;
+        background: #08072c;
         /* border-right: 1px solid rgb(255 255 255 / 12%); */
         box-shadow: 0 0.1rem 0.7rem rgb(0 0 0 / 32%) !important;
     }
     
     html.dark-theme .sidebar-wrapper .sidebar-header {
-        background: #0D0B3E;
+        background: #08072c;
         /* border-right: 1px solid rgb(255 255 255 / 12%);
         border-bottom: 1px solid rgb(255 255 255 / 12%) */
     }

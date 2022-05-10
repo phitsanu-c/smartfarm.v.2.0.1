@@ -76,7 +76,7 @@
                             echo $url_link .'#'.encode($row_["site_id"].','.$row_["house_master"]);
                         // }
                     } ?>">
-                <div class="card" style="padding: 1.25rem; height:300px; border-radius:20px">
+                <div class="card" style="padding: 1.25rem; height:350px; border-radius:20px">
                     <img src="public/images/site/<?= $row_["site_img"] ?>" style="height: 20vh; width: 100%;" class="card-img-top img-fluid" alt="site01">
                     <!-- <div class="card"> -->
                     <h6 class="card-title text-bold text-center" style="margin-top: 15px">สถานที่ : <B><?= $row_["site_name"] ?></B></h6>
