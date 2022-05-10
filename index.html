@@ -546,7 +546,7 @@
 
                         var count_stcont = getArraySum(controlStatus);
                         var meter_count = getArraySum(meter_status);
-                        alert(meter_count);
+                        // alert(meter_count);
                         $.ajax({
                             url: "views/pagex_dashboard.php",
                             method: "post",
@@ -1912,9 +1912,10 @@
                             url: "routes/tu/pagex_dashboard.php",
                             method: "post",
                             data: {
-                                s_master: res.s_master,
-                                config_sn: res.config_sn,
-                                config_cn: res.config_cn,
+                                data : res,
+                                // s_master: res.s_master,
+                                // config_sn: res.config_sn,
+                                // config_cn: res.config_cn,
                                 count_cn: getArraySum(res.controlstatus)
                             },
                             // dataType: "json",

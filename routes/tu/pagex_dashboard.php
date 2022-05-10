@@ -6,12 +6,17 @@
 </style>
 <div class="page-content">
 <?php
-    session_start();
-    $s_master = $_POST["s_master"];
-    $config_sn = $_POST['config_sn'];
-    $config_cn = $_POST['config_cn'];
+    $config = $_POST['data'];
+    $account_user = $config["account_user"];
+    // print_r($config);
+    // exit();
+    $s_master = $config["s_master"];
+    $config_sn = $config['config_sn'];
+    $config_cn = $config['config_cn'];
+    $set_maxmin = $config['set_maxmin'];
+    $sensor = $config['sensor'];
     // $house_master2 = substr($house_master, 0,5);
-    $numb = intval(substr($s_master['house_master'], 5,10));
+    // $numb = intval(substr($s_master['house_master'], 5,10));
     // $dashName = $_POST['dashName'];
     // $controlstatus = $_POST['controlstatus'];
     // $conttrolname = $_POST['conttrolname'];
@@ -765,10 +770,12 @@
 </div>
 <script>
     var house_master = '<?= $s_master["house_master"] ?>';
-    var login_user = '<?= $_SESSION["account_user"] ?>';
+    var login_user = '<?= $account_user ?>';
     var config_sn = $.parseJSON('<?= json_encode($config_sn) ?>');
     var config_cn = $.parseJSON('<?= json_encode($config_cn) ?>');
-    console.log(config_cn)
+    var set_maxmin = $.parseJSON('<?= json_encode($set_maxmin) ?>');
+    var sensor = $.parseJSON('<?= json_encode($sensor) ?>');
+    // console.log(sensor[1].sensor_id)
     
     // ++++++--------+++++++++
     // Global variables
@@ -837,10 +844,33 @@
             $(".date").html(parseJSON['date']);
             $(".time").html(ntime);
             var data_ = parseJSON['data']
+            console.log(sensor)
             for (var i = 1; i <= 7; i++) {
+                // console.log(config_sn['sn_sensor_'+i])
+                // 
                 if (config_sn['sn_status_'+i] == 1) {
-                $(".dash_img_" + i).attr("src", "public/images/Sensor/Temp.svg"); // Temp_High.svg
-
+                    // for(var s=0; s <= sensor.length; s++){
+                    //     if(s == config_sn['sn_sensor_'+i]){
+                            console.log(sensor[(config_sn['sn_sensor_'+i] -1)].sensor_name)
+                            if(i == 1){
+                                dash_status(sn_data= (data_['temp_out']*1).toFixed(1), max= set_maxmin.Tmax, min= set_maxmin.Tmin)
+                            }else if(i == 2){
+                                dash_status(sn_data= (data_['hum_out']*1).toFixed(1), max= set_maxmin.Tmax, min= set_maxmin.Tmin)
+                            }else if(i == 3){
+                                dash_status(sn_data= (data_['light_out']/1000).toFixed(1), max= set_maxmin.Tmax, min= set_maxmin.Tmin)
+                            }else if(i == 4){
+                                dash_status(sn_data= (data_['temp_in']*1).toFixed(1), max= set_maxmin.Tmax, min= set_maxmin.Tmin)
+                            }else if(i == 5){
+                                dash_status(sn_data= (data_['hum_in']*1).toFixed(1), max= set_maxmin.Tmax, min= set_maxmin.Tmin)
+                            }else if(i == 6){
+                                dash_status(sn_data= (data_['light_in']/1000).toFixed(1), max= set_maxmin.Tmax, min= set_maxmin.Tmin)
+                            }else if(i == 7){
+                                dash_status(sn_data= (data_['soil_in']*1).toFixed(1), max= set_maxmin.Tmax, min= set_maxmin.Tmin)
+                            }
+                            
+                    //     }
+                    // }
+                    
             //     // show_dash(unit = dashUnit[i],snmode = dashMode[i]);
             //     if (house_master !== "KMUMT001") {
             //         if (dashMode[i] === "7") { // µmol / KLux
@@ -863,7 +893,6 @@
             //                 } else {
             //                     sn_unit[i] = dashUnit[i];
             //                 }
-                            $(".dash_data__" + i).html(data_['temp_out'] + " ℃");
             //             }
             //         }
             //         // ++++++++++
@@ -895,6 +924,20 @@
             //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
             //             }
             //         }
+                }
+                function dash_status(sn_data, max, min){
+                    if(sn_data >= max){
+                        $(".dash_img_" + i).attr("src", "public/images/Sensor/"+sensor[(config_sn['sn_sensor_'+i] -1)].sensor_imgMax);
+                    }else if(sn_data < min){
+                        $(".dash_img_" + i).attr("src", "public/images/Sensor/"+sensor[(config_sn['sn_sensor_'+i] -1)].sensor_imgMin);
+                    }else{
+                        $(".dash_img_" + i).attr("src", "public/images/Sensor/"+sensor[(config_sn['sn_sensor_'+i] -1)].sensor_imgNor);
+                    }
+                    if(sensor[(config_sn['sn_sensor_'+i] -1)].sensor_unit == 1){
+                        $(".dash_data__" + i).html(sn_data + " ℃");
+                    }else{
+                        $(".dash_data__" + i).html(sn_data + " "+sensor[(config_sn['sn_sensor_'+i] -1)].sensor_unit);
+                    }
                 }
             }
 
