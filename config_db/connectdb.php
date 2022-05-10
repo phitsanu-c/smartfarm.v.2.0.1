@@ -1,7 +1,7 @@
 <?php
     // session_start();
     
-    $db["host"] = "localhost";
+    $db["host"] = "172.30.6.32";
     $db["user"] = "root";
     $db["pass"] = "67235520";
     $db["name"] = "new_smartfarm"; //"inet_mqtt_smart_farm"; //"smart_farm_mqtt";

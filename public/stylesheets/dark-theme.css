@@ -1,10 +1,12 @@
     html.dark-theme .switcher-wrapper {
-        background: #1e1e1e
+        background: #26244C
     }
     
     html.dark-theme body {
         color: #e4e5e6;
-        background-color: #1e1e1e
+        /* background-color: #26244C; */
+        background: rgb(16, 20, 124);
+        background: radial-gradient(circle, rgba(16, 20, 124, 1) 12%, rgba(5, 13, 50, 1) 77%);
     }
     
     html.dark-theme .text-option {
@@ -27,13 +29,14 @@
     }
     
     html.dark-theme .card {
-        background-color: #171717;
-        box-shadow: 0 .1rem .7rem rgb(0 0 0 / 32%)
+        background-color: #05123f8a;
+        box-shadow: 0 .1rem .7rem rgba(0, 0, 0, 0.973);
+        backdrop-filter: blur(14px);
     }
     
     @media (max-width: 1023px) {
         html.dark-theme .card {
-            background-color: #171717;
+            background-color: #0D0B3E;
             box-shadow: 0 .1rem .7rem rgb(0 0 0 / 32%)
         }
     }
@@ -55,7 +58,7 @@
     }
     
     html.dark-theme .topbar {
-        background-color: #171717;
+        background-color: #0D0B3E;
         border-bottom: 1px solid rgb(237 237 237 / 12%);
         box-shadow: 0 0.1rem 0.7rem rgb(0 0 0 / 32%)
     }
@@ -97,7 +100,7 @@
     }
     
     html.dark-theme .page-footer {
-        background-color: #171717;
+        background-color: #0D0B3E;
         border-top: 1px solid rgb(237 237 237 / 12%)
     }
     
@@ -124,7 +127,7 @@
     
     html.dark-theme .search-bar input {
         color: #e4e5e6;
-        background-color: #1e1e1e;
+        background-color: #26244C;
         border: 1px solid rgb(241 241 241 / 15%);
         box-shadow: inset 0 1px 2px rgb(0 0 0 / 0%)
     }
@@ -140,7 +143,7 @@
     }
     
     html.dark-theme .search-bar .btn-search {
-        background: #1e1e1e;
+        background: #26244C;
         border: 1px solid rgb(217 211 211 / 30%)
     }
     
@@ -150,7 +153,7 @@
     
     html.dark-theme .dropdown-menu {
         color: #e4e5e6;
-        background-color: #1e1e1e;
+        background-color: #26244C;
         box-shadow: 0 .5rem 1rem rgb(0 0 0 / .3)
     }
     
@@ -159,7 +162,7 @@
     }
     
     html.dark-theme .dropdown-menu .dropdown-item:hover {
-        background-color: #171717
+        background-color: #0D0B3E
     }
     
     html.dark-theme .dropdown-divider {
@@ -202,7 +205,7 @@
     
     html.dark-theme .btn-white {
         color: #e4e5e6;
-        background-color: #1e1e1e;
+        background-color: #26244C;
         border-color: rgb(206 212 218 / 45%);
         border-top: 1px solid #63686f;
         border-left: 1px solid #63686f
@@ -277,7 +280,7 @@
     }
     
     html.dark-theme .theme-icons {
-        background-color: #171717
+        background-color: #0D0B3E
     }
     
     html.dark-theme .pricing-table .card ul li.list-group-item {
@@ -326,13 +329,13 @@
     }
     
     html.dark-theme .topbar .navbar .dropdown-menu::after {
-        background: #1e1e1e;
+        background: #26244C;
         border-top: 1px solid #0b2354;
         border-left: 1px solid #0b2354
     }
     
     html.dark-theme .topbar .navbar .dropdown-large .dropdown-menu::after {
-        background: #1e1e1e;
+        background: #26244C;
         border-top: 1px solid #0b2354;
         border-left: 1px solid #0b2354
     }
@@ -356,13 +359,13 @@
     }
     
     html.dark-theme .sidebar-wrapper {
-        background: #171717;
+        background: #0D0B3E;
         border-right: 1px solid rgb(255 255 255 / 12%);
         box-shadow: 0 0.1rem 0.7rem rgb(0 0 0 / 32%) !important;
     }
     
     html.dark-theme .sidebar-wrapper .sidebar-header {
-        background: #171717;
+        background: #0D0B3E;
         border-right: 1px solid rgb(255 255 255 / 12%);
         border-bottom: 1px solid rgb(255 255 255 / 12%)
     }
@@ -407,7 +410,7 @@
     }
     
     html.dark-theme .footer {
-        background: #1e1e1e;
+        background: #26244C;
         border-top: 1px solid rgb(255 255 255 / 12%)
     }
     
@@ -420,7 +423,7 @@
     }
     
     html.dark-theme .modal-content {
-        background-color: #171717
+        background-color: #0D0B3E
     }
     
     html.dark-theme .modal-header {
@@ -432,17 +435,17 @@
     }
     
     html.dark-theme .email-wrapper {
-        background: #171717;
+        background: #0D0B3E;
         box-shadow: 0 .1rem .7rem rgb(0 0 0 / 24%)
     }
     
     html.dark-theme .email-sidebar {
-        background: #171717;
+        background: #0D0B3E;
         border-right: 1px solid rgb(255 255 255 / .12)
     }
     
     html.dark-theme .email-sidebar-header {
-        background: #171717;
+        background: #0D0B3E;
         border-bottom: 1px solid rgb(255 255 255 / .12);
         border-right: 0 solid rgb(255 255 255 / 12%)
     }
@@ -453,7 +456,7 @@
     
     html.dark-theme .email-navigation a.list-group-item {
         color: #e4e5e6;
-        background-color: #171717;
+        background-color: #0D0B3E;
         border-bottom: 1px solid rgb(0 0 0 / 0%)
     }
     
@@ -463,7 +466,7 @@
     
     html.dark-theme .email-meeting a.list-group-item {
         color: #e4e5e6;
-        background-color: #171717;
+        background-color: #0D0B3E;
         border-bottom: 1px solid rgb(0 0 0 / 0%)
     }
     
@@ -472,7 +475,7 @@
     }
     
     html.dark-theme .list-group-item {
-        background-color: #171717;
+        background-color: #0D0B3E;
         border: 1px solid rgb(255 255 255 / 13%)
     }
     
@@ -491,16 +494,16 @@
     }
     
     html.dark-theme .email-header {
-        background: #171717;
+        background: #0D0B3E;
         border-bottom: 1px solid rgb(255 255 255 / 13%)
     }
     
     html.dark-theme .email-content {
-        background: #171717
+        background: #0D0B3E
     }
     
     html.dark-theme .email-list div.email-message {
-        background: #171717;
+        background: #0D0B3E;
         border-bottom: 1px solid rgb(255 255 255 / 12%);
         color: #e4e5e6
     }
@@ -511,7 +514,7 @@
     }
     
     html.dark-theme .bg-body {
-        background-color: #1e1e1e!important
+        background-color: #26244C!important
     }
     
     html.dark-theme .email-time {
@@ -525,31 +528,31 @@
     }
     
     html.dark-theme .widgets-icons {
-        color: #1e1e1e
+        color: #26244C
     }
     
     html.dark-theme .invoice {
-        background-color: #171717
+        background-color: #0D0B3E
     }
     
     html.dark-theme .chat-wrapper {
-        background: #171717;
+        background: #0D0B3E;
         box-shadow: 0 .1rem .7rem rgb(0 0 0 / 22%)
     }
     
     html.dark-theme .chat-sidebar {
-        background: #171717;
+        background: #0D0B3E;
         border-right: 1px solid rgb(255 255 255 / 13%)
     }
     
     html.dark-theme .chat-sidebar-header {
-        background: #171717;
+        background: #0D0B3E;
         border-bottom: 1px solid rgb(255 255 255 / 13%);
         border-right: 0 solid rgb(255 255 255 / 13%)
     }
     
     html.dark-theme .chat-header {
-        background: #171717;
+        background: #0D0B3E;
         border-bottom: 1px solid rgb(255 255 255 / 13%)
     }
     
@@ -568,12 +571,12 @@
     
     html.dark-theme .chat-top-header-menu a {
         color: #c3c5c8;
-        background-color: #1e1e1e;
+        background-color: #26244C;
         border: 1px solid rgb(255 255 255 / 15%)
     }
     
     html.dark-theme .chat-content-leftside .chat-left-msg {
-        background-color: #1e1e1e
+        background-color: #26244C
     }
     
     html.dark-theme .chat-content-rightside .chat-right-msg {
@@ -581,13 +584,13 @@
     }
     
     html.dark-theme .chat-footer {
-        background: #171717;
+        background: #0D0B3E;
         border-top: 1px solid rgb(255 255 255 / 13%)
     }
     
     html.dark-theme .chat-footer-menu a {
         color: #c3c5c8;
-        background-color: #1e1e1e;
+        background-color: #26244C;
         border: 1px solid rgb(255 255 255 / 15%)
     }
     
@@ -596,12 +599,12 @@
     }
     
     html.dark-theme .fm-icon-box {
-        background: #1e1e1e;
+        background: #26244C;
         color: #fff
     }
     
     html.dark-theme .contacts-social a {
-        background: #1e1e1e;
+        background: #26244C;
         color: #fff
     }
     
@@ -617,7 +620,7 @@
     }
     
     html.dark-theme .invoice main .notices {
-        background: #1e1e1e
+        background: #26244C
     }
     
     html.dark-theme .invoice footer {
@@ -643,7 +646,7 @@
     }
     
     html.dark-theme .breadcrumb {
-        background-color: #1e1e1e
+        background-color: #26244C
     }
     
     html.dark-theme .breadcrumb-item.active {
@@ -690,7 +693,7 @@
     
     html.dark-theme .page-link {
         color: #b2b6ba;
-        background-color: #1e1e1e;
+        background-color: #26244C;
         border: 1px solid rgb(255 255 255 / .12)
     }
     
@@ -706,7 +709,7 @@
     
     html.dark-theme .chip {
         color: rgb(198 200 203);
-        background-color: #1e1e1e;
+        background-color: #26244C;
         border: 1px solid rgb(255 255 255 / 15%)
     }
     
@@ -716,7 +719,7 @@
     
     html.dark-theme ul.icons li {
         box-shadow: 0 1px 5px #13171a;
-        background: #1e1e1e
+        background: #26244C
     }
     
     html.dark-theme ul.icons li i {
@@ -724,7 +727,7 @@
     }
     
     html.dark-theme .icon-box {
-        background: #171717;
+        background: #0D0B3E;
         box-shadow: 0 1px 5px #161a1e
     }
     
@@ -734,13 +737,13 @@
     
     html.dark-theme .form-control {
         color: #c0c8d1;
-        background-color: #1e1e1e;
+        background-color: #26244C;
         border: 1px solid rgb(255 255 255 / 34%)
     }
     
     html.dark-theme .form-select {
         color: #c0c8d1;
-        background-color: #1e1e1e;
+        background-color: #26244C;
         border: 1px solid rgb(255 255 255 / 34%)
     }
     
@@ -763,7 +766,7 @@
     }
     
     html.dark-theme .picker__input {
-        background-color: #1e1e1e!important;
+        background-color: #26244C!important;
         border: 1px solid rgb(255 255 255 / 34%)!important
     }
     
@@ -773,7 +776,7 @@
     }
     
     html.dark-theme .select2-dropdown {
-        background-color: #171717;
+        background-color: #0D0B3E;
         border: 1px solid rgb(255 255 255 / 38%)
     }
     
@@ -786,7 +789,7 @@
     html.dark-theme .select2-container--bootstrap4 .select2-selection--multiple .select2-selection__choice {
         color: #dee1e5;
         border: 1px solid rgb(255 255 255 / 55%);
-        background: #171717
+        background: #0D0B3E
     }
     
     html.dark-theme .select2-container--bootstrap4 .select2-selection--multiple .select2-selection__rendered .select2-search__field {
@@ -809,7 +812,7 @@
     }
     
     html.dark-theme .bootstrap-tagsinput {
-        background-color: #1e1e1e;
+        background-color: #26244C;
         border: 1px solid rgb(255 255 255 / 35%);
         box-shadow: inset 0 1px 1px rgb(0 0 0 / 37%);
         color: #e5e0e0
@@ -944,7 +947,7 @@
             opacity: .4
         }
         html.dark-theme .full-search-bar {
-            background: #171717
+            background: #0D0B3E
         }
         html.dark-theme .search-bar .btn-search-back {
             background: rgb(3 11 35 / 0%);
