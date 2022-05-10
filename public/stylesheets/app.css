@@ -63,7 +63,7 @@ a {
     z-index: 5;
     background: #fff;
     background-clip: padding-box;
-    border-bottom: 1px solid #e4e4e4
+    /* border-bottom: 1px solid #e4e4e4 */
 }
 
 .logo-icon {
@@ -124,7 +124,8 @@ a {
     text-align: center;
     padding: 7px;
     font-size: 14px;
-    border-top: 1px solid #e4e4e4;
+    /* border-top: 1px solid #e4e4e4;
+     */
     z-index: 3
 }
 

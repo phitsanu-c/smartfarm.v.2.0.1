@@ -61,13 +61,13 @@
                 <div>
                     <h4 class="logo-text">Smart Greenhouse</h4>
                 </div>
-                <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i></div>
+                <div class="toggle-icon ms-auto"><i class='bx bx-menu'></i></div>
             </div>
             <!--navigation-->
             <ul class="metismenu" id="menu">
                 <li class="memu_site">
                     <a href="javascript:;">
-                        <div class="parent-icon"><i class='lni-map-marker'></i></div>
+                        <div class="parent-icon"><i class='lni lni-map-marker'></i></div>
                         <div class="menu-title">สถานที่</div>
                     </a>
                 </li>
@@ -86,7 +86,7 @@
                 </li>
                 <li class="memu_compare">
                     <a href="javascript:;">
-                        <div class="parent-icon"><i class='lni lni-popup'></i>
+                        <div class="parent-icon"><i class='lni lni-files'></i>
                         </div>
                         <div class="menu-title">เปรียบเทียบข้อมูล </div>
                     </a>
@@ -386,14 +386,14 @@
     <!--end switcher-->
     <!-- Bootstrap JS -->
     <script src="public/javascripts/bootstrap.bundle.min.js"></script>
-    
+
     <script src="public/plugins/simplebar/js/simplebar.min.js"></script>
     <script src="public/plugins/metismenu/js/metisMenu.min.js"></script>
     <script src="public/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
     <!--app JS-->
     <script src="public/javascripts/app.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script> -->
-    
+
     <!-- sweetalert2 -->
     <script src="public/plugins/sweetalert2-7.28.12/dist/sweetalert2.all.min.js"></script>
     <!-- Resources -->
@@ -437,7 +437,7 @@
         if (house_master.length == 8) {
             $(".memu_dash").show().addClass("mm-active");
             $(".memu_report").show();
-            if(house_master.substring(0, 3) != "TUS"){
+            if (house_master.substring(0, 3) != "TUS") {
                 if (house_master !== "KMUMT001") {
                     $(".title_km").html("ประวัติการตั้งเวลา");
                 } else {
@@ -481,7 +481,7 @@
                         var meterUnit = res.meterUnit;
                         var time_update = res.time_update;
 
-                        
+
 
                         var array_realChT = [];
                         var array_realnameT = [];
@@ -769,14 +769,14 @@
                                                     // return false;
                                                     let strdate = new Date();
                                                     var strNdate = moment(new Date()).add(-10, 'minutes').format('YYYY/MM/DD');
-                                                    if (time_update != "false"){
+                                                    if (time_update != "false") {
                                                         if (time_update.substring(0, 10) == strNdate || p_json['date'] == strNdate) {
                                                             $(".status_timeUpdate").removeClass("text-danger").addClass("text-success").html("ออนไลน์")
                                                         } else {
                                                             $(".status_timeUpdate").removeClass("text-success").addClass("text-danger").html("ออฟไลน์")
                                                         }
                                                     }
-                                                    
+
                                                 } else {
                                                     // console.log(loading);// != KMUMT001
                                                     // -------------------------------------------------------------
@@ -789,14 +789,14 @@
                                                     var data_array = parseJSON['data'];
                                                     let strdate = new Date();
                                                     var strNdate = moment(new Date()).add(-10, 'minutes').format('YYYY/MM/DD');
-                                                    if (time_update != false){
+                                                    if (time_update != false) {
                                                         if (time_update.substring(0, 10) == strNdate || parseJSON['date'] == strNdate) {
                                                             $(".status_timeUpdate").removeClass("text-danger").addClass("text-success").html("ออนไลน์")
                                                         } else {
                                                             $(".status_timeUpdate").removeClass("text-success").addClass("text-danger").html("ออฟไลน์")
                                                         }
                                                     }
-                                                    
+
                                                     // alert(time_update.substring(0, 10) + ' ' + parseJSON['date'] + " " + strNdate)
                                                 }
                                                 // console.log(parseJSON);
@@ -1889,8 +1889,8 @@
 
                     }
                 });
-            
-            }else{  
+
+            } else {
                 // = มธ.
                 $.ajax({
                     url: "routes/tu/get_config.php",
@@ -1906,13 +1906,13 @@
                         // console.log(s);
                         // console.log(getArraySum(res.controlstatus));
                         // alert(getArraySum(res.controlStatus))
-                    
-        
+
+
                         $.ajax({
                             url: "routes/tu/pagex_dashboard.php",
                             method: "post",
                             data: {
-                                data : res,
+                                data: res,
                                 // s_master: res.s_master,
                                 // config_sn: res.config_sn,
                                 // config_cn: res.config_cn,
@@ -1921,16 +1921,17 @@
                             // dataType: "json",
                             success: function(res_dash) {
                                 $("#load_pages").html(res_dash);
-                                
+
                             }
                         });
                     }
                 }); // ajax
             }
-        }else{ // No sn
+        } else { // No sn
             $(".memu_dash").hide()
             $(".memu_report").hide();
         }
+
         function getArraySum(a) {
             // count array
             var total = 0;

@@ -173,12 +173,12 @@
                                                 <h5 class="card-title mt-2 "><B><?= $config_sn['sn_name_'.$i] ?></B></h5>
                                                 <div class="ms-auto mt-2 image-popups">
                                                     <?php if($config_sn["sn_imgMap_".$i] != ""){
-                                                        echo '<a href="public/images/img_map/'.$config_sn["sn_imgMap_".$i].'"><i class="lni lni-map-marker"></i></a>';
+                                                        echo '<a href="public/images/img_map/'.$config_sn["sn_imgMap_".$i].'"><i class="lni lni-map-marker "></i></a>';
                                                     }?>
                                                 </div>
                                             </div>
-                                            <img src="" alt="..." class="dash_img_<?= $i ?>"  style="width:90px; margin-top:10px; text-align: center!important;">
-                                            <h6 class="card-text text-center dash_data__<?= $i ?>" style="margin-top:20px"></h6>
+                                            <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle"  style="width:90px; margin-top:10px; text-align: center!important;">
+                                            <h6 class="card-text text-center  dash_data__<?= $i ?>" style="margin-top:20px"></h6>
                                         </div>
                                     </div>
                                 <?php } } ?>
@@ -201,7 +201,7 @@
                                                     }?>
                                                 </div>
                                             </div>
-                                            <img src="" alt="..." class="dash_img_<?= $i ?>"  style="width:90px; margin-top:10px; text-align: center!important;">
+                                            <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle"  style="width:90px; margin-top:10px; text-align: center!important;">
                                             <h6 class="card-text text-center dash_data__<?= $i ?>" style="margin-top:20px"></h6>
                                         </div>
                                     </div>

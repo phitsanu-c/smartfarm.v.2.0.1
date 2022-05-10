@@ -4,9 +4,9 @@
     
     html.dark-theme body {
         color: #e4e5e6;
-        /* background-color: #26244C; */
-        background: rgb(16, 20, 124);
-        background: radial-gradient(circle, rgba(16, 20, 124, 1) 12%, rgba(5, 13, 50, 1) 77%);
+        /* background-color: #150941; */
+        background: rgb(23, 23, 85);
+        background: radial-gradient(circle, rgb(17, 17, 77) 14%, rgb(10, 10, 59) 100%);
     }
     
     html.dark-theme .text-option {
@@ -29,8 +29,8 @@
     }
     
     html.dark-theme .card {
-        background-color: #05123f8a;
-        box-shadow: 0 .1rem .7rem rgba(0, 0, 0, 0.973);
+        background-color: #21214b86;
+        box-shadow: 0 .1rem .7rem rgba(2, 2, 54, 0.938);
         backdrop-filter: blur(14px);
     }
     
@@ -59,12 +59,12 @@
     
     html.dark-theme .topbar {
         background-color: #0D0B3E;
-        border-bottom: 1px solid rgb(237 237 237 / 12%);
+        /* border-bottom: 1px solid rgb(237 237 237 / 12%); */
         box-shadow: 0 0.1rem 0.7rem rgb(0 0 0 / 32%)
     }
     
     html.dark-theme .user-box {
-        border-left: 1px solid rgb(255 255 255 / .15)
+        border-left: 2px solid rgba(45, 17, 124, 0.486)
     }
     
     html.dark-theme .user-info .user-name {
@@ -121,7 +121,7 @@
     }
     
     html.dark-theme .topbar .navbar-nav .nav-link {
-        border-left: 0 solid rgb(255 255 255 / 12%);
+        border-left: 0 solid rgba(6, 13, 56, 0.12);
         color: #e4e5e6
     }
     
@@ -317,7 +317,7 @@
     }
     
     html.dark-theme .border {
-        border: 1px solid rgb(255 255 255 / 12%)!important
+        border: 1px solid rgba(13, 156, 175, 0.336)!important
     }
     
     html.dark-theme .border-end {
@@ -360,14 +360,14 @@
     
     html.dark-theme .sidebar-wrapper {
         background: #0D0B3E;
-        border-right: 1px solid rgb(255 255 255 / 12%);
+        /* border-right: 1px solid rgb(255 255 255 / 12%); */
         box-shadow: 0 0.1rem 0.7rem rgb(0 0 0 / 32%) !important;
     }
     
     html.dark-theme .sidebar-wrapper .sidebar-header {
         background: #0D0B3E;
-        border-right: 1px solid rgb(255 255 255 / 12%);
-        border-bottom: 1px solid rgb(255 255 255 / 12%)
+        /* border-right: 1px solid rgb(255 255 255 / 12%);
+        border-bottom: 1px solid rgb(255 255 255 / 12%) */
     }
     
     html.dark-theme .sidebar-wrapper .sidebar-header .logo-text {
@@ -644,10 +644,9 @@
     html.dark-theme .fc .fc-daygrid-day-number {
         color: #fff
     }
-    
-    html.dark-theme .breadcrumb {
+    /* html.dark-theme .breadcrumb {
         background-color: #26244C
-    }
+    } */
     
     html.dark-theme .breadcrumb-item.active {
         color: #8b969f
