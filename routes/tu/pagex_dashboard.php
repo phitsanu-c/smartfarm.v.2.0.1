@@ -291,278 +291,278 @@
                         <!-- ========================================= -->
                          <!-- Control 1 -->
                          <div class="">
-                                                        <div class="row p-t-10 parent" style="background-color: #e0e6e9e3; text-align: justify;">
-                                                            <div class="child">
-                                                                <h4><b class="text_load_1">wdwfwegergr</b></h4>
-                                                            </div>
-                                                            <a class="child1 edit_cont" href="javascript:void(0)" status="1">
-                                                                <h4><b>Edit</b></h4>
-                                                            </a>
-                                                            <!-- <h4 class="col"><b class="text_load_1"></b></h4>
-                                                                <button class=" text-right"><b class="">Edit</b></button> -->
+                            <div class="row p-t-10 parent" style="background-color: #e0e6e9e3; text-align: justify;">
+                                <div class="child">
+                                    <h4><b class="text_load_1">wdwfwegergr</b></h4>
+                                </div>
+                                <a class="child1 edit_cont" href="javascript:void(0)" status="1">
+                                    <h4><b>Edit</b></h4>
+                                </a>
+                                <!-- <h4 class="col"><b class="text_load_1"></b></h4>
+                                    <button class=" text-right"><b class="">Edit</b></button> -->
 
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-12 m-t-10">
-                                                                <div class="row">
-                                                                    <div class="col-6 text-left">
-                                                                        <B>TIMER 1</B>
-                                                                    </div>
-                                                                    <div class="col-6 text-right">
-                                                                        <!-- <input type="checkbox" id="1_1" class="sw_toggle js-switch"> -->
-                                                                        <img class="img_sw 1_1" src="" alt="">
-                                                                        <div class="sw_toggle">
-                                                                            <input class="input_check" type="checkbox" id="1_1" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                                                        </div>
-                                                                        <!-- <button type="button" class="btn waves-effect waves-light btn-rounded btn-xs btn-success"> <i class="fa fa-check"></i> On</button> -->
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row m-t-10 ">
-                                                            <div class="col-6 m-t-0">
-                                                                <div class="form-group text-left">
-                                                                    <div class="row">
-                                                                        <div class="col-md-3 align-vertical-center">
-                                                                            <small class="form-control-feedback"> START </small>
-                                                                        </div>
-                                                                        <div class="col-md-9">
-                                                                            <input type="time" id="time_s_1_1" class="form-control  input_time" data-open="myTimePicker">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-6 m-t-0">
-                                                                <div class="form-group text-left">
-                                                                    <div class="row">
-                                                                        <div class="col-md-3">
-                                                                            <small class="form-control-feedback"> END </small>
-                                                                        </div>
-                                                                        <div class="col-md-9">
-                                                                            <input type="time" id="time_e_1_1" class="form-control input_time">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 m-t-10">
+                                    <div class="row">
+                                        <div class="col-6 text-left">
+                                            <B>TIMER 1</B>
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            <!-- <input type="checkbox" id="1_1" class="sw_toggle js-switch"> -->
+                                            <img class="img_sw 1_1" src="" alt="">
+                                            <div class="sw_toggle">
+                                                <input class="input_check" type="checkbox" id="1_1" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                            </div>
+                                            <!-- <button type="button" class="btn waves-effect waves-light btn-rounded btn-xs btn-success"> <i class="fa fa-check"></i> On</button> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-t-10 ">
+                                <div class="col-6 m-t-0">
+                                    <div class="form-group text-left">
+                                        <div class="row">
+                                            <div class="col-md-3 align-vertical-center">
+                                                <small class="form-control-feedback"> START </small>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="time" id="time_s_1_1" class="form-control  input_time" data-open="myTimePicker">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 m-t-0">
+                                    <div class="form-group text-left">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <small class="form-control-feedback"> END </small>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="time" id="time_e_1_1" class="form-control input_time">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                                                        <div class="row  border-top">
-                                                            <div class="col-12 m-t-10">
-                                                                <div class="row">
-                                                                    <div class="col-6 text-left">
-                                                                        <B>TIMER 2</B>
-                                                                    </div>
-                                                                    <div class="col-6 text-right">
-                                                                        <!-- <input type="checkbox" id="1_2" class="sw_toggle js-switch"> -->
-                                                                        <!-- <input type="checkbox" id="1_2" class="sw_toggle" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios"> -->
-                                                                        <!-- <button type="button" class="btn waves-effect waves-light btn-rounded btn-xs btn-danger ">Off <i class="fa fa-times"></i></button> -->
-                                                                        <img class="img_sw 1_2" src="" alt="">
-                                                                        <div class="sw_toggle">
-                                                                            <input class="input_check" type="checkbox" id="1_2" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row m-t-10 ">
-                                                            <div class="col-6 m-t-0">
-                                                                <div class="form-group text-left">
-                                                                    <div class="row">
-                                                                        <div class="col-md-3 align-vertical-center">
-                                                                            <small class="form-control-feedback"> START </small>
-                                                                        </div>
-                                                                        <div class="col-md-9">
-                                                                            <input type="time" id="time_s_1_2" class="form-control input_time">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-6 m-t-0">
-                                                                <div class="form-group text-left">
-                                                                    <div class="row">
-                                                                        <div class="col-md-3">
-                                                                            <small class="form-control-feedback"> END </small>
-                                                                        </div>
-                                                                        <div class="col-md-9">
-                                                                            <input type="time" id="time_e_1_2" class="form-control input_time">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                            <div class="row  border-top">
+                                <div class="col-12 m-t-10">
+                                    <div class="row">
+                                        <div class="col-6 text-left">
+                                            <B>TIMER 2</B>
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            <!-- <input type="checkbox" id="1_2" class="sw_toggle js-switch"> -->
+                                            <!-- <input type="checkbox" id="1_2" class="sw_toggle" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios"> -->
+                                            <!-- <button type="button" class="btn waves-effect waves-light btn-rounded btn-xs btn-danger ">Off <i class="fa fa-times"></i></button> -->
+                                            <img class="img_sw 1_2" src="" alt="">
+                                            <div class="sw_toggle">
+                                                <input class="input_check" type="checkbox" id="1_2" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-t-10 ">
+                                <div class="col-6 m-t-0">
+                                    <div class="form-group text-left">
+                                        <div class="row">
+                                            <div class="col-md-3 align-vertical-center">
+                                                <small class="form-control-feedback"> START </small>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="time" id="time_s_1_2" class="form-control input_time">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 m-t-0">
+                                    <div class="form-group text-left">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <small class="form-control-feedback"> END </small>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="time" id="time_e_1_2" class="form-control input_time">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                                                        <div class="row  border-top">
-                                                            <div class="col-12 m-t-10">
-                                                                <div class="row">
-                                                                    <div class="col-6 text-left">
-                                                                        <B>TIMER 3</B>
-                                                                    </div>
-                                                                    <div class="col-6 text-right">
-                                                                        <!-- <input type="checkbox" id="1_3" class="sw_toggle" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary"> -->
-                                                                        <img class="img_sw 1_3" src="" alt="">
-                                                                        <div class="sw_toggle">
-                                                                            <input class="input_check" type="checkbox" id="1_3" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row m-t-10">
-                                                            <div class="col-6 m-t-0">
-                                                                <div class="form-group text-left">
-                                                                    <div class="row">
-                                                                        <div class="col-md-3 align-vertical-center">
-                                                                            <small class="form-control-feedback"> START </small>
-                                                                        </div>
-                                                                        <div class="col-md-9">
-                                                                            <input type="time" id="time_s_1_3" class="form-control input_time">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-6 m-t-0">
-                                                                <div class="form-group text-left">
-                                                                    <div class="row">
-                                                                        <div class="col-md-3">
-                                                                            <small class="form-control-feedback"> END </small>
-                                                                        </div>
-                                                                        <div class="col-md-9">
-                                                                            <input type="time" id="time_e_1_3" class="form-control input_time">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                            <div class="row  border-top">
+                                <div class="col-12 m-t-10">
+                                    <div class="row">
+                                        <div class="col-6 text-left">
+                                            <B>TIMER 3</B>
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            <!-- <input type="checkbox" id="1_3" class="sw_toggle" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary"> -->
+                                            <img class="img_sw 1_3" src="" alt="">
+                                            <div class="sw_toggle">
+                                                <input class="input_check" type="checkbox" id="1_3" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-t-10">
+                                <div class="col-6 m-t-0">
+                                    <div class="form-group text-left">
+                                        <div class="row">
+                                            <div class="col-md-3 align-vertical-center">
+                                                <small class="form-control-feedback"> START </small>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="time" id="time_s_1_3" class="form-control input_time">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 m-t-0">
+                                    <div class="form-group text-left">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <small class="form-control-feedback"> END </small>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="time" id="time_e_1_3" class="form-control input_time">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                                                        <div class="row  border-top">
-                                                            <div class="col-12 m-t-10">
-                                                                <div class="row">
-                                                                    <div class="col-6 text-left">
-                                                                        <B>TIMER 4</B>
-                                                                    </div>
-                                                                    <div class="col-6 text-right">
-                                                                        <!-- <input type="checkbox" id="1_4" class="sw_toggle" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary"> -->
-                                                                        <img class="img_sw 1_4" src="" alt="">
-                                                                        <div class="sw_toggle">
-                                                                            <input class="input_check" type="checkbox" id="1_4" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row m-t-10">
-                                                            <div class="col-6 m-t-0">
-                                                                <div class="form-group text-left">
-                                                                    <div class="row">
-                                                                        <div class="col-md-3 align-vertical-center">
-                                                                            <small class="form-control-feedback"> START </small>
-                                                                        </div>
-                                                                        <div class="col-md-9">
-                                                                            <input type="time" id="time_s_1_4" class="form-control input_time">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-6 m-t-0">
-                                                                <div class="form-group text-left">
-                                                                    <div class="row">
-                                                                        <div class="col-md-3">
-                                                                            <small class="form-control-feedback"> END </small>
-                                                                        </div>
-                                                                        <div class="col-md-9">
-                                                                            <input type="time" id="time_e_1_4" class="form-control input_time">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                            <div class="row  border-top">
+                                <div class="col-12 m-t-10">
+                                    <div class="row">
+                                        <div class="col-6 text-left">
+                                            <B>TIMER 4</B>
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            <!-- <input type="checkbox" id="1_4" class="sw_toggle" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary"> -->
+                                            <img class="img_sw 1_4" src="" alt="">
+                                            <div class="sw_toggle">
+                                                <input class="input_check" type="checkbox" id="1_4" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-t-10">
+                                <div class="col-6 m-t-0">
+                                    <div class="form-group text-left">
+                                        <div class="row">
+                                            <div class="col-md-3 align-vertical-center">
+                                                <small class="form-control-feedback"> START </small>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="time" id="time_s_1_4" class="form-control input_time">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 m-t-0">
+                                    <div class="form-group text-left">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <small class="form-control-feedback"> END </small>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="time" id="time_e_1_4" class="form-control input_time">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                                                        <div class="row  border-top">
-                                                            <div class="col-12 m-t-10">
-                                                                <div class="row">
-                                                                    <div class="col-6 text-left">
-                                                                        <B>TIMER 5</B>
-                                                                    </div>
-                                                                    <div class="col-6 text-right">
-                                                                        <!-- <input type="checkbox" id="1_5" class="sw_toggle" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary"> -->
-                                                                        <img class="img_sw 1_5" src="" alt="">
-                                                                        <div class="sw_toggle">
-                                                                            <input class="input_check" type="checkbox" id="1_5" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row m-t-10">
-                                                            <div class="col-6 m-t-0">
-                                                                <div class="form-group text-left">
-                                                                    <div class="row">
-                                                                        <div class="col-md-3 align-vertical-center">
-                                                                            <small class="form-control-feedback"> START </small>
-                                                                        </div>
-                                                                        <div class="col-md-9">
-                                                                            <input type="time" id="time_s_1_5" class="form-control input_time">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-6 m-t-0">
-                                                                <div class="form-group text-left">
-                                                                    <div class="row">
-                                                                        <div class="col-md-3">
-                                                                            <small class="form-control-feedback"> END </small>
-                                                                        </div>
-                                                                        <div class="col-md-9">
-                                                                            <input type="time" id="time_e_1_5" class="form-control input_time">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row  border-top">
-                                                            <div class="col-12 m-t-10">
-                                                                <div class="row">
-                                                                    <div class="col-6 text-left">
-                                                                        <B>TIMER 6</B>
-                                                                    </div>
-                                                                    <div class="col-6 text-right">
-                                                                        <!-- <input type="checkbox" id="1_6" class="sw_toggle" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary"> -->
-                                                                        <img class="img_sw 1_6" src="" alt="">
-                                                                        <div class="sw_toggle">
-                                                                            <input class="input_check" type="checkbox" id="1_6" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row m-t-10">
-                                                            <div class="col-6 m-t-0">
-                                                                <div class="form-group text-left">
-                                                                    <div class="row">
-                                                                        <div class="col-md-3 align-vertical-center">
-                                                                            <small class="form-control-feedback"> START </small>
-                                                                        </div>
-                                                                        <div class="col-md-9">
-                                                                            <input type="time" id="time_s_1_6" class="form-control input_time">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-6 m-t-0">
-                                                                <div class="form-group text-left">
-                                                                    <div class="row">
-                                                                        <div class="col-md-3">
-                                                                            <small class="form-control-feedback"> END </small>
-                                                                        </div>
-                                                                        <div class="col-md-9">
-                                                                            <input type="time" id="time_e_1_6" class="form-control input_time">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Exit Control 1 -->
+                            <div class="row  border-top">
+                                <div class="col-12 m-t-10">
+                                    <div class="row">
+                                        <div class="col-6 text-left">
+                                            <B>TIMER 5</B>
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            <!-- <input type="checkbox" id="1_5" class="sw_toggle" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary"> -->
+                                            <img class="img_sw 1_5" src="" alt="">
+                                            <div class="sw_toggle">
+                                                <input class="input_check" type="checkbox" id="1_5" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-t-10">
+                                <div class="col-6 m-t-0">
+                                    <div class="form-group text-left">
+                                        <div class="row">
+                                            <div class="col-md-3 align-vertical-center">
+                                                <small class="form-control-feedback"> START </small>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="time" id="time_s_1_5" class="form-control input_time">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 m-t-0">
+                                    <div class="form-group text-left">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <small class="form-control-feedback"> END </small>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="time" id="time_e_1_5" class="form-control input_time">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row  border-top">
+                                <div class="col-12 m-t-10">
+                                    <div class="row">
+                                        <div class="col-6 text-left">
+                                            <B>TIMER 6</B>
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            <!-- <input type="checkbox" id="1_6" class="sw_toggle" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary"> -->
+                                            <img class="img_sw 1_6" src="" alt="">
+                                            <div class="sw_toggle">
+                                                <input class="input_check" type="checkbox" id="1_6" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-t-10">
+                                <div class="col-6 m-t-0">
+                                    <div class="form-group text-left">
+                                        <div class="row">
+                                            <div class="col-md-3 align-vertical-center">
+                                                <small class="form-control-feedback"> START </small>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="time" id="time_s_1_6" class="form-control input_time">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 m-t-0">
+                                    <div class="form-group text-left">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <small class="form-control-feedback"> END </small>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="time" id="time_e_1_6" class="form-control input_time">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Exit Control 1 -->
                         <!-- ================================ -->
                     </div>
                     <div class="modal-footer">
