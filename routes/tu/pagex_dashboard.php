@@ -1,13 +1,42 @@
 <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 <style>
-  .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
-  .toggle.ios .toggle-handle { border-radius: 20px; }
+    .toggle.ios,
+    .toggle-on.ios,
+    .toggle-off.ios {
+        border-radius: 20px;
+    }
+    
+    .toggle.ios .toggle-handle {
+        border-radius: 20px;
+    }
 </style>
 <div class="page-content">
-<?php
+    <?php
     $config = $_POST['data'];
     $account_user = $config["account_user"];
+
+
+
+
+
+
+    // >>>>>>>>>>>>>>>>>  เปลี่ยน seve เป็น save ด้วยนะ <<<<<<<<<<<<<<<<<<<<<<< !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // >>>>>>>>>>>>>>>>>  เปลี่ยน seve เป็น save ด้วยนะ <<<<<<<<<<<<<<<<<<<<<<< !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // >>>>>>>>>>>>>>>>>  เปลี่ยน seve เป็น save ด้วยนะ <<<<<<<<<<<<<<<<<<<<<<< !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // >>>>>>>>>>>>>>>>>  เปลี่ยน seve เป็น save ด้วยนะ <<<<<<<<<<<<<<<<<<<<<<< !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // >>>>>>>>>>>>>>>>>  เปลี่ยน seve เป็น save ด้วยนะ <<<<<<<<<<<<<<<<<<<<<<< !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // >>>>>>>>>>>>>>>>>  เปลี่ยน seve เป็น save ด้วยนะ <<<<<<<<<<<<<<<<<<<<<<< !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // >>>>>>>>>>>>>>>>>  เปลี่ยน seve เป็น save ด้วยนะ <<<<<<<<<<<<<<<<<<<<<<< !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // >>>>>>>>>>>>>>>>>  เปลี่ยน seve เป็น save ด้วยนะ <<<<<<<<<<<<<<<<<<<<<<< !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // >>>>>>>>>>>>>>>>>  เปลี่ยน seve เป็น save ด้วยนะ <<<<<<<<<<<<<<<<<<<<<<< !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+
+
+
+
     // print_r($config);
     // exit();
     $s_master = $config["s_master"];
@@ -35,83 +64,87 @@
     // exit();
 ?>
 
-    <!--breadcrumb-->
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3"><?= $s_master['site_name'] ?></div>
-        <div class="ps-3">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0 p-0">
-                    <li class="breadcrumb-item"><a href="javascript:;"><i class="-alt"></i></a> </li>
-                    <li class="breadcrumb-item" aria-current="page"><?= $s_master['house_name'] ?></li>
-                </ol>
-            </nav>
-        </div>
-        <div class="ms-auto">
-            <div class="btn-group">
-                <span class="text-center">
+        <!--breadcrumb-->
+        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+            <div class="breadcrumb-title pe-3">
+                <?= $s_master['site_name'] ?>
+            </div>
+            <div class="ps-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 p-0">
+                        <li class="breadcrumb-item"><a href="javascript:;"><i class="-alt"></i></a> </li>
+                        <li class="breadcrumb-item" aria-current="page">
+                            <?= $s_master['house_name'] ?>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="ms-auto">
+                <div class="btn-group">
+                    <span class="text-center">
                     <span class="date"></span><br>
                     <span class="time"></span>
-                </span>
+                    </span>
+                </div>
             </div>
         </div>
-    </div>
-    <!--end breadcrumb-->
+        <!--end breadcrumb-->
 
-    <!-- <h6 class="mb-0 text-uppercase">Horizontal Card</h6> -->
-    <hr/>
-    <div class="row">
-        <div class="col-12 col-lg-4 col-xl-4 d-flex">
-            <div class="card w-100 radius-10">
-                <div class="card-body"> 
-                    <div class="card radius-10 shadow-none">
-                        <img src="public/images/site/<?= $house_img ?>" alt="..." class="card-img">
-                    </div>
-                    <div class="card radius-10 shadow-none">
-                        <div class="card-body border radius-10 shadow-none mb-3">
-                            <div class="col-12">
-                                <!-- <div class="card-body radius-10 shadow-none"> -->
+        <!-- <h6 class="mb-0 text-uppercase">Horizontal Card</h6> -->
+        <hr/>
+        <div class="row">
+            <div class="col-12 col-lg-4 col-xl-4 d-flex">
+                <div class="card w-100 radius-10">
+                    <div class="card-body">
+                        <div class="card radius-10 shadow-none">
+                            <img src="public/images/site/<?= $house_img ?>" alt="..." class="card-img">
+                        </div>
+                        <div class="card radius-10 shadow-none">
+                            <div class="card-body border radius-10 shadow-none mb-3">
+                                <div class="col-12">
+                                    <!-- <div class="card-body radius-10 shadow-none"> -->
                                     <div class="d-flex">
                                         <h5>ที่ตั้ง : <b><?= $s_master["site_address"] ?></b></h5>
                                     </div>
-                                <!-- </div> -->
-                            </div>
-                            <div class="col-12">
-                                <!-- <div class="card-body radius-10 shadow-none"> -->
+                                    <!-- </div> -->
+                                </div>
+                                <div class="col-12">
+                                    <!-- <div class="card-body radius-10 shadow-none"> -->
                                     <div class="d-flex">
                                         <h5>สถานะโรงเรือน : <b class="status_timeUpdate"></b></h5>
                                     </div>
-                                <!-- </div> -->
-                            </div>
-                            <div class="col-12">
-                                <!-- <div class="card-body radius-10 shadow-none"> -->
+                                    <!-- </div> -->
+                                </div>
+                                <div class="col-12">
+                                    <!-- <div class="card-body radius-10 shadow-none"> -->
                                     <div class="d-flex">
                                         <h5>ขนาดโรงเรือน : <b><?= substr($s_master["house_size"],9,13) ?></b> เมตร</h5>
                                     </div>
-                                <!-- </div> -->
-                            </div>
-                            <div class="col-12">
-                                <!-- <div class="card-body radius-10 shadow-none"> -->
+                                    <!-- </div> -->
+                                </div>
+                                <div class="col-12">
+                                    <!-- <div class="card-body radius-10 shadow-none"> -->
                                     <div class="d-flex">
                                         <h5>ระบบอินเตอร์เน็ต : <b>Internet SIM</b></h5>
                                     </div>
-                                <!-- </div> -->
-                            </div>
-                            <div class="col-12">
-                                <!-- <div class="card-body radius-10 shadow-none"> -->
+                                    <!-- </div> -->
+                                </div>
+                                <div class="col-12">
+                                    <!-- <div class="card-body radius-10 shadow-none"> -->
                                     <div class="d-flex">
                                         <h5>หมายเลขอินเตอร์เน็ต : <b><?= $s_master["site_internet"] ?></b></h5>
                                     </div>
-                                <!-- </div> -->
-                            </div>
-                            <div class="col-12">
-                                <!-- <div class="card-body radius-10 shadow-none"> -->
+                                    <!-- </div> -->
+                                </div>
+                                <div class="col-12">
+                                    <!-- <div class="card-body radius-10 shadow-none"> -->
                                     <div class="d-flex">
                                         <h5>วันหมดอายุ : <b><?= $s_master["site_internetO"] ?></b></h5>
                                     </div>
-                                <!-- </div> -->
-                            </div>
-                            <div class="col-12">
-                                <!-- <div class="card-body radius-10 shadow-none"> -->
+                                    <!-- </div> -->
+                                </div>
+                                <div class="col-12">
+                                    <!-- <div class="card-body radius-10 shadow-none"> -->
                                     <div class="d-flex">
                                         <h5>จุดติดตั้งเซ็นเซอร์ : <b class="image-popups">
                                         <?php if($s_master["house_img_map"] != ""){
@@ -119,17 +152,17 @@
                                                         }else{echo "-";}?>
                                             </b></h5>
                                     </div>
-                                <!-- </div> -->
+                                    <!-- </div> -->
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-12 col-lg-8 col-xl-8 d-flex">
-            <div class="card w-100 radius-10">
-                <div class="card-body"> 
-                    <!-- <div class="card radius-10 border shadow-none">
+            <div class="col-12 col-lg-8 col-xl-8 d-flex">
+                <div class="card w-100 radius-10">
+                    <div class="card-body">
+                        <!-- <div class="card radius-10 border shadow-none">
                         <div class="card-body">
                             <h5 class="text-center">สภาพอากาศจากกรมอุตุนิยมวิทยา</h5>
                             <div class="row">
@@ -161,60 +194,65 @@
                             </div>
                         </div>
                     </div><br/> -->
-                    <div class="card radius-10 border shadow-none">
-                        <div class="card-body">
-                            <h5 class="text-center">ข้อมูลเซ็นเซอร์นอกโรงเรือน</h5>
-                            <div class="row text-center">
-                                <?php for($i = 1; $i <= 3; $i++){
+                        <div class="card radius-10 border shadow-none">
+                            <div class="card-body">
+                                <h5 class="text-center">ข้อมูลเซ็นเซอร์นอกโรงเรือน</h5>
+                                <div class="row text-center">
+                                    <?php for($i = 1; $i <= 3; $i++){
                                     if($config_sn['sn_status_'.$i] == 1){ ?>
                                     <div class="col-lg-4 col-xl-4 col-sm-12">
                                         <div class="card-body border radius-10 shadow-none mb-3">
-                                           <div class="d-flex">
-                                                <h5 class="card-title mt-2 "><B><?= $config_sn['sn_name_'.$i] ?></B></h5>
+                                            <div class="d-flex">
+                                                <h5 class="card-title mt-2 ">
+                                                    <B><?= $config_sn['sn_name_'.$i] ?></B>
+                                                </h5>
                                                 <div class="ms-auto mt-2 image-popups">
                                                     <?php if($config_sn["sn_imgMap_".$i] != ""){
                                                         echo '<a href="public/images/img_map/'.$config_sn["sn_imgMap_".$i].'"><i class="lni lni-map-marker "></i></a>';
                                                     }?>
                                                 </div>
                                             </div>
-                                            <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle"  style="width:90px; margin-top:10px; text-align: center!important;">
+                                            <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle" style="width:90px; margin-top:10px; text-align: center!important;">
                                             <h6 class="card-text text-center  dash_data__<?= $i ?>" style="margin-top:20px"></h6>
                                         </div>
                                     </div>
-                                <?php } } ?>
+                                    <?php } } ?>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card radius-10 border shadow-none">
-                        <div class="card-body">
-                            <h5 class="text-center">ข้อมูลเซ็นเซอร์ในโรงเรือน</h5>
-                            <div class="row text-center">
-                                <?php for($i = 4; $i <= 7; $i++){
+                        <div class="card radius-10 border shadow-none">
+                            <div class="card-body">
+                                <h5 class="text-center">ข้อมูลเซ็นเซอร์ในโรงเรือน</h5>
+                                <div class="row text-center">
+                                    <?php for($i = 4; $i <= 7; $i++){
                                     if($config_sn['sn_status_'.$i] == 1){ ?>
                                     <div class="col-lg-3 col-xl-3 col-sm-12">
-                                    <div class="card-body border radius-10 shadow-none mb-3">
-                                           <div class="d-flex">
-                                                <h5 class="card-title mt-2 "><B><?= $config_sn['sn_name_'.$i] ?></B></h5>
+                                        <div class="card-body border radius-10 shadow-none mb-3">
+                                            <div class="d-flex">
+                                                <h5 class="card-title mt-2 ">
+                                                    <B><?= $config_sn['sn_name_'.$i] ?></B>
+                                                </h5>
                                                 <div class="ms-auto mt-2 image-popups">
                                                     <?php if($config_sn["sn_imgMap_".$i] != ""){
                                                         echo '<a href="public/images/img_map/'.$config_sn["sn_imgMap_".$i].'"><i class="lni lni-map-marker"></i></a>';
                                                     }?>
                                                 </div>
                                             </div>
-                                            <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle"  style="width:90px; margin-top:10px; text-align: center!important;">
+                                            <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle" style="width:90px; margin-top:10px; text-align: center!important;">
                                             <h6 class="card-text text-center dash_data__<?= $i ?>" style="margin-top:20px"></h6>
                                         </div>
                                     </div>
-                                <?php } } ?>
+                                    <?php } } ?>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div><!--end row-->
-    
-    <?php if($_POST["count_cn"] != 0){?>
+        <!--end row-->
+
+        <?php if($_POST["count_cn"] != 0){?>
         <div class="col-12 col-lg-12 col-xl-12 d-flex">
             <div class="card w-100 radius-10">
                 <div class="card-body">
@@ -222,10 +260,10 @@
                         <h4 class="card-title text-center"><b>ระบบควบคุม </b></h4>
                         <!-- <h5 class="card-title text-center"><b>โหมดอัตโนมัติ </b></h5> -->
                         <!-- <div class="row g-2"> -->
-                            <!-- <div class="col-lg-6 col-xl-6 col-sm-12 col-12" > -->
-                                <button type="button" class="btn btn-outline-success px-5 radius-30 sw_mode_Auto active" style="font-size:18px">โหมดอัตโนมัติ</button>
-                            <!-- </div> -->
-                            <!-- <div class="col-lg-6 col-xl-6 col-sm-12 col-12">
+                        <!-- <div class="col-lg-6 col-xl-6 col-sm-12 col-12" > -->
+                        <button type="button" class="btn btn-outline-success px-5 radius-30 sw_mode_Auto active" style="font-size:18px">โหมดอัตโนมัติ</button>
+                        <!-- </div> -->
+                        <!-- <div class="col-lg-6 col-xl-6 col-sm-12 col-12">
                                 <button type="button" class="col-lg-6 col-xl-6 col-sm-12 col-12 btn btn-outline-info px-5 radius-30 sw_mode_Manual" style="font-size:18px">โหมดสั่งงานด้วยตนเอง</button>
                             </div> -->
                         <!-- </div> -->
@@ -233,30 +271,30 @@
                     <div class="row">
                         <?php for($i = 1; $i <= 12; $i++){ if(
                             $config_cn['cn_status_'.$i] == 1){ ?>
-                            <div class="col-lg-3 col-xl-3 col-sm-12">
-                                <div class="card-body border radius-10 shadow-none mb-3">
-                                    <div class="d-flex">
-                                        <h5 class="mb-0 mmn"><b><?= $config_cn['cn_name_'.$i] ?></b></h5>
-                                    </div>
-                                    <div class="text-center">
-                                        <img class="dash_img_con_<?= $i ?>" width="185">
-                                    </div>
+                        <div class="col-lg-3 col-xl-3 col-sm-12">
+                            <div class="card-body border radius-10 shadow-none mb-3">
+                                <div class="d-flex">
+                                    <h5 class="mb-0 mmn"><b><?= $config_cn['cn_name_'.$i] ?></b></h5>
+                                </div>
+                                <div class="text-center">
+                                    <img class="dash_img_con_<?= $i ?>" width="185">
                                 </div>
                             </div>
+                        </div>
                         <?php }} ?>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Modal Control -->
-        <div class="modal fade" id="Modal_Auto_control"  tabindex="-1" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
+        <div class="modal fade" id="Modal_Auto_control" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header border-4">
-                            <!-- <div><i class="bx bxs-user me-1 font-22 text-info"></i></div> -->
-                            <b class="modal_autoText"></b>
-                       
-                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <!-- <div><i class="bx bxs-user me-1 font-22 text-info"></i></div> -->
+                        <b class="modal_autoText"></b>
+
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="seve_auto">
@@ -264,7 +302,7 @@
                                 <input type="hidden" class="channel" id="channel">
                                 <div class="border p-4 rounded mb-3 time_loop">
                                     <div class="d-flex mb-2">
-                                    <B>TIMER Loop</B>
+                                        <B>TIMER Loop</B>
                                         <div class="sw_toggle ms-auto">
                                             <input class="input_check" type="checkbox" id="sw_7" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
                                         </div>
@@ -366,7 +404,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>    
+                                    </div>
                                 </div>
                                 <div class="border p-4 rounded">
                                     <div class="d-flex mb-2">
@@ -503,7 +541,7 @@
                                     </div>
                                     <div class="row m-t-10 ">
                                         <div class="col-6 m-t-0">
-                                        <div class="form-group text-left">
+                                            <div class="form-group text-left">
                                                 <div class="row">
                                                     <div class="col-md-3 align-vertical-center">
                                                         <small class="form-control-feedback start_7"> START </small>
@@ -545,7 +583,7 @@
                                     </div>
                                     <div class="row m-t-10 ">
                                         <div class="col-6 m-t-0">
-                                        <div class="form-group text-left">
+                                            <div class="form-group text-left">
                                                 <div class="row">
                                                     <div class="col-md-3 align-vertical-center">
                                                         <small class="form-control-feedback start_7"> START </small>
@@ -587,7 +625,7 @@
                                     </div>
                                     <div class="row m-t-10 ">
                                         <div class="col-6 m-t-0">
-                                        <div class="form-group text-left">
+                                            <div class="form-group text-left">
                                                 <div class="row">
                                                     <div class="col-md-3 align-vertical-center">
                                                         <small class="form-control-feedback start_7"> START </small>
@@ -621,41 +659,41 @@
                                         </div>
                                     </div>
                                 </div>
-                            </from>
+                                </from>
                         </div>
                         <div class="seve_auto_kmutt">
                             <form class="row g-3" id="seve_auto_kmutt">
                                 <!-- <div class="tab-pane show active ridge" role="tabpanel"> -->
-                                    <div class="row">
-                                        <div class="container col-md-12">
-                                            <div class="text-center"><br>
-                                                <h5>Soil moisture (%)</h5>
-                                                <h6>ON - OFF Dripper 1</h6>
-                                                <input type="text" class="range_control range_control1"/>
-                                            </div>
-                                        </div>
-                                        <div class="container col-md-12">
-                                            <div class="text-center"><br>
-                                                <h5>Soil moisture (%)</h5>
-                                                <h6>ON - OFF Dripper 2</h6>
-                                                <input type="text" class="range_control range_control2"/>
-                                            </div>
-                                        </div>
-                                        <div class="container col-md-12">
-                                            <div class="text-center"><br>
-                                                <h5>temperature (℃)</h5>
-                                                <h6>ON - OFF Foggy inside and Sprinkler outside</h6>
-                                                <input type="text" class="range_control range_control3"/>
-                                            </div>
-                                        </div>
-                                        <div class="container col-md-12">
-                                            <div class="text-center"><br>
-                                                <h5>Light intensity (KLux)</h5>
-                                                <h6>ON - OFF Slan</h6>
-                                                <input type="text" class="range_control range_control5" />
-                                            </div>
+                                <div class="row">
+                                    <div class="container col-md-12">
+                                        <div class="text-center"><br>
+                                            <h5>Soil moisture (%)</h5>
+                                            <h6>ON - OFF Dripper 1</h6>
+                                            <input type="text" class="range_control range_control1" />
                                         </div>
                                     </div>
+                                    <div class="container col-md-12">
+                                        <div class="text-center"><br>
+                                            <h5>Soil moisture (%)</h5>
+                                            <h6>ON - OFF Dripper 2</h6>
+                                            <input type="text" class="range_control range_control2" />
+                                        </div>
+                                    </div>
+                                    <div class="container col-md-12">
+                                        <div class="text-center"><br>
+                                            <h5>temperature (℃)</h5>
+                                            <h6>ON - OFF Foggy inside and Sprinkler outside</h6>
+                                            <input type="text" class="range_control range_control3" />
+                                        </div>
+                                    </div>
+                                    <div class="container col-md-12">
+                                        <div class="text-center"><br>
+                                            <h5>Light intensity (KLux)</h5>
+                                            <h6>ON - OFF Slan</h6>
+                                            <input type="text" class="range_control range_control5" />
+                                        </div>
+                                    </div>
+                                </div>
                                 <!-- </div> -->
                             </form>
                         </div>
@@ -672,13 +710,13 @@
             </div>
         </div>
         <!-- exit Modal Control -->
-    <?php } ?>
-    <div class="col-12 col-lg-12 col-xl-12 d-flex">
-        <div class="card w-100 radius-10">
-            <div class="card-body">
-                <div class="d-flex">
-                    <ul class="nav nav-pills mb-3" role="tablist">
-                        <?php if($_POST["s_btnT"] > 0){echo '
+        <?php } ?>
+        <div class="col-12 col-lg-12 col-xl-12 d-flex">
+            <div class="card w-100 radius-10">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <ul class="nav nav-pills mb-3" role="tablist">
+                            <?php if($_POST["s_btnT"] > 0){echo '
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link active btn_ch_t" data-bs-toggle="pill" href="" role="tab" aria-selected="false">
                                     <div class="d-flex align-items-center">
@@ -761,12 +799,46 @@
                             }
                         }
                         ?>
-                    </ul>
+                        </ul>
+                    </div>
+                    <div class="chartdiv" id='chart_realtime'></div>
                 </div>
-                <div class="chartdiv" id='chart_realtime'></div>
-            </dic>
-        </dic>
-    </dic>
+            </div>
+        </div>
+
+        <!-- ---------------  Control Mode  -------------- -->
+        <div class="row">
+            <div class="col-12 col-lg-6 col-xl-6 d-flex">
+                <div class="card w-100 radius-10">
+                    <div class="card-body text-center">
+                        <h4 class="card-title text-center"><b>ระบบควบคุม </b></h4>
+                        <div class="row g-2">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-lg-6 col-xl-6 col-sm-12 col-12">
+                                        <button type="button" class="btn btn-outline-success px-5 radius-30 sw_mode_Auto active" style="font-size:18px; width:100%">โหมดอัตโนมัติ</button>
+                                    </div>
+                                    <div class="col-lg-6 col-xl-6 col-sm-12 col-12">
+                                        <button type="button" class="btn btn-outline-success px-5 radius-30 sw_mode_Manual " style="font-size:18px; width:100%">โหมดควบคุมด้วยตัวเอง</button>
+
+                                    </div>
+                                    <div style=" border-top: 3px solid rgba(67, 38, 148, 0.473); margin-top:10px;">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 col-xl-6 d-flex">
+                <div class="card w-100 radius-10">
+                    <div class="card-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- --------------- End Control Mode  -------------- -->
 </div>
 <script>
     var house_master = '<?= $s_master["house_master"] ?>';
@@ -776,7 +848,7 @@
     var set_maxmin = $.parseJSON('<?= json_encode($set_maxmin) ?>');
     var sensor = $.parseJSON('<?= json_encode($sensor) ?>');
     // console.log(sensor[1].sensor_id)
-    
+
     // ++++++--------+++++++++
     // Global variables
     var client = null;
@@ -848,114 +920,115 @@
             for (var i = 1; i <= 7; i++) {
                 // console.log(config_sn['sn_sensor_'+i])
                 // 
-                if (config_sn['sn_status_'+i] == 1) {
+                if (config_sn['sn_status_' + i] == 1) {
                     // for(var s=0; s <= sensor.length; s++){
                     //     if(s == config_sn['sn_sensor_'+i]){
-                            console.log(sensor[(config_sn['sn_sensor_'+i] -1)].sensor_name)
-                            if(i == 1){
-                                dash_status(sn_data= (data_['temp_out']*1).toFixed(1), max= set_maxmin.Tmax, min= set_maxmin.Tmin)
-                            }else if(i == 2){
-                                dash_status(sn_data= (data_['hum_out']*1).toFixed(1), max= set_maxmin.Tmax, min= set_maxmin.Tmin)
-                            }else if(i == 3){
-                                dash_status(sn_data= (data_['light_out']/1000).toFixed(1), max= set_maxmin.Tmax, min= set_maxmin.Tmin)
-                            }else if(i == 4){
-                                dash_status(sn_data= (data_['temp_in']*1).toFixed(1), max= set_maxmin.Tmax, min= set_maxmin.Tmin)
-                            }else if(i == 5){
-                                dash_status(sn_data= (data_['hum_in']*1).toFixed(1), max= set_maxmin.Tmax, min= set_maxmin.Tmin)
-                            }else if(i == 6){
-                                dash_status(sn_data= (data_['light_in']/1000).toFixed(1), max= set_maxmin.Tmax, min= set_maxmin.Tmin)
-                            }else if(i == 7){
-                                dash_status(sn_data= (data_['soil_in']*1).toFixed(1), max= set_maxmin.Tmax, min= set_maxmin.Tmin)
-                            }
-                            
+                    console.log(sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_name)
+                    if (i == 1) {
+                        dash_status(sn_data = (data_['temp_out'] * 1).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                    } else if (i == 2) {
+                        dash_status(sn_data = (data_['hum_out'] * 1).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                    } else if (i == 3) {
+                        dash_status(sn_data = (data_['light_out'] / 1000).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                    } else if (i == 4) {
+                        dash_status(sn_data = (data_['temp_in'] * 1).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                    } else if (i == 5) {
+                        dash_status(sn_data = (data_['hum_in'] * 1).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                    } else if (i == 6) {
+                        dash_status(sn_data = (data_['light_in'] / 1000).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                    } else if (i == 7) {
+                        dash_status(sn_data = (data_['soil_in'] * 1).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                    }
+
                     //     }
                     // }
-                    
-            //     // show_dash(unit = dashUnit[i],snmode = dashMode[i]);
-            //     if (house_master !== "KMUMT001") {
-            //         if (dashMode[i] === "7") { // µmol / KLux
-            //             $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>' + '<br>' + (data_array[dashSncanel[i]] / 1000).toFixed(1) + " KLux");
-            //         } else if (dashMode[i] === "6") {
-            //             $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>');
-            //         } else if (dashMode[i] === "5") {
-            //             $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 1000).toFixed(1) + " KLux" + '<br>' + (data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>');
-            //         } else {
-            //             if (data_array[dashSncanel[i]] >= 1000) {
-            //                 data_dash[i] = (data_array[dashSncanel[i]] / 1000).toFixed(1);
-            //                 sn_unit[i] = 'K' + dashUnit[i];
-            //             } else if (data_array[dashSncanel[i]] >= 1000000) {
-            //                 data_dash[i] = (data_array[dashSncanel[i]] / 1000).toFixed(1);
-            //                 sn_unit[i] = 'M' + dashUnit[i];
-            //             } else {
-            //                 data_dash[i] = (data_array[dashSncanel[i]] * 1).toFixed(1);
-            //                 if (dashUnit[i] === "1") {
-            //                     sn_unit[i] = "℃";
-            //                 } else {
-            //                     sn_unit[i] = dashUnit[i];
-            //                 }
-            //             }
-            //         }
-            //         // ++++++++++
-            //         if ($(".btn_ch_t").hasClass("active") == true) {
-            //             if (dashMode[i] === "1") {
-            //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
-            //             }
-            //         }
-            //         if ($(".btn_ch_h").hasClass("active") == true) {
-            //             if (dashMode[i] === "2") {
-            //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
-            //             }
-            //         }
-            //         if ($(".btn_ch_s").hasClass("active") == true) {
-            //             if (dashMode[i] === "3") {
-            //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
-            //             }
-            //         }
-            //         if ($(".btn_ch_l").hasClass("active") == true) {
-            //             if (dashMode[i] === "4" || dashMode[i] === "5") {
-            //                 new_chart.push((data_array[dashSncanel[i]] / 1000).toFixed(1));
-            //             }
-            //             if (dashMode[i] === "6" || dashMode[i] === "7") {
-            //                 new_chart.push((data_array[dashSncanel[i]] / 54).toFixed(1));
-            //             }
-            //         }
-            //         if ($(".btn_ch_p").hasClass("active") == true) {
-            //             if (dashMode[i] === "10") {
-            //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
-            //             }
-            //         }
+
+                    //     // show_dash(unit = dashUnit[i],snmode = dashMode[i]);
+                    //     if (house_master !== "KMUMT001") {
+                    //         if (dashMode[i] === "7") { // µmol / KLux
+                    //             $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>' + '<br>' + (data_array[dashSncanel[i]] / 1000).toFixed(1) + " KLux");
+                    //         } else if (dashMode[i] === "6") {
+                    //             $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>');
+                    //         } else if (dashMode[i] === "5") {
+                    //             $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 1000).toFixed(1) + " KLux" + '<br>' + (data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>');
+                    //         } else {
+                    //             if (data_array[dashSncanel[i]] >= 1000) {
+                    //                 data_dash[i] = (data_array[dashSncanel[i]] / 1000).toFixed(1);
+                    //                 sn_unit[i] = 'K' + dashUnit[i];
+                    //             } else if (data_array[dashSncanel[i]] >= 1000000) {
+                    //                 data_dash[i] = (data_array[dashSncanel[i]] / 1000).toFixed(1);
+                    //                 sn_unit[i] = 'M' + dashUnit[i];
+                    //             } else {
+                    //                 data_dash[i] = (data_array[dashSncanel[i]] * 1).toFixed(1);
+                    //                 if (dashUnit[i] === "1") {
+                    //                     sn_unit[i] = "℃";
+                    //                 } else {
+                    //                     sn_unit[i] = dashUnit[i];
+                    //                 }
+                    //             }
+                    //         }
+                    //         // ++++++++++
+                    //         if ($(".btn_ch_t").hasClass("active") == true) {
+                    //             if (dashMode[i] === "1") {
+                    //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
+                    //             }
+                    //         }
+                    //         if ($(".btn_ch_h").hasClass("active") == true) {
+                    //             if (dashMode[i] === "2") {
+                    //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
+                    //             }
+                    //         }
+                    //         if ($(".btn_ch_s").hasClass("active") == true) {
+                    //             if (dashMode[i] === "3") {
+                    //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
+                    //             }
+                    //         }
+                    //         if ($(".btn_ch_l").hasClass("active") == true) {
+                    //             if (dashMode[i] === "4" || dashMode[i] === "5") {
+                    //                 new_chart.push((data_array[dashSncanel[i]] / 1000).toFixed(1));
+                    //             }
+                    //             if (dashMode[i] === "6" || dashMode[i] === "7") {
+                    //                 new_chart.push((data_array[dashSncanel[i]] / 54).toFixed(1));
+                    //             }
+                    //         }
+                    //         if ($(".btn_ch_p").hasClass("active") == true) {
+                    //             if (dashMode[i] === "10") {
+                    //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
+                    //             }
+                    //         }
                 }
-                function dash_status(sn_data, max, min){
-                    if(sn_data >= max){
-                        $(".dash_img_" + i).attr("src", "public/images/Sensor/"+sensor[(config_sn['sn_sensor_'+i] -1)].sensor_imgMax);
-                    }else if(sn_data < min){
-                        $(".dash_img_" + i).attr("src", "public/images/Sensor/"+sensor[(config_sn['sn_sensor_'+i] -1)].sensor_imgMin);
-                    }else{
-                        $(".dash_img_" + i).attr("src", "public/images/Sensor/"+sensor[(config_sn['sn_sensor_'+i] -1)].sensor_imgNor);
+
+                function dash_status(sn_data, max, min) {
+                    if (sn_data >= max) {
+                        $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_imgMax);
+                    } else if (sn_data < min) {
+                        $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_imgMin);
+                    } else {
+                        $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_imgNor);
                     }
-                    if(sensor[(config_sn['sn_sensor_'+i] -1)].sensor_unit == 1){
+                    if (sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_unit == 1) {
                         $(".dash_data__" + i).html(sn_data + " ℃");
-                    }else{
-                        $(".dash_data__" + i).html(sn_data + " "+sensor[(config_sn['sn_sensor_'+i] -1)].sensor_unit);
+                    } else {
+                        $(".dash_data__" + i).html(sn_data + " " + sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_unit);
                     }
                 }
             }
 
         }
-    }// exit_message
+    } // exit_message
     connect();
 
     // ++++++++++++++++++
     $('.sw_mode_Auto').click(function() { // console.log($(this).attr("id"));
         // alert($(this).attr("id"))
         // if ($(this).hasClass("active") === false) {
-            // if (house_master !== "KMUMT001") {
-            //     switch_mode(sw_name = "Auto", mess = "Auto", mqtt_name = "user_control");
-            // } else {
-            //     switch_mode(sw_name = "Auto", mess = "on", mqtt_name = "control_user");
-            // }
+        // if (house_master !== "KMUMT001") {
+        //     switch_mode(sw_name = "Auto", mess = "Auto", mqtt_name = "user_control");
+        // } else {
+        //     switch_mode(sw_name = "Auto", mess = "on", mqtt_name = "control_user");
         // }
-        mqtt_send(msg_dn=house_master + "/control/status/mode", msg="Auto")
+        // }
+        mqtt_send(msg_dn = house_master + "/control/status/mode", msg = "Auto")
     });
     $('.sw_mode_Manual').click(function() { // console.log($(this).attr("id"));
         // if ($(this).hasClass("active") === false) {
@@ -965,7 +1038,7 @@
         //         switch_mode(sw_name = "Manual", mess = "off", mqtt_name_us = "control_user");
         //     }
         // }
-        mqtt_send(msg_dn=house_master + "/control/status/mode", msg="Manual")
+        mqtt_send(msg_dn = house_master + "/control/status/mode", msg = "Manual")
     });
 
     function switch_mode(sw_name, mess, mqtt_name_us) {
@@ -1007,23 +1080,37 @@
     }
     // $('.sw_manual_1').attr('checked')
     // alert($(".sw_manual_1").is(":checked"))
-    
+
     $(".Dsw_manual_1").click(function() {
-        setTimeout(function(){
+        setTimeout(function() {
             // alert($(".sw_manual_1").prop('checked'));
             if (house_master !== "KMUMT001") {
-                switch_control(sta = $(".sw_manual_1").prop('checked'), sw_name = "sw_manual_1", ch_name='<?= $config_cn['cn_name_1'] ?>', mqtt_ch_name = "dripper_1", mqtt_name_us = "user_control" );
-            }else{
-                switch_control(sta = $(".sw_manual_1").prop('checked'), sw_name = "sw_manual_1", ch_name='<?= $config_cn['cn_name_1'] ?>', mqtt_ch_name = "control_st_1", mqtt_name_us = "control_user" );
+                switch_control(sta = $(".sw_manual_1").prop('checked'), sw_name = "sw_manual_1", ch_name = '<?= $config_cn['
+                    cn_name_1 '] ?>', mqtt_ch_name = "dripper_1", mqtt_name_us = "user_control");
+            } else {
+                switch_control(sta = $(".sw_manual_1").prop('checked'), sw_name = "sw_manual_1", ch_name = '<?= $config_cn['
+                    cn_name_1 '] ?>', mqtt_ch_name = "control_st_1", mqtt_name_us = "control_user");
             }
         }, 100);
     });
-    
+
     function switch_control(sta, sw_name, ch_name, mqtt_ch_name, mqtt_name_us) {
         if (house_master !== "KMUMT001") {
-            if(sta === false){var sw_sta = "ปิด"; var mess = "OFF";}else{var sw_sta = "เปิด";var mess = "ON";}
-        }else{
-            if(sta === false){var sw_sta = "ปิด"; var mess = "off";}else{var sw_sta = "เปิด";var mess = "on";}
+            if (sta === false) {
+                var sw_sta = "ปิด";
+                var mess = "OFF";
+            } else {
+                var sw_sta = "เปิด";
+                var mess = "ON";
+            }
+        } else {
+            if (sta === false) {
+                var sw_sta = "ปิด";
+                var mess = "off";
+            } else {
+                var sw_sta = "เปิด";
+                var mess = "on";
+            }
         }
         swal({
             title: 'คุณต้องการ ' + sw_sta + ' ' + ch_name + ' ?',
@@ -1052,11 +1139,12 @@
                 message.retained = true;
                 client.send(message);
                 // console.log(message.qos);
-            }else{
-                $('.'+sw_name).bootstrapToggle("toggle");
+            } else {
+                $('.' + sw_name).bootstrapToggle("toggle");
             }
         });
     }
+
     function switch_control_slan(sta, ch_name, mess, mqtt_ch_name, mqtt_name_us) {
         swal({
             title: 'คุณต้องการ ' + sta + ' ' + ch_name + ' ?',
@@ -1085,443 +1173,464 @@
                 message.retained = true;
                 client.send(message);
                 // console.log(message.qos);
-            }else{
+            } else {
                 // $('.'+sw_name).bootstrapToggle("toggle");
             }
         });
     }
     // ------- Switch control --------------
-    $("#save_auto_cont").click(function(){
+    $("#save_auto_cont").click(function() {
         if (house_master !== "KMUMT001") {
             var channel = $(".channel").val();
             // alert(channel)
-            if(channel == 9){
-                if($("#sw_7").prop('checked') == true){
-                    if($("#time_s_7").val() === ""){
+            if (channel == 9) {
+                if ($("#sw_7").prop('checked') == true) {
+                    if ($("#time_s_7").val() === "") {
                         $('#time_s_7').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_s_7').removeClass('is-invalid')
                     }
-                    if($("#time_e_7").val() === ""){
+                    if ($("#time_e_7").val() === "") {
                         $('#time_e_7').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_e_7').removeClass('is-invalid')
                     }
-                    if($("#time_s_7").val() >= $("#time_e_7").val()){
+                    if ($("#time_s_7").val() >= $("#time_e_7").val()) {
                         swal_c(type = 'error', title = 'Error...', text = 'TIMMER LOOP : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
                         $('#time_s_7').addClass('is-invalid')
                         $('#time_e_7').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_s_7').removeClass('is-invalid')
                         $('#time_e_7').removeClass('is-invalid')
                     }
-                    if($("#time_on_7").val() === ""){
+                    if ($("#time_on_7").val() === "") {
                         $('#time_on_7').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_on_7').removeClass('is-invalid')
                     }
-                    if($("#time_off_7").val() === ""){
+                    if ($("#time_off_7").val() === "") {
                         $('#time_off_7').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_off_7').removeClass('is-invalid')
                     }
-                }else{
-                    if($("#sw_1").prop('checked') == true){
-                        if($("#time_s_1").val() === ""){
+                } else {
+                    if ($("#sw_1").prop('checked') == true) {
+                        if ($("#time_s_1").val() === "") {
                             $('#time_s_1').addClass('is-invalid')
                             return false;
-                        }else{
+                        } else {
                             $('#time_s_1').removeClass('is-invalid')
                         }
-                        if($("#time_e_1").val() === ""){
+                        if ($("#time_e_1").val() === "") {
                             $('#time_e_1').addClass('is-invalid')
                             return false;
-                        }else{
+                        } else {
                             $('#time_e_1').removeClass('is-invalid')
                         }
-                        if($("#time_s_1").val() >= $("#time_e_1").val()){
+                        if ($("#time_s_1").val() >= $("#time_e_1").val()) {
                             swal_c(type = 'error', title = 'Error...', text = 'TIMMER 1 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
                             $('#time_s_1').addClass('is-invalid')
                             $('#time_e_1').addClass('is-invalid')
                             return false;
-                        }else{
+                        } else {
                             $('#time_s_1').removeClass('is-invalid')
                             $('#time_e_1').removeClass('is-invalid')
                         }
                     }
-                    if($("#sw_2").prop('checked') == true){
-                        if($("#time_s_2").val() === ""){
+                    if ($("#sw_2").prop('checked') == true) {
+                        if ($("#time_s_2").val() === "") {
                             $('#time_s_2').addClass('is-invalid')
                             return false;
-                        }else{
+                        } else {
                             $('#time_s_2').removeClass('is-invalid')
                         }
-                        if($("#time_e_2").val() === ""){
+                        if ($("#time_e_2").val() === "") {
                             $('#time_e_2').addClass('is-invalid')
                             return false;
-                        }else{
+                        } else {
                             $('#time_e_2').removeClass('is-invalid')
                         }
-                        if($("#time_s_2").val() >= $("#time_e_2").val()){
+                        if ($("#time_s_2").val() >= $("#time_e_2").val()) {
                             swal_c(type = 'error', title = 'Error...', text = 'TIMMER 2 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
                             $('#time_s_2').addClass('is-invalid')
                             $('#time_e_2').addClass('is-invalid')
                             return false;
-                        }else{
+                        } else {
                             $('#time_s_2').removeClass('is-invalid')
                             $('#time_e_2').removeClass('is-invalid')
                         }
                     }
-                    if($("#sw_3").prop('checked') == true){
-                        if($("#time_s_3").val() === ""){
+                    if ($("#sw_3").prop('checked') == true) {
+                        if ($("#time_s_3").val() === "") {
                             $('#time_s_3').addClass('is-invalid')
                             return false;
-                        }else{
+                        } else {
                             $('#time_s_3').removeClass('is-invalid')
                         }
-                        if($("#time_e_3").val() === ""){
+                        if ($("#time_e_3").val() === "") {
                             $('#time_e_3').addClass('is-invalid')
                             return false;
-                        }else{
+                        } else {
                             $('#time_e_3').removeClass('is-invalid')
                         }
-                        if($("#time_s_3").val() >= $("#time_e_3").val()){
+                        if ($("#time_s_3").val() >= $("#time_e_3").val()) {
                             swal_c(type = 'error', title = 'Error...', text = 'TIMMER 3 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
                             $('#time_s_3').addClass('is-invalid')
                             $('#time_e_3').addClass('is-invalid')
                             return false;
-                        }else{
+                        } else {
                             $('#time_s_3').removeClass('is-invalid')
                             $('#time_e_3').removeClass('is-invalid')
                         }
                     }
-                    if($("#sw_4").prop('checked') == true){
-                        if($("#time_s_4").val() === ""){
+                    if ($("#sw_4").prop('checked') == true) {
+                        if ($("#time_s_4").val() === "") {
                             $('#time_s_4').addClass('is-invalid')
                             return false;
-                        }else{
+                        } else {
                             $('#time_s_4').removeClass('is-invalid')
                         }
-                        if($("#time_e_4").val() === ""){
+                        if ($("#time_e_4").val() === "") {
                             $('#time_e_4').addClass('is-invalid')
                             return false;
-                        }else{
+                        } else {
                             $('#time_e_4').removeClass('is-invalid')
                         }
-                        if($("#time_s_4").val() >= $("#time_e_4").val()){
+                        if ($("#time_s_4").val() >= $("#time_e_4").val()) {
                             swal_c(type = 'error', title = 'Error...', text = 'TIMMER 4 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
                             $('#time_s_4').addClass('is-invalid')
                             $('#time_e_4').addClass('is-invalid')
                             return false;
-                        }else{
+                        } else {
                             $('#time_s_4').removeClass('is-invalid')
                             $('#time_e_4').removeClass('is-invalid')
                         }
                     }
-                    if($("#sw_5").prop('checked') == true){
-                        if($("#time_s_5").val() === ""){
+                    if ($("#sw_5").prop('checked') == true) {
+                        if ($("#time_s_5").val() === "") {
                             $('#time_s_5').addClass('is-invalid')
                             return false;
-                        }else{
+                        } else {
                             $('#time_s_5').removeClass('is-invalid')
                         }
-                        if($("#time_e_5").val() === ""){
+                        if ($("#time_e_5").val() === "") {
                             $('#time_e_5').addClass('is-invalid')
                             return false;
-                        }else{
+                        } else {
                             $('#time_e_5').removeClass('is-invalid')
                         }
-                        if($("#time_s_5").val() >= $("#time_e_5").val()){
+                        if ($("#time_s_5").val() >= $("#time_e_5").val()) {
                             swal_c(type = 'error', title = 'Error...', text = 'TIMMER 5 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
                             $('#time_s_5').addClass('is-invalid')
                             $('#time_e_5').addClass('is-invalid')
                             return false;
-                        }else{
+                        } else {
                             $('#time_s_5').removeClass('is-invalid')
                             $('#time_e_5').removeClass('is-invalid')
                         }
                     }
-                    if($("#sw_6").prop('checked') == true){
-                        if($("#time_s_6").val() === ""){
+                    if ($("#sw_6").prop('checked') == true) {
+                        if ($("#time_s_6").val() === "") {
                             $('#time_s_6').addClass('is-invalid')
                             return false;
-                        }else{
+                        } else {
                             $('#time_s_6').removeClass('is-invalid')
                         }
-                        if($("#time_e_6").val() === ""){
+                        if ($("#time_e_6").val() === "") {
                             $('#time_e_6').addClass('is-invalid')
                             return false;
-                        }else{
+                        } else {
                             $('#time_e_6').removeClass('is-invalid')
                         }
-                        if($("#time_s_6").val() >= $("#time_e_6").val()){
+                        if ($("#time_s_6").val() >= $("#time_e_6").val()) {
                             swal_c(type = 'error', title = 'Error...', text = 'TIMMER 6 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
                             $('#time_s_6').addClass('is-invalid')
                             $('#time_e_6').addClass('is-invalid')
                             return false;
-                        }else{
+                        } else {
                             $('#time_s_6').removeClass('is-invalid')
                             $('#time_e_6').removeClass('is-invalid')
                         }
                     }
                 }
-            }else if(channel == 11){
+            } else if (channel == 11) {
                 var minsToAdd = 15;
-                var newTime_d2 = new Date(new Date("1970/01/01 " + $("#time_s_1").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
-                var newTime_d3 = new Date(new Date("1970/01/01 " + $("#time_s_2").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
-                var newTime_d4 = new Date(new Date("1970/01/01 " + $("#time_s_3").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
-                var newTime_d5 = new Date(new Date("1970/01/01 " + $("#time_s_4").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
-                var newTime_d6 = new Date(new Date("1970/01/01 " + $("#time_s_5").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
-                
-                    // ----------
-                if($("#sw_1").prop('checked') == true){
-                    if($("#time_s_1").val() === ""){
+                var newTime_d2 = new Date(new Date("1970/01/01 " + $("#time_s_1").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                var newTime_d3 = new Date(new Date("1970/01/01 " + $("#time_s_2").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                var newTime_d4 = new Date(new Date("1970/01/01 " + $("#time_s_3").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                var newTime_d5 = new Date(new Date("1970/01/01 " + $("#time_s_4").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                var newTime_d6 = new Date(new Date("1970/01/01 " + $("#time_s_5").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+
+                // ----------
+                if ($("#sw_1").prop('checked') == true) {
+                    if ($("#time_s_1").val() === "") {
                         $('#time_s_1').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_s_1').removeClass('is-invalid')
                     }
                 }
-                if($("#sw_2").prop('checked') == true){
-                    if($("#time_s_2").val() === ""){
+                if ($("#sw_2").prop('checked') == true) {
+                    if ($("#time_s_2").val() === "") {
                         $('#time_s_2').addClass('is-invalid')
                         return false;
-                    }else if($("#time_s_2").val() <= newTime_d2){
+                    } else if ($("#time_s_2").val() <= newTime_d2) {
                         swal_c(type = 'error', title = 'Error...', text = '<b>TIMMER 2 : TIME </b> ต้องมากกว่า <b>' + newTime_d2 + '</b> !');
                         $("#time_s_2").addClass("is-invalid");
                         return false;
-                    }else{
+                    } else {
                         $('#time_s_2').removeClass('is-invalid')
                     }
-                    if($("#time_se_1").val() == $("#time_se_2").val()){
+                    if ($("#time_se_1").val() == $("#time_se_2").val()) {
                         swal_c(type = 'error', title = 'Error...', text = '<b> LEVEL : TIMMER 2 </b> ต้องไม่เท่ากับ <b> LEVEL : TIMMER 1 </b> !');
                         $("#time_se_2").addClass("is-invalid");
                         return false;
-                    }else{
+                    } else {
                         $("#time_se_2").removeClass("is-invalid");
                     }
                 }
-                if($("#sw_3").prop('checked') == true){
-                    if($("#time_s_3").val() === ""){
+                if ($("#sw_3").prop('checked') == true) {
+                    if ($("#time_s_3").val() === "") {
                         $('#time_s_3').addClass('is-invalid')
                         return false;
-                    }else if($("#time_s_3").val() <= newTime_d3){
+                    } else if ($("#time_s_3").val() <= newTime_d3) {
                         swal_c(type = 'error', title = 'Error...', text = '<b>TIMMER 3 : TIME </b> เวลาต้องมากกว่า <b>' + newTime_d3 + '</b> !');
                         $("#time_s_3").addClass("is-invalid");
                         return false;
-                    }else{
+                    } else {
                         $('#time_s_3').removeClass('is-invalid')
                     }
-                    if($("#time_se_2").val() == $("#time_se_3").val()){
+                    if ($("#time_se_2").val() == $("#time_se_3").val()) {
                         swal_c(type = 'error', title = 'Error...', text = '<b> LEVEL : TIMMER 3 </b> ต้องไม่เท่ากับ <b> LEVEL : TIMMER 2 </b> !');
                         $("#time_se_3").addClass("is-invalid");
                         return false;
-                    }else{
+                    } else {
                         $("#time_se_3").removeClass("is-invalid");
                     }
                 }
-                if($("#sw_4").prop('checked') == true){
-                    if($("#time_s_4").val() === ""){
+                if ($("#sw_4").prop('checked') == true) {
+                    if ($("#time_s_4").val() === "") {
                         $('#time_s_4').addClass('is-invalid')
                         return false;
-                    }else if($("#time_s_4").val() <= newTime_d4){
+                    } else if ($("#time_s_4").val() <= newTime_d4) {
                         swal_c(type = 'error', title = 'Error...', text = '<b>TIMMER 4 : TIME </b> เวลาต้องมากกว่า <b>' + newTime_d4 + '</b> !');
                         $("#time_s_4").addClass("is-invalid");
                         return false;
-                    }else{
+                    } else {
                         $('#time_s_4').removeClass('is-invalid')
                     }
-                    if($("#time_se_3").val() == $("#time_se_4").val()){
+                    if ($("#time_se_3").val() == $("#time_se_4").val()) {
                         swal_c(type = 'error', title = 'Error...', text = '<b> LEVEL : TIMMER 4 </b> ต้องไม่เท่ากับ <b> LEVEL : TIMMER 3 </b> !');
                         $("#time_se_4").addClass("is-invalid");
                         return false;
-                    }else{
+                    } else {
                         $("#time_se_4").removeClass("is-invalid");
                     }
                 }
-                if($("#sw_5").prop('checked') == true){
-                    if($("#time_s_5").val() === ""){
+                if ($("#sw_5").prop('checked') == true) {
+                    if ($("#time_s_5").val() === "") {
                         $('#time_s_5').addClass('is-invalid')
                         return false;
-                    }else if($("#time_s_5").val() <= newTime_d5){
+                    } else if ($("#time_s_5").val() <= newTime_d5) {
                         swal_c(type = 'error', title = 'Error...', text = '<b>TIMMER 5 : TIME </b> เวลาต้องมากกว่า <b>' + newTime_d5 + '</b> !');
                         $("#time_s_5").addClass("is-invalid");
                         return false;
-                    }else{
+                    } else {
                         $('#time_s_5').removeClass('is-invalid')
                     }
-                    if($("#time_se_4").val() == $("#time_se_5").val()){
+                    if ($("#time_se_4").val() == $("#time_se_5").val()) {
                         swal_c(type = 'error', title = 'Error...', text = '<b> LEVEL : TIMMER 5 </b> ต้องไม่เท่ากับ <b> LEVEL : TIMMER 4 </b> !');
                         $("#time_se_5").addClass("is-invalid");
                         return false;
-                    }else{
+                    } else {
                         $("#time_se_5").removeClass("is-invalid");
                     }
                 }
-                if($("#sw_6").prop('checked') == true){
-                    if($("#time_s_6").val() === ""){
+                if ($("#sw_6").prop('checked') == true) {
+                    if ($("#time_s_6").val() === "") {
                         $('#time_s_6').addClass('is-invalid')
                         return false;
-                    }else if($("#time_s_6").val() <= newTime_d6){
+                    } else if ($("#time_s_6").val() <= newTime_d6) {
                         swal_c(type = 'error', title = 'Error...', text = '<b>TIMMER 6 : TIME </b> เวลาต้องมากกว่า <b>' + newTime_d6 + '</b> !');
                         $("#time_s_6").addClass("is-invalid");
                         return false;
-                    }else{
+                    } else {
                         $('#time_s_6').removeClass('is-invalid')
                     }
-                    if($("#time_se_5").val() == $("#time_se_6").val()){
+                    if ($("#time_se_5").val() == $("#time_se_6").val()) {
                         swal_c(type = 'error', title = 'Error...', text = '<b> LEVEL : TIMMER 6 </b> ต้องไม่เท่ากับ <b> LEVEL : TIMMER 5 </b> !');
                         $("#time_se_6").addClass("is-invalid");
                         return false;
-                    }else{
+                    } else {
                         $("#time_se_6").removeClass("is-invalid");
                     }
                 }
-            }else{
-                if($("#sw_1").prop('checked') == true){
-                    if($("#time_s_1").val() === ""){
+            } else {
+                if ($("#sw_1").prop('checked') == true) {
+                    if ($("#time_s_1").val() === "") {
                         $('#time_s_1').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_s_1').removeClass('is-invalid')
                     }
-                    if($("#time_e_1").val() === ""){
+                    if ($("#time_e_1").val() === "") {
                         $('#time_e_1').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_e_1').removeClass('is-invalid')
                     }
-                    if($("#time_s_1").val() >= $("#time_e_1").val()){
+                    if ($("#time_s_1").val() >= $("#time_e_1").val()) {
                         swal_c(type = 'error', title = 'Error...', text = 'TIMMER 1 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
                         $('#time_s_1').addClass('is-invalid')
                         $('#time_e_1').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_s_1').removeClass('is-invalid')
                         $('#time_e_1').removeClass('is-invalid')
                     }
                 }
-                if($("#sw_2").prop('checked') == true){
-                    if($("#time_s_2").val() === ""){
+                if ($("#sw_2").prop('checked') == true) {
+                    if ($("#time_s_2").val() === "") {
                         $('#time_s_2').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_s_2').removeClass('is-invalid')
                     }
-                    if($("#time_e_2").val() === ""){
+                    if ($("#time_e_2").val() === "") {
                         $('#time_e_2').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_e_2').removeClass('is-invalid')
                     }
-                    if($("#time_s_2").val() >= $("#time_e_2").val()){
+                    if ($("#time_s_2").val() >= $("#time_e_2").val()) {
                         swal_c(type = 'error', title = 'Error...', text = 'TIMMER 2 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
                         $('#time_s_2').addClass('is-invalid')
                         $('#time_e_2').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_s_2').removeClass('is-invalid')
                         $('#time_e_2').removeClass('is-invalid')
                     }
                 }
-                if($("#sw_3").prop('checked') == true){
-                    if($("#time_s_3").val() === ""){
+                if ($("#sw_3").prop('checked') == true) {
+                    if ($("#time_s_3").val() === "") {
                         $('#time_s_3').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_s_3').removeClass('is-invalid')
                     }
-                    if($("#time_e_3").val() === ""){
+                    if ($("#time_e_3").val() === "") {
                         $('#time_e_3').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_e_3').removeClass('is-invalid')
                     }
-                    if($("#time_s_3").val() >= $("#time_e_3").val()){
+                    if ($("#time_s_3").val() >= $("#time_e_3").val()) {
                         swal_c(type = 'error', title = 'Error...', text = 'TIMMER 3 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
                         $('#time_s_3').addClass('is-invalid')
                         $('#time_e_3').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_s_3').removeClass('is-invalid')
                         $('#time_e_3').removeClass('is-invalid')
                     }
                 }
-                if($("#sw_4").prop('checked') == true){
-                    if($("#time_s_4").val() === ""){
+                if ($("#sw_4").prop('checked') == true) {
+                    if ($("#time_s_4").val() === "") {
                         $('#time_s_4').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_s_4').removeClass('is-invalid')
                     }
-                    if($("#time_e_4").val() === ""){
+                    if ($("#time_e_4").val() === "") {
                         $('#time_e_4').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_e_4').removeClass('is-invalid')
                     }
-                    if($("#time_s_4").val() >= $("#time_e_4").val()){
+                    if ($("#time_s_4").val() >= $("#time_e_4").val()) {
                         swal_c(type = 'error', title = 'Error...', text = 'TIMMER 4 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
                         $('#time_s_4').addClass('is-invalid')
                         $('#time_e_4').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_s_4').removeClass('is-invalid')
                         $('#time_e_4').removeClass('is-invalid')
                     }
                 }
-                if($("#sw_5").prop('checked') == true){
-                    if($("#time_s_5").val() === ""){
+                if ($("#sw_5").prop('checked') == true) {
+                    if ($("#time_s_5").val() === "") {
                         $('#time_s_5').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_s_5').removeClass('is-invalid')
                     }
-                    if($("#time_e_5").val() === ""){
+                    if ($("#time_e_5").val() === "") {
                         $('#time_e_5').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_e_5').removeClass('is-invalid')
                     }
-                    if($("#time_s_5").val() >= $("#time_e_5").val()){
+                    if ($("#time_s_5").val() >= $("#time_e_5").val()) {
                         swal_c(type = 'error', title = 'Error...', text = 'TIMMER 5 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
                         $('#time_s_5').addClass('is-invalid')
                         $('#time_e_5').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_s_5').removeClass('is-invalid')
                         $('#time_e_5').removeClass('is-invalid')
                     }
                 }
-                if($("#sw_6").prop('checked') == true){
-                    if($("#time_s_6").val() === ""){
+                if ($("#sw_6").prop('checked') == true) {
+                    if ($("#time_s_6").val() === "") {
                         $('#time_s_6').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_s_6').removeClass('is-invalid')
                     }
-                    if($("#time_e_6").val() === ""){
+                    if ($("#time_e_6").val() === "") {
                         $('#time_e_6').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_e_6').removeClass('is-invalid')
                     }
-                    if($("#time_s_6").val() >= $("#time_e_6").val()){
+                    if ($("#time_s_6").val() >= $("#time_e_6").val()) {
                         swal_c(type = 'error', title = 'Error...', text = 'TIMMER 6 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
                         $('#time_s_6').addClass('is-invalid')
                         $('#time_e_6').addClass('is-invalid')
                         return false;
-                    }else{
+                    } else {
                         $('#time_s_6').removeClass('is-invalid')
                         $('#time_e_6').removeClass('is-invalid')
                     }
                 }
             }
+
             function swal_c(type, title, text) {
                 Swal({
                     type: type,
@@ -1542,13 +1651,41 @@
                 cancelButtonText: 'ยกเลิก'
             }).then((result) => {
                 if (result.value) {
-                    if ($("#sw_1").prop('checked') == true) { var sw_1 = 1; } else { var sw_1 = 0; }
-                    if ($("#sw_2").prop('checked') == true) { var sw_2 = 1; } else { var sw_2 = 0; }
-                    if ($("#sw_3").prop('checked') == true) { var sw_3 = 1; } else { var sw_3 = 0; }
-                    if ($("#sw_4").prop('checked') == true) { var sw_4 = 1; } else { var sw_4 = 0; }
-                    if ($("#sw_5").prop('checked') == true) { var sw_5 = 1; } else { var sw_5 = 0; }
-                    if ($("#sw_6").prop('checked') == true) { var sw_6 = 1; } else { var sw_6 = 0; }
-                    if ($("#sw_7").prop('checked') == true) { var sw_7 = 1; } else { var sw_7 = 0; }
+                    if ($("#sw_1").prop('checked') == true) {
+                        var sw_1 = 1;
+                    } else {
+                        var sw_1 = 0;
+                    }
+                    if ($("#sw_2").prop('checked') == true) {
+                        var sw_2 = 1;
+                    } else {
+                        var sw_2 = 0;
+                    }
+                    if ($("#sw_3").prop('checked') == true) {
+                        var sw_3 = 1;
+                    } else {
+                        var sw_3 = 0;
+                    }
+                    if ($("#sw_4").prop('checked') == true) {
+                        var sw_4 = 1;
+                    } else {
+                        var sw_4 = 0;
+                    }
+                    if ($("#sw_5").prop('checked') == true) {
+                        var sw_5 = 1;
+                    } else {
+                        var sw_5 = 0;
+                    }
+                    if ($("#sw_6").prop('checked') == true) {
+                        var sw_6 = 1;
+                    } else {
+                        var sw_6 = 0;
+                    }
+                    if ($("#sw_7").prop('checked') == true) {
+                        var sw_7 = 1;
+                    } else {
+                        var sw_7 = 0;
+                    }
                     if (message.destinationName == house_master + "/1/control/time_control") {
                         var result = message.payloadString;
                         var parseJSON = $.parseJSON(result);
@@ -1559,41 +1696,41 @@
                             url: "routes/save_autoControl.php",
                             data: {
                                 house_master: house_master,
-                                channel     : $("#channel").val(),
-                                sw_1 : sw_1,
-                                sw_2 : sw_2,
-                                sw_3 : sw_3,
-                                sw_4 : sw_4,
-                                sw_5 : sw_5,
-                                sw_6 : sw_6,
-                                sw_7 : sw_7,
-                                s_1 : $("#time_s_1").val(),
-                                s_2 : $("#time_s_2").val(),
-                                s_3 : $("#time_s_3").val(),
-                                s_4 : $("#time_s_4").val(),
-                                s_5 : $("#time_s_5").val(),
-                                s_6 : $("#time_s_6").val(),
-                                s_7 : $("#time_s_7").val(),
-                                e_1 : $("#time_e_1").val(),
-                                e_2 : $("#time_e_2").val(),
-                                e_3 : $("#time_e_3").val(),
-                                e_4 : $("#time_e_4").val(),
-                                e_5 : $("#time_e_5").val(),
-                                e_6 : $("#time_e_6").val(),
-                                e_7 : $("#time_e_7").val(),
-                                on_7 : $("#time_on_7").val(),
-                                off_7 : $("#time_off_7").val(),
-                                se_1 : $("#time_se_1").val(),
-                                se_2 : $("#time_se_2").val(),
-                                se_3 : $("#time_se_3").val(),
-                                se_4 : $("#time_se_4").val(),
-                                se_5 : $("#time_se_5").val(),
-                                se_6 : $("#time_se_6").val()
+                                channel: $("#channel").val(),
+                                sw_1: sw_1,
+                                sw_2: sw_2,
+                                sw_3: sw_3,
+                                sw_4: sw_4,
+                                sw_5: sw_5,
+                                sw_6: sw_6,
+                                sw_7: sw_7,
+                                s_1: $("#time_s_1").val(),
+                                s_2: $("#time_s_2").val(),
+                                s_3: $("#time_s_3").val(),
+                                s_4: $("#time_s_4").val(),
+                                s_5: $("#time_s_5").val(),
+                                s_6: $("#time_s_6").val(),
+                                s_7: $("#time_s_7").val(),
+                                e_1: $("#time_e_1").val(),
+                                e_2: $("#time_e_2").val(),
+                                e_3: $("#time_e_3").val(),
+                                e_4: $("#time_e_4").val(),
+                                e_5: $("#time_e_5").val(),
+                                e_6: $("#time_e_6").val(),
+                                e_7: $("#time_e_7").val(),
+                                on_7: $("#time_on_7").val(),
+                                off_7: $("#time_off_7").val(),
+                                se_1: $("#time_se_1").val(),
+                                se_2: $("#time_se_2").val(),
+                                se_3: $("#time_se_3").val(),
+                                se_4: $("#time_se_4").val(),
+                                se_5: $("#time_se_5").val(),
+                                se_6: $("#time_se_6").val()
                             },
                             dataType: 'json',
                             success: function(res) {
                                 // console.log(res.data)
-                                if(res.status === "Insert_Success"){
+                                if (res.status === "Insert_Success") {
                                     $("#Modal_Auto_control").modal("hide");
                                     $.extend(parseJSON, res.data);
                                     var json_msg = JSON.stringify(parseJSON);
@@ -1603,14 +1740,14 @@
                                     message.qos = 1;
                                     message.retained = true;
                                     client.send(message);
-                                
+
                                     swal({
                                         title: 'บันทึกข้อมูลสำเร็จ',
                                         type: 'success',
                                         allowOutsideClick: false,
                                         confirmButtonColor: '#32CD32'
                                     });
-                                }else{
+                                } else {
                                     swal({
                                         title: 'Error !',
                                         text: "เกิดข้อผิดพลาด ?",
@@ -1629,26 +1766,28 @@
                     }
                 }
             });
-        }else{ // =KMUMT001
+        } else { // =KMUMT001
             var Rmx1 = $(".range_control1").val().split(";");
             var Rmx2 = $(".range_control2").val().split(";");
             var Rmx3 = $(".range_control3").val().split(";");
             var Rmx5 = $(".range_control5").val().split(";");
-            if(Rmx1[0] == Rmx1[1]){
+            if (Rmx1[0] == Rmx1[1]) {
                 swal_c(type = 'error', title = 'Error...', text = 'Soil moisture 1 : <b>ความชื้นเริ่มต้นต้องน้อยกว่าความชื้นสิ้นสุด</b> !');
                 return false;
             }
-            if(Rmx2[0] == Rmx2[1]){
+            if (Rmx2[0] == Rmx2[1]) {
                 swal_c(type = 'error', title = 'Error...', text = 'Soil moisture 2 : <b>ความชื้นเริ่มต้นต้องน้อยกว่าความชื้นสิ้นสุด</b> !');
                 return false;
             }
-            if(Rmx3[0] == Rmx3[1]){
+            if (Rmx3[0] == Rmx3[1]) {
                 swal_c(type = 'error', title = 'Error...', text = 'Temperature : <b>อุณหภูมิเริ่มต้นต้องน้อยกว่าอุณหภูมิสิ้นสุด</b> !');
                 return false;
-            }if(Rmx5[0] == Rmx5[1]){
+            }
+            if (Rmx5[0] == Rmx5[1]) {
                 swal_c(type = 'error', title = 'Error...', text = 'Light intensity  : <b>ความเข้มแสงเริ่มต้นต้องน้อยกว่าความเข้มแสงสิ้นสุด</b> !');
                 return false;
             }
+
             function swal_c(type, title, text) {
                 Swal({
                     type: type,
@@ -1734,13 +1873,13 @@
                                 message.retained = true;
                                 client.send(message);
 
-                            swal({
+                                swal({
                                     title: 'บันทึกข้อมูลสำเร็จ',
                                     type: 'success',
                                     allowOutsideClick: false,
                                     confirmButtonColor: '#32CD32'
                                 });
-                            }else{
+                            } else {
                                 swal({
                                     title: 'Error !',
                                     text: "เกิดข้อผิดพลาด ?",
@@ -1760,9 +1899,9 @@
             });
         }
     }); // exit_save_Auto
-    
+
     // ++++++++++++++++++
-    function mqtt_send(msg_dn, msg){
+    function mqtt_send(msg_dn, msg) {
         // Create a client instance
         client = new Paho.MQTT.Client(hostname, Number(port), "mqtt_js_324" + parseInt(Math.random() * 100000, 10));
 
@@ -1771,7 +1910,9 @@
         client.onMessageArrived = onMessageArrived;
 
         // connect the client
-        client.connect({onSuccess:onConnect});
+        client.connect({
+            onSuccess: onConnect
+        });
 
         // called when the client connects
         function onConnect() {
@@ -1786,7 +1927,7 @@
         // called when the client loses its connection
         function onConnectionLost(responseObject) {
             if (responseObject.errorCode !== 0) {
-                console.log("onConnectionLost:"+responseObject.errorMessage);
+                console.log("onConnectionLost:" + responseObject.errorMessage);
             }
         }
 
