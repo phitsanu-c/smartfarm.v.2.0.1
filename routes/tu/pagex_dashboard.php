@@ -3,6 +3,18 @@
 <style>
   .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
   .toggle.ios .toggle-handle { border-radius: 20px; }
+
+
+  .no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.no-gutters>.col,
+.no-gutters>[class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+}
 </style>
 <div class="page-content">
 <?php
@@ -249,416 +261,310 @@
             </div>
         </div>
         <!-- Modal Control -->
-        <div class="modal fade" id="Modal_Auto_control"  tabindex="-1" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
+        <div class="modal fade" id="Modal_control"  tabindex="-1" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered" ><!-- style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;" -->
                 <div class="modal-content">
                     <div class="modal-header border-4">
-                            <!-- <div><i class="bx bxs-user me-1 font-22 text-info"></i></div> -->
-                            <b class="modal_autoText"></b>
-                       
+                        <div><i class="bx bxs-user me-1 font-22 text-info"></i></div>
+                        <b class="modal_autoText">Control Status</b>
                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="seve_auto">
-                            <form class="row g-3" id="seve_auto" onsubmit="return false">
-                                <input type="hidden" class="channel" id="channel">
-                                <div class="border p-4 rounded mb-3 time_loop">
-                                    <div class="d-flex mb-2">
-                                    <B>TIMER Loop</B>
-                                        <div class="sw_toggle ms-auto">
-                                            <input class="input_check" type="checkbox" id="sw_7" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6 m-t-0">
-                                            <div class="form-group text-left">
-                                                <div class="row">
-                                                    <div class="col-md-3 align-vertical-center">
-                                                        <small class="form-control-feedback"> START </small>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <select id="time_s_7" class="form-select input_time">
-                                                            <option value="">Select</option>
-                                                            <option value="06:00">06:00</option>
-                                                            <option value="07:00">07:00</option>
-                                                            <option value="08:00">08:00</option>
-                                                            <option value="09:00">09:00</option>
-                                                            <option value="10:00">10:00</option>
-                                                            <option value="11:00">11:00</option>
-                                                            <option value="12:00">12:00</option>
-                                                            <option value="13:00">13:00</option>
-                                                            <option value="14:00">14:00</option>
-                                                            <option value="15:00">15:00</option>
-                                                            <option value="16:00">16:00</option>
-                                                            <option value="17:00">17:00</option>
-                                                        </select>
-                                                        <div class="invalid-feedback">กรุณาระบุเวลาเริ่มต้น</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 m-t-0">
-                                            <div class="form-group text-left">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <small class="form-control-feedback"> END </small>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <select id="time_e_7" class="form-select input_time">
-                                                            <option value="">Select</option>
-                                                            <option value="07:00">07:00</option>
-                                                            <option value="08:00">08:00</option>
-                                                            <option value="09:00">09:00</option>
-                                                            <option value="10:00">10:00</option>
-                                                            <option value="11:00">11:00</option>
-                                                            <option value="12:00">12:00</option>
-                                                            <option value="13:00">13:00</option>
-                                                            <option value="14:00">14:00</option>
-                                                            <option value="15:00">15:00</option>
-                                                            <option value="16:00">16:00</option>
-                                                            <option value="17:00">17:00</option>
-                                                            <option value="18:00">18:00</option>
-                                                        </select>
-                                                        <div class="invalid-feedback">กรุณาระบุเวลาสิ้นสุด</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 m-t-0">
-                                            <div class="form-group text-left">
-                                                <div class="row">
-                                                    <div class="col-md-3 align-vertical-center">
-                                                        <small class="form-control-feedback"> ON </small>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <select id="time_on_7" class="form-select input_time">
-                                                            <option value="">Select</option>
-                                                            <option value="5">5 min.</option>
-                                                            <option value="10">10 min.</option>
-                                                            <option value="15">15 min.</option>
-                                                            <option value="20">20 min.</option>
-                                                            <option value="25">25 min.</option>
-                                                            <option value="30">30 min.</option>
-                                                        </select>
-                                                        <div class="invalid-feedback">กรุณาระบุเวลาทำงาน</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 m-t-0">
-                                            <div class="form-group text-left">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <small class="form-control-feedback"> OFF </small>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <select id="time_off_7" class="form-select input_time">
-                                                            <option value="">Select</option>
-                                                            <option value="5">5 min.</option>
-                                                            <option value="10">10 min.</option>
-                                                            <option value="15">15 min.</option>
-                                                            <option value="20">20 min.</option>
-                                                            <option value="25">25 min.</option>
-                                                            <option value="30">30 min.</option>
-                                                        </select>
-                                                        <div class="invalid-feedback">กรุณาระบุเวลาหยุดทำงาน</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>    
+                        <div class="col-12">
+                            <div class="row col-12 m-t-10 no-gutters">
+                                <div class="col-6 card-body border radius-10 shadow-none mb-3">
+                                    <button type="button" class="btn btn-success sw_mode_Auto" style="width: 100%;"> อัตโนมัติ</button>
                                 </div>
-                                <div class="border p-4 rounded">
-                                    <div class="d-flex mb-2">
-                                        <B>TIMER 1</B>
-                                        <div class="sw_toggle ms-auto">
-                                            <input class="input_check" type="checkbox" id="sw_1" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6 m-t-0">
-                                            <div class="form-group text-left">
-                                                <div class="row">
-                                                    <div class="col-md-3 align-vertical-center">
-                                                        <small class="form-control-feedback start_7"> START </small>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <input type="time" id="time_s_1" class="form-control input_time">
-                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 m-t-0">
-                                            <div class="form-group text-left">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <small class="form-control-feedback end_7"> END </small>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <input type="time" id="time_e_1" class="form-control input_time">
-                                                        <select id="time_se_1" class="form-select input_time">
-                                                            <option value="0">0 : Close 0%</option>
-                                                            <option value="1">1 : Close 25%</option>
-                                                            <option value="2">2 : Close 50%</option>
-                                                            <option value="3">3 : Close 75%</option>
-                                                            <option value="4">4 : Close 100%</option>
-                                                        </select>
-                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr/>
-                                    <div class="d-flex mb-2">
-                                        <B>TIMER 2</B>
-                                        <div class="sw_toggle ms-auto">
-                                            <input class="input_check" type="checkbox" id="sw_2" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                        </div>
-                                    </div>
-                                    <div class="row m-t-10 ">
-                                        <div class="col-6 m-t-0">
-                                            <div class="form-group text-left">
-                                                <div class="row">
-                                                    <div class="col-md-3 align-vertical-center">
-                                                        <small class="form-control-feedback start_7"> START </small>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <input type="time" id="time_s_2" class="form-control input_time">
-                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 m-t-0">
-                                            <div class="form-group text-left">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <small class="form-control-feedback end_7"> END </small>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <input type="time" id="time_e_2" class="form-control input_time">
-                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                        <select id="time_se_2" class="form-select input_time">
-                                                            <option value="0">0 : Close 0%</option>
-                                                            <option value="1">1 : Close 25%</option>
-                                                            <option value="2">2 : Close 50%</option>
-                                                            <option value="3">3 : Close 75%</option>
-                                                            <option value="4">4 : Close 100%</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr/>
-                                    <div class="d-flex mb-2">
-                                        <B>TIMER 3</B>
-                                        <div class="sw_toggle ms-auto">
-                                            <input class="input_check" type="checkbox" id="sw_3" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                        </div>
-                                    </div>
-                                    <div class="row m-t-10 ">
-                                        <div class="col-6 m-t-0">
-                                            <div class="form-group text-left">
-                                                <div class="row">
-                                                    <div class="col-md-3 align-vertical-center">
-                                                        <small class="form-control-feedback start_7"> START </small>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <input type="time" id="time_s_3" class="form-control input_time">
-                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 m-t-0">
-                                            <div class="form-group text-left">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <small class="form-control-feedback end_7"> END </small>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <input type="time" id="time_e_3" class="form-control input_time">
-                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                        <select id="time_se_3" class="form-select input_time">
-                                                            <option value="0">0 : Close 0%</option>
-                                                            <option value="1">1 : Close 25%</option>
-                                                            <option value="2">2 : Close 50%</option>
-                                                            <option value="3">3 : Close 75%</option>
-                                                            <option value="4">4 : Close 100%</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr/>
-                                    <div class="d-flex mb-2">
-                                        <B>TIMER 4</B>
-                                        <div class="sw_toggle ms-auto">
-                                            <input class="input_check" type="checkbox" id="sw_4" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                        </div>
-                                    </div>
-                                    <div class="row m-t-10 ">
-                                        <div class="col-6 m-t-0">
-                                        <div class="form-group text-left">
-                                                <div class="row">
-                                                    <div class="col-md-3 align-vertical-center">
-                                                        <small class="form-control-feedback start_7"> START </small>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <input type="time" id="time_s_4" class="form-control input_time">
-                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 m-t-0">
-                                            <div class="form-group text-left">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <small class="form-control-feedback end_7"> END </small>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <input type="time" id="time_e_4" class="form-control input_time">
-                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                        <select id="time_se_4" class="form-select input_time">
-                                                            <option value="0">0 : Close 0%</option>
-                                                            <option value="1">1 : Close 25%</option>
-                                                            <option value="2">2 : Close 50%</option>
-                                                            <option value="3">3 : Close 75%</option>
-                                                            <option value="4">4 : Close 100%</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr/>
-                                    <div class="d-flex mb-2">
-                                        <B>TIMER 5</B>
-                                        <div class="sw_toggle ms-auto">
-                                            <input class="input_check" type="checkbox" id="sw_5" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                        </div>
-                                    </div>
-                                    <div class="row m-t-10 ">
-                                        <div class="col-6 m-t-0">
-                                        <div class="form-group text-left">
-                                                <div class="row">
-                                                    <div class="col-md-3 align-vertical-center">
-                                                        <small class="form-control-feedback start_7"> START </small>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <input type="time" id="time_s_5" class="form-control input_time">
-                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 m-t-0">
-                                            <div class="form-group text-left">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <small class="form-control-feedback end_7"> END </small>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <input type="time" id="time_e_5" class="form-control input_time">
-                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                        <select id="time_se_5" class="form-select input_time">
-                                                            <option value="0">0 : Close 0%</option>
-                                                            <option value="1">1 : Close 25%</option>
-                                                            <option value="2">2 : Close 50%</option>
-                                                            <option value="3">3 : Close 75%</option>
-                                                            <option value="4">4 : Close 100%</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr/>
-                                    <div class="d-flex mb-2">
-                                        <B>TIMER 6</B>
-                                        <div class="sw_toggle ms-auto">
-                                            <input class="input_check" type="checkbox" id="sw_6" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                        </div>
-                                    </div>
-                                    <div class="row m-t-10 ">
-                                        <div class="col-6 m-t-0">
-                                        <div class="form-group text-left">
-                                                <div class="row">
-                                                    <div class="col-md-3 align-vertical-center">
-                                                        <small class="form-control-feedback start_7"> START </small>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <input type="time" id="time_s_6" class="form-control input_time">
-                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 m-t-0">
-                                            <div class="form-group text-left">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <small class="form-control-feedback end_7"> END </small>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <input type="time" id="time_e_6" class="form-control input_time">
-                                                        <div class="invalid-feedback">กรุณาระบุเวลา</div>
-                                                        <select id="time_se_6" class="form-select input_time">
-                                                            <option value="0">0 : Close 0%</option>
-                                                            <option value="1">1 : Close 25%</option>
-                                                            <option value="2">2 : Close 50%</option>
-                                                            <option value="3">3 : Close 75%</option>
-                                                            <option value="4">4 : Close 100%</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="col-6 card-body border radius-10 shadow-none mb-3">
+                                    <button type="button" class="btn btn-success sw_mode_Manual" style="width: 100%;">กำหนดเอง</button>
                                 </div>
-                            </from>
+                            </div>
+                            <!-- ---------------- -->
+                            <ul class="nav nav-pills col-12 m-t-10 ul_Auto" role="tablist">
+                                <?php for($i = 1; $i<=12; $i++){
+                                    echo '  <li class="nav-item col-md-3 col-6 cAu_'.$i.'">
+                                                <a class="nav-link " href="javascript:;">'.$config_cn['cn_name_'.$i].'</a>
+                                            </li>';
+                                }?>
+                            </ul>
+                            <!-- ---------------- -->
                         </div>
-                        <div class="seve_auto_kmutt">
-                            <form class="row g-3" id="seve_auto_kmutt">
-                                <!-- <div class="tab-pane show active ridge" role="tabpanel"> -->
-                                    <div class="row">
-                                        <div class="container col-md-12">
-                                            <div class="text-center"><br>
-                                                <h5>Soil moisture (%)</h5>
-                                                <h6>ON - OFF Dripper 1</h6>
-                                                <input type="text" class="range_control range_control1"/>
-                                            </div>
-                                        </div>
-                                        <div class="container col-md-12">
-                                            <div class="text-center"><br>
-                                                <h5>Soil moisture (%)</h5>
-                                                <h6>ON - OFF Dripper 2</h6>
-                                                <input type="text" class="range_control range_control2"/>
-                                            </div>
-                                        </div>
-                                        <div class="container col-md-12">
-                                            <div class="text-center"><br>
-                                                <h5>temperature (℃)</h5>
-                                                <h6>ON - OFF Foggy inside and Sprinkler outside</h6>
-                                                <input type="text" class="range_control range_control3"/>
-                                            </div>
-                                        </div>
-                                        <div class="container col-md-12">
-                                            <div class="text-center"><br>
-                                                <h5>Light intensity (KLux)</h5>
-                                                <h6>ON - OFF Slan</h6>
-                                                <input type="text" class="range_control range_control5" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                <!-- </div> -->
-                            </form>
-                        </div>
+                        <!-- ========================================= -->
+                         <!-- Control 1 -->
+                         <div class="">
+                                                        <div class="row p-t-10 parent" style="background-color: #e0e6e9e3; text-align: justify;">
+                                                            <div class="child">
+                                                                <h4><b class="text_load_1">wdwfwegergr</b></h4>
+                                                            </div>
+                                                            <a class="child1 edit_cont" href="javascript:void(0)" status="1">
+                                                                <h4><b>Edit</b></h4>
+                                                            </a>
+                                                            <!-- <h4 class="col"><b class="text_load_1"></b></h4>
+                                                                <button class=" text-right"><b class="">Edit</b></button> -->
+
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-12 m-t-10">
+                                                                <div class="row">
+                                                                    <div class="col-6 text-left">
+                                                                        <B>TIMER 1</B>
+                                                                    </div>
+                                                                    <div class="col-6 text-right">
+                                                                        <!-- <input type="checkbox" id="1_1" class="sw_toggle js-switch"> -->
+                                                                        <img class="img_sw 1_1" src="" alt="">
+                                                                        <div class="sw_toggle">
+                                                                            <input class="input_check" type="checkbox" id="1_1" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                                                        </div>
+                                                                        <!-- <button type="button" class="btn waves-effect waves-light btn-rounded btn-xs btn-success"> <i class="fa fa-check"></i> On</button> -->
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row m-t-10 ">
+                                                            <div class="col-6 m-t-0">
+                                                                <div class="form-group text-left">
+                                                                    <div class="row">
+                                                                        <div class="col-md-3 align-vertical-center">
+                                                                            <small class="form-control-feedback"> START </small>
+                                                                        </div>
+                                                                        <div class="col-md-9">
+                                                                            <input type="time" id="time_s_1_1" class="form-control  input_time" data-open="myTimePicker">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6 m-t-0">
+                                                                <div class="form-group text-left">
+                                                                    <div class="row">
+                                                                        <div class="col-md-3">
+                                                                            <small class="form-control-feedback"> END </small>
+                                                                        </div>
+                                                                        <div class="col-md-9">
+                                                                            <input type="time" id="time_e_1_1" class="form-control input_time">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row  border-top">
+                                                            <div class="col-12 m-t-10">
+                                                                <div class="row">
+                                                                    <div class="col-6 text-left">
+                                                                        <B>TIMER 2</B>
+                                                                    </div>
+                                                                    <div class="col-6 text-right">
+                                                                        <!-- <input type="checkbox" id="1_2" class="sw_toggle js-switch"> -->
+                                                                        <!-- <input type="checkbox" id="1_2" class="sw_toggle" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios"> -->
+                                                                        <!-- <button type="button" class="btn waves-effect waves-light btn-rounded btn-xs btn-danger ">Off <i class="fa fa-times"></i></button> -->
+                                                                        <img class="img_sw 1_2" src="" alt="">
+                                                                        <div class="sw_toggle">
+                                                                            <input class="input_check" type="checkbox" id="1_2" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row m-t-10 ">
+                                                            <div class="col-6 m-t-0">
+                                                                <div class="form-group text-left">
+                                                                    <div class="row">
+                                                                        <div class="col-md-3 align-vertical-center">
+                                                                            <small class="form-control-feedback"> START </small>
+                                                                        </div>
+                                                                        <div class="col-md-9">
+                                                                            <input type="time" id="time_s_1_2" class="form-control input_time">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6 m-t-0">
+                                                                <div class="form-group text-left">
+                                                                    <div class="row">
+                                                                        <div class="col-md-3">
+                                                                            <small class="form-control-feedback"> END </small>
+                                                                        </div>
+                                                                        <div class="col-md-9">
+                                                                            <input type="time" id="time_e_1_2" class="form-control input_time">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row  border-top">
+                                                            <div class="col-12 m-t-10">
+                                                                <div class="row">
+                                                                    <div class="col-6 text-left">
+                                                                        <B>TIMER 3</B>
+                                                                    </div>
+                                                                    <div class="col-6 text-right">
+                                                                        <!-- <input type="checkbox" id="1_3" class="sw_toggle" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary"> -->
+                                                                        <img class="img_sw 1_3" src="" alt="">
+                                                                        <div class="sw_toggle">
+                                                                            <input class="input_check" type="checkbox" id="1_3" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row m-t-10">
+                                                            <div class="col-6 m-t-0">
+                                                                <div class="form-group text-left">
+                                                                    <div class="row">
+                                                                        <div class="col-md-3 align-vertical-center">
+                                                                            <small class="form-control-feedback"> START </small>
+                                                                        </div>
+                                                                        <div class="col-md-9">
+                                                                            <input type="time" id="time_s_1_3" class="form-control input_time">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6 m-t-0">
+                                                                <div class="form-group text-left">
+                                                                    <div class="row">
+                                                                        <div class="col-md-3">
+                                                                            <small class="form-control-feedback"> END </small>
+                                                                        </div>
+                                                                        <div class="col-md-9">
+                                                                            <input type="time" id="time_e_1_3" class="form-control input_time">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row  border-top">
+                                                            <div class="col-12 m-t-10">
+                                                                <div class="row">
+                                                                    <div class="col-6 text-left">
+                                                                        <B>TIMER 4</B>
+                                                                    </div>
+                                                                    <div class="col-6 text-right">
+                                                                        <!-- <input type="checkbox" id="1_4" class="sw_toggle" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary"> -->
+                                                                        <img class="img_sw 1_4" src="" alt="">
+                                                                        <div class="sw_toggle">
+                                                                            <input class="input_check" type="checkbox" id="1_4" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row m-t-10">
+                                                            <div class="col-6 m-t-0">
+                                                                <div class="form-group text-left">
+                                                                    <div class="row">
+                                                                        <div class="col-md-3 align-vertical-center">
+                                                                            <small class="form-control-feedback"> START </small>
+                                                                        </div>
+                                                                        <div class="col-md-9">
+                                                                            <input type="time" id="time_s_1_4" class="form-control input_time">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6 m-t-0">
+                                                                <div class="form-group text-left">
+                                                                    <div class="row">
+                                                                        <div class="col-md-3">
+                                                                            <small class="form-control-feedback"> END </small>
+                                                                        </div>
+                                                                        <div class="col-md-9">
+                                                                            <input type="time" id="time_e_1_4" class="form-control input_time">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row  border-top">
+                                                            <div class="col-12 m-t-10">
+                                                                <div class="row">
+                                                                    <div class="col-6 text-left">
+                                                                        <B>TIMER 5</B>
+                                                                    </div>
+                                                                    <div class="col-6 text-right">
+                                                                        <!-- <input type="checkbox" id="1_5" class="sw_toggle" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary"> -->
+                                                                        <img class="img_sw 1_5" src="" alt="">
+                                                                        <div class="sw_toggle">
+                                                                            <input class="input_check" type="checkbox" id="1_5" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row m-t-10">
+                                                            <div class="col-6 m-t-0">
+                                                                <div class="form-group text-left">
+                                                                    <div class="row">
+                                                                        <div class="col-md-3 align-vertical-center">
+                                                                            <small class="form-control-feedback"> START </small>
+                                                                        </div>
+                                                                        <div class="col-md-9">
+                                                                            <input type="time" id="time_s_1_5" class="form-control input_time">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6 m-t-0">
+                                                                <div class="form-group text-left">
+                                                                    <div class="row">
+                                                                        <div class="col-md-3">
+                                                                            <small class="form-control-feedback"> END </small>
+                                                                        </div>
+                                                                        <div class="col-md-9">
+                                                                            <input type="time" id="time_e_1_5" class="form-control input_time">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row  border-top">
+                                                            <div class="col-12 m-t-10">
+                                                                <div class="row">
+                                                                    <div class="col-6 text-left">
+                                                                        <B>TIMER 6</B>
+                                                                    </div>
+                                                                    <div class="col-6 text-right">
+                                                                        <!-- <input type="checkbox" id="1_6" class="sw_toggle" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary"> -->
+                                                                        <img class="img_sw 1_6" src="" alt="">
+                                                                        <div class="sw_toggle">
+                                                                            <input class="input_check" type="checkbox" id="1_6" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row m-t-10">
+                                                            <div class="col-6 m-t-0">
+                                                                <div class="form-group text-left">
+                                                                    <div class="row">
+                                                                        <div class="col-md-3 align-vertical-center">
+                                                                            <small class="form-control-feedback"> START </small>
+                                                                        </div>
+                                                                        <div class="col-md-9">
+                                                                            <input type="time" id="time_s_1_6" class="form-control input_time">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6 m-t-0">
+                                                                <div class="form-group text-left">
+                                                                    <div class="row">
+                                                                        <div class="col-md-3">
+                                                                            <small class="form-control-feedback"> END </small>
+                                                                        </div>
+                                                                        <div class="col-md-9">
+                                                                            <input type="time" id="time_e_1_6" class="form-control input_time">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Exit Control 1 -->
+                        <!-- ================================ -->
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="save_auto_cont" class="btn btn-success waves-light">
@@ -1799,4 +1705,7 @@
         //     }
         // }
     }
+    $('.memu_control').click(function(){
+        $("#Modal_control").modal('show')
+    })
 </script>
