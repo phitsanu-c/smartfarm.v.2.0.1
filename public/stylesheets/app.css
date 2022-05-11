@@ -381,7 +381,7 @@ a {
     padding-right: .5rem;
     color: #6c757d;
     font-family: LineIcons;
-    content: "\ea5c"
+    /* content: "\ea5c" */
 }
 
 .icon-badge {
