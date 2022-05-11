@@ -262,35 +262,21 @@
         <!-- Modal Control -->
         <div class="modal fade" id="Modal_control"  tabindex="-1" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 			<div class="modal-dialog modal-dialog-centered" ><!-- style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;" -->
-                <div class="modal-content">
+            
+            
+                <div class="modal-control">
                     <div class="modal-header border-4">
                         <div><i class="bx bxs-user me-1 font-22 text-info"></i></div>
                         <b class="modal_autoText">Control Status</b>
                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    
                     </div>
-                    <div class="modal-body">
-                        <div class="col-12">
-                            <div class="row col-12 m-t-10 no-gutters">
-                                <div class="col-6 card-body border radius-10 shadow-none mb-3">
-                                    <button type="button" class="btn btn-success sw_mode_Auto" style="width: 100%;"> อัตโนมัติ</button>
-                                </div>
-                                <div class="col-6 card-body border radius-10 shadow-none mb-3">
-                                    <button type="button" class="btn btn-success sw_mode_Manual" style="width: 100%;">กำหนดเอง</button>
-                                </div>
-                            </div>
-                            <!-- ---------------- -->
-                            <ul class="nav nav-pills col-12 m-t-10 ul_Auto" role="tablist">
-                                <?php for($i = 1; $i<=12; $i++){
-                                    echo '  <li class="nav-item col-md-3 col-6 cAu_'.$i.'">
-                                                <a class="nav-link " href="javascript:;">'.$config_cn['cn_name_'.$i].'</a>
-                                            </li>';
-                                }?>
-                            </ul>
-                            <!-- ---------------- -->
-                        </div>
+                    
+                    <div class="modal-control-body">
+                        
                         <!-- ========================================= -->
                          <!-- Control 1 -->
-                         <div class="">
+                         <div class="row">
                             <div class="row p-t-10 parent" style="background-color: #e0e6e9e3; text-align: justify;">
                                 <div class="child">
                                     <h4><b class="text_load_1">wdwfwegergr</b></h4>

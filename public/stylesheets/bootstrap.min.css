@@ -5550,6 +5550,35 @@ fieldset:disabled .btn {
     outline: 0
 }
 
+.modal-control {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    outline: 0;
+}
+
+.modal-control-body {
+    position: relative;
+    height: 50vh;
+    flex: 1 1 auto;
+    padding: 1rem;
+    overflow-y: scroll;
+}
+
+.modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 1rem;
+    border-top: 1px solid #e9ecef;
+}
+
 .modal-dialog {
     position: relative;
     width: auto;
