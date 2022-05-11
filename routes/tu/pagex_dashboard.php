@@ -5,15 +5,33 @@
   .toggle.ios .toggle-handle { border-radius: 20px; }
 
   .no-gutters {
-    margin-right: 0;
-    margin-left: 0;
-}
+        margin-right: 0;
+        margin-left: 0;
+    }
 
-.no-gutters>.col,
-.no-gutters>[class*="col-"] {
-    padding-right: 0;
-    padding-left: 0;
-}
+    .no-gutters>.col,
+    .no-gutters>[class*="col-"] {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .parent {
+        display: flex;
+    }
+    
+    .child {
+        padding-left: 20px;
+    }
+    
+    .child2 {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    
+    .child1 {
+        margin-left: auto;
+        padding-right: 20px;
+    }
 </style>
 <div class="page-content">
 <?php
@@ -71,7 +89,7 @@
     <!-- <h6 class="mb-0 text-uppercase">Horizontal Card</h6> -->
     <hr/>
     <div class="row">
-        <div class="col-12 col-lg-4 col-xl-4 d-flex">
+        <div class="col-12 col-lg-4 col-xl-4 col-sm-12 d-flex">
             <div class="card w-100 radius-10">
                 <div class="card-body"> 
                     <div class="card radius-10 shadow-none">
@@ -137,7 +155,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-8 col-xl-8 d-flex">
+        <div class="col-12 col-lg-8 col-xl-8 col-sm-12 d-flex">
             <div class="card w-100 radius-10">
                 <div class="card-body"> 
                     <!-- <div class="card radius-10 border shadow-none">
@@ -226,15 +244,15 @@
     </div><!--end row-->
     
     <?php if($_POST["count_cn"] != 0){?>
-        <div class="col-12 col-lg-12 col-xl-12 d-flex">
+        <div class="col-12 col-lg-12 col-xl-12 col-sm-12 d-flex">
             <div class="card w-100 radius-10">
                 <div class="card-body">
                     <div class="card-body text-center">
-                        <h4 class="card-title text-center"><b>ระบบควบคุม </b></h4>
+                        <h3 class="card-title text-center"><b>ระบบควบคุม </b></h3>
                         <!-- <h5 class="card-title text-center"><b>โหมดอัตโนมัติ </b></h5> -->
                         <!-- <div class="row g-2"> -->
                             <!-- <div class="col-lg-6 col-xl-6 col-sm-12 col-12" > -->
-                                <button type="button" class="btn btn-outline-success px-5 radius-30 sw_mode_Auto active" style="font-size:18px">โหมดอัตโนมัติ</button>
+                                <button type="button" class="btn btn-outline-success px-5 radius-30 dash_mode active" style="font-size:18px">โหมดอัตโนมัติ</button>
                             <!-- </div> -->
                             <!-- <div class="col-lg-6 col-xl-6 col-sm-12 col-12">
                                 <button type="button" class="col-lg-6 col-xl-6 col-sm-12 col-12 btn btn-outline-info px-5 radius-30 sw_mode_Manual" style="font-size:18px">โหมดสั่งงานด้วยตนเอง</button>
@@ -242,12 +260,19 @@
                         <!-- </div> -->
                     </div>
                     <div class="row">
-                        <?php for($i = 1; $i <= 12; $i++){ if(
-                            $config_cn['cn_status_'.$i] == 1){ ?>
+                        <?php for($i = 1; $i <= 12; $i++){ 
+                            if($config_cn['cn_status_'.$i] == 1){ ?>
                             <div class="col-lg-3 col-xl-3 col-sm-12">
                                 <div class="card-body border radius-10 shadow-none mb-3">
-                                    <div class="d-flex">
-                                        <h5 class="mb-0 mmn"><b><?= $config_cn['cn_name_'.$i] ?></b></h5>
+                                    <div class="text-center">
+                                        <?php  
+                                            if($i <= 4){echo '<h4><b>Dripper '.$i.'</b></h4>';}
+                                            elseif($i > 4 && $i <= 8){echo '<h4><b>Fan '.($i-4).'</b></h4>';}
+                                            elseif($i > 8 && $i <= 10){echo '<h4><b>Foggy '.($i-8).'</b></h4>';}
+                                            elseif($i == 11){echo '<h4><b>sprinker</b></h4>';}
+                                            elseif($i == 12){echo '<h4><b>Roof</b></h4>';}
+                                        ?>
+                                        <h5><?= $config_cn['cn_name_'.$i] ?></h5>
                                     </div>
                                     <div class="text-center">
                                         <img class="dash_img_con_<?= $i ?>" width="185">
@@ -564,7 +589,7 @@
         </div>
         <!-- exit Modal Control -->
     <?php } ?>
-    <div class="col-12 col-lg-12 col-xl-12 d-flex">
+    <div class="col-12 col-lg-12 col-xl-12 col-sm-12 d-flex">
         <div class="card w-100 radius-10">
             <div class="card-body">
                 <div class="d-flex">
@@ -666,7 +691,7 @@
     var config_cn = $.parseJSON('<?= json_encode($config_cn) ?>');
     var set_maxmin = $.parseJSON('<?= json_encode($set_maxmin) ?>');
     var sensor = $.parseJSON('<?= json_encode($sensor) ?>');
-    // console.log(sensor[1].sensor_id)
+    console.log(config_cn)
     
     // ++++++--------+++++++++
     // Global variables
@@ -728,21 +753,21 @@
         if (message.destinationName == house_master + "/data_sensor/realtime") {
             var result = message.payloadString;
             var parseJSON = $.parseJSON(result);
-            console.log(parseJSON)
+            // console.log(parseJSON)
             var chart_timestamp = parseJSON['date_time'];
             var time_t = parseJSON['time'];
             var ntime = time_t.substring(0, 5);
             $(".date").html(parseJSON['date']);
             $(".time").html(ntime);
             var data_ = parseJSON['data']
-            console.log(sensor)
+            // console.log(sensor)
             for (var i = 1; i <= 7; i++) {
                 // console.log(config_sn['sn_sensor_'+i])
                 // 
                 if (config_sn['sn_status_'+i] == 1) {
                     // for(var s=0; s <= sensor.length; s++){
                     //     if(s == config_sn['sn_sensor_'+i]){
-                            console.log(sensor[(config_sn['sn_sensor_'+i] -1)].sensor_name)
+                            // console.log(sensor[(config_sn['sn_sensor_'+i] -1)].sensor_name)
                             if(i == 1){
                                 dash_status(sn_data= (data_['temp_out']*1).toFixed(1), max= set_maxmin.Tmax, min= set_maxmin.Tmin)
                             }else if(i == 2){
@@ -832,7 +857,56 @@
                 }
             }
 
+        }else if (message.destinationName == house_master + "/control/resporn") {
+            var result = message.payloadString;
+            var parseJSON = $.parseJSON(result);
+            // console.log(parseJSON)
+            if(parseJSON.mode === 'Manual'){
+                $('.dash_mode').html('โหมดกำหนดเอง')
+            }else{
+                $('.dash_mode').html('โหมดอัตโนมัติ')
+            }
+            for(var i = 1; i<=12; i++){
+                if(config_cn['cn_status_'+i] == 1){
+                    if(i <= 4){
+                        if(parseJSON['dripper_'+i] === 'OFF'){
+                            $(".dash_img_con_"+i).attr("src", "public/images/control/Sprinkler_OFF2.svg");
+                        }else{
+                            $(".dash_img_con_"+i).attr("src", "public/images/control/Sprinkler_ON2.svg");
+                        }
+                    }
+                    if(i < 9 && i > 4){
+                        if(parseJSON['fan_'+(i-4)] === 'OFF'){
+                            $(".dash_img_con_"+i).attr("src", "public/images/control/Fan_OFF.svg");
+                        }else{
+                            $(".dash_img_con_"+i).attr("src", "public/images/control/Fan_ON.svg");
+                        }
+                    }
+                    if(i == 9 || i == 10 ){
+                        if(parseJSON['fan_'+(i-8)] === 'OFF'){
+                            $(".dash_img_con_"+i).attr("src", "public/images/control/new_foggy-off.svg");
+                        }else{
+                            $(".dash_img_con_"+i).attr("src", "public/images/control/new_foggy-on.svg");
+                        }
+                    }
+                    if(i == 11){
+                        if(parseJSON['sprinker'] === 'OFF'){
+                            $(".dash_img_con_"+i).attr("src", "public/images/control/Sprinkler_OFF.svg");
+                        }else{
+                            $(".dash_img_con_"+i).attr("src", "public/images/control/Sprinkler_ON.svg");
+                        }
+                    }
+                    if(i == 12){
+                        if(parseJSON['roof'] === 'OFF'){
+                            $(".dash_img_con_"+i).attr("src", "public/images/control/Roof_OFF2.png");
+                        }else{
+                            $(".dash_img_con_"+i).attr("src", "public/images/control/Roof_ON2.png");
+                        }
+                    }
+                }
+            }
         }
+
     }// exit_message
     connect();
 
