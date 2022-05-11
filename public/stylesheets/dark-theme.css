@@ -29,8 +29,8 @@
     }
     
     html.dark-theme .card {
-        background-color: #21214b86;
-        box-shadow: 0 .1rem .7rem rgba(2, 2, 54, 0.938);
+        background-color: #21214bf3;
+        box-shadow: 0 .1rem .7rem rgb(2, 2, 54);
         backdrop-filter: blur(14px);
     }
     
@@ -416,6 +416,11 @@
     
     html.dark-theme .btn-light-warning {
         color: #ff9305
+    }
+    
+    .modal-control {
+        background-color: rgba(7, 6, 66, 0.904);
+        border: 1px solid rgba(16, 62, 100, 0.2);
     }
     
     html.dark-theme .btn-light-dark {
