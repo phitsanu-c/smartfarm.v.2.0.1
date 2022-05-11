@@ -41,7 +41,7 @@ $(function() {
     }), $(".compose-mail-close").on("click", function() {
         $(".compose-mail-popup").hide()
     }), $(".switcher-btn").on("click", function() {
-        $(".switcher-wrapper").toggleClass("switcher-toggled")
+        // $(".switcher-wrapper").toggleClass("switcher-toggled")
     }), $(".close-switcher").on("click", function() {
         $(".switcher-wrapper").removeClass("switcher-toggled")
     }), $("#lightmode").on("click", function() {

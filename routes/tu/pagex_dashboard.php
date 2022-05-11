@@ -14,24 +14,6 @@
         padding-right: 0;
         padding-left: 0;
     }
-
-    .parent {
-        display: flex;
-    }
-    
-    .child {
-        padding-left: 20px;
-    }
-    
-    .child2 {
-        padding-left: 0px;
-        padding-right: 0px;
-    }
-    
-    .child1 {
-        margin-left: auto;
-        padding-right: 20px;
-    }
 </style>
 <div class="page-content">
 <?php
@@ -287,19 +269,26 @@
         <!-- Modal Control -->
         <div class="modal fade" id="Modal_control"  tabindex="-1" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 			<div class="modal-dialog modal-dialog-centered" ><!-- style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;" -->
-            
-            
                 <div class="modal-control">
                     <div class="modal-header border-4">
-                        <div><i class="bx bxs-user me-1 font-22 text-info"></i></div>
-                        <b class="modal_autoText">Control Status</b>
-                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    
+                        <!-- <div><i class="bx bxs-user me-1 font-22 text-info"></i></div> -->
+                        <div class="col-12">
+                            <div class="row">
+                                <h3 class="col"><b class="modal_autoText">Control Status</b></h3>
+                                <button type="button" class="col-2 btn-close pe-5" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        </div>
+                        <div class="row col-12 m-t-10 no-gutters">
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-block sw_mode_Auto" style="width: 100%;"></button>
+                                        </div>
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-block sw_mode_Manual" style="width: 100%;"></button>
+                                        </div>
+                                    </div>
                     </div>
                     
                     <div class="modal-control-body">
-                        
-                        <!-- ========================================= -->
                          <!-- Control 1 -->
                          <div class="row">
                             <div class="row p-t-10 parent" style="background-color: #e0e6e9e3; text-align: justify;">
@@ -594,95 +583,14 @@
             <div class="card-body">
                 <div class="d-flex">
                     <ul class="nav nav-pills mb-3" role="tablist">
-                        <?php if($_POST["s_btnT"] > 0){echo '
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link active btn_ch_t" data-bs-toggle="pill" href="" role="tab" aria-selected="false">
-                                    <div class="d-flex align-items-center">
-                                        <div class="tab-title">อุณหภูมิ</div>
-                                    </div>
-                                </a>
-                            </li>';
-                        }if($_POST["s_btnH"] > 0){
-                            if($_POST["s_btnT"] == 0 && $_POST["s_btnH"] > 0){echo '
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link active btn_ch_h" data-bs-toggle="pill" href="" role="tab" aria-selected="false">
-                                        <div class="d-flex align-items-center">
-                                            <div class="tab-title">ความชื้นอากาศ</div>
-                                        </div>
-                                    </a>
-                                </li>';
-                            }else{echo '
-                                <li class="nav-item li_ch_h" role="presentation">
-                                    <a class="nav-link btn_ch_h" data-bs-toggle="pill" href="" role="tab" aria-selected="false">
-                                        <div class="d-flex align-items-center">
-                                            <div class="tab-title">ความชื้นอากาศ</div>
-                                        </div>
-                                    </a>
-                                </li>';
-                            }
-                        } if($_POST["s_btnS"] > 0){
-                            if($_POST["s_btnT"] == 0 && $_POST["s_btnH"] == 0 && $_POST["s_btnS"] > 0){echo '
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link active btn_ch_s" data-bs-toggle="pill" href="" role="tab" aria-selected="true">
-                                        <div class="d-flex align-items-center">
-                                            <div class="tab-title">ความชื้นดิน</div>
-                                        </div>
-                                    </a>
-                                </li>';
-                            }else{echo '
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link btn_ch_s" data-bs-toggle="pill" href="" role="tab" aria-selected="true">
-                                        <div class="d-flex align-items-center">
-                                            <div class="tab-title">ความชื้นดิน</div>
-                                        </div>
-                                    </a>
-                                </li>';
-                            }
-                        }if($_POST["s_btnL"] > 0){
-                            if($_POST["s_btnT"] == 0 && $_POST["s_btnH"] == 0 && $_POST["s_btnS"] == 0 && $_POST["s_btnL"] > 0){echo '
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link active btn_ch_l" data-bs-toggle="pill" href="" role="tab" aria-selected="true">
-                                        <div class="d-flex align-items-center">
-                                            <div class="tab-title">ความเข้มแสง</div>
-                                        </div>
-                                    </a>
-                                </li>';
-                            }else{echo '
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link btn_ch_l" data-bs-toggle="pill" href="" role="tab" aria-selected="true">
-                                        <div class="d-flex align-items-center">
-                                            <div class="tab-title">ความเข้มแสง</div>
-                                        </div>
-                                    </a>
-                                </li>';
-                            }
-                        }if($_POST["meter_count"] > 0){
-                            if($_POST["s_btnT"] == 0 && $_POST["s_btnH"] == 0 && $_POST["s_btnS"] == 0 && $_POST["s_btnL"] > 0){echo '
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link active btn_ch_p" data-bs-toggle="pill" href="" role="tab" aria-selected="true">
-                                        <div class="d-flex align-items-center">
-                                            <div class="tab-title">พลังงาน</div>
-                                        </div>
-                                    </a>
-                                </li>';
-                            }else{
-                                // echo '
-                                // <li class="nav-item" role="presentation">
-                                //     <a class="nav-link btn_ch_p" data-bs-toggle="pill" href="" role="tab" aria-selected="true">
-                                //         <div class="d-flex align-items-center">
-                                //             <div class="tab-title">พลังงาน</div>
-                                //         </div>
-                                //     </a>
-                                // </li>';
-                            }
-                        }
+                        <?php 
                         ?>
                     </ul>
                 </div>
                 <div class="chartdiv" id='chart_realtime'></div>
-            </dic>
-        </dic>
-    </dic>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
     var house_master = '<?= $s_master["house_master"] ?>';
