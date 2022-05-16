@@ -1,10 +1,18 @@
-<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+    rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 <style>
-  .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
-  .toggle.ios .toggle-handle { border-radius: 20px; }
+    .toggle.ios,
+    .toggle-on.ios,
+    .toggle-off.ios {
+        border-radius: 20px;
+    }
 
-  .no-gutters {
+    .toggle.ios .toggle-handle {
+        border-radius: 20px;
+    }
+
+    .no-gutters {
         margin-right: 0;
         margin-left: 0;
     }
@@ -16,7 +24,7 @@
     }
 </style>
 <div class="page-content">
-<?php
+    <?php
     $config = $_POST['data'];
     $account_user = $config["account_user"];
     // print_r($config);
@@ -48,12 +56,16 @@
 
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3"><?= $s_master['site_name'] ?></div>
+        <div class="breadcrumb-title pe-3">
+            <?= $s_master['site_name'] ?>
+        </div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="javascript:;"><i class="-alt"></i></a> </li>
-                    <li class="breadcrumb-item" aria-current="page"><?= $s_master['house_name'] ?></li>
+                    <li class="breadcrumb-item" aria-current="page">
+                        <?= $s_master['house_name'] ?>
+                    </li>
                 </ol>
             </nav>
         </div>
@@ -69,11 +81,11 @@
     <!--end breadcrumb-->
 
     <!-- <h6 class="mb-0 text-uppercase">Horizontal Card</h6> -->
-    <hr/>
+    <hr />
     <div class="row">
         <div class="col-12 col-lg-4 col-xl-4 col-sm-12 d-flex">
             <div class="card w-100 radius-10">
-                <div class="card-body"> 
+                <div class="card-body">
                     <div class="card radius-10 shadow-none">
                         <img src="public/images/site/<?= $house_img ?>" alt="..." class="card-img">
                     </div>
@@ -81,55 +93,63 @@
                         <div class="card-body border radius-10 shadow-none mb-3">
                             <div class="col-12">
                                 <!-- <div class="card-body radius-10 shadow-none"> -->
-                                    <div class="d-flex">
-                                        <h5>ที่ตั้ง : <b><?= $s_master["site_address"] ?></b></h5>
-                                    </div>
+                                <div class="d-flex">
+                                    <h5>ที่ตั้ง : <b>
+                                            <?= $s_master["site_address"] ?>
+                                        </b></h5>
+                                </div>
                                 <!-- </div> -->
                             </div>
                             <div class="col-12">
                                 <!-- <div class="card-body radius-10 shadow-none"> -->
-                                    <div class="d-flex">
-                                        <h5>สถานะโรงเรือน : <b class="status_timeUpdate"></b></h5>
-                                    </div>
+                                <div class="d-flex">
+                                    <h5>สถานะโรงเรือน : <b class="status_timeUpdate"></b></h5>
+                                </div>
                                 <!-- </div> -->
                             </div>
                             <div class="col-12">
                                 <!-- <div class="card-body radius-10 shadow-none"> -->
-                                    <div class="d-flex">
-                                        <h5>ขนาดโรงเรือน : <b><?= substr($s_master["house_size"],9,13) ?></b> เมตร</h5>
-                                    </div>
+                                <div class="d-flex">
+                                    <h5>ขนาดโรงเรือน : <b>
+                                            <?= substr($s_master["house_size"],9,13) ?>
+                                        </b> เมตร</h5>
+                                </div>
                                 <!-- </div> -->
                             </div>
                             <div class="col-12">
                                 <!-- <div class="card-body radius-10 shadow-none"> -->
-                                    <div class="d-flex">
-                                        <h5>ระบบอินเตอร์เน็ต : <b>Internet SIM</b></h5>
-                                    </div>
+                                <div class="d-flex">
+                                    <h5>ระบบอินเตอร์เน็ต : <b>Internet SIM</b></h5>
+                                </div>
                                 <!-- </div> -->
                             </div>
                             <div class="col-12">
                                 <!-- <div class="card-body radius-10 shadow-none"> -->
-                                    <div class="d-flex">
-                                        <h5>หมายเลขอินเตอร์เน็ต : <b><?= $s_master["site_internet"] ?></b></h5>
-                                    </div>
+                                <div class="d-flex">
+                                    <h5>หมายเลขอินเตอร์เน็ต : <b>
+                                            <?= $s_master["site_internet"] ?>
+                                        </b></h5>
+                                </div>
                                 <!-- </div> -->
                             </div>
                             <div class="col-12">
                                 <!-- <div class="card-body radius-10 shadow-none"> -->
-                                    <div class="d-flex">
-                                        <h5>วันหมดอายุ : <b><?= $s_master["site_internetO"] ?></b></h5>
-                                    </div>
+                                <div class="d-flex">
+                                    <h5>วันหมดอายุ : <b>
+                                            <?= $s_master["site_internetO"] ?>
+                                        </b></h5>
+                                </div>
                                 <!-- </div> -->
                             </div>
                             <div class="col-12">
                                 <!-- <div class="card-body radius-10 shadow-none"> -->
-                                    <div class="d-flex">
-                                        <h5>จุดติดตั้งเซ็นเซอร์ : <b class="image-popups">
-                                        <?php if($s_master["house_img_map"] != ""){
+                                <div class="d-flex">
+                                    <h5>จุดติดตั้งเซ็นเซอร์ : <b class="image-popups">
+                                            <?php if($s_master["house_img_map"] != ""){
                                                             echo '<a href="public/images/img_map/'.$s_master["house_img_map"].'"><i class="lni lni-map-marker"></i></a>';
                                                         }else{echo "-";}?>
-                                            </b></h5>
-                                    </div>
+                                        </b></h5>
+                                </div>
                                 <!-- </div> -->
                             </div>
                         </div>
@@ -139,7 +159,7 @@
         </div>
         <div class="col-12 col-lg-8 col-xl-8 col-sm-12 d-flex">
             <div class="card w-100 radius-10">
-                <div class="card-body"> 
+                <div class="card-body">
                     <!-- <div class="card radius-10 border shadow-none">
                         <div class="card-body">
                             <h5 class="text-center">สภาพอากาศจากกรมอุตุนิยมวิทยา</h5>
@@ -178,20 +198,24 @@
                             <div class="row text-center">
                                 <?php for($i = 1; $i <= 3; $i++){
                                     if($config_sn['sn_status_'.$i] == 1){ ?>
-                                    <div class="col-lg-4 col-xl-4 col-sm-12">
-                                        <div class="card-body border radius-10 shadow-none mb-3">
-                                           <div class="d-flex">
-                                                <h5 class="card-title mt-2 "><B><?= $config_sn['sn_name_'.$i] ?></B></h5>
-                                                <div class="ms-auto mt-2 image-popups">
-                                                    <?php if($config_sn["sn_imgMap_".$i] != ""){
+                                <div class="col-lg-4 col-xl-4 col-sm-12">
+                                    <div class="card-body border radius-10 shadow-none mb-3">
+                                        <div class="d-flex">
+                                            <h5 class="card-title mt-2 "><B>
+                                                    <?= $config_sn['sn_name_'.$i] ?>
+                                                </B></h5>
+                                            <div class="ms-auto mt-2 image-popups">
+                                                <?php if($config_sn["sn_imgMap_".$i] != ""){
                                                         echo '<a href="public/images/img_map/'.$config_sn["sn_imgMap_".$i].'"><i class="lni lni-map-marker "></i></a>';
                                                     }?>
-                                                </div>
                                             </div>
-                                            <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle"  style="width:90px; margin-top:10px; text-align: center!important;">
-                                            <h6 class="card-text text-center  dash_data__<?= $i ?>" style="margin-top:20px"></h6>
                                         </div>
+                                        <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle"
+                                            style="width:90px; margin-top:10px; text-align: center!important;">
+                                        <h6 class="card-text text-center  dash_data__<?= $i ?>" style="margin-top:20px">
+                                        </h6>
                                     </div>
+                                </div>
                                 <?php } } ?>
                             </div>
                         </div>
@@ -202,20 +226,24 @@
                             <div class="row text-center">
                                 <?php for($i = 4; $i <= 7; $i++){
                                     if($config_sn['sn_status_'.$i] == 1){ ?>
-                                    <div class="col-lg-3 col-xl-3 col-sm-12">
+                                <div class="col-lg-3 col-xl-3 col-sm-12">
                                     <div class="card-body border radius-10 shadow-none mb-3">
-                                           <div class="d-flex">
-                                                <h5 class="card-title mt-2 "><B><?= $config_sn['sn_name_'.$i] ?></B></h5>
-                                                <div class="ms-auto mt-2 image-popups">
-                                                    <?php if($config_sn["sn_imgMap_".$i] != ""){
+                                        <div class="d-flex">
+                                            <h5 class="card-title mt-2 "><B>
+                                                    <?= $config_sn['sn_name_'.$i] ?>
+                                                </B></h5>
+                                            <div class="ms-auto mt-2 image-popups">
+                                                <?php if($config_sn["sn_imgMap_".$i] != ""){
                                                         echo '<a href="public/images/img_map/'.$config_sn["sn_imgMap_".$i].'"><i class="lni lni-map-marker"></i></a>';
                                                     }?>
-                                                </div>
                                             </div>
-                                            <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle"  style="width:90px; margin-top:10px; text-align: center!important;">
-                                            <h6 class="card-text text-center dash_data__<?= $i ?>" style="margin-top:20px"></h6>
                                         </div>
+                                        <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle"
+                                            style="width:90px; margin-top:10px; text-align: center!important;">
+                                        <h6 class="card-text text-center dash_data__<?= $i ?>" style="margin-top:20px">
+                                        </h6>
                                     </div>
+                                </div>
                                 <?php } } ?>
                             </div>
                         </div>
@@ -223,374 +251,243 @@
                 </div>
             </div>
         </div>
-    </div><!--end row-->
-    
+    </div>
+    <!--end row-->
+
     <?php if($_POST["count_cn"] != 0){?>
-        <div class="col-12 col-lg-12 col-xl-12 col-sm-12 d-flex">
-            <div class="card w-100 radius-10">
-                <div class="card-body">
-                    <div class="card-body text-center">
-                        <h3 class="card-title text-center"><b>ระบบควบคุม </b></h3>
-                        <!-- <h5 class="card-title text-center"><b>โหมดอัตโนมัติ </b></h5> -->
-                        <!-- <div class="row g-2"> -->
-                            <!-- <div class="col-lg-6 col-xl-6 col-sm-12 col-12" > -->
-                                <button type="button" class="btn btn-outline-success px-5 radius-30 dash_mode active" style="font-size:18px">โหมดอัตโนมัติ</button>
-                            <!-- </div> -->
-                            <!-- <div class="col-lg-6 col-xl-6 col-sm-12 col-12">
+    <div class="col-12 col-lg-12 col-xl-12 col-sm-12 d-flex">
+        <div class="card w-100 radius-10">
+            <div class="card-body">
+                <div class="card-body text-center">
+                    <h3 class="card-title text-center"><b>ระบบควบคุม </b></h3>
+                    <!-- <h5 class="card-title text-center"><b>โหมดอัตโนมัติ </b></h5> -->
+                    <!-- <div class="row g-2"> -->
+                    <!-- <div class="col-lg-6 col-xl-6 col-sm-12 col-12" > -->
+                    <button type="button" class="btn btn-outline-success px-5 radius-30 dash_mode active"
+                        style="font-size:18px">โหมดอัตโนมัติ</button>
+                    <!-- </div> -->
+                    <!-- <div class="col-lg-6 col-xl-6 col-sm-12 col-12">
                                 <button type="button" class="col-lg-6 col-xl-6 col-sm-12 col-12 btn btn-outline-info px-5 radius-30 sw_mode_Manual" style="font-size:18px">โหมดสั่งงานด้วยตนเอง</button>
                             </div> -->
-                        <!-- </div> -->
-                    </div>
-                    <div class="row">
-                        <?php for($i = 1; $i <= 12; $i++){ 
+                    <!-- </div> -->
+                </div>
+                <div class="row">
+                    <?php for($i = 1; $i <= 12; $i++){
                             if($config_cn['cn_status_'.$i] == 1){ ?>
-                            <div class="col-lg-3 col-xl-3 col-sm-12">
-                                <div class="card-body border radius-10 shadow-none mb-3">
-                                    <div class="text-center">
-                                        <?php  
+                    <div class="col-lg-3 col-xl-3 col-sm-12">
+                        <div class="card-body border radius-10 shadow-none mb-3">
+                            <div class="text-center">
+                                <?php
                                             if($i <= 4){echo '<h4><b>Dripper '.$i.'</b></h4>';}
                                             elseif($i > 4 && $i <= 8){echo '<h4><b>Fan '.($i-4).'</b></h4>';}
                                             elseif($i > 8 && $i <= 10){echo '<h4><b>Foggy '.($i-8).'</b></h4>';}
                                             elseif($i == 11){echo '<h4><b>sprinker</b></h4>';}
                                             elseif($i == 12){echo '<h4><b>Roof</b></h4>';}
                                         ?>
-                                        <h5><?= $config_cn['cn_name_'.$i] ?></h5>
-                                    </div>
-                                    <div class="text-center">
-                                        <img class="dash_img_con_<?= $i ?>" width="185">
-                                    </div>
-                                </div>
+                                <h5>
+                                    <?= $config_cn['cn_name_'.$i] ?>
+                                </h5>
                             </div>
-                        <?php }} ?>
+                            <div class="text-center">
+                                <img class="dash_img_con_<?= $i ?>" width="185">
+                            </div>
+                        </div>
                     </div>
+                    <?php }} ?>
                 </div>
             </div>
         </div>
-        <!-- Modal Control -->
-        <div class="modal fade" id="Modal_control"  tabindex="-1" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-			<div class="modal-dialog modal-dialog-centered" ><!-- style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;" -->
-                <div class="modal-control">
-                    <div class="modal-header border-4">
-                        <!-- <div><i class="bx bxs-user me-1 font-22 text-info"></i></div> -->
-                        <div class="col-12">
-                            <div class="row">
-                                <h3 class="col"><b class="modal_autoText">Control Status</b></h3>
-                                <button type="button" class="col-2 btn-close pe-5" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <!-- Modal Control -->
+    <div class="modal fade" id="Modal_control" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header">
+					<!-- <h5 class="modal-title">Modal title</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                    <div class="col-12">
+                        <div class="d-flex align-items-center">
+                            <h4 class="modal-title"><b id="title_modal"></b> Control Status</h4>
+                            <div class="ms-auto">
+                                <button type="button" class="btn-close close_modal" data-bs-dismiss="modal"
+                                    aria-label="Close"> <span aria-hidden="true"></span> </button>
                             </div>
                         </div>
-                        <div class="row col-12 m-t-10 no-gutters">
-                                        <div class="col-6">
-                                            <button type="button" class="btn btn-block sw_mode_Auto" style="width: 100%;"></button>
-                                        </div>
-                                        <div class="col-6">
-                                            <button type="button" class="btn btn-block sw_mode_Manual" style="width: 100%;"></button>
-                                        </div>
-                                    </div>
+                        <div class="row col-12 no-gutters">
+                            <div class="col-6">
+                                <button type="button" class="btn px-5 sw_mode_Auto" style="width: 100%;">อัตโนมัติ</button>
+                            </div>
+                            <div class="col-6">
+                                <button type="button" class="btn px-5 sw_mode_Manual" style="width: 100%;">กำหนดค่าเอง</button>
+                            </div>
+                        </div>
+                        <div class="col-12 ul_Auto">
+                            <ul class="nav mt-2">
+                                <?php
+                                    for($i = 1; $i <= 12; $i++){
+                                        if($config_cn['cn_status_'.$i] == 1){
+                                            echo '<li class="nav-item col-md-3">
+                                            <a class="btn btn-outline-secondary sw_btn_au" id="'.$i.'">'.$config_cn['cn_name_'.$i].'</a>
+                                        </li>';}
+                                    }
+                                ?>
+                            </ul>
+                        </div>
                     </div>
-                    
-                    <div class="modal-control-body">
-                         <!-- Control 1 -->
-                         <div class="row">
-                            <div class="row p-t-10 parent" style="background-color: #e0e6e9e3; text-align: justify;">
-                                <div class="child">
-                                    <h4><b class="text_load_1">wdwfwegergr</b></h4>
-                                </div>
-                                <a class="child1 edit_cont" href="javascript:void(0)" status="1">
-                                    <h4><b>Edit</b></h4>
-                                </a>
-                                <!-- <h4 class="col"><b class="text_load_1"></b></h4>
-                                    <button class=" text-right"><b class="">Edit</b></button> -->
-
-                            </div>
-                            <div class="row">
-                                <div class="col-12 m-t-10">
-                                    <div class="row">
-                                        <div class="col-6 text-left">
-                                            <B>TIMER 1</B>
-                                        </div>
-                                        <div class="col-6 text-right">
-                                            <!-- <input type="checkbox" id="1_1" class="sw_toggle js-switch"> -->
-                                            <img class="img_sw 1_1" src="" alt="">
-                                            <div class="sw_toggle">
-                                                <input class="input_check" type="checkbox" id="1_1" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                            </div>
-                                            <!-- <button type="button" class="btn waves-effect waves-light btn-rounded btn-xs btn-success"> <i class="fa fa-check"></i> On</button> -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row m-t-10 ">
-                                <div class="col-6 m-t-0">
-                                    <div class="form-group text-left">
-                                        <div class="row">
-                                            <div class="col-md-3 align-vertical-center">
-                                                <small class="form-control-feedback"> START </small>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <input type="time" id="time_s_1_1" class="form-control  input_time" data-open="myTimePicker">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6 m-t-0">
-                                    <div class="form-group text-left">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <small class="form-control-feedback"> END </small>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <input type="time" id="time_e_1_1" class="form-control input_time">
-                                            </div>
-                                        </div>
-                                    </div>
+				</div>
+				<div class="modal-body">
+                    <div class="container ul_Auto">
+                        <!-- Control 1 -->
+                        <div class="row ridge">
+                            <div class="d-flex align-items-center"
+                                style="background-color: #708090; text-align: justify;">
+                                <h5><b class="text_load"></b></h5>
+                                <div class="ms-auto">
+                                    <a class="edit_cont" href="javascript:void(0)"><b>Edit</b></a>
+                                    <input type="hidden" class="load_select">
                                 </div>
                             </div>
 
-                            <div class="row  border-top">
-                                <div class="col-12 m-t-10">
-                                    <div class="row">
-                                        <div class="col-6 text-left">
-                                            <B>TIMER 2</B>
-                                        </div>
-                                        <div class="col-6 text-right">
-                                            <!-- <input type="checkbox" id="1_2" class="sw_toggle js-switch"> -->
-                                            <!-- <input type="checkbox" id="1_2" class="sw_toggle" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios"> -->
-                                            <!-- <button type="button" class="btn waves-effect waves-light btn-rounded btn-xs btn-danger ">Off <i class="fa fa-times"></i></button> -->
-                                            <img class="img_sw 1_2" src="" alt="">
-                                            <div class="sw_toggle">
-                                                <input class="input_check" type="checkbox" id="1_2" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row m-t-10 ">
-                                <div class="col-6 m-t-0">
-                                    <div class="form-group text-left">
-                                        <div class="row">
-                                            <div class="col-md-3 align-vertical-center">
-                                                <small class="form-control-feedback"> START </small>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <input type="time" id="time_s_1_2" class="form-control input_time">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6 m-t-0">
-                                    <div class="form-group text-left">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <small class="form-control-feedback"> END </small>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <input type="time" id="time_e_1_2" class="form-control input_time">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row  border-top">
-                                <div class="col-12 m-t-10">
-                                    <div class="row">
-                                        <div class="col-6 text-left">
-                                            <B>TIMER 3</B>
-                                        </div>
-                                        <div class="col-6 text-right">
-                                            <!-- <input type="checkbox" id="1_3" class="sw_toggle" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary"> -->
-                                            <img class="img_sw 1_3" src="" alt="">
-                                            <div class="sw_toggle">
-                                                <input class="input_check" type="checkbox" id="1_3" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row m-t-10">
-                                <div class="col-6 m-t-0">
-                                    <div class="form-group text-left">
-                                        <div class="row">
-                                            <div class="col-md-3 align-vertical-center">
-                                                <small class="form-control-feedback"> START </small>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <input type="time" id="time_s_1_3" class="form-control input_time">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6 m-t-0">
-                                    <div class="form-group text-left">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <small class="form-control-feedback"> END </small>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <input type="time" id="time_e_1_3" class="form-control input_time">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row  border-top">
-                                <div class="col-12 m-t-10">
-                                    <div class="row">
-                                        <div class="col-6 text-left">
-                                            <B>TIMER 4</B>
-                                        </div>
-                                        <div class="col-6 text-right">
-                                            <!-- <input type="checkbox" id="1_4" class="sw_toggle" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary"> -->
-                                            <img class="img_sw 1_4" src="" alt="">
-                                            <div class="sw_toggle">
-                                                <input class="input_check" type="checkbox" id="1_4" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row m-t-10">
-                                <div class="col-6 m-t-0">
-                                    <div class="form-group text-left">
-                                        <div class="row">
-                                            <div class="col-md-3 align-vertical-center">
-                                                <small class="form-control-feedback"> START </small>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <input type="time" id="time_s_1_4" class="form-control input_time">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6 m-t-0">
-                                    <div class="form-group text-left">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <small class="form-control-feedback"> END </small>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <input type="time" id="time_e_1_4" class="form-control input_time">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row  border-top">
-                                <div class="col-12 m-t-10">
-                                    <div class="row">
-                                        <div class="col-6 text-left">
-                                            <B>TIMER 5</B>
-                                        </div>
-                                        <div class="col-6 text-right">
-                                            <!-- <input type="checkbox" id="1_5" class="sw_toggle" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary"> -->
-                                            <img class="img_sw 1_5" src="" alt="">
-                                            <div class="sw_toggle">
-                                                <input class="input_check" type="checkbox" id="1_5" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row m-t-10">
-                                <div class="col-6 m-t-0">
-                                    <div class="form-group text-left">
-                                        <div class="row">
-                                            <div class="col-md-3 align-vertical-center">
-                                                <small class="form-control-feedback"> START </small>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <input type="time" id="time_s_1_5" class="form-control input_time">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6 m-t-0">
-                                    <div class="form-group text-left">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <small class="form-control-feedback"> END </small>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <input type="time" id="time_e_1_5" class="form-control input_time">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row  border-top">
-                                <div class="col-12 m-t-10">
-                                    <div class="row">
-                                        <div class="col-6 text-left">
-                                            <B>TIMER 6</B>
-                                        </div>
-                                        <div class="col-6 text-right">
-                                            <!-- <input type="checkbox" id="1_6" class="sw_toggle" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary"> -->
-                                            <img class="img_sw 1_6" src="" alt="">
-                                            <div class="sw_toggle">
-                                                <input class="input_check" type="checkbox" id="1_6" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row m-t-10">
-                                <div class="col-6 m-t-0">
-                                    <div class="form-group text-left">
-                                        <div class="row">
-                                            <div class="col-md-3 align-vertical-center">
-                                                <small class="form-control-feedback"> START </small>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <input type="time" id="time_s_1_6" class="form-control input_time">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6 m-t-0">
-                                    <div class="form-group text-left">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <small class="form-control-feedback"> END </small>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <input type="time" id="time_e_1_6" class="form-control input_time">
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <?php
+                                        for($i = 1; $i <=6; $i++){
+                                            echo '<div class="col-12 border-bottom">
+                                                <div class="d-flex align-items-center mb-2 mt-2">
+                                                    <div class="pt-2">TIMER '.$i.'</div>
+                                                    <div class="ms-auto">
+                                                        <img class="img_sw img_'.$i.'" src="" alt="">
+                                                        <div class="sw_toggle">
+                                                            <input class="input_check" type="checkbox" id="swch_'.$i.'" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-6">
+                                                        <div class="form-group text-left">
+                                                            <div class="row">
+                                                                <div class="col-md-3 align-vertical-center">
+                                                                    <small class="form-control-feedback"> START </small>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <input type="time" id="time_s_'.$i.'" class="form-control input_time">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-group text-left">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <small class="form-control-feedback"> END </small>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <input type="time" id="time_e_'.$i.'" class="form-control input_time">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>';
+                                        }
+                                    ?>
                                 </div>
                             </div>
                         </div>
                         <!-- Exit Control 1 -->
-                        <!-- ================================ -->
                     </div>
-                    <div class="modal-footer">
+                    <!-- ================================ -->
+                    <div class="container ul_Manual">
+                        <ul class="nav mt-2">
+                            <?php
+                                if($config_cn['cn_status_1'] == 1 || $config_cn['cn_status_2'] == 1 || $config_cn['cn_status_3'] == 1 || $config_cn['cn_status_4'] == 1){
+                                    echo '<li class="nav-item col-md-3">
+                                        <a class="btn btn-outline-secondary sw_btn_au" id="s1">Dripper</a>
+                                    </li>';
+                                }
+                                if($config_cn['cn_status_5'] == 1 || $config_cn['cn_status_6'] == 1 || $config_cn['cn_status_7'] == 1 || $config_cn['cn_status_8'] == 1){
+                                    echo '<li class="nav-item col-md-3">
+                                        <a class="btn btn-outline-secondary sw_btn_au" id="s2">Fan</a>
+                                    </li>';
+                                }
+                                if($config_cn['cn_status_9'] == 1 || $config_cn['cn_status_10'] == 1){
+                                    echo '<li class="nav-item col-md-3">
+                                        <a class="btn btn-outline-secondary sw_btn_au" id="s3">Foggy</a>
+                                    </li>';
+                                }
+                                if($config_cn['cn_status_11'] == 1){
+                                    echo '<li class="nav-item col-md-3">
+                                        <a class="btn btn-outline-secondary sw_btn_au" id="s4">Sprinker</a>
+                                    </li>';
+                                }
+                                if($config_cn['cn_status_12'] == 1){
+                                    echo '<li class="nav-item col-md-3">
+                                        <a class="btn btn-outline-secondary sw_btn_au" id="s5">Roof</a>
+                                    </li>';
+                                }
+                            ?>
+                        </ul>
+                    </div>
+				</div>
+				<div class="modal-footer">
+                    <div class="ul_Auto">
                         <button type="button" id="save_auto_cont" class="btn btn-success waves-light">
                             <i class="fadeIn animated bx bx-save"></i> บันทึก
                         </button>
-                        <button type="button" class="btn btn-danger waves-effect" data-bs-dismiss="modal">
+                        <button type="button" id="close_auto_cont" class="btn btn-danger waves-effect">
                             <i class="fadeIn animated bx bx-window-close"></i> ยกเลิก
                         </button>
                     </div>
-                </div>
-            </div>
-        </div>
-        <!-- exit Modal Control -->
+					<div class="ul_Manual" style="width: 100%;">
+                        <div class="d-flex align-items-center">
+                            <div class="form-check check_m">
+                                <input class="form-check-input" type="checkbox" id="manual_check">
+                                <label class="form-check-label">เลือกทั้งหมด</label>
+                            </div>
+                            <div class="ms-auto">
+                                <button type="button" class="btn btn-outline-secondary px-5 radius-30 btn_config">ตั้งค่า</button>
+                                <button type="button" id="save_manual_cont" class="btn btn-success waves-light">
+                                    <i class="fadeIn animated bx bx-save"></i> บันทึก
+                                </button>
+                                <button type="button" id="close_manual_cont" class="btn btn-danger waves-effect">
+                                    <i class="fadeIn animated bx bx-window-close"></i> ยกเลิก
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row mt-3 mb-3">
+                            <div class="col-3 text-center">
+                                <label class="label_1">Dripper 1</label>
+                                <div class="check_m">
+                                    <input class="input_check2" type="checkbox" id="label_1" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                </div>
+                            </div>
+                            <div class="col-3 text-center">
+                                <label class="label_2">Dripper 2</label>
+                                <div class="check_m">
+                                    <input class="input_check2" type="checkbox" id="label_2" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                </div>
+                            </div>
+                            <div class="col-3 text-center">
+                                <label class="label_3">Dripper 3</label>
+                                <div class="check_m">
+                                    <input class="input_check2" type="checkbox" id="label_3" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                </div>
+                            </div>
+                            <div class="col-3 text-center">
+                                <label class="label_4">Dripper 4</label>
+                                <div class="check_m">
+                                    <input class="input_check2" type="checkbox" id="label_4" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+    <!-- exit Modal Control -->
     <?php } ?>
-    <div class="col-12 col-lg-12 col-xl-12 col-sm-12 d-flex">
-        <div class="card w-100 radius-10">
-            <div class="card-body">
-                <div class="d-flex">
-                    <ul class="nav nav-pills mb-3" role="tablist">
-                        <?php 
-                        ?>
-                    </ul>
-                </div>
-                <div class="chartdiv" id='chart_realtime'></div>
-            </div>
-        </div>
-    </div>
 </div>
 <script>
     var house_master = '<?= $s_master["house_master"] ?>';
@@ -600,7 +497,7 @@
     var set_maxmin = $.parseJSON('<?= json_encode($set_maxmin) ?>');
     var sensor = $.parseJSON('<?= json_encode($sensor) ?>');
     console.log(config_cn)
-    
+
     // ++++++--------+++++++++
     // Global variables
     var client = null;
@@ -632,7 +529,7 @@
         // And subscribe to our topics	-- both with the same callback function
         options = {
             qos: 1,
-            onSuccess: function(context) {
+            onSuccess: function (context) {
                 // console.log("ไม่สามารถเชื่อมต่อกับ เครื่อง ได้ !!!!");
                 // setInterval(function() {
                 //     location.reload();
@@ -671,144 +568,150 @@
             // console.log(sensor)
             for (var i = 1; i <= 7; i++) {
                 // console.log(config_sn['sn_sensor_'+i])
-                // 
-                if (config_sn['sn_status_'+i] == 1) {
+                //
+                if (config_sn['sn_status_' + i] == 1) {
                     // for(var s=0; s <= sensor.length; s++){
                     //     if(s == config_sn['sn_sensor_'+i]){
-                            // console.log(sensor[(config_sn['sn_sensor_'+i] -1)].sensor_name)
-                            if(i == 1){
-                                dash_status(sn_data= (data_['temp_out']*1).toFixed(1), max= set_maxmin.Tmax, min= set_maxmin.Tmin)
-                            }else if(i == 2){
-                                dash_status(sn_data= (data_['hum_out']*1).toFixed(1), max= set_maxmin.Tmax, min= set_maxmin.Tmin)
-                            }else if(i == 3){
-                                dash_status(sn_data= (data_['light_out']/1000).toFixed(1), max= set_maxmin.Tmax, min= set_maxmin.Tmin)
-                            }else if(i == 4){
-                                dash_status(sn_data= (data_['temp_in']*1).toFixed(1), max= set_maxmin.Tmax, min= set_maxmin.Tmin)
-                            }else if(i == 5){
-                                dash_status(sn_data= (data_['hum_in']*1).toFixed(1), max= set_maxmin.Tmax, min= set_maxmin.Tmin)
-                            }else if(i == 6){
-                                dash_status(sn_data= (data_['light_in']/1000).toFixed(1), max= set_maxmin.Tmax, min= set_maxmin.Tmin)
-                            }else if(i == 7){
-                                dash_status(sn_data= (data_['soil_in']*1).toFixed(1), max= set_maxmin.Tmax, min= set_maxmin.Tmin)
-                            }
-                            
+                    // console.log(sensor[(config_sn['sn_sensor_'+i] -1)].sensor_name)
+                    if (i == 1) {
+                        dash_status(sn_data = (data_['temp_out'] * 1).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                    } else if (i == 2) {
+                        dash_status(sn_data = (data_['hum_out'] * 1).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                    } else if (i == 3) {
+                        dash_status(sn_data = (data_['light_out'] / 1000).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                    } else if (i == 4) {
+                        dash_status(sn_data = (data_['temp_in'] * 1).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                    } else if (i == 5) {
+                        dash_status(sn_data = (data_['hum_in'] * 1).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                    } else if (i == 6) {
+                        dash_status(sn_data = (data_['light_in'] / 1000).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                    } else if (i == 7) {
+                        dash_status(sn_data = (data_['soil_in'] * 1).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                    }
+
                     //     }
                     // }
-                    
-            //     // show_dash(unit = dashUnit[i],snmode = dashMode[i]);
-            //     if (house_master !== "KMUMT001") {
-            //         if (dashMode[i] === "7") { // µmol / KLux
-            //             $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>' + '<br>' + (data_array[dashSncanel[i]] / 1000).toFixed(1) + " KLux");
-            //         } else if (dashMode[i] === "6") {
-            //             $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>');
-            //         } else if (dashMode[i] === "5") {
-            //             $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 1000).toFixed(1) + " KLux" + '<br>' + (data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>');
-            //         } else {
-            //             if (data_array[dashSncanel[i]] >= 1000) {
-            //                 data_dash[i] = (data_array[dashSncanel[i]] / 1000).toFixed(1);
-            //                 sn_unit[i] = 'K' + dashUnit[i];
-            //             } else if (data_array[dashSncanel[i]] >= 1000000) {
-            //                 data_dash[i] = (data_array[dashSncanel[i]] / 1000).toFixed(1);
-            //                 sn_unit[i] = 'M' + dashUnit[i];
-            //             } else {
-            //                 data_dash[i] = (data_array[dashSncanel[i]] * 1).toFixed(1);
-            //                 if (dashUnit[i] === "1") {
-            //                     sn_unit[i] = "℃";
-            //                 } else {
-            //                     sn_unit[i] = dashUnit[i];
-            //                 }
-            //             }
-            //         }
-            //         // ++++++++++
-            //         if ($(".btn_ch_t").hasClass("active") == true) {
-            //             if (dashMode[i] === "1") {
-            //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
-            //             }
-            //         }
-            //         if ($(".btn_ch_h").hasClass("active") == true) {
-            //             if (dashMode[i] === "2") {
-            //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
-            //             }
-            //         }
-            //         if ($(".btn_ch_s").hasClass("active") == true) {
-            //             if (dashMode[i] === "3") {
-            //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
-            //             }
-            //         }
-            //         if ($(".btn_ch_l").hasClass("active") == true) {
-            //             if (dashMode[i] === "4" || dashMode[i] === "5") {
-            //                 new_chart.push((data_array[dashSncanel[i]] / 1000).toFixed(1));
-            //             }
-            //             if (dashMode[i] === "6" || dashMode[i] === "7") {
-            //                 new_chart.push((data_array[dashSncanel[i]] / 54).toFixed(1));
-            //             }
-            //         }
-            //         if ($(".btn_ch_p").hasClass("active") == true) {
-            //             if (dashMode[i] === "10") {
-            //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
-            //             }
-            //         }
+
+                    //     // show_dash(unit = dashUnit[i],snmode = dashMode[i]);
+                    //     if (house_master !== "KMUMT001") {
+                    //         if (dashMode[i] === "7") { // µmol / KLux
+                    //             $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>' + '<br>' + (data_array[dashSncanel[i]] / 1000).toFixed(1) + " KLux");
+                    //         } else if (dashMode[i] === "6") {
+                    //             $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>');
+                    //         } else if (dashMode[i] === "5") {
+                    //             $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 1000).toFixed(1) + " KLux" + '<br>' + (data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>');
+                    //         } else {
+                    //             if (data_array[dashSncanel[i]] >= 1000) {
+                    //                 data_dash[i] = (data_array[dashSncanel[i]] / 1000).toFixed(1);
+                    //                 sn_unit[i] = 'K' + dashUnit[i];
+                    //             } else if (data_array[dashSncanel[i]] >= 1000000) {
+                    //                 data_dash[i] = (data_array[dashSncanel[i]] / 1000).toFixed(1);
+                    //                 sn_unit[i] = 'M' + dashUnit[i];
+                    //             } else {
+                    //                 data_dash[i] = (data_array[dashSncanel[i]] * 1).toFixed(1);
+                    //                 if (dashUnit[i] === "1") {
+                    //                     sn_unit[i] = "℃";
+                    //                 } else {
+                    //                     sn_unit[i] = dashUnit[i];
+                    //                 }
+                    //             }
+                    //         }
+                    //         // ++++++++++
+                    //         if ($(".btn_ch_t").hasClass("active") == true) {
+                    //             if (dashMode[i] === "1") {
+                    //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
+                    //             }
+                    //         }
+                    //         if ($(".btn_ch_h").hasClass("active") == true) {
+                    //             if (dashMode[i] === "2") {
+                    //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
+                    //             }
+                    //         }
+                    //         if ($(".btn_ch_s").hasClass("active") == true) {
+                    //             if (dashMode[i] === "3") {
+                    //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
+                    //             }
+                    //         }
+                    //         if ($(".btn_ch_l").hasClass("active") == true) {
+                    //             if (dashMode[i] === "4" || dashMode[i] === "5") {
+                    //                 new_chart.push((data_array[dashSncanel[i]] / 1000).toFixed(1));
+                    //             }
+                    //             if (dashMode[i] === "6" || dashMode[i] === "7") {
+                    //                 new_chart.push((data_array[dashSncanel[i]] / 54).toFixed(1));
+                    //             }
+                    //         }
+                    //         if ($(".btn_ch_p").hasClass("active") == true) {
+                    //             if (dashMode[i] === "10") {
+                    //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
+                    //             }
+                    //         }
                 }
-                function dash_status(sn_data, max, min){
-                    if(sn_data >= max){
-                        $(".dash_img_" + i).attr("src", "public/images/Sensor/"+sensor[(config_sn['sn_sensor_'+i] -1)].sensor_imgMax);
-                    }else if(sn_data < min){
-                        $(".dash_img_" + i).attr("src", "public/images/Sensor/"+sensor[(config_sn['sn_sensor_'+i] -1)].sensor_imgMin);
-                    }else{
-                        $(".dash_img_" + i).attr("src", "public/images/Sensor/"+sensor[(config_sn['sn_sensor_'+i] -1)].sensor_imgNor);
+                function dash_status(sn_data, max, min) {
+                    if (sn_data >= max) {
+                        $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_imgMax);
+                    } else if (sn_data < min) {
+                        $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_imgMin);
+                    } else {
+                        $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_imgNor);
                     }
-                    if(sensor[(config_sn['sn_sensor_'+i] -1)].sensor_unit == 1){
+                    if (sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_unit == 1) {
                         $(".dash_data__" + i).html(sn_data + " ℃");
-                    }else{
-                        $(".dash_data__" + i).html(sn_data + " "+sensor[(config_sn['sn_sensor_'+i] -1)].sensor_unit);
+                    } else {
+                        $(".dash_data__" + i).html(sn_data + " " + sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_unit);
                     }
                 }
             }
 
-        }else if (message.destinationName == house_master + "/control/resporn") {
+        } else if (message.destinationName == house_master + "/control/resporn") {
             var result = message.payloadString;
             var parseJSON = $.parseJSON(result);
             // console.log(parseJSON)
-            if(parseJSON.mode === 'Manual'){
+            if (parseJSON.mode === 'Manual') {
                 $('.dash_mode').html('โหมดกำหนดเอง')
-            }else{
+                    $('.sw_mode_Auto').removeClass('btn-success').addClass('btn-outline-success')
+                    $('.sw_mode_Manual').addClass('btn-success').removeClass('btn-outline-success')
+                    $('.ul_Auto').hide()
+            } else {
                 $('.dash_mode').html('โหมดอัตโนมัติ')
+                    $('.sw_mode_Auto').addClass('btn-success').removeClass('btn-outline-success')
+                    $('.sw_mode_Manual').removeClass('btn-success').addClass('btn-outline-success')
+                    $('.ul_Auto').show()
             }
-            for(var i = 1; i<=12; i++){
-                if(config_cn['cn_status_'+i] == 1){
-                    if(i <= 4){
-                        if(parseJSON['dripper_'+i] === 'OFF'){
-                            $(".dash_img_con_"+i).attr("src", "public/images/control/Sprinkler_OFF2.svg");
-                        }else{
-                            $(".dash_img_con_"+i).attr("src", "public/images/control/Sprinkler_ON2.svg");
+            for (var i = 1; i <= 12; i++) {
+                if (config_cn['cn_status_' + i] == 1) {
+                    if (i <= 4) {
+                        if (parseJSON['dripper_' + i] === 'OFF') {
+                            $(".dash_img_con_" + i).attr("src", "public/images/control/Sprinkler_OFF2.svg");
+                        } else {
+                            $(".dash_img_con_" + i).attr("src", "public/images/control/Sprinkler_ON2.svg");
                         }
                     }
-                    if(i < 9 && i > 4){
-                        if(parseJSON['fan_'+(i-4)] === 'OFF'){
-                            $(".dash_img_con_"+i).attr("src", "public/images/control/Fan_OFF.svg");
-                        }else{
-                            $(".dash_img_con_"+i).attr("src", "public/images/control/Fan_ON.svg");
+                    if (i < 9 && i > 4) {
+                        if (parseJSON['fan_' + (i - 4)] === 'OFF') {
+                            $(".dash_img_con_" + i).attr("src", "public/images/control/Fan_OFF.svg");
+                        } else {
+                            $(".dash_img_con_" + i).attr("src", "public/images/control/Fan_ON.svg");
                         }
                     }
-                    if(i == 9 || i == 10 ){
-                        if(parseJSON['fan_'+(i-8)] === 'OFF'){
-                            $(".dash_img_con_"+i).attr("src", "public/images/control/new_foggy-off.svg");
-                        }else{
-                            $(".dash_img_con_"+i).attr("src", "public/images/control/new_foggy-on.svg");
+                    if (i == 9 || i == 10) {
+                        if (parseJSON['fan_' + (i - 8)] === 'OFF') {
+                            $(".dash_img_con_" + i).attr("src", "public/images/control/new_foggy-off.svg");
+                        } else {
+                            $(".dash_img_con_" + i).attr("src", "public/images/control/new_foggy-on.svg");
                         }
                     }
-                    if(i == 11){
-                        if(parseJSON['sprinker'] === 'OFF'){
-                            $(".dash_img_con_"+i).attr("src", "public/images/control/Sprinkler_OFF.svg");
-                        }else{
-                            $(".dash_img_con_"+i).attr("src", "public/images/control/Sprinkler_ON.svg");
+                    if (i == 11) {
+                        if (parseJSON['sprinker'] === 'OFF') {
+                            $(".dash_img_con_" + i).attr("src", "public/images/control/Sprinkler_OFF.svg");
+                        } else {
+                            $(".dash_img_con_" + i).attr("src", "public/images/control/Sprinkler_ON.svg");
                         }
                     }
-                    if(i == 12){
-                        if(parseJSON['roof'] === 'OFF'){
-                            $(".dash_img_con_"+i).attr("src", "public/images/control/Roof_OFF2.png");
-                        }else{
-                            $(".dash_img_con_"+i).attr("src", "public/images/control/Roof_ON2.png");
+                    if (i == 12) {
+                        if (parseJSON['roof'] === 'OFF') {
+                            $(".dash_img_con_" + i).attr("src", "public/images/control/Roof_OFF2.png");
+                        } else {
+                            $(".dash_img_con_" + i).attr("src", "public/images/control/Roof_ON2.png");
                         }
                     }
                 }
@@ -819,18 +722,18 @@
     connect();
 
     // ++++++++++++++++++
-    $('.sw_mode_Auto').click(function() { // console.log($(this).attr("id"));
+    $('.sw_mode_Auto').click(function () { // console.log($(this).attr("id"));
         // alert($(this).attr("id"))
         // if ($(this).hasClass("active") === false) {
-            // if (house_master !== "KMUMT001") {
-            //     switch_mode(sw_name = "Auto", mess = "Auto", mqtt_name = "user_control");
-            // } else {
-            //     switch_mode(sw_name = "Auto", mess = "on", mqtt_name = "control_user");
-            // }
+        // if (house_master !== "KMUMT001") {
+        //     switch_mode(sw_name = "Auto", mess = "Auto", mqtt_name = "user_control");
+        // } else {
+        //     switch_mode(sw_name = "Auto", mess = "on", mqtt_name = "control_user");
         // }
-        mqtt_send(msg_dn=house_master + "/control/status/mode", msg="Auto")
+        // }
+        mqtt_send(msg_dn = house_master + "/control/status/mode", msg = "Auto")
     });
-    $('.sw_mode_Manual').click(function() { // console.log($(this).attr("id"));
+    $('.sw_mode_Manual').click(function () { // console.log($(this).attr("id"));
         // if ($(this).hasClass("active") === false) {
         //     if (house_master !== "KMUMT001") {
         //         switch_mode(sw_name = "Manual", mess = "Manual", mqtt_name_us = "user_control");
@@ -838,7 +741,7 @@
         //         switch_mode(sw_name = "Manual", mess = "off", mqtt_name_us = "control_user");
         //     }
         // }
-        mqtt_send(msg_dn=house_master + "/control/status/mode", msg="Manual")
+        mqtt_send(msg_dn = house_master + "/control/status/mode", msg = "Manual")
     });
 
     function switch_mode(sw_name, mess, mqtt_name_us) {
@@ -880,23 +783,23 @@
     }
     // $('.sw_manual_1').attr('checked')
     // alert($(".sw_manual_1").is(":checked"))
-    
-    $(".Dsw_manual_1").click(function() {
-        setTimeout(function(){
+
+    $(".Dsw_manual_1").click(function () {
+        setTimeout(function () {
             // alert($(".sw_manual_1").prop('checked'));
             if (house_master !== "KMUMT001") {
-                switch_control(sta = $(".sw_manual_1").prop('checked'), sw_name = "sw_manual_1", ch_name='<?= $config_cn['cn_name_1'] ?>', mqtt_ch_name = "dripper_1", mqtt_name_us = "user_control" );
-            }else{
-                switch_control(sta = $(".sw_manual_1").prop('checked'), sw_name = "sw_manual_1", ch_name='<?= $config_cn['cn_name_1'] ?>', mqtt_ch_name = "control_st_1", mqtt_name_us = "control_user" );
+                switch_control(sta = $(".sw_manual_1").prop('checked'), sw_name = "sw_manual_1", ch_name = '<?= $config_cn['cn_name_1'] ?>', mqtt_ch_name = "dripper_1", mqtt_name_us = "user_control");
+            } else {
+                switch_control(sta = $(".sw_manual_1").prop('checked'), sw_name = "sw_manual_1", ch_name = '<?= $config_cn['cn_name_1'] ?>', mqtt_ch_name = "control_st_1", mqtt_name_us = "control_user");
             }
         }, 100);
     });
-    
+
     function switch_control(sta, sw_name, ch_name, mqtt_ch_name, mqtt_name_us) {
         if (house_master !== "KMUMT001") {
-            if(sta === false){var sw_sta = "ปิด"; var mess = "OFF";}else{var sw_sta = "เปิด";var mess = "ON";}
-        }else{
-            if(sta === false){var sw_sta = "ปิด"; var mess = "off";}else{var sw_sta = "เปิด";var mess = "on";}
+            if (sta === false) { var sw_sta = "ปิด"; var mess = "OFF"; } else { var sw_sta = "เปิด"; var mess = "ON"; }
+        } else {
+            if (sta === false) { var sw_sta = "ปิด"; var mess = "off"; } else { var sw_sta = "เปิด"; var mess = "on"; }
         }
         swal({
             title: 'คุณต้องการ ' + sw_sta + ' ' + ch_name + ' ?',
@@ -925,8 +828,8 @@
                 message.retained = true;
                 client.send(message);
                 // console.log(message.qos);
-            }else{
-                $('.'+sw_name).bootstrapToggle("toggle");
+            } else {
+                $('.' + sw_name).bootstrapToggle("toggle");
             }
         });
     }
@@ -958,532 +861,157 @@
                 message.retained = true;
                 client.send(message);
                 // console.log(message.qos);
-            }else{
+            } else {
                 // $('.'+sw_name).bootstrapToggle("toggle");
             }
         });
     }
     // ------- Switch control --------------
-    $("#save_auto_cont").click(function(){
-        if (house_master !== "KMUMT001") {
-            var channel = $(".channel").val();
-            // alert(channel)
-            if(channel == 9){
-                if($("#sw_7").prop('checked') == true){
-                    if($("#time_s_7").val() === ""){
-                        $('#time_s_7').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_s_7').removeClass('is-invalid')
-                    }
-                    if($("#time_e_7").val() === ""){
-                        $('#time_e_7').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_e_7').removeClass('is-invalid')
-                    }
-                    if($("#time_s_7").val() >= $("#time_e_7").val()){
-                        swal_c(type = 'error', title = 'Error...', text = 'TIMMER LOOP : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
-                        $('#time_s_7').addClass('is-invalid')
-                        $('#time_e_7').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_s_7').removeClass('is-invalid')
-                        $('#time_e_7').removeClass('is-invalid')
-                    }
-                    if($("#time_on_7").val() === ""){
-                        $('#time_on_7').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_on_7').removeClass('is-invalid')
-                    }
-                    if($("#time_off_7").val() === ""){
-                        $('#time_off_7').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_off_7').removeClass('is-invalid')
-                    }
-                }else{
-                    if($("#sw_1").prop('checked') == true){
-                        if($("#time_s_1").val() === ""){
-                            $('#time_s_1').addClass('is-invalid')
+
+    // ++++++++++++++++++
+    $('.memu_control').click(function () {
+        // Create a client instance
+        client = new Paho.MQTT.Client(hostname, Number(port), "mqtt_js_324" + parseInt(Math.random() * 100000, 10));
+
+        // set callback handlers
+        client.onConnectionLost = onConnectionLost;
+        client.onMessageArrived = onMessageArrived;
+
+        // connect the client
+        client.connect({ onSuccess: onConnect });
+
+        // called when the client connects
+        function onConnect() {
+            // Once a connection has been made, make a subscription and send a message.
+            console.log("onConnect");
+            client.subscribe(house_master + "/control/config/auto");
+        }
+
+        // called when the client loses its connection
+        function onConnectionLost(responseObject) {
+            if (responseObject.errorCode !== 0) {
+                console.log("onConnectionLost:" + responseObject.errorMessage);
+            }
+        }
+
+        // called when a message arrives
+        function onMessageArrived(message) {
+            function mqtt_send(msg_dn, msg, user) {
+                message = new Paho.MQTT.Message(msg);
+                message.destinationName = msg_dn;
+                message.qos = 1;
+                message.retained = true;
+                client.send(message);
+            }
+            $("#save_auto_cont").click(function () {
+                for (var i = 1; i <= 6; i++){
+                    if ($("#swch_"+i).prop('checked') == true) {
+                        if ($("#time_s_"+i).val() === "") {
+                            $('#time_s_'+i).addClass('is-invalid')
                             return false;
-                        }else{
-                            $('#time_s_1').removeClass('is-invalid')
+                        } else {
+                            $('#time_s_'+i).removeClass('is-invalid')
                         }
-                        if($("#time_e_1").val() === ""){
-                            $('#time_e_1').addClass('is-invalid')
+                        if ($("#time_e_"+i).val() === "") {
+                            $('#time_e_'+i).addClass('is-invalid')
                             return false;
-                        }else{
-                            $('#time_e_1').removeClass('is-invalid')
+                        } else {
+                            $('#time_e_+i').removeClass('is-invalid')
                         }
-                        if($("#time_s_1").val() >= $("#time_e_1").val()){
-                            swal_c(type = 'error', title = 'Error...', text = 'TIMMER 1 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
+                        if ($("#time_s_"+i).val() >= $("#time_e_"+i).val()) {
+                            swal_c(type = 'error', title = 'Error...', text = 'TIMMER '+i+' : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
                             $('#time_s_1').addClass('is-invalid')
                             $('#time_e_1').addClass('is-invalid')
                             return false;
-                        }else{
-                            $('#time_s_1').removeClass('is-invalid')
-                            $('#time_e_1').removeClass('is-invalid')
-                        }
-                    }
-                    if($("#sw_2").prop('checked') == true){
-                        if($("#time_s_2").val() === ""){
-                            $('#time_s_2').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_2').removeClass('is-invalid')
-                        }
-                        if($("#time_e_2").val() === ""){
-                            $('#time_e_2').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_e_2').removeClass('is-invalid')
-                        }
-                        if($("#time_s_2").val() >= $("#time_e_2").val()){
-                            swal_c(type = 'error', title = 'Error...', text = 'TIMMER 2 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
-                            $('#time_s_2').addClass('is-invalid')
-                            $('#time_e_2').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_2').removeClass('is-invalid')
-                            $('#time_e_2').removeClass('is-invalid')
-                        }
-                    }
-                    if($("#sw_3").prop('checked') == true){
-                        if($("#time_s_3").val() === ""){
-                            $('#time_s_3').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_3').removeClass('is-invalid')
-                        }
-                        if($("#time_e_3").val() === ""){
-                            $('#time_e_3').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_e_3').removeClass('is-invalid')
-                        }
-                        if($("#time_s_3").val() >= $("#time_e_3").val()){
-                            swal_c(type = 'error', title = 'Error...', text = 'TIMMER 3 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
-                            $('#time_s_3').addClass('is-invalid')
-                            $('#time_e_3').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_3').removeClass('is-invalid')
-                            $('#time_e_3').removeClass('is-invalid')
-                        }
-                    }
-                    if($("#sw_4").prop('checked') == true){
-                        if($("#time_s_4").val() === ""){
-                            $('#time_s_4').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_4').removeClass('is-invalid')
-                        }
-                        if($("#time_e_4").val() === ""){
-                            $('#time_e_4').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_e_4').removeClass('is-invalid')
-                        }
-                        if($("#time_s_4").val() >= $("#time_e_4").val()){
-                            swal_c(type = 'error', title = 'Error...', text = 'TIMMER 4 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
-                            $('#time_s_4').addClass('is-invalid')
-                            $('#time_e_4').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_4').removeClass('is-invalid')
-                            $('#time_e_4').removeClass('is-invalid')
-                        }
-                    }
-                    if($("#sw_5").prop('checked') == true){
-                        if($("#time_s_5").val() === ""){
-                            $('#time_s_5').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_5').removeClass('is-invalid')
-                        }
-                        if($("#time_e_5").val() === ""){
-                            $('#time_e_5').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_e_5').removeClass('is-invalid')
-                        }
-                        if($("#time_s_5").val() >= $("#time_e_5").val()){
-                            swal_c(type = 'error', title = 'Error...', text = 'TIMMER 5 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
-                            $('#time_s_5').addClass('is-invalid')
-                            $('#time_e_5').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_5').removeClass('is-invalid')
-                            $('#time_e_5').removeClass('is-invalid')
-                        }
-                    }
-                    if($("#sw_6").prop('checked') == true){
-                        if($("#time_s_6").val() === ""){
-                            $('#time_s_6').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_6').removeClass('is-invalid')
-                        }
-                        if($("#time_e_6").val() === ""){
-                            $('#time_e_6').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_e_6').removeClass('is-invalid')
-                        }
-                        if($("#time_s_6").val() >= $("#time_e_6").val()){
-                            swal_c(type = 'error', title = 'Error...', text = 'TIMMER 6 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
-                            $('#time_s_6').addClass('is-invalid')
-                            $('#time_e_6').addClass('is-invalid')
-                            return false;
-                        }else{
-                            $('#time_s_6').removeClass('is-invalid')
-                            $('#time_e_6').removeClass('is-invalid')
+                        } else {
+                            $('#time_s_'+i).removeClass('is-invalid')
+                            $('#time_e_'+i).removeClass('is-invalid')
                         }
                     }
                 }
-            }else if(channel == 11){
-                var minsToAdd = 15;
-                var newTime_d2 = new Date(new Date("1970/01/01 " + $("#time_s_1").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
-                var newTime_d3 = new Date(new Date("1970/01/01 " + $("#time_s_2").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
-                var newTime_d4 = new Date(new Date("1970/01/01 " + $("#time_s_3").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
-                var newTime_d5 = new Date(new Date("1970/01/01 " + $("#time_s_4").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
-                var newTime_d6 = new Date(new Date("1970/01/01 " + $("#time_s_5").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
-                
-                    // ----------
-                if($("#sw_1").prop('checked') == true){
-                    if($("#time_s_1").val() === ""){
-                        $('#time_s_1').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_s_1').removeClass('is-invalid')
-                    }
+                function swal_c(type, title, text) {
+                    Swal({
+                        type: type,
+                        title: title,
+                        html: text,
+                        allowOutsideClick: false
+                    });
                 }
-                if($("#sw_2").prop('checked') == true){
-                    if($("#time_s_2").val() === ""){
-                        $('#time_s_2').addClass('is-invalid')
-                        return false;
-                    }else if($("#time_s_2").val() <= newTime_d2){
-                        swal_c(type = 'error', title = 'Error...', text = '<b>TIMMER 2 : TIME </b> ต้องมากกว่า <b>' + newTime_d2 + '</b> !');
-                        $("#time_s_2").addClass("is-invalid");
-                        return false;
-                    }else{
-                        $('#time_s_2').removeClass('is-invalid')
-                    }
-                    if($("#time_se_1").val() == $("#time_se_2").val()){
-                        swal_c(type = 'error', title = 'Error...', text = '<b> LEVEL : TIMMER 2 </b> ต้องไม่เท่ากับ <b> LEVEL : TIMMER 1 </b> !');
-                        $("#time_se_2").addClass("is-invalid");
-                        return false;
-                    }else{
-                        $("#time_se_2").removeClass("is-invalid");
-                    }
-                }
-                if($("#sw_3").prop('checked') == true){
-                    if($("#time_s_3").val() === ""){
-                        $('#time_s_3').addClass('is-invalid')
-                        return false;
-                    }else if($("#time_s_3").val() <= newTime_d3){
-                        swal_c(type = 'error', title = 'Error...', text = '<b>TIMMER 3 : TIME </b> เวลาต้องมากกว่า <b>' + newTime_d3 + '</b> !');
-                        $("#time_s_3").addClass("is-invalid");
-                        return false;
-                    }else{
-                        $('#time_s_3').removeClass('is-invalid')
-                    }
-                    if($("#time_se_2").val() == $("#time_se_3").val()){
-                        swal_c(type = 'error', title = 'Error...', text = '<b> LEVEL : TIMMER 3 </b> ต้องไม่เท่ากับ <b> LEVEL : TIMMER 2 </b> !');
-                        $("#time_se_3").addClass("is-invalid");
-                        return false;
-                    }else{
-                        $("#time_se_3").removeClass("is-invalid");
-                    }
-                }
-                if($("#sw_4").prop('checked') == true){
-                    if($("#time_s_4").val() === ""){
-                        $('#time_s_4').addClass('is-invalid')
-                        return false;
-                    }else if($("#time_s_4").val() <= newTime_d4){
-                        swal_c(type = 'error', title = 'Error...', text = '<b>TIMMER 4 : TIME </b> เวลาต้องมากกว่า <b>' + newTime_d4 + '</b> !');
-                        $("#time_s_4").addClass("is-invalid");
-                        return false;
-                    }else{
-                        $('#time_s_4').removeClass('is-invalid')
-                    }
-                    if($("#time_se_3").val() == $("#time_se_4").val()){
-                        swal_c(type = 'error', title = 'Error...', text = '<b> LEVEL : TIMMER 4 </b> ต้องไม่เท่ากับ <b> LEVEL : TIMMER 3 </b> !');
-                        $("#time_se_4").addClass("is-invalid");
-                        return false;
-                    }else{
-                        $("#time_se_4").removeClass("is-invalid");
-                    }
-                }
-                if($("#sw_5").prop('checked') == true){
-                    if($("#time_s_5").val() === ""){
-                        $('#time_s_5').addClass('is-invalid')
-                        return false;
-                    }else if($("#time_s_5").val() <= newTime_d5){
-                        swal_c(type = 'error', title = 'Error...', text = '<b>TIMMER 5 : TIME </b> เวลาต้องมากกว่า <b>' + newTime_d5 + '</b> !');
-                        $("#time_s_5").addClass("is-invalid");
-                        return false;
-                    }else{
-                        $('#time_s_5').removeClass('is-invalid')
-                    }
-                    if($("#time_se_4").val() == $("#time_se_5").val()){
-                        swal_c(type = 'error', title = 'Error...', text = '<b> LEVEL : TIMMER 5 </b> ต้องไม่เท่ากับ <b> LEVEL : TIMMER 4 </b> !');
-                        $("#time_se_5").addClass("is-invalid");
-                        return false;
-                    }else{
-                        $("#time_se_5").removeClass("is-invalid");
-                    }
-                }
-                if($("#sw_6").prop('checked') == true){
-                    if($("#time_s_6").val() === ""){
-                        $('#time_s_6').addClass('is-invalid')
-                        return false;
-                    }else if($("#time_s_6").val() <= newTime_d6){
-                        swal_c(type = 'error', title = 'Error...', text = '<b>TIMMER 6 : TIME </b> เวลาต้องมากกว่า <b>' + newTime_d6 + '</b> !');
-                        $("#time_s_6").addClass("is-invalid");
-                        return false;
-                    }else{
-                        $('#time_s_6').removeClass('is-invalid')
-                    }
-                    if($("#time_se_5").val() == $("#time_se_6").val()){
-                        swal_c(type = 'error', title = 'Error...', text = '<b> LEVEL : TIMMER 6 </b> ต้องไม่เท่ากับ <b> LEVEL : TIMMER 5 </b> !');
-                        $("#time_se_6").addClass("is-invalid");
-                        return false;
-                    }else{
-                        $("#time_se_6").removeClass("is-invalid");
-                    }
-                }
-            }else{
-                if($("#sw_1").prop('checked') == true){
-                    if($("#time_s_1").val() === ""){
-                        $('#time_s_1').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_s_1').removeClass('is-invalid')
-                    }
-                    if($("#time_e_1").val() === ""){
-                        $('#time_e_1').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_e_1').removeClass('is-invalid')
-                    }
-                    if($("#time_s_1").val() >= $("#time_e_1").val()){
-                        swal_c(type = 'error', title = 'Error...', text = 'TIMMER 1 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
-                        $('#time_s_1').addClass('is-invalid')
-                        $('#time_e_1').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_s_1').removeClass('is-invalid')
-                        $('#time_e_1').removeClass('is-invalid')
-                    }
-                }
-                if($("#sw_2").prop('checked') == true){
-                    if($("#time_s_2").val() === ""){
-                        $('#time_s_2').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_s_2').removeClass('is-invalid')
-                    }
-                    if($("#time_e_2").val() === ""){
-                        $('#time_e_2').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_e_2').removeClass('is-invalid')
-                    }
-                    if($("#time_s_2").val() >= $("#time_e_2").val()){
-                        swal_c(type = 'error', title = 'Error...', text = 'TIMMER 2 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
-                        $('#time_s_2').addClass('is-invalid')
-                        $('#time_e_2').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_s_2').removeClass('is-invalid')
-                        $('#time_e_2').removeClass('is-invalid')
-                    }
-                }
-                if($("#sw_3").prop('checked') == true){
-                    if($("#time_s_3").val() === ""){
-                        $('#time_s_3').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_s_3').removeClass('is-invalid')
-                    }
-                    if($("#time_e_3").val() === ""){
-                        $('#time_e_3').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_e_3').removeClass('is-invalid')
-                    }
-                    if($("#time_s_3").val() >= $("#time_e_3").val()){
-                        swal_c(type = 'error', title = 'Error...', text = 'TIMMER 3 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
-                        $('#time_s_3').addClass('is-invalid')
-                        $('#time_e_3').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_s_3').removeClass('is-invalid')
-                        $('#time_e_3').removeClass('is-invalid')
-                    }
-                }
-                if($("#sw_4").prop('checked') == true){
-                    if($("#time_s_4").val() === ""){
-                        $('#time_s_4').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_s_4').removeClass('is-invalid')
-                    }
-                    if($("#time_e_4").val() === ""){
-                        $('#time_e_4').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_e_4').removeClass('is-invalid')
-                    }
-                    if($("#time_s_4").val() >= $("#time_e_4").val()){
-                        swal_c(type = 'error', title = 'Error...', text = 'TIMMER 4 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
-                        $('#time_s_4').addClass('is-invalid')
-                        $('#time_e_4').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_s_4').removeClass('is-invalid')
-                        $('#time_e_4').removeClass('is-invalid')
-                    }
-                }
-                if($("#sw_5").prop('checked') == true){
-                    if($("#time_s_5").val() === ""){
-                        $('#time_s_5').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_s_5').removeClass('is-invalid')
-                    }
-                    if($("#time_e_5").val() === ""){
-                        $('#time_e_5').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_e_5').removeClass('is-invalid')
-                    }
-                    if($("#time_s_5").val() >= $("#time_e_5").val()){
-                        swal_c(type = 'error', title = 'Error...', text = 'TIMMER 5 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
-                        $('#time_s_5').addClass('is-invalid')
-                        $('#time_e_5').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_s_5').removeClass('is-invalid')
-                        $('#time_e_5').removeClass('is-invalid')
-                    }
-                }
-                if($("#sw_6").prop('checked') == true){
-                    if($("#time_s_6").val() === ""){
-                        $('#time_s_6').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_s_6').removeClass('is-invalid')
-                    }
-                    if($("#time_e_6").val() === ""){
-                        $('#time_e_6').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_e_6').removeClass('is-invalid')
-                    }
-                    if($("#time_s_6").val() >= $("#time_e_6").val()){
-                        swal_c(type = 'error', title = 'Error...', text = 'TIMMER 6 : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
-                        $('#time_s_6').addClass('is-invalid')
-                        $('#time_e_6').addClass('is-invalid')
-                        return false;
-                    }else{
-                        $('#time_s_6').removeClass('is-invalid')
-                        $('#time_e_6').removeClass('is-invalid')
-                    }
-                }
-            }
-            function swal_c(type, title, text) {
-                Swal({
-                    type: type,
-                    title: title,
-                    html: text,
-                    allowOutsideClick: false
-                });
-            }
-            swal({
-                title: 'บันทึกการเปลี่ยนแปลง',
-                text: "คุณต้องการบันทึกการเปลี่ยนแปลง ?",
-                type: 'warning',
-                allowOutsideClick: false,
-                showCancelButton: true,
-                confirmButtonColor: '#32CD32',
-                cancelButtonColor: '#FF3333',
-                confirmButtonText: 'ไช่',
-                cancelButtonText: 'ยกเลิก'
-            }).then((result) => {
-                if (result.value) {
-                    if ($("#sw_1").prop('checked') == true) { var sw_1 = 1; } else { var sw_1 = 0; }
-                    if ($("#sw_2").prop('checked') == true) { var sw_2 = 1; } else { var sw_2 = 0; }
-                    if ($("#sw_3").prop('checked') == true) { var sw_3 = 1; } else { var sw_3 = 0; }
-                    if ($("#sw_4").prop('checked') == true) { var sw_4 = 1; } else { var sw_4 = 0; }
-                    if ($("#sw_5").prop('checked') == true) { var sw_5 = 1; } else { var sw_5 = 0; }
-                    if ($("#sw_6").prop('checked') == true) { var sw_6 = 1; } else { var sw_6 = 0; }
-                    if ($("#sw_7").prop('checked') == true) { var sw_7 = 1; } else { var sw_7 = 0; }
-                    if (message.destinationName == house_master + "/1/control/time_control") {
-                        var result = message.payloadString;
-                        var parseJSON = $.parseJSON(result);
-                        // console.log(parseJSON);
-                        // return false;
+                swal({
+                    title: 'บันทึกการเปลี่ยนแปลง',
+                    text: "คุณต้องการบันทึกการเปลี่ยนแปลง ?",
+                    type: 'warning',
+                    allowOutsideClick: false,
+                    showCancelButton: true,
+                    confirmButtonColor: '#32CD32',
+                    cancelButtonColor: '#FF3333',
+                    confirmButtonText: 'ไช่',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.value) {
+                        if ($("#swch_1").prop('checked') == true) { var sw_1 = 1; } else { var sw_1 = 0; }
+                        if ($("#swch_2").prop('checked') == true) { var sw_2 = 1; } else { var sw_2 = 0; }
+                        if ($("#swch_3").prop('checked') == true) { var sw_3 = 1; } else { var sw_3 = 0; }
+                        if ($("#swch_4").prop('checked') == true) { var sw_4 = 1; } else { var sw_4 = 0; }
+                        if ($("#swch_5").prop('checked') == true) { var sw_5 = 1; } else { var sw_5 = 0; }
+                        if ($("#swch_6").prop('checked') == true) { var sw_6 = 1; } else { var sw_6 = 0; }
                         $.ajax({
                             type: "POST",
-                            url: "routes/save_autoControl.php",
+                            url: "routes/tu/save_autoControl.php",
                             data: {
                                 house_master: house_master,
-                                channel     : $("#channel").val(),
-                                sw_1 : sw_1,
-                                sw_2 : sw_2,
-                                sw_3 : sw_3,
-                                sw_4 : sw_4,
-                                sw_5 : sw_5,
-                                sw_6 : sw_6,
-                                sw_7 : sw_7,
-                                s_1 : $("#time_s_1").val(),
-                                s_2 : $("#time_s_2").val(),
-                                s_3 : $("#time_s_3").val(),
-                                s_4 : $("#time_s_4").val(),
-                                s_5 : $("#time_s_5").val(),
-                                s_6 : $("#time_s_6").val(),
-                                s_7 : $("#time_s_7").val(),
-                                e_1 : $("#time_e_1").val(),
-                                e_2 : $("#time_e_2").val(),
-                                e_3 : $("#time_e_3").val(),
-                                e_4 : $("#time_e_4").val(),
-                                e_5 : $("#time_e_5").val(),
-                                e_6 : $("#time_e_6").val(),
-                                e_7 : $("#time_e_7").val(),
-                                on_7 : $("#time_on_7").val(),
-                                off_7 : $("#time_off_7").val(),
-                                se_1 : $("#time_se_1").val(),
-                                se_2 : $("#time_se_2").val(),
-                                se_3 : $("#time_se_3").val(),
-                                se_4 : $("#time_se_4").val(),
-                                se_5 : $("#time_se_5").val(),
-                                se_6 : $("#time_se_6").val()
+                                load_select: $(".load_select").val(),
+                                sw_1: sw_1,
+                                sw_2: sw_2,
+                                sw_3: sw_3,
+                                sw_4: sw_4,
+                                sw_5: sw_5,
+                                sw_6: sw_6,
+                                s_1: $("#time_s_1").val(),
+                                s_2: $("#time_s_2").val(),
+                                s_3: $("#time_s_3").val(),
+                                s_4: $("#time_s_4").val(),
+                                s_5: $("#time_s_5").val(),
+                                s_6: $("#time_s_6").val(),
+                                e_1: $("#time_e_1").val(),
+                                e_2: $("#time_e_2").val(),
+                                e_3: $("#time_e_3").val(),
+                                e_4: $("#time_e_4").val(),
+                                e_5: $("#time_e_5").val(),
+                                e_6: $("#time_e_6").val()
                             },
                             dataType: 'json',
-                            success: function(res) {
-                                // console.log(res.data)
-                                if(res.status === "Insert_Success"){
+                            success: function (res) {
+                                console.log(res.data)
+                                if (res.status === "Insert_Success") {
                                     $("#Modal_Auto_control").modal("hide");
-                                    $.extend(parseJSON, res.data);
-                                    var json_msg = JSON.stringify(parseJSON);
-                                    // console.log(parseJSON)
-                                    message = new Paho.MQTT.Message(json_msg);
-                                    message.destinationName = house_master + "/1/control/time_control";
-                                    message.qos = 1;
-                                    message.retained = true;
-                                    client.send(message);
-                                
+                                    if (message.destinationName == house_master + "/control/config/auto") {
+                                        var result = message.payloadString;
+                                        var parseJSON = $.parseJSON(result);
+                                        // console.log(parseJSON);
+                                        $.extend(parseJSON, res.data);
+                                        var json_msg = JSON.stringify(parseJSON);
+                                        // console.log(parseJSON)
+                                        mqtt_send(house_master+'/control/config/auto', json_msg, '')
+                                    }
                                     swal({
                                         title: 'บันทึกข้อมูลสำเร็จ',
                                         type: 'success',
                                         allowOutsideClick: false,
                                         confirmButtonColor: '#32CD32'
                                     });
-                                }else{
+                                    for (var i = 1; i <= 6; i++){
+                                        if ($("#swch_"+i).prop('checked') == true) { $(".img_"+i).attr("src", "public/images/control/switck_on.png"); } else { $(".img_"+i).attr("src", "public/images/control/switck_off.png"); }
+                                    }
+                                    $(".img_sw").show();
+                                    $('.input_time').prop('disabled', true);
+                                    $(".sw_toggle").hide();
+                                    $(".edit_cont").show();
+                                    $(".sw_mode_Auto").attr('disabled', false);
+                                    $(".sw_mode_Manual").attr('disabled', false);
+                                    $("#save_auto_cont").hide();
+                                    $("#close_auto_cont").hide();
+                                } else {
                                     swal({
                                         title: 'Error !',
                                         text: "เกิดข้อผิดพลาด ?",
@@ -1499,180 +1027,235 @@
                                 }
                             }
                         });
+
                     }
-                }
-            });
-        }else{ // =KMUMT001
-            var Rmx1 = $(".range_control1").val().split(";");
-            var Rmx2 = $(".range_control2").val().split(";");
-            var Rmx3 = $(".range_control3").val().split(";");
-            var Rmx5 = $(".range_control5").val().split(";");
-            if(Rmx1[0] == Rmx1[1]){
-                swal_c(type = 'error', title = 'Error...', text = 'Soil moisture 1 : <b>ความชื้นเริ่มต้นต้องน้อยกว่าความชื้นสิ้นสุด</b> !');
-                return false;
-            }
-            if(Rmx2[0] == Rmx2[1]){
-                swal_c(type = 'error', title = 'Error...', text = 'Soil moisture 2 : <b>ความชื้นเริ่มต้นต้องน้อยกว่าความชื้นสิ้นสุด</b> !');
-                return false;
-            }
-            if(Rmx3[0] == Rmx3[1]){
-                swal_c(type = 'error', title = 'Error...', text = 'Temperature : <b>อุณหภูมิเริ่มต้นต้องน้อยกว่าอุณหภูมิสิ้นสุด</b> !');
-                return false;
-            }if(Rmx5[0] == Rmx5[1]){
-                swal_c(type = 'error', title = 'Error...', text = 'Light intensity  : <b>ความเข้มแสงเริ่มต้นต้องน้อยกว่าความเข้มแสงสิ้นสุด</b> !');
-                return false;
-            }
-            function swal_c(type, title, text) {
-                Swal({
-                    type: type,
-                    title: title,
-                    html: text,
-                    allowOutsideClick: false
                 });
-            }
-            swal({
-                title: 'บันทึกการเปลี่ยนแปลง',
-                text: "คุณต้องการบันทึกการเปลี่ยนแปลง ?",
-                type: 'warning',
-                allowOutsideClick: false,
-                showCancelButton: true,
-                confirmButtonColor: '#32CD32',
-                cancelButtonColor: '#FF3333',
-                confirmButtonText: 'ไช่',
-                cancelButtonText: 'ยกเลิก'
-            }).then((result) => {
-                if (result.value) {
-                    $.ajax({
-                        url: "routes/save_autoControl.php",
-                        method: "post",
-                        data: {
-                            house_master: house_master,
-                            A1: $(".range_control1").val(),
-                            A2: $(".range_control2").val(),
-                            A3: $(".range_control3").val(),
-                            A5: $(".range_control5").val()
-                        },
-                        dataType: "json",
-                        success: function(res) {
-                            $("#Modal_Auto_control").modal("hide");
-                            console.log(res);
-                            if (res === "Success") {
-                                message = new Paho.MQTT.Message(Rmx1[0]);
-                                message.destinationName = house_master + "/1/data_config/data_config_sprinnker_base_down";
-                                message.retained = true;
-                                client.send(message);
+            }); // exit_save_Auto
+        }
 
-                                message = new Paho.MQTT.Message(Rmx1[1]);
-                                message.destinationName = house_master + "/1/data_config/data_config_sprinnker_base_up";
-                                message.retained = true;
-                                client.send(message);
+        if($('.sw_mode_Auto').hasClass('btn-success') == true){
+            $.ajax({
+                url: "routes/tu/get_control_au.php",
+                method: "post",
+                data: {
+                    house_master: house_master,
+                    config_cn: config_cn
+                },
+                dataType: "json",
+                success: function(res) {
+                    // console.log(res);
+                    $("#Modal_control").modal('show', { backdrop: "static" })
+                    $(".edit_cont").show();
+                    $(".img_sw").show();
+                    $(".sw_toggle").hide();
+                    $('.input_time').prop('disabled', true);
+                    if(config_cn.cn_status_1 == 1){
+                        $('.text_load').html(config_cn.cn_name_1); $('.load_select').val(1); $("#1").addClass('active');
+                    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 1) {
+                        $('.text_load').html(config_cn.cn_name_2); $('.load_select').val(2); $("#2").addClass('active');
+                    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 1) {
+                        $('.text_load').html(config_cn.cn_name_3); $('.load_select').val(3); $("#3").addClass('active');
+                    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 1) {
+                        $('.text_load').html(config_cn.cn_name_4); $('.load_select').val(4); $("#4").addClass('active');
+                    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 1) {
+                        $('.text_load').html(config_cn.cn_name_5); $('.load_select').val(5); $("#5").addClass('active');
+                    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 1) {
+                        $('.text_load').html(config_cn.cn_name_6); $('.load_select').val(6); $("#6").addClass('active');
+                    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 1) {
+                        $('.text_load').html(config_cn.cn_name_7); $('.load_select').val(7); $("#7").addClass('active');
+                    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 1) {
+                        $('.text_load').html(config_cn.cn_name_8); $('.load_select').val(8); $("#8").addClass('active');
+                    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 1) {
+                        $('.text_load').html(config_cn.cn_name_9); $('.load_select').val(9); $("#9").addClass('active');
+                    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 1) {
+                        $('.text_load').html(config_cn.cn_name_10); $('.load_select').val(10); $("#10").addClass('active');
+                    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 0 && config_cn.cn_status_11 == 1) {
+                        $('.text_load').html(config_cn.cn_name_11); $('.load_select').val(11); $("#11").addClass('active');
+                    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 0 && config_cn.cn_status_11 == 0 && config_cn.cn_status_12 == 1) {
+                        $('.text_load').html(config_cn.cn_name_12); $('.load_select').val(12); $("#12").addClass('active');
+                    }
+                    for (var i = 1; i < 13; i++) {
+                        if(i != $('.load_select').val()){
+                            $('#'+i).removeClass('active')
+                        }
+                    }
+                    // ===============================================
+                    df_ed_text($('.load_select').val())
+                    function df_ed_text(numb) {
+                        for (var i = 0; i <= 6; i++) {
+                            if (res["load_"+numb]["load_st_"+i] == 1) {
+                                $("#swch_"+i).bootstrapToggle('on');
+                                $(".img_"+i).attr("src", "public/images/control/switck_on.png");
+                                $("#time_s_"+i).prop('disabled', true).val(res["load_"+numb]["load_s_"+i]);
+                                $("#time_e_"+i).prop('disabled', true).val(res["load_"+numb]["load_e_"+i]);
+                            } else {
+                                $("#swch_"+i).bootstrapToggle('off');
+                                $(".img_"+i).attr("src", "public/images/control/switck_off.png");
+                                $("#time_s_"+i).prop('disabled', true).val("");
+                                $("#time_e_"+i).prop('disabled', true).val("");
+                            }
+                        }
+                    }
+                    $(".edit_cont").click(function() {
+                        // $(".nav-link").addClass('disabled');
+                        $(this).hide();
+                        $(".img_sw").hide();
+                        $(".sw_toggle").show();
+                        $("#close_auto_cont").show();
+                        $(".sw_mode_Auto").attr('disabled', true);
+                        $(".sw_mode_Manual").attr('disabled', true);
+                        $(".close_modal").hide();
+                        for (var i = 0; i <= 6; i++) {
+                            if (res["load_"+$('.load_select').val()]["load_st_"+i] == 1) {
+                                $("#time_s_"+i).prop('disabled', false);
+                                $("#time_e_"+i).prop('disabled', false);
+                            } else {
+                                $("#time_s_"+i).prop('disabled', true);
+                                $("#time_e_"+i).prop('disabled', true);
+                            }
+                        }
+                        $('.input_check').change(function() {
+                            var input_num = this.id.split("_");
+                            if ($(this).prop('checked') === true) {
 
-                                message = new Paho.MQTT.Message(Rmx2[0]);
-                                message.destinationName = house_master + "/1/data_config/data_config_sprinnker_down";
-                                message.retained = true;
-                                client.send(message);
-
-                                message = new Paho.MQTT.Message(Rmx2[1]);
-                                message.destinationName = house_master + "/1/data_config/data_config_sprinnker_up";
-                                message.retained = true;
-                                client.send(message);
-
-                                message = new Paho.MQTT.Message(Rmx3[0]);
-                                message.destinationName = house_master + "/1/data_config/data_config_foggy_down";
-                                message.retained = true;
-                                client.send(message);
-
-                                message = new Paho.MQTT.Message(Rmx3[1]);
-                                message.destinationName = house_master + "/1/data_config/data_config_foggy_up";
-                                message.retained = true;
-                                client.send(message);
-
-                                message = new Paho.MQTT.Message(Rmx3[0]);
-                                message.destinationName = house_master + "/1/data_config/data_config_sprinnker_top_down";
-                                message.retained = true;
-                                client.send(message);
-
-                                message = new Paho.MQTT.Message(Rmx3[1]);
-                                message.destinationName = house_master + "/1/data_config/data_config_sprinnker_top_up";
-                                message.retained = true;
-                                client.send(message);
-
-                                message = new Paho.MQTT.Message(Rmx5[0]);
-                                message.destinationName = house_master + "/1/data_config/data_config_slan_down";
-                                message.retained = true;
-                                client.send(message);
-
-                                message = new Paho.MQTT.Message(Rmx5[1]);
-                                message.destinationName = house_master + "/1/data_config/data_config_slan_up";
-                                message.retained = true;
-                                client.send(message);
-
-                            swal({
-                                    title: 'บันทึกข้อมูลสำเร็จ',
-                                    type: 'success',
-                                    allowOutsideClick: false,
-                                    confirmButtonColor: '#32CD32'
-                                });
-                            }else{
+                                $("#time_s_"+input_num[1]).prop('disabled', false).val(res["load_"+$('.load_select').val()]["load_s_"+input_num[1]]);
+                                $("#time_e_"+input_num[1]).prop('disabled', false).val(res["load_"+$('.load_select').val()]["load_e_"+input_num[1]]);
+                            }else {
+                                $("#time_s_"+input_num[1]).prop('disabled', true).val("");
+                                $("#time_e_"+input_num[1]).prop('disabled', true).val("");
+                            }
+                            btn_save_chang($('.load_select').val(), '');
+                        });
+                        $(".input_time").change(function() {
+                            btn_save_chang($('.load_select').val(), '');
+                        });
+                    });
+                    function btn_save_chang(chanel, mode){
+                        var sw_gd = [];
+                        for (var i = 1; i <= 6; i++) {
+                            if ($("#swch_"+i).prop('checked') === true) {
+                                sw_gd['load_st_'+i] = 1;
+                                sw_gd['load_s_'+i] = $("#time_s_"+i).val();
+                                sw_gd['load_e_'+i] = $("#time_e_"+i).val();
+                            } else {
+                                sw_gd['load_st_'+i] = 0;
+                                sw_gd['load_s_'+i] = "";
+                                sw_gd['load_e_'+i] = "";
+                            }
+                        }
+                        var sw_gd2 = {
+                            'load_st_1':sw_gd['load_st_1'],
+                            'load_s_1':sw_gd['load_s_1'],
+                            'load_e_1':sw_gd['load_e_1'],
+                            'load_st_2':sw_gd['load_st_2'],
+                            'load_s_2':sw_gd['load_s_2'],
+                            'load_e_2':sw_gd['load_e_2'],
+                            'load_st_3':sw_gd['load_st_3'],
+                            'load_s_3':sw_gd['load_s_3'],
+                            'load_e_3':sw_gd['load_e_3'],
+                            'load_st_4':sw_gd['load_st_4'],
+                            'load_s_4':sw_gd['load_s_4'],
+                            'load_e_4':sw_gd['load_e_4'],
+                            'load_st_5':sw_gd['load_st_5'],
+                            'load_s_5':sw_gd['load_s_5'],
+                            'load_e_5':sw_gd['load_e_5'],
+                            'load_st_6':sw_gd['load_st_6'],
+                            'load_s_6':sw_gd['load_s_6'],
+                            'load_e_6':sw_gd['load_e_6']
+                        };
+                        // console.log(JSON.stringify(res['load_'+chanel]));
+                        // console.log(JSON.stringify(sw_gd2));
+                        // console.log(sw_gd2);
+                        if(mode === 'close'){
+                            if (JSON.stringify(res['load_'+chanel]) === JSON.stringify(sw_gd2)) {
+                                $(".img_sw").show();
+                                $('.input_time').prop('disabled', true);
+                                $(".sw_toggle").hide();
+                                $(".edit_cont").show();
+                                $("#save_auto_cont").hide();
+                                $("#close_auto_cont").hide();
+                                $(".sw_mode_Auto").attr('disabled', false);
+                                $(".sw_mode_Manual").attr('disabled', false);
+                                $(".close_modal").show();
+                            } else {
                                 swal({
-                                    title: 'Error !',
-                                    text: "เกิดข้อผิดพลาด ?",
-                                    type: 'error',
+                                    title: 'คุณแน่ใจหรือไม่?',
+                                    text: "คุณต้องการยกเลิกการตั้งค่า?",
+                                    type: 'warning',
                                     allowOutsideClick: false,
-                                    confirmButtonColor: '#32CD32'
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#da3444',
+                                    cancelButtonColor: '#8e8e8e',
+                                    confirmButtonText: 'ยืนยัน',
+                                    cancelButtonText: 'ยกเลิก',
                                 }).then((result) => {
                                     if (result.value) {
-                                        location.reload();
-                                        return false;
+                                        $(".img_sw").show();
+                                        $('.input_time').removeClass("input_err").prop('disabled', true);
+                                        $(".sw_toggle").hide();
+                                        $(".edit_cont").show();
+                                        $(".sw_mode_Auto").attr('disabled', false);
+                                        $(".sw_mode_Manual").attr('disabled', false);
+                                        $(".close_modal").show();
+                                        df_ed_text(chanel);
+                                        $("#save_auto_cont").hide();
+                                        $("#close_auto_cont").hide();
                                     }
                                 });
                             }
+                        }else {
+                            if (JSON.stringify(res['load_'+chanel]) === JSON.stringify(sw_gd2)) {
+                                $("#save_auto_cont").hide();
+                            } else {
+                                $("#save_auto_cont").show();
+                            }
                         }
+                    }
+                    $("#close_auto_cont").click(function() {
+                        btn_save_chang($('.load_select').val(), 'close')
                     });
+                    $('.sw_btn_au').click(function(){
+                        $(this).addClass('active')
+                        var numb = $(this).attr('id');
+                        $('.load_select').val(numb)
+                        for (var i = 1; i < 13; i++) {
+                            if(i != numb){
+                                $('#'+i).removeClass('active')
+                            }
+                        }
+                        df_ed_text(numb);
+                        $("#save_auto_cont").hide();
+                    })
+                    $("#save_auto_cont").hide();
+                    $("#close_auto_cont").hide();
+                }
+            });
+        }else {
+            $.ajax({
+                url: "routes/tu/get_control_mn.php",
+                method: "post",
+                data: {
+                    house_master: house_master,
+                    config_cn: config_cn
+                },
+                dataType: "json",
+                success: function(res) {
+                    console.log(res);
+                    $("#Modal_control").modal('show', { backdrop: "static" })
+                    $('.check_m').hide();
+                    $('#save_manual_cont').hide();
+                    $('#close_manual_cont').hide();
+                    // if(config_cn['cn_status_1'] == 1){
+                    //
+                    // }
+                    $('.btn_config').click(function(){
+                        $(this).hide();
+                        $('.check_m').show();
+                        $('#save_manual_cont').show();
+                        $('#close_manual_cont').show();
+                    })
                 }
             });
         }
-    }); // exit_save_Auto
-    
-    // ++++++++++++++++++
-    function mqtt_send(msg_dn, msg){
-        // Create a client instance
-        client = new Paho.MQTT.Client(hostname, Number(port), "mqtt_js_324" + parseInt(Math.random() * 100000, 10));
-
-        // set callback handlers
-        client.onConnectionLost = onConnectionLost;
-        client.onMessageArrived = onMessageArrived;
-
-        // connect the client
-        client.connect({onSuccess:onConnect});
-
-        // called when the client connects
-        function onConnect() {
-            // Once a connection has been made, make a subscription and send a message.
-            console.log("onConnect");
-            client.subscribe(house_master + "/control/status/mode");
-            message = new Paho.MQTT.Message(msg);
-            message.destinationName = msg_dn;
-            client.send(message);
-        }
-
-        // called when the client loses its connection
-        function onConnectionLost(responseObject) {
-            if (responseObject.errorCode !== 0) {
-                console.log("onConnectionLost:"+responseObject.errorMessage);
-            }
-        }
-
-        // called when a message arrives
-        // function onMessageArrived(message) {
-        //     // console.log("onMessageArrived:"+message.payloadString);
-        //     if (message.destinationName == house_master + "/control/status/mode") {
-        //         var result = message.payloadString;
-        //         console.log(result)
-        //     }
-        // }
-    }
-    $('.memu_control').click(function(){
-        $("#Modal_control").modal('show')
     })
 </script>
