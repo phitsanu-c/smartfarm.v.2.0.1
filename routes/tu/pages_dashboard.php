@@ -477,31 +477,30 @@
                         </div>
                         <div class="row mt-3 mb-3">
                             <div class="col-3 text-center">
-                                <label class="label_1">Dripper 1</label>
+                                <label class="label_1"></label>
                                 <div class="check_m">
                                     <input class="input_check2" type="checkbox" id="label_1" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
                                 </div>
                             </div>
                             <div class="col-3 text-center">
-                                <label class="label_2">Dripper 2</label>
+                                <label class="label_2"></label>
                                 <div class="check_m">
                                     <input class="input_check2" type="checkbox" id="label_2" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
                                 </div>
                             </div>
                             <div class="col-3 text-center">
-                                <label class="label_3">Dripper 3</label>
-                                <div class="check_m">
+                                <label class="label_3"></label>
+                                <div class="check_m check_m3">
                                     <input class="input_check2" type="checkbox" id="label_3" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
                                 </div>
                             </div>
                             <div class="col-3 text-center">
-                                <label class="label_4">Dripper 4</label>
-                                <div class="check_m">
+                                <label class="label_4"></label>
+                                <div class="check_m check_m4">
                                     <input class="input_check2" type="checkbox" id="label_4" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
                                 </div>
                             </div>
                         </div>
-
                     </div>
 				</div>
 			</div>
@@ -1266,7 +1265,6 @@
                         btn_save_chang($('.load_select').val(), 'close')
                     });
                     $('.sw_btn_au').click(function(){
-                        $(this).addClass('active')
                         var numb = $(this).attr('id');
                         $('.load_select').val(numb)
                         memu_auto_check(numb);
@@ -1335,23 +1333,154 @@
                                 }
                             }
                         }
+                        df_mn_text(val);
+                        if(val <= 3){
+                            $('.btn_config').show();
+                            if(val == 3){
+                                $('.label_3').hide();
+                                $('.label_4').hide();
+                                $('.check_m3').hide();
+                                $('.check_m4').hide();
+                            }
+                        }else {
+                            $('.btn_config').hide();
+                            $('.label_1').hide();
+                            $('.label_2').hide();
+                            $('.label_3').hide();
+                            $('.label_4').hide();
+                            $('.check_m3').hide();
+                            $('.check_m4').hide();
+                        }
                     }
                     $('.sw_btn_s').click(function(){
-                        // $(this).addClass('active')
                         var numb = Number($(this).attr('id').substring(1));
                         $('.manual_select').val(numb)
                         memu_manuak_check(numb);
-                    })
+                    });
+                    function df_mn_text(val) {
+                        if(val == 1){
+                            if(res.dripper_1 == 'ON'){
+                                $('.label_1').show().html(config_cn.cn_name_1);
+                                $('#label_1').bootstrapToggle('on')
+                            }else {
+                                $('.label_1').hide();
+                                $('#label_1').bootstrapToggle('off')
+                            }
+                            if(res.dripper_2 == 'ON'){
+                                $('.label_2').show().html(config_cn.cn_name_2);
+                                $('#label_2').bootstrapToggle('on')
+                            }else {
+                                $('.label_2').hide();
+                                $('#label_2').bootstrapToggle('off')
+                            }
+                            if(res.dripper_3 == 'ON'){
+                                $('.label_3').show().html(config_cn.cn_name_3);
+                                $('#label_3').bootstrapToggle('on')
+                            }else {
+                                $('.label_3').hide();
+                                $('#label_3').bootstrapToggle('off')
+                            }
+                            if(res.dripper_4 == 'ON'){
+                                $('.label_4').show().html(config_cn.cn_name_4);
+                                $('#label_4').bootstrapToggle('on')
+                            }else {
+                                $('.label_4').hide();
+                                $('#label_4').bootstrapToggle('off')
+                            }
+                            if(res.dripper_1 == 'ON' && res.dripper_2 == 'ON' && res.dripper_3 == 'ON' && res.dripper_4 == 'ON'){
+                                $('#manual_check').prop('checked', true);
+                            }else {
+                                $('#manual_check').prop('checked', false);
+                            }
+                        }else if (val == 2){
+                            if(res.fan_1 == 'ON'){
+                                $('.label_1').show().html(config_cn.cn_name_5);
+                                $('#label_1').bootstrapToggle('on')
+                            }else {
+                                $('.label_1').hide();
+                                $('#label_1').bootstrapToggle('off')
+                            }
+                            if(res.fan_2 == 'ON'){
+                                $('.label_2').show().html(config_cn.cn_name_6);
+                                $('#label_2').bootstrapToggle('on')
+                            }else {
+                                $('.label_2').hide();
+                                $('#label_2').bootstrapToggle('off')
+                            }
+                            if(res.fan_3 == 'ON'){
+                                $('.label_3').show().html(config_cn.cn_name_7);
+                                $('#label_3').bootstrapToggle('on')
+                            }else {
+                                $('.label_3').hide();
+                                $('#label_3').bootstrapToggle('off')
+                            }
+                            if(res.fan_4 == 'ON'){
+                                $('.label_4').show().html(config_cn.cn_name_8);
+                                $('#label_4').bootstrapToggle('on')
+                            }else {
+                                $('.label_4').hide();
+                                $('#label_4').bootstrapToggle('off')
+                            }
+                            if(res.fan_1 == 'ON' && res.fan_2 == 'ON' && res.fan_3 == 'ON' && res.fan_4 == 'ON'){
+                                $('#manual_check').prop('checked', true);
+                            }else {
+                                $('#manual_check').prop('checked', false);
+                            }
+                        }else if (val == 3){
+                            if(res.foggy_1 == 'ON'){
+                                $('.label_1').show().html(config_cn.cn_name_9);
+                                $('#label_1').bootstrapToggle('on')
+                            }else {
+                                $('.label_1').hide();
+                                $('#label_1').bootstrapToggle('off')
+                            }
+                            if(res.foggy_2 == 'ON'){
+                                $('.label_2').show().html(config_cn.cn_name_10);
+                                $('#label_2').bootstrapToggle('on')
+                            }else {
+                                $('.label_2').hide();
+                                $('#label_2').bootstrapToggle('off')
+                            }
+                            $('.label_3').hide();
+                            $('.label_4').hide();
+                            $('#label_3').bootstrapToggle('off')
+                            $('#label_4').bootstrapToggle('off')
+                            $('.check_m3').hide();
+                            $('.check_m4').hide();
+                            if(res.foggy_1 == 'ON' && res.foggy_2 == 'ON'){
+                                $('#manual_check').prop('checked', true);
+                            }else {
+                                $('#manual_check').prop('checked', false);
+                            }
+                        }
+                    }
                     $('.btn_config').click(function(){
                         $(this).hide();
                         $('.check_m').show();
                         $('#save_manual_cont').show();
                         $('#close_manual_cont').show();
+                        df_mn_text($('.manual_select').val());
                         $('#manual_check').change(function(){
                             if($(this).prop('checked') === true){
                                 $('.input_check2').bootstrapToggle('on')
                             }else {
                                 $('.input_check2').bootstrapToggle('off')
+                            }
+                        });
+                        $('.input_check2').change(function(){
+                            var numb = $('.manual_select').val();
+                            if(numb <= 2){
+                                if($('#label_1').prop('checked') === true && $('#label_2').prop('checked') === true && $('#label_3').prop('checked') === true && $('#label_4').prop('checked') === true) {
+                                    $('#manual_check').prop('checked', true);
+                                }else {
+                                    $('#manual_check').prop('checked', false);
+                                }
+                            }else if(numb == 3){
+                                if($('#label_1').prop('checked') === true && $('#label_2').prop('checked') === true) {
+                                    $('#manual_check').prop('checked', true);
+                                }else {
+                                    $('#manual_check').prop('checked', false);
+                                }
                             }
                         });
                     });
