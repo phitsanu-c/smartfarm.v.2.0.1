@@ -318,7 +318,7 @@
                                 <button type="button" class="btn px-5 sw_mode_Auto" style="width: 100%;">อัตโนมัติ</button>
                             </div>
                             <div class="col-6">
-                                <button type="button" class="btn px-5 sw_mode_Manual" style="width: 100%;">กำหนดค่าเอง</button>
+                                <button type="button" class="btn px-5 sw_mode_Manual" style="width: 100%;">กำหนดเอง</button>
                             </div>
                         </div>
                         <div class="col-12 ul_Auto">
@@ -326,8 +326,8 @@
                                 <?php
                                     for($i = 1; $i <= 12; $i++){
                                         if($config_cn['cn_status_'.$i] == 1){
-                                            echo '<li class="nav-item col-md-3">
-                                            <a class="btn btn-outline-secondary sw_btn_au" id="'.$i.'">'.$config_cn['cn_name_'.$i].'</a>
+                                            echo '<li class="nav-item col-3">
+                                            <a class="btn  btn-block btn-outline-secondary sw_btn_au" style="width:100%" id="'.$i.'">'.$config_cn['cn_name_'.$i].'</a>
                                         </li>';}
                                     }
                                 ?>
