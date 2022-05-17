@@ -326,16 +326,10 @@
                                 <?php
                                    for($i = 1; $i <= 12; $i++){
                                         if($config_cn['cn_status_'.$i] == 1){
-<<<<<<< HEAD:routes/tu/pages_dashboard.php
-                                            echo '<li class="nav-item col-3">
-                                            <a class="btn btn-outline-secondary sw_btn_au" style="width:100%" id="'.$i.'">'.$config_cn['cn_name_'.$i].'</a>
-=======
                                             echo '<li class="nav-item col-3 col-lg-2">
                                             <button class="btn  btn-block btn-control sw_btn_au" style="width:100% " id="'.$i.'">'.$config_cn['cn_name_'.$i].'<br>
                                             <img src="public/images/control/rmutt/dripper.png" width="70" />
                                             </button>
-                                            
->>>>>>> 3dbc0955c0392cc787f4d5dd4255266da9da069a:routes/tu/pagex_dashboard.php
                                         </li>';}
                                     }
                                 ?>
