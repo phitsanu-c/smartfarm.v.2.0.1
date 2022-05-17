@@ -376,8 +376,8 @@
                         <!-- Control 1 -->
                         <div class="row ridge">
                             <div class="d-flex align-items-center"
-                                style="background-color: #708090; text-align: justify;">
-                                <h5><b class="text_load"></b></h5>
+                                style="background-color: #283A6C; text-align: justify;">
+                                <h5><b class="text_load " style="color:#FFF; pading-top:5px"> </b></h5>
                                 <div class="ms-auto">
                                     <a class="edit_cont" href="javascript:void(0)"><b>Edit</b></a>
                                     <input type="hidden" class="load_select">
