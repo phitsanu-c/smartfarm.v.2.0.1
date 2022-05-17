@@ -327,7 +327,7 @@
                                    for($i = 1; $i <= 12; $i++){
                                         if($config_cn['cn_status_'.$i] == 1){
                                             echo '<li class="nav-item col-3 col-lg-2">
-                                            <button class="btn  btn-block btn-control sw_btn_au" style="width:100% " id="'.$i.'">'.$config_cn['cn_name_'.$i].'<br>
+                                            <button class="btn btn-control sw_btn_au" style="width:100% " id="'.$i.'">'.$config_cn['cn_name_'.$i].'<br>
                                             <img src="public/images/control/rmutt/dripper.png" width="70" />
                                             </button>
                                             
@@ -405,27 +405,27 @@
                             <?php
                                 if($config_cn['cn_status_1'] == 1 || $config_cn['cn_status_2'] == 1 || $config_cn['cn_status_3'] == 1 || $config_cn['cn_status_4'] == 1){
                                     echo '<li class="nav-item col-md-3">
-                                        <a class="btn btn-outline-secondary sw_btn_au" id="s1">Dripper</a>
+                                        <a class="btn btn-control sw_btn_au" id="s1">Dripper</a>
                                     </li>';
                                 }
                                 if($config_cn['cn_status_5'] == 1 || $config_cn['cn_status_6'] == 1 || $config_cn['cn_status_7'] == 1 || $config_cn['cn_status_8'] == 1){
                                     echo '<li class="nav-item col-md-3">
-                                        <a class="btn btn-outline-secondary sw_btn_au" id="s2">Fan</a>
+                                        <a class="btn btn-control sw_btn_au" id="s2">Fan</a>
                                     </li>';
                                 }
                                 if($config_cn['cn_status_9'] == 1 || $config_cn['cn_status_10'] == 1){
                                     echo '<li class="nav-item col-md-3">
-                                        <a class="btn btn-outline-secondary sw_btn_au" id="s3">Foggy</a>
+                                        <a class="btn btn-control sw_btn_au" id="s3">Foggy</a>
                                     </li>';
                                 }
                                 if($config_cn['cn_status_11'] == 1){
                                     echo '<li class="nav-item col-md-3">
-                                        <a class="btn btn-outline-secondary sw_btn_au" id="s4">Sprinker</a>
+                                        <a class="btn btn-control sw_btn_au" id="s4">Sprinker</a>
                                     </li>';
                                 }
                                 if($config_cn['cn_status_12'] == 1){
                                     echo '<li class="nav-item col-md-3">
-                                        <a class="btn btn-outline-secondary sw_btn_au" id="s5">Roof</a>
+                                        <a class="btn btn-control sw_btn_au" id="s5">Roof</a>
                                     </li>';
                                 }
                             ?>
