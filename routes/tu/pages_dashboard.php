@@ -329,10 +329,11 @@
                                    for($i = 1; $i <= 12; $i++){
                                         if($config_cn['cn_status_'.$i] == 1){
                                             echo '<li class="nav-item col-3 col-lg-2">
-                                            <button class="btn btn-control sw_btn_au" style="width:100% " id="'.$i.'">'.$config_cn['cn_name_'.$i].'<br>
-                                            <img src="public/images/control/rmutt/dripper_off.png" width="70" />
-                                            </button>
-                                        </li>';}
+                                                    <button class="btn btn-control sw_btn_au" style="width:100% " id="'.$i.'">'.$config_cn['cn_name_'.$i].'<br>
+                                                        <img class="cn_memu_img_'.$i.'" src="" width="70" />
+                                                    </button>
+                                               </li>';
+                                       }
                                     }
                                 ?>
                             </ul>
@@ -434,39 +435,7 @@
                     </div>
                     <!-- ================================ -->
                     <div class="container ul_Manual">
-<<<<<<< HEAD
 
-=======
-                        <ul class="nav mt-2">
-                            <?php
-                                if($config_cn['cn_status_1'] == 1 || $config_cn['cn_status_2'] == 1 || $config_cn['cn_status_3'] == 1 || $config_cn['cn_status_4'] == 1){
-                                    echo '<li class="nav-item col-md-3">
-                                        <a class="btn btn-control sw_btn_au" id="s1">Dripper</a>
-                                    </li>';
-                                }
-                                if($config_cn['cn_status_5'] == 1 || $config_cn['cn_status_6'] == 1 || $config_cn['cn_status_7'] == 1 || $config_cn['cn_status_8'] == 1){
-                                    echo '<li class="nav-item col-md-3">
-                                        <a class="btn btn-control sw_btn_au" id="s2">Fan</a>
-                                    </li>';
-                                }
-                                if($config_cn['cn_status_9'] == 1 || $config_cn['cn_status_10'] == 1){
-                                    echo '<li class="nav-item col-md-3">
-                                        <a class="btn btn-control sw_btn_au" id="s3">Foggy</a>
-                                    </li>';
-                                }
-                                if($config_cn['cn_status_11'] == 1){
-                                    echo '<li class="nav-item col-md-3">
-                                        <a class="btn btn-control sw_btn_au" id="s4">Sprinker</a>
-                                    </li>';
-                                }
-                                if($config_cn['cn_status_12'] == 1){
-                                    echo '<li class="nav-item col-md-3">
-                                        <a class="btn btn-control sw_btn_au" id="s5">Roof</a>
-                                    </li>';
-                                }
-                            ?>
-                        </ul>
->>>>>>> 1cba406e85febcd8f50f1ef8e9459def58e2625a
                     </div>
 				</div>
 				<div class="modal-footer">
@@ -1092,33 +1061,61 @@
                     $(".sw_toggle").hide();
                     $('.input_time').prop('disabled', true);
                     if(config_cn.cn_status_1 == 1){
-                        $('.text_load').html(config_cn.cn_name_1); $('.load_select').val(1); $("#1").addClass('active');
+                        $('.load_select').val(1);
                     }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 1) {
-                        $('.text_load').html(config_cn.cn_name_2); $('.load_select').val(2); $("#2").addClass('active');
+                        $('.load_select').val(2);
                     }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 1) {
-                        $('.text_load').html(config_cn.cn_name_3); $('.load_select').val(3); $("#3").addClass('active');
+                        $('.load_select').val(3);
                     }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 1) {
-                        $('.text_load').html(config_cn.cn_name_4); $('.load_select').val(4); $("#4").addClass('active');
+                        $('.load_select').val(4);
                     }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 1) {
-                        $('.text_load').html(config_cn.cn_name_5); $('.load_select').val(5); $("#5").addClass('active');
+                        $('.load_select').val(5);
                     }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 1) {
-                        $('.text_load').html(config_cn.cn_name_6); $('.load_select').val(6); $("#6").addClass('active');
+                        $('.load_select').val(6);
                     }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 1) {
-                        $('.text_load').html(config_cn.cn_name_7); $('.load_select').val(7); $("#7").addClass('active');
+                        $('.load_select').val(7);
                     }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 1) {
-                        $('.text_load').html(config_cn.cn_name_8); $('.load_select').val(8); $("#8").addClass('active');
+                        $('.load_select').val(8);
                     }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 1) {
-                        $('.text_load').html(config_cn.cn_name_9); $('.load_select').val(9); $("#9").addClass('active');
+                        $('.load_select').val(9);
                     }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 1) {
-                        $('.text_load').html(config_cn.cn_name_10); $('.load_select').val(10); $("#10").addClass('active');
+                        $('.load_select').val(10);
                     }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 0 && config_cn.cn_status_11 == 1) {
-                        $('.text_load').html(config_cn.cn_name_11); $('.load_select').val(11); $("#11").addClass('active');
+                        $('.load_select').val(11); $("#11").addClass('active');
                     }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 0 && config_cn.cn_status_11 == 0 && config_cn.cn_status_12 == 1) {
-                        $('.text_load').html(config_cn.cn_name_12); $('.load_select').val(12); $("#12").addClass('active');
+                        $('.load_select').val(12);
                     }
-                    for (var i = 1; i < 13; i++) {
-                        if(i != $('.load_select').val()){
-                            $('#'+i).removeClass('active')
+                    memu_auto_check($('.load_select').val());
+                    function memu_auto_check(val){
+                        for (var i = 1; i <= 12; i++) {
+                            if(i == val){
+                                $('.text_load').html(config_cn['cn_name_'+i]);
+                                $("#"+i).addClass('active');
+                                if(i <= 4){
+                                    $('.cn_memu_img_'+i).attr('src','public/images/icons/memu_control/dripper_on.png');
+                                }else if (i > 4 && i <= 8) {
+                                    $('.cn_memu_img_'+i).attr('src','public/images/icons/memu_control/fan_on.png');
+                                }else if (i > 8 && i <= 10) {
+                                    $('.cn_memu_img_'+i).attr('src','public/images/icons/memu_control/foggy_on.png');
+                                }else if (i == 11) {
+                                    $('.cn_memu_img_'+i).attr('src','public/images/icons/memu_control/spray_on.png');
+                                }else if (i == 12) {
+                                    $('.cn_memu_img_'+i).attr('src','public/images/icons/memu_control/shading_on.png');
+                                }
+                            }else {
+                                $('#'+i).removeClass('active')
+                                if(i <= 4){
+                                    $('.cn_memu_img_'+i).attr('src','public/images/icons/memu_control/dripper_off.png');
+                                }else if (i > 4 && i <= 8) {
+                                    $('.cn_memu_img_'+i).attr('src','public/images/icons/memu_control/fan_off.png');
+                                }else if (i > 8 && i <= 10) {
+                                    $('.cn_memu_img_'+i).attr('src','public/images/icons/memu_control/foggy_off.png');
+                                }else if (i == 11) {
+                                    $('.cn_memu_img_'+i).attr('src','public/images/icons/memu_control/spray_off.png');
+                                }else if (i == 12) {
+                                    $('.cn_memu_img_'+i).attr('src','public/images/icons/memu_control/shading_off.png');
+                                }
+                            }
                         }
                     }
                     // ===============================================
@@ -1260,11 +1257,7 @@
                         $(this).addClass('active')
                         var numb = $(this).attr('id');
                         $('.load_select').val(numb)
-                        for (var i = 1; i < 13; i++) {
-                            if(i != numb){
-                                $('#'+i).removeClass('active')
-                            }
-                        }
+                        memu_auto_check(numb);
                         df_ed_text(numb);
                         $("#save_auto_cont").hide();
                     })
