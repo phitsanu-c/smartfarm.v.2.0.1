@@ -300,7 +300,7 @@
     </div>
     <!-- Modal Control -->
     <div class="modal fade" id="Modal_control" tabindex="-1" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-scrollable">
+		<div class="modal-dialog modal-dialog-scrollable modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<!-- <h5 class="modal-title">Modal title</h5>
@@ -324,10 +324,18 @@
                         <div class="col-12 ul_Auto">
                             <ul class="nav mt-2">
                                 <?php
-                                    for($i = 1; $i <= 12; $i++){
+                                   for($i = 1; $i <= 12; $i++){
                                         if($config_cn['cn_status_'.$i] == 1){
+<<<<<<< HEAD:routes/tu/pages_dashboard.php
                                             echo '<li class="nav-item col-3">
                                             <a class="btn btn-outline-secondary sw_btn_au" style="width:100%" id="'.$i.'">'.$config_cn['cn_name_'.$i].'</a>
+=======
+                                            echo '<li class="nav-item col-3 col-lg-2">
+                                            <button class="btn  btn-block btn-control sw_btn_au" style="width:100% " id="'.$i.'">'.$config_cn['cn_name_'.$i].'<br>
+                                            <img src="public/images/control/rmutt/dripper.png" width="70" />
+                                            </button>
+                                            
+>>>>>>> 3dbc0955c0392cc787f4d5dd4255266da9da069a:routes/tu/pagex_dashboard.php
                                         </li>';}
                                     }
                                 ?>
