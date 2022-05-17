@@ -379,7 +379,7 @@
                                 style="background-color: #283A6C; text-align: justify;">
                                 <h5><b class="text_load " style="color:#FFF; pading-top:5px"> </b></h5>
                                 <div class="ms-auto">
-                                    <a class="edit_cont" href="javascript:void(0)"><b>Edit</b></a>
+                                    <a class="edit_cont" style="color:FFF" href="javascript:void(0)"><b >ตั้งค่า</b></a>
                                     <input type="hidden" class="load_select">
                                 </div>
                             </div>

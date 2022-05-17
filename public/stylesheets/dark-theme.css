@@ -684,7 +684,7 @@
     }
     
     html.dark-theme .btn-control:hover {
-        color: #0d6efd;
+        color: #3FC6F2;
     }
     
     html.dark-theme .btn-check:active+.btn-control,
@@ -692,7 +692,7 @@
     html.dark-theme .btn-control.active,
     html.dark-theme .btn-control.dropdown-toggle.show,
     html.dark-theme .btn-control:active {
-        color: #0d6efd;
+        color: #3FC6F2;
     }
     
     html.dark-theme .btn-dark {
