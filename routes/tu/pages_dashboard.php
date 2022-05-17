@@ -313,16 +313,18 @@
                                     aria-label="Close"> <span aria-hidden="true"></span> </button>
                             </div>
                         </div>
-                        <div class="row col-12 no-gutters">
+                        <div class="col-12 mt-2">
+                            <div class="row ">
                             <div class="col-6">
-                                <button type="button" class="btn px-5 sw_mode_Auto" style="width: 100%;">อัตโนมัติ</button>
+                                <button type="button" class="btn btn-lg sw_mode_Auto" style="width: 100%; border-radius:20px;">อัตโนมัติ</button>
                             </div>
                             <div class="col-6">
-                                <button type="button" class="btn px-5 sw_mode_Manual" style="width: 100%;">กำหนดเอง</button>
+                                <button type="button" class="btn btn-lg  sw_mode_Manual" style="width: 100%; border-radius:20px;">กำหนดเอง</button>
+                            </div>
                             </div>
                         </div>
                         <div class="col-12 ul_Auto">
-                            <ul class="nav mt-2">
+                            <ul class="nav mt-3">
                                 <?php
                                    for($i = 1; $i <= 12; $i++){
                                         if($config_cn['cn_status_'.$i] == 1){
@@ -375,8 +377,8 @@
                         <!-- Control 1 -->
                         <div class="row ridge">
                             <div class="d-flex align-items-center"
-                                style="background-color: #708090; text-align: justify;">
-                                <h5><b class="text_load"></b></h5>
+                                style="background-color: #283A6C; text-align: justify;">
+                                <h5><b class="text_load " style="color:#FFF; pading-top:5px"> </b></h5>
                                 <div class="ms-auto">
                                     <a class="edit_cont" href="javascript:void(0)"><b>Edit</b></a>
                                     <input type="hidden" class="load_select">
