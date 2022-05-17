@@ -447,7 +447,9 @@
                     </div>
                     <!-- ================================ -->
                     <div class="container ul_Manual">
-                            <div class="row">
+                   
+                            <div class="row ridge">
+                            <h3 class="text-center" style="background-color: #283A6C; color:#FFF">ควบคุม dripper</h3>
                                 <div class="col text-end  me-2">
                                      <button class="btn btn-control " > <br>
                                                         <img src="public/images/icons/memu_control/off_off.png" width="100" />
