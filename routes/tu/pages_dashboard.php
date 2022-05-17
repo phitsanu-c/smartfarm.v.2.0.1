@@ -339,48 +339,48 @@
                                 ?>
                             </ul>
                         </div>
-                        <div class="col-12 ul_Manual">
-                            <ul class="nav mt-2">
-                                <?php
+                        
+                        <div class="row cols-10 text-center mt-2 ul_Manual">
+                        <?php
                                     if($config_cn['cn_status_1'] == 1 || $config_cn['cn_status_2'] == 1 || $config_cn['cn_status_3'] == 1 || $config_cn['cn_status_4'] == 1){
-                                        echo '<li class="nav-item col-3 col-lg-2">
+                                        echo '<div class="cols-3 cols-lg-5">
                                                 <button class="btn btn-control sw_btn_s" style="width:100% " id="s1">Dripper<br>
-                                                    <img class="cn_memu_img_mn_1" src="" width="70" />
+                                                    <img class="cn_memu_img_mn_1" width="70"  src=""  />
                                                 </button>
-                                           </li>';
+                                           </div>';
                                     }
                                     if($config_cn['cn_status_5'] == 1 || $config_cn['cn_status_6'] == 1 || $config_cn['cn_status_7'] == 1 || $config_cn['cn_status_8'] == 1){
-                                        echo '<li class="nav-item col-3 col-lg-2">
+                                        echo '<div class="cols-3 cols-lg-5">
                                                 <button class="btn btn-control sw_btn_s" style="width:100% " id="s2">Fan<br>
                                                     <img class="cn_memu_img_mn_2" src="" width="70" />
                                                 </button>
-                                           </li>';
+                                           </div>';
                                     }
                                     if($config_cn['cn_status_9'] == 1 || $config_cn['cn_status_10'] == 1){
-                                        echo '<li class="nav-item col-3 col-lg-2">
+                                        echo '<div class="cols-3 cols-lg-5" >
                                                 <button class="btn btn-control sw_btn_s" style="width:100% " id="s3">Foggy<br>
                                                     <img class="cn_memu_img_mn_3" src="" width="70" />
                                                 </button>
-                                           </li>';
+                                           </div>';
                                     }
                                     if($config_cn['cn_status_11'] == 1){
-                                        echo '<li class="nav-item col-3 col-lg-2">
+                                        echo '<div class="cols-3 cols-lg-5">
                                                 <button class="btn btn-control sw_btn_s" style="width:100% " id="s4">Sprinker<br>
                                                     <img class="cn_memu_img_mn_4" src="" width="70" />
                                                 </button>
-                                           </li>';
+                                           </div>';
                                     }
                                     if($config_cn['cn_status_12'] == 1){
-                                        echo '<li class="nav-item col-3 col-lg-2">
+                                        echo '<div class="cols-3 cols-lg-5">
                                                 <button class="btn btn-control sw_btn_s" style="width:100% " id="s5">Roof<br>
                                                     <img class="cn_memu_img_mn_5" src="" width="70" />
                                                 </button>
-                                           </li>';
+                                           </div>';
 
                                     }
                                 ?>
                                 <input type="hidden" class="manual_select">
-                            </ul>
+                    
                         </div>
                     </div>
 				</div>
