@@ -198,25 +198,26 @@
                             <div class="row text-center">
                                 <?php for($i = 1; $i <= 3; $i++){
                                     if($config_sn['sn_status_'.$i] == 1){ ?>
-                                <div class="col-lg-4 col-xl-4 col-sm-12">
-                                    <div class="card-body border radius-10 shadow-none mb-3">
-                                        <div class="d-flex">
-                                            <h5 class="card-title mt-2 "><B>
-                                                    <?= $config_sn['sn_name_'.$i] ?>
-                                                </B></h5>
-                                            <div class="ms-auto mt-2 image-popups">
-                                                <?php if($config_sn["sn_imgMap_".$i] != ""){
-                                                        echo '<a href="public/images/img_map/'.$config_sn["sn_imgMap_".$i].'"><i class="lni lni-map-marker "></i></a>';
-                                                    }?>
+                                        <div class="col-lg-4 col-xl-4 col-sm-12">
+                                            <div class="card-body border radius-10 shadow-none mb-3">
+                                                <div class="d-flex">
+                                                    <h5 class="card-title mt-2 "><B>
+                                                            <?= $config_sn['sn_name_'.$i] ?>
+                                                        </B></h5>
+                                                    <div class="ms-auto mt-2 image-popups">
+                                                        <?php if($config_sn["sn_imgMap_".$i] != ""){
+                                                                echo '<a href="public/images/img_map/'.$config_sn["sn_imgMap_".$i].'"><i class="lni lni-map-marker "></i></a>';
+                                                            }?>
+                                                    </div>
+                                                </div>
+                                                <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle"
+                                                    style="width:90px; margin-top:10px; text-align: center!important;">
+                                                <h6 class="card-text text-center  dash_data__<?= $i ?>" style="margin-top:20px">
+                                                </h6>
                                             </div>
                                         </div>
-                                        <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle"
-                                            style="width:90px; margin-top:10px; text-align: center!important;">
-                                        <h6 class="card-text text-center  dash_data__<?= $i ?>" style="margin-top:20px">
-                                        </h6>
-                                    </div>
-                                </div>
-                                <?php } } ?>
+                                    <?php }
+                                } ?>
                             </div>
                         </div>
                     </div>
@@ -315,12 +316,12 @@
                         </div>
                         <div class="col-12 mt-2">
                             <div class="row ">
-                            <div class="col-6">
-                                <button type="button" class="btn btn-lg sw_mode_Auto" style="width: 100%; border-radius:20px;">อัตโนมัติ</button>
-                            </div>
-                            <div class="col-6">
-                                <button type="button" class="btn btn-lg  sw_mode_Manual" style="width: 100%; border-radius:20px;">กำหนดเอง</button>
-                            </div>
+                                <div class="col-6">
+                                    <button type="button" class="btn btn-lg sw_mode_Auto" style="width: 100%; border-radius:20px;">อัตโนมัติ</button>
+                                </div>
+                                <div class="col-6">
+                                    <button type="button" class="btn btn-lg  sw_mode_Manual" style="width: 100%; border-radius:20px;">กำหนดเอง</button>
+                                </div>
                             </div>
                         </div>
                         <div class="col-12 ul_Auto">
@@ -342,29 +343,40 @@
                             <ul class="nav mt-2">
                                 <?php
                                     if($config_cn['cn_status_1'] == 1 || $config_cn['cn_status_2'] == 1 || $config_cn['cn_status_3'] == 1 || $config_cn['cn_status_4'] == 1){
-                                        echo '<li class="nav-item" style="width: 20%;">
-                                            <a class="btn btn-outline-secondary sw_btn_s" id="s1">Dripper</a>
-                                        </li>';
+                                        echo '<li class="nav-item col-3 col-lg-2">
+                                                <button class="btn btn-control sw_btn_s" style="width:100% " id="s1">Dripper<br>
+                                                    <img class="cn_memu_img_mn_1" src="" width="70" />
+                                                </button>
+                                           </li>';
                                     }
                                     if($config_cn['cn_status_5'] == 1 || $config_cn['cn_status_6'] == 1 || $config_cn['cn_status_7'] == 1 || $config_cn['cn_status_8'] == 1){
-                                        echo '<li class="nav-item" style="width: 20%;">
-                                            <a class="btn btn-outline-secondary sw_btn_s" id="s2">Fan</a>
-                                        </li>';
+                                        echo '<li class="nav-item col-3 col-lg-2">
+                                                <button class="btn btn-control sw_btn_s" style="width:100% " id="s2">Fan<br>
+                                                    <img class="cn_memu_img_mn_2" src="" width="70" />
+                                                </button>
+                                           </li>';
                                     }
                                     if($config_cn['cn_status_9'] == 1 || $config_cn['cn_status_10'] == 1){
-                                        echo '<li class="nav-item" style="width: 20%;">
-                                            <a class="btn btn-outline-secondary sw_btn_s" id="s3">Foggy</a>
-                                        </li>';
+                                        echo '<li class="nav-item col-3 col-lg-2">
+                                                <button class="btn btn-control sw_btn_s" style="width:100% " id="s3">Foggy<br>
+                                                    <img class="cn_memu_img_mn_3" src="" width="70" />
+                                                </button>
+                                           </li>';
                                     }
                                     if($config_cn['cn_status_11'] == 1){
-                                        echo '<li class="nav-item" style="width: 20%;">
-                                            <a class="btn btn-outline-secondary sw_btn_s" id="s4">Sprinker</a>
-                                        </li>';
+                                        echo '<li class="nav-item col-3 col-lg-2">
+                                                <button class="btn btn-control sw_btn_s" style="width:100% " id="s4">Sprinker<br>
+                                                    <img class="cn_memu_img_mn_4" src="" width="70" />
+                                                </button>
+                                           </li>';
                                     }
                                     if($config_cn['cn_status_12'] == 1){
-                                        echo '<li class="nav-item" style="width: 20%;">
-                                            <a class="btn btn-outline-secondary sw_btn_s" id="s5">Roof</a>
-                                        </li>';
+                                        echo '<li class="nav-item col-3 col-lg-2">
+                                                <button class="btn btn-control sw_btn_s" style="width:100% " id="s5">Roof<br>
+                                                    <img class="cn_memu_img_mn_5" src="" width="70" />
+                                                </button>
+                                           </li>';
+
                                     }
                                 ?>
                                 <input type="hidden" class="manual_select">
@@ -1282,56 +1294,53 @@
                     $('#close_manual_cont').hide();
                     if(config_cn.cn_status_1 == 1 || config_cn.cn_status_2 == 1 || config_cn.cn_status_3 == 1 || config_cn.cn_status_4 == 1){
                         $('.manual_select').val(1);
-                        $('#s1').addClass('active');
-                        $('#s2').removeClass('active');
-                        $('#s3').removeClass('active');
-                        $('#s4').removeClass('active');
-                        $('#s5').removeClass('active');
-                    } else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 && 0 || config_cn.cn_status_4 && 0 ||
-                            config_cn.cn_status_5 == 1 || config_cn.cn_status_6 == 1 || config_cn.cn_status_7 == 1 || config_cn.cn_status_8 == 1){
+                    }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 || config_cn.cn_status_5 == 1 || config_cn.cn_status_6 == 1 || config_cn.cn_status_7 == 1 || config_cn.cn_status_8 == 1){
                         $('.manual_select').val(2)
-                        $('#s1').removeClass('active');
-                        $('#s2').addClass('active');
-                        $('#s3').removeClass('active');
-                        $('#s4').removeClass('active');
-                        $('#s5').removeClass('active');
-                    }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 && 0 || config_cn.cn_status_4 && 0 &&
-                            config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 ||
-                            config_cn.cn_status_9 == 1 || config_cn.cn_status_10 == 1){
+                    }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 || config_cn.cn_status_9 == 1 || config_cn.cn_status_10 == 1){
                         $('.manual_select').val(3)
-                        $('#s1').removeClass('active');
-                        $('#s2').removeClass('active');
-                        $('#s3').addClass('active');
-                        $('#s4').removeClass('active');
-                        $('#s5').removeClass('active');
-                    }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 && 0 || config_cn.cn_status_4 && 0 &&
-                            config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 &&
-                            config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 0 || config_cn.cn_status_11 == 1){
+                    }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 0 || config_cn.cn_status_11 == 1){
                         $('.manual_select').val(4)
-                        $('#s1').removeClass('active');
-                        $('#s2').removeClass('active');
-                        $('#s3').removeClass('active');
-                        $('#s4').addClass('active');
-                        $('#s5').removeClass('active');
-                    }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 && 0 || config_cn.cn_status_4 && 0 &&
-                            config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 &&
-                            config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 0 && config_cn.cn_status_11 == 0 || config_cn.cn_status_12 == 1){
+                    }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 0 && config_cn.cn_status_11 == 0 || config_cn.cn_status_12 == 1){
                         $('.manual_select').val(5)
-                        $('#s1').removeClass('active');
-                        $('#s2').removeClass('active');
-                        $('#s3').removeClass('active');
-                        $('#s4').removeClass('active');
-                        $('#s5').addClass('active');
                     }
-                    $('.sw_btn_s').click(function(){
-                        $(this).addClass('active')
-                        var numb = Number($(this).attr('id').substring(1));
-                        $('.manual_select').val(numb)
-                        for (var i = 1; i < 6; i++) {
-                            if(i != numb){
-                                $('#s'+i).removeClass('active');
+                    memu_manuak_check($('.manual_select').val());
+                    function memu_manuak_check(val){
+                        for (var i = 1; i <= 5; i++) {
+                            if(i == val){
+                                // $('.text_load_mn').html(config_cn['cn_name_'+i]);
+                                $("#s"+i).addClass('active');
+                                if(i == 1){
+                                    $('.cn_memu_img_mn_'+i).attr('src','public/images/icons/memu_control/dripper_on.png');
+                                }else if (i == 2) {
+                                    $('.cn_memu_img_mn_'+i).attr('src','public/images/icons/memu_control/fan_on.png');
+                                }else if (i == 3) {
+                                    $('.cn_memu_img_mn_'+i).attr('src','public/images/icons/memu_control/foggy_on.png');
+                                }else if (i == 4) {
+                                    $('.cn_memu_img_mn_'+i).attr('src','public/images/icons/memu_control/spray_on.png');
+                                }else if (i == 5) {
+                                    $('.cn_memu_img_mn_'+i).attr('src','public/images/icons/memu_control/shading_on.png');
+                                }
+                            }else {
+                                $('#s'+i).removeClass('active')
+                                if(i == 1){
+                                    $('.cn_memu_img_mn_'+i).attr('src','public/images/icons/memu_control/dripper_off.png');
+                                }else if (i == 2) {
+                                    $('.cn_memu_img_mn_'+i).attr('src','public/images/icons/memu_control/fan_off.png');
+                                }else if (i == 3) {
+                                    $('.cn_memu_img_mn_'+i).attr('src','public/images/icons/memu_control/foggy_off.png');
+                                }else if (i == 4) {
+                                    $('.cn_memu_img_mn_'+i).attr('src','public/images/icons/memu_control/spray_off.png');
+                                }else if (i == 5) {
+                                    $('.cn_memu_img_mn_'+i).attr('src','public/images/icons/memu_control/shading_off.png');
+                                }
                             }
                         }
+                    }
+                    $('.sw_btn_s').click(function(){
+                        // $(this).addClass('active')
+                        var numb = Number($(this).attr('id').substring(1));
+                        $('.manual_select').val(numb)
+                        memu_manuak_check(numb);
                     })
                     $('.btn_config').click(function(){
                         $(this).hide();
