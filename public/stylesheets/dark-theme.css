@@ -968,3 +968,15 @@
             border-left: 0 solid #ededed
         }
     }
+    
+    .btn-control {
+        color: #ffffff;
+    }
+    
+    .btn-control:hover {
+        color: #0d6efd;
+    }
+    
+    .btn-control:active {
+        color: #0d6efd;
+    }
