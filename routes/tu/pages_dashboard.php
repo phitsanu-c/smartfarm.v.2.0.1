@@ -335,6 +335,38 @@
                                 ?>
                             </ul>
                         </div>
+                        <div class="col-12 ul_Manual">
+                            <ul class="nav mt-2">
+                                <?php
+                                    if($config_cn['cn_status_1'] == 1 || $config_cn['cn_status_2'] == 1 || $config_cn['cn_status_3'] == 1 || $config_cn['cn_status_4'] == 1){
+                                        echo '<li class="nav-item" style="width: 20%;">
+                                            <a class="btn btn-outline-secondary sw_btn_s" id="s1">Dripper</a>
+                                        </li>';
+                                    }
+                                    if($config_cn['cn_status_5'] == 1 || $config_cn['cn_status_6'] == 1 || $config_cn['cn_status_7'] == 1 || $config_cn['cn_status_8'] == 1){
+                                        echo '<li class="nav-item" style="width: 20%;">
+                                            <a class="btn btn-outline-secondary sw_btn_s" id="s2">Fan</a>
+                                        </li>';
+                                    }
+                                    if($config_cn['cn_status_9'] == 1 || $config_cn['cn_status_10'] == 1){
+                                        echo '<li class="nav-item" style="width: 20%;">
+                                            <a class="btn btn-outline-secondary sw_btn_s" id="s3">Foggy</a>
+                                        </li>';
+                                    }
+                                    if($config_cn['cn_status_11'] == 1){
+                                        echo '<li class="nav-item" style="width: 20%;">
+                                            <a class="btn btn-outline-secondary sw_btn_s" id="s4">Sprinker</a>
+                                        </li>';
+                                    }
+                                    if($config_cn['cn_status_12'] == 1){
+                                        echo '<li class="nav-item" style="width: 20%;">
+                                            <a class="btn btn-outline-secondary sw_btn_s" id="s5">Roof</a>
+                                        </li>';
+                                    }
+                                ?>
+                                <input type="hidden" class="manual_select">
+                            </ul>
+                        </div>
                     </div>
 				</div>
 				<div class="modal-body">
@@ -400,35 +432,7 @@
                     </div>
                     <!-- ================================ -->
                     <div class="container ul_Manual">
-                        <ul class="nav mt-2">
-                            <?php
-                                if($config_cn['cn_status_1'] == 1 || $config_cn['cn_status_2'] == 1 || $config_cn['cn_status_3'] == 1 || $config_cn['cn_status_4'] == 1){
-                                    echo '<li class="nav-item col-md-3">
-                                        <a class="btn btn-outline-secondary sw_btn_au" id="s1">Dripper</a>
-                                    </li>';
-                                }
-                                if($config_cn['cn_status_5'] == 1 || $config_cn['cn_status_6'] == 1 || $config_cn['cn_status_7'] == 1 || $config_cn['cn_status_8'] == 1){
-                                    echo '<li class="nav-item col-md-3">
-                                        <a class="btn btn-outline-secondary sw_btn_au" id="s2">Fan</a>
-                                    </li>';
-                                }
-                                if($config_cn['cn_status_9'] == 1 || $config_cn['cn_status_10'] == 1){
-                                    echo '<li class="nav-item col-md-3">
-                                        <a class="btn btn-outline-secondary sw_btn_au" id="s3">Foggy</a>
-                                    </li>';
-                                }
-                                if($config_cn['cn_status_11'] == 1){
-                                    echo '<li class="nav-item col-md-3">
-                                        <a class="btn btn-outline-secondary sw_btn_au" id="s4">Sprinker</a>
-                                    </li>';
-                                }
-                                if($config_cn['cn_status_12'] == 1){
-                                    echo '<li class="nav-item col-md-3">
-                                        <a class="btn btn-outline-secondary sw_btn_au" id="s5">Roof</a>
-                                    </li>';
-                                }
-                            ?>
-                        </ul>
+
                     </div>
 				</div>
 				<div class="modal-footer">
@@ -1249,9 +1253,59 @@
                     $('.check_m').hide();
                     $('#save_manual_cont').hide();
                     $('#close_manual_cont').hide();
-                    // if(config_cn['cn_status_1'] == 1){
-                    //
-                    // }
+                    if(config_cn.cn_status_1 == 1 || config_cn.cn_status_2 == 1 || config_cn.cn_status_3 == 1 || config_cn.cn_status_4 == 1){
+                        $('.manual_select').val(1);
+                        $('#s1').addClass('active');
+                        $('#s2').removeClass('active');
+                        $('#s3').removeClass('active');
+                        $('#s4').removeClass('active');
+                        $('#s5').removeClass('active');
+                    } else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 && 0 || config_cn.cn_status_4 && 0 ||
+                            config_cn.cn_status_5 == 1 || config_cn.cn_status_6 == 1 || config_cn.cn_status_7 == 1 || config_cn.cn_status_8 == 1){
+                        $('.manual_select').val(2)
+                        $('#s1').removeClass('active');
+                        $('#s2').addClass('active');
+                        $('#s3').removeClass('active');
+                        $('#s4').removeClass('active');
+                        $('#s5').removeClass('active');
+                    }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 && 0 || config_cn.cn_status_4 && 0 &&
+                            config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 ||
+                            config_cn.cn_status_9 == 1 || config_cn.cn_status_10 == 1){
+                        $('.manual_select').val(3)
+                        $('#s1').removeClass('active');
+                        $('#s2').removeClass('active');
+                        $('#s3').addClass('active');
+                        $('#s4').removeClass('active');
+                        $('#s5').removeClass('active');
+                    }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 && 0 || config_cn.cn_status_4 && 0 &&
+                            config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 &&
+                            config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 0 || config_cn.cn_status_11 == 1){
+                        $('.manual_select').val(4)
+                        $('#s1').removeClass('active');
+                        $('#s2').removeClass('active');
+                        $('#s3').removeClass('active');
+                        $('#s4').addClass('active');
+                        $('#s5').removeClass('active');
+                    }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 && 0 || config_cn.cn_status_4 && 0 &&
+                            config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 &&
+                            config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 0 && config_cn.cn_status_11 == 0 || config_cn.cn_status_12 == 1){
+                        $('.manual_select').val(5)
+                        $('#s1').removeClass('active');
+                        $('#s2').removeClass('active');
+                        $('#s3').removeClass('active');
+                        $('#s4').removeClass('active');
+                        $('#s5').addClass('active');
+                    }
+                    $('.sw_btn_s').click(function(){
+                        $(this).addClass('active')
+                        var numb = Number($(this).attr('id').substring(1));
+                        $('.manual_select').val(numb)
+                        for (var i = 1; i < 6; i++) {
+                            if(i != numb){
+                                $('#s'+i).removeClass('active');
+                            }
+                        }
+                    })
                     $('.btn_config').click(function(){
                         $(this).hide();
                         $('.check_m').show();
