@@ -328,7 +328,7 @@
                                         if($config_cn['cn_status_'.$i] == 1){
                                             echo '<li class="nav-item col-3 col-lg-2">
                                             <button class="btn btn-control sw_btn_au" style="width:100% " id="'.$i.'">'.$config_cn['cn_name_'.$i].'<br>
-                                            <img src="public/images/control/rmutt/dripper.png" width="70" />
+                                            <img src="public/images/control/rmutt/dripper_off.png" width="70" />
                                             </button>
                                         </li>';}
                                     }

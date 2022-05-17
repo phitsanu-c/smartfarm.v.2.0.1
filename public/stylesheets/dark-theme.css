@@ -678,6 +678,23 @@
         border-color: rgb(255 255 255 / 32%)
     }
     
+    html.dark-theme .btn-control {
+        color: #fff;
+        /* background-color: rgb(255 255 255 / 15%); */
+    }
+    
+    html.dark-theme .btn-control:hover {
+        color: #0d6efd;
+    }
+    
+    html.dark-theme .btn-check:active+.btn-control,
+    html.dark-theme .btn-check:checked+.btn-control,
+    html.dark-theme .btn-control.active,
+    html.dark-theme .btn-control.dropdown-toggle.show,
+    html.dark-theme .btn-control:active {
+        color: #0d6efd;
+    }
+    
     html.dark-theme .btn-dark {
         color: #fff;
         background-color: #181e22;
@@ -967,16 +984,4 @@
         html.dark-theme .topbar .navbar-nav .nav-link {
             border-left: 0 solid #ededed
         }
-    }
-    
-    .btn-control {
-        color: #ffffff;
-    }
-    
-    .btn-control:hover {
-        color: #0d6efd;
-    }
-    
-    .btn-control:active {
-        color: #0d6efd;
     }
