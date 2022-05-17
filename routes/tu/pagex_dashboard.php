@@ -668,14 +668,16 @@
             // console.log(parseJSON)
             if (parseJSON.mode === 'Manual') {
                 $('.dash_mode').html('โหมดกำหนดเอง')
-                    $('.sw_mode_Auto').removeClass('btn-success').addClass('btn-outline-success')
-                    $('.sw_mode_Manual').addClass('btn-success').removeClass('btn-outline-success')
-                    $('.ul_Auto').hide()
+                $('.sw_mode_Auto').removeClass('btn-success').addClass('btn-outline-success')
+                $('.sw_mode_Manual').addClass('btn-success').removeClass('btn-outline-success')
+                $('.ul_Auto').hide()
+                $('.ul_Manual').show()
             } else {
                 $('.dash_mode').html('โหมดอัตโนมัติ')
-                    $('.sw_mode_Auto').addClass('btn-success').removeClass('btn-outline-success')
-                    $('.sw_mode_Manual').removeClass('btn-success').addClass('btn-outline-success')
-                    $('.ul_Auto').show()
+                $('.sw_mode_Auto').addClass('btn-success').removeClass('btn-outline-success')
+                $('.sw_mode_Manual').removeClass('btn-success').addClass('btn-outline-success')
+                $('.ul_Auto').show()
+                $('.ul_Manual').hide()
             }
             for (var i = 1; i <= 12; i++) {
                 if (config_cn['cn_status_' + i] == 1) {
@@ -1253,7 +1255,10 @@
                         $('.check_m').show();
                         $('#save_manual_cont').show();
                         $('#close_manual_cont').show();
-                    })
+                        $('#manual_check').change(function(){
+                            if($(this).prop('cha'));
+                        });
+                    });
                 }
             });
         }
