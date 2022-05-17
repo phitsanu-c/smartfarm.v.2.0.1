@@ -339,7 +339,7 @@
                                 ?>
                             </ul>
                         </div>
-                        
+
                         <div class="row cols-10 text-center mt-2 ul_Manual">
                         <?php
                                     if($config_cn['cn_status_1'] == 1 || $config_cn['cn_status_2'] == 1 || $config_cn['cn_status_3'] == 1 || $config_cn['cn_status_4'] == 1){
@@ -380,7 +380,7 @@
                                     }
                                 ?>
                                 <input type="hidden" class="manual_select">
-                    
+
                         </div>
                     </div>
 				</div>
@@ -1265,17 +1265,28 @@
                         btn_save_chang($('.load_select').val(), 'close')
                     });
                     $('.sw_btn_au').click(function(){
-                        var numb = $(this).attr('id');
-                        $('.load_select').val(numb)
-                        memu_auto_check(numb);
-                        df_ed_text(numb);
-                        $("#save_auto_cont").hide();
+                        if($('.edit_cont').is(":hidden") == true){
+                            swal({
+                                title: 'ข้อผิดพลาด !',
+                                text: "กรุณาบ้นทึกหรือยกเลิกการตั้งค่าก่อน !!!",
+                                type: 'warning',
+                                allowOutsideClick: false,
+                                confirmButtonColor: '#32CD32',
+                                confirmButtonText: 'ตกลง',
+                            });
+                        }else {
+                            var numb = $(this).attr('id');
+                            $('.load_select').val(numb)
+                            memu_auto_check(numb);
+                            df_ed_text(numb);
+                            $("#save_auto_cont").hide();
+                        }
                     })
                     $("#save_auto_cont").hide();
                     $("#close_auto_cont").hide();
                 }
             });
-        }else {
+        }else { // Manual
             $.ajax({
                 url: "routes/tu/get_control_mn.php",
                 method: "post",
@@ -1301,8 +1312,8 @@
                     }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 0 && config_cn.cn_status_11 == 0 || config_cn.cn_status_12 == 1){
                         $('.manual_select').val(5)
                     }
-                    memu_manuak_check($('.manual_select').val());
-                    function memu_manuak_check(val){
+                    memu_manual_check($('.manual_select').val());
+                    function memu_manual_check(val){
                         for (var i = 1; i <= 5; i++) {
                             if(i == val){
                                 // $('.text_load_mn').html(config_cn['cn_name_'+i]);
@@ -1334,7 +1345,7 @@
                             }
                         }
                         df_mn_text(val);
-                        if(val <= 3){
+                        if(val < 4){
                             $('.btn_config').show();
                             if(val == 3){
                                 $('.label_3').hide();
@@ -1354,8 +1365,19 @@
                     }
                     $('.sw_btn_s').click(function(){
                         var numb = Number($(this).attr('id').substring(1));
-                        $('.manual_select').val(numb)
-                        memu_manuak_check(numb);
+                        if($('#close_manual_cont').is(":hidden") == false){
+                            swal({
+                                title: 'ข้อผิดพลาด !',
+                                text: "กรุณาบ้นทึกหรือยกเลิกการตั้งค่าก่อน !!!",
+                                type: 'warning',
+                                allowOutsideClick: false,
+                                confirmButtonColor: '#32CD32',
+                                confirmButtonText: 'ตกลง',
+                            });
+                        }else {
+                            $('.manual_select').val(numb)
+                            memu_manual_check(numb);
+                        }
                     });
                     function df_mn_text(val) {
                         if(val == 1){
@@ -1452,13 +1474,21 @@
                             }else {
                                 $('#manual_check').prop('checked', false);
                             }
+                        }else {
+                            // $('.btn_config').hide();
+                            // $('.label_1').hide();
+                            // $('.label_2').hide();
+                            // $('.label_3').hide();
+                            // $('.label_4').hide();
+                            // $('.check_m').hide();
                         }
                     }
                     $('.btn_config').click(function(){
                         $(this).hide();
                         $('.check_m').show();
-                        $('#save_manual_cont').show();
                         $('#close_manual_cont').show();
+                        $(".sw_mode_Auto").attr('disabled', true);
+                        $(".sw_mode_Manual").attr('disabled', true);
                         df_mn_text($('.manual_select').val());
                         $('#manual_check').change(function(){
                             if($(this).prop('checked') === true){
@@ -1466,6 +1496,7 @@
                             }else {
                                 $('.input_check2').bootstrapToggle('off')
                             }
+                            btn_save_check_mn($('.manual_select').val(), '')
                         });
                         $('.input_check2').change(function(){
                             var numb = $('.manual_select').val();
@@ -1482,8 +1513,150 @@
                                     $('#manual_check').prop('checked', false);
                                 }
                             }
+                            btn_save_check_mn($('.manual_select').val(), '');
                         });
                     });
+                    $('#close_manual_cont').click(function(){
+                        btn_save_check_mn($('.manual_select').val(), 'close');
+                    });
+                    function btn_save_check_mn(numb, mode){
+                        var new_log = [];
+                        if(numb == 1){
+                            if ($("#label_1").prop('checked') === true) {
+                                new_log['dripper_1'] = "ON";
+                            }else {
+                                new_log['dripper_1'] = "OFF";
+                            }
+                            if ($("#label_2").prop('checked') === true) {
+                                new_log['dripper_2'] = "ON";
+                            }else {
+                                new_log['dripper_2'] = "OFF";
+                            }
+                            if ($("#label_3").prop('checked') === true) {
+                                new_log['dripper_3'] = "ON";
+                            }else {
+                                new_log['dripper_3'] = "OFF";
+                            }
+                            if ($("#label_4").prop('checked') === true) {
+                                new_log['dripper_4'] = "ON";
+                            }else {
+                                new_log['dripper_4'] = "OFF";
+                            }
+                            new_log['fan_1'] = res.fan_1;
+                            new_log['fan_2'] = res.fan_2;
+                            new_log['fan_3'] = res.fan_3;
+                            new_log['fan_4'] = res.fan_4;
+                            new_log['foggy_1'] = res.foggy_1;
+                            new_log['foggy_2'] = res.foggy_2;
+                            new_log['spray'] = res.spray;
+                            new_log['roof'] = res.roof;
+                        }else if (numb == 2){
+                            new_log['dripper_1'] = res.dripper_1;
+                            new_log['dripper_2'] = res.dripper_2;
+                            new_log['dripper_3'] = res.dripper_3;
+                            new_log['dripper_4'] = res.dripper_4;
+                            if ($("#label_1").prop('checked') === true) {
+                                new_log['fan_1'] = "ON";
+                            }else {
+                                new_log['fan_1'] = "OFF";
+                            }
+                            if ($("#label_2").prop('checked') === true) {
+                                new_log['fan_2'] = "ON";
+                            }else {
+                                new_log['fan_2'] = "OFF";
+                            }
+                            if ($("#label_3").prop('checked') === true) {
+                                new_log['fan_3'] = "ON";
+                            }else {
+                                new_log['fan_3'] = "OFF";
+                            }
+                            if ($("#label_4").prop('checked') === true) {
+                                new_log['fan_4'] = "ON";
+                            }else {
+                                new_log['fan_4'] = "OFF";
+                            }
+                            new_log['foggy_1'] = res.foggy_1;
+                            new_log['foggy_2'] = res.foggy_2;
+                            new_log['spray'] = res.spray;
+                            new_log['roof'] = res.roof;
+                        }else if (numb == 3){
+                            new_log['dripper_1'] = res.dripper_1;
+                            new_log['dripper_2'] = res.dripper_2;
+                            new_log['dripper_3'] = res.dripper_3;
+                            new_log['dripper_4'] = res.dripper_4;
+                            new_log['fan_1'] = res.fan_1;
+                            new_log['fan_2'] = res.fan_2;
+                            new_log['fan_3'] = res.fan_3;
+                            new_log['fan_4'] = res.fan_4;
+                            if ($("#label_1").prop('checked') === true) {
+                                new_log['foggy_1'] = "ON";
+                            }else {
+                                new_log['foggy_1'] = "OFF";
+                            }
+                            if ($("#label_2").prop('checked') === true) {
+                                new_log['foggy_2'] = "ON";
+                            }else {
+                                new_log['foggy_2'] = "OFF";
+                            }
+                            new_log['spray'] = res.spray;
+                            new_log['roof'] = res.roof;
+                        }
+                        var new_log2 = {
+                            'dripper_1': new_log.dripper_1,
+                            'dripper_2': new_log.dripper_2,
+                            'dripper_3': new_log.dripper_3,
+                            'dripper_4': new_log.dripper_4,
+                            'fan_1': new_log.fan_1,
+                            'fan_2': new_log.fan_2,
+                            'fan_3': new_log.fan_3,
+                            'fan_4': new_log.fan_4,
+                            'foggy_1': new_log.foggy_1,
+                            'foggy_2': new_log.foggy_2,
+                            'spray': new_log.spray,
+                            'roof': new_log.roof,
+                        };
+                        // console.log(JSON.stringify(res))
+                        // console.log(JSON.stringify(new_log))
+                        if(mode === 'close'){
+                            if (JSON.stringify(res) === JSON.stringify(new_log2)) {
+                                $(".btn_config").show();
+                                $('.check_m').hide();
+                                $(".sw_mode_Auto").attr('disabled', false);
+                                $(".sw_mode_Manual").attr('disabled', false);
+                                df_mn_text($('.manual_select').val());
+                                $("#save_manual_cont").hide();
+                                $("#close_manual_cont").hide();
+                            } else {
+                                swal({
+                                    title: 'คุณแน่ใจหรือไม่?',
+                                    text: "คุณต้องการยกเลิกการตั้งค่า?",
+                                    type: 'warning',
+                                    allowOutsideClick: false,
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#da3444',
+                                    cancelButtonColor: '#8e8e8e',
+                                    confirmButtonText: 'ยืนยัน',
+                                    cancelButtonText: 'ยกเลิก',
+                                }).then((result) => {
+                                    if (result.value) {
+                                        $(".btn_config").show();
+                                        $('.check_m').hide();
+                                        $(".sw_mode_Auto").attr('disabled', false);
+                                        $(".sw_mode_Manual").attr('disabled', false);
+                                        df_mn_text($('.manual_select').val());
+                                        $("#save_manual_cont").hide();
+                                        $("#close_manual_cont").hide();
+                                    }
+                                });
+                            }
+                        }else {
+                            if (JSON.stringify(res) === JSON.stringify(new_log2)) {
+                                $("#save_manual_cont").hide();
+                            } else {
+                                $("#save_manual_cont").show();
+                            }
+                        }
+                    }
                 }
             });
         }
