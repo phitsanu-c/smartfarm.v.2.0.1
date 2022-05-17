@@ -327,7 +327,7 @@
                                     for($i = 1; $i <= 12; $i++){
                                         if($config_cn['cn_status_'.$i] == 1){
                                             echo '<li class="nav-item col-3">
-                                            <a class="btn  btn-block btn-outline-secondary sw_btn_au" style="width:100%" id="'.$i.'">'.$config_cn['cn_name_'.$i].'</a>
+                                            <a class="btn btn-outline-secondary sw_btn_au" style="width:100%" id="'.$i.'">'.$config_cn['cn_name_'.$i].'</a>
                                         </li>';}
                                     }
                                 ?>
@@ -1256,7 +1256,11 @@
                         $('#save_manual_cont').show();
                         $('#close_manual_cont').show();
                         $('#manual_check').change(function(){
-                            if($(this).prop('cha'));
+                            if($(this).prop('checked') === true){
+                                $('.input_check2').bootstrapToggle('on')
+                            }else {
+                                $('.input_check2').bootstrapToggle('off')
+                            }
                         });
                     });
                 }
