@@ -330,7 +330,6 @@
                                             <button class="btn btn-control sw_btn_au" style="width:100% " id="'.$i.'">'.$config_cn['cn_name_'.$i].'<br>
                                             <img src="public/images/control/rmutt/dripper.png" width="70" />
                                             </button>
-                                            
                                         </li>';}
                                     }
                                 ?>
@@ -1259,7 +1258,11 @@
                         $('#save_manual_cont').show();
                         $('#close_manual_cont').show();
                         $('#manual_check').change(function(){
-                            if($(this).prop('cha'));
+                            if($(this).prop('checked') === true){
+                                $('.input_check2').bootstrapToggle('on')
+                            }else {
+                                $('.input_check2').bootstrapToggle('off')
+                            }
                         });
                     });
                 }
