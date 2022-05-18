@@ -291,7 +291,7 @@
         </div>
         <!-- Modal Control -->
         <div class="modal fade" id="Modal_control" tabindex="-1" aria-hidden="true">
-    		<div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg">
     			<div class="modal-content">
     				<div class="modal-header">
     					<!-- <h5 class="modal-title">Modal title</h5>
@@ -450,7 +450,7 @@
                         <div class="ul_Auto">
                             <button type="button" id="save_auto_cont" class="btn btn-success waves-light">
                                 <i class="fadeIn animated bx bx-save"></i> บันทึก
-                            </fn_df_checkbox_manualbutton>
+                            </button>
                             <button type="button" id="close_auto_cont" class="btn btn-danger waves-effect">
                                 <i class="fadeIn animated bx bx-window-close"></i> ยกเลิก
                             </button>
@@ -463,6 +463,7 @@
                                 </div>
                                 <div class="ms-auto">
                                     <button type="button" class="btn btn-outline-secondary px-5 radius-30 menu_config_manual">ตั้งค่า</button>
+                                    <input type="hidden" id="val_sw">
                                     <button type="button" id="save_manual_cont" class="btn btn-success waves-light">
                                         <i class="fadeIn animated bx bx-save"></i> บันทึก
                                     </button>
@@ -501,7 +502,7 @@
     				</div>
     			</div>
     		</div>
-    	</div>
+        </div>
         <!-- exit Modal Control -->
     <?php } ?>
 </div>
@@ -887,7 +888,7 @@
     // ------- Switch control --------------
 
     // ++++++++++++++++++
-    $('.menu_control').click(function () {
+    $('.memu_control').click(function () {
         // Create a client instance
         client = new Paho.MQTT.Client(hostname, Number(port), "mqtt_js_324" + parseInt(Math.random() * 100000, 10));
 
@@ -1049,7 +1050,134 @@
                     }
                 });
             }); // exit_save_Auto
-        }
+            $("#save_manual_cont").click(function () {
+                var log_sw = [];
+                var numb = $('.hidden_select_sw_manual').val();
+                if(numb == 1){
+                    if ($("#label_1").prop('checked') === true) {
+                        log_sw['sw_1'] = "ON";
+                    }else {
+                        log_sw['sw_1'] = "OFF";
+                    }
+                    if ($("#label_2").prop('checked') === true) {
+                        log_sw['sw_2'] = "ON";
+                    }else {
+                        log_sw['sw_2'] = "OFF";
+                    }
+                    if ($("#label_3").prop('checked') === true) {
+                        log_sw['sw_3'] = "ON";
+                    }else {
+                        log_sw['sw_3'] = "OFF";
+                    }
+                    if ($("#label_4").prop('checked') === true) {
+                        log_sw['sw_4'] = "ON";
+                    }else {
+                        log_sw['sw_4'] = "OFF";
+                    }
+                }else if (numb == 2){
+                    if ($("#label_1").prop('checked') === true) {
+                        log_sw['sw_1'] = "ON";
+                    }else {
+                        log_sw['sw_1'] = "OFF";
+                    }
+                    if ($("#label_2").prop('checked') === true) {
+                        log_sw['sw_2'] = "ON";
+                    }else {
+                        log_sw['sw_2'] = "OFF";
+                    }
+                    if ($("#label_3").prop('checked') === true) {
+                        log_sw['sw_3'] = "ON";
+                    }else {
+                        log_sw['sw_3'] = "OFF";
+                    }
+                    if ($("#label_4").prop('checked') === true) {
+                        log_sw['sw_4'] = "ON";
+                    }else {
+                        log_sw['sw_4'] = "OFF";
+                    }
+                }else if (numb == 3){
+                    if ($("#label_1").prop('checked') === true) {
+                        log_sw['sw_1'] = "ON";
+                    }else {
+                        log_sw['sw_1'] = "OFF";
+                    }
+                    if ($("#label_2").prop('checked') === true) {
+                        log_sw['sw_2'] = "ON";
+                    }else {
+                        log_sw['sw_2'] = "OFF";
+                    }
+                    log_sw['sw_3'] = "OFF";
+                    log_sw['sw_4'] = "OFF";
+                }
+                swal({
+                    title: 'บันทึกการเปลี่ยนแปลง',
+                    text: "คุณต้องการบันทึกการเปลี่ยนแปลง ?",
+                    type: 'warning',
+                    allowOutsideClick: false,
+                    showCancelButton: true,
+                    confirmButtonColor: '#32CD32',
+                    cancelButtonColor: '#FF3333',
+                    confirmButtonText: 'ไช่',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.value) {
+                        var log_sw2 = {
+                            'mode':numb,
+                            'sw_1':log_sw['sw_1'],
+                            'sw_2':log_sw['sw_2'],
+                            'sw_3':log_sw['sw_3'],
+                            'sw_4':log_sw['sw_4']
+                        }
+                        // console.log(log_sw)
+                        $.ajax({
+                            type: "POST",
+                            url: "routes/tu/save_manualControl.php",
+                            data: {
+                                house_master: house_master,
+                                log_sw: log_sw2
+                            },
+                            dataType: 'json',
+                            success: function (res) {
+                                // console.log(res.data)
+                                if (res.status === "Insert_Success") {
+                                    $("#Modal_Auto_control").modal("hide");
+                                    $('#val_sw').val(JSON.stringify(res.data));
+                                    // console.log(res.data);
+                                    mqtt_send(house_master+'/control/config/manual', JSON.stringify(res.data), '')
+                                    swal({
+                                        title: 'บันทึกข้อมูลสำเร็จ',
+                                        type: 'success',
+                                        allowOutsideClick: false,
+                                        confirmButtonColor: '#32CD32'
+                                    });
+                                    $(".menu_config_manual").show();
+                                    $('.status_config_manual').hide();
+                                    $(".sw_mode_Auto").attr('disabled', false);
+                                    $(".sw_mode_Manual").attr('disabled', false);
+                                    $("#save_manual_cont").hide();
+                                    $("#close_manual_cont").hide();
+                                    fn_label_manual($('.hidden_select_sw_manual').val());
+                                } else {
+                                    swal({
+                                        title: 'Error !',
+                                        text: "เกิดข้อผิดพลาด ?",
+                                        type: 'error',
+                                        allowOutsideClick: false,
+                                        confirmButtonColor: '#32CD32'
+                                    }).then((result) => {
+                                        if (result.value) {
+                                            location.reload();
+                                            return false;
+                                        }
+                                    });
+                                }
+                            }
+                        });
+
+                    }
+                });
+            }); // exit_save_Manual
+        } // exit_message
 
         if($('.sw_mode_Auto').hasClass('btn-success') == true){
             $.ajax({ // Auto
@@ -1125,7 +1253,6 @@
                             }
                         }
                     }
-                    // ===============================================
                     fn_df_logdata_auto($('.hidden_select_sw_auto').val())
                     function fn_df_logdata_auto(numb) {
                         for (var i = 0; i <= 6; i++) {
@@ -1291,11 +1418,13 @@
                 },
                 dataType: "json",
                 success: function(res) {
-                    // console.log(res);
+                    console.log(res);
                     $("#Modal_control").modal('show', { backdrop: "static" })
                     $('.status_config_manual').hide();
                     $('#save_manual_cont').hide();
                     $('#close_manual_cont').hide();
+                    $('#val_sw').val(JSON.stringify(res));
+                    // console.log($('#val_sw').val());
                     if(config_cn.cn_status_1 == 1 || config_cn.cn_status_2 == 1 || config_cn.cn_status_3 == 1 || config_cn.cn_status_4 == 1){
                         $('.hidden_select_sw_manual').val(1);
                     }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 || config_cn.cn_status_5 == 1 || config_cn.cn_status_6 == 1 || config_cn.cn_status_7 == 1 || config_cn.cn_status_8 == 1){
@@ -1308,55 +1437,6 @@
                         $('.hidden_select_sw_manual').val(5)
                     }
                     fn_df_sw_manual($('.hidden_select_sw_manual').val());
-                    function fn_df_sw_manual(val){
-                        for (var i = 1; i <= 5; i++) {
-                            if(i == val){
-                                $("#s"+i).addClass('active');
-                                if(i == 1){
-                                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/dripper_on.png');
-                                }else if (i == 2) {
-                                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/fan_on.png');
-                                }else if (i == 3) {
-                                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/foggy_on.png');
-                                }else if (i == 4) {
-                                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/spray_on.png');
-                                }else if (i == 5) {
-                                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/shading_on.png');
-                                }
-                            }else {
-                                $('#s'+i).removeClass('active')
-                                if(i == 1){
-                                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/dripper_off.png');
-                                }else if (i == 2) {
-                                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/fan_off.png');
-                                }else if (i == 3) {
-                                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/foggy_off.png');
-                                }else if (i == 4) {
-                                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/spray_off.png');
-                                }else if (i == 5) {
-                                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/shading_off.png');
-                                }
-                            }
-                        }
-                        fn_df_checkbox_manual(val);
-                        if(val < 4){
-                            $('.menu_config_manual').show();
-                            if(val == 3){
-                                $('.label_3').hide();
-                                $('.label_4').hide();
-                                $('.status_config_manual_3').hide();
-                                $('.status_config_manual_4').hide();
-                            }
-                        }else {
-                            $('.menu_config_manual').hide();
-                            $('.label_1').hide();
-                            $('.label_2').hide();
-                            $('.label_3').hide();
-                            $('.label_4').hide();
-                            $('.status_config_manual_3').hide();
-                            $('.status_config_manual_4').hide();
-                        }
-                    }
                     $('.sw_sel_load_manual').click(function(){
                         var numb = Number($(this).attr('id').substring(1));
                         if($('#close_manual_cont').is(":hidden") == false){
@@ -1373,118 +1453,95 @@
                             fn_df_sw_manual(numb);
                         }
                     });
-                    function fn_df_checkbox_manual(val) {
-                        if(val == 1){
-                            $('.title_load_manual').html('ควบคุม Dripper');
-                            if(res.dripper_1 == 'ON'){
-                                $('.label_1').show().html(config_cn.cn_name_1);
-                                $('#label_1').bootstrapToggle('on')
-                            }else {
-                                $('.label_1').hide();
-                                $('#label_1').bootstrapToggle('off')
-                            }
-                            if(res.dripper_2 == 'ON'){
-                                $('.label_2').show().html(config_cn.cn_name_2);
-                                $('#label_2').bootstrapToggle('on')
-                            }else {
-                                $('.label_2').hide();
-                                $('#label_2').bootstrapToggle('off')
-                            }
-                            if(res.dripper_3 == 'ON'){
-                                $('.label_3').show().html(config_cn.cn_name_3);
-                                $('#label_3').bootstrapToggle('on')
-                            }else {
-                                $('.label_3').hide();
-                                $('#label_3').bootstrapToggle('off')
-                            }
-                            if(res.dripper_4 == 'ON'){
-                                $('.label_4').show().html(config_cn.cn_name_4);
-                                $('#label_4').bootstrapToggle('on')
-                            }else {
-                                $('.label_4').hide();
-                                $('#label_4').bootstrapToggle('off')
-                            }
-                            if(res.dripper_1 == 'ON' && res.dripper_2 == 'ON' && res.dripper_3 == 'ON' && res.dripper_4 == 'ON'){
-                                $('#checkbox_all_manual').prop('checked', true);
-                            }else {
-                                $('#checkbox_all_manual').prop('checked', false);
-                            }
-                        }else if (val == 2){
-                                $('.title_load_manual').html('ควบคุม Fan');
-                            if(res.fan_1 == 'ON'){
-                                $('.label_1').show().html(config_cn.cn_name_5);
-                                $('#label_1').bootstrapToggle('on')
-                            }else {
-                                $('.label_1').hide();
-                                $('#label_1').bootstrapToggle('off')
-                            }
-                            if(res.fan_2 == 'ON'){
-                                $('.label_2').show().html(config_cn.cn_name_6);
-                                $('#label_2').bootstrapToggle('on')
-                            }else {
-                                $('.label_2').hide();
-                                $('#label_2').bootstrapToggle('off')
-                            }
-                            if(res.fan_3 == 'ON'){
-                                $('.label_3').show().html(config_cn.cn_name_7);
-                                $('#label_3').bootstrapToggle('on')
-                            }else {
-                                $('.label_3').hide();
-                                $('#label_3').bootstrapToggle('off')
-                            }
-                            if(res.fan_4 == 'ON'){
-                                $('.label_4').show().html(config_cn.cn_name_8);
-                                $('#label_4').bootstrapToggle('on')
-                            }else {
-                                $('.label_4').hide();
-                                $('#label_4').bootstrapToggle('off')
-                            }
-                            if(res.fan_1 == 'ON' && res.fan_2 == 'ON' && res.fan_3 == 'ON' && res.fan_4 == 'ON'){
-                                $('#checkbox_all_manual').prop('checked', true);
-                            }else {
-                                $('#checkbox_all_manual').prop('checked', false);
-                            }
-                        }else if (val == 3){
-                                $('.title_load_manual').html('ควบคุม Foggy');
-                            if(res.foggy_1 == 'ON'){
-                                $('.label_1').show().html(config_cn.cn_name_9);
-                                $('#label_1').bootstrapToggle('on')
-                            }else {
-                                $('.label_1').hide();
-                                $('#label_1').bootstrapToggle('off')
-                            }
-                            if(res.foggy_2 == 'ON'){
-                                $('.label_2').show().html(config_cn.cn_name_10);
-                                $('#label_2').bootstrapToggle('on')
-                            }else {
-                                $('.label_2').hide();
-                                $('#label_2').bootstrapToggle('off')
-                            }
-                            $('.label_3').hide();
-                            $('.label_4').hide();
-                            $('#label_3').bootstrapToggle('off')
-                            $('#label_4').bootstrapToggle('off')
-                            $('.status_config_manual_3').hide();
-                            $('.status_config_manual_4').hide();
-                            if(res.foggy_1 == 'ON' && res.foggy_2 == 'ON'){
-                                $('#checkbox_all_manual').prop('checked', true);
-                            }else {
-                                $('#checkbox_all_manual').prop('checked', false);
-                            }
-                        }else if(val == 4){
-                            $('.title_load_manual').html('ควบคุม Spray');
-                        }else if(val == 5){
-                            $('.title_load_manual').html('ควบคุม Shading');
-                        }
-                    }
                     $('.menu_config_manual').click(function(){
                         $(this).hide();
                         $('.status_config_manual').show();
                         $('#close_manual_cont').show();
                         $(".sw_mode_Auto").attr('disabled', true);
                         $(".sw_mode_Manual").attr('disabled', true);
-                        fn_df_checkbox_manual($('.hidden_select_sw_manual').val());
-                        $('#checkbox_all_manual').change(function(){
+                        // fn_label_manual($('.hidden_select_sw_manual').val());
+                        // =================================================
+                        var val = $('.hidden_select_sw_manual').val();
+                        var sw_log = $.parseJSON($('#val_sw').val());
+                        $('.label_1').show();
+                        $('.label_2').show();
+                        $('.label_3').show();
+                        $('.label_4').show();
+                        if(val == 1){
+                            if(sw_log.dripper_1 == 'ON'){
+                                $('#label_1').bootstrapToggle('on')
+                            }else {
+                                $('#label_1').bootstrapToggle('off')
+                            }
+                            if(sw_log.dripper_2 == 'ON'){
+                                $('#label_2').bootstrapToggle('on')
+                            }else {
+                                $('#label_2').bootstrapToggle('off')
+                            }
+                            if(sw_log.dripper_3 == 'ON'){
+                                $('#label_3').bootstrapToggle('on')
+                            }else {
+                                $('#label_3').bootstrapToggle('off')
+                            }
+                            if(sw_log.dripper_4 == 'ON'){
+                                $('#label_4').bootstrapToggle('on')
+                            }else {
+                                $('#label_4').bootstrapToggle('off')
+                            }
+                            if(sw_log.dripper_1 == 'ON' && sw_log.dripper_2 == 'ON' && sw_log.dripper_3 == 'ON' && sw_log.dripper_4 == 'ON'){
+                                $('#checkbox_all_manual').prop('checked', true);
+                            }else {
+                                $('#checkbox_all_manual').prop('checked', false);
+                            }
+                        }else if (val == 2){
+                            if(sw_log.fan_1 == 'ON'){
+                                $('#label_1').bootstrapToggle('on')
+                            }else {
+                                $('#label_1').bootstrapToggle('off')
+                            }
+                            if(sw_log.fan_2 == 'ON'){
+                                $('#label_2').bootstrapToggle('on')
+                            }else {
+                                $('#label_2').bootstrapToggle('off')
+                            }
+                            if(sw_log.fan_3 == 'ON'){
+                                $('#label_3').bootstrapToggle('on')
+                            }else {
+                                $('#label_3').bootstrapToggle('off')
+                            }
+                            if(sw_log.fan_4 == 'ON'){
+                                $('#label_4').bootstrapToggle('on')
+                            }else {
+                                $('#label_4').bootstrapToggle('off')
+                            }
+                            if(sw_log.fan_1 == 'ON' && sw_log.fan_2 == 'ON' && sw_log.fan_3 == 'ON' && sw_log.fan_4 == 'ON'){
+                                $('#checkbox_all_manual').prop('checked', true);
+                            }else {
+                                $('#checkbox_all_manual').prop('checked', false);
+                            }
+                        }else if (val == 3){
+                            if(sw_log.foggy_1 == 'ON'){
+                                $('#label_1').bootstrapToggle('on')
+                            }else {
+                                $('#label_1').bootstrapToggle('off')
+                            }
+                            if(sw_log.foggy_2 == 'ON'){
+                                $('#label_2').bootstrapToggle('on')
+                            }else {
+                                $('#label_2').bootstrapToggle('off')
+                            }
+                            $('.label_3').hide();
+                            $('.label_4').hide();
+                            $('.status_config_manual_3').hide();
+                            $('.status_config_manual_4').hide();
+                            if(sw_log.foggy_1 == 'ON' && sw_log.foggy_2 == 'ON'){
+                                $('#checkbox_all_manual').prop('checked', true);
+                            }else {
+                                $('#checkbox_all_manual').prop('checked', false);
+                            }
+                        }
+                        // =============================================
+                        $('#checkbox_all_manual').click(function(){
                             if($(this).prop('checked') === true){
                                 $('.input_check2').bootstrapToggle('on')
                             }else {
@@ -1492,7 +1549,7 @@
                             }
                             fn_check_manual_save($('.hidden_select_sw_manual').val(), '')
                         });
-                        $('.input_check2').change(function(){
+                        $('.input_check2').on('change',function(){
                             var numb = $('.hidden_select_sw_manual').val();
                             if(numb <= 2){
                                 if($('#label_1').prop('checked') === true && $('#label_2').prop('checked') === true && $('#label_3').prop('checked') === true && $('#label_4').prop('checked') === true) {
@@ -1509,150 +1566,278 @@
                             }
                             fn_check_manual_save($('.hidden_select_sw_manual').val(), '');
                         });
-                    });
-                    $('#close_manual_cont').click(function(){
-                        fn_check_manual_save($('.hidden_select_sw_manual').val(), 'close');
-                    });
-                    function fn_check_manual_save(numb, mode){
-                        var new_log = [];
-                        if(numb == 1){
-                            if ($("#label_1").prop('checked') === true) {
-                                new_log['dripper_1'] = "ON";
-                            }else {
-                                new_log['dripper_1'] = "OFF";
+                        $('#close_manual_cont').click(function(){
+                            fn_check_manual_save($('.hidden_select_sw_manual').val(), 'close');
+                        });
+                        function fn_check_manual_save(numb, mode){
+                            var sw_log = $.parseJSON($('#val_sw').val());
+                            var new_log = [];
+                            if(numb == 1){
+                                if ($("#label_1").prop('checked') == true) {
+                                    new_log['dripper_1'] = "ON";
+                                }else {
+                                    new_log['dripper_1'] = "OFF";
+                                }
+                                if ($("#label_2").prop('checked') == true) {
+                                    new_log['dripper_2'] = "ON";
+                                }else {
+                                    new_log['dripper_2'] = "OFF";
+                                }
+                                if ($("#label_3").prop('checked') == true) {
+                                    new_log['dripper_3'] = "ON";
+                                }else {
+                                    new_log['dripper_3'] = "OFF";
+                                }
+                                if ($("#label_4").prop('checked') == true) {
+                                    new_log['dripper_4'] = "ON";
+                                }else {
+                                    new_log['dripper_4'] = "OFF";
+                                }
+                                new_log['fan_1'] = sw_log.fan_1;
+                                new_log['fan_2'] = sw_log.fan_2;
+                                new_log['fan_3'] = sw_log.fan_3;
+                                new_log['fan_4'] = sw_log.fan_4;
+                                new_log['foggy_1'] = sw_log.foggy_1;
+                                new_log['foggy_2'] = sw_log.foggy_2;
+                                new_log['spray'] = sw_log.spray;
+                                new_log['shading'] = sw_log.shading;
+                            }else if (numb == 2){
+                                new_log['dripper_1'] = sw_log.dripper_1;
+                                new_log['dripper_2'] = sw_log.dripper_2;
+                                new_log['dripper_3'] = sw_log.dripper_3;
+                                new_log['dripper_4'] = sw_log.dripper_4;
+                                if ($("#label_1").prop('checked') == true) {
+                                    new_log['fan_1'] = "ON";
+                                }else {
+                                    new_log['fan_1'] = "OFF";
+                                }
+                                if ($("#label_2").prop('checked') == true) {
+                                    new_log['fan_2'] = "ON";
+                                }else {
+                                    new_log['fan_2'] = "OFF";
+                                }
+                                if ($("#label_3").prop('checked') == true) {
+                                    new_log['fan_3'] = "ON";
+                                }else {
+                                    new_log['fan_3'] = "OFF";
+                                }
+                                if ($("#label_4").prop('checked') == true) {
+                                    new_log['fan_4'] = "ON";
+                                }else {
+                                    new_log['fan_4'] = "OFF";
+                                }
+                                new_log['foggy_1'] = sw_log.foggy_1;
+                                new_log['foggy_2'] = sw_log.foggy_2;
+                                new_log['spray'] = sw_log.spray;
+                                new_log['shading'] = sw_log.shading;
+                            }else if (numb == 3){
+                                new_log['dripper_1'] = sw_log.dripper_1;
+                                new_log['dripper_2'] = sw_log.dripper_2;
+                                new_log['dripper_3'] = sw_log.dripper_3;
+                                new_log['dripper_4'] = sw_log.dripper_4;
+                                new_log['fan_1'] = sw_log.fan_1;
+                                new_log['fan_2'] = sw_log.fan_2;
+                                new_log['fan_3'] = sw_log.fan_3;
+                                new_log['fan_4'] = sw_log.fan_4;
+                                if ($("#label_1").prop('checked') == true) {
+                                    new_log['foggy_1'] = "ON";
+                                }else {
+                                    new_log['foggy_1'] = "OFF";
+                                }
+                                if ($("#label_2").prop('checked') == true) {
+                                    new_log['foggy_2'] = "ON";
+                                }else {
+                                    new_log['foggy_2'] = "OFF";
+                                }
+                                new_log['spray'] = sw_log.spray;
+                                new_log['shading'] = sw_log.shading;
                             }
-                            if ($("#label_2").prop('checked') === true) {
-                                new_log['dripper_2'] = "ON";
+                            var new_log2 = {
+                                'dripper_1': new_log.dripper_1,
+                                'dripper_2': new_log.dripper_2,
+                                'dripper_3': new_log.dripper_3,
+                                'dripper_4': new_log.dripper_4,
+                                'fan_1': new_log.fan_1,
+                                'fan_2': new_log.fan_2,
+                                'fan_3': new_log.fan_3,
+                                'fan_4': new_log.fan_4,
+                                'foggy_1': new_log.foggy_1,
+                                'foggy_2': new_log.foggy_2,
+                                'spray': new_log.spray,
+                                'shading': new_log.shading,
+                            };
+                            // console.log($('#val_sw').val())
+                            // console.log(JSON.stringify(new_log2))
+                            if(mode === 'close'){
+                                if ($('#val_sw').val() === JSON.stringify(new_log2)) {
+                                    $(".menu_config_manual").show();
+                                    $('.status_config_manual').hide();
+                                    $(".sw_mode_Auto").attr('disabled', false);
+                                    $(".sw_mode_Manual").attr('disabled', false);
+                                    fn_label_manual($('.hidden_select_sw_manual').val());
+                                    $("#save_manual_cont").hide();
+                                    $("#close_manual_cont").hide();
+                                } else {
+                                    swal({
+                                        title: 'คุณแน่ใจหรือไม่?',
+                                        text: "คุณต้องการยกเลิกการตั้งค่า?",
+                                        type: 'warning',
+                                        allowOutsideClick: false,
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#da3444',
+                                        cancelButtonColor: '#8e8e8e',
+                                        confirmButtonText: 'ยืนยัน',
+                                        cancelButtonText: 'ยกเลิก',
+                                    }).then((result) => {
+                                        if (result.value) {
+                                            $(".menu_config_manual").show();
+                                            $('.status_config_manual').hide();
+                                            $(".sw_mode_Auto").attr('disabled', false);
+                                            $(".sw_mode_Manual").attr('disabled', false);
+                                            fn_label_manual($('.hidden_select_sw_manual').val());
+                                            $("#save_manual_cont").hide();
+                                            $("#close_manual_cont").hide();
+                                        }
+                                    });
+                                }
                             }else {
-                                new_log['dripper_2'] = "OFF";
+                                if ($('#val_sw').val() === JSON.stringify(new_log2)) {
+                                    $("#save_manual_cont").hide();
+                                } else {
+                                    $("#save_manual_cont").show();
+                                }
                             }
-                            if ($("#label_3").prop('checked') === true) {
-                                new_log['dripper_3'] = "ON";
-                            }else {
-                                new_log['dripper_3'] = "OFF";
-                            }
-                            if ($("#label_4").prop('checked') === true) {
-                                new_log['dripper_4'] = "ON";
-                            }else {
-                                new_log['dripper_4'] = "OFF";
-                            }
-                            new_log['fan_1'] = res.fan_1;
-                            new_log['fan_2'] = res.fan_2;
-                            new_log['fan_3'] = res.fan_3;
-                            new_log['fan_4'] = res.fan_4;
-                            new_log['foggy_1'] = res.foggy_1;
-                            new_log['foggy_2'] = res.foggy_2;
-                            new_log['spray'] = res.spray;
-                            new_log['roof'] = res.roof;
-                        }else if (numb == 2){
-                            new_log['dripper_1'] = res.dripper_1;
-                            new_log['dripper_2'] = res.dripper_2;
-                            new_log['dripper_3'] = res.dripper_3;
-                            new_log['dripper_4'] = res.dripper_4;
-                            if ($("#label_1").prop('checked') === true) {
-                                new_log['fan_1'] = "ON";
-                            }else {
-                                new_log['fan_1'] = "OFF";
-                            }
-                            if ($("#label_2").prop('checked') === true) {
-                                new_log['fan_2'] = "ON";
-                            }else {
-                                new_log['fan_2'] = "OFF";
-                            }
-                            if ($("#label_3").prop('checked') === true) {
-                                new_log['fan_3'] = "ON";
-                            }else {
-                                new_log['fan_3'] = "OFF";
-                            }
-                            if ($("#label_4").prop('checked') === true) {
-                                new_log['fan_4'] = "ON";
-                            }else {
-                                new_log['fan_4'] = "OFF";
-                            }
-                            new_log['foggy_1'] = res.foggy_1;
-                            new_log['foggy_2'] = res.foggy_2;
-                            new_log['spray'] = res.spray;
-                            new_log['roof'] = res.roof;
-                        }else if (numb == 3){
-                            new_log['dripper_1'] = res.dripper_1;
-                            new_log['dripper_2'] = res.dripper_2;
-                            new_log['dripper_3'] = res.dripper_3;
-                            new_log['dripper_4'] = res.dripper_4;
-                            new_log['fan_1'] = res.fan_1;
-                            new_log['fan_2'] = res.fan_2;
-                            new_log['fan_3'] = res.fan_3;
-                            new_log['fan_4'] = res.fan_4;
-                            if ($("#label_1").prop('checked') === true) {
-                                new_log['foggy_1'] = "ON";
-                            }else {
-                                new_log['foggy_1'] = "OFF";
-                            }
-                            if ($("#label_2").prop('checked') === true) {
-                                new_log['foggy_2'] = "ON";
-                            }else {
-                                new_log['foggy_2'] = "OFF";
-                            }
-                            new_log['spray'] = res.spray;
-                            new_log['roof'] = res.roof;
                         }
-                        var new_log2 = {
-                            'dripper_1': new_log.dripper_1,
-                            'dripper_2': new_log.dripper_2,
-                            'dripper_3': new_log.dripper_3,
-                            'dripper_4': new_log.dripper_4,
-                            'fan_1': new_log.fan_1,
-                            'fan_2': new_log.fan_2,
-                            'fan_3': new_log.fan_3,
-                            'fan_4': new_log.fan_4,
-                            'foggy_1': new_log.foggy_1,
-                            'foggy_2': new_log.foggy_2,
-                            'spray': new_log.spray,
-                            'roof': new_log.roof,
-                        };
-                        // console.log(JSON.stringify(res))
-                        // console.log(JSON.stringify(new_log))
-                        if(mode === 'close'){
-                            if (JSON.stringify(res) === JSON.stringify(new_log2)) {
-                                $(".menu_config_manual").show();
-                                $('.status_config_manual').hide();
-                                $(".sw_mode_Auto").attr('disabled', false);
-                                $(".sw_mode_Manual").attr('disabled', false);
-                                fn_df_checkbox_manual($('.hidden_select_sw_manual').val());
-                                $("#save_manual_cont").hide();
-                                $("#close_manual_cont").hide();
-                            } else {
-                                swal({
-                                    title: 'คุณแน่ใจหรือไม่?',
-                                    text: "คุณต้องการยกเลิกการตั้งค่า?",
-                                    type: 'warning',
-                                    allowOutsideClick: false,
-                                    showCancelButton: true,
-                                    confirmButtonColor: '#da3444',
-                                    cancelButtonColor: '#8e8e8e',
-                                    confirmButtonText: 'ยืนยัน',
-                                    cancelButtonText: 'ยกเลิก',
-                                }).then((result) => {
-                                    if (result.value) {
-                                        $(".menu_config_manual").show();
-                                        $('.status_config_manual').hide();
-                                        $(".sw_mode_Auto").attr('disabled', false);
-                                        $(".sw_mode_Manual").attr('disabled', false);
-                                        fn_df_checkbox_manual($('.hidden_select_sw_manual').val());
-                                        $("#save_manual_cont").hide();
-                                        $("#close_manual_cont").hide();
-                                    }
-                                });
-                            }
-                        }else {
-                            if (JSON.stringify(res) === JSON.stringify(new_log2)) {
-                                $("#save_manual_cont").hide();
-                            } else {
-                                $("#save_manual_cont").show();
-                            }
-                        }
-                    }
+                    });
                 }
             });
         }
-    })
+        // label_manual
+        function fn_label_manual(val) {
+            var sw_log = $.parseJSON($('#val_sw').val());
+            if(val == 1){
+                $('.title_load_manual').html('ควบคุม Dripper');
+                $('.label_1').html(config_cn.cn_name_1);
+                $('.label_2').html(config_cn.cn_name_2);
+                $('.label_3').html(config_cn.cn_name_3);
+                $('.label_4').html(config_cn.cn_name_4);
+                if($('#close_manual_cont').is(":hidden") == true){
+                    if(sw_log.dripper_1 === 'ON'){
+                        $('.label_1').show();
+                    }else{
+                        $('.label_1').hide();
+                    }
+                    if(sw_log.dripper_2 === 'ON'){
+                        $('.label_2').show();
+                    }else{
+                        $('.label_2').hide();
+                    }
+                    if(sw_log.dripper_3 === 'ON'){
+                        $('.label_3').show();
+                    }else{
+                        $('.label_3').hide();
+                    }
+                    if(sw_log.dripper_4 === 'ON'){
+                        $('.label_4').show();
+                    }else{
+                        $('.label_4').hide();
+                    }
+                }
+            }else if(val == 2){
+                $('.title_load_manual').html('ควบคุม Fan');
+                $('.label_1').html(config_cn.cn_name_5);
+                $('.label_2').html(config_cn.cn_name_6);
+                $('.label_3').html(config_cn.cn_name_7);
+                $('.label_4').html(config_cn.cn_name_8);
+                if($('#close_manual_cont').is(":hidden") == true){
+                    if(sw_log.fan_1 === 'ON'){
+                        $('.label_1').show();
+                    }else{
+                        $('.label_1').hide();
+                    }
+                    if(sw_log.fan_2 === 'ON'){
+                        $('.label_2').show();
+                    }else{
+                        $('.label_2').hide();
+                    }
+                    if(sw_log.fan_3 === 'ON'){
+                        $('.label_3').show();
+                    }else{
+                        $('.label_3').hide();
+                    }
+                    if(sw_log.fan_4 === 'ON'){
+                        $('.label_4').show();
+                    }else{
+                        $('.label_4').hide();
+                    }
+                }
+            }else if(val == 3){
+                $('.title_load_manual').html('ควบคุม Foggy');
+                $('.label_1').html(config_cn.cn_name_9);
+                $('.label_2').html(config_cn.cn_name_10);
+                if($('#close_manual_cont').is(":hidden") == true){
+                    if(sw_log.foggy_1 === 'ON'){
+                        $('.label_1').show();
+                    }else{
+                        $('.label_1').hide();
+                    }
+                    if(sw_log.foggy_2 === 'ON'){
+                        $('.label_2').show();
+                    }else{
+                        $('.label_2').hide();
+                    }
+                    $('.label_3').hide();
+                    $('.label_4').hide();
+                    $('.status_config_manual_3').hide();
+                    $('.status_config_manual_4').hide();
+                }
+            }else if(val == 4){
+                $('.title_load_manual').html('ควบคุม Spray');
+            }else if(val == 5){
+                $('.title_load_manual').html('ควบคุม Shading');
+            }
+            if(val < 4){
+                $('.menu_config_manual').show();
+            }else {
+                $('.menu_config_manual').hide();
+                $('.label_1').hide();
+                $('.label_2').hide();
+                $('.label_3').hide();
+                $('.label_4').hide();
+            }
+        }
+        // switch_manual
+        function fn_df_sw_manual(val){
+            for (var i = 1; i <= 5; i++) {
+                if(i == val){
+                    $("#s"+i).addClass('active');
+                    if(i == 1){
+                        $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/dripper_on.png');
+                    }else if (i == 2) {
+                        $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/fan_on.png');
+                    }else if (i == 3) {
+                        $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/foggy_on.png');
+                    }else if (i == 4) {
+                        $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/spray_on.png');
+                    }else if (i == 5) {
+                        $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/shading_on.png');
+                    }
+                }else {
+                    $('#s'+i).removeClass('active')
+                    if(i == 1){
+                        $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/dripper_off.png');
+                    }else if (i == 2) {
+                        $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/fan_off.png');
+                    }else if (i == 3) {
+                        $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/foggy_off.png');
+                    }else if (i == 4) {
+                        $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/spray_off.png');
+                    }else if (i == 5) {
+                        $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/shading_off.png');
+                    }
+                }
+            }
+            fn_label_manual(val);
+        }
+    });
 </script>

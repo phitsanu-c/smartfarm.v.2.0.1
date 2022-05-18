@@ -19,6 +19,6 @@
         'foggy_1'   => $row['mn_load_9'],
         'foggy_2'   => $row['mn_load_10'],
         'spray'     => $row['mn_load_11'],
-        'roof'      => $row['mn_load_12']
+        'shading'   => $row['mn_load_12']
     ];
     echo json_encode($data);
