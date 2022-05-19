@@ -365,7 +365,6 @@
                                                     <img class="img_sw_sel_load_manual_5" src="" width="70" />
                                                 </button>
                                            </div>';
-
                                     }
                                 ?>
                                 <input type="hidden" class="hidden_select_sw_manual">
@@ -433,15 +432,11 @@
                         <div class="container ul_Manual">
                             <div class="row ridge">
                                 <h3 class="text-center title_load_manual" style="background-color: #283A6C; color:#FFF"></h3>
-                                <div class="col text-end  me-2">
-                                     <button class="btn btn-control" > <br>
-                                        <img src="public/images/icons/menu_control/off_off.png" width="100" />
-                                    </button>
+                                <div class="col text-end  me-2 mb-3 mt-2">
+                                     <button class="btn btn-control sw_manual_on"></button>
                                 </div>
-                                <div class="col text-start ms-2">
-                                     <button class="btn btn-control" > <br>
-                                        <img src="public/images/icons/menu_control/on_on.png" width="100" />
-                                    </button>
+                                <div class="col text-start ms-2 mb-3 mt-2">
+                                     <button class="btn btn-control sw_manual_off"></button>
                                 </div>
                             </div>
                         </div>
@@ -505,6 +500,84 @@
         </div>
         <!-- exit Modal Control -->
     <?php } ?>
+    <div class="col-12 col-lg-12 col-xl-12 d-flex">
+        <div class="card w-100 radius-10">
+            <div class="card-body">
+                <div class="d-flex">
+                    <ul class="nav nav-pills mb-3" role="tablist">
+                        <?php //if($_POST["s_btnT"] > 0){echo '?>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active btn_ch_t" data-bs-toggle="pill" href="" role="tab" aria-selected="false">
+                                    <div class="d-flex align-items-center">
+                                        <div class="tab-title">อุณหภูมิ</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <!-- ';
+                        }if($_POST["s_btnH"] > 0){
+                            if($_POST["s_btnT"] == 0 && $_POST["s_btnH"] > 0){echo ' -->
+                                <!-- <li class="nav-item" role="presentation">
+                                    <a class="nav-link active btn_ch_h" data-bs-toggle="pill" href="" role="tab" aria-selected="false">
+                                        <div class="d-flex align-items-center">
+                                            <div class="tab-title">ความชื้นอากาศ</div>
+                                        </div>
+                                    </a>
+                                </li> -->
+                                <!-- ';
+                            }else{echo ' -->
+                                <li class="nav-item li_ch_h" role="presentation">
+                                    <a class="nav-link btn_ch_h" data-bs-toggle="pill" href="" role="tab" aria-selected="false">
+                                        <div class="d-flex align-items-center">
+                                            <div class="tab-title">ความชื้นอากาศ</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <!-- ';
+                            }
+                        } if($_POST["s_btnS"] > 0){
+                            if($_POST["s_btnT"] == 0 && $_POST["s_btnH"] == 0 && $_POST["s_btnS"] > 0){echo ' -->
+                                <!-- <li class="nav-item" role="presentation">
+                                    <a class="nav-link active btn_ch_s" data-bs-toggle="pill" href="" role="tab" aria-selected="true">
+                                        <div class="d-flex align-items-center">
+                                            <div class="tab-title">ความชื้นดิน</div>
+                                        </div>
+                                    </a>
+                                </li> -->
+                                <!-- ';
+                            }else{echo ' -->
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link btn_ch_s" data-bs-toggle="pill" href="" role="tab" aria-selected="true">
+                                        <div class="d-flex align-items-center">
+                                            <div class="tab-title">ความชื้นดิน</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <!-- ';
+                            }
+                        }if($_POST["s_btnL"] > 0){
+                            if($_POST["s_btnT"] == 0 && $_POST["s_btnH"] == 0 && $_POST["s_btnS"] == 0 && $_POST["s_btnL"] > 0){echo ' -->
+                                <!-- <li class="nav-item" role="presentation">
+                                    <a class="nav-link active btn_ch_l" data-bs-toggle="pill" href="" role="tab" aria-selected="true">
+                                        <div class="d-flex align-items-center">
+                                            <div class="tab-title">ความเข้มแสง</div>
+                                        </div>
+                                    </a>
+                                </li> -->
+                                <!-- ';
+                            }else{echo ' -->
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link btn_ch_l" data-bs-toggle="pill" href="" role="tab" aria-selected="true">
+                                        <div class="d-flex align-items-center">
+                                            <div class="tab-title">ความเข้มแสง</div>
+                                        </div>
+                                    </a>
+                                </li>
+                    </ul>
+                </div>
+                <div class="chartdiv" id='chart_realtime'></div>
+            </dic>
+        </dic>
+    </dic>
 </div>
 <script>
     var house_master = '<?= $s_master["house_master"] ?>';
@@ -514,7 +587,17 @@
     var set_maxmin = $.parseJSON('<?= json_encode($set_maxmin) ?>');
     var sensor = $.parseJSON('<?= json_encode($sensor) ?>');
     console.log(config_cn)
-
+    if(config_cn.cn_status_1 == 1 || config_cn.cn_status_2 == 1 || config_cn.cn_status_3 == 1 || config_cn.cn_status_4 == 1){
+        $('.hidden_select_sw_manual').val(1);
+    }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 || config_cn.cn_status_5 == 1 || config_cn.cn_status_6 == 1 || config_cn.cn_status_7 == 1 || config_cn.cn_status_8 == 1){
+        $('.hidden_select_sw_manual').val(2)
+    }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 || config_cn.cn_status_9 == 1 || config_cn.cn_status_10 == 1){
+        $('.hidden_select_sw_manual').val(3)
+    }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 0 || config_cn.cn_status_11 == 1){
+        $('.hidden_select_sw_manual').val(4)
+    }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 0 && config_cn.cn_status_11 == 0 || config_cn.cn_status_12 == 1){
+        $('.hidden_select_sw_manual').val(5)
+    }
     // ++++++--------+++++++++
     // Global variables
     var client = null;
@@ -554,6 +637,7 @@
                 console.log("subscribed");
             }
         }
+        client.subscribe(house_master + "/control/config/manual", options);
         client.subscribe(house_master + "/data_sensor/realtime", options);
         client.subscribe(house_master + "/control/resporn", options);
     }
@@ -572,7 +656,11 @@
     }
     // +++++++++------------+++++++++++
     function onMessageArrived(message) {
-        if (message.destinationName == house_master + "/data_sensor/realtime") {
+        if(message.destinationName ==  house_master + "/control/config/manual"){
+            var result = message.payloadString;
+            console.log(result);
+            $('#val_sw').val(result);
+        }else if(message.destinationName == house_master + "/data_sensor/realtime") {
             var result = message.payloadString;
             var parseJSON = $.parseJSON(result);
             // console.log(parseJSON)
@@ -679,7 +767,7 @@
                 }
             }
 
-        } else if (message.destinationName == house_master + "/control/resporn") {
+        }else if(message.destinationName == house_master + "/control/resporn") {
             var result = message.payloadString;
             var parseJSON = $.parseJSON(result);
             // console.log(parseJSON)
@@ -689,12 +777,102 @@
                 $('.sw_mode_Manual').addClass('btn-success').removeClass('btn-outline-success')
                 $('.ul_Auto').hide()
                 $('.ul_Manual').show()
+                // if($('#Modal_control').hasClass('show') == true){
+                    fn_df_sw_manual($('.hidden_select_sw_manual').val());
+                    $('.sw_sel_load_manual').click(function(){
+                        if($('#close_manual_cont').is(":hidden") != false){
+                            fn_check_sw_on_off(Number($(this).attr('id').substring(1)));
+                        }
+                    });
+                    fn_check_sw_on_off($('.hidden_select_sw_manual').val());
+                    function fn_check_sw_on_off(val){
+                        var sw_log = $.parseJSON($('#val_sw').val());
+                        if(val == 1){
+                            var count_sw = [];
+                            var count_stats_on = [];
+                            if(sw_log.dripper_1 == 'ON'){ count_sw[1] = 1; }else { count_sw[1] = 0; }
+                            if(sw_log.dripper_2 == 'ON'){ count_sw[2] = 1; }else { count_sw[2] = 0; }
+                            if(sw_log.dripper_3 == 'ON'){ count_sw[3] = 1; }else { count_sw[3] = 0; }
+                            if(sw_log.dripper_4 == 'ON'){ count_sw[4] = 1; }else { count_sw[4] = 0; }
+                            if(parseJSON.dripper_1 == 'ON'){ count_stats_on[1] = 1; }else { count_stats_on[1] = 0; }
+                            if(parseJSON.dripper_2 == 'ON'){ count_stats_on[2] = 1; }else { count_stats_on[2] = 0; }
+                            if(parseJSON.dripper_3 == 'ON'){ count_stats_on[3] = 1; }else { count_stats_on[3] = 0; }
+                            if(parseJSON.dripper_4 == 'ON'){ count_stats_on[4] = 1; }else { count_stats_on[4] = 0; }
+                            if(countElement(1,count_sw) == countElement(1,count_stats_on)){
+                                $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="100" />');
+                                $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="100" />');
+                            }else {
+                                $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="100" />');
+                                $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="100" />');
+                            }
+                            // alert(countElement(1,count_stats_on))
+                        }else if(val == 2){
+                            var count_sw = [];
+                            var count_stats_on = [];
+                            if(sw_log.fan_1 == 'ON'){ count_sw[1] = 1; }else { count_sw[1] = 0; }
+                            if(sw_log.fan_2 == 'ON'){ count_sw[2] = 1; }else { count_sw[2] = 0; }
+                            if(sw_log.fan_3 == 'ON'){ count_sw[3] = 1; }else { count_sw[3] = 0; }
+                            if(sw_log.fan_4 == 'ON'){ count_sw[4] = 1; }else { count_sw[4] = 0; }
+                            if(parseJSON.fan_1 == 'ON'){ count_stats_on[1] = 1; }else { count_stats_on[1] = 0; }
+                            if(parseJSON.fan_2 == 'ON'){ count_stats_on[2] = 1; }else { count_stats_on[2] = 0; }
+                            if(parseJSON.fan_3 == 'ON'){ count_stats_on[3] = 1; }else { count_stats_on[3] = 0; }
+                            if(parseJSON.fan_4 == 'ON'){ count_stats_on[4] = 1; }else { count_stats_on[4] = 0; }
+                            if(countElement(1,count_sw) == countElement(1,count_stats_on)){
+                                $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="100" />');
+                                $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="100" />');
+                            }else {
+                                $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="100" />');
+                                $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="100" />');
+                            }
+                        }else if(val == 3){
+                            var count_sw = [];
+                            var count_stats_on = [];
+                            if(sw_log.foggy_1 == 'ON'){ count_sw[1] = 1; }else { count_sw[1] = 0; }
+                            if(sw_log.foggy_2 == 'ON'){ count_sw[1] = 1; }else { count_sw[1] = 0; }
+                            if(parseJSON.foggy_1 == 'ON'){ count_stats_on[1] = 1; }else { count_stats_on[1] = 0; }
+                            if(parseJSON.foggy_2 == 'ON'){ count_stats_on[2] = 1; }else { count_stats_on[2] = 0; }
+                            if(countElement(1,count_sw) == countElement(1,count_stats_on)){
+                                $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="100" />');
+                                $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="100" />');
+                            }else {
+                                $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="100" />');
+                                $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="100" />');
+                            }
+                        }else if(val == 4){
+                            if(parseJSON.spray == 'ON'){
+                                $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="100" />');
+                                $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="100" />');
+                            }else {
+                                $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="100" />');
+                                $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="100" />');
+                            }
+                        }else if(val == 5){
+                            if(parseJSON.shading == 'ON'){
+                                $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="100" />');
+                                $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="100" />');
+                            }else {
+                                $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="100" />');
+                                $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="100" />');
+                            }
+                        }
+                    }
+                // }
             } else {
                 $('.dash_mode').html('โหมดอัตโนมัติ')
                 $('.sw_mode_Auto').addClass('btn-success').removeClass('btn-outline-success')
                 $('.sw_mode_Manual').removeClass('btn-success').addClass('btn-outline-success')
                 $('.ul_Auto').show()
                 $('.ul_Manual').hide()
+                if($('#Modal_control').hasClass('show') == true){
+                    $(".img_sw").show();
+                    $('.input_time').prop('disabled', true);
+                    $(".sw_toggle").hide();
+                    $(".menu_config_auto").show();
+                    $("#save_auto_cont").hide();
+                    $("#close_auto_cont").hide();
+                    $(".sw_mode_Auto").attr('disabled', false);
+                    $(".sw_mode_Manual").attr('disabled', false);
+                }
             }
             for (var i = 1; i <= 12; i++) {
                 if (config_cn['cn_status_' + i] == 1) {
@@ -705,7 +883,7 @@
                             $(".dash_img_con_" + i).attr("src", "public/images/control/Sprinkler_ON2.svg");
                         }
                     }
-                    if (i < 9 && i > 4) {
+                    if (i > 4 && i <= 8) {
                         if (parseJSON['fan_' + (i - 4)] === 'OFF') {
                             $(".dash_img_con_" + i).attr("src", "public/images/control/Fan_OFF.svg");
                         } else {
@@ -720,14 +898,14 @@
                         }
                     }
                     if (i == 11) {
-                        if (parseJSON['sprinker'] === 'OFF') {
+                        if (parseJSON['spray'] === 'OFF') {
                             $(".dash_img_con_" + i).attr("src", "public/images/control/Sprinkler_OFF.svg");
                         } else {
                             $(".dash_img_con_" + i).attr("src", "public/images/control/Sprinkler_ON.svg");
                         }
                     }
                     if (i == 12) {
-                        if (parseJSON['roof'] === 'OFF') {
+                        if (parseJSON['shading'] === 'OFF') {
                             $(".dash_img_con_" + i).attr("src", "public/images/control/Roof_OFF2.png");
                         } else {
                             $(".dash_img_con_" + i).attr("src", "public/images/control/Roof_ON2.png");
@@ -741,153 +919,7 @@
     connect();
 
     // ++++++++++++++++++
-    $('.sw_mode_Auto').click(function () { // console.log($(this).attr("id"));
-        // alert($(this).attr("id"))
-        // if ($(this).hasClass("active") === false) {
-        // if (house_master !== "KMUMT001") {
-        //     switch_mode(sw_name = "Auto", mess = "Auto", mqtt_name = "user_control");
-        // } else {
-        //     switch_mode(sw_name = "Auto", mess = "on", mqtt_name = "control_user");
-        // }
-        // }
-        mqtt_send(msg_dn = house_master + "/control/status/mode", msg = "Auto")
-    });
-    $('.sw_mode_Manual').click(function () { // console.log($(this).attr("id"));
-        // if ($(this).hasClass("active") === false) {
-        //     if (house_master !== "KMUMT001") {
-        //         switch_mode(sw_name = "Manual", mess = "Manual", mqtt_name_us = "user_control");
-        //     } else {
-        //         switch_mode(sw_name = "Manual", mess = "off", mqtt_name_us = "control_user");
-        //     }
-        // }
-        mqtt_send(msg_dn = house_master + "/control/status/mode", msg = "Manual")
-    });
-
-    function switch_mode(sw_name, mess, mqtt_name_us) {
-        swal({
-            title: 'เปลี่ยนโหมดการทำงาน !',
-            text: "คุณต้องการเปลี่ยนเป็นไปใช้โหมด" + sw_name + " ?",
-            type: 'warning',
-            allowOutsideClick: false,
-            showCancelButton: true,
-            confirmButtonColor: '#32CD32',
-            cancelButtonColor: '#FF3333',
-            confirmButtonText: 'ไช่',
-            cancelButtonText: 'ยกเลิก'
-        }).then((result) => {
-            if (result.value) {
-                // console.log(login_user);
-                message = new Paho.MQTT.Message(login_user);
-                message.destinationName = house_master + "/control/status/" + mqtt_name_us;
-                message.retained = true;
-                message.qos = 1;
-                client.send(message);
-
-                message = new Paho.MQTT.Message(mess);
-                message.destinationName = house_master + "/control/status/mode";
-                message.retained = true;
-                message.qos = 1;
-                client.send(message);
-
-                // swal({
-                //     text: "Loading ... ",
-                //     allowOutsideClick: false,
-                //     onOpen: () => {
-                //         swal.showLoading()
-                //         timerInterval = setInterval(() => {}, 100)
-                //     }
-                // });
-            }
-        });
-    }
-    // $('.sw_manual_1').attr('checked')
-    // alert($(".sw_manual_1").is(":checked"))
-
-    $(".Dsw_manual_1").click(function () {
-        setTimeout(function () {
-            // alert($(".sw_manual_1").prop('checked'));
-            if (house_master !== "KMUMT001") {
-                switch_control(sta = $(".sw_manual_1").prop('checked'), sw_name = "sw_manual_1", ch_name = '<?= $config_cn['cn_name_1'] ?>', mqtt_ch_name = "dripper_1", mqtt_name_us = "user_control");
-            } else {
-                switch_control(sta = $(".sw_manual_1").prop('checked'), sw_name = "sw_manual_1", ch_name = '<?= $config_cn['cn_name_1'] ?>', mqtt_ch_name = "control_st_1", mqtt_name_us = "control_user");
-            }
-        }, 100);
-    });
-
-    function switch_control(sta, sw_name, ch_name, mqtt_ch_name, mqtt_name_us) {
-        if (house_master !== "KMUMT001") {
-            if (sta === false) { var sw_sta = "ปิด"; var mess = "OFF"; } else { var sw_sta = "เปิด"; var mess = "ON"; }
-        } else {
-            if (sta === false) { var sw_sta = "ปิด"; var mess = "off"; } else { var sw_sta = "เปิด"; var mess = "on"; }
-        }
-        swal({
-            title: 'คุณต้องการ ' + sw_sta + ' ' + ch_name + ' ?',
-            // text: "คุณต้องการเปลี่ยนไปใช้โหมด Manual !!!",
-            type: 'warning',
-            allowOutsideClick: false,
-            showCancelButton: true,
-            confirmButtonColor: '#32CD32',
-            cancelButtonColor: '#FF3333',
-            confirmButtonText: 'ไช่',
-            cancelButtonText: 'ยกเลิก'
-        }).then((result) => {
-            console.log(result)
-            if (result.value) {
-                // alert(sta)
-                // return false;
-                message = new Paho.MQTT.Message(login_user);
-                message.destinationName = house_master + "/1/control/" + mqtt_name_us;
-                message.qos = 1;
-                message.retained = true;
-                client.send(message);
-
-                message = new Paho.MQTT.Message(mess);
-                message.destinationName = house_master + "/1/control/" + mqtt_ch_name;
-                message.qos = 1;
-                message.retained = true;
-                client.send(message);
-                // console.log(message.qos);
-            } else {
-                $('.' + sw_name).bootstrapToggle("toggle");
-            }
-        });
-    }
-    function switch_control_slan(sta, ch_name, mess, mqtt_ch_name, mqtt_name_us) {
-        swal({
-            title: 'คุณต้องการ ' + sta + ' ' + ch_name + ' ?',
-            // text: "คุณต้องการเปลี่ยนไปใช้โหมด Manual !!!",
-            type: 'warning',
-            allowOutsideClick: false,
-            showCancelButton: true,
-            confirmButtonColor: '#32CD32',
-            cancelButtonColor: '#FF3333',
-            confirmButtonText: 'ไช่',
-            cancelButtonText: 'ยกเลิก'
-        }).then((result) => {
-            console.log(result)
-            if (result.value) {
-                // alert(sta)
-                // return false;
-                message = new Paho.MQTT.Message(login_user);
-                message.destinationName = house_master + "/1/control/" + mqtt_name_us;
-                message.qos = 1;
-                message.retained = true;
-                client.send(message);
-
-                message = new Paho.MQTT.Message(mess);
-                message.destinationName = house_master + "/1/control/" + mqtt_ch_name;
-                message.qos = 1;
-                message.retained = true;
-                client.send(message);
-                // console.log(message.qos);
-            } else {
-                // $('.'+sw_name).bootstrapToggle("toggle");
-            }
-        });
-    }
-    // ------- Switch control --------------
-
-    // ++++++++++++++++++
+    // alert($('#Modal_control').hasClass('show'))
     $('.memu_control').click(function () {
         // Create a client instance
         client = new Paho.MQTT.Client(hostname, Number(port), "mqtt_js_324" + parseInt(Math.random() * 100000, 10));
@@ -1177,9 +1209,203 @@
                     }
                 });
             }); // exit_save_Manual
+            $('.sw_mode_Auto').click(function () { // console.log($(this).attr("id"));
+                // alert($(this).attr("id"))
+                if ($(this).hasClass("active") === false) {
+                    switch_mode(sw_name = "อัตโนมัติ", mess = "Auto");
+                }
+            });
+            $('.sw_mode_Manual').click(function () { // console.log($(this).attr("id"));
+                if ($(this).hasClass("btn-success") === false) {
+                    switch_mode(sw_name = "กำหนดเอง", mess = "Manual");
+                }
+            });
+            // $('.hidden_select_sw_manual').val()
+            function switch_mode(sw_name, mess, mqtt_name_us) {
+                swal({
+                    title: 'เปลี่ยนโหมดการทำงาน !',
+                    text: "คุณต้องการเปลี่ยนเป็นไปใช้โหมด" + sw_name + " ?",
+                    type: 'warning',
+                    allowOutsideClick: false,
+                    showCancelButton: true,
+                    confirmButtonColor: '#32CD32',
+                    cancelButtonColor: '#FF3333',
+                    confirmButtonText: 'ไช่',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.value) {
+                        // console.log(login_user);
+                        message = new Paho.MQTT.Message(mess);
+                        message.destinationName = house_master + "/control/status/mode";
+                        message.retained = true;
+                        message.qos = 1;
+                        client.send(message);
+
+                        message = new Paho.MQTT.Message(login_user);
+                        message.destinationName = house_master + "/control/status/user_control";
+                        message.retained = true;
+                        message.qos = 1;
+                        client.send(message);
+                    }
+                });
+            }
+            $('.sw_manual_on').click(function(){
+                if ($(this).hasClass("acitve") === false) {
+                    switch_control("ON", $('.hidden_select_sw_manual').val());
+                }
+            });
+            $('.sw_manual_off').click(function(){
+                if ($(this).hasClass("acitve") === false) {
+                    switch_control("OFF", $('.hidden_select_sw_manual').val());
+                }
+            });
+            function switch_control(sts, val) {
+                if(sts === "ON"){
+                    var status = 'เปิด';
+                }else {
+                    var status = 'ปิด';
+                }
+                var sw_log = $.parseJSON($('#val_sw').val());
+                if(val == 1){
+                    var name = 'Dripper';
+                    if(sw_log.dripper_1 == 'ON'){
+                        var sw_1 = 1;
+                        var mqtt_name_1 = 'dripper_1';
+                    }else {
+                        var sw_1 = 0;
+                    }
+                    if(sw_log.dripper_2 == 'ON'){
+                        var sw_2 = 1;
+                        var mqtt_name_2 = 'dripper_2';
+                    }else {
+                        var sw_2 = 0;
+                    }
+                    if(sw_log.dripper_3 == 'ON'){
+                        var sw_1 = 3;
+                        var mqtt_name_3 = 'dripper_3';
+                    }else {
+                        var sw_3 = 0;
+                    }
+                    if(sw_log.dripper_4 == 'ON'){
+                        var sw_4 = 1;
+                        var mqtt_name_4 = 'dripper_4';
+                    }else {
+                        var sw_4 = 0;
+                    }
+                }else if(val == 2){
+                    var name = 'Fan';
+                    if(sw_log.fan_1 == 'ON'){
+                        var sw_1 = 1;
+                        var mqtt_name_1 = 'fan_1';
+                    }else {
+                        var sw_1 = 0;
+                    }
+                    if(sw_log.fan_2 == 'ON'){
+                        var sw_2 = 1;
+                        var mqtt_name_2 = 'fan_2';
+                    }else {
+                        var sw_2 = 0;
+                    }
+                    if(sw_log.fan_3 == 'ON'){
+                        var sw_1 = 3;
+                        var mqtt_name_3 = 'fan_3';
+                    }else {
+                        var sw_3 = 0;
+                    }
+                    if(sw_log.fan_4 == 'ON'){
+                        var sw_4 = 1;
+                        var mqtt_name_4 = 'fan_4';
+                    }else {
+                        var sw_4 = 0;
+                    }
+                }else if(val == 3){
+                    var name = 'Foggy';
+                    if(sw_log.foggy_1 == 'ON'){
+                        var sw_1 = 1;
+                        var mqtt_name_1 = 'foggy_1';
+                    }else {
+                        var sw_1 = 0;
+                    }
+                    if(sw_log.foggy_2 == 'ON'){
+                        var sw_2 = 1;
+                        var mqtt_name_2 = 'foggy_2';
+                    }else {
+                        var sw_2 = 0;
+                    }
+                    var sw_3 = 0;
+                    var sw_4 = 0;
+                }else if(val == 4){
+                    var name = 'Spray';
+                    var sw_1 = 1;
+                    var mqtt_name_1 = 'spray';
+                    var sw_2 = 0;
+                    var sw_3 = 0;
+                    var sw_4 = 0;
+                }else if(val == 5){
+                    var name = 'Shading';
+                    var mqtt_name_1 = 'shading';
+                    var sw_1 = 1;
+                    var sw_2 = 0;
+                    var sw_3 = 0;
+                    var sw_4 = 0;
+                }
+                swal({
+                    title: 'คุณต้องการ ' + status + ' ' + name + ' ?',
+                    // text: "คุณต้องการเปลี่ยนไปใช้โหมด Manual !!!",
+                    type: 'warning',
+                    allowOutsideClick: false,
+                    showCancelButton: true,
+                    confirmButtonColor: '#32CD32',
+                    cancelButtonColor: '#FF3333',
+                    confirmButtonText: 'ไช่',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    console.log(result)
+                    if (result.value) {
+                        // alert(sta)
+                        // return false;
+
+                        if(sw_1 == 1){
+                            message = new Paho.MQTT.Message(sts);
+                            message.destinationName = house_master + "/control/status/" + mqtt_name_1;
+                            message.qos = 1;
+                            message.retained = true;
+                            client.send(message);
+                            // console.log(message.qos);
+                        }
+                        if(sw_2 == 1){
+                            message = new Paho.MQTT.Message(sts);
+                            message.destinationName = house_master + "/control/status/" + mqtt_name_2;
+                            message.qos = 1;
+                            message.retained = true;
+                            client.send(message);
+                        }
+                        if(sw_3 == 1){
+                            message = new Paho.MQTT.Message(sts);
+                            message.destinationName = house_master + "/control/status/" + mqtt_name_3;
+                            message.qos = 1;
+                            message.retained = true;
+                            client.send(message);
+                        }
+                        if(sw_4 == 1){
+                            message = new Paho.MQTT.Message(sts);
+                            message.destinationName = house_master + "/control/status/" + mqtt_name_4;
+                            message.qos = 1;
+                            message.retained = true;
+                            client.send(message);
+                        }
+
+                        message = new Paho.MQTT.Message(login_user);
+                        message.destinationName = house_master + "/control/status/user_control";
+                        message.qos = 1;
+                        message.retained = true;
+                        client.send(message);
+                    }
+                });
+            }
         } // exit_message
 
-        if($('.sw_mode_Auto').hasClass('btn-success') == true){
+        // if($('.sw_mode_Auto').hasClass('btn-success') == true){
             $.ajax({ // Auto
                 url: "routes/tu/get_control_au.php",
                 method: "post",
@@ -1348,7 +1574,7 @@
                                 $("#close_auto_cont").hide();
                                 $(".sw_mode_Auto").attr('disabled', false);
                                 $(".sw_mode_Manual").attr('disabled', false);
-                                $(".close_modal").show();
+                                // $(".close_modal").show();
                             } else {
                                 swal({
                                     title: 'คุณแน่ใจหรือไม่?',
@@ -1371,7 +1597,7 @@
                                         $(".close_modal").show();
                                         fn_df_logdata_auto(chanel);
                                         $("#save_auto_cont").hide();
-                                        $("#close_auto_cont").hide();
+                                        // $("#close_auto_cont").hide();
                                     }
                                 });
                             }
@@ -1408,34 +1634,24 @@
                     $("#close_auto_cont").hide();
                 }
             });
-        }else { // Manual
-            $.ajax({
-                url: "routes/tu/get_control_mn.php",
-                method: "post",
-                data: {
-                    house_master: house_master,
-                    config_cn: config_cn
-                },
-                dataType: "json",
-                success: function(res) {
-                    console.log(res);
-                    $("#Modal_control").modal('show', { backdrop: "static" })
+        // }else { // Manual
+            // $.ajax({
+            //     url: "routes/tu/get_control_mn.php",
+            //     method: "post",
+            //     data: {
+            //         house_master: house_master,
+            //         config_cn: config_cn
+            //     },
+            //     dataType: "json",
+            //     success: function(res) {
+            //         console.log(res);
+                    // $("#Modal_control").modal('show', { backdrop: "static" })
                     $('.status_config_manual').hide();
                     $('#save_manual_cont').hide();
                     $('#close_manual_cont').hide();
-                    $('#val_sw').val(JSON.stringify(res));
+                    // $('#val_sw').val(JSON.stringify(res));
                     // console.log($('#val_sw').val());
-                    if(config_cn.cn_status_1 == 1 || config_cn.cn_status_2 == 1 || config_cn.cn_status_3 == 1 || config_cn.cn_status_4 == 1){
-                        $('.hidden_select_sw_manual').val(1);
-                    }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 || config_cn.cn_status_5 == 1 || config_cn.cn_status_6 == 1 || config_cn.cn_status_7 == 1 || config_cn.cn_status_8 == 1){
-                        $('.hidden_select_sw_manual').val(2)
-                    }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 || config_cn.cn_status_9 == 1 || config_cn.cn_status_10 == 1){
-                        $('.hidden_select_sw_manual').val(3)
-                    }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 0 || config_cn.cn_status_11 == 1){
-                        $('.hidden_select_sw_manual').val(4)
-                    }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 0 && config_cn.cn_status_11 == 0 || config_cn.cn_status_12 == 1){
-                        $('.hidden_select_sw_manual').val(5)
-                    }
+
                     fn_df_sw_manual($('.hidden_select_sw_manual').val());
                     $('.sw_sel_load_manual').click(function(){
                         var numb = Number($(this).attr('id').substring(1));
@@ -1709,135 +1925,142 @@
                             }
                         }
                     });
+            //     }
+            // });
+        // }
+    });
+
+    // label_manual
+    function fn_label_manual(val) {
+        var sw_log = $.parseJSON($('#val_sw').val());
+        if(val == 1){
+            $('.title_load_manual').html('ควบคุม Dripper');
+            $('.label_1').html(config_cn.cn_name_1);
+            $('.label_2').html(config_cn.cn_name_2);
+            $('.label_3').html(config_cn.cn_name_3);
+            $('.label_4').html(config_cn.cn_name_4);
+            if($('#close_manual_cont').is(":hidden") == true){
+                if(sw_log.dripper_1 === 'ON'){
+                    $('.label_1').show();
+                }else{
+                    $('.label_1').hide();
                 }
-            });
-        }
-        // label_manual
-        function fn_label_manual(val) {
-            var sw_log = $.parseJSON($('#val_sw').val());
-            if(val == 1){
-                $('.title_load_manual').html('ควบคุม Dripper');
-                $('.label_1').html(config_cn.cn_name_1);
-                $('.label_2').html(config_cn.cn_name_2);
-                $('.label_3').html(config_cn.cn_name_3);
-                $('.label_4').html(config_cn.cn_name_4);
-                if($('#close_manual_cont').is(":hidden") == true){
-                    if(sw_log.dripper_1 === 'ON'){
-                        $('.label_1').show();
-                    }else{
-                        $('.label_1').hide();
-                    }
-                    if(sw_log.dripper_2 === 'ON'){
-                        $('.label_2').show();
-                    }else{
-                        $('.label_2').hide();
-                    }
-                    if(sw_log.dripper_3 === 'ON'){
-                        $('.label_3').show();
-                    }else{
-                        $('.label_3').hide();
-                    }
-                    if(sw_log.dripper_4 === 'ON'){
-                        $('.label_4').show();
-                    }else{
-                        $('.label_4').hide();
-                    }
+                if(sw_log.dripper_2 === 'ON'){
+                    $('.label_2').show();
+                }else{
+                    $('.label_2').hide();
                 }
-            }else if(val == 2){
-                $('.title_load_manual').html('ควบคุม Fan');
-                $('.label_1').html(config_cn.cn_name_5);
-                $('.label_2').html(config_cn.cn_name_6);
-                $('.label_3').html(config_cn.cn_name_7);
-                $('.label_4').html(config_cn.cn_name_8);
-                if($('#close_manual_cont').is(":hidden") == true){
-                    if(sw_log.fan_1 === 'ON'){
-                        $('.label_1').show();
-                    }else{
-                        $('.label_1').hide();
-                    }
-                    if(sw_log.fan_2 === 'ON'){
-                        $('.label_2').show();
-                    }else{
-                        $('.label_2').hide();
-                    }
-                    if(sw_log.fan_3 === 'ON'){
-                        $('.label_3').show();
-                    }else{
-                        $('.label_3').hide();
-                    }
-                    if(sw_log.fan_4 === 'ON'){
-                        $('.label_4').show();
-                    }else{
-                        $('.label_4').hide();
-                    }
-                }
-            }else if(val == 3){
-                $('.title_load_manual').html('ควบคุม Foggy');
-                $('.label_1').html(config_cn.cn_name_9);
-                $('.label_2').html(config_cn.cn_name_10);
-                if($('#close_manual_cont').is(":hidden") == true){
-                    if(sw_log.foggy_1 === 'ON'){
-                        $('.label_1').show();
-                    }else{
-                        $('.label_1').hide();
-                    }
-                    if(sw_log.foggy_2 === 'ON'){
-                        $('.label_2').show();
-                    }else{
-                        $('.label_2').hide();
-                    }
+                if(sw_log.dripper_3 === 'ON'){
+                    $('.label_3').show();
+                }else{
                     $('.label_3').hide();
-                    $('.label_4').hide();
-                    $('.status_config_manual_3').hide();
-                    $('.status_config_manual_4').hide();
                 }
-            }else if(val == 4){
-                $('.title_load_manual').html('ควบคุม Spray');
-            }else if(val == 5){
-                $('.title_load_manual').html('ควบคุม Shading');
+                if(sw_log.dripper_4 === 'ON'){
+                    $('.label_4').show();
+                }else{
+                    $('.label_4').hide();
+                }
             }
-            if(val < 4){
-                $('.menu_config_manual').show();
-            }else {
-                $('.menu_config_manual').hide();
-                $('.label_1').hide();
-                $('.label_2').hide();
+        }else if(val == 2){
+            $('.title_load_manual').html('ควบคุม Fan');
+            $('.label_1').html(config_cn.cn_name_5);
+            $('.label_2').html(config_cn.cn_name_6);
+            $('.label_3').html(config_cn.cn_name_7);
+            $('.label_4').html(config_cn.cn_name_8);
+            if($('#close_manual_cont').is(":hidden") == true){
+                if(sw_log.fan_1 === 'ON'){
+                    $('.label_1').show();
+                }else{
+                    $('.label_1').hide();
+                }
+                if(sw_log.fan_2 === 'ON'){
+                    $('.label_2').show();
+                }else{
+                    $('.label_2').hide();
+                }
+                if(sw_log.fan_3 === 'ON'){
+                    $('.label_3').show();
+                }else{
+                    $('.label_3').hide();
+                }
+                if(sw_log.fan_4 === 'ON'){
+                    $('.label_4').show();
+                }else{
+                    $('.label_4').hide();
+                }
+            }
+        }else if(val == 3){
+            $('.title_load_manual').html('ควบคุม Foggy');
+            $('.label_1').html(config_cn.cn_name_9);
+            $('.label_2').html(config_cn.cn_name_10);
+            if($('#close_manual_cont').is(":hidden") == true){
+                if(sw_log.foggy_1 === 'ON'){
+                    $('.label_1').show();
+                }else{
+                    $('.label_1').hide();
+                }
+                if(sw_log.foggy_2 === 'ON'){
+                    $('.label_2').show();
+                }else{
+                    $('.label_2').hide();
+                }
                 $('.label_3').hide();
                 $('.label_4').hide();
+                $('.status_config_manual_3').hide();
+                $('.status_config_manual_4').hide();
             }
+        }else if(val == 4){
+            $('.title_load_manual').html('ควบคุม Spray');
+        }else if(val == 5){
+            $('.title_load_manual').html('ควบคุม Shading');
         }
-        // switch_manual
-        function fn_df_sw_manual(val){
-            for (var i = 1; i <= 5; i++) {
-                if(i == val){
-                    $("#s"+i).addClass('active');
-                    if(i == 1){
-                        $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/dripper_on.png');
-                    }else if (i == 2) {
-                        $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/fan_on.png');
-                    }else if (i == 3) {
-                        $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/foggy_on.png');
-                    }else if (i == 4) {
-                        $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/spray_on.png');
-                    }else if (i == 5) {
-                        $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/shading_on.png');
-                    }
-                }else {
-                    $('#s'+i).removeClass('active')
-                    if(i == 1){
-                        $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/dripper_off.png');
-                    }else if (i == 2) {
-                        $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/fan_off.png');
-                    }else if (i == 3) {
-                        $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/foggy_off.png');
-                    }else if (i == 4) {
-                        $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/spray_off.png');
-                    }else if (i == 5) {
-                        $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/shading_off.png');
-                    }
+        if(val < 4){
+            $('.menu_config_manual').show();
+        }else {
+            $('.menu_config_manual').hide();
+            $('.label_1').hide();
+            $('.label_2').hide();
+            $('.label_3').hide();
+            $('.label_4').hide();
+        }
+    }
+    // switch_manual
+    function fn_df_sw_manual(val){
+        for (var i = 1; i <= 5; i++) {
+            if(i == val){
+                $("#s"+i).addClass('active');
+                if(i == 1){
+                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/dripper_on.png');
+                }else if (i == 2) {
+                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/fan_on.png');
+                }else if (i == 3) {
+                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/foggy_on.png');
+                }else if (i == 4) {
+                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/spray_on.png');
+                }else if (i == 5) {
+                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/shading_on.png');
+                }
+            }else {
+                $('#s'+i).removeClass('active')
+                if(i == 1){
+                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/dripper_off.png');
+                }else if (i == 2) {
+                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/fan_off.png');
+                }else if (i == 3) {
+                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/foggy_off.png');
+                }else if (i == 4) {
+                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/spray_off.png');
+                }else if (i == 5) {
+                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/shading_off.png');
                 }
             }
-            fn_label_manual(val);
         }
-    });
+        fn_label_manual(val);
+    }
+
+    function countElement(item,array) {
+        var count = 0;
+        $.each(array, function(i,v) { if (v === item) count++; });
+        return count;
+    }
 </script>
