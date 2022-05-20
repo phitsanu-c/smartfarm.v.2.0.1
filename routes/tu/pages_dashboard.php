@@ -26,6 +26,7 @@
     <?php
         $config = $_POST['data'];
         $account_user = $config["account_user"];
+        $s_sensor = $_POST['s_sensor'];
         // print_r($config);
         // exit();
         $s_master = $config["s_master"];
@@ -505,76 +506,40 @@
             <div class="card-body">
                 <div class="d-flex">
                     <ul class="nav nav-pills mb-3" role="tablist">
-                        <?php //if($_POST["s_btnT"] > 0){echo '?>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link active btn_ch_t" data-bs-toggle="pill" href="" role="tab" aria-selected="false">
-                                    <div class="d-flex align-items-center">
-                                        <div class="tab-title">อุณหภูมิ</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <!-- ';
-                        }if($_POST["s_btnH"] > 0){
-                            if($_POST["s_btnT"] == 0 && $_POST["s_btnH"] > 0){echo ' -->
-                                <!-- <li class="nav-item" role="presentation">
-                                    <a class="nav-link active btn_ch_h" data-bs-toggle="pill" href="" role="tab" aria-selected="false">
-                                        <div class="d-flex align-items-center">
-                                            <div class="tab-title">ความชื้นอากาศ</div>
-                                        </div>
-                                    </a>
-                                </li> -->
-                                <!-- ';
-                            }else{echo ' -->
-                                <li class="nav-item li_ch_h" role="presentation">
-                                    <a class="nav-link btn_ch_h" data-bs-toggle="pill" href="" role="tab" aria-selected="false">
-                                        <div class="d-flex align-items-center">
-                                            <div class="tab-title">ความชื้นอากาศ</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <!-- ';
-                            }
-                        } if($_POST["s_btnS"] > 0){
-                            if($_POST["s_btnT"] == 0 && $_POST["s_btnH"] == 0 && $_POST["s_btnS"] > 0){echo ' -->
-                                <!-- <li class="nav-item" role="presentation">
-                                    <a class="nav-link active btn_ch_s" data-bs-toggle="pill" href="" role="tab" aria-selected="true">
-                                        <div class="d-flex align-items-center">
-                                            <div class="tab-title">ความชื้นดิน</div>
-                                        </div>
-                                    </a>
-                                </li> -->
-                                <!-- ';
-                            }else{echo ' -->
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link btn_ch_s" data-bs-toggle="pill" href="" role="tab" aria-selected="true">
-                                        <div class="d-flex align-items-center">
-                                            <div class="tab-title">ความชื้นดิน</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <!-- ';
-                            }
-                        }if($_POST["s_btnL"] > 0){
-                            if($_POST["s_btnT"] == 0 && $_POST["s_btnH"] == 0 && $_POST["s_btnS"] == 0 && $_POST["s_btnL"] > 0){echo ' -->
-                                <!-- <li class="nav-item" role="presentation">
-                                    <a class="nav-link active btn_ch_l" data-bs-toggle="pill" href="" role="tab" aria-selected="true">
-                                        <div class="d-flex align-items-center">
-                                            <div class="tab-title">ความเข้มแสง</div>
-                                        </div>
-                                    </a>
-                                </li> -->
-                                <!-- ';
-                            }else{echo ' -->
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link btn_ch_l" data-bs-toggle="pill" href="" role="tab" aria-selected="true">
-                                        <div class="d-flex align-items-center">
-                                            <div class="tab-title">ความเข้มแสง</div>
-                                        </div>
-                                    </a>
-                                </li>
+                        <li class="nav-item btn_ch_t" role="presentation">
+                            <a class="nav-link btn_ch_t" data-bs-toggle="pill" href="" role="tab" aria-selected="false">
+                                <div class="d-flex align-items-center">
+                                    <div class="tab-title">อุณหภูมิ</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item " role="presentation">
+                            <a class="nav-link btn_ch_h" data-bs-toggle="pill" href="" role="tab" aria-selected="false">
+                                <div class="d-flex align-items-center">
+                                    <div class="tab-title">ความชื้นอากาศ</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link btn_ch_l" data-bs-toggle="pill" href="" role="tab" aria-selected="true">
+                                <div class="d-flex align-items-center">
+                                    <div class="tab-title">ความเข้มแสง</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link btn_ch_s" data-bs-toggle="pill" href="" role="tab" aria-selected="true">
+                                <div class="d-flex align-items-center">
+                                    <div class="tab-title">ความชื้นดิน</div>
+                                </div>
+                            </a>
+                        </li>
                     </ul>
                 </div>
-                <div class="chartdiv" id='chart_realtime'></div>
+                <div class="chartdiv" id='chart_realtime_1'></div>
+                <div class="chartdiv" id='chart_realtime_2'></div>
+                <div class="chartdiv" id='chart_realtime_3'></div>
+                <div class="chartdiv" id='chart_realtime_4'></div>
             </dic>
         </dic>
     </dic>
@@ -586,7 +551,8 @@
     var config_cn = $.parseJSON('<?= json_encode($config_cn) ?>');
     var set_maxmin = $.parseJSON('<?= json_encode($set_maxmin) ?>');
     var sensor = $.parseJSON('<?= json_encode($sensor) ?>');
-    console.log(config_cn)
+    var s_sensor = $.parseJSON('<?= json_encode($s_sensor) ?>');
+    console.log(Number(house_master.substring(5,10)))
     if(config_cn.cn_status_1 == 1 || config_cn.cn_status_2 == 1 || config_cn.cn_status_3 == 1 || config_cn.cn_status_4 == 1){
         $('.hidden_select_sw_manual').val(1);
     }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 || config_cn.cn_status_5 == 1 || config_cn.cn_status_6 == 1 || config_cn.cn_status_7 == 1 || config_cn.cn_status_8 == 1){
@@ -597,6 +563,26 @@
         $('.hidden_select_sw_manual').val(4)
     }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 0 && config_cn.cn_status_11 == 0 || config_cn.cn_status_12 == 1){
         $('.hidden_select_sw_manual').val(5)
+    }
+    if(s_sensor.s_btnT > 0){
+        $('.btn_ch_t').addClass('active');
+    }else {
+        $('.btn_ch_t').hide();
+        if(s_sensor.s_btnH > 0){
+            $('.btn_ch_h').addClass('active');
+        }else {
+            $('.btn_ch_h').hide();
+            if(s_sensor.s_btnL > 0){
+                $('.btn_ch_l').addClass('active');
+            }else {
+                $('.btn_ch_l').hide();
+                if(s_sensor.s_btnS > 0){
+                    $('.btn_ch_s').addClass('active');
+                }else {
+                    $('.btn_ch_s').hide();
+                }
+            }
+        }
     }
     // ++++++--------+++++++++
     // Global variables
@@ -658,8 +644,11 @@
     function onMessageArrived(message) {
         if(message.destinationName ==  house_master + "/control/config/manual"){
             var result = message.payloadString;
-            console.log(result);
-            $('#val_sw').val(result);
+            var parseJSON = $.parseJSON(result);
+            // console.log(parseJSON);
+            delete parseJSON['serial_id'];
+            // console.log(parseJSON);
+            $('#val_sw').val(JSON.stringify(parseJSON));
         }else if(message.destinationName == house_master + "/data_sensor/realtime") {
             var result = message.payloadString;
             var parseJSON = $.parseJSON(result);
@@ -947,13 +936,6 @@
 
         // called when a message arrives
         function onMessageArrived(message) {
-            function mqtt_send(msg_dn, msg, user) {
-                message = new Paho.MQTT.Message(msg);
-                message.destinationName = msg_dn;
-                message.qos = 1;
-                message.retained = true;
-                client.send(message);
-            }
             $("#save_auto_cont").click(function () {
                 for (var i = 1; i <= 6; i++){
                     if ($("#swch_"+i).prop('checked') == true) {
@@ -1209,6 +1191,13 @@
                     }
                 });
             }); // exit_save_Manual
+            function mqtt_send(msg_dn, msg, user) {
+                message = new Paho.MQTT.Message(msg);
+                message.destinationName = msg_dn;
+                message.qos = 1;
+                message.retained = true;
+                client.send(message);
+            }
             $('.sw_mode_Auto').click(function () { // console.log($(this).attr("id"));
                 // alert($(this).attr("id"))
                 if ($(this).hasClass("active") === false) {
@@ -1220,7 +1209,6 @@
                     switch_mode(sw_name = "กำหนดเอง", mess = "Manual");
                 }
             });
-            // $('.hidden_select_sw_manual').val()
             function switch_mode(sw_name, mess, mqtt_name_us) {
                 swal({
                     title: 'เปลี่ยนโหมดการทำงาน !',
@@ -1250,12 +1238,12 @@
                 });
             }
             $('.sw_manual_on').click(function(){
-                if ($(this).hasClass("acitve") === false) {
+                if ($(this).hasClass("active") === false) {
                     switch_control("ON", $('.hidden_select_sw_manual').val());
                 }
             });
             $('.sw_manual_off').click(function(){
-                if ($(this).hasClass("acitve") === false) {
+                if ($(this).hasClass("active") === false) {
                     switch_control("OFF", $('.hidden_select_sw_manual').val());
                 }
             });
@@ -1360,7 +1348,7 @@
                     confirmButtonText: 'ไช่',
                     cancelButtonText: 'ยกเลิก'
                 }).then((result) => {
-                    console.log(result)
+                    // console.log(result)
                     if (result.value) {
                         // alert(sta)
                         // return false;
@@ -1635,41 +1623,28 @@
                 }
             });
         // }else { // Manual
-            // $.ajax({
-            //     url: "routes/tu/get_control_mn.php",
-            //     method: "post",
-            //     data: {
-            //         house_master: house_master,
-            //         config_cn: config_cn
-            //     },
-            //     dataType: "json",
-            //     success: function(res) {
-            //         console.log(res);
-                    // $("#Modal_control").modal('show', { backdrop: "static" })
-                    $('.status_config_manual').hide();
-                    $('#save_manual_cont').hide();
-                    $('#close_manual_cont').hide();
-                    // $('#val_sw').val(JSON.stringify(res));
-                    // console.log($('#val_sw').val());
-
-                    fn_df_sw_manual($('.hidden_select_sw_manual').val());
-                    $('.sw_sel_load_manual').click(function(){
-                        var numb = Number($(this).attr('id').substring(1));
-                        if($('#close_manual_cont').is(":hidden") == false){
-                            swal({
-                                title: 'ข้อผิดพลาด !',
-                                text: "กรุณาบ้นทึกหรือยกเลิกการตั้งค่าก่อน !!!",
-                                type: 'warning',
-                                allowOutsideClick: false,
-                                confirmButtonColor: '#32CD32',
-                                confirmButtonText: 'ตกลง',
-                            });
-                        }else {
-                            $('.hidden_select_sw_manual').val(numb)
-                            fn_df_sw_manual(numb);
-                        }
-                    });
-                    $('.menu_config_manual').click(function(){
+        // ================================================
+        $('.status_config_manual').hide();
+        $('#save_manual_cont').hide();
+        $('#close_manual_cont').hide();
+        fn_df_sw_manual($('.hidden_select_sw_manual').val());
+        $('.sw_sel_load_manual').click(function(){
+            var numb = Number($(this).attr('id').substring(1));
+            if($('#close_manual_cont').is(":hidden") == false){
+                swal({
+                    title: 'ข้อผิดพลาด !',
+                    text: "กรุณาบ้นทึกหรือยกเลิกการตั้งค่าก่อน !!!",
+                    type: 'warning',
+                    allowOutsideClick: false,
+                    confirmButtonColor: '#32CD32',
+                    confirmButtonText: 'ตกลง',
+                });
+            }else {
+                $('.hidden_select_sw_manual').val(numb)
+                fn_df_sw_manual(numb);
+            }
+        });
+        $('.menu_config_manual').click(function(){
                         $(this).hide();
                         $('.status_config_manual').show();
                         $('#close_manual_cont').show();
@@ -1925,9 +1900,6 @@
                             }
                         }
                     });
-            //     }
-            // });
-        // }
     });
 
     // label_manual
@@ -2057,10 +2029,81 @@
         }
         fn_label_manual(val);
     }
-
+    // count array by value
     function countElement(item,array) {
         var count = 0;
         $.each(array, function(i,v) { if (v === item) count++; });
         return count;
     }
+    // =======================================
+    const myArr = res.theme.split(" ");
+    // alert(myArr[0])
+    if (myArr[0] === "dark-theme") {
+        am4core.useTheme(am4themes_dark);
+    }
+    am4core.useTheme(am4themes_animated);
+    var chart = am4core.create("chart_realtime", am4charts.XYChart);
+    chart.dateFormatter.inputDateFormat = "yyyy/MM/dd - HH:mm";
+
+    var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+    dateAxis.periodChangeDateFormats.setKey("hour", "[bold]dd MMM ");
+    dateAxis.tooltipDateFormat = "HH:mm, d MMM yyyy";
+
+    var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+    // alert($(".btn_ch_t").hasClass("active"))
+    if ($(".btn_ch_t").hasClass("active") == true) {
+
+    }
+    if ($(".btn_ch_h").hasClass("active") == true) {
+
+    }
+    if ($(".btn_ch_s").hasClass("active") == true) {
+
+    }
+    if ($(".btn_ch_l").hasClass("active") == true) {
+
+    }
+    am4core.ready(function() {
+        var new_array_realCh = [];
+        // alert(array_realCh.length)
+        for (var a = 1; a <= array_realCh.length; a++) {
+            new_array_realCh.push('round(' + array_realCh[(a - 1)] + ', 1) AS new_' + a);
+        }
+        console.log([
+            'nn', $(".btn_ch_l").hasClass("active"),
+            new_array_realCh
+        ]);
+        // return false
+        $.ajax({
+            url: 'routes/get_chart_realtime.php',
+            method: "post",
+            data: {
+                house_master: house_master,
+                array_realCh: new_array_realCh,
+                array_realname: array_realname
+            },
+            dataType: "json",
+            success: function(res_chart) {
+                if (res_chart.theme === "dark-theme") {
+                    am4core.useTheme(am4themes_dark);
+                }
+                // $("#chart_realtime").addClass("");
+                console.log(res_chart)
+                chart.data = res_chart.data;
+
+                var series = [];
+                for (var i = 1; i <= array_realCh.length; i++) {
+                    series[i] = chart.series.push(new am4charts.LineSeries());
+                    series[i].dataFields.valueY = "new_" + i;
+                    series[i].dataFields.dateX = "data_timestamp";
+                    series[i].tooltipText = array_realname[i - 1] + " {new_" + i + "} (" + unit[i - 1] + ")";
+                    series[i].name = array_realname[i - 1];
+                    series[i].strokeWidth = 2;
+
+
+                }
+            }
+        });
+    });
 </script>

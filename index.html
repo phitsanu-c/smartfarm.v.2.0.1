@@ -1930,28 +1930,37 @@
                     },
                     dataType: "json",
                     success: function(res) {
-                        // console.log(res);
-                        // var config_sn = res.config_sn
-                        // var s = res.controlstatus;
-                        // console.log(s);
-                        // console.log(getArraySum(res.controlstatus));
-                        // alert(getArraySum(res.controlStatus))
-
-
+                        var temp_c = [];
+                        var hum_c = [];
+                        var light_c = [];
+                        var soil_c = [];
+                        for (var i = 1; i <= 7; i++) {
+                            if (res.config_sn['sn_sensor_'+i] == 1) {
+                                temp_c.push(1);
+                            }else if (res.config_sn['sn_sensor_'+i] == 2) {
+                                hum_c.push(1);
+                            }else if (res.config_sn['sn_sensor_'+i] == 3) {
+                                soil_c.push(1);
+                            }else {
+                                light_c.push(1);
+                            }
+                        }
                         $.ajax({
                             url: "routes/tu/pages_dashboard.php",
                             method: "post",
                             data: {
                                 data: res,
-                                // s_mastex: res.s_master,
-                                // config_sn: res.config_sn,
-                                // config_cn: res.config_cn,
+                                s_sensor:{
+                                    s_btnT: getArraySum(temp_c),
+                                    s_btnH: getArraySum(hum_c),
+                                    s_btnS: getArraySum(soil_c),
+                                    s_btnL: getArraySum(light_c),
+                                },
                                 count_cn: getArraySum(res.controlstatus)
                             },
                             // dataType: "json",
                             success: function(res_dash) {
                                 $("#load_pages").html(res_dash);
-
                             }
                         });
                     }
