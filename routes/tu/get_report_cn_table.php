@@ -92,7 +92,32 @@
            $i++;
         }
     } elseif ($_POST['mode_report'] == 're_cnAuto') {
+        $table_name = 'tbn_control_au'.$_POST['load_select'];
+        $channel[] = "SUBSTRING(load_timestamp,1,10) AS nDate";
+        $channel[] = "SUBSTRING(load_timestamp,-8, 5) AS nTime";
+        $channel[] = "load_user";
+        $channel[] = "load_s_1";
+        $channel[] = "load_e_1";
+        $channel[] = "load_s_2";
+        $channel[] = "load_e_2";
+        $channel[] = "load_s_3";
+        $channel[] = "load_e_3";
+        $channel[] = "load_s_4";
+        $channel[] = "load_e_4";
+        $channel[] = "load_s_5";
+        $channel[] = "load_e_5";
+        $channel[] = "load_s_6";
+        $channel[] = "load_e_6";
 
+        $channel1 = implode(', ',$channel);
+        // exit();
+        $sql = "SELECT $channel1 FROM $table_name WHERE load_sn = '$house_master' AND load_timestamp BETWEEN '$start_day' AND '$stop_day' ORDER BY load_timestamp ";
+        $stmt = $dbcon->query($sql);
+        $data0 = array();
+        $i=1;
+        while ($row = $stmt->fetch()) {
+            $data0[] = $row;
+        }
     } elseif ($_POST['mode_report'] == 're_cnManual') {
         $channel[] = "SUBSTRING(mn_timestamp,1,10) AS nDate";
         $channel[] = "SUBSTRING(mn_timestamp,-8, 5) AS nTime";
@@ -119,6 +144,9 @@
         while ($row = $stmt->fetch()) {
             $data0[] = $row;
         }
+    }elseif ($_POST['mode_report'] == 're_sensor') {
+        $numb = intval(substr($house_master, 5,10));
+
     }
     // echo $sql;
     // exit();
