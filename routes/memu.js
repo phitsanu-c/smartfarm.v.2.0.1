@@ -1,7 +1,7 @@
 $(".memu_site").click(function() {
     $(this).addClass('mm-active');
     $("#load_pages").load('views/pages_site.php');
-    if(house_master === '' || house_master.length != 8){ 
+    if(house_master === '' || house_master.length != 8){
         $(".memu_house").hide();
     }else{
         $(".memu_house").removeClass("mm-active")
@@ -10,7 +10,7 @@ $(".memu_site").click(function() {
 $(".memu_house").click(function() {
     $(this).addClass('mm-active');
     $("#load_pages").load('views/pages_house.php?s='+url[0]);
-    // if(house_master === '' || house_master.length != 8){ 
+    // if(house_master === '' || house_master.length != 8){
     //     $(".memu_house").hide();
     // }else{
     //     $(".memu_house").removeClass("mm-active")
@@ -367,7 +367,7 @@ $(".memu_dash").click(function() {
                                                         $(".status_timeUpdate").removeClass("text-success").addClass("text-danger").html("ออฟไลน์")
                                                     }
                                                 }
-                                                
+
                                             } else {
                                                 // console.log(loading);// != KMUMT001
                                                 // -------------------------------------------------------------
@@ -387,7 +387,7 @@ $(".memu_dash").click(function() {
                                                         $(".status_timeUpdate").removeClass("text-success").addClass("text-danger").html("ออฟไลน์")
                                                     }
                                                 }
-                                                
+
                                                 // alert(time_update.substring(0, 10) + ' ' + parseJSON['date'] + " " + strNdate)
                                             }
                                             // console.log(parseJSON);
@@ -1480,32 +1480,38 @@ $(".memu_dash").click(function() {
 
                 }
             });
-        
-        }else{  
+
+        }else{
             // = มธ.
-            $.ajax({
-                url: "routes/tu/get_config.php",
-                method: "post",
-                data: {
-                    house_master: house_master
-                },
-                dataType: "json",
-                success: function(res) {
-                    console.log(res);
-                }
-            }); // ajax
+            // $.ajax({
+            //     url: "routes/tu/get_config.php",
+            //     method: "post",
+            //     data: {
+            //         house_master: house_master
+            //     },
+            //     dataType: "json",
+            //     success: function(res) {
+            //         console.log(res);
+            //     }
+            // }); // ajax
         }
     }else{ // No sn
         $(".memu_dash").hide()
         $(".memu_report").hide();
     }
 });
-$(".memu_report").click(function() {
-    // $('#pills-selectSite').hide();
-    // $("#pills-selectHome").hide();
-    // $("#pills-selectReport").show();
-    // $("#pills-profile").hide();
-});
+// $(".memu_report").click(function() {
+//     $(this).addClass('mm-active');
+//     $(".memu_dash").show().addClass("mm-active");
+//     // $(".memu_report").show();
+//     if(house_master.substring(0, 3) != "TUS"){
+//
+//     }
+//     // $('#pills-selectSite').hide();
+//     // $("#pills-selectHome").hide();
+//     // $("#pills-selectReport").show();
+//     // $("#pills-profile").hide();
+// });
 
 // --------------
 

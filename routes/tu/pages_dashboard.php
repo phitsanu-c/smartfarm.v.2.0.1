@@ -507,28 +507,28 @@
                 <div class="d-flex">
                     <ul class="nav nav-pills mb-3" role="tablist">
                         <li class="nav-item btn_ch_t" role="presentation">
-                            <a class="nav-link btn_ch_t" data-bs-toggle="pill" href="" role="tab" aria-selected="false">
+                            <a class="nav-link btn_ch_t" data-bs-toggle="pill" href="#hreft_temp" role="tab" aria-selected="false">
                                 <div class="d-flex align-items-center">
                                     <div class="tab-title">อุณหภูมิ</div>
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item " role="presentation">
-                            <a class="nav-link btn_ch_h" data-bs-toggle="pill" href="" role="tab" aria-selected="false">
+                            <a class="nav-link btn_ch_h" data-bs-toggle="pill" href="#hreft_hum" role="tab" aria-selected="false">
                                 <div class="d-flex align-items-center">
                                     <div class="tab-title">ความชื้นอากาศ</div>
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link btn_ch_l" data-bs-toggle="pill" href="" role="tab" aria-selected="true">
+                            <a class="nav-link btn_ch_l" data-bs-toggle="pill" href="#hreft_light" role="tab" aria-selected="true">
                                 <div class="d-flex align-items-center">
                                     <div class="tab-title">ความเข้มแสง</div>
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link btn_ch_s" data-bs-toggle="pill" href="" role="tab" aria-selected="true">
+                            <a class="nav-link btn_ch_s" data-bs-toggle="pill" href="#hreft_soil" role="tab" aria-selected="true">
                                 <div class="d-flex align-items-center">
                                     <div class="tab-title">ความชื้นดิน</div>
                                 </div>
@@ -536,10 +536,20 @@
                         </li>
                     </ul>
                 </div>
-                <div class="chartdiv" id='chart_realtime_1'></div>
-                <div class="chartdiv" id='chart_realtime_2'></div>
-                <div class="chartdiv" id='chart_realtime_3'></div>
-                <div class="chartdiv" id='chart_realtime_4'></div>
+                <div class="tab-content" id="pills-tabContent">
+					<!-- <div class="tab-pane fade" id="hreft_temp" role="tabpanel"> -->
+		                <div class="chartdiv" id="chart1"></div>
+					<!-- </div>
+					<div class="tab-pane fade" id="hreft_hum" role="tabpanel"> -->
+    				    <div class="chartdiv" id="chart2"></div>
+					<!-- </div>
+					<div class="tab-pane fade" id="hreft_light" role="tabpanel"> -->
+    				    <div class="chartdiv" id="chart3"></div>
+					<!-- </div>
+					<div class="tab-pane fade" id="hreft_soil" role="tabpanel"> -->
+    				    <div class="chartdiv" id="chart4"></div>
+					<!-- </div> -->
+				</div>
             </dic>
         </dic>
     </dic>
@@ -552,7 +562,15 @@
     var set_maxmin = $.parseJSON('<?= json_encode($set_maxmin) ?>');
     var sensor = $.parseJSON('<?= json_encode($sensor) ?>');
     var s_sensor = $.parseJSON('<?= json_encode($s_sensor) ?>');
-    console.log(Number(house_master.substring(5,10)))
+    console.log(config_sn);
+    var data_temp_out = [];
+    var data_temp_in = [];
+    var data_hum_out = [];
+    var data_hum_in = [];
+    var data_light_out = [];
+    var data_light_in = [];
+    var data_soil_in = [];
+    // console.log(Number(house_master.substring(5,10)))
     if(config_cn.cn_status_1 == 1 || config_cn.cn_status_2 == 1 || config_cn.cn_status_3 == 1 || config_cn.cn_status_4 == 1){
         $('.hidden_select_sw_manual').val(1);
     }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 || config_cn.cn_status_5 == 1 || config_cn.cn_status_6 == 1 || config_cn.cn_status_7 == 1 || config_cn.cn_status_8 == 1){
@@ -566,18 +584,22 @@
     }
     if(s_sensor.s_btnT > 0){
         $('.btn_ch_t').addClass('active');
+        $('#hreft_temp').addClass('active show');
     }else {
         $('.btn_ch_t').hide();
         if(s_sensor.s_btnH > 0){
             $('.btn_ch_h').addClass('active');
+            $('#hreft_hum').addClass('active show');
         }else {
             $('.btn_ch_h').hide();
             if(s_sensor.s_btnL > 0){
                 $('.btn_ch_l').addClass('active');
+                $('#hreft_light').addClass('active show');
             }else {
                 $('.btn_ch_l').hide();
                 if(s_sensor.s_btnS > 0){
                     $('.btn_ch_s').addClass('active');
+                    $('#hreft_soil').addClass('active show');
                 }else {
                     $('.btn_ch_s').hide();
                 }
@@ -624,7 +646,7 @@
             }
         }
         client.subscribe(house_master + "/control/config/manual", options);
-        client.subscribe(house_master + "/data_sensor/realtime", options);
+        client.subscribe(house_master + "/data_sensor/filter", options);
         client.subscribe(house_master + "/control/resporn", options);
     }
 
@@ -649,11 +671,10 @@
             delete parseJSON['serial_id'];
             // console.log(parseJSON);
             $('#val_sw').val(JSON.stringify(parseJSON));
-        }else if(message.destinationName == house_master + "/data_sensor/realtime") {
+        }else if(message.destinationName == house_master + "/data_sensor/filter") {
             var result = message.payloadString;
             var parseJSON = $.parseJSON(result);
-            // console.log(parseJSON)
-            var chart_timestamp = parseJSON['date_time'];
+            console.log('parseJSON')
             var time_t = parseJSON['time'];
             var ntime = time_t.substring(0, 5);
             $(".date").html(parseJSON['date']);
@@ -664,9 +685,6 @@
                 // console.log(config_sn['sn_sensor_'+i])
                 //
                 if (config_sn['sn_status_' + i] == 1) {
-                    // for(var s=0; s <= sensor.length; s++){
-                    //     if(s == config_sn['sn_sensor_'+i]){
-                    // console.log(sensor[(config_sn['sn_sensor_'+i] -1)].sensor_name)
                     if (i == 1) {
                         dash_status(sn_data = (data_['temp_out'] * 1).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
                     } else if (i == 2) {
@@ -682,63 +700,6 @@
                     } else if (i == 7) {
                         dash_status(sn_data = (data_['soil_in'] * 1).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
                     }
-
-                    //     }
-                    // }
-
-                    //     // show_dash(unit = dashUnit[i],snmode = dashMode[i]);
-                    //     if (house_master !== "KMUMT001") {
-                    //         if (dashMode[i] === "7") { // µmol / KLux
-                    //             $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>' + '<br>' + (data_array[dashSncanel[i]] / 1000).toFixed(1) + " KLux");
-                    //         } else if (dashMode[i] === "6") {
-                    //             $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>');
-                    //         } else if (dashMode[i] === "5") {
-                    //             $(".dash_data_1_" + i).html((data_array[dashSncanel[i]] / 1000).toFixed(1) + " KLux" + '<br>' + (data_array[dashSncanel[i]] / 54).toFixed(1) + ' µmol m<sup>-2</sup>s<sup>-1</sup>');
-                    //         } else {
-                    //             if (data_array[dashSncanel[i]] >= 1000) {
-                    //                 data_dash[i] = (data_array[dashSncanel[i]] / 1000).toFixed(1);
-                    //                 sn_unit[i] = 'K' + dashUnit[i];
-                    //             } else if (data_array[dashSncanel[i]] >= 1000000) {
-                    //                 data_dash[i] = (data_array[dashSncanel[i]] / 1000).toFixed(1);
-                    //                 sn_unit[i] = 'M' + dashUnit[i];
-                    //             } else {
-                    //                 data_dash[i] = (data_array[dashSncanel[i]] * 1).toFixed(1);
-                    //                 if (dashUnit[i] === "1") {
-                    //                     sn_unit[i] = "℃";
-                    //                 } else {
-                    //                     sn_unit[i] = dashUnit[i];
-                    //                 }
-                    //             }
-                    //         }
-                    //         // ++++++++++
-                    //         if ($(".btn_ch_t").hasClass("active") == true) {
-                    //             if (dashMode[i] === "1") {
-                    //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
-                    //             }
-                    //         }
-                    //         if ($(".btn_ch_h").hasClass("active") == true) {
-                    //             if (dashMode[i] === "2") {
-                    //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
-                    //             }
-                    //         }
-                    //         if ($(".btn_ch_s").hasClass("active") == true) {
-                    //             if (dashMode[i] === "3") {
-                    //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
-                    //             }
-                    //         }
-                    //         if ($(".btn_ch_l").hasClass("active") == true) {
-                    //             if (dashMode[i] === "4" || dashMode[i] === "5") {
-                    //                 new_chart.push((data_array[dashSncanel[i]] / 1000).toFixed(1));
-                    //             }
-                    //             if (dashMode[i] === "6" || dashMode[i] === "7") {
-                    //                 new_chart.push((data_array[dashSncanel[i]] / 54).toFixed(1));
-                    //             }
-                    //         }
-                    //         if ($(".btn_ch_p").hasClass("active") == true) {
-                    //             if (dashMode[i] === "10") {
-                    //                 new_chart.push((data_array[dashSncanel[i]] * 1).toFixed(1));
-                    //             }
-                    //         }
                 }
                 function dash_status(sn_data, max, min) {
                     if (sn_data >= max) {
@@ -755,7 +716,145 @@
                     }
                 }
             }
-
+            if(s_sensor.s_btnT > 0){
+            // console.log(data_temp_out);
+                if(data_temp_out.length > 0){
+                    // var chartLine1 = new ApexCharts(document.querySelector('#chart1'), optionsLine);
+                    // chartLine1.render();
+                    data_temp_out.shift();
+                    data_temp_in.shift();
+                    data_temp_out.push({
+                        x: parseJSON['date']+' '+ntime,
+                        y:(data_['temp_out'] * 1).toFixed(1)
+                    })
+                    data_temp_in.push({
+                        x: parseJSON['date']+' '+ntime,
+                        y:(data_['temp_in'] * 1).toFixed(1)
+                    })
+                    chartLine1.updateSeries([
+                        {
+                            name: config_sn.sn_name_1,
+                            data: data_temp_out
+                        }, {
+                            name: config_sn.sn_name_4,
+                            data: data_temp_in
+                        }
+                    ])
+                    // console.log(data_temp_out);
+                }
+            }
+            if(s_sensor.s_btnH > 0){
+                if(data_hum_out.length > 0){
+                    // var chartLine2 = new ApexCharts(document.querySelector('#chart2'), optionsLine);
+                    // chartLine2.render();
+                    data_hum_out.shift();
+                    data_hum_in.shift();
+                    data_hum_out.push({
+                        x: parseJSON['date']+' '+ntime,
+                        y:(data_['hum_out'] * 1).toFixed(1)
+                    })
+                    data_hum_in.push({
+                        x: parseJSON['date']+' '+ntime,
+                        y:(data_['hum_in'] * 1).toFixed(1)
+                    })
+                    chartLine2.updateSeries([
+                        {
+                            name: config_sn.sn_name_2,
+                            data: data_hum_out
+                        }, {
+                            name: config_sn.sn_name_5,
+                            data: data_hum_in
+                        }
+                    ])
+                    // chartLine2.updateOptions({
+                    //     title:  {text: 'ความชื้นอากาศ'},
+                    //     tooltip: {
+                    //         y: {
+                    //             formatter: function (val) {
+                    //                 return  val + " %Rh"
+                    //             }
+                    //         }
+                    //     },
+                    //     subtitle: {
+                    //         text: '(%Rh)',
+                    //         offsetY: 55,
+                    //         offsetX: 10
+                    //     },
+                    // });
+                }
+            }
+            if(s_sensor.s_btnL > 0){
+                if(data_light_out.length > 0){
+                    // var chartLine3 = new ApexCharts(document.querySelector('#chart3'), optionsLine);
+                    // chartLine3.render();
+                    data_light_out.shift();
+                    data_light_in.shift();
+                    data_light_out.push({
+                        x: parseJSON['date']+' '+ntime,
+                        y:(data_['light_out'] / 1000).toFixed(1)
+                    })
+                    data_hum_in.push({
+                        x: parseJSON['date']+' '+ntime,
+                        y:(data_['light_in'] / 1000).toFixed(1)
+                    })
+                    chartLine3.updateSeries([
+                        {
+                            name: config_sn.sn_name_3,
+                            data: data_light_out
+                        }, {
+                            name: config_sn.sn_name_6,
+                            data: data_light_in
+                        }
+                    ])
+                    // chartLine3.updateOptions({
+                    //     title:  {text: 'ความเข้มแสง'},
+                    //     tooltip: {
+                    //         y: {
+                    //             formatter: function (val) {
+                    //                 return  val + " KLux"
+                    //             }
+                    //         }
+                    //     },
+                    //     subtitle: {
+                    //         text: '(KLux)',
+                    //         offsetY: 55,
+                    //         offsetX: 10
+                    //     },
+                    // })
+                }
+            }
+            if(s_sensor.s_btnS > 0){
+                if(data_soil_in.length > 0){
+                    // var chartLine4 = new ApexCharts(document.querySelector('#chart4'), optionsLine);
+                    // chartLine4.render();
+                    data_soil_in.shift();
+                    data_soil_in.push({
+                        x: parseJSON['date']+' '+ntime,
+                        y:(data_['soil_in'] * 1).toFixed(1)
+                    })
+                    chartLine4.updateSeries([
+                        {
+                            name: config_sn.sn_name_7,
+                            data: data_soil_in
+                        }
+                    ])
+                    // chartLine4.updateOptions({
+                    //     title:  {text: 'ความชื้นดิน'},
+                    //     tooltip: {
+                    //         y: {
+                    //             formatter: function (val) {
+                    //                 return  val + " %"
+                    //             }
+                    //         }
+                    //     },
+                    //     subtitle: {
+                    //         text: '(%)',
+                    //         offsetY: 55,
+                    //         offsetX: 10
+                    //     },
+                    // })
+                }
+            }
         }else if(message.destinationName == house_master + "/control/resporn") {
             var result = message.payloadString;
             var parseJSON = $.parseJSON(result);
@@ -2035,75 +2134,244 @@
         $.each(array, function(i,v) { if (v === item) count++; });
         return count;
     }
-    // =======================================
-    const myArr = res.theme.split(" ");
-    // alert(myArr[0])
-    if (myArr[0] === "dark-theme") {
-        am4core.useTheme(am4themes_dark);
-    }
-    am4core.useTheme(am4themes_animated);
-    var chart = am4core.create("chart_realtime", am4charts.XYChart);
-    chart.dateFormatter.inputDateFormat = "yyyy/MM/dd - HH:mm";
-
-    var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-    dateAxis.periodChangeDateFormats.setKey("hour", "[bold]dd MMM ");
-    dateAxis.tooltipDateFormat = "HH:mm, d MMM yyyy";
-
-    var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-
-    // alert($(".btn_ch_t").hasClass("active"))
-    if ($(".btn_ch_t").hasClass("active") == true) {
-
-    }
-    if ($(".btn_ch_h").hasClass("active") == true) {
-
-    }
-    if ($(".btn_ch_s").hasClass("active") == true) {
-
-    }
-    if ($(".btn_ch_l").hasClass("active") == true) {
-
-    }
-    am4core.ready(function() {
-        var new_array_realCh = [];
-        // alert(array_realCh.length)
-        for (var a = 1; a <= array_realCh.length; a++) {
-            new_array_realCh.push('round(' + array_realCh[(a - 1)] + ', 1) AS new_' + a);
-        }
-        console.log([
-            'nn', $(".btn_ch_l").hasClass("active"),
-            new_array_realCh
-        ]);
-        // return false
-        $.ajax({
-            url: 'routes/get_chart_realtime.php',
-            method: "post",
-            data: {
-                house_master: house_master,
-                array_realCh: new_array_realCh,
-                array_realname: array_realname
-            },
-            dataType: "json",
-            success: function(res_chart) {
-                if (res_chart.theme === "dark-theme") {
-                    am4core.useTheme(am4themes_dark);
+</script>
+<script>
+    var optionsLine = {
+        chart: {
+            id: 'realtime',
+            foreColor: '#9ba7b2',
+            height: 560,
+            type: 'line',
+            toolbar: {
+                show: true,
+                tools: {
+                    download: false,
+                    selection: true,
+                     zoom: true,
+                     zoomin: true,
+                     zoomout: true,
+                     pan: true,
                 }
-                // $("#chart_realtime").addClass("");
-                console.log(res_chart)
-                chart.data = res_chart.data;
-
-                var series = [];
-                for (var i = 1; i <= array_realCh.length; i++) {
-                    series[i] = chart.series.push(new am4charts.LineSeries());
-                    series[i].dataFields.valueY = "new_" + i;
-                    series[i].dataFields.dateX = "data_timestamp";
-                    series[i].tooltipText = array_realname[i - 1] + " {new_" + i + "} (" + unit[i - 1] + ")";
-                    series[i].name = array_realname[i - 1];
-                    series[i].strokeWidth = 2;
-
-
+            },
+            dropShadow: {
+                enabled: true,
+                top: 3,
+                left: 2,
+                blur: 4,
+                opacity: 0.1,
+            }
+        },
+        stroke: {
+            curve: 'smooth',
+            width: 5
+        },
+        // colors: ["#0d6efd", '#212529'],
+        // series: [{
+        //   data: data.slice()
+        // }],
+        series: [],
+        // [{
+        //     name: "temp_out",
+        //     data: res.data.temp_out//[1, 15, 56, 20, 33, 27]
+        // }, {
+        //     name: "temp_in",
+        //     data: res.data.temp_in//[30, 33, 21, 42, 19, 32]
+        // }],
+        title: {
+            // text: 'Multiline Chart',
+            align: 'left',
+            offsetY: 30,
+            // offsetX: 20
+        },
+        animations: {
+          enabled: true,
+          easing: 'linear',
+          // dynamicAnimation: {
+          //   speed: 1000
+          // }
+        },
+        markers: {
+            size: 2,
+            strokeWidth: 0,
+            hover: {
+                size: 7
+            }
+        },
+        grid: {
+            show: true,
+            padding: {
+                bottom: 0
+            }
+        },
+        xaxis: {
+            type: 'datetime',
+            // categories:res.data.timestamp,
+            labels: {
+                datetimeUTC: false,
+                // format: 'dd/MM HH:mm',
+                datetimeFormatter: {
+                    year: 'yyyy',
+                    month: 'MMM \'yy',
+                    day: 'dd MMM',
+                    hour: 'HH:mm'
                 }
             }
-        });
+        },
+        legend: {
+            // position: 'top',
+            // horizontalAlign: 'right',
+            // offsetY: -30
+        },
+        fill: {
+            type: "solid",
+            fillOpacity: 0.7
+        },
+        noData: {
+            text: 'Loading...'
+        },
+        tooltip: {
+            x: {
+                format: 'yyyy/MM/dd HH:mm'
+            },
+        }
+    }
+    if(s_sensor.s_btnT > 0){
+        var chartLine1 = new ApexCharts(document.querySelector('#chart1'), optionsLine);
+        chartLine1.render();
+    }
+    if(s_sensor.s_btnH > 0){
+        var chartLine2 = new ApexCharts(document.querySelector('#chart2'), optionsLine);
+        chartLine2.render();
+    }
+    if(s_sensor.s_btnL > 0){
+        var chartLine3 = new ApexCharts(document.querySelector('#chart3'), optionsLine);
+        chartLine3.render();
+    }
+    if(s_sensor.s_btnS > 0){
+        var chartLine4 = new ApexCharts(document.querySelector('#chart4'), optionsLine);
+        chartLine4.render();
+    }
+
+    $.ajax({ // Auto
+        url: "routes/tu/get_chart_realtime.php",
+        method: "post",
+        data: {
+            house_master: house_master,
+            config_sn: config_sn
+        },
+        dataType: "json",
+        success: function(res) {
+            // console.log(res);
+            // console.log(res.data);
+            if(s_sensor.s_btnT > 0){
+                data_temp_out = res.data.temp_out;
+                data_temp_in = res.data.temp_in;
+                chartLine1.updateSeries([
+                    {
+                        name: config_sn.sn_name_1,
+                        data: data_temp_out
+                    }, {
+                        name: config_sn.sn_name_4,
+                        data: data_temp_in
+                    }
+                ])
+                chartLine1.updateOptions({
+                    title:  {text: 'อุณหภูมิ'},
+                    tooltip: {
+                        y: {
+                        	formatter: function (val) {
+                        		return  val + " ℃"
+                        	}
+                        }
+                    },
+                    subtitle: {
+                        text: '(℃)',
+                        offsetY: 55,
+                        offsetX: 10
+                    },
+                })
+            }
+            if(s_sensor.s_btnH > 0){
+                data_hum_out = res.data.hum_out;
+                data_hum_in = res.data.hum_in;
+                chartLine2.updateSeries([
+                    {
+                        name: config_sn.sn_name_2,
+                        data: data_hum_out
+                    }, {
+                        name: config_sn.sn_name_5,
+                        data: data_hum_in
+                    }
+                ]);
+                // console.log(data_hum_out);
+                chartLine2.updateOptions({
+                    title:  {text: 'ความชื้นอากาศ'},
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return  val + " %Rh"
+                            }
+                        }
+                    },
+                    subtitle: {
+                        text: '(%Rh)',
+                        offsetY: 55,
+                        offsetX: 10
+                    },
+                });
+            }
+            if(s_sensor.s_btnL > 0){
+                data_light_out = res.data.light_out;
+                data_light_in = res.data.light_in;
+                chartLine3.updateSeries([
+                    {
+                        name: config_sn.sn_name_3,
+                        data: data_light_out
+                    }, {
+                        name: config_sn.sn_name_6,
+                        data: data_light_in
+                    }
+                ]);
+                chartLine3.updateOptions({
+                    title:  {text: 'ความเข้มแสง'},
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return  val + " KLux"
+                            }
+                        }
+                    },
+                    subtitle: {
+                        text: '(KLux)',
+                        offsetY: 55,
+                        offsetX: 10
+                    },
+                })
+            }
+            if(s_sensor.s_btnS > 0){
+                data_soil_in = res.data.soil_in;
+                chartLine4.updateSeries([
+                    {
+                        name: config_sn.sn_name_7,
+                        data: data_soil_in
+                    }]
+                )
+                chartLine4.updateOptions({
+                    title:  {text: 'ความชื้นดิน'},
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return  val + " %"
+                            }
+                        }
+                    },
+                    subtitle: {
+                        text: '(%)',
+                        offsetY: 55,
+                        offsetX: 10
+                    },
+                })
+            }
+        }
     });
 </script>

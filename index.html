@@ -462,6 +462,9 @@
     <script src="public/plugins/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider.min.js"></script>
     <script src="public/plugins/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider-init.js"></script>
 
+
+	<script src="public/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
+
     <script src="routes/memu.js"></script>
     <script>
         if (house_master.length == 8) {
@@ -1962,6 +1965,28 @@
                             success: function(res_dash) {
                                 $("#load_pages").html(res_dash);
                             }
+                        });
+                        $(".memu_report").click(function() {
+                            $(this).addClass('mm-active');
+                            $(".memu_dash").show().removeClass("mm-active");
+                            $.ajax({
+                                url: "routes/tu/pages_report.php",
+                                method: "post",
+                                data: {
+                                    data: res,
+                                    s_sensor:{
+                                        s_btnT: getArraySum(temp_c),
+                                        s_btnH: getArraySum(hum_c),
+                                        s_btnS: getArraySum(soil_c),
+                                        s_btnL: getArraySum(light_c),
+                                    },
+                                    count_cn: getArraySum(res.controlstatus)
+                                },
+                                // dataType: "json",
+                                success: function(res_dash) {
+                                    $("#load_pages").html(res_dash);
+                                }
+                            });
                         });
                     }
                 }); // ajax
