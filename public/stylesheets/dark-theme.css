@@ -3,7 +3,7 @@
     }
     
     html.dark-theme body {
-        color: #e4e5e6;
+        /* color: #e4e5e6; */
         /* background-color: #150941; */
         background: rgb(23, 23, 85);
         background: radial-gradient(circle, rgb(17, 17, 77) 14%, rgb(10, 10, 59) 100%);
