@@ -104,10 +104,10 @@
                                         <table id="table_re_Sensor" class="table table-striped table-bordered dataTable" style="width:100%">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">#</th>
+                                                    <!-- <th class="text-center">#</th> -->
                                                     <th class="text-center">วัน-เวลา</th>
-                                                    <th class="text-center">วัน</th>
-                                                    <th class="text-center">เวลา</th>
+                                                    <!-- <th class="text-center">วัน</th>
+                                                    <th class="text-center">เวลา</th> -->
                                                     <th class="text-center th_1"></th>
                                                     <th class="text-center th_2"></th>
                                                     <th class="text-center th_3"></th>
@@ -257,7 +257,7 @@
         </div>
     </div>
 
-        <!-- Modal_select_sn -->
+    <!-- Modal_select_sn -->
     <div class="modal fade" id="Modal_select_sn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog-scrollable modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">

@@ -23,7 +23,7 @@
     // $numb = intval(substr($house_master, 5,10));
     // $channel =  if($config_cn['cn_status_1'] == 1){echo "cs_dripper_1 AS dripper_1,";};
     // $channel[] = "ROW_NUMBER() OVER (ORDER BY cn_id ) AS row_num";
-    if($_POST['mode_report'] == 're_cn'){
+    if($_POST['mode_report'] == 're_cn'){ // re_cn
         $channel[] = "SUBSTRING(cn_timestamp,1,10) AS nDate";
         $channel[] = "SUBSTRING(cn_timestamp,-8, 5) AS nTime";
         $channel[] = "cn_mode";
@@ -91,7 +91,7 @@
            // $data0['soil_in'][]   = $row['soil_in'];
            $i++;
         }
-    } elseif ($_POST['mode_report'] == 're_cnAuto') {
+    } elseif ($_POST['mode_report'] == 're_cnAuto') { // re_cnManual
         $table_name = 'tbn_control_au'.$_POST['load_select'];
         $channel[] = "SUBSTRING(load_timestamp,1,10) AS nDate";
         $channel[] = "SUBSTRING(load_timestamp,-8, 5) AS nTime";
@@ -118,7 +118,7 @@
         while ($row = $stmt->fetch()) {
             $data0[] = $row;
         }
-    } elseif ($_POST['mode_report'] == 're_cnManual') {
+    } elseif ($_POST['mode_report'] == 're_cnManual') { // re_cnManual
         $channel[] = "SUBSTRING(mn_timestamp,1,10) AS nDate";
         $channel[] = "SUBSTRING(mn_timestamp,-8, 5) AS nTime";
         $channel[] = "mn_user";
@@ -144,9 +144,42 @@
         while ($row = $stmt->fetch()) {
             $data0[] = $row;
         }
-    }elseif ($_POST['mode_report'] == 're_sensor') {
+    }elseif ($_POST['mode_report'] == 're_sensor') { // re_sensor
         $numb = intval(substr($house_master, 5,10));
+        $data_channel = [];
+        $channel[] = "SUBSTRING(data_timestamp,1,16) AS nDate";
+        // $channel[] = "SUBSTRING(data_timestamp,1,10) AS nDate";
+        // $channel[] = "SUBSTRING(data_timestamp,-8, 5) AS nTime";
+        for($i=0; $i < count($config_cn[3]); $i++){
+            if ($config_cn[3][$i] == 4 || $config_cn[3][$i] == 5) {
+                if($house_master == 'KMUMT001'){
+                    $channel[] = 'round('.$config_cn[1][$i].$numb.', 1) AS data_cn'.($i+1);
+                }else{
+                    $channel[] = 'round('.$config_cn[1][$i].$numb.'/1000, 1) AS data_cn'.($i+1);
+                }
 
+            } elseif ($config_cn[3][$i] == 6 || $config_cn[3][$i] == 7) {
+                $channel[] = 'round('.$config_cn[1][$i].$numb.'/54, 1) AS data_cn'.($i+1);
+            } else {
+                $channel[] = 'round('.$config_cn[1][$i].$numb.', 1) AS data_cn'.($i+1);
+            }
+        }
+        // $config_cn
+        // $channel[] = "SUBSTRING(mn_timestamp,1,10) AS nDate";
+        // $channel[] = "SUBSTRING(mn_timestamp,-8, 5) AS nTime";
+        // $channel[] = "mn_user";
+        // if($config_cn['cn_status_1'] == 1){$channel[] = "mn_load_1 AS dripper_1";}
+        $channel1 = implode(', ',$channel);
+        $house_master2 = substr($house_master, 0,5);
+        // exit();
+        $sql = "SELECT $channel1 FROM tbn_data_tu WHERE data_sn = '$house_master2' AND data_timestamp BETWEEN '$start_day' AND '$stop_day' ORDER BY data_timestamp ";
+        $stmt = $dbcon->query($sql);
+        $data0 = array();
+        $i=1;
+        while ($row = $stmt->fetch()) {
+            $data0[] = $row;
+           $i++;
+        }
     }
     // echo $sql;
     // exit();
