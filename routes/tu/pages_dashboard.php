@@ -536,20 +536,21 @@
                         </li>
                     </ul>
                 </div>
-                <div class="tab-content" id="pills-tabContent">
+                <!-- <div class="tab-content" id="pills-tabContent"> -->
 					<!-- <div class="tab-pane fade" id="hreft_temp" role="tabpanel"> -->
-		                <div class="chartdiv" id="chart1"></div>
+		                <!-- <div class="chartdiv" id="chart1"></div> -->
 					<!-- </div>
 					<div class="tab-pane fade" id="hreft_hum" role="tabpanel"> -->
-    				    <div class="chartdiv" id="chart2"></div>
+    				    <!-- <div class="chartdiv" id="chart2"></div> -->
 					<!-- </div>
 					<div class="tab-pane fade" id="hreft_light" role="tabpanel"> -->
-    				    <div class="chartdiv" id="chart3"></div>
+    				    <!-- <div class="chartdiv" id="chart3"></div> -->
 					<!-- </div>
 					<div class="tab-pane fade" id="hreft_soil" role="tabpanel"> -->
-    				    <div class="chartdiv" id="chart4"></div>
+    				    <!-- <div class="chartdiv" id="chart4"></div> -->
 					<!-- </div> -->
-				</div>
+				<!-- </div> -->
+                <div class="chartdiv" id="chart_realtime"></div>
             </dic>
         </dic>
     </dic>
@@ -584,22 +585,22 @@
     }
     if(s_sensor.s_btnT > 0){
         $('.btn_ch_t').addClass('active');
-        $('#hreft_temp').addClass('active show');
+        // $('#hreft_temp').addClass('active show');
     }else {
         $('.btn_ch_t').hide();
         if(s_sensor.s_btnH > 0){
             $('.btn_ch_h').addClass('active');
-            $('#hreft_hum').addClass('active show');
+            // $('#hreft_hum').addClass('active show');
         }else {
             $('.btn_ch_h').hide();
             if(s_sensor.s_btnL > 0){
                 $('.btn_ch_l').addClass('active');
-                $('#hreft_light').addClass('active show');
+                // $('#hreft_light').addClass('active show');
             }else {
                 $('.btn_ch_l').hide();
                 if(s_sensor.s_btnS > 0){
                     $('.btn_ch_s').addClass('active');
-                    $('#hreft_soil').addClass('active show');
+                    // $('#hreft_soil').addClass('active show');
                 }else {
                     $('.btn_ch_s').hide();
                 }
@@ -716,7 +717,7 @@
                     }
                 }
             }
-            if(s_sensor.s_btnT > 0){
+            if($('.btn_ch_t').hasClass('active') == true){
             // console.log(data_temp_out);
                 if(data_temp_out.length > 0){
                     // var chartLine1 = new ApexCharts(document.querySelector('#chart1'), optionsLine);
@@ -731,7 +732,7 @@
                         x: parseJSON['date']+' '+ntime,
                         y:(data_['temp_in'] * 1).toFixed(1)
                     })
-                    chartLine1.updateSeries([
+                    chartLine.updateSeries([
                         {
                             name: config_sn.sn_name_1,
                             data: data_temp_out
@@ -741,9 +742,24 @@
                         }
                     ])
                     // console.log(data_temp_out);
+                    // chartLine.updateOptions({
+                    //     title:  {text: 'อุณหภูมิ'},
+                    //     tooltip: {
+                    //         y: {
+                    //         	formatter: function (val) {
+                    //         		return  val + " ℃"
+                    //         	}
+                    //         }
+                    //     },
+                    //     subtitle: {
+                    //         text: '(℃)',
+                    //         offsetY: 55,
+                    //         offsetX: 10
+                    //     },
+                    // })
                 }
             }
-            if(s_sensor.s_btnH > 0){
+            if($('.btn_ch_h').hasClass('active') == true){
                 if(data_hum_out.length > 0){
                     // var chartLine2 = new ApexCharts(document.querySelector('#chart2'), optionsLine);
                     // chartLine2.render();
@@ -751,13 +767,13 @@
                     data_hum_in.shift();
                     data_hum_out.push({
                         x: parseJSON['date']+' '+ntime,
-                        y:(data_['hum_out'] * 1).toFixed(1)
+                        y: (data_['hum_out'] * 1).toFixed(1)
                     })
                     data_hum_in.push({
                         x: parseJSON['date']+' '+ntime,
-                        y:(data_['hum_in'] * 1).toFixed(1)
+                        y: (data_['hum_in'] * 1).toFixed(1)
                     })
-                    chartLine2.updateSeries([
+                    chartLine.updateSeries([
                         {
                             name: config_sn.sn_name_2,
                             data: data_hum_out
@@ -766,7 +782,7 @@
                             data: data_hum_in
                         }
                     ])
-                    // chartLine2.updateOptions({
+                    // chartLine.updateOptions({
                     //     title:  {text: 'ความชื้นอากาศ'},
                     //     tooltip: {
                     //         y: {
@@ -783,7 +799,7 @@
                     // });
                 }
             }
-            if(s_sensor.s_btnL > 0){
+            if($('.btn_ch_L').hasClass('active') == true){
                 if(data_light_out.length > 0){
                     // var chartLine3 = new ApexCharts(document.querySelector('#chart3'), optionsLine);
                     // chartLine3.render();
@@ -797,7 +813,7 @@
                         x: parseJSON['date']+' '+ntime,
                         y:(data_['light_in'] / 1000).toFixed(1)
                     })
-                    chartLine3.updateSeries([
+                    chartLine.updateSeries([
                         {
                             name: config_sn.sn_name_3,
                             data: data_light_out
@@ -806,7 +822,7 @@
                             data: data_light_in
                         }
                     ])
-                    // chartLine3.updateOptions({
+                    // chartLine.updateOptions({
                     //     title:  {text: 'ความเข้มแสง'},
                     //     tooltip: {
                     //         y: {
@@ -823,7 +839,7 @@
                     // })
                 }
             }
-            if(s_sensor.s_btnS > 0){
+            if($('.btn_ch_s').hasClass('active') == true){
                 if(data_soil_in.length > 0){
                     // var chartLine4 = new ApexCharts(document.querySelector('#chart4'), optionsLine);
                     // chartLine4.render();
@@ -832,13 +848,13 @@
                         x: parseJSON['date']+' '+ntime,
                         y:(data_['soil_in'] * 1).toFixed(1)
                     })
-                    chartLine4.updateSeries([
+                    chartLine.updateSeries([
                         {
                             name: config_sn.sn_name_7,
                             data: data_soil_in
                         }
                     ])
-                    // chartLine4.updateOptions({
+                    // chartLine.updateOptions({
                     //     title:  {text: 'ความชื้นดิน'},
                     //     tooltip: {
                     //         y: {
@@ -2235,22 +2251,24 @@
             },
         }
     }
-    if(s_sensor.s_btnT > 0){
-        var chartLine1 = new ApexCharts(document.querySelector('#chart1'), optionsLine);
-        chartLine1.render();
-    }
-    if(s_sensor.s_btnH > 0){
-        var chartLine2 = new ApexCharts(document.querySelector('#chart2'), optionsLine);
-        chartLine2.render();
-    }
-    if(s_sensor.s_btnL > 0){
-        var chartLine3 = new ApexCharts(document.querySelector('#chart3'), optionsLine);
-        chartLine3.render();
-    }
-    if(s_sensor.s_btnS > 0){
-        var chartLine4 = new ApexCharts(document.querySelector('#chart4'), optionsLine);
-        chartLine4.render();
-    }
+    var chartLine = new ApexCharts(document.querySelector('#chart_realtime'), optionsLine);
+        chartLine.render();
+    // if(s_sensor.s_btnT > 0){
+    //     var chartLine1 = new ApexCharts(document.querySelector('#chart1'), optionsLine);
+    //     chartLine1.render();
+    // }
+    // if(s_sensor.s_btnH > 0){
+    //     var chartLine2 = new ApexCharts(document.querySelector('#chart2'), optionsLine);
+    //     chartLine2.render();
+    // }
+    // if(s_sensor.s_btnL > 0){
+    //     var chartLine3 = new ApexCharts(document.querySelector('#chart3'), optionsLine);
+    //     chartLine3.render();
+    // }
+    // if(s_sensor.s_btnS > 0){
+    //     var chartLine4 = new ApexCharts(document.querySelector('#chart4'), optionsLine);
+    //     chartLine4.render();
+    // }
 
     $.ajax({ // Auto
         url: "routes/tu/get_chart_realtime.php",
@@ -2266,7 +2284,7 @@
             if(s_sensor.s_btnT > 0){
                 data_temp_out = res.data.temp_out;
                 data_temp_in = res.data.temp_in;
-                chartLine1.updateSeries([
+                chartLine.updateSeries([
                     {
                         name: config_sn.sn_name_1,
                         data: data_temp_out
@@ -2275,7 +2293,7 @@
                         data: data_temp_in
                     }
                 ])
-                chartLine1.updateOptions({
+                chartLine.updateOptions({
                     title:  {text: 'อุณหภูมิ'},
                     tooltip: {
                         y: {
@@ -2291,10 +2309,10 @@
                     },
                 })
             }
-            if(s_sensor.s_btnH > 0){
+            else if(s_sensor.s_btnT == 0 && s_sensor.s_btnH > 0){
                 data_hum_out = res.data.hum_out;
                 data_hum_in = res.data.hum_in;
-                chartLine2.updateSeries([
+                chartLine.updateSeries([
                     {
                         name: config_sn.sn_name_2,
                         data: data_hum_out
@@ -2304,7 +2322,7 @@
                     }
                 ]);
                 // console.log(data_hum_out);
-                chartLine2.updateOptions({
+                chartLine.updateOptions({
                     title:  {text: 'ความชื้นอากาศ'},
                     tooltip: {
                         y: {
@@ -2320,10 +2338,10 @@
                     },
                 });
             }
-            if(s_sensor.s_btnL > 0){
+            else if(s_sensor.s_btnT == 0 && s_sensor.s_btnH == 0 && s_sensor.s_btnL > 0){
                 data_light_out = res.data.light_out;
                 data_light_in = res.data.light_in;
-                chartLine3.updateSeries([
+                chartLine.updateSeries([
                     {
                         name: config_sn.sn_name_3,
                         data: data_light_out
@@ -2332,7 +2350,7 @@
                         data: data_light_in
                     }
                 ]);
-                chartLine3.updateOptions({
+                chartLine.updateOptions({
                     title:  {text: 'ความเข้มแสง'},
                     tooltip: {
                         y: {
@@ -2348,15 +2366,15 @@
                     },
                 })
             }
-            if(s_sensor.s_btnS > 0){
+            else if(s_sensor.s_btnT == 0 && s_sensor.s_btnH == 0 && s_sensor.s_btnL == 0 && s_sensor.s_btnS > 0){
                 data_soil_in = res.data.soil_in;
-                chartLine4.updateSeries([
+                chartLine.updateSeries([
                     {
                         name: config_sn.sn_name_7,
                         data: data_soil_in
                     }]
                 )
-                chartLine4.updateOptions({
+                chartLine.updateOptions({
                     title:  {text: 'ความชื้นดิน'},
                     tooltip: {
                         y: {
