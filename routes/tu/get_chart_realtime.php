@@ -1,8 +1,8 @@
 <?php
 require '../connectdb.php';
 $house_master = $_POST["house_master"];
-$start_day = date("Y/m/d H:i:s", strtotime('-1 day'));//'-6 hour'));
-$stop_day = date("Y/m/d H:i:s");
+$start_day = date("Y-m-d H:i:s", strtotime('-1 day'));//'-6 hour'));
+$stop_day = date("Y-m-d H:i:s");
 $numb = intval(substr($house_master, 5,10));
 $channel = 'round(data_temp_out_'.$numb.',1) AS temp_out,
             round(data_hum_out_'.$numb.',1) AS hum_out,

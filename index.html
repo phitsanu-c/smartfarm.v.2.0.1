@@ -65,7 +65,7 @@
         margin-left: auto;
         padding-right: 20px;
     } */
-        
+
         .ridge {
             border-style: ridge;
         }
@@ -468,8 +468,6 @@
     <script src="routes/memu.js"></script>
     <script>
         if (house_master.length == 8) {
-            $(".memu_dash").show().addClass("mm-active");
-            $(".memu_report").show();
             if (house_master.substring(0, 3) != "TUS") {
                 if (house_master !== "KMUMT001") {
                     $(".title_km").html("ประวัติการตั้งเวลา");
@@ -1948,25 +1946,40 @@
                                 light_c.push(1);
                             }
                         }
-                        $.ajax({
-                            url: "routes/tu/pages_dashboard.php",
-                            method: "post",
-                            data: {
-                                data: res,
-                                s_sensor: {
-                                    s_btnT: getArraySum(temp_c),
-                                    s_btnH: getArraySum(hum_c),
-                                    s_btnS: getArraySum(soil_c),
-                                    s_btnL: getArraySum(light_c),
-                                },
-                                count_cn: getArraySum(res.controlstatus)
-                            },
-                            // dataType: "json",
-                            success: function(res_dash) {
-                                $("#load_pages").html(res_dash);
+                        dash_show();
+                        function dash_show(){
+                            $(".memu_dash").show().addClass("mm-active");
+                            $(".memu_report").show();
+                            $(".memu_compare").hide();
+                            if(getArraySum(res.controlstatus) > 0){
+                                $('.memu_control').show()
+                            }else {
+                                $('.memu_control').hide()
                             }
+                            $.ajax({
+                                url: "routes/tu/pages_dashboard.php",
+                                method: "post",
+                                data: {
+                                    data: res,
+                                    s_sensor: {
+                                        s_btnT: getArraySum(temp_c),
+                                        s_btnH: getArraySum(hum_c),
+                                        s_btnS: getArraySum(soil_c),
+                                        s_btnL: getArraySum(light_c),
+                                    },
+                                    count_cn: getArraySum(res.controlstatus)
+                                },
+                                // dataType: "json",
+                                success: function(res_dash) {
+                                    $("#load_pages").html(res_dash);
+                                }
+                            });
+                        }
+                        $(".memu_dash").click(function() {
+                            dash_show();
                         });
                         $(".memu_report").click(function() {
+                        $('.memu_control').hide()
                             $(this).addClass('mm-active');
                             $(".memu_dash").show().removeClass("mm-active");
                             $.ajax({

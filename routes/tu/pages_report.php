@@ -97,28 +97,10 @@
                         <div id="report_sensor">
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="p-chart" role="tabpanel">
-                                    <div id="report_chart" style=""></div>
+                                    <div id="chart_report" style=""></div>
                                 </div>
                                 <div class="tab-pane fade" id="p-table" role="tabpanel">
-                                    <div class="table-responsive">
-                                        <table id="table_re_Sensor" class="table table-striped table-bordered dataTable" style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <!-- <th class="text-center">#</th> -->
-                                                    <th class="text-center">วัน-เวลา</th>
-                                                    <!-- <th class="text-center">วัน</th>
-                                                    <th class="text-center">เวลา</th> -->
-                                                    <th class="text-center th_1"></th>
-                                                    <th class="text-center th_2"></th>
-                                                    <th class="text-center th_3"></th>
-                                                    <th class="text-center th_4"></th>
-                                                    <th class="text-center th_5"></th>
-                                                    <th class="text-center th_6"></th>
-                                                    <th class="text-center th_7"></th>
-                                                </tr>
-                                            </thead>
-                                        </table>
-                                    </div>
+                                    <div id="table_report"></div>
                                 </div>
                             </div>
                         </div>
@@ -157,7 +139,7 @@
                             <?php for($i=1; $i <= 12; $i++){
                                 if($config_cn['cn_status_'.$i] == 1){
                                 echo '<li class="nav-item" role="presentation">
-                                        <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d;">
+                                        <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
                                             <div class="d-flex align-items-center">
                                                 <div class="tab-title">'.$config_cn['cn_name_'.$i].'</div>
                                             </div>
@@ -318,7 +300,7 @@
                                             <h5>อุณหภูมิ</h5>
                                             <div class="form-check mb-3">
                                                 <input type="checkbox" class="form-check-input" name="checkbox_all_temp" onchange="checkbox_all('temp')" <?php if($s_sensor['s_btnT'] > 0){echo 'checked';}?>>
-                                                <label class="form-check-label">เลือกทั้งหมด <?= $s_sensor['s_btnT']?></label>
+                                                <label class="form-check-label">เลือกทั้งหมด </label>
                                             </div>
                                             <hr/>
                                             <?php for($i=1; $i <= 7; $i++ ){
@@ -665,7 +647,7 @@
                 $(".all_week").hasClass("active") != false ||
                 $(".all_month").hasClass("active") != false ||
                 $(".all_from_to").hasClass("active") != false
-            ){ sumbit_report(); }
+            ){ report_sn(); }
         }
     });
     $(".re_tb").click(function () {
@@ -676,7 +658,7 @@
                 $(".all_week").hasClass("active") != false ||
                 $(".all_month").hasClass("active") != false ||
                 $(".all_from_to").hasClass("active") != false
-            ){sumbit_report();}
+            ){report_sn();}
         }
     });
 
@@ -875,13 +857,8 @@
                 $(".val_end").removeClass('is-invalid');
             }
         }
-        // alert($("#mode_dwm").val())
-        // alert(ch_value)
-        // console.log(ch_value)
-        // return false;
 
         // var loading = verticalNoTitle();
-        active_btn();
         function report_chart(){
             $("#report_chart").addClass("report_chart");
             $.ajax({
@@ -1000,64 +977,286 @@
                 }
             });
         }
+        $("#Modal_select_sn").modal("hide");
+        // alert($(".re_tb").hasClass("active"))
+        // return false
+        active_btn($(".mode_dwm").val());
+        if($(".re_ch").hasClass("active") == true){
+            $('#chart_report').html('')
+            report_chart_sn(ch_value, $(".mode_dwm").val())
+        }else if($(".re_tb").hasClass("active") == true){
+            $('#table_report').html('')
+            report_table_sn(ch_value, $(".mode_dwm").val());
+        }
         function report_table_sn(val, mode_dwm){
-            $('#hide0').css( 'display', 'block' );
-            // console.log(val[1])
-            // alert(val[1].length);
-            for(var i =1; i <= 7; i++){
-                if(i <= val[1].length){
-                    $('.th_'+i).html(val[2][(i-1)])
-                }else {
-                    $('.th_'+i).hide()
+            $.ajax({
+                type: "POST",
+                url: "routes/tu/get_re_table.php",
+                data: {
+                    house_master: house_master,
+                    mode : mode_dwm,
+                    mode_report: $('#mode_report').val(),
+                    config_cn : val,
+                    val_start : $(".val_start").val(),
+                    val_end : $(".val_end").val(),
+                    sel_all_every : $("#sel_all_every").val()
+                },
+                // dataType: 'json',
+                success: function(res) {
+                    setTimeout(function () {$("#table_report").html(res);}, 2000);
                 }
-            }
-            var table = $('#table_re_Sensor').DataTable({
-                "scrollY": 330,
-                "scrollX": true,
-                "scrollCollapse": false,
-                "paging":    false,
-                "searching": false,
-                "destroy": true,
-                "order": [
-                    [0, "desc"]
-                ],
-              //   "processing": true,
-              //   'language':{
-              //     "loadingRecords": "&nbsp;",
-              //     "processing": "Loading..."
-              // },
-                "columnDefs": [
-                    {
-                        // "targets": [ 1 ],
-                        // render: $.fn.dataTable.render.moment( 'X', 'YYYY/MM/DD' ),
-                        // "render": $.fn.dataTable.render.moment( 'YYYY/MM/DD' ),
-                        "visible": false,
-                        "searchable": false,
-                    },
-                ],
-                dom: "<'floatRight'B><'clear'>frtip",
-                buttons: [{
-                        text: 'Export csv',
-                        title: "Smart Farm Report",
-                        charset: 'utf-8',
-                        extension: '.csv',
-                        // exportOptions: {
-                        //    columns: [ 0, 2, 5 ]
-                        // },
-                        className:'btn btn-outline-success px-5 btnexport0',
-                        extend: 'csv',
-                        format: 'YYYY/MM/dd',
-                        // fieldSeparator: ';',
-                        // fieldBoundary: '',
-                        filename: 'smart_farm_'+datetime,
-                        // className: 'btn-info',
-                        bom: true
-                    }
-                ]
             });
-            table.button('.btnexport0').nodes().css("display", "none")
-            table.clear().draw();
-            // return false;
+            // // $('#hide0').css( 'display', 'block' );
+            // // console.log(val[1])
+            // // alert(val[1].length);
+            // var column_tb = []
+            // column_tb.push({title: "วัน-เวลา"})
+            // for(var i =1; i <= val[1].length; i++){
+            //     column_tb.push({title: val[2][(i-1)],"sClass": "center",
+            //     "orderable":      false,
+            //     // "data":           null,
+            //     "defaultContent": ""})
+            //     // if(i <= val[1].length){
+            //     //     $('.th_'+i).html(val[2][(i-1)])
+            //     // }else {
+            //     //     $('.th_'+i).hide()
+            //     // }
+            // }
+            // var table = $('#table_re_Sensor').DataTable({
+            //     "scrollY": '90vh',
+            //     "scrollX": true,
+            //     "scrollCollapse": false,
+            //     "paging":    false,
+            //     "searching": false,
+            //     "destroy": true,
+            //     "order": [
+            //         [0, "desc"]
+            //     ],
+            //     //  "processing": "<span class='fa-stack fa-lg'>\n\
+            //     //      <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>\n\
+            //     // </span>&nbsp;&nbsp;&nbsp;&nbsp;Processing ...",
+            //     "language": {
+            //        "processing": "<span class='fa-stack fa-lg'>\n\
+            //             <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>\n\
+            //         </span>&emsp;Processing ...",
+            //     },
+            //     columns: column_tb,
+            //     "columnDefs": [{
+            //         // "targets": [ 1 ],
+            //         // render: $.fn.dataTable.render.moment( 'X', 'YYYY/MM/DD' ),
+            //         // "render": $.fn.dataTable.render.moment( 'YYYY/MM/DD' ),
+            //         "visible": false,
+            //         // "searchable": false,
+            //     }],
+            //     dom: "<'floatRight'B><'clear'>frtip",
+            //     buttons: [{
+            //             text: 'Export csv',
+            //             title: "Smart Farm Report",
+            //             charset: 'utf-8',
+            //             extension: '.csv',
+            //             // exportOptions: {
+            //             //    columns: [ 0, 2, 5 ]
+            //             // },
+            //             className:'btn btn-outline-success px-5 btnexport0',
+            //             extend: 'csv',
+            //             format: 'YYYY/MM/dd',
+            //             // fieldSeparator: ';',
+            //             // fieldBoundary: '',
+            //             filename: 'smart_farm_'+datetime,
+            //             // className: 'btn-info',
+            //             bom: true
+            //         }
+            //     ]
+            // });
+            // // $("thead", table).remove();
+            // console.log(column_tb);
+            // table.button('.btnexport0').nodes().css("display", "none")
+            // table.reload()
+            // // return false;
+            // $.ajax({
+            //     type: "POST",
+            //     url: "routes/tu/get_report_cn_table.php",
+            //     data: {
+            //         house_master: house_master,
+            //         mode : mode_dwm,
+            //         mode_report: $('#mode_report').val(),
+            //         config_cn : val,
+            //         val_start : $(".val_start").val(),
+            //         val_end : $(".val_end").val(),
+            //         sel_all_every : $("#sel_all_every").val()
+            //     },
+            //     dataType: 'json',
+            //     success: function(res) {
+            //         // console.log(res);
+            //         if(res.length > 0){
+            //             table.button('.btnexport0').nodes().css("display", "block")
+            //
+            //         }
+            //         // else {
+            //         //     $('#table_re_Sensor').DataTable({
+            //         //         "scrollY": '90vh',
+            //         //         "scrollX": true,
+            //         //         "scrollCollapse": false,
+            //         //         "paging":    false,
+            //         //         "searching": false,
+            //         //         "destroy": true,
+            //         //         "order": [
+            //         //             [0, "desc"]
+            //         //         ],
+            //         //         //  "processing": "<span class='fa-stack fa-lg'>\n\
+            //         //         //      <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>\n\
+            //         //         // </span>&nbsp;&nbsp;&nbsp;&nbsp;Processing ...",
+            //         //         "language": {
+            //         //            "processing": "<span class='fa-stack fa-lg'>\n\
+            //         //                 <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>\n\
+            //         //             </span>&emsp;Processing ...",
+            //         //         },
+            //         //         columns: column_tb,
+            //         //         "columnDefs": [{
+            //         //             orderable: false,
+            //         //             // "targets": [ 1 ],
+            //         //             // render: $.fn.dataTable.render.moment( 'X', 'YYYY/MM/DD' ),
+            //         //             // "render": $.fn.dataTable.render.moment( 'YYYY/MM/DD' ),
+            //         //             "visible": false,
+            //         //             // "searchable": false,
+            //         //         }],
+            //         //         // dom: "<'floatRight'B><'clear'>frtip",
+            //         //         // buttons: [{
+            //         //         //         text: 'Export csv',
+            //         //         //         title: "Smart Farm Report",
+            //         //         //         charset: 'utf-8',
+            //         //         //         extension: '.csv',
+            //         //         //         // exportOptions: {
+            //         //         //         //    columns: [ 0, 2, 5 ]
+            //         //         //         // },
+            //         //         //         className:'btn btn-outline-success px-5 btnexport0',
+            //         //         //         extend: 'csv',
+            //         //         //         format: 'YYYY/MM/dd',
+            //         //         //         // fieldSeparator: ';',
+            //         //         //         // fieldBoundary: '',
+            //         //         //         filename: 'smart_farm_'+datetime,
+            //         //         //         // className: 'btn-info',
+            //         //         //         bom: true
+            //         //         //     }
+            //         //         // ]
+            //         //     });
+            //         // }
+            //         table.clear().rows.add(res).draw();
+            //     }
+            // });
+        }
+        function report_chart_sn(val, mode_dwm){
+            var options = {
+                chart: {
+                    id: 'realtime',
+                    foreColor: '#9ba7b2',
+                    height: 560,
+                    type: 'line',
+                    toolbar: {
+                        show: true,
+                        tools: {
+                            download: true,
+                            selection: true,
+                             zoom: true,
+                             zoomin: true,
+                             zoomout: true,
+                             pan: true,
+                        }
+                    },
+                    dropShadow: {
+                        enabled: true,
+                        top: 3,
+                        left: 2,
+                        blur: 4,
+                        opacity: 0.1,
+                    }
+                },
+                stroke: {
+                    curve: 'smooth',
+                    width: 5
+                },
+                // colors: ["#0d6efd", '#212529'],
+                // series: [{
+                //   data: data.slice()
+                // }],
+                series: [],
+                // [{
+                //     name: "temp_out",
+                //     data: res.data.temp_out//[1, 15, 56, 20, 33, 27]
+                // }, {
+                //     name: "temp_in",
+                //     data: res.data.temp_in//[30, 33, 21, 42, 19, 32]
+                // }],
+                title: {
+                    // text: 'Multiline Chart',
+                    align: 'left',
+                    offsetY: 30,
+                    // offsetX: 20
+                },
+                animations: {
+                  enabled: true,
+                  easing: 'linear',
+                  // dynamicAnimation: {
+                  //   speed: 1000
+                  // }
+                },
+                markers: {
+                    size: 2,
+                    strokeWidth: 0,
+                    hover: {
+                        size: 7
+                    }
+                },
+                grid: {
+                    show: true,
+                    padding: {
+                        bottom: 0
+                    }
+                },
+                xaxis: {
+                    type: 'datetime',
+                    // categories:res.data.timestamp,
+                    labels: {
+                        datetimeUTC: false,
+                        // format: 'dd/MM HH:mm',
+                        datetimeFormatter: {
+                            year: 'yyyy',
+                            month: 'MMM \'yy',
+                            day: 'dd MMM',
+                            hour: 'HH:mm'
+                        }
+                    }
+                },
+                legend: {
+                    // position: 'top',
+                    // horizontalAlign: 'right',
+                    // offsetY: -30
+                },
+                fill: {
+                    type: "solid",
+                    fillOpacity: 0.7
+                },
+                noData: {
+                    text: 'Loading...'
+                },
+                tooltip: {
+                    x: {
+                        format: 'yyyy-MM-dd HH:mm'
+                    },
+                    y: {
+                    	formatter: function (val) {
+                    		return  val //+ " ℃"
+                    	}
+                    }
+                },
+                    // subtitle: {
+                    //     text: '(℃)',
+                    //     offsetY: 55,
+                    //     offsetX: 10
+                    // },
+            }
+            var chart = new ApexCharts(document.querySelector('#chart_report'), options);
+            chart.render();
             $.ajax({
                 type: "POST",
                 url: "routes/tu/get_report_cn_table.php",
@@ -1068,47 +1267,61 @@
                     config_cn : val,
                     val_start : $(".val_start").val(),
                     val_end : $(".val_end").val(),
+                    sel_all_every : $("#sel_all_every").val(),
+                    // ct_mode: 'chart'
                 },
                 dataType: 'json',
                 success: function(res) {
-                    // console.log(res);
-                    if(res.length > 0){
-                        table.button('.btnexport0').nodes().css("display", "block")
-                    }
-                    table.clear().rows.add(res).draw();
+                    console.log(res);
+                    // if(res.length > 0){
+
+                        var Series_ = []
+                        // column_tb.push({title: "วัน-เวลา"})
+                        for(var i =1; i <= val[1].length; i++){
+                            Series_.push({name: val[2][(i-1)], data: res['data_cn'+i]})
+                        }
+                        console.log(Series_);
+                        chart.updateSeries(Series_)
+                        // chart.updateSeries([Series_[0]
+                        //     {
+                        //         name: config_sn.sn_name_1,
+                        //         data: data_temp_out
+                        //     }, {
+                        //         name: config_sn.sn_name_4,
+                        //         data: data_temp_in
+                        //     }
+                        // ])
+                        chart.updateOptions({
+                            xaxis: {
+                              categories: res.timestamp
+                            }
+                        });
+                    // }
                 }
             });
         }
-        function active_btn(){
-            if($(".mode_dwm").val() === 'day'){
-                $(".all_day").addClass("active");
-                $(".all_week").removeClass("active");
-                $(".all_month").removeClass("active");
-                $(".all_from_to").removeClass("active");
-            }else if($(".mode_dwm").val() === 'week'){
-                $(".all_day").removeClass("active");
-                $(".all_week").addClass("active");
-                $(".all_month").removeClass("active");
-                $(".all_from_to").removeClass("active");
-            }else if($(".mode_dwm").val() === 'month'){
-                $(".all_day").removeClass("active");
-                $(".all_week").removeClass("active");
-                $(".all_month").addClass("active");
-                $(".all_from_to").removeClass("active");
-            }else{
-                $(".all_day").removeClass("active");
-                $(".all_week").removeClass("active");
-                $(".all_month").removeClass("active");
-                $(".all_from_to").addClass("active");
-            }
-            $("#Modal_select_sn").modal("hide");
-        }
-        // alert($(".re_tb").hasClass("active"))
-        // return false
-        if($(".re_ch").hasClass("active") == true){
-            report_chart();
-        }else if($(".re_tb").hasClass("active") == true){
-            report_table_sn(ch_value, $(".mode_dwm").val());
+    }
+    function active_btn(mode_dwm){
+        if(mode_dwm === 'day'){
+            $(".all_day").addClass('active')
+            $(".all_week").removeClass('active')
+            $(".all_month").removeClass('active')
+            $(".all_from_to").removeClass('active')
+        }else if(mode_dwm === 'week'){
+            $(".all_day").removeClass('active')
+            $(".all_week").addClass('active')
+            $(".all_month").removeClass('active')
+            $(".all_from_to").removeClass('active')
+        }else if(mode_dwm === 'month'){
+            $(".all_day").removeClass('active')
+            $(".all_week").removeClass('active')
+            $(".all_month").addClass('active')
+            $(".all_from_to").removeClass('active')
+        }else if(mode_dwm === 'from_to'){
+            $(".all_day").removeClass('active')
+            $(".all_week").removeClass('active')
+            $(".all_month").removeClass('active')
+            $(".all_from_to").addClass('active')
         }
     }
 </script>
@@ -1190,27 +1403,7 @@
 
     function report_cn_table(mode_dwm){
         $('#hide').css( 'display', 'block' );
-        if(mode_dwm === 'day'){
-            $(".all_day").addClass('active')
-            $(".all_week").removeClass('active')
-            $(".all_month").removeClass('active')
-            $(".all_from_to").removeClass('active')
-        }else if(mode_dwm === 'week'){
-            $(".all_day").removeClass('active')
-            $(".all_week").addClass('active')
-            $(".all_month").removeClass('active')
-            $(".all_from_to").removeClass('active')
-        }else if(mode_dwm === 'month'){
-            $(".all_day").removeClass('active')
-            $(".all_week").removeClass('active')
-            $(".all_month").addClass('active')
-            $(".all_from_to").removeClass('active')
-        }else if(mode_dwm === 'from_to'){
-            $(".all_day").removeClass('active')
-            $(".all_week").removeClass('active')
-            $(".all_month").removeClass('active')
-            $(".all_from_to").addClass('active')
-        }
+        active_btn(mode_dwm);
         var table = $('#example').DataTable({
             "scrollY": 330,
             "scrollX": true,
@@ -1280,27 +1473,7 @@
     }
     function report_cnAuto_table(mode_dwm){
         $('#hide2').css( 'display', 'block' );
-        if(mode_dwm === 'day'){
-            $(".all_day").addClass('active')
-            $(".all_week").removeClass('active')
-            $(".all_month").removeClass('active')
-            $(".all_from_to").removeClass('active')
-        }else if(mode_dwm === 'week'){
-            $(".all_day").removeClass('active')
-            $(".all_week").addClass('active')
-            $(".all_month").removeClass('active')
-            $(".all_from_to").removeClass('active')
-        }else if(mode_dwm === 'month'){
-            $(".all_day").removeClass('active')
-            $(".all_week").removeClass('active')
-            $(".all_month").addClass('active')
-            $(".all_from_to").removeClass('active')
-        }else if(mode_dwm === 'from_to'){
-            $(".all_day").removeClass('active')
-            $(".all_week").removeClass('active')
-            $(".all_month").removeClass('active')
-            $(".all_from_to").addClass('active')
-        }
+        active_btn(mode_dwm);
         var table2 = $('#table_re_cnAuto').DataTable({
             "scrollY": 330,
             "scrollX": true,
@@ -1394,27 +1567,7 @@
     }
     function report_cnManual_table(mode_dwm){
         $('#hide3').css( 'display', 'block' );
-        if(mode_dwm === 'day'){
-            $(".all_day").addClass('active')
-            $(".all_week").removeClass('active')
-            $(".all_month").removeClass('active')
-            $(".all_from_to").removeClass('active')
-        }else if(mode_dwm === 'week'){
-            $(".all_day").removeClass('active')
-            $(".all_week").addClass('active')
-            $(".all_month").removeClass('active')
-            $(".all_from_to").removeClass('active')
-        }else if(mode_dwm === 'month'){
-            $(".all_day").removeClass('active')
-            $(".all_week").removeClass('active')
-            $(".all_month").addClass('active')
-            $(".all_from_to").removeClass('active')
-        }else if(mode_dwm === 'from_to'){
-            $(".all_day").removeClass('active')
-            $(".all_week").removeClass('active')
-            $(".all_month").removeClass('active')
-            $(".all_from_to").addClass('active')
-        }
+        active_btn(mode_dwm);
         var table3 = $('#table_re_cnManual').DataTable({
             "scrollY": 330,
             "scrollX": true,

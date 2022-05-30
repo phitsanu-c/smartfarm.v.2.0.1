@@ -10,11 +10,11 @@
         $start_day = date("Y-m-d H:i:s", strtotime('-1 day'));
         $stop_day = date("Y-m-d H:i:s");
     } else if ($_POST["mode"] == 'week') {
-        $start_day = date("Y/m/d H:i:s", strtotime('-7 day'));
-        $stop_day = date("Y/m/d H:i:s");
+        $start_day = date("Y-m-d H:i:s", strtotime('-7 day'));
+        $stop_day = date("Y-m-d H:i:s");
     } else if ($_POST["mode"] == 'month') {
-        $start_day = date("Y/m/d H:i:s", strtotime('-30 day'));
-        $stop_day = date("Y/m/d H:i:s");
+        $start_day = date("Y-m-d H:i:s", strtotime('-30 day'));
+        $stop_day = date("Y-m-d H:i:s");
     } else if ($_POST["mode"] == 'from_to') {
         $start_day = $_POST["val_start"].':00';
         $stop_day = $_POST["val_end"].':00';
@@ -150,7 +150,8 @@
         $channel[] = "SUBSTRING(data_timestamp,1,16) AS nDate";
         // $channel[] = "SUBSTRING(data_timestamp,1,10) AS nDate";
         // $channel[] = "SUBSTRING(data_timestamp,-8, 5) AS nTime";
-        for($i=0; $i < count($config_cn[3]); $i++){
+        $count_columns = count($config_cn[3]);
+        for($i=0; $i < $count_columns; $i++){
             if ($config_cn[3][$i] == 4 || $config_cn[3][$i] == 5) {
                 if($house_master == 'KMUMT001'){
                     $channel[] = 'round('.$config_cn[1][$i].$numb.', 1) AS data_cn'.($i+1);
@@ -171,17 +172,43 @@
         // if($config_cn['cn_status_1'] == 1){$channel[] = "mn_load_1 AS dripper_1";}
         $channel1 = implode(', ',$channel);
         $house_master2 = substr($house_master, 0,5);
+        // $start_day2 = date("Y/m/d H:i:s",strtotime($start_day));
+        // $stop_day2 = date("Y/m/d H:i:s",strtotime($stop_day));
         // exit();
-        $sql = "SELECT $channel1 FROM tbn_data_tu WHERE data_sn = '$house_master2' AND data_timestamp BETWEEN '$start_day' AND '$stop_day' ORDER BY data_timestamp ";
+        $sel_all_every = $_POST["sel_all_every"];
+        $sql = "SELECT $channel1 FROM tbn_data_tu WHERE data_sn = '$house_master2' AND data_timestamp BETWEEN '$start_day' AND '$stop_day' AND mod(minute(`data_timestamp`),'$sel_all_every') = 0 ORDER BY data_timestamp ";
         $stmt = $dbcon->query($sql);
         $data0 = array();
         $i=1;
         while ($row = $stmt->fetch()) {
-            $data0[] = $row;
+            // $data0[] = $row;
+            $data0['timestamp'][] = $row['nDate'];
+            if($count_columns >= 1){
+                $data0['data_cn1'][]  = $row['data_cn1'];
+            }
+            if($count_columns >= 2){
+                $data0['data_cn2'][]   = $row['data_cn2'];
+            }
+            if($count_columns >= 3){
+                $data0['data_cn3'][] = $row['data_cn3'];
+            }
+            if($count_columns >= 4){
+                $data0['data_cn4'][]   = $row['data_cn4'];
+            }
+            if($count_columns >= 5){
+                $data0['data_cn5'][]    = $row['data_cn5'];
+            }
+            if($count_columns >= 6){
+                $data0['data_cn6'][]  = $row['data_cn6'];
+            }
+            if($count_columns >= 7){
+                $data0['data_cn7'][]   = $row['data_cn7'];
+            }
            $i++;
         }
-    }
+    } // DATE_FORMAT(NOW(),'%Y-%m-%d %H-%i-%s')
     // echo $sql;
+    // echo $count_columns;
     // exit();
        echo json_encode(
            $data0

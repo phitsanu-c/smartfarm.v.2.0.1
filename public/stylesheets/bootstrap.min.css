@@ -333,7 +333,8 @@ thead,
 tr {
     border-color: inherit;
     border-style: solid;
-    border-width: 0
+    border-width: 0;
+    text-align:center;
 }
 
 label {

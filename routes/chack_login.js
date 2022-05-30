@@ -36,35 +36,48 @@ $.getJSON('routes/login.php', function(msg) {
             $(".memu_site").addClass("mm-active")
             $("#load_pages").load('views/pages_site.php');
             $(".memu_house").hide();
-            // $(".memu_dash").hide();
-            // $(".memu_report").hide();
+            $(".memu_dash").hide();
+            $(".memu_report").hide();
+            $('.memu_control').hide();
+            $('.memu_compare').hide();
         }else{ // site != nail
             if(house_master === '' || house_master.length != 8){ // chack sn != nail or ไม่ถูกต้อง
                 $(".memu_site").removeClass("mm-active")
                 $(".memu_house").show().addClass("mm-active")
-                // $(".memu_dash").hide();
-                // $(".memu_report").hide();
+                $(".memu_dash").hide();
+                $(".memu_report").hide();
+                $('.memu_control').hide();
+                $('.memu_compare').hide();
                 $("#load_pages").load('views/pages_house.php?s='+url[0]);
             }else{
                 $(".memu_site").removeClass("mm-active")
                 $(".memu_house").removeClass("mm-active")
             }
+            if(url[0] == 10){
+                $(".memu_compare").show();
+            }else{
+                $(".memu_compare").hide();
+            }
         }
-    }else{ // user and admin
+    }else{ // user and admin != supportadmin
         // alert(res.sn['count_house'])
         if(msg.sn['count_site'] == 1){ // 1 site
             if(msg.sn['count_house'] == 1){ // 1 site 1 house
                 $(".memu_site").hide()
                 $(".memu_house").hide()
                 // $(".memu_dash").show().addClass("mm-active");
-                // $(".memu_report").show();
+                $(".memu_report").show().removeClass("mm-active")
             }else{ // 1 site > 1 house
                 $(".memu_site").hide()
                 $(".memu_house").show().addClass("mm-active")
                 // $(".memu_dash").hide();
                 // $(".memu_report").hide();
                 $("#load_pages").load('views/pages_house.php?s='+msg.sn['siteID']);
-                
+            }
+            if(url[0] == 10){
+                $(".memu_compare").show();
+            }else{
+                $(".memu_compare").hide();
             }
         }else{ // > 1 site
             // if(msg.sn['count_house'] == 1){
@@ -72,31 +85,35 @@ $.getJSON('routes/login.php', function(msg) {
                     $(".memu_site").addClass("mm-active")
                     $("#load_pages").load('views/pages_site.php');
                     $(".memu_house").hide();
-                    // $(".memu_dash").hide();
-                    // $(".memu_report").hide();
+                    $(".memu_dash").hide();
+                    $(".memu_report").hide();
+                    $('.memu_control').hide();
+                    $('.memu_compare').hide();
                 }else{ // site != nail
                     if(house_master === '' || house_master.length != 8){ // chack sn != nail or ไม่ถูกต้อง
                         $(".memu_site").removeClass("mm-active")
                         $(".memu_house").show().addClass("mm-active")
-                        // $(".memu_dash").hide();
-                        // $(".memu_report").hide();
+                        $(".memu_dash").hide();
+                        $(".memu_report").hide();
+                        $('.memu_control').hide();
+                        $('.memu_compare').hide();
                         $("#load_pages").load('views/pages_house.php?s='+url[0]);
                     }else{
                         $(".memu_site").removeClass("mm-active")
                         $(".memu_house").removeClass("mm-active")
+                        if(url[0] == 10){
+                            $(".memu_compare").show();
+                        }else{
+                            $(".memu_compare").hide();
+                        }
                     }
                 }
             // }
         }
     }
-    
-    if(url[0] == 10){
-        $(".memu_compare").show();
-    }else{
-        $(".memu_compare").hide();
-    }
+
     $("#pills-selectReport").hide();
-    
+
     // theme
     if (msg.theme === "dark-theme") {
         $("#toggleTheme").attr('checked', true);
