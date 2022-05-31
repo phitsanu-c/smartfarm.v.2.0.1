@@ -32,7 +32,20 @@
         $data['foggy_1'] = $log_sw['sw_1'];
         $data['foggy_2'] = $log_sw['sw_2'];
     }
-    $data2 = $data;
+    $res = $data;
+    // '[config]
+    // nserial_id='.$house_master.'
+    // dripper_1='.$data['dripper_1'].'
+    // dripper_2='.$data['dripper_2'].'
+    // dripper_3='.$data['dripper_3'].'
+    // dripper_4='.$data['dripper_4'].'
+    // fan_1='.$data['fan_1'].'
+    // fan_2='.$data['fan_2'].'
+    // fan_3='.$data['fan_3'].'
+    // fan_4='.$data['fan_4'].'
+    // foggy_1='.$data['foggy_1'].'
+    // foggy_2='.$data['foggy_2'];
+
     if($log_sw['mode'] < 4){
         $data["load_sn"] = $house_master;
         $data["losd_user"] = $_SESSION["account_user"];
@@ -44,7 +57,7 @@
                         :fan_1, :fan_2, :fan_3, :fan_4,
                         :foggy_1, :foggy_2, :spray, :shading)";
         if ($dbcon->prepare($sql)->execute($data) === TRUE) {
-            echo json_encode(['status' => "Insert_Success", 'data' => $data2 ], JSON_UNESCAPED_UNICODE );
+            echo json_encode(['status' => "Insert_Success", 'data' => $res ], JSON_UNESCAPED_UNICODE );
         }else{
             echo json_encode(['status' => "Insert_Error ".$tb_name, 'data' => '' ], JSON_UNESCAPED_UNICODE );
         }

@@ -459,7 +459,8 @@
                                 </div>
                                 <div class="ms-auto">
                                     <button type="button" class="btn btn-outline-secondary px-5 radius-30 menu_config_manual">ตั้งค่า</button>
-                                    <input type="hidden" id="val_sw">
+                                    <input type="hidden" id="val_sw_manual">
+                                    <input type="hidden" id="val_sw_auto">
                                     <button type="button" id="save_manual_cont" class="btn btn-success waves-light">
                                         <i class="fadeIn animated bx bx-save"></i> บันทึก
                                     </button>
@@ -583,10 +584,37 @@
     }else if(config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 0 && config_cn.cn_status_11 == 0 || config_cn.cn_status_12 == 1){
         $('.hidden_select_sw_manual').val(5)
     }
+    // -------------------------------------
+    if(config_cn.cn_status_1 == 1){
+        $('.hidden_select_sw_auto').val(1);
+    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 1) {
+        $('.hidden_select_sw_auto').val(2);
+    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 1) {
+        $('.hidden_select_sw_auto').val(3);
+    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 1) {
+        $('.hidden_select_sw_auto').val(4);
+    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 1) {
+        $('.hidden_select_sw_auto').val(5);
+    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 1) {
+        $('.hidden_select_sw_auto').val(6);
+    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 1) {
+        $('.hidden_select_sw_auto').val(7);
+    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 1) {
+        $('.hidden_select_sw_auto').val(8);
+    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 1) {
+        $('.hidden_select_sw_auto').val(9);
+    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 1) {
+        $('.hidden_select_sw_auto').val(10);
+    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 0 && config_cn.cn_status_11 == 1) {
+        $('.hidden_select_sw_auto').val(11); $("#11").addClass('active');
+    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 0 && config_cn.cn_status_11 == 0 && config_cn.cn_status_12 == 1) {
+        $('.hidden_select_sw_auto').val(12);
+    }
     if(s_sensor.s_btnT > 0){
         $('.btn_ch_t').addClass('active');
         // $('#hreft_temp').addClass('active show');
-    }else {
+    }
+    else {
         $('.btn_ch_t').hide();
         if(s_sensor.s_btnH > 0){
             $('.btn_ch_h').addClass('active');
@@ -648,7 +676,8 @@
         }
         client.subscribe(house_master + "/control/config/manual", options);
         client.subscribe(house_master + "/data_sensor/filter", options);
-        client.subscribe(house_master + "/control/resporn", options);
+        client.subscribe(house_master + "/control/response", options);
+        client.subscribe(house_master + "/control/config/auto", options);
     }
 
     function onFail(context) {
@@ -667,12 +696,23 @@
     function onMessageArrived(message) {
         if(message.destinationName ==  house_master + "/control/config/manual"){
             var result = message.payloadString;
-            var parseJSON = $.parseJSON(result);
-            // console.log(parseJSON);
-            delete parseJSON['serial_id'];
-            // console.log(parseJSON);
-            $('#val_sw').val(JSON.stringify(parseJSON));
-        }else if(message.destinationName == house_master + "/data_sensor/filter") {
+            var n_result = result.split('\r\n')
+            // var parseJSON = $.parseJSON(result);
+            // console.log(n_result);
+            $('#val_sw_manual').val(JSON.stringify({
+              "dripper_1":  result.split('\r\n')[2].split('=')[1],
+              "dripper_2":  result.split('\r\n')[3].split('=')[1],
+              "dripper_3":  result.split('\r\n')[4].split('=')[1],
+              "dripper_4":  result.split('\r\n')[5].split('=')[1],
+              "fan_1":      result.split('\r\n')[6].split('=')[1],
+              "fan_2":      result.split('\r\n')[7].split('=')[1],
+              "fan_3":      result.split('\r\n')[8].split('=')[1],
+              "fan_4":      result.split('\r\n')[9].split('=')[1],
+              "foggy_1":    result.split('\r\n')[10].split('=')[1],
+              "foggy_2":    result.split('\r\n')[11].split('=')[1]
+            }));
+        }
+        else if(message.destinationName == house_master + "/data_sensor/filter") {
             var result = message.payloadString;
             var parseJSON = $.parseJSON(result);
             // console.log('parseJSON')
@@ -807,7 +847,8 @@
                     ])
                 // }
             }
-        }else if(message.destinationName == house_master + "/control/resporn") {
+        }
+        else if(message.destinationName == house_master + "/control/response") {
             var result = message.payloadString;
             var parseJSON = $.parseJSON(result);
             // console.log(parseJSON)
@@ -826,8 +867,8 @@
                     });
                     fn_check_sw_on_off($('.hidden_select_sw_manual').val());
                     function fn_check_sw_on_off(val){
-                        var sw_log = $.parseJSON($('#val_sw').val());
-                        if(val == 1){
+                        var sw_log = $.parseJSON($('#val_sw_manual').val());
+                        if(val == 1){ // dripper
                             var count_sw = [];
                             var count_stats_on = [];
                             if(sw_log.dripper_1 == 'ON'){ count_sw[1] = 1; }else { count_sw[1] = 0; }
@@ -841,12 +882,14 @@
                             if(countElement(1,count_sw) == countElement(1,count_stats_on)){
                                 $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="100" />');
                                 $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="100" />');
-                            }else {
+                            }
+                            else {
                                 $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="100" />');
                                 $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="100" />');
                             }
                             // alert(countElement(1,count_stats_on))
-                        }else if(val == 2){
+                        }
+                        else if(val == 2){ // FAN
                             var count_sw = [];
                             var count_stats_on = [];
                             if(sw_log.fan_1 == 'ON'){ count_sw[1] = 1; }else { count_sw[1] = 0; }
@@ -864,11 +907,12 @@
                                 $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="100" />');
                                 $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="100" />');
                             }
-                        }else if(val == 3){
+                        }
+                        else if(val == 3){ // foggy
                             var count_sw = [];
                             var count_stats_on = [];
                             if(sw_log.foggy_1 == 'ON'){ count_sw[1] = 1; }else { count_sw[1] = 0; }
-                            if(sw_log.foggy_2 == 'ON'){ count_sw[1] = 1; }else { count_sw[1] = 0; }
+                            if(sw_log.foggy_2 == 'ON'){ count_sw[2] = 1; }else { count_sw[2] = 0; }
                             if(parseJSON.foggy_1 == 'ON'){ count_stats_on[1] = 1; }else { count_stats_on[1] = 0; }
                             if(parseJSON.foggy_2 == 'ON'){ count_stats_on[2] = 1; }else { count_stats_on[2] = 0; }
                             if(countElement(1,count_sw) == countElement(1,count_stats_on)){
@@ -878,7 +922,8 @@
                                 $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="100" />');
                                 $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="100" />');
                             }
-                        }else if(val == 4){
+                        }
+                        else if(val == 4){ // spray
                             if(parseJSON.spray == 'ON'){
                                 $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="100" />');
                                 $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="100" />');
@@ -886,7 +931,8 @@
                                 $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="100" />');
                                 $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="100" />');
                             }
-                        }else if(val == 5){
+                        }
+                        else if(val == 5){ // shading
                             if(parseJSON.shading == 'ON'){
                                 $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="100" />');
                                 $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="100" />');
@@ -897,7 +943,8 @@
                         }
                     }
                 // }
-            } else {
+            }
+            else {
                 $('.dash_mode').html('โหมดอัตโนมัติ')
                 $('.sw_mode_Auto').addClass('btn-success').removeClass('btn-outline-success')
                 $('.sw_mode_Manual').removeClass('btn-success').addClass('btn-outline-success')
@@ -954,6 +1001,403 @@
                 }
             }
         }
+        else if(message.destinationName == house_master + "/control/config/auto"){
+            var result = message.payloadString;
+            var n_result = result.split('\r\n')
+            console.log(n_result);
+            var SW_drip1 = []
+            var SW_drip2 = []
+            var SW_drip3 = []
+            var SW_drip4 = []
+            var SW_fan1 = []
+            var SW_fan2 = []
+            var SW_fan3 = []
+            var SW_fan4 = []
+            var SW_foggy1 = []
+            var SW_foggy2 = []
+            var SW_spray = []
+            var SW_shading = []
+            for(var i=1; i<=6; i++){
+                if(config_cn['cn_status_1'] == 1){
+                    if(n_result[i].split('=')[1] != '99:99' && n_result[i+1].split('=')[1] != '99:99'){
+                        SW_drip1.push({ sw:1, s:n_result[i].split('=')[1], e:n_result[i+1].split('=')[1] });
+                    }else {
+                        SW_drip1.push({ sw:0, s:'', e:'' })
+                    }
+                }
+                if(config_cn['cn_status_2'] == 1){
+                    if(n_result[i+13].split('=')[1] != '99:99' && n_result[i+14].split('=')[1] != '99:99'){
+                        SW_drip2.push({ sw:1, s:n_result[i+13].split('=')[1], e:n_result[i+14].split('=')[1] });
+                    }else {
+                        SW_drip2.push({ sw:0, s:'', e:'' });
+                    }
+                }
+                if(config_cn['cn_status_3'] == 1){
+                    if(n_result[i+26].split('=')[1] != '99:99' && n_result[i+27].split('=')[1] != '99:99'){
+                        SW_drip3.push({ sw:1, s:n_result[i+26].split('=')[1], e:n_result[i+27].split('=')[1] });
+                    }else {
+                        SW_drip3.push({ sw:0, s:'', e:'' });
+                    }
+                }
+                if(config_cn['cn_status_4'] == 1){
+                    if(n_result[i+39].split('=')[1] != '99:99' && n_result[i+40].split('=')[1] != '99:99'){
+                        SW_drip4.push({ sw:1, s:n_result[i+39].split('=')[1], e:n_result[i+40].split('=')[1] });
+                    }else {
+                        SW_drip4.push({ sw:0, s:'', e:'' });
+                    }
+                }
+                if(config_cn['cn_status_5'] == 1){
+                    if(n_result[i+52].split('=')[1] != '99:99' && n_result[i+53].split('=')[1] != '99:99'){
+                        SW_fan1.push({ sw:1, s:n_result[i+52].split('=')[1], e:n_result[i+53].split('=')[1] });
+                    }else {
+                        SW_fan1.push({ sw:0, s:'', e:'' });
+                    }
+                }
+                if(config_cn['cn_status_6'] == 1){
+                    if(n_result[i+65].split('=')[1] != '99:99' && n_result[i+66].split('=')[1] != '99:99'){
+                        SW_fan2.push({ sw:1, s:n_result[i+65].split('=')[1], e:n_result[i+66].split('=')[1] });
+                    }else {
+                        SW_fan2.push({ sw:0, s:'', e:'' });
+                    }
+                }
+                if(config_cn['cn_status_7'] == 1){
+                    if(n_result[i+78].split('=')[1] != '99:99' && n_result[i+79].split('=')[1] != '99:99'){
+                        SW_fan3.push({ sw:1, s:n_result[i+78].split('=')[1], e:n_result[i+79].split('=')[1] });
+                    }else {
+                        SW_fan3.push({ sw:0, s:'', e:'' });
+                    }
+                }
+                if(config_cn['cn_status_8'] == 1){
+                    if(n_result[i+91].split('=')[1] != '99:99' && n_result[i+92].split('=')[1] != '99:99'){
+                        SW_fan4.push({ sw:1, s:n_result[i+91].split('=')[1], e:n_result[i+92].split('=')[1] });
+                    }else {
+                        SW_fan4.push({ sw:0, s:'', e:'' });
+                    }
+                }
+                if(config_cn['cn_status_9'] == 1){
+                    if(n_result[i+104].split('=')[1] != '99:99' && n_result[i+105].split('=')[1] != '99:99'){
+                        SW_foggy1.push({ sw:1, s:n_result[i+104].split('=')[1], e:n_result[i+105].split('=')[1] });
+                    }else {
+                        SW_foggy1.push({ sw:0, s:'', e:'' });
+                    }
+                }
+                if(config_cn['cn_status_10'] == 1){
+                    if(n_result[i+117].split('=')[1] != '99:99' && n_result[i+118].split('=')[1] != '99:99'){
+                        SW_foggy2.push({ sw:1, s:n_result[i+117].split('=')[1], e:n_result[i+118].split('=')[1] });
+                    }else {
+                        SW_foggy2.push({ sw:0, s:'', e:'' });
+                    }
+                }
+                if(config_cn['cn_status_11'] == 1){
+                    if(n_result[i+130].split('=')[1] != '99:99' && n_result[i+131].split('=')[1] != '99:99'){
+                        SW_spray.push({ sw:1, s:n_result[i+130].split('=')[1], e:n_result[i+131].split('=')[1] });
+                    }else {
+                        SW_spray.push({ sw:0, s:'', e:'' });
+                    }
+                }
+                if(config_cn['cn_status_12'] == 1){
+                    if(n_result[i+143].split('=')[1] != '99:99' && n_result[i+144].split('=')[1] != '99:99'){
+                        SW_shading.push({ sw:1, s:n_result[i+143].split('=')[1], e:n_result[i+144].split('=')[1] });
+                    }else {
+                        SW_shading.push({ sw:0, s:'', e:'' });
+                    }
+                }
+            }
+            // console.log(SW_spray);
+            // return false
+            var data_auto = {};
+            if(config_cn['cn_status_1'] == 1){
+                $.extend(data_auto, {
+                    'load_1':{
+                        'load_st_1':SW_drip1[0].sw,
+                        'load_st_2':SW_drip1[1].sw,
+                        'load_st_3':SW_drip1[2].sw,
+                        'load_st_4':SW_drip1[3].sw,
+                        'load_st_5':SW_drip1[4].sw,
+                        'load_st_6':SW_drip1[5].sw,
+                        'load_s_1':SW_drip1[0].s,
+                        'load_s_2':SW_drip1[1].s,
+                        'load_s_3':SW_drip1[2].s,
+                        'load_s_4':SW_drip1[3].s,
+                        'load_s_5':SW_drip1[4].s,
+                        'load_s_6':SW_drip1[5].s,
+                        'load_e_1':SW_drip1[0].e,
+                        'load_e_2':SW_drip1[1].e,
+                        'load_e_3':SW_drip1[2].e,
+                        'load_e_4':SW_drip1[3].e,
+                        'load_e_5':SW_drip1[4].e,
+                        'load_e_6':SW_drip1[5].e
+                    }
+                });
+            }
+            if(config_cn['cn_status_2'] == 1){
+                $.extend(data_auto, {
+                    'load_2':{
+                        'load_st_1':SW_drip2[0].sw,
+                        'load_st_2':SW_drip2[1].sw,
+                        'load_st_3':SW_drip2[2].sw,
+                        'load_st_4':SW_drip2[3].sw,
+                        'load_st_5':SW_drip2[4].sw,
+                        'load_st_6':SW_drip2[5].sw,
+                        'load_s_1':SW_drip2[0].s,
+                        'load_s_2':SW_drip2[1].s,
+                        'load_s_3':SW_drip2[2].s,
+                        'load_s_4':SW_drip2[3].s,
+                        'load_s_5':SW_drip2[4].s,
+                        'load_s_6':SW_drip2[5].s,
+                        'load_e_1':SW_drip2[0].e,
+                        'load_e_2':SW_drip2[1].e,
+                        'load_e_3':SW_drip2[2].e,
+                        'load_e_4':SW_drip2[3].e,
+                        'load_e_5':SW_drip2[4].e,
+                        'load_e_6':SW_drip2[5].e
+                    }
+                });
+            }
+            if(config_cn['cn_status_3'] == 1){
+                $.extend(data_auto, {
+                    'load_3':{
+                        'load_st_1':SW_drip3[0].sw,
+                        'load_st_2':SW_drip3[1].sw,
+                        'load_st_3':SW_drip3[2].sw,
+                        'load_st_4':SW_drip3[3].sw,
+                        'load_st_5':SW_drip3[4].sw,
+                        'load_st_6':SW_drip3[5].sw,
+                        'load_s_1':SW_drip3[0].s,
+                        'load_s_2':SW_drip3[1].s,
+                        'load_s_3':SW_drip3[2].s,
+                        'load_s_4':SW_drip3[3].s,
+                        'load_s_5':SW_drip3[4].s,
+                        'load_s_6':SW_drip3[5].s,
+                        'load_e_1':SW_drip3[0].e,
+                        'load_e_2':SW_drip3[1].e,
+                        'load_e_3':SW_drip3[2].e,
+                        'load_e_4':SW_drip3[3].e,
+                        'load_e_5':SW_drip3[4].e,
+                        'load_e_6':SW_drip3[5].e
+                    }
+                });
+            }
+            if(config_cn['cn_status_4'] == 1){
+                $.extend(data_auto, {
+                    'load_4':{
+                        'load_st_1':SW_drip4[0].sw,
+                        'load_st_2':SW_drip4[1].sw,
+                        'load_st_3':SW_drip4[2].sw,
+                        'load_st_4':SW_drip4[3].sw,
+                        'load_st_5':SW_drip4[4].sw,
+                        'load_st_6':SW_drip4[5].sw,
+                        'load_s_1':SW_drip4[0].s,
+                        'load_s_2':SW_drip4[1].s,
+                        'load_s_3':SW_drip4[2].s,
+                        'load_s_4':SW_drip4[3].s,
+                        'load_s_5':SW_drip4[4].s,
+                        'load_s_6':SW_drip4[5].s,
+                        'load_e_1':SW_drip4[0].e,
+                        'load_e_2':SW_drip4[1].e,
+                        'load_e_3':SW_drip4[2].e,
+                        'load_e_4':SW_drip4[3].e,
+                        'load_e_5':SW_drip4[4].e,
+                        'load_e_6':SW_drip4[5].e
+                    }
+                });
+            }
+            if(config_cn['cn_status_5'] == 1){
+                $.extend(data_auto, {
+                    'load_5':{
+                        'load_st_1':SW_fan1[0].sw,
+                        'load_st_2':SW_fan1[1].sw,
+                        'load_st_3':SW_fan1[2].sw,
+                        'load_st_4':SW_fan1[3].sw,
+                        'load_st_5':SW_fan1[4].sw,
+                        'load_st_6':SW_fan1[5].sw,
+                        'load_s_1':SW_fan1[0].s,
+                        'load_s_2':SW_fan1[1].s,
+                        'load_s_3':SW_fan1[2].s,
+                        'load_s_4':SW_fan1[3].s,
+                        'load_s_5':SW_fan1[4].s,
+                        'load_s_6':SW_fan1[5].s,
+                        'load_e_1':SW_fan1[0].e,
+                        'load_e_2':SW_fan1[1].e,
+                        'load_e_3':SW_fan1[2].e,
+                        'load_e_4':SW_fan1[3].e,
+                        'load_e_5':SW_fan1[4].e,
+                        'load_e_6':SW_fan1[5].e
+                    }
+                });
+            }
+            if(config_cn['cn_status_6'] == 1){
+                $.extend(data_auto, {
+                    'load_6':{
+                        'load_st_1':SW_fan2[0].sw,
+                        'load_st_2':SW_fan2[1].sw,
+                        'load_st_3':SW_fan2[2].sw,
+                        'load_st_4':SW_fan2[3].sw,
+                        'load_st_5':SW_fan2[4].sw,
+                        'load_st_6':SW_fan2[5].sw,
+                        'load_s_1':SW_fan2[0].s,
+                        'load_s_2':SW_fan2[1].s,
+                        'load_s_3':SW_fan2[2].s,
+                        'load_s_4':SW_fan2[3].s,
+                        'load_s_5':SW_fan2[4].s,
+                        'load_s_6':SW_fan2[5].s,
+                        'load_e_1':SW_fan2[0].e,
+                        'load_e_2':SW_fan2[1].e,
+                        'load_e_3':SW_fan2[2].e,
+                        'load_e_4':SW_fan2[3].e,
+                        'load_e_5':SW_fan2[4].e,
+                        'load_e_6':SW_fan2[5].e
+                    }
+                });
+            }
+            if(config_cn['cn_status_7'] == 1){
+                $.extend(data_auto, {
+                    'load_7':{
+                        'load_st_1':SW_fan3[0].sw,
+                        'load_st_2':SW_fan3[1].sw,
+                        'load_st_3':SW_fan3[2].sw,
+                        'load_st_4':SW_fan3[3].sw,
+                        'load_st_5':SW_fan3[4].sw,
+                        'load_st_6':SW_fan3[5].sw,
+                        'load_s_1':SW_fan3[0].s,
+                        'load_s_2':SW_fan3[1].s,
+                        'load_s_3':SW_fan3[2].s,
+                        'load_s_4':SW_fan3[3].s,
+                        'load_s_5':SW_fan3[4].s,
+                        'load_s_6':SW_fan3[5].s,
+                        'load_e_1':SW_fan3[0].e,
+                        'load_e_2':SW_fan3[1].e,
+                        'load_e_3':SW_fan3[2].e,
+                        'load_e_4':SW_fan3[3].e,
+                        'load_e_5':SW_fan3[4].e,
+                        'load_e_6':SW_fan3[5].e
+                    }
+                });
+            }
+            if(config_cn['cn_status_8'] == 1){
+                $.extend(data_auto, {
+                    'load_8':{
+                        'load_st_1':SW_fan4[0].sw,
+                        'load_st_2':SW_fan4[1].sw,
+                        'load_st_3':SW_fan4[2].sw,
+                        'load_st_4':SW_fan4[3].sw,
+                        'load_st_5':SW_fan4[4].sw,
+                        'load_st_6':SW_fan4[5].sw,
+                        'load_s_1':SW_fan4[0].s,
+                        'load_s_2':SW_fan4[1].s,
+                        'load_s_3':SW_fan4[2].s,
+                        'load_s_4':SW_fan4[3].s,
+                        'load_s_5':SW_fan4[4].s,
+                        'load_s_6':SW_fan4[5].s,
+                        'load_e_1':SW_fan4[0].e,
+                        'load_e_2':SW_fan4[1].e,
+                        'load_e_3':SW_fan4[2].e,
+                        'load_e_4':SW_fan4[3].e,
+                        'load_e_5':SW_fan4[4].e,
+                        'load_e_6':SW_fan4[5].e
+                    }
+                });
+            }
+            if(config_cn['cn_status_9'] == 1){
+                $.extend(data_auto, {
+                    'load_9':{
+                        'load_st_1':SW_foggy1[0].sw,
+                        'load_st_2':SW_foggy1[1].sw,
+                        'load_st_3':SW_foggy1[2].sw,
+                        'load_st_4':SW_foggy1[3].sw,
+                        'load_st_5':SW_foggy1[4].sw,
+                        'load_st_6':SW_foggy1[5].sw,
+                        'load_s_1':SW_foggy1[0].s,
+                        'load_s_2':SW_foggy1[1].s,
+                        'load_s_3':SW_foggy1[2].s,
+                        'load_s_4':SW_foggy1[3].s,
+                        'load_s_5':SW_foggy1[4].s,
+                        'load_s_6':SW_foggy1[5].s,
+                        'load_e_1':SW_foggy1[0].e,
+                        'load_e_2':SW_foggy1[1].e,
+                        'load_e_3':SW_foggy1[2].e,
+                        'load_e_4':SW_foggy1[3].e,
+                        'load_e_5':SW_foggy1[4].e,
+                        'load_e_6':SW_foggy1[5].e
+                    }
+                });
+            }
+            if(config_cn['cn_status_10'] == 1){
+                $.extend(data_auto, {
+                    'load_10':{
+                        'load_st_1':SW_foggy2[0].sw,
+                        'load_st_2':SW_foggy2[1].sw,
+                        'load_st_3':SW_foggy2[2].sw,
+                        'load_st_4':SW_foggy2[3].sw,
+                        'load_st_5':SW_foggy2[4].sw,
+                        'load_st_6':SW_foggy2[5].sw,
+                        'load_s_1':SW_foggy2[0].s,
+                        'load_s_2':SW_foggy2[1].s,
+                        'load_s_3':SW_foggy2[2].s,
+                        'load_s_4':SW_foggy2[3].s,
+                        'load_s_5':SW_foggy2[4].s,
+                        'load_s_6':SW_foggy2[5].s,
+                        'load_e_1':SW_foggy2[0].e,
+                        'load_e_2':SW_foggy2[1].e,
+                        'load_e_3':SW_foggy2[2].e,
+                        'load_e_4':SW_foggy2[3].e,
+                        'load_e_5':SW_foggy2[4].e,
+                        'load_e_6':SW_foggy2[5].e
+                    }
+                });
+            }
+            if(config_cn['cn_status_11'] == 1){
+                $.extend(data_auto, {
+                    'load_11':{
+                        'load_st_1':SW_spray[0].sw,
+                        'load_st_2':SW_spray[1].sw,
+                        'load_st_3':SW_spray[2].sw,
+                        'load_st_4':SW_spray[3].sw,
+                        'load_st_5':SW_spray[4].sw,
+                        'load_st_6':SW_spray[5].sw,
+                        'load_s_1':SW_spray[0].s,
+                        'load_s_2':SW_spray[1].s,
+                        'load_s_3':SW_spray[2].s,
+                        'load_s_4':SW_spray[3].s,
+                        'load_s_5':SW_spray[4].s,
+                        'load_s_6':SW_spray[5].s,
+                        'load_e_1':SW_spray[0].e,
+                        'load_e_2':SW_spray[1].e,
+                        'load_e_3':SW_spray[2].e,
+                        'load_e_4':SW_spray[3].e,
+                        'load_e_5':SW_spray[4].e,
+                        'load_e_6':SW_spray[5].e
+                    }
+                });
+            }
+            if(config_cn['cn_status_12'] == 1){
+                $.extend(data_auto, {
+                    'load_12':{
+                        'load_st_1':SW_shading[0].sw,
+                        'load_st_2':SW_shading[1].sw,
+                        'load_st_3':SW_shading[2].sw,
+                        'load_st_4':SW_shading[3].sw,
+                        'load_st_5':SW_shading[4].sw,
+                        'load_st_6':SW_shading[5].sw,
+                        'load_s_1':SW_shading[0].s,
+                        'load_s_2':SW_shading[1].s,
+                        'load_s_3':SW_shading[2].s,
+                        'load_s_4':SW_shading[3].s,
+                        'load_s_5':SW_shading[4].s,
+                        'load_s_6':SW_shading[5].s,
+                        'load_e_1':SW_shading[0].e,
+                        'load_e_2':SW_shading[1].e,
+                        'load_e_3':SW_shading[2].e,
+                        'load_e_4':SW_shading[3].e,
+                        'load_e_5':SW_shading[4].e,
+                        'load_e_6':SW_shading[5].e
+                    }
+                });
+            }
+            // console.log(JSON.stringify(data_auto) );
+            $('#val_sw_auto').val(JSON.stringify(data_auto));
+            // console.log($('#val_sw_auto').val());
+        }
 
     }// exit_message
     connect();
@@ -963,8 +1407,10 @@
     $('.memu_control').click(function () {
         $(".memu_dash").show().addClass("mm-active");
         $(this).removeClass("mm-active");
+        $("#Modal_control").modal('show', { backdrop: "static" })
+
         // Create a client instance
-        client = new Paho.MQTT.Client(hostname, Number(port), "mqtt_js_324" + parseInt(Math.random() * 100000, 10));
+        client = new Paho.MQTT.Client(hostname, Number(port), "mqtt_control_324" + parseInt(Math.random() * 100000, 10));
 
         // set callback handlers
         client.onConnectionLost = onConnectionLost;
@@ -1033,7 +1479,8 @@
                     cancelButtonColor: '#FF3333',
                     confirmButtonText: 'ไช่',
                     cancelButtonText: 'ยกเลิก'
-                }).then((result) => {
+                }).
+                then((result) => {
                     if (result.value) {
                         if ($("#swch_1").prop('checked') == true) { var sw_1 = 1; } else { var sw_1 = 0; }
                         if ($("#swch_2").prop('checked') == true) { var sw_2 = 1; } else { var sw_2 = 0; }
@@ -1064,28 +1511,47 @@
                                 e_3: $("#time_e_3").val(),
                                 e_4: $("#time_e_4").val(),
                                 e_5: $("#time_e_5").val(),
-                                e_6: $("#time_e_6").val()
+                                e_6: $("#time_e_6").val(),
+                                parseJSON: JSON.parse($('#val_sw_auto').val())
                             },
                             dataType: 'json',
                             success: function (res) {
                                 console.log(res.data)
                                 if (res.status === "Insert_Success") {
                                     $("#Modal_Auto_control").modal("hide");
-                                    if (message.destinationName == house_master + "/control/config/auto") {
-                                        var result = message.payloadString;
-                                        var parseJSON = $.parseJSON(result);
-                                        // console.log(parseJSON);
-                                        $.extend(parseJSON, res.data);
-                                        var json_msg = JSON.stringify(parseJSON);
-                                        // console.log(parseJSON)
-                                        mqtt_send(house_master+'/control/config/auto', json_msg, '')
+                                    var originalArray = res.data;
+                                    var separator = '\r\n';
+                                    var implodedArray = '';
+
+                                    for(let i = 0; i < originalArray.length; i++) {
+
+                                        // add a string from original array
+                                        implodedArray += originalArray[i];
+
+                                        // unless the iterator reaches the end of
+                                        // the array add the separator string
+                                        if(i != originalArray.length - 1){
+                                            implodedArray += separator;
+                                        }
                                     }
+                                    // console.log(implodedArray);
+                                    // if (message.destinationName == house_master + "/control/config/auto") {
+                                        // var parseJSON = JSON.parse($('#val_sw_auto').val())
+                                        // var result = message.payloadString;
+                                        // var parseJSON = $.parseJSON(result);
+                                        // console.log(parseJSON);
+                                        // $.extend(parseJSON, res.data);
+                                        // var json_msg = JSON.stringify(parseJSON);
+                                        // console.log(parseJSON.length)
+                                        mqtt_send(house_master+'/control/config/auto', implodedArray, '')
+                                    // }
                                     swal({
                                         title: 'บันทึกข้อมูลสำเร็จ',
                                         type: 'success',
                                         allowOutsideClick: false,
                                         confirmButtonColor: '#32CD32'
                                     });
+                                    // fn_df_logdata_auto($('.hidden_select_sw_auto').val())
                                     for (var i = 1; i <= 6; i++){
                                         if ($("#swch_"+i).prop('checked') == true) { $(".img_"+i).attr("src", "public/images/control/switck_on.png"); } else { $(".img_"+i).attr("src", "public/images/control/switck_off.png"); }
                                     }
@@ -1106,7 +1572,7 @@
                                         confirmButtonColor: '#32CD32'
                                     }).then((result) => {
                                         if (result.value) {
-                                            location.reload();
+                                            // location.reload();
                                             return false;
                                         }
                                     });
@@ -1141,7 +1607,8 @@
                     }else {
                         log_sw['sw_4'] = "OFF";
                     }
-                }else if (numb == 2){
+                }
+                else if (numb == 2){
                     if ($("#label_1").prop('checked') === true) {
                         log_sw['sw_1'] = "ON";
                     }else {
@@ -1162,7 +1629,8 @@
                     }else {
                         log_sw['sw_4'] = "OFF";
                     }
-                }else if (numb == 3){
+                }
+                else if (numb == 3){
                     if ($("#label_1").prop('checked') === true) {
                         log_sw['sw_1'] = "ON";
                     }else {
@@ -1208,9 +1676,24 @@
                                 // console.log(res.data)
                                 if (res.status === "Insert_Success") {
                                     $("#Modal_Auto_control").modal("hide");
-                                    $('#val_sw').val(JSON.stringify(res.data));
+                                    $('#val_sw_manual').val(JSON.stringify(res.data));
                                     // console.log(res.data);
-                                    mqtt_send(house_master+'/control/config/manual', JSON.stringify(res.data), '')
+                                    var new_res = //JSON.stringify(
+                                        '[config]'+'\r\n'+
+                                        'serial_id='+house_master+'\r\n'+
+                                        'dripper_1='+res.data['dripper_1']+'\r\n'+
+                                        'dripper_2='+res.data['dripper_2']+'\r\n'+
+                                        'dripper_3='+res.data['dripper_3']+'\r\n'+
+                                        'dripper_4='+res.data['dripper_4']+'\r\n'+
+                                        'fan_1='+res.data['fan_1']+'\r\n'+
+                                        'fan_2='+res.data['fan_2']+'\r\n'+
+                                        'fan_3='+res.data['fan_3']+'\r\n'+
+                                        'fan_4='+res.data['fan_4']+'\r\n'+
+                                        'foggy_1='+res.data['foggy_1']+'\r\n'+
+                                        'foggy_2='+res.data['foggy_2']
+
+                                    // );
+                                    mqtt_send(house_master+'/control/config/manual', new_res, '')
                                     swal({
                                         title: 'บันทึกข้อมูลสำเร็จ',
                                         type: 'success',
@@ -1276,14 +1759,26 @@
                 }).then((result) => {
                     if (result.value) {
                         // console.log(login_user);
+                        message = new Paho.MQTT.Message(login_user);
+                        message.destinationName = house_master + "/control/status/user_control";
+                        message.retained = true;
+                        message.qos = 1;
+                        client.send(message);
+
                         message = new Paho.MQTT.Message(mess);
                         message.destinationName = house_master + "/control/status/mode";
                         message.retained = true;
                         message.qos = 1;
                         client.send(message);
-
+                        // ----------------------------------------------------------
                         message = new Paho.MQTT.Message(login_user);
-                        message.destinationName = house_master + "/control/status/user_control";
+                        message.destinationName = house_master + "/control/loads/user_control";
+                        message.retained = true;
+                        message.qos = 1;
+                        client.send(message);
+
+                        message = new Paho.MQTT.Message(mess);
+                        message.destinationName = house_master + "/control/loads/mode";
                         message.retained = true;
                         message.qos = 1;
                         client.send(message);
@@ -1306,7 +1801,7 @@
                 }else {
                     var status = 'ปิด';
                 }
-                var sw_log = $.parseJSON($('#val_sw').val());
+                var sw_log = $.parseJSON($('#val_sw_manual').val());
                 if(val == 1){
                     var name = 'Dripper';
                     if(sw_log.dripper_1 == 'ON'){
@@ -1333,7 +1828,8 @@
                     }else {
                         var sw_4 = 0;
                     }
-                }else if(val == 2){
+                }
+                else if(val == 2){
                     var name = 'Fan';
                     if(sw_log.fan_1 == 'ON'){
                         var sw_1 = 1;
@@ -1359,7 +1855,8 @@
                     }else {
                         var sw_4 = 0;
                     }
-                }else if(val == 3){
+                }
+                else if(val == 3){
                     var name = 'Foggy';
                     if(sw_log.foggy_1 == 'ON'){
                         var sw_1 = 1;
@@ -1375,14 +1872,16 @@
                     }
                     var sw_3 = 0;
                     var sw_4 = 0;
-                }else if(val == 4){
+                }
+                else if(val == 4){
                     var name = 'Spray';
                     var sw_1 = 1;
                     var mqtt_name_1 = 'spray';
                     var sw_2 = 0;
                     var sw_3 = 0;
                     var sw_4 = 0;
-                }else if(val == 5){
+                }
+                else if(val == 5){
                     var name = 'Shading';
                     var mqtt_name_1 = 'shading';
                     var sw_1 = 1;
@@ -1406,6 +1905,11 @@
                         // alert(sta)
                         // return false;
 
+                        message = new Paho.MQTT.Message(login_user);
+                        message.destinationName = house_master + "/control/status/user_control";
+                        message.qos = 1;
+                        message.retained = true;
+                        client.send(message);
                         if(sw_1 == 1){
                             message = new Paho.MQTT.Message(sts);
                             message.destinationName = house_master + "/control/status/" + mqtt_name_1;
@@ -1437,246 +1941,119 @@
                         }
 
                         message = new Paho.MQTT.Message(login_user);
-                        message.destinationName = house_master + "/control/status/user_control";
+                        message.destinationName = house_master + "/control/loads/user_control";
                         message.qos = 1;
                         message.retained = true;
                         client.send(message);
+                        if(val == 1){
+                            message = new Paho.MQTT.Message(sts);
+                            message.destinationName = house_master + "/control/loads/dripper";
+                            message.qos = 1;
+                            message.retained = true;
+                            client.send(message);
+                        }
+                        else if(val == 2){
+                            message = new Paho.MQTT.Message(sts);
+                            message.destinationName = house_master + "/control/loads/fan";
+                            message.qos = 1;
+                            message.retained = true;
+                            client.send(message);
+                        }
+                        else if(val == 3){
+                            message = new Paho.MQTT.Message(sts);
+                            message.destinationName = house_master + "/control/loads/foggy";
+                            message.qos = 1;
+                            message.retained = true;
+                            client.send(message);
+                        }
+                        else if(val == 4){
+                            message = new Paho.MQTT.Message(sts);
+                            message.destinationName = house_master + "/control/loads/spray";
+                            message.qos = 1;
+                            message.retained = true;
+                            client.send(message);
+                        }
+                        else if(val == 5){
+                            message = new Paho.MQTT.Message(sts);
+                            message.destinationName = house_master + "/control/loads/shading";
+                            message.qos = 1;
+                            message.retained = true;
+                            client.send(message);
+
+                        }
                     }
                 });
             }
         } // exit_message
-
-        // if($('.sw_mode_Auto').hasClass('btn-success') == true){
-            $.ajax({ // Auto
-                url: "routes/tu/get_control_au.php",
-                method: "post",
-                data: {
-                    house_master: house_master,
-                    config_cn: config_cn
-                },
-                dataType: "json",
-                success: function(res) {
-                    // console.log(res);
-                    $("#Modal_control").modal('show', { backdrop: "static" })
-                    $(".menu_config_auto").show();
-                    $(".img_sw").show();
-                    $(".sw_toggle").hide();
-                    $('.input_time').prop('disabled', true);
-                    if(config_cn.cn_status_1 == 1){
-                        $('.hidden_select_sw_auto').val(1);
-                    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 1) {
-                        $('.hidden_select_sw_auto').val(2);
-                    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 1) {
-                        $('.hidden_select_sw_auto').val(3);
-                    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 1) {
-                        $('.hidden_select_sw_auto').val(4);
-                    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 1) {
-                        $('.hidden_select_sw_auto').val(5);
-                    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 1) {
-                        $('.hidden_select_sw_auto').val(6);
-                    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 1) {
-                        $('.hidden_select_sw_auto').val(7);
-                    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 1) {
-                        $('.hidden_select_sw_auto').val(8);
-                    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 1) {
-                        $('.hidden_select_sw_auto').val(9);
-                    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 1) {
-                        $('.hidden_select_sw_auto').val(10);
-                    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 0 && config_cn.cn_status_11 == 1) {
-                        $('.hidden_select_sw_auto').val(11); $("#11").addClass('active');
-                    }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 0 && config_cn.cn_status_11 == 0 && config_cn.cn_status_12 == 1) {
-                        $('.hidden_select_sw_auto').val(12);
-                    }
-                    fn_df_checkbox_auto($('.hidden_select_sw_auto').val());
-                    function fn_df_checkbox_auto(val){
-                        for (var i = 1; i <= 12; i++) {
-                            if(i == val){
-                                $('.title_load_auto').html(config_cn['cn_name_'+i]);
-                                $("#"+i).addClass('active');
-                                if(i <= 4){
-                                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_on.png');
-                                }else if (i > 4 && i <= 8) {
-                                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_on.png');
-                                }else if (i > 8 && i <= 10) {
-                                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_on.png');
-                                }else if (i == 11) {
-                                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_on.png');
-                                }else if (i == 12) {
-                                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/shading_on.png');
-                                }
-                            }else {
-                                $('#'+i).removeClass('active')
-                                if(i <= 4){
-                                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_off.png');
-                                }else if (i > 4 && i <= 8) {
-                                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_off.png');
-                                }else if (i > 8 && i <= 10) {
-                                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_off.png');
-                                }else if (i == 11) {
-                                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_off.png');
-                                }else if (i == 12) {
-                                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/shading_off.png');
-                                }
-                            }
-                        }
-                    }
-                    fn_df_logdata_auto($('.hidden_select_sw_auto').val())
-                    function fn_df_logdata_auto(numb) {
-                        for (var i = 0; i <= 6; i++) {
-                            if (res["load_"+numb]["load_st_"+i] == 1) {
-                                $("#swch_"+i).bootstrapToggle('on');
-                                $(".img_"+i).attr("src", "public/images/control/switck_on.png");
-                                $("#time_s_"+i).prop('disabled', true).val(res["load_"+numb]["load_s_"+i]);
-                                $("#time_e_"+i).prop('disabled', true).val(res["load_"+numb]["load_e_"+i]);
-                            } else {
-                                $("#swch_"+i).bootstrapToggle('off');
-                                $(".img_"+i).attr("src", "public/images/control/switck_off.png");
-                                $("#time_s_"+i).prop('disabled', true).val("");
-                                $("#time_e_"+i).prop('disabled', true).val("");
-                            }
-                        }
-                    }
-                    $(".menu_config_auto").click(function() {
-                        // $(".nav-link").addClass('disabled');
-                        $(this).hide();
-                        $(".img_sw").hide();
-                        $(".sw_toggle").show();
-                        $("#close_auto_cont").show();
-                        $(".sw_mode_Auto").attr('disabled', true);
-                        $(".sw_mode_Manual").attr('disabled', true);
-                        $(".close_modal").hide();
-                        for (var i = 0; i <= 6; i++) {
-                            if (res["load_"+$('.hidden_select_sw_auto').val()]["load_st_"+i] == 1) {
-                                $("#time_s_"+i).prop('disabled', false);
-                                $("#time_e_"+i).prop('disabled', false);
-                            } else {
-                                $("#time_s_"+i).prop('disabled', true);
-                                $("#time_e_"+i).prop('disabled', true);
-                            }
-                        }
-                        $('.input_check').change(function() {
-                            var input_num = this.id.split("_");
-                            if ($(this).prop('checked') === true) {
-                                $("#time_s_"+input_num[1]).prop('disabled', false).val(res["load_"+$('.hidden_select_sw_auto').val()]["load_s_"+input_num[1]]);
-                                $("#time_e_"+input_num[1]).prop('disabled', false).val(res["load_"+$('.hidden_select_sw_auto').val()]["load_e_"+input_num[1]]);
-                            }else {
-                                $("#time_s_"+input_num[1]).prop('disabled', true).val("");
-                                $("#time_e_"+input_num[1]).prop('disabled', true).val("");
-                            }
-                            fn_check_auto_save($('.hidden_select_sw_auto').val(), '');
-                        });
-                        $(".input_time").change(function() {
-                            fn_check_auto_save($('.hidden_select_sw_auto').val(), '');
-                        });
-                    });
-                    function fn_check_auto_save(chanel, mode){
-                        var sw_gd = [];
-                        for (var i = 1; i <= 6; i++) {
-                            if ($("#swch_"+i).prop('checked') === true) {
-                                sw_gd['load_st_'+i] = 1;
-                                sw_gd['load_s_'+i] = $("#time_s_"+i).val();
-                                sw_gd['load_e_'+i] = $("#time_e_"+i).val();
-                            } else {
-                                sw_gd['load_st_'+i] = 0;
-                                sw_gd['load_s_'+i] = "";
-                                sw_gd['load_e_'+i] = "";
-                            }
-                        }
-                        var sw_gd2 = {
-                            'load_st_1':sw_gd['load_st_1'],
-                            'load_s_1':sw_gd['load_s_1'],
-                            'load_e_1':sw_gd['load_e_1'],
-                            'load_st_2':sw_gd['load_st_2'],
-                            'load_s_2':sw_gd['load_s_2'],
-                            'load_e_2':sw_gd['load_e_2'],
-                            'load_st_3':sw_gd['load_st_3'],
-                            'load_s_3':sw_gd['load_s_3'],
-                            'load_e_3':sw_gd['load_e_3'],
-                            'load_st_4':sw_gd['load_st_4'],
-                            'load_s_4':sw_gd['load_s_4'],
-                            'load_e_4':sw_gd['load_e_4'],
-                            'load_st_5':sw_gd['load_st_5'],
-                            'load_s_5':sw_gd['load_s_5'],
-                            'load_e_5':sw_gd['load_e_5'],
-                            'load_st_6':sw_gd['load_st_6'],
-                            'load_s_6':sw_gd['load_s_6'],
-                            'load_e_6':sw_gd['load_e_6']
-                        };
-                        // console.log(JSON.stringify(res['load_'+chanel]));
-                        // console.log(JSON.stringify(sw_gd2));
-                        // console.log(sw_gd2);
-                        if(mode === 'close'){
-                            if (JSON.stringify(res['load_'+chanel]) === JSON.stringify(sw_gd2)) {
-                                $(".img_sw").show();
-                                $('.input_time').prop('disabled', true);
-                                $(".sw_toggle").hide();
-                                $(".menu_config_auto").show();
-                                $("#save_auto_cont").hide();
-                                $("#close_auto_cont").hide();
-                                $(".sw_mode_Auto").attr('disabled', false);
-                                $(".sw_mode_Manual").attr('disabled', false);
-                                // $(".close_modal").show();
-                            } else {
-                                swal({
-                                    title: 'คุณแน่ใจหรือไม่?',
-                                    text: "คุณต้องการยกเลิกการตั้งค่า?",
-                                    type: 'warning',
-                                    allowOutsideClick: false,
-                                    showCancelButton: true,
-                                    confirmButtonColor: '#da3444',
-                                    cancelButtonColor: '#8e8e8e',
-                                    confirmButtonText: 'ยืนยัน',
-                                    cancelButtonText: 'ยกเลิก',
-                                }).then((result) => {
-                                    if (result.value) {
-                                        $(".img_sw").show();
-                                        $('.input_time').removeClass("input_err").prop('disabled', true);
-                                        $(".sw_toggle").hide();
-                                        $(".menu_config_auto").show();
-                                        $(".sw_mode_Auto").attr('disabled', false);
-                                        $(".sw_mode_Manual").attr('disabled', false);
-                                        $(".close_modal").show();
-                                        fn_df_logdata_auto(chanel);
-                                        $("#save_auto_cont").hide();
-                                        // $("#close_auto_cont").hide();
-                                    }
-                                });
-                            }
-                        }else {
-                            if (JSON.stringify(res['load_'+chanel]) === JSON.stringify(sw_gd2)) {
-                                $("#save_auto_cont").hide();
-                            } else {
-                                $("#save_auto_cont").show();
-                            }
-                        }
-                    }
-                    $("#close_auto_cont").click(function() {
-                        fn_check_auto_save($('.hidden_select_sw_auto').val(), 'close')
-                    });
-                    $('.sw_sel_load_auto').click(function(){
-                        if($('.menu_config_auto').is(":hidden") == true){
-                            swal({
-                                title: 'ข้อผิดพลาด !',
-                                text: "กรุณาบ้นทึกหรือยกเลิกการตั้งค่าก่อน !!!",
-                                type: 'warning',
-                                allowOutsideClick: false,
-                                confirmButtonColor: '#32CD32',
-                                confirmButtonText: 'ตกลง',
-                            });
-                        }else {
-                            var numb = $(this).attr('id');
-                            $('.hidden_select_sw_auto').val(numb)
-                            fn_df_checkbox_auto(numb);
-                            fn_df_logdata_auto(numb);
-                            $("#save_auto_cont").hide();
-                        }
-                    })
-                    $("#save_auto_cont").hide();
-                    $("#close_auto_cont").hide();
-                }
-            });
-        // }else { // Manual
         // ================================================
+        // Auto
+        $(".menu_config_auto").show();
+        $(".img_sw").show();
+        $(".sw_toggle").hide();
+        $('.input_time').prop('disabled', true);
+        $("#save_auto_cont").hide();
+        $("#close_auto_cont").hide();
+        fn_df_checkbox_auto($('.hidden_select_sw_auto').val());
+        fn_df_logdata_auto($('.hidden_select_sw_auto').val())
+        $(".menu_config_auto").click(function() {
+            var res = JSON.parse($('#val_sw_auto').val())
+            // console.log(res);
+            // $(".nav-link").addClass('disabled');
+            $(this).hide();
+            $(".img_sw").hide();
+            $(".sw_toggle").show();
+            $("#close_auto_cont").show();
+            $(".sw_mode_Auto").attr('disabled', true);
+            $(".sw_mode_Manual").attr('disabled', true);
+            $(".close_modal").hide();
+            for (var i = 0; i <= 6; i++) {
+                if (res["load_"+$('.hidden_select_sw_auto').val()]["load_st_"+i] == 1) {
+                    $("#time_s_"+i).prop('disabled', false);
+                    $("#time_e_"+i).prop('disabled', false);
+                } else {
+                    $("#time_s_"+i).prop('disabled', true);
+                    $("#time_e_"+i).prop('disabled', true);
+                }
+            }
+            $('.input_check').change(function() {
+                var input_num = this.id.split("_");
+                if ($(this).prop('checked') === true) {
+                    $("#time_s_"+input_num[1]).prop('disabled', false).val(res["load_"+$('.hidden_select_sw_auto').val()]["load_s_"+input_num[1]]);
+                    $("#time_e_"+input_num[1]).prop('disabled', false).val(res["load_"+$('.hidden_select_sw_auto').val()]["load_e_"+input_num[1]]);
+                }else {
+                    $("#time_s_"+input_num[1]).prop('disabled', true).val("");
+                    $("#time_e_"+input_num[1]).prop('disabled', true).val("");
+                }
+                fn_check_auto_save($('.hidden_select_sw_auto').val(), '');
+            });
+            $(".input_time").change(function() {
+                fn_check_auto_save($('.hidden_select_sw_auto').val(), '');
+            });
+        });
+        $("#close_auto_cont").click(function() {
+            fn_check_auto_save($('.hidden_select_sw_auto').val(), 'close')
+        });
+        $('.sw_sel_load_auto').click(function(){
+            if($('.menu_config_auto').is(":hidden") == true){
+                swal({
+                    title: 'ข้อผิดพลาด !',
+                    text: "กรุณาบ้นทึกหรือยกเลิกการตั้งค่าก่อน !!!",
+                    type: 'warning',
+                    allowOutsideClick: false,
+                    confirmButtonColor: '#32CD32',
+                    confirmButtonText: 'ตกลง',
+                });
+            }
+            else {
+                var numb = $(this).attr('id');
+                $('.hidden_select_sw_auto').val(numb)
+                fn_df_checkbox_auto(numb);
+                fn_df_logdata_auto(numb);
+                $("#save_auto_cont").hide();
+            }
+        })
+        // ================================================
+        // Manual
         $('.status_config_manual').hide();
         $('#save_manual_cont').hide();
         $('#close_manual_cont').hide();
@@ -1706,7 +2083,7 @@
             // fn_label_manual($('.hidden_select_sw_manual').val());
             // =================================================
             var val = $('.hidden_select_sw_manual').val();
-            var sw_log = $.parseJSON($('#val_sw').val());
+            var sw_log = $.parseJSON($('#val_sw_manual').val());
             $('.label_1').show();
             $('.label_2').show();
             $('.label_3').show();
@@ -1814,7 +2191,7 @@
                 fn_check_manual_save($('.hidden_select_sw_manual').val(), 'close');
             });
             function fn_check_manual_save(numb, mode){
-                var sw_log = $.parseJSON($('#val_sw').val());
+                var sw_log = $.parseJSON($('#val_sw_manual').val());
                 var new_log = [];
                 if(numb == 1){
                     if ($("#label_1").prop('checked') == true) {
@@ -1910,10 +2287,10 @@
                     'spray': new_log.spray,
                     'shading': new_log.shading,
                 };
-                // console.log($('#val_sw').val())
+                // console.log($('#val_sw_manual').val())
                 // console.log(JSON.stringify(new_log2))
                 if(mode === 'close'){
-                    if ($('#val_sw').val() === JSON.stringify(new_log2)) {
+                    if ($('#val_sw_manual').val() === JSON.stringify(new_log2)) {
                         $(".menu_config_manual").show();
                         $('.status_config_manual').hide();
                         $(".sw_mode_Auto").attr('disabled', false);
@@ -1945,7 +2322,7 @@
                         });
                     }
                 }else {
-                    if ($('#val_sw').val() === JSON.stringify(new_log2)) {
+                    if ($('#val_sw_manual').val() === JSON.stringify(new_log2)) {
                         $("#save_manual_cont").hide();
                     } else {
                         $("#save_manual_cont").show();
@@ -1955,9 +2332,146 @@
         });
     });
 
+    // df sw Auto
+    function fn_df_checkbox_auto(val){  // switch
+        for (var i = 1; i <= 12; i++) {
+            if(i == val){
+                $('.title_load_auto').html(config_cn['cn_name_'+i]);
+                $("#"+i).addClass('active');
+                if(i <= 4){
+                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_on.png');
+                }else if (i > 4 && i <= 8) {
+                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_on.png');
+                }else if (i > 8 && i <= 10) {
+                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_on.png');
+                }else if (i == 11) {
+                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_on.png');
+                }else if (i == 12) {
+                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/shading_on.png');
+                }
+            }
+            else {
+                $('#'+i).removeClass('active')
+                if(i <= 4){
+                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_off.png');
+                }else if (i > 4 && i <= 8) {
+                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_off.png');
+                }else if (i > 8 && i <= 10) {
+                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_off.png');
+                }else if (i == 11) {
+                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_off.png');
+                }else if (i == 12) {
+                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/shading_off.png');
+                }
+            }
+        }
+    }
+    // df input Auto
+    function fn_df_logdata_auto(numb) { // input
+        var res = JSON.parse($('#val_sw_auto').val())
+            console.log(res);
+            // return false;
+        for (var i = 0; i <= 6; i++) {
+            if (res["load_"+numb]["load_st_"+i] == 1) {
+                $("#swch_"+i).bootstrapToggle('on');
+                $(".img_"+i).attr("src", "public/images/control/switck_on.png");
+                $("#time_s_"+i).prop('disabled', true).val(res["load_"+numb]["load_s_"+i]);
+                $("#time_e_"+i).prop('disabled', true).val(res["load_"+numb]["load_e_"+i]);
+            } else {
+                $("#swch_"+i).bootstrapToggle('off');
+                $(".img_"+i).attr("src", "public/images/control/switck_off.png");
+                $("#time_s_"+i).prop('disabled', true).val("");
+                $("#time_e_"+i).prop('disabled', true).val("");
+            }
+        }
+    }
+    // check save Auto
+    function fn_check_auto_save(chanel, mode){
+        var res = JSON.parse($('#val_sw_auto').val())
+        var sw_gd = [];
+        for (var i = 1; i <= 6; i++) {
+            if ($("#swch_"+i).prop('checked') === true) {
+                sw_gd['load_st_'+i] = 1;
+                sw_gd['load_s_'+i] = $("#time_s_"+i).val();
+                sw_gd['load_e_'+i] = $("#time_e_"+i).val();
+            } else {
+                sw_gd['load_st_'+i] = 0;
+                sw_gd['load_s_'+i] = "";
+                sw_gd['load_e_'+i] = "";
+            }
+        }
+        var sw_gd2 = {
+            'load_st_1':sw_gd['load_st_1'],
+            'load_st_2':sw_gd['load_st_2'],
+            'load_st_3':sw_gd['load_st_3'],
+            'load_st_4':sw_gd['load_st_4'],
+            'load_st_5':sw_gd['load_st_5'],
+            'load_st_6':sw_gd['load_st_6'],
+            'load_s_1':sw_gd['load_s_1'],
+            'load_s_2':sw_gd['load_s_2'],
+            'load_s_3':sw_gd['load_s_3'],
+            'load_s_4':sw_gd['load_s_4'],
+            'load_s_5':sw_gd['load_s_5'],
+            'load_s_6':sw_gd['load_s_6'],
+            'load_e_1':sw_gd['load_e_1'],
+            'load_e_2':sw_gd['load_e_2'],
+            'load_e_3':sw_gd['load_e_3'],
+            'load_e_4':sw_gd['load_e_4'],
+            'load_e_5':sw_gd['load_e_5'],
+            'load_e_6':sw_gd['load_e_6']
+        };
+        // console.log(JSON.stringify(res['load_'+chanel]));
+        // console.log(JSON.stringify(sw_gd2));
+        // console.log(sw_gd2);
+
+        if(mode === 'close'){
+            if (JSON.stringify(res['load_'+chanel]) === JSON.stringify(sw_gd2)) {
+                $(".img_sw").show();
+                $('.input_time').prop('disabled', true);
+                $(".sw_toggle").hide();
+                $(".menu_config_auto").show();
+                $("#save_auto_cont").hide();
+                $("#close_auto_cont").hide();
+                $(".sw_mode_Auto").attr('disabled', false);
+                $(".sw_mode_Manual").attr('disabled', false);
+                // $(".close_modal").show();
+            } else {
+                swal({
+                    title: 'คุณแน่ใจหรือไม่?',
+                    text: "คุณต้องการยกเลิกการตั้งค่า?",
+                    type: 'warning',
+                    allowOutsideClick: false,
+                    showCancelButton: true,
+                    confirmButtonColor: '#da3444',
+                    cancelButtonColor: '#8e8e8e',
+                    confirmButtonText: 'ยืนยัน',
+                    cancelButtonText: 'ยกเลิก',
+                }).then((result) => {
+                    if (result.value) {
+                        $(".img_sw").show();
+                        $('.input_time').removeClass("input_err").prop('disabled', true);
+                        $(".sw_toggle").hide();
+                        $(".menu_config_auto").show();
+                        $(".sw_mode_Auto").attr('disabled', false);
+                        $(".sw_mode_Manual").attr('disabled', false);
+                        $(".close_modal").show();
+                        fn_df_logdata_auto(chanel);
+                        $("#save_auto_cont").hide();
+                        // $("#close_auto_cont").hide();
+                    }
+                });
+            }
+        }else {
+            if (JSON.stringify(res['load_'+chanel]) === JSON.stringify(sw_gd2)) {
+                $("#save_auto_cont").hide();
+            } else {
+                $("#save_auto_cont").show();
+            }
+        }
+    }
     // label_manual
     function fn_label_manual(val) {
-        var sw_log = $.parseJSON($('#val_sw').val());
+        var sw_log = $.parseJSON($('#val_sw_manual').val());
         if(val == 1){
             $('.title_load_manual').html('ควบคุม Dripper');
             $('.label_1').html(config_cn.cn_name_1);
@@ -1986,7 +2500,8 @@
                     $('.label_4').hide();
                 }
             }
-        }else if(val == 2){
+        }
+        else if(val == 2){
             $('.title_load_manual').html('ควบคุม Fan');
             $('.label_1').html(config_cn.cn_name_5);
             $('.label_2').html(config_cn.cn_name_6);
@@ -2014,7 +2529,8 @@
                     $('.label_4').hide();
                 }
             }
-        }else if(val == 3){
+        }
+        else if(val == 3){
             $('.title_load_manual').html('ควบคุม Foggy');
             $('.label_1').html(config_cn.cn_name_9);
             $('.label_2').html(config_cn.cn_name_10);
@@ -2034,9 +2550,11 @@
                 $('.status_config_manual_3').hide();
                 $('.status_config_manual_4').hide();
             }
-        }else if(val == 4){
+        }
+        else if(val == 4){
             $('.title_load_manual').html('ควบคุม Spray');
-        }else if(val == 5){
+        }
+        else if(val == 5){
             $('.title_load_manual').html('ควบคุม Shading');
         }
         if(val < 4){
