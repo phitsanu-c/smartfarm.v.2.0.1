@@ -79,7 +79,7 @@
                 <div class="card" style="padding: 1.25rem; border-radius:20px"><!-- height:350px; -->
                     <img src="public/images/site/<?= $row_["site_img"] ?>" style="height: 20vh; width: 100%;" class="card-img-top img-fluid" alt="site01">
                     <!-- <div class="card"> -->
-                    <h6 class="card-title text-bold text-center" style="margin-top: 15px">สถานที่ : <B><?= $row_["site_name"] ?></B></h6>
+                    <h6 class="card-title text-bold text-center" style="margin-top: 15px; font-size 1vw">สถานที่ : <B><?= $row_["site_name"] ?></B></h6>
                     <h6 class="card-title text-bold text-center" style="margin-top: 10px">ที่ตั้ง : <B><?= $row_["site_address"] ?></B></h6>
                     <!-- <div class="d-grid" style="overflow:auto; padding-left:10px; padding-right:10px;" id="style-3"> -->
                     <?php

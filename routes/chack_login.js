@@ -1,7 +1,7 @@
 var url = $.base64.decode(window.location.hash.substring(1))
-if(url === ""){
+if (url === "") {
     url = ',,'.split(',')
-}else{
+} else {
     url = url.split(',')
 }
 var house_master = url[1].substring(0, 8);
@@ -25,14 +25,14 @@ $.getJSON('routes/login.php', function(msg) {
 
     // console.log(msg.date_start);
     // if (msg.date_start != new Date().getDate()) {
-        // logout();
-        // return false;
-        // console.log(window.location.pathname);
+    // logout();
+    // return false;
+    // console.log(window.location.pathname);
     // }
 
     // -----------------------------------------------------
-    if(msg.sn['account_status'] == 1 ){ // supportadmin
-        if(url[0] === ''){ // site = nail
+    if (msg.sn['account_status'] == 1) { // supportadmin
+        if (url[0] === '') { // site = nail
             $(".memu_site").addClass("mm-active")
             $("#load_pages").load('views/pages_site.php');
             $(".memu_house").hide();
@@ -40,75 +40,75 @@ $.getJSON('routes/login.php', function(msg) {
             $(".memu_report").hide();
             $('.memu_control').hide();
             $('.memu_compare').hide();
-        }else{ // site != nail
-            if(house_master === '' || house_master.length != 8){ // chack sn != nail or ไม่ถูกต้อง
+        } else { // site != nail
+            if (house_master === '' || house_master.length != 8) { // chack sn != nail or ไม่ถูกต้อง
                 $(".memu_site").removeClass("mm-active")
                 $(".memu_house").show().addClass("mm-active")
                 $(".memu_dash").hide();
                 $(".memu_report").hide();
                 $('.memu_control').hide();
                 $('.memu_compare').hide();
-                $("#load_pages").load('views/pages_house.php?s='+url[0]);
-            }else{
+                $("#load_pages").load('views/pages_house.php?s=' + url[0]);
+            } else {
                 $(".memu_site").removeClass("mm-active")
                 $(".memu_house").removeClass("mm-active")
             }
-            if(url[0] == 10){
+            if (url[0] == 10) {
                 $(".memu_compare").show();
-            }else{
+            } else {
                 $(".memu_compare").hide();
             }
         }
-    }else{ // user and admin != supportadmin
+    } else { // user and admin != supportadmin
         // alert(res.sn['count_house'])
-        if(msg.sn['count_site'] == 1){ // 1 site
-            if(msg.sn['count_house'] == 1){ // 1 site 1 house
+        if (msg.sn['count_site'] == 1) { // 1 site
+            if (msg.sn['count_house'] == 1) { // 1 site 1 house
                 $(".memu_site").hide()
                 $(".memu_house").hide()
-                // $(".memu_dash").show().addClass("mm-active");
+                    // $(".memu_dash").show().addClass("mm-active");
                 $(".memu_report").show().removeClass("mm-active")
-            }else{ // 1 site > 1 house
+            } else { // 1 site > 1 house
                 $(".memu_site").hide()
                 $(".memu_house").show().addClass("mm-active")
                 $(".memu_dash").hide();
                 $(".memu_report").hide();
                 $('.memu_control').hide();
-                $("#load_pages").load('views/pages_house.php?s='+msg.sn['siteID']);
+                $("#load_pages").load('views/pages_house.php?s=' + msg.sn['siteID']);
             }
-            if(url[0] == 10){
+            if (url[0] == 10) {
                 $(".memu_compare").show();
-            }else{
+            } else {
                 $(".memu_compare").hide();
             }
-        }else{ // > 1 site
+        } else { // > 1 site
             // if(msg.sn['count_house'] == 1){
-                if(url[0] === ''){ // site = nail
-                    $(".memu_site").addClass("mm-active")
-                    $("#load_pages").load('views/pages_site.php');
-                    $(".memu_house").hide();
+            if (url[0] === '') { // site = nail
+                $(".memu_site").addClass("mm-active")
+                $("#load_pages").load('views/pages_site.php');
+                $(".memu_house").hide();
+                $(".memu_dash").hide();
+                $(".memu_report").hide();
+                $('.memu_control').hide();
+                $('.memu_compare').hide();
+            } else { // site != nail
+                if (house_master === '' || house_master.length != 8) { // chack sn != nail or ไม่ถูกต้อง
+                    $(".memu_site").removeClass("mm-active")
+                    $(".memu_house").show().addClass("mm-active")
                     $(".memu_dash").hide();
                     $(".memu_report").hide();
                     $('.memu_control').hide();
                     $('.memu_compare').hide();
-                }else{ // site != nail
-                    if(house_master === '' || house_master.length != 8){ // chack sn != nail or ไม่ถูกต้อง
-                        $(".memu_site").removeClass("mm-active")
-                        $(".memu_house").show().addClass("mm-active")
-                        $(".memu_dash").hide();
-                        $(".memu_report").hide();
-                        $('.memu_control').hide();
-                        $('.memu_compare').hide();
-                        $("#load_pages").load('views/pages_house.php?s='+url[0]);
-                    }else{
-                        $(".memu_site").removeClass("mm-active")
-                        $(".memu_house").removeClass("mm-active")
-                        if(url[0] == 10){
-                            $(".memu_compare").show();
-                        }else{
-                            $(".memu_compare").hide();
-                        }
+                    $("#load_pages").load('views/pages_house.php?s=' + url[0]);
+                } else {
+                    $(".memu_site").removeClass("mm-active")
+                    $(".memu_house").removeClass("mm-active")
+                    if (url[0] == 10) {
+                        $(".memu_compare").show();
+                    } else {
+                        $(".memu_compare").hide();
                     }
                 }
+            }
             // }
         }
     }
@@ -122,28 +122,28 @@ $.getJSON('routes/login.php', function(msg) {
         $("#toggleTheme").attr('checked', false);
     }
     $("html").attr("class", msg.theme)
-    // if (msg.theme === "dark-theme") {
-    //     $("#lightmode").attr('checked', false);
-    //     $("#darkmode").attr('checked', true);
-    //     $("#semidark").attr('checked', false);
-    //     $("#minimaltheme").attr('checked', false);
-    // } else if (msg.theme === "semi-dark") {
-    //     $("#lightmode").attr('checked', false);
-    //     $("#darkmode").attr('checked', false);
-    //     $("#semidark").attr('checked', true);
-    //     $("#minimaltheme").attr('checked', false);
-    // } else if (msg.theme === "minimal-theme") {
-    //     $("#lightmode").attr('checked', false);
-    //     $("#darkmode").attr('checked', false);
-    //     $("#semidark").attr('checked', false);
-    //     $("#minimaltheme").attr('checked', true);
-    // } else {
-    //     $("#lightmode").attr('checked', true);
-    //     $("#darkmode").attr('checked', false);
-    //     $("#semidark").attr('checked', false);
-    //     $("#minimaltheme").attr('checked', false);
-    // }
-    // $("#theme").addClass(msg.theme);
+        // if (msg.theme === "dark-theme") {
+        //     $("#lightmode").attr('checked', false);
+        //     $("#darkmode").attr('checked', true);
+        //     $("#semidark").attr('checked', false);
+        //     $("#minimaltheme").attr('checked', false);
+        // } else if (msg.theme === "semi-dark") {
+        //     $("#lightmode").attr('checked', false);
+        //     $("#darkmode").attr('checked', false);
+        //     $("#semidark").attr('checked', true);
+        //     $("#minimaltheme").attr('checked', false);
+        // } else if (msg.theme === "minimal-theme") {
+        //     $("#lightmode").attr('checked', false);
+        //     $("#darkmode").attr('checked', false);
+        //     $("#semidark").attr('checked', false);
+        //     $("#minimaltheme").attr('checked', true);
+        // } else {
+        //     $("#lightmode").attr('checked', true);
+        //     $("#darkmode").attr('checked', false);
+        //     $("#semidark").attr('checked', false);
+        //     $("#minimaltheme").attr('checked', false);
+        // }
+        // $("#theme").addClass(msg.theme);
     $(".btn_modal_sg").click(function() {
         $(".sg_name").val(msg.username);
         $(".sg_tel").val(msg.tel);
@@ -190,6 +190,7 @@ function countdown() {
         logout();}
     // $("#test_timr").html("countdown : " + number);
 }
+
 function logout() {
     $.ajax({
         url: 'routes/login.php',
@@ -210,6 +211,7 @@ function logout() {
 function loadingOut(loading) {
     setTimeout(() => loading.out(), 100);
 }
+
 function toggleTheme(val) {
     if (val === true) {
         $("html").addClass('dark-theme');

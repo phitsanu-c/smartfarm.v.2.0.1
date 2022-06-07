@@ -49,7 +49,7 @@
                         echo $url_link .'#'.encode($row_["house_siteID"].','.$row_["house_master"]);
                     // } 
                 ?>">
-                <div class="card" style="padding: 1.25rem; height:350px; border-radius:20px">
+                <div class="card" style="padding: 1.25rem;  border-radius:20px">
                     <img src="<?php if($row_["house_img"] == ""){echo "public/images/default.jpg";}else{echo "public/images/house/".$row_["house_img"];} ?>" style="height: 20vh; width: 100%;" class="card-img-top img-fluid" alt="site01">
                     <!-- <div class="card"> -->
                     <h6 class="card-title text-bold text-center" style="margin-top: 15px">ชื่อ : <B><?= $row_["house_name"] ?></B></h6>
