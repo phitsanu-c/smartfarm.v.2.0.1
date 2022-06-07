@@ -78,11 +78,11 @@
     </div>
     <!--end breadcrumb-->
 
-    <!-- <h6 class="mb-0 text-uppercase">Horizontal Card</h6> -->
+    <!-- <h5 class="mb-0 text-uppercase">Horizontal Card</h5> -->
     <hr />
     <div class="row">
         <div class="col-12 col-lg-4 col-xl-4 col-sm-12 d-flex">
-            <div class="card w-100 radius-10">
+            <div class="card radius-10">
                 <div class="card-body">
                     <div class="card radius-10 shadow-none">
                         <img src="public/images/site/<?= $house_img ?>" alt="..." class="card-img">
@@ -92,44 +92,44 @@
                             <div class="col-12">
                                 <!-- <div class="card-body radius-10 shadow-none"> -->
                                 <div class="d-flex">
-                                    <h6>ที่ตั้ง : <b>
+                                    <h5>ที่ตั้ง : <b>
                                             <?= $s_master["site_address"] ?>
-                                        </b></h6>
+                                        </b></h5>
                                 </div>
                                 <!-- </div> -->
                             </div>
                             <div class="col-12">
                                 <!-- <div class="card-body radius-10 shadow-none"> -->
                                 <div class="d-flex">
-                                    <h6>สถานะโรงเรือน : <b class="status_timeUpdate"></b></h6>
+                                    <h5>สถานะโรงเรือน : <b class="status_timeUpdate"></b></h5>
                                 </div>
                                 <!-- </div> -->
                             </div>
                             <div class="col-12">
                                 <!-- <div class="card-body radius-10 shadow-none"> -->
                                 <div class="d-flex">
-                                    <h6>ขนาดโรงเรือน : <b><?= substr($s_master["house_size"],9,13) ?></b> เมตร</h6>
+                                    <h5>ขนาดโรงเรือน : <b><?= substr($s_master["house_size"],9,13) ?></b> เมตร</h5>
                                 </div>
                                 <!-- </div> -->
                             </div>
                             <div class="col-12">
                                 <!-- <div class="card-body radius-10 shadow-none"> -->
                                 <div class="d-flex">
-                                    <h6>ระบบอินเตอร์เน็ต : <b>Internet SIM</b></h6>
+                                    <h5>ระบบอินเตอร์เน็ต : <b>Internet SIM</b></h5>
                                 </div>
                                 <!-- </div> -->
                             </div>
                             <div class="col-12">
                                 <!-- <div class="card-body radius-10 shadow-none"> -->
                                 <div class="d-flex">
-                                    <h6>หมายเลขอินเตอร์เน็ต : <b><?= $s_master["site_internet"] ?></b></h6>
+                                    <h5>หมายเลขอินเตอร์เน็ต : <b><?= $s_master["site_internet"] ?></b></h5>
                                 </div>
                                 <!-- </div> -->
                             </div>
                             <div class="col-12">
                                 <!-- <div class="card-body radius-10 shadow-none"> -->
                                 <div class="d-flex">
-                                    <h6>วันหมดอายุ : <b><?= $s_master["site_internetO"] ?></b></h6>
+                                    <h5>วันหมดอายุ : <b><?= $s_master["site_internetO"] ?></b></h5>
                                 </div>
                                 <!-- </div> -->
                             </div>
@@ -155,45 +155,45 @@
                             <h5 class="text-center">สภาพอากาศจากกรมอุตุนิยมวิทยา</h5>
                             <div class="row">
                                 <div class="col-lg-4 col-xl-4 col-sm-6 text-center">
-                                    <h6 class="mb-0">อุณหภูมิ</h6><br>
-                                    <h6 class="mb-0 font-semibold text-primary weather-temperature"></h6><br>
-                                    <h6 class="mb-0 text-primary"> (<span class="weather-min-temperature"></span> - <span class="weather-max-temperature"></span>)</h6><br>
+                                    <h5 class="mb-0">อุณหภูมิ</h5><br>
+                                    <h5 class="mb-0 font-semibold text-primary weather-temperature"></h5><br>
+                                    <h5 class="mb-0 text-primary"> (<span class="weather-min-temperature"></span> - <span class="weather-max-temperature"></span>)</h5><br>
                                 </div>
                                 <div class="col-lg-4 col-xl-4 col-sm-6 text-center">
                                     <img src="" class="weather-icon" alt="Weather Icon" style=" width: 30%;" /><br>
                                     <span class="text-primary weather-description capitalize"></span><br><br>
                                 </div>
                                 <div class="col-lg-4 col-xl-4 col-sm-6 text-center">
-                                    <h6 class="mb-0">ความชื้นในอากาศ</h6><br>
-                                    <h6 class="mb-0 text-primary weather-humidity"></h6><br>
+                                    <h5 class="mb-0">ความชื้นในอากาศ</h5><br>
+                                    <h5 class="mb-0 text-primary weather-humidity"></h5><br>
                                 </div>
                                 <div class="col-lg-4 col-xl-4 col-sm-6 text-center">
-                                    <h6 class="mb-0">ความเร็วลม</h6><br>
-                                    <h6 class="mb-0 text-primary weather-wind-speed"></h6>
+                                    <h5 class="mb-0">ความเร็วลม</h5><br>
+                                    <h5 class="mb-0 text-primary weather-wind-speed"></h5>
                                 </div>
                                 <div class="col-lg-4 col-xl-4 col-sm-6 text-center">
-                                    <h6 class="mb-0">พระอาทิตย์ขึ้น</h6><br>
-                                    <h6 class="mb-0 text-primary weather-sunrise"></h6>
+                                    <h5 class="mb-0">พระอาทิตย์ขึ้น</h5><br>
+                                    <h5 class="mb-0 text-primary weather-sunrise"></h5>
                                 </div>
                                 <div class="col-lg-4 col-xl-4 col-sm-6 text-center">
-                                    <h6 class="mb-0">พระอาทิตย์ตก</h6><br>
-                                    <h6 class="mb-0 text-primary weather-sunset"></h6>
+                                    <h5 class="mb-0">พระอาทิตย์ตก</h5><br>
+                                    <h5 class="mb-0 text-primary weather-sunset"></h5>
                                 </div>
                             </div>
                         </div>
                     </div><br/> -->
                     <div class="card radius-10 border shadow-none">
                         <div class="card-body">
-                            <h6 class="text-center">ข้อมูลเซ็นเซอร์นอกโรงเรือน</h6>
+                            <h5 class="text-center">ข้อมูลเซ็นเซอร์นอกโรงเรือน</h5>
                             <div class="row text-center">
                                 <?php for($i = 1; $i <= 3; $i++){
                                     if($config_sn['sn_status_'.$i] == 1){ ?>
                                         <div class="col-lg-4 col-xl-4 col-sm-12">
                                             <div class="card-body border radius-10 shadow-none mb-3">
                                                 <div class="col">
-                                                    <h6 class="card-title mt-2 "><B>
+                                                    <h5 class="card-title mt-2 "><B>
                                                             <?= $config_sn['sn_name_'.$i] ?>
-                                                        </B></h6>
+                                                        </B></h5>
                                                     <div class="ms-auto mt-2 image-popups">
                                                         <?php if($config_sn["sn_imgMap_".$i] != ""){
                                                                 echo '<a href="public/images/img_map/'.$config_sn["sn_imgMap_".$i].'"><i class="lni lni-map-marker "></i></a>';
@@ -201,9 +201,9 @@
                                                     </div>
                                                 </div>
                                                 <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle"
-                                                    style="width:5vw; margin-top:10px; text-align: center!important;">
-                                                <h6 class="card-text text-center  dash_data__<?= $i ?>" style="margin-top:20px; font-size:1.2vw">
-                                                </h6>
+                                                    style="width:90px; margin-top:10px; text-align: center!important;">
+                                                <h5 class="card-text text-center  dash_data__<?= $i ?>" style="margin-top:20px; font-size:1.2vw">
+                                                </h5>
                                             </div>
                                         </div>
                                     <?php }
@@ -213,16 +213,16 @@
                     </div>
                     <div class="card radius-10 border shadow-none">
                         <div class="card-body">
-                            <h6 class="text-center">ข้อมูลเซ็นเซอร์ในโรงเรือน</h6>
+                            <h5 class="text-center">ข้อมูลเซ็นเซอร์ในโรงเรือน</h5>
                             <div class="row text-center">
                                 <?php for($i = 4; $i <= 7; $i++){
                                     if($config_sn['sn_status_'.$i] == 1){ ?>
                                 <div class="col-lg-3 col-xl-3 col-sm-12">
                                     <div class="card-body border radius-10 shadow-none mb-3">
                                         <div class="col">
-                                            <h6 class="card-title text-center mt-2 "><B>
+                                            <h5 class="card-title text-center mt-2 "><B>
                                                     <?= $config_sn['sn_name_'.$i] ?>
-                                                </B></h6>
+                                                </B></h5>
                                             <div class="ms-auto mt-2 image-popups">
                                                 <?php if($config_sn["sn_imgMap_".$i] != ""){
                                                         echo '<a href="public/images/img_map/'.$config_sn["sn_imgMap_".$i].'"><i class="lni lni-map-marker"></i></a>';
@@ -230,9 +230,9 @@
                                             </div>
                                         </div>
                                         <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle"
-                                            style="width:5vw; margin-top:10px; text-align: center!important;">
-                                        <h6 class="card-text text-center dash_data__<?= $i ?>" style="margin-top:20px; font-size:1.2vw">
-                                        </h6>
+                                            style="width:90px; margin-top:10px; text-align: center!important;">
+                                        <h5 class="card-text text-center dash_data__<?= $i ?>" style="margin-top:20px; font-size:1.2vw">
+                                        </h5>
                                     </div>
                                 </div>
                                 <?php } } ?>
@@ -249,11 +249,11 @@
             <div class="card w-100 radius-10">
                 <div class="card-body">
                     <div class="card-body text-center">
-                        <h6 class="card-title text-center"><b>สถานะการทำงาน </b></h6>
+                        <h5 class="card-title text-center"><b>สถานะการทำงาน </b></h5>
                         <!-- <h5 class="card-title text-center"><b>โหมดอัตโนมัติ </b></h5> -->
                         <!-- <div class="row g-2"> -->
                         <!-- <div class="col-lg-6 col-xl-6 col-sm-12 col-12" > -->
-                        <button type="button" class="btn btn-outline-success px-5 radius-30 dash_mode active" style="font-size:1vw"></button>
+                        <button type="button" class="btn btn-outline-success px-5 radius-30 dash_mode active" style="font-size:1.25rem"></button>
                         <!-- </div> -->
                         <!-- <div class="col-lg-6 col-xl-6 col-sm-12 col-12">
                                     <button type="button" class="col-lg-6 col-xl-6 col-sm-12 col-12 btn btn-outline-info px-5 radius-30 sw_mode_Manual" style="font-size:18px">โหมดสั่งงานด้วยตนเอง</button>
@@ -267,11 +267,11 @@
                                     <div class="card-body border radius-10 shadow-none mb-3">
                                         <div class="text-center">
                                             <?php
-                                                if($i <= 4){echo '<h6><b>น้ำหยด '.$i.'</b></h6>';}
-                                                elseif($i > 4 && $i <= 8){echo '<h6><b>พัดลม '.($i-4).'</b></h6>';}
-                                                elseif($i > 8 && $i <= 10){echo '<h6><b>พ่นหมอก '.($i-8).'</b></h6>';}
-                                                elseif($i == 11){echo '<h6><b>สเปรย์</b></h6>';}
-                                                elseif($i == 12){echo '<h6><b>ม่านพรางแสง</b></h6>';}
+                                                if($i <= 4){echo '<h5><b>น้ำหยด '.$i.'</b></h5>';}
+                                                elseif($i > 4 && $i <= 8){echo '<h5><b>พัดลม '.($i-4).'</b></h5>';}
+                                                elseif($i > 8 && $i <= 10){echo '<h5><b>พ่นหมอก '.($i-8).'</b></h5>';}
+                                                elseif($i == 11){echo '<h5><b>สเปรย์</b></h5>';}
+                                                elseif($i == 12){echo '<h5><b>ม่านพรางแสง</b></h5>';}
                                             ?>
                                         </div>
                                         <div class="text-center">
@@ -505,28 +505,28 @@
                         <li class="nav-item btn_ch_t" role="presentation">
                             <a class="nav-link btn_ch_t" data-bs-toggle="pill" href="#hreft_temp" role="tab" aria-selected="false">
                                 <div class="d-flex align-items-center">
-                                    <div class="tab-title" style="font-size:1vw">อุณหภูมิ</div>
+                                    <div class="tab-title">อุณหภูมิ</div>
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item " role="presentation">
                             <a class="nav-link btn_ch_h" data-bs-toggle="pill" href="#hreft_hum" role="tab" aria-selected="false">
                                 <div class="d-flex align-items-center">
-                                    <div class="tab-title" style="font-size:1vw">ความชื้นอากาศ</div>
+                                    <div class="tab-title">ความชื้นอากาศ</div>
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link btn_ch_l" data-bs-toggle="pill" href="#hreft_light" role="tab" aria-selected="true">
                                 <div class="d-flex align-items-center">
-                                    <div class="tab-title" style="font-size:1vw">ความเข้มแสง</div>
+                                    <div class="tab-title">ความเข้มแสง</div>
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link btn_ch_s" data-bs-toggle="pill" href="#hreft_soil" role="tab" aria-selected="true">
                                 <div class="d-flex align-items-center">
-                                    <div class="tab-title" style="font-size:1vw">ความชื้นดิน</div>
+                                    <div class="tab-title" >ความชื้นดิน</div>
                                 </div>
                             </a>
                         </li>
@@ -967,9 +967,9 @@
                     }
                     if (i > 4 && i <= 8) {
                         if (parseJSON['fan_' + (i - 4)] === 'OFF') {
-                            $(".dash_img_con_" + i).attr("src", "public/images/control/Fan_OFF.svg");
+                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/Fan2_OFF.svg");
                         } else {
-                            $(".dash_img_con_" + i).attr("src", "public/images/control/Fan_ON.svg");
+                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/Fan2_ON.svg");
                         }
                     }
                     if (i == 9 || i == 10) {
