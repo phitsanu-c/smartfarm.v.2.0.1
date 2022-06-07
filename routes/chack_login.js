@@ -174,17 +174,20 @@ function verticalNoTitle() {
 }
 
 // logout
-countdown(number = 1200); // วินาที
+countdown(number = 360); // วินาที
 
 function countdown() {
+    clearTimeout(countdown);
     setTimeout(countdown, 1000);
-    console.log(number)
+    // console.log(number)
     // $('#redirect').html("Redirecting in " + number + " seconds.");
     number--;
     if (number < 0) {
-        logout();
         number = 0;
     }
+    if(number == 0){
+        clearTimeout(countdown);
+        logout();}
     // $("#test_timr").html("countdown : " + number);
 }
 function logout() {

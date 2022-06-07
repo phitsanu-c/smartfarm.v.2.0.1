@@ -33,7 +33,7 @@
                     window.location.href = document.URL.substring(0, document.URL.length-15);
                 }else{
                     // alert(res.sn['count_house'])
-                    // if(res.sn['count_site'] == 1){ // 1 site
+                    if(res.sn['count_site'] == 1){ // 1 site
                         // if(res.sn['count_house'] == 1){ // 1 site 1 house
                             // if(res.sn['master'].substring(0, 3) == "TUS"){
                                 // window.location.href = document.URL.substring(0, document.URL.length-15)+"/tu/#"+res.sn['en_url'];
@@ -43,9 +43,9 @@
                         // }else{ // 1 site > 1 house
                             // window.location.href = document.URL.substring(0, document.URL.length-15)+"#"+res.sn['en_url'];
                         // }
-                    // }else{ // > 1 site
-                        // window.location.href = document.URL.substring(0, document.URL.length-15)+"#"+res.sn['en_url'];
-                    // }
+                    }else{ // > 1 site
+                        window.location.href = document.URL.substring(0, document.URL.length-15);
+                    }
                 }
             }
         });
@@ -316,8 +316,8 @@
                             window.location.href = document.URL.substring(0, document.URL.length-15);
                         }else{
                             // alert(res.sn['count_house'])
-                            // if(res.sn['count_site'] == 1){ // 1 site
-                            //     if(res.sn['count_house'] == 1){ // 1 site 1 house
+                            if(res.sn['count_site'] == 1){ // 1 site
+                                // if(res.sn['count_house'] == 1){ // 1 site 1 house
                                     // if(res.sn['master'].substring(0, 3) == "TUS"){
                                     //     window.location.href = document.URL.substring(0, document.URL.length-15)+"/tu/#"+res.sn['en_url'];
                                     // }else{
@@ -326,9 +326,9 @@
                             //     }else{ // 1 site > 1 house
                             //         window.location.href = document.URL.substring(0, document.URL.length-15)+"#"+res.sn['en_url'];
                             //     }
-                            // }else{ // > 1 site
-                            //     window.location.href = document.URL.substring(0, document.URL.length-15)+"#"+res.sn['en_url'];
-                            // }
+                            }else{ // > 1 site
+                                window.location.href = document.URL.substring(0, document.URL.length-15);
+                            }
                         }
                     }
                 },
