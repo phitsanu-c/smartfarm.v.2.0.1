@@ -27,8 +27,8 @@
     </div>
     <!--end breadcrumb-->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-4">
-                
-                
+
+
     <?php
         // session_start();
         require '../routes/connectdb.php';
@@ -66,23 +66,23 @@
     ?>
         <div class="col-12 col-sm-12 col-md-4 col-lg-4  col-xl-3">
             <a href="
-                <?php 
-                    if($count_house[0] != 1){ 
+                <?php
+                    if($count_house[0] != 1){
                         echo $url_link .'#'.encode($row_["site_id"].',');
-                    }else{ 
+                    }else{
                         // if(substr($row_["house_master"],0,2) == "TUS"){
                         //     echo $url_link .'/tu/#'.encode($row_["site_id"].','.$row_["house_master"]);
                         // }else{
                             echo $url_link .'#'.encode($row_["site_id"].','.$row_["house_master"]);
                         // }
                     } ?>">
-                <div class="card" style="padding: 1.25rem; height:350px; border-radius:20px">
+                <div class="card" style="padding: 1.25rem; border-radius:20px"><!-- height:350px; -->
                     <img src="public/images/site/<?= $row_["site_img"] ?>" style="height: 20vh; width: 100%;" class="card-img-top img-fluid" alt="site01">
                     <!-- <div class="card"> -->
                     <h6 class="card-title text-bold text-center" style="margin-top: 15px">สถานที่ : <B><?= $row_["site_name"] ?></B></h6>
                     <h6 class="card-title text-bold text-center" style="margin-top: 10px">ที่ตั้ง : <B><?= $row_["site_address"] ?></B></h6>
                     <!-- <div class="d-grid" style="overflow:auto; padding-left:10px; padding-right:10px;" id="style-3"> -->
-                    <?php 
+                    <?php
                         echo '<h6 class="card-title text-bold text-center" style="margin-top: 10px">จำนวน : <B>'.$count_house[0].' โรงเรือน</B></h6>';
                         // foreach ($stmt2 as $row) {
                         //     echo '<a class="btn btn-outline-info px-5 radius-30" style="margin-top: 10px" href="'. $url_link .'#'. encode($row["house_master"]) .'">'. $row["house_name"].'</a>';
@@ -99,6 +99,6 @@
 
     <?php $i++;
     } ?>
-         
-    </div>   
+
+    </div>
 </div>

@@ -283,10 +283,34 @@
                 dataType: 'json',
                 success: function(res) {
                     console.log(res)
+                    // return false
                     if (res.name_login === 'No user') {
                         $('.l_err').show();
                         return false;
-                    } else if (res.name_login != '') {
+                    }
+                    else if (res.name_login === "already logged in") {
+                        swal({
+                            title: 'ผู้ใช้งานนี้อยู่ในระบบ !',
+                            html: "กรุณาใช้ <b>ชื่อผู้ใช้/อีเมลล์</b> ใหม่",
+                            type: 'warning',
+                            allowOutsideClick: false,
+                            confirmButtonColor: '#32CD32'
+                        });
+                        $(".i_forgot_email").addClass('is-invalid');
+                        return false;
+                    }
+                    else if (res.name_login === "site > 10") {
+                        swal({
+                            title: 'มีผู้ใช้งานในระบบมากเกินไป !',
+                            html: "กรุณาลงชื่อเข้าใช้อีกครั้งในภายหลัง",
+                            type: 'warning',
+                            allowOutsideClick: false,
+                            confirmButtonColor: '#32CD32'
+                        });
+                        $(".i_forgot_email").addClass('is-invalid');
+                        return false;
+                    }
+                    else if (res.name_login != '') {
                         // alert(res.name_login)
                         if(res.sn['account_status'] == 1){
                             window.location.href = document.URL.substring(0, document.URL.length-15);

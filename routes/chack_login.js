@@ -70,8 +70,9 @@ $.getJSON('routes/login.php', function(msg) {
             }else{ // 1 site > 1 house
                 $(".memu_site").hide()
                 $(".memu_house").show().addClass("mm-active")
-                // $(".memu_dash").hide();
-                // $(".memu_report").hide();
+                $(".memu_dash").hide();
+                $(".memu_report").hide();
+                $('.memu_control').hide();
                 $("#load_pages").load('views/pages_house.php?s='+msg.sn['siteID']);
             }
             if(url[0] == 10){
@@ -150,38 +151,18 @@ $.getJSON('routes/login.php', function(msg) {
         $(".sg_text").val("");
         $("#modal_sg").modal("show");
     });
+
+    // window.addEventListener("beforeunload", function (e) {
+    //   logout()
+    //   return;
+    // });
+    // window.onunload = function(){
+    //     logout()
+    // alert("The window is closing now!");
+    // }
+
 });
 
-// logout
-countdown(number = 180000);
-
-function countdown() {
-    setTimeout(countdown, 1000);
-    // console.log(number)
-    // $('#redirect').html("Redirecting in " + number + " seconds.");
-    number--;
-    if (number < 0) {
-        logout();
-        number = 0;
-    }
-    // $("#test_timr").html("countdown : " + number);
-}
-
-function logout() {
-    $.ajax({
-        url: 'routes/login.php',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            logout: "logout"
-        },
-        success: function(ress) {
-            if (ress === "logout_succress") {
-                window.location = 'page_login.html';
-            }
-        }
-    });
-}
 
 function verticalNoTitle() {
     var loading = new Loading({
@@ -190,6 +171,37 @@ function verticalNoTitle() {
     });
     return loading;
     // loadingOut(loading);
+}
+
+// logout
+countdown(number = 1200); // วินาที
+
+function countdown() {
+    setTimeout(countdown, 1000);
+    console.log(number)
+    // $('#redirect').html("Redirecting in " + number + " seconds.");
+    number--;
+    if (number < 0) {
+        logout();
+        number = 0;
+    }
+    // $("#test_timr").html("countdown : " + number);
+}
+function logout() {
+    $.ajax({
+        url: 'routes/login.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            logout: 'logout',
+            // siteID: msg.sn['siteID']
+        },
+        success: function(ress) {
+            if (ress === "logout_succress") {
+                window.location = 'page_login.html';
+            }
+        }
+    });
 }
 
 function loadingOut(loading) {

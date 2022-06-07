@@ -564,7 +564,7 @@
     var set_maxmin = $.parseJSON('<?= json_encode($set_maxmin) ?>');
     var sensor = $.parseJSON('<?= json_encode($sensor) ?>');
     var s_sensor = $.parseJSON('<?= json_encode($s_sensor) ?>');
-    console.log(config_sn);
+    console.log(sensor);
     var data_temp_out = [];
     var data_temp_in = [];
     var data_hum_out = [];
@@ -1398,7 +1398,6 @@
             $('#val_sw_auto').val(JSON.stringify(data_auto));
             // console.log($('#val_sw_auto').val());
         }
-
     }// exit_message
     connect();
 

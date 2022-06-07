@@ -466,7 +466,28 @@
     <script src="public/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
 
     <script src="routes/memu.js"></script>
+    <!-- <script src="https://unpkg.com/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script> -->
+<script type="text/javascript">
+
+        // $(window).bind("beforeunload",function(event){
+        //     var msg="ยืนยันการปิดหน้านี้?";
+        //     alert('aaaaa')
+        //     // event.preventDefault();
+        //     $(window).bind("unload",function(event){
+        //         event.stopImmediatePropagation();
+        //         // แทรก ajax code ลบ session หรืออื่น ๆ
+        //         alert("Bye Bye");
+        //     });
+        //     return msg;
+        // });
+        // $("a").click(function(){ // กรณีคลิกลิ้งค์ ไม่ต้องแสดง การแจ้งเตือน
+        //     $(window).unbind("beforeunload");
+        // });
+</script>
     <script>
+        $(".logout").click(function() {
+            logout()
+        });
         if (house_master.length == 8) {
             if (house_master.substring(0, 3) != "TUS") {
                 if (house_master !== "KMUMT001") {
@@ -1921,7 +1942,8 @@
                     }
                 });
 
-            } else {
+            }
+            else {
                 // = มธ.
                 $.ajax({
                     url: "routes/tu/get_config.php",
@@ -2020,10 +2042,6 @@
     </script>
 
     <script>
-        $(".logout").click(function() {
-            logout()
-        });
-
         $("#submit_suggestion_modal").click(function() {
             if ($(".sg_title").val() === "") {
                 $(".sg_title").addClass("is-invalid");
