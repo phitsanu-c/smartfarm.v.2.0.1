@@ -33,7 +33,6 @@ if ($mqtt->connect(true,NULL,$username,$password)) {
         // if (isset($_POSTname["mode_user"])) {
         // $mode_user = $_POST["mode_user"];
         $username = $_POST['name'];
-
         $password = $_POST['pass'];
         // echo $username." and ".$password." and ".$_POST["status"];
         // exit();
@@ -114,7 +113,7 @@ if ($mqtt->connect(true,NULL,$username,$password)) {
                 'userID'  => $_SESSION['account_id'],
                 'siteID'  => $_SESSION['sn']['siteID']
             ];
-            if ($dbcon->prepare("INSERT INTO `tbn_login_re`(`re_datetime`, `re_userID`, `re_siteID`) VALUES (:dt, :userID, :siteID)")->execute($log_re) === TRUE) {}
+           // if ($dbcon->prepare("INSERT INTO `tbn_login_re`(`re_datetime`, `re_userID`, `re_siteID`) VALUES (:dt, :userID, :siteID)")->execute($log_re) === TRUE) {}
         }
     }
 
@@ -142,7 +141,7 @@ if ($mqtt->connect(true,NULL,$username,$password)) {
     }
 
     if (isset($_SESSION["account_user"])) {
-        $new_dt = ['account_id' => $_SESSION['account_id'], 'dt' => date("Y-m-d").' '.date("H:i:s", strtotime('3 minute')), 'name_login' => $_SESSION["account_user"],'email' => $_SESSION["account_email"]]; // '-6 hour'));
+        $new_dt = ['account_id' => $_SESSION['account_id'], 'dt' => date("Y-m-d").' '.date("H:i:s", strtotime('30 minute')), 'name_login' => $_SESSION["account_user"],'email' => $_SESSION["account_email"]]; // '-6 hour'));
         // if(substr($data_mq, 2) == "0"){
         //     $decodedJson[$_SESSION['account_id']] = $new_dt;
         // }else {
