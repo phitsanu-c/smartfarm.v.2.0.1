@@ -58,24 +58,24 @@
 
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3"> <?= $s_master['site_name'] ?> </div>
+        <div class="breadcrumb-title pe-3"> <h5><?= $s_master['site_name'] ?></h5> </div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="javascript:;"><i class="-alt"></i></a> </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <?= $s_master['house_name'] ?>
+                        <h5><?= $s_master['house_name'] ?></h5>
                     </li>
                 </ol>
             </nav>
         </div>
         <div class="ms-auto">
-            <div class="btn-group">
-                <span class="text-center">
-                    <span class="date"></span><br>
-                    <span class="time"></span>
-                </span>
-            </div>
+            <!-- <div class="btn-group"> -->
+                <!-- <span class="text-center"> -->
+                    <h5 class="date"></h5>
+                    <!-- <span class="time"></span> -->
+                <!-- </span> -->
+            <!-- </div> -->
         </div>
     </div>
     <!--end breadcrumb-->
@@ -505,7 +505,7 @@
                                     style="background-color: #283A6C; text-align: justify;">
                                     <a><b class="title_load_auto " style="color:#FFF; font-size:20px"> </b></a>
                                     <div class="ms-auto">
-                                        <a class="menu_config_auto" style="color:#FFF; font-size:15px" href="javascript:void(0)"><b> <i class='bx bx-cog'></i> ตั้งค่า</b></a>
+                                        <a class="menu_config_auto" style="color:#FFF; font-size:16px" href="javascript:void(0)"><b> <i class='bx bx-cog'></i> ตั้งค่า</b></a>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -584,7 +584,7 @@
                                     <label class="form-check-label text_font_size ">เลือกทั้งหมด</label>
                                 </div>
                                 <div class="ms-auto">
-                                    <button type="button" class="btn btn-outline-secondary px-5 radius-30 menu_config_manual">ตั้งค่า</button>
+                                    <button type="button" class="btn btn-outline-secondary px-5 radius-30 menu_config_manual"><label class="text_font_size">ตั้งค่า</label></button>
                                     <input type="hidden" id="val_sw_manual">
                                     <input type="hidden" id="val_sw_auto">
                                     <button type="button" id="save_manual_cont" class="btn btn-success waves-light">
@@ -786,7 +786,6 @@
         console.info('Connecting...');
     }
     // ---------------------------------------------------------------------------------------
-
     function onConnect(context) {
         console.log("Client Connected");
         // And subscribe to our topics	-- both with the same callback function
@@ -844,8 +843,8 @@
             // console.log('parseJSON')
             var time_t = parseJSON['time'];
             var ntime = time_t.substring(0, 5);
-            $(".date").html(parseJSON['date']);
-            $(".time").html(ntime);
+            $(".date").html(parseJSON['date']+' '+ntime);
+            // $(".time").html(ntime);
             var data_ = parseJSON['data']
             // console.log(sensor)
             for (var i = 1; i <= 7; i++) {
@@ -1110,36 +1109,46 @@
                     if (i <= 4) {
                         if (parseJSON['dripper_' + i] === 'OFF') {
                             $(".dash_img_con_" + i).attr("src", "public/images/control/Sprinkler_OFF2.svg");
+                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_off.png');
                         } else {
                             $(".dash_img_con_" + i).attr("src", "public/images/control/Sprinkler_ON2.svg");
+                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_on.png');
                         }
                     }
                     if (i > 4 && i <= 8) {
                         if (parseJSON['fan_' + (i - 4)] === 'OFF') {
                             $(".dash_img_con_" + i).attr("src", "public/images/control/TU/Fan2_OFF.svg");
+                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_off.png');
                         } else {
                             $(".dash_img_con_" + i).attr("src", "public/images/control/TU/Fan2_ON.svg");
+                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_on.png');
                         }
                     }
                     if (i == 9 || i == 10) {
                         if (parseJSON['foggy_' + (i - 8)] === 'OFF') {
                             $(".dash_img_con_" + i).attr("src", "public/images/control/new_foggy-off.svg");
+                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_off.png');
                         } else {
                             $(".dash_img_con_" + i).attr("src", "public/images/control/new_foggy-on.svg");
+                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_on.png');
                         }
                     }
                     if (i == 11) {
                         if (parseJSON['spray'] === 'OFF') {
                             $(".dash_img_con_" + i).attr("src", "public/images/control/Sprinkler_OFF.svg");
+                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_off.png');
                         } else {
                             $(".dash_img_con_" + i).attr("src", "public/images/control/Sprinkler_ON.svg");
+                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_on.png');
                         }
                     }
                     if (i == 12) {
                         if (parseJSON['shading'] === 'OFF') {
                             $(".dash_img_con_" + i).attr("src", "public/images/control/Roof_OFF2.png");
+                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/shading_off.png');
                         } else {
                             $(".dash_img_con_" + i).attr("src", "public/images/control/Roof_ON2.png");
+                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/shading_on.png');
                         }
                     }
                 }
@@ -2481,31 +2490,31 @@
             if(i == val){
                 $('.title_load_auto').html(config_cn['cn_name_'+i]);
                 $("#"+i).addClass('active');
-                if(i <= 4){
-                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_on.png');
-                }else if (i > 4 && i <= 8) {
-                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_on.png');
-                }else if (i > 8 && i <= 10) {
-                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_on.png');
-                }else if (i == 11) {
-                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_on.png');
-                }else if (i == 12) {
-                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/shading_on.png');
-                }
+                // if(i <= 4){
+                //     $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_on.png');
+                // }else if (i > 4 && i <= 8) {
+                //     $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_on.png');
+                // }else if (i > 8 && i <= 10) {
+                //     $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_on.png');
+                // }else if (i == 11) {
+                //     $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_on.png');
+                // }else if (i == 12) {
+                //     $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/shading_on.png');
+                // }
             }
             else {
                 $('#'+i).removeClass('active')
-                if(i <= 4){
-                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_off.png');
-                }else if (i > 4 && i <= 8) {
-                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_off.png');
-                }else if (i > 8 && i <= 10) {
-                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_off.png');
-                }else if (i == 11) {
-                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_off.png');
-                }else if (i == 12) {
-                    $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/shading_off.png');
-                }
+                // if(i <= 4){
+                //     $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_off.png');
+                // }else if (i > 4 && i <= 8) {
+                //     $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_off.png');
+                // }else if (i > 8 && i <= 10) {
+                //     $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_off.png');
+                // }else if (i == 11) {
+                //     $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_off.png');
+                // }else if (i == 12) {
+                //     $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/shading_off.png');
+                // }
             }
         }
     }
