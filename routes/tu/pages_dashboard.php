@@ -58,24 +58,24 @@
 
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3"> <?= $s_master['site_name'] ?> </div>
+        <div class="breadcrumb-title pe-3"> <h5><?= $s_master['site_name'] ?></h5> </div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="javascript:;"><i class="-alt"></i></a> </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <?= $s_master['house_name'] ?>
+                        <h5><?= $s_master['house_name'] ?></h5>
                     </li>
                 </ol>
             </nav>
         </div>
         <div class="ms-auto">
-            <div class="btn-group">
-                <span class="text-center">
-                    <span class="date"></span><br>
-                    <span class="time"></span>
-                </span>
-            </div>
+            <!-- <div class="btn-group"> -->
+                <!-- <span class="text-center"> -->
+                    <h5 class="date"></h5>
+                    <!-- <span class="time"></span> -->
+                <!-- </span> -->
+            <!-- </div> -->
         </div>
     </div>
     <!--end breadcrumb-->
@@ -843,8 +843,8 @@
             // console.log('parseJSON')
             var time_t = parseJSON['time'];
             var ntime = time_t.substring(0, 5);
-            $(".date").html(parseJSON['date']);
-            $(".time").html(ntime);
+            $(".date").html(parseJSON['date']+' '+ntime);
+            // $(".time").html(ntime);
             var data_ = parseJSON['data']
             // console.log(sensor)
             for (var i = 1; i <= 7; i++) {
