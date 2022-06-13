@@ -68,12 +68,12 @@
             <a href="
                 <?php
                     if($count_house[0] != 1){
-                        echo $url_link .'#'.encode($row_["site_id"].',');
+                        echo $url_link .'#'.encode(','.$row_["site_id"].',');
                     }else{
                         // if(substr($row_["house_master"],0,2) == "TUS"){
                         //     echo $url_link .'/tu/#'.encode($row_["site_id"].','.$row_["house_master"]);
                         // }else{
-                            echo $url_link .'#'.encode($row_["site_id"].','.$row_["house_master"]);
+                            echo $url_link .'#'.encode(','.$row_["site_id"].','.$row_["house_master"]);
                         // }
                     } ?>">
                 <div class="card" style="padding: 1.25rem; border-radius:20px"><!-- height:350px; -->

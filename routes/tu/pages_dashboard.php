@@ -1,5 +1,4 @@
-<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
 <style>
     .toggle.ios,
     .toggle-on.ios,
@@ -20,6 +19,9 @@
     .no-gutters>[class*="col-"] {
         padding-right: 0;
         padding-left: 0;
+    }
+    .text_font_size{
+        font-size:16px;
     }
 </style>
 <div class="page-content">
@@ -112,27 +114,29 @@
                                 </div>
                                 <!-- </div> -->
                             </div>
-                            <div class="col-12">
-                                <!-- <div class="card-body radius-10 shadow-none"> -->
-                                <div class="d-flex">
-                                    <h5>ระบบอินเตอร์เน็ต : <b>Internet SIM</b></h5>
+                            <?php if($config['userLevel'] < 3){?>
+                                <div class="col-12">
+                                    <!-- <div class="card-body radius-10 shadow-none"> -->
+                                    <div class="d-flex">
+                                        <h5>ระบบอินเตอร์เน็ต : <b>Internet SIM</b></h5>
+                                    </div>
+                                    <!-- </div> -->
                                 </div>
-                                <!-- </div> -->
-                            </div>
-                            <div class="col-12">
-                                <!-- <div class="card-body radius-10 shadow-none"> -->
-                                <div class="d-flex">
-                                    <h5>หมายเลขอินเตอร์เน็ต : <b><?= $s_master["site_internet"] ?></b></h5>
+                                <div class="col-12">
+                                    <!-- <div class="card-body radius-10 shadow-none"> -->
+                                    <div class="d-flex">
+                                        <h5>หมายเลขอินเตอร์เน็ต : <b><?= $s_master["site_internet"] ?></b></h5>
+                                    </div>
+                                    <!-- </div> -->
                                 </div>
-                                <!-- </div> -->
-                            </div>
-                            <div class="col-12">
-                                <!-- <div class="card-body radius-10 shadow-none"> -->
-                                <div class="d-flex">
-                                    <h5>วันหมดอายุ : <b><?= $s_master["site_internetO"] ?></b></h5>
+                                <div class="col-12">
+                                    <!-- <div class="card-body radius-10 shadow-none"> -->
+                                    <div class="d-flex">
+                                        <h5>วันหมดอายุ : <b><?= $s_master["site_internetO"] ?></b></h5>
+                                    </div>
+                                    <!-- </div> -->
                                 </div>
-                                <!-- </div> -->
-                            </div>
+                            <?php } ?>
                             <!-- <div class="col-12">
                                 <div class="d-flex">
                                     <h5>จุดติดตั้งเซ็นเซอร์ : <b class="image-popups">
@@ -182,56 +186,58 @@
                             </div>
                         </div>
                     </div><br/> -->
-                    <div class="card radius-10 border shadow-none">
-                        <div class="card-body">
-                            <h5 class="text-center">ข้อมูลเซ็นเซอร์นอกโรงเรือน</h5>
-                            <div class="row text-center">
-                                <?php for($i = 1; $i <= 3; $i++){
-                                    if($config_sn['sn_status_'.$i] == 1){ ?>
-                                        <div class="col-lg-4 col-xl-4 col-sm-12">
-                                            <div class="card-body border radius-10 shadow-none mb-3">
-                                                <div class="col">
-                                                    <h5 class="card-title mt-2 "><B>
-                                                            <?= $config_sn['sn_name_'.$i] ?>
-                                                        </B></h5>
-                                                    <div class="ms-auto mt-2 image-popups">
-                                                        <?php if($config_sn["sn_imgMap_".$i] != ""){
-                                                                echo '<a href="public/images/img_map/'.$config_sn["sn_imgMap_".$i].'"><i class="lni lni-map-marker "></i></a>';
-                                                            }?>
+                    <?php if($config_sn['sn_status_1'] == 1 || $config_sn['sn_status_2'] == 1 || $config_sn['sn_status_3'] == 1){?>
+                        <div class="card radius-10 border shadow-none">
+                            <div class="card-body">
+                                <h5 class="text-center">ข้อมูลเซนเซอร์นอกโรงเรือน</h5>
+                                <div class="row text-center">
+                                    <?php for($i = 1; $i <= 3; $i++){
+                                        if($config_sn['sn_status_'.$i] == 1){ ?>
+                                            <div class="col-lg-4 col-xl-4 col-sm-12">
+                                                <div class="card-body border radius-10 shadow-none mb-3">
+                                                    <div class="col">
+                                                        <h5 class="card-title mt-2 "><B>
+                                                                <?php //$config_sn['sn_name_'.$i]
+                                                                    if($i == 1){echo "อุณหภูมิ";}elseif($i == 2){ echo "ความชื้น"; }elseif($i == 3){ echo "ความเข้มแสง"; }
+                                                                ?>
+                                                            </B></h5>
+                                                        <div class="ms-auto mt-2 image-popups">
+                                                            <?php if($config_sn["sn_imgMap_".$i] != ""){
+                                                                    echo '<a href="public/images/img_map/'.$config_sn["sn_imgMap_".$i].'"><i class="lni lni-map-marker "></i></a>';
+                                                                }?>
+                                                        </div>
                                                     </div>
+                                                    <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle" style="width:88px; margin-top:10px; text-align: center!important;">
+                                                    <h5 class="card-text text-center dash_data__<?= $i ?>" style="margin-top:20px; font-size:1.5vw">
+                                                    </h5>
                                                 </div>
-                                                <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle"
-                                                    style="width:90px; margin-top:10px; text-align: center!important;">
-                                                <h5 class="card-text text-center  dash_data__<?= $i ?>" style="margin-top:20px; font-size:1.2vw">
-                                                </h5>
                                             </div>
-                                        </div>
-                                    <?php }
-                                } ?>
+                                        <?php }
+                                    } ?>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <?php } ?>
                     <div class="card radius-10 border shadow-none">
                         <div class="card-body">
-                            <h5 class="text-center">ข้อมูลเซ็นเซอร์ในโรงเรือน</h5>
+                            <h5 class="text-center">ข้อมูลเซนเซอร์ในโรงเรือน</h5>
                             <div class="row text-center">
                                 <?php for($i = 4; $i <= 7; $i++){
                                     if($config_sn['sn_status_'.$i] == 1){ ?>
                                 <div class="col-lg-3 col-xl-3 col-sm-12">
                                     <div class="card-body border radius-10 shadow-none mb-3">
                                         <div class="col">
-                                            <h5 class="card-title text-center mt-2 "><B>
-                                                    <?= $config_sn['sn_name_'.$i] ?>
-                                                </B></h5>
+                                            <h5 class="card-title text-center mt-2 ">
+                                                <B> <?php if($i == 4){echo "อุณหภูมิ";}elseif($i == 5){ echo "ความชื้น"; }elseif($i == 6){ echo "ความเข้มแสง"; }elseif($i == 7){ echo "ความชื้นดิน"; } ?> </B>
+                                            </h5>
                                             <div class="ms-auto mt-2 image-popups">
                                                 <?php if($config_sn["sn_imgMap_".$i] != ""){
                                                         echo '<a href="public/images/img_map/'.$config_sn["sn_imgMap_".$i].'"><i class="lni lni-map-marker"></i></a>';
                                                     }?>
                                             </div>
                                         </div>
-                                        <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle"
-                                            style="width:90px; margin-top:10px; text-align: center!important;">
-                                        <h5 class="card-text text-center dash_data__<?= $i ?>" style="margin-top:20px; font-size:1.2vw">
+                                        <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle" style="width:88px; margin-top:10px; text-align: center!important;">
+                                        <h5 class="card-text text-center dash_data__<?= $i ?>" style="margin-top:20px; font-size:1.5vw">
                                         </h5>
                                     </div>
                                 </div>
@@ -265,14 +271,14 @@
                             if($config_cn['cn_status_'.$i] == 1){ ?>
                                 <div class="col-lg-3 col-xl-3 col-sm-12">
                                     <div class="card-body border radius-10 shadow-none mb-3">
-                                        <div class="text-center">
+                                        <div class="text-center"><h5 style="font-size:1.5vw"><b>
                                             <?php
-                                                if($i <= 4){echo '<h5><b>น้ำหยด '.$i.'</b></h5>';}
-                                                elseif($i > 4 && $i <= 8){echo '<h5><b>พัดลม '.($i-4).'</b></h5>';}
-                                                elseif($i > 8 && $i <= 10){echo '<h5><b>พ่นหมอก '.($i-8).'</b></h5>';}
-                                                elseif($i == 11){echo '<h5><b>สเปรย์</b></h5>';}
-                                                elseif($i == 12){echo '<h5><b>ม่านพรางแสง</b></h5>';}
-                                            ?>
+                                                if($i <= 4){echo 'น้ำหยด '.$i;}
+                                                elseif($i > 4 && $i <= 8){echo 'พัดลม '.($i-4);}
+                                                elseif($i > 8 && $i <= 10){echo 'พ่นหมอก '.($i-8);}
+                                                elseif($i == 11){echo 'สเปรย์';}
+                                                elseif($i == 12){echo 'ม่านพรางแสง';}
+                                            ?></b></h5>
                                         </div>
                                         <div class="text-center">
                                             <img class="dash_img_con_<?= $i ?>" style="width:15vh">
@@ -301,7 +307,7 @@
                                 </div>
                             </div>
                             <div class="col-12 mt-2">
-                                <div class="row ">
+                                <div class="row">
                                     <div class="col-6">
                                         <button type="button" class="btn btn-lg sw_mode_Auto" style="width: 100%; border-radius:20px;">อัตโนมัติ</button>
                                     </div>
@@ -310,54 +316,179 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 ul_Auto">
-                                <ul class="nav mt-3">
-                                    <?php
-                                       for($i = 1; $i <= 12; $i++){
-                                            if($config_cn['cn_status_'.$i] == 1){
-                                                echo '<li class="nav-item col-3 col-lg-2">
-                                                        <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="'.$i.'">'.$config_cn['cn_name_'.$i].'<br>
-                                                            <img class="img_sw_sel_load_auto'.$i.'" src="" width="70" />
-                                                        </button>
-                                                   </li>';
+                            <div class="col-12 mt-2 ul_Auto">
+                                <div class="row">
+                                    <div class="col-12 col-lg-4">
+                                        <div class="row"><?php
+                                            if($config_cn['cn_status_1'] == 1){
+                                                echo '<div class="col-3 col-lg-6">
+                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="1">
+                                                            <div class="text_font_size">'.$config_cn['cn_name_1'].'</div>
+                                                             <img class="img_sw_sel_load_auto1" src="" width="70" />
+                                                         </button>
+                                                    </div>';
                                             }
-                                        }
-                                    ?>
-                                </ul>
+                                            if($config_cn['cn_status_2'] == 1){
+                                                echo '<div class="col-3 col-lg-6">
+                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="2">
+                                                            <div class="text_font_size">'.$config_cn['cn_name_2'].'</div>
+                                                             <img class="img_sw_sel_load_auto2" src="" width="70" />
+                                                         </button>
+                                                    </div>';
+                                            }
+                                            if($config_cn['cn_status_3'] == 1){
+                                                echo '<div class="col-3 col-lg-6">
+                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="3">
+                                                            <div class="text_font_size">'.$config_cn['cn_name_3'].'</div>
+                                                             <img class="img_sw_sel_load_auto3" src="" width="70" />
+                                                         </button>
+                                                    </div>';
+                                            }
+                                            if($config_cn['cn_status_4'] == 1){
+                                                echo '<div class="col-3 col-lg-6">
+                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="4">
+                                                            <div class="text_font_size">'.$config_cn['cn_name_4'].'</div>
+                                                             <img class="img_sw_sel_load_auto4" src="" width="70" />
+                                                         </button>
+                                                    </div>';
+                                            } ?>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-4">
+                                        <div class="row"><?php
+                                            if($config_cn['cn_status_5'] == 1){
+                                                echo '<div class="col-3 col-lg-6">
+                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="5">
+                                                            <div class="text_font_size">'.$config_cn['cn_name_5'].'</div>
+                                                             <img class="img_sw_sel_load_auto5" src="" width="70" />
+                                                         </button>
+                                                    </div>';
+                                            }
+                                            if($config_cn['cn_status_6'] == 1){
+                                                echo '<div class="col-3 col-lg-6">
+                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="6">
+                                                            <div class="text_font_size">'.$config_cn['cn_name_6'].'</div>
+                                                             <img class="img_sw_sel_load_auto6" src="" width="70" />
+                                                         </button>
+                                                    </div>';
+                                            }
+                                            if($config_cn['cn_status_7'] == 1){
+                                                echo '<div class="col-3 col-lg-6">
+                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="7">
+                                                            <div class="text_font_size">'.$config_cn['cn_name_7'].'</div>
+                                                             <img class="img_sw_sel_load_auto7" src="" width="70" />
+                                                         </button>
+                                                    </div>';
+                                            }
+                                            if($config_cn['cn_status_8'] == 1){
+                                                echo '<div class="col-3 col-lg-6">
+                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="8">
+                                                            <div class="text_font_size">'.$config_cn['cn_name_8'].'</div>
+                                                             <img class="img_sw_sel_load_auto8" src="" width="70" />
+                                                         </button>
+                                                    </div>';
+                                            } ?>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-4">
+                                        <div class="row"><?php
+                                            if($config_cn['cn_status_9'] == 1){
+                                                echo '<div class="col-3 col-lg-6">
+                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="9">
+                                                            <div class="text_font_size">'.$config_cn['cn_name_9'].'</div>
+                                                             <img class="img_sw_sel_load_auto9" src="" width="70" />
+                                                         </button>
+                                                    </div>';
+                                            }
+                                            if($config_cn['cn_status_10'] == 1){
+                                                echo '<div class="col-3 col-lg-6">
+                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="10">
+                                                            <div class="text_font_size">'.$config_cn['cn_name_10'].'</div>
+                                                             <img class="img_sw_sel_load_auto10" src="" width="70" />
+                                                         </button>
+                                                    </div>';
+                                            }
+                                            if($config_cn['cn_status_11'] == 1){
+                                                echo '<div class="col-3 col-lg-6">
+                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="11">
+                                                            <div class="text_font_size">'.$config_cn['cn_name_11'].'</div>
+                                                             <img class="img_sw_sel_load_auto11" src="" width="70" />
+                                                         </button>
+                                                    </div>';
+                                            }
+                                            if($config_cn['cn_status_12'] == 1){
+                                                echo '<div class="col-3 col-lg-6">
+                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="12">
+                                                            <div class="text_font_size">พรางแสง</div>
+                                                             <img class="img_sw_sel_load_auto12" src="" width="70" />
+                                                         </button>
+                                                    </div>';
+                                            } ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                                   // echo '<ul class="nav mt-3">';
+                                   // for($i = 1; $i <= 12; $i++){
+                                   //      if($config_cn['cn_status_'.$i] == 1){
+                                   //          if($i == 12){
+                                   //              echo '<li class="nav-item col-3 col-lg-2">
+                                   //                      <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="'.$i.'">พรางแสง<br>
+                                   //                          <img class="img_sw_sel_load_auto'.$i.'" src="" width="70" />
+                                   //                      </button>
+                                   //                 </li>';
+                                   //          }else {
+                                   //              echo '<li class="nav-item col-3 col-lg-2">
+                                   //                  <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="'.$i.'">'.$config_cn['cn_name_'.$i].'<br>
+                                   //                      <img class="img_sw_sel_load_auto'.$i.'" src="" width="70" />
+                                   //                  </button>
+                                   //             </li>';
+                                   //          }
+                                   //      }
+                                   //  }
+                                   // echo "</ul>";
+                                ?>
+
                                 <input type="hidden" class="hidden_select_sw_auto">
                             </div>
                             <div class="row cols-10 text-center mt-2 ul_Manual">
-                                <?php if($config_cn['cn_status_1'] == 1 || $config_cn['cn_status_2'] == 1 || $config_cn['cn_status_3'] == 1 || $config_cn['cn_status_4'] == 1){
+                                <?php
+                                    if($config_cn['cn_status_1'] == 1 || $config_cn['cn_status_2'] == 1 || $config_cn['cn_status_3'] == 1 || $config_cn['cn_status_4'] == 1){
                                         echo '<div class="cols-3 cols-lg-5">
-                                                <button class="btn btn-control sw_sel_load_manual" style="width:100% " id="s1">Dripper<br>
+                                                <button class="btn btn-control sw_sel_load_manual" style="width:100% border-radius:20px;" id="s1">
+                                                    <div class="text_font_size">น้ำหยด</div>
                                                     <img class="img_sw_sel_load_manual_1" width="70"  src=""  />
                                                 </button>
                                            </div>';
                                     }
                                     if($config_cn['cn_status_9'] == 1 || $config_cn['cn_status_10'] == 1){
                                         echo '<div class="cols-3 cols-lg-5" >
-                                                <button class="btn btn-control sw_sel_load_manual" style="width:100% " id="s3">Foggy<br>
+                                                <button class="btn btn-control sw_sel_load_manual" style="width:100% " id="s3">
+                                                    <div class="text_font_size">พ่นหมอก</div>
                                                     <img class="img_sw_sel_load_manual_3" src="" width="70" />
                                                 </button>
                                            </div>';
                                     }
                                     if($config_cn['cn_status_11'] == 1){
                                         echo '<div class="cols-3 cols-lg-5">
-                                                <button class="btn btn-control sw_sel_load_manual" style="width:100% " id="s4">Spray<br>
+                                                <button class="btn btn-control sw_sel_load_manual" style="width:100% " id="s4">
+                                                    <div class="text_font_size">สเปรย์</div>
                                                     <img class="img_sw_sel_load_manual_4" src="" width="70" />
                                                 </button>
                                            </div>';
                                     }
                                     if($config_cn['cn_status_5'] == 1 || $config_cn['cn_status_6'] == 1 || $config_cn['cn_status_7'] == 1 || $config_cn['cn_status_8'] == 1){
                                         echo '<div class="cols-3 cols-lg-5">
-                                                <button class="btn btn-control sw_sel_load_manual" style="width:100% " id="s2">Fan<br>
+                                                <button class="btn btn-control sw_sel_load_manual" style="width:100% " id="s2">
+                                                    <div class="text_font_size">พัดลม</div>
                                                     <img class="img_sw_sel_load_manual_2" src="" width="70" />
                                                 </button>
                                            </div>';
                                     }
                                     if($config_cn['cn_status_12'] == 1){
                                         echo '<div class="cols-3 cols-lg-5">
-                                                <button class="btn btn-control sw_sel_load_manual" style="width:100% " id="s5">Shading<br>
+                                                <button class="btn btn-control sw_sel_load_manual" style="width:100% " id="s5">
+                                                    <div class="text_font_size">พรางแสง</div>
                                                     <img class="img_sw_sel_load_manual_5" src="" width="70" />
                                                 </button>
                                            </div>';
@@ -429,10 +560,10 @@
                             <div class="row ridge">
                                 <h3 class="text-center title_load_manual" style="background-color: #283A6C; color:#FFF"></h3>
                                 <div class="col text-end  me-2 mb-3 mt-2">
-                                     <button class="btn btn-control sw_manual_on"></button>
+                                     <button class="btn sw_manual_on"></button>
                                 </div>
                                 <div class="col text-start ms-2 mb-3 mt-2">
-                                     <button class="btn btn-control sw_manual_off"></button>
+                                     <button class="btn sw_manual_off"></button>
                                 </div>
                             </div>
                         </div>
@@ -449,8 +580,8 @@
     					<div class="ul_Manual" style="width: 100%;">
                             <div class="d-flex align-items-center">
                                 <div class="form-check status_config_manual">
-                                    <input class="form-check-input" type="checkbox" id="checkbox_all_manual">
-                                    <label class="form-check-label">เลือกทั้งหมด</label>
+                                    <input class="form-check-input " type="checkbox" id="checkbox_all_manual">
+                                    <label class="form-check-label text_font_size ">เลือกทั้งหมด</label>
                                 </div>
                                 <div class="ms-auto">
                                     <button type="button" class="btn btn-outline-secondary px-5 radius-30 menu_config_manual">ตั้งค่า</button>
@@ -466,25 +597,25 @@
                             </div>
                             <div class="row mt-3 mb-3">
                                 <div class="col-3 text-center">
-                                    <label class="label_1"></label>
+                                    <label class="text_font_size label_1"></label>
                                     <div class="status_config_manual">
                                         <input class="input_check2" type="checkbox" id="label_1" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
                                     </div>
                                 </div>
                                 <div class="col-3 text-center">
-                                    <label class="label_2"></label>
+                                    <label class="text_font_size label_2"></label>
                                     <div class="status_config_manual">
                                         <input class="input_check2" type="checkbox" id="label_2" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
                                     </div>
                                 </div>
                                 <div class="col-3 text-center">
-                                    <label class="label_3"></label>
+                                    <label class="text_font_size label_3"></label>
                                     <div class="status_config_manual status_config_manual_3">
                                         <input class="input_check2" type="checkbox" id="label_3" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
                                     </div>
                                 </div>
                                 <div class="col-3 text-center">
-                                    <label class="label_4"></label>
+                                    <label class="text_font_size label_4"></label>
                                     <div class="status_config_manual status_config_manual_4">
                                         <input class="input_check2" type="checkbox" id="label_4" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
                                     </div>
@@ -601,7 +732,7 @@
     }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 1) {
         $('.hidden_select_sw_auto').val(10);
     }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 0 && config_cn.cn_status_11 == 1) {
-        $('.hidden_select_sw_auto').val(11); $("#11").addClass('active');
+        $('.hidden_select_sw_auto').val(11); //$("#11").addClass('active');
     }else if (config_cn.cn_status_1 == 0 && config_cn.cn_status_2 == 0 && config_cn.cn_status_3 == 0 && config_cn.cn_status_4 == 0 && config_cn.cn_status_5 == 0 && config_cn.cn_status_6 == 0 && config_cn.cn_status_7 == 0 && config_cn.cn_status_8 == 0 && config_cn.cn_status_9 == 0 && config_cn.cn_status_10 == 0 && config_cn.cn_status_11 == 0 && config_cn.cn_status_12 == 1) {
         $('.hidden_select_sw_auto').val(12);
     }
@@ -848,98 +979,115 @@
             var parseJSON = $.parseJSON(result);
             // console.log(parseJSON)
             if (parseJSON.mode === 'Manual') {
-                $('.dash_mode').html('โหมดกำหนดเอง')
-                $('.sw_mode_Auto').removeClass('btn-success').addClass('btn-outline-success')
-                $('.sw_mode_Manual').addClass('btn-success').removeClass('btn-outline-success')
-                $('.ul_Auto').hide()
-                $('.ul_Manual').show()
-                // if($('#Modal_control').hasClass('show') == true){
-                    fn_df_sw_manual($('.hidden_select_sw_manual').val());
-                    $('.sw_sel_load_manual').click(function(){
-                        if($('#close_manual_cont').is(":hidden") != false){
-                            fn_check_sw_on_off(Number($(this).attr('id').substring(1)));
+                $('.dash_mode').html('โหมดกำหนดเอง');
+                $('.sw_mode_Auto').removeClass('btn-success').addClass('btn-outline-success');
+                $('.sw_mode_Manual').addClass('btn-success').removeClass('btn-outline-success');
+                $('.ul_Auto').hide();
+                $('.ul_Manual').show();
+                var sw_log = $.parseJSON($('#val_sw_manual').val());
+                var count_sw1 = [];
+                var count_stats1_on = [];
+                var count_sw2 = [];
+                var count_stats2_on = [];
+                var count_sw3 = [];
+                var count_stats3_on = [];
+                if(sw_log.dripper_1 == 'ON'){ count_sw1[1] = 1; }else { count_sw1[1] = 0; }
+                if(sw_log.dripper_2 == 'ON'){ count_sw1[2] = 1; }else { count_sw1[2] = 0; }
+                if(sw_log.dripper_3 == 'ON'){ count_sw1[3] = 1; }else { count_sw1[3] = 0; }
+                if(sw_log.dripper_4 == 'ON'){ count_sw1[4] = 1; }else { count_sw1[4] = 0; }
+                if(parseJSON.dripper_1 == 'ON'){ count_stats1_on[1] = 1; }else { count_stats1_on[1] = 0; }
+                if(parseJSON.dripper_2 == 'ON'){ count_stats1_on[2] = 1; }else { count_stats1_on[2] = 0; }
+                if(parseJSON.dripper_3 == 'ON'){ count_stats1_on[3] = 1; }else { count_stats1_on[3] = 0; }
+                if(parseJSON.dripper_4 == 'ON'){ count_stats1_on[4] = 1; }else { count_stats1_on[4] = 0; }
+                if(sw_log.fan_1 == 'ON'){ count_sw2[1] = 1; }else { count_sw2[1] = 0; }
+                if(sw_log.fan_2 == 'ON'){ count_sw2[2] = 1; }else { count_sw2[2] = 0; }
+                if(sw_log.fan_3 == 'ON'){ count_sw2[3] = 1; }else { count_sw2[3] = 0; }
+                if(sw_log.fan_4 == 'ON'){ count_sw2[4] = 1; }else { count_sw2[4] = 0; }
+                if(parseJSON.fan_1 == 'ON'){ count_stats2_on[1] = 1; }else { count_stats2_on[1] = 0; }
+                if(parseJSON.fan_2 == 'ON'){ count_stats2_on[2] = 1; }else { count_stats2_on[2] = 0; }
+                if(parseJSON.fan_3 == 'ON'){ count_stats2_on[3] = 1; }else { count_stats2_on[3] = 0; }
+                if(parseJSON.fan_4 == 'ON'){ count_stats2_on[4] = 1; }else { count_stats2_on[4] = 0; }
+                if(sw_log.foggy_1 == 'ON'){ count_sw3[1] = 1; }else { count_sw3[1] = 0; }
+                if(sw_log.foggy_2 == 'ON'){ count_sw3[2] = 1; }else { count_sw3[2] = 0; }
+                if(parseJSON.foggy_1 == 'ON'){ count_stats3_on[1] = 1; }else { count_stats3_on[1] = 0; }
+                if(parseJSON.foggy_2 == 'ON'){ count_stats3_on[2] = 1; }else { count_stats3_on[2] = 0; }
+
+                fn_check_sw_on_off($('.hidden_select_sw_manual').val());
+                function fn_check_sw_on_off(val){
+                    if(val == 1){ // dripper
+                        if(countElement(1,count_sw1) == countElement(1,count_stats1_on)){
+                            $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="75" />');
+                            $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="75" />');
                         }
-                    });
-                    fn_check_sw_on_off($('.hidden_select_sw_manual').val());
-                    function fn_check_sw_on_off(val){
-                        var sw_log = $.parseJSON($('#val_sw_manual').val());
-                        if(val == 1){ // dripper
-                            var count_sw = [];
-                            var count_stats_on = [];
-                            if(sw_log.dripper_1 == 'ON'){ count_sw[1] = 1; }else { count_sw[1] = 0; }
-                            if(sw_log.dripper_2 == 'ON'){ count_sw[2] = 1; }else { count_sw[2] = 0; }
-                            if(sw_log.dripper_3 == 'ON'){ count_sw[3] = 1; }else { count_sw[3] = 0; }
-                            if(sw_log.dripper_4 == 'ON'){ count_sw[4] = 1; }else { count_sw[4] = 0; }
-                            if(parseJSON.dripper_1 == 'ON'){ count_stats_on[1] = 1; }else { count_stats_on[1] = 0; }
-                            if(parseJSON.dripper_2 == 'ON'){ count_stats_on[2] = 1; }else { count_stats_on[2] = 0; }
-                            if(parseJSON.dripper_3 == 'ON'){ count_stats_on[3] = 1; }else { count_stats_on[3] = 0; }
-                            if(parseJSON.dripper_4 == 'ON'){ count_stats_on[4] = 1; }else { count_stats_on[4] = 0; }
-                            if(countElement(1,count_sw) == countElement(1,count_stats_on)){
-                                $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="100" />');
-                                $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="100" />');
-                            }
-                            else {
-                                $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="100" />');
-                                $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="100" />');
-                            }
-                            // alert(countElement(1,count_stats_on))
-                        }
-                        else if(val == 2){ // FAN
-                            var count_sw = [];
-                            var count_stats_on = [];
-                            if(sw_log.fan_1 == 'ON'){ count_sw[1] = 1; }else { count_sw[1] = 0; }
-                            if(sw_log.fan_2 == 'ON'){ count_sw[2] = 1; }else { count_sw[2] = 0; }
-                            if(sw_log.fan_3 == 'ON'){ count_sw[3] = 1; }else { count_sw[3] = 0; }
-                            if(sw_log.fan_4 == 'ON'){ count_sw[4] = 1; }else { count_sw[4] = 0; }
-                            if(parseJSON.fan_1 == 'ON'){ count_stats_on[1] = 1; }else { count_stats_on[1] = 0; }
-                            if(parseJSON.fan_2 == 'ON'){ count_stats_on[2] = 1; }else { count_stats_on[2] = 0; }
-                            if(parseJSON.fan_3 == 'ON'){ count_stats_on[3] = 1; }else { count_stats_on[3] = 0; }
-                            if(parseJSON.fan_4 == 'ON'){ count_stats_on[4] = 1; }else { count_stats_on[4] = 0; }
-                            if(countElement(1,count_sw) == countElement(1,count_stats_on)){
-                                $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="100" />');
-                                $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="100" />');
-                            }else {
-                                $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="100" />');
-                                $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="100" />');
-                            }
-                        }
-                        else if(val == 3){ // foggy
-                            var count_sw = [];
-                            var count_stats_on = [];
-                            if(sw_log.foggy_1 == 'ON'){ count_sw[1] = 1; }else { count_sw[1] = 0; }
-                            if(sw_log.foggy_2 == 'ON'){ count_sw[2] = 1; }else { count_sw[2] = 0; }
-                            if(parseJSON.foggy_1 == 'ON'){ count_stats_on[1] = 1; }else { count_stats_on[1] = 0; }
-                            if(parseJSON.foggy_2 == 'ON'){ count_stats_on[2] = 1; }else { count_stats_on[2] = 0; }
-                            if(countElement(1,count_sw) == countElement(1,count_stats_on)){
-                                $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="100" />');
-                                $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="100" />');
-                            }else {
-                                $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="100" />');
-                                $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="100" />');
-                            }
-                        }
-                        else if(val == 4){ // spray
-                            if(parseJSON.spray == 'ON'){
-                                $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="100" />');
-                                $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="100" />');
-                            }else {
-                                $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="100" />');
-                                $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="100" />');
-                            }
-                        }
-                        else if(val == 5){ // shading
-                            if(parseJSON.shading == 'ON'){
-                                $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="100" />');
-                                $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="100" />');
-                            }else {
-                                $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="100" />');
-                                $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="100" />');
-                            }
+                        else {
+                            $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="75" />');
+                            $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="75" />');
                         }
                     }
-                // }
+                    else if(val == 2){ // FAN
+                        if(countElement(1,count_sw2) == countElement(1,count_stats2_on)){
+                            $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="75" />');
+                            $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="75" />');
+                        }else {
+                            $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="75" />');
+                            $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="75" />');
+                        }
+                    }
+                    else if(val == 3){ // foggy
+                        if(countElement(1,count_sw3) == countElement(1,count_stats3_on)){
+                            $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="75" />');
+                            $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="75" />');
+                        }else {
+                            $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="75" />');
+                            $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="75" />');
+                        }
+                    }
+                    else if(val == 4){ // spray
+                        if(parseJSON.spray == 'ON'){
+                            $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="75" />');
+                            $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="75" />');
+                        }else {
+                            $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="75" />');
+                            $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="75" />');
+                        }
+                    }
+                    else if(val == 5){ // shading
+                        if(parseJSON.shading == 'ON'){
+                            $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="75" />');
+                            $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="75" />');
+                        }else {
+                            $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="75" />');
+                            $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="75" />');
+                        }
+                    }
+                }
+                if(countElement(1,count_sw1) == countElement(1,count_stats1_on)){
+                    $('.img_sw_sel_load_manual_1').attr('src','public/images/icons/menu_control/dripper_on.png');
+                }else {
+                    $('.img_sw_sel_load_manual_1').attr('src','public/images/icons/menu_control/dripper_off.png');
+                }
+                if(countElement(1,count_sw2) == countElement(1,count_stats2_on)){
+                    $('.img_sw_sel_load_manual_2').attr('src','public/images/icons/menu_control/fan_on.png');
+                }else {
+                    $('.img_sw_sel_load_manual_2').attr('src','public/images/icons/menu_control/fan_off.png');
+                }
+                if(countElement(1,count_sw3) == countElement(1,count_stats3_on)){
+                    $('.img_sw_sel_load_manual_3').attr('src','public/images/icons/menu_control/foggy_on.png');
+                }else {
+                    $('.img_sw_sel_load_manual_3').attr('src','public/images/icons/menu_control/foggy_off.png');
+                }
+                if(parseJSON.spray == 'ON'){
+                    $('.img_sw_sel_load_manual_4').attr('src','public/images/icons/menu_control/spray_on.png');
+                }else {
+                    $('.img_sw_sel_load_manual_4').attr('src','public/images/icons/menu_control/spray_off.png');
+                }
+                if(parseJSON.shading == 'ON'){
+                    $('.img_sw_sel_load_manual_5').attr('src','public/images/icons/menu_control/shading_on.png');
+                }else {
+                    $('.img_sw_sel_load_manual_5').attr('src','public/images/icons/menu_control/shading_off.png');
+                }
             }
-            else {
+            else { // โหมดอัตโนมัติ
                 $('.dash_mode').html('โหมดอัตโนมัติ')
                 $('.sw_mode_Auto').addClass('btn-success').removeClass('btn-outline-success')
                 $('.sw_mode_Manual').removeClass('btn-success').addClass('btn-outline-success')
@@ -956,6 +1104,7 @@
                     $(".sw_mode_Manual").attr('disabled', false);
                 }
             }
+            // status control dashboard
             for (var i = 1; i <= 12; i++) {
                 if (config_cn['cn_status_' + i] == 1) {
                     if (i <= 4) {
@@ -973,7 +1122,7 @@
                         }
                     }
                     if (i == 9 || i == 10) {
-                        if (parseJSON['fan_' + (i - 8)] === 'OFF') {
+                        if (parseJSON['foggy_' + (i - 8)] === 'OFF') {
                             $(".dash_img_con_" + i).attr("src", "public/images/control/new_foggy-off.svg");
                         } else {
                             $(".dash_img_con_" + i).attr("src", "public/images/control/new_foggy-on.svg");
@@ -1404,7 +1553,7 @@
         $("#Modal_control").modal('show', { backdrop: "static" })
 
         // Create a client instance
-        client = new Paho.MQTT.Client(hostname, Number(port), "mqtt_control_324" + parseInt(Math.random() * 100000, 10));
+        client = new Paho.MQTT.Client(hostname, Number(port), "mqtt_control_324" + parseInt(Math.random() * 1000, 10));
 
         // set callback handlers
         client.onConnectionLost = onConnectionLost;
@@ -2467,7 +2616,7 @@
     function fn_label_manual(val) {
         var sw_log = $.parseJSON($('#val_sw_manual').val());
         if(val == 1){
-            $('.title_load_manual').html('ควบคุม Dripper');
+            $('.title_load_manual').html('ควบคุมน้ำหยด');
             $('.label_1').html(config_cn.cn_name_1);
             $('.label_2').html(config_cn.cn_name_2);
             $('.label_3').html(config_cn.cn_name_3);
@@ -2496,7 +2645,7 @@
             }
         }
         else if(val == 2){
-            $('.title_load_manual').html('ควบคุม Fan');
+            $('.title_load_manual').html('ควบคุมพัดลม');
             $('.label_1').html(config_cn.cn_name_5);
             $('.label_2').html(config_cn.cn_name_6);
             $('.label_3').html(config_cn.cn_name_7);
@@ -2525,7 +2674,7 @@
             }
         }
         else if(val == 3){
-            $('.title_load_manual').html('ควบคุม Foggy');
+            $('.title_load_manual').html('ควบคุมพ่นหมอก');
             $('.label_1').html(config_cn.cn_name_9);
             $('.label_2').html(config_cn.cn_name_10);
             if($('#close_manual_cont').is(":hidden") == true){
@@ -2546,10 +2695,10 @@
             }
         }
         else if(val == 4){
-            $('.title_load_manual').html('ควบคุม Spray');
+            $('.title_load_manual').html('ควบคุมสเปรย์');
         }
         else if(val == 5){
-            $('.title_load_manual').html('ควบคุม Shading');
+            $('.title_load_manual').html('ควบคุมม่านพรางแสง');
         }
         if(val < 4){
             $('.menu_config_manual').show();
@@ -2565,31 +2714,31 @@
     function fn_df_sw_manual(val){
         for (var i = 1; i <= 5; i++) {
             if(i == val){
-                $("#s"+i).addClass('active');
-                if(i == 1){
-                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/dripper_on.png');
-                }else if (i == 2) {
-                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/fan_on.png');
-                }else if (i == 3) {
-                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/foggy_on.png');
-                }else if (i == 4) {
-                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/spray_on.png');
-                }else if (i == 5) {
-                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/shading_on.png');
-                }
+                $("#s"+i).addClass('active'); // .addClass('btn-outline-success') //
+                // if(i == 1){
+                //     $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/dripper_on.png');
+                // }else if (i == 2) {
+                //     $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/fan_on.png');
+                // }else if (i == 3) {
+                //     $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/foggy_on.png');
+                // }else if (i == 4) {
+                //     $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/spray_on.png');
+                // }else if (i == 5) {
+                //     $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/shading_on.png');
+                // }
             }else {
-                $('#s'+i).removeClass('active')
-                if(i == 1){
-                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/dripper_off.png');
-                }else if (i == 2) {
-                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/fan_off.png');
-                }else if (i == 3) {
-                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/foggy_off.png');
-                }else if (i == 4) {
-                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/spray_off.png');
-                }else if (i == 5) {
-                    $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/shading_off.png');
-                }
+                $('#s'+i).removeClass('active') //.removeClass('btn-outline-success')
+                // if(i == 1){
+                //     $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/dripper_off.png');
+                // }else if (i == 2) {
+                //     $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/fan_off.png');
+                // }else if (i == 3) {
+                //     $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/foggy_off.png');
+                // }else if (i == 4) {
+                //     $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/spray_off.png');
+                // }else if (i == 5) {
+                //     $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/shading_off.png');
+                // }
             }
         }
         fn_label_manual(val);

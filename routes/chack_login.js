@@ -4,8 +4,8 @@ if (url === "") {
 } else {
     url = url.split(',')
 }
-var house_master = url[1].substring(0, 8);
-// alert(url)
+var house_master = url[2].substring(0, 8);
+// alert(url[0])
 console.log(house_master);
 // console.log($.base64.encode('TSPWM001zasn'));
 // console.log($.base64.decode('S083TVQwMDF6YXNu'))
@@ -32,7 +32,7 @@ $.getJSON('routes/login.php', function(msg) {
 
     // -----------------------------------------------------
     if (msg.sn['account_status'] == 1) { // supportadmin
-        if (url[0] === '') { // site = nail
+        if (url[1] === '') { // site = nail
             $(".memu_site").addClass("mm-active")
             $("#load_pages").load('views/pages_site.php');
             $(".memu_house").hide();
@@ -40,7 +40,8 @@ $.getJSON('routes/login.php', function(msg) {
             $(".memu_report").hide();
             $('.memu_control').hide();
             $('.memu_compare').hide();
-        } else { // site != nail
+        }
+        else { // site != nail
             if (house_master === '' || house_master.length != 8) { // chack sn != nail or ไม่ถูกต้อง
                 $(".memu_site").removeClass("mm-active")
                 $(".memu_house").show().addClass("mm-active")
@@ -48,12 +49,13 @@ $.getJSON('routes/login.php', function(msg) {
                 $(".memu_report").hide();
                 $('.memu_control').hide();
                 $('.memu_compare').hide();
-                $("#load_pages").load('views/pages_house.php?s=' + url[0]);
-            } else {
+                $("#load_pages").load('views/pages_house.php?s=' + url[1]);
+            }
+            else {
                 $(".memu_site").removeClass("mm-active")
                 $(".memu_house").removeClass("mm-active")
             }
-            if (url[0] == 10) {
+            if (url[0] == 4) {
                 $(".memu_compare").show();
             } else {
                 $(".memu_compare").hide();
@@ -67,22 +69,28 @@ $.getJSON('routes/login.php', function(msg) {
                 $(".memu_house").hide()
                     // $(".memu_dash").show().addClass("mm-active");
                 $(".memu_report").show().removeClass("mm-active")
-            } else { // 1 site > 1 house
+            }
+            else { // 1 site > 1 house
                 $(".memu_site").hide()
-                $(".memu_house").show().addClass("mm-active")
-                $(".memu_dash").hide();
+                if (house_master === '' || house_master.length != 8) {
+                    $(".memu_house").show().addClass("mm-active")
+                    $("#load_pages").load('views/pages_house.php?s=' + msg.sn['siteID']);
+                    $(".memu_dash").hide();
+                }else {
+                    $(".memu_house").show().removeClass("mm-active")
+                    $(".memu_dash").show();
+                }
                 $(".memu_report").hide();
                 $('.memu_control').hide();
-                $("#load_pages").load('views/pages_house.php?s=' + msg.sn['siteID']);
             }
-            if (url[0] == 10) {
+            if (url[0] == 4) {
                 $(".memu_compare").show();
             } else {
                 $(".memu_compare").hide();
             }
         } else { // > 1 site
             // if(msg.sn['count_house'] == 1){
-            if (url[0] === '') { // site = nail
+            if (url[1] === '') { // site = nail
                 $(".memu_site").addClass("mm-active")
                 $("#load_pages").load('views/pages_site.php');
                 $(".memu_house").hide();
@@ -90,7 +98,8 @@ $.getJSON('routes/login.php', function(msg) {
                 $(".memu_report").hide();
                 $('.memu_control').hide();
                 $('.memu_compare').hide();
-            } else { // site != nail
+            }
+            else { // site != nail
                 if (house_master === '' || house_master.length != 8) { // chack sn != nail or ไม่ถูกต้อง
                     $(".memu_site").removeClass("mm-active")
                     $(".memu_house").show().addClass("mm-active")
@@ -98,11 +107,12 @@ $.getJSON('routes/login.php', function(msg) {
                     $(".memu_report").hide();
                     $('.memu_control').hide();
                     $('.memu_compare').hide();
-                    $("#load_pages").load('views/pages_house.php?s=' + url[0]);
-                } else {
+                    $("#load_pages").load('views/pages_house.php?s=' + url[1]);
+                }
+                else {
                     $(".memu_site").removeClass("mm-active")
                     $(".memu_house").removeClass("mm-active")
-                    if (url[0] == 10) {
+                    if (url[0] == 4) {
                         $(".memu_compare").show();
                     } else {
                         $(".memu_compare").hide();
@@ -174,7 +184,7 @@ function verticalNoTitle() {
 }
 
 // logout
-countdown(number = 360); // วินาที
+countdown(number = 1800); // วินาที
 
 function countdown() {
     clearTimeout(countdown);

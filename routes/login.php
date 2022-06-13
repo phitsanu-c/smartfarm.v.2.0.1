@@ -9,7 +9,6 @@ $password = '';                   // set your password
 $topic = "web_system";
 $mqtt = new bluerhinos\phpMQTT($host, $port, "ClientID".rand());
 //
-$decodedJson=[];
 if ($mqtt->connect(true,NULL,$username,$password)) {
     $data_mq = $mqtt->subscribeAndWaitForMessage($topic, 1);
 
@@ -29,7 +28,7 @@ if ($mqtt->connect(true,NULL,$username,$password)) {
         }
         $row_count = $query->fetch();
         // echo $row_count['count_user']; exit();
-        if ($row_count == 0) {
+        if ($row_count['count_user'] == 0) {
             echo json_encode(['name_login'  => "No user"], JSON_UNESCAPED_UNICODE);
             exit();
         }
@@ -40,7 +39,7 @@ if ($mqtt->connect(true,NULL,$username,$password)) {
                 echo json_encode(['name_login'  => "already logged in"], JSON_UNESCAPED_UNICODE);
                 exit();
             } else {
-                $dbcon->prepare("DELETE FROM `tbn_login_re` WHERE `re_userID`= $account_id")->execute();
+                $dbcon->prepare("DELETE FROM `tbn_login_re` WHERE `re_userID`= '$account_id'")->execute();
             }
         }
         // if(substr($data_mq, 2) != 0){
@@ -53,7 +52,7 @@ if ($mqtt->connect(true,NULL,$username,$password)) {
         if($row_count["account_status"] != 1){ // != supperadmin
              // mqsql v.8 $rowc = $dbcon->query("SELECT `userST_siteID`, house_master, ROW_NUMBER() OVER(PARTITION BY `userST_accountID`) AS count_site FROM `tbn_userst` INNER JOIN `tbn_house` ON tbn_userst.userST_houseID = tbn_house.house_id WHERE `userST_accountID`=$account_id GROUP BY `userST_accountID`, `userST_siteID` ORDER BY count_site DESC LIMIT 1")->fetch(); // INNER JOIN tbn_house ON tbn_userst.userST_houseID = tbn_house.house_id WHERE `userST_accountID`='$account_id' GROUP BY SET
             // $zz = "SET @row_number = 0; SELECT `userST_siteID`, house_master, (@row_number:=@row_number + 1) AS count_site FROM `tbn_userst` INNER JOIN `tbn_house` ON tbn_userst.userST_houseID = tbn_house.house_id WHERE `userST_accountID`=$account_id GROUP BY `userST_accountID`, `userST_siteID` ORDER BY count_site DESC LIMIT 1";
-            $rowc = $dbcon->query("SELECT `userST_siteID`, house_master, (@s:=@s + 1) AS count_site FROM (SELECT @s:=0) as s, `tbn_userst` INNER JOIN `tbn_house` ON tbn_userst.userST_houseID = tbn_house.house_id WHERE `userST_accountID`=$account_id GROUP BY `userST_accountID`, `userST_siteID` ORDER BY count_site DESC LIMIT 1")->fetch();
+            $rowc = $dbcon->query("SELECT `userST_siteID`, `house_master`, `house_webv`, (@s:=@s + 1) AS count_site FROM (SELECT @s:=0) as s, `tbn_userst` INNER JOIN `tbn_house` ON tbn_userst.userST_houseID = tbn_house.house_id WHERE `userST_accountID`=$account_id GROUP BY `userST_accountID`, `userST_siteID` ORDER BY `count_site` DESC LIMIT 1")->fetch();
             // print_r($rowc); echo $rowc['count_site'] ;exit();
             if($rowc['count_site'] == 1 ){ // 1 Site chack house
                 $userST_siteID = $rowc['userST_siteID'];
@@ -64,9 +63,9 @@ if ($mqtt->connect(true,NULL,$username,$password)) {
                 }
                 $rowc2 = $dbcon->query("SELECT COUNT('userST_houseID') FROM `tbn_userst` WHERE `userST_accountID`='$account_id' AND userST_siteID = '$userST_siteID'")->fetch();
                 if($rowc2[0] == 1){ // == 1 Site  1 house
-                    $_SESSION["sn"] = array('count_site' => $rowc['count_site'], 'count_house' => $rowc2[0], 'siteID' => $userST_siteID, 'master' => $rowc['house_master'], 'en_url' => encode($userST_siteID.','.$rowc['house_master']), 'account_status'=>$row_count["account_status"] );
+                    $_SESSION["sn"] = array('count_site' => $rowc['count_site'], 'count_house' => $rowc2[0], 'siteID' => $userST_siteID, 'master' => $rowc['house_master'], 'en_url' => encode($rowc['house_webv'].','.$userST_siteID.','.$rowc['house_master']), 'account_status'=>$row_count["account_status"] );
                 }else{ // == 1 Site  > 1 house
-                    $_SESSION["sn"] = array('count_site' => $rowc['count_site'], 'count_house' => $rowc2[0], 'siteID' => $userST_siteID, 'en_url' => encode($userST_siteID.','), 'account_status' => $row_count["account_status"] );
+                    $_SESSION["sn"] = array('count_site' => $rowc['count_site'], 'count_house' => $rowc2[0], 'siteID' => $userST_siteID, 'en_url' => encode(','.$userST_siteID.','), 'account_status' => $row_count["account_status"] );
                 }
                 $log_login = [
                     'dt'   => date("Y-m-d").' '.date("H:i:s"),
@@ -95,13 +94,14 @@ if ($mqtt->connect(true,NULL,$username,$password)) {
         }
         $_SESSION["account_email"] = $row_count["account_email"];
         $_SESSION["account_tel"] = $row_count["account_tel"];
+        $_SESSION["account_status"] = $row_count["account_status"];
         $log_re = [
             'dt'   => date("Y-m-d").' '.date("H:i:s", strtotime('3 minute')),
             'userID'  => $_SESSION['account_id'],
             'siteID'  => $_SESSION['sn']['siteID']
         ];
         $dbcon->prepare("INSERT INTO `tbn_login_re`(`re_datetime`, `re_userID`, `re_siteID`) VALUES (:dt, :userID, :siteID)")->execute($log_re);
-        $new_dt = ['account_id' => $_SESSION['account_id'], 'dt' => date("Y-m-d").' '.date("H:i:s", strtotime('1 minute')), 'siteID' => $_SESSION["sn"]['siteID'], 'count_site' => $_SESSION['sn']['count_site']]; // '-6 hour'));
+        $new_dt = ['account_id' => $_SESSION['account_id'], 'dt' => date("Y-m-d").' '.date("H:i:s", strtotime('30 minute')), 'siteID' => $_SESSION["sn"]['siteID'], 'count_site' => $_SESSION['sn']['count_site']]; // '-6 hour'));
         $decodedJson[$_SESSION['account_id']] = $new_dt;
         $message = json_encode($decodedJson);
         $mqtt->publish($topic,$message, 1);
@@ -175,7 +175,7 @@ if ($mqtt->connect(true,NULL,$username,$password)) {
                 echo json_encode(['name_login'  => ""]);
                 exit();
             }else {
-                $new_dt = ['account_id' => $_SESSION['account_id'], 'dt' => date("Y-m-d").' '.date("H:i:s", strtotime('1 minute')), 'siteID' => $_SESSION["sn"]['siteID'], 'count_site' => $_SESSION['sn']['count_site']]; // '-6 hour'));
+                $new_dt = ['account_id' => $_SESSION['account_id'], 'dt' => date("Y-m-d").' '.date("H:i:s", strtotime('30 minute')), 'siteID' => $_SESSION["sn"]['siteID'], 'count_site' => $_SESSION['sn']['count_site']]; // '-6 hour'));
                 $decodedJson[$_SESSION['account_id']] = $new_dt;
                 $message = json_encode($decodedJson);
                 $mqtt->publish($topic,$message, 1);

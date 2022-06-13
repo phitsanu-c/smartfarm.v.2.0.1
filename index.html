@@ -43,6 +43,7 @@
     <link href="public/plugins/ion-rangeslider/css/ion.rangeSlider.skinModern.css" rel="stylesheet">
     <link href="public/stylesheets/css.css" rel="stylesheet">
     <title>Smart Green House by AI 5.0 AGRICULTURE INNOVATION</title>
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
     <!--plugins-->
     <script src="public/javascripts/jquery.min.js"></script>
     <script src="public/javascripts/decode.js"></script>
@@ -79,7 +80,7 @@
         <div class="sidebar-wrapper" data-simplebar="true">
             <div class="sidebar-header">
                 <div>
-                    <img src="public/images/logo/logo3.png" class="logo-icon" alt="logo icon">
+                    <!-- <img src="public/images/logo/logo3.png" class="logo-icon" alt="logo icon"> -->
                 </div>
                 <div>
                     <h4 class="logo-text">SMART GREENHOUSE</h4>
@@ -462,6 +463,7 @@
     <script src="public/plugins/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider.min.js"></script>
     <script src="public/plugins/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider-init.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
     <script src="public/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
 
@@ -485,11 +487,12 @@
         // });
 </script>
     <script>
+    // alert(url[0])
         $(".logout").click(function() {
             logout()
         });
         if (house_master.length == 8) {
-            if (house_master.substring(0, 3) != "TUS") {
+            if (url[0] ==3) {
                 if (house_master !== "KMUMT001") {
                     $(".title_km").html("ประวัติการตั้งเวลา");
                 } else {
@@ -1943,7 +1946,7 @@
                 });
 
             }
-            else {
+            else if (url[0] ==4) {
                 // = มธ.
                 $.ajax({
                     url: "routes/tu/get_config.php",
@@ -1953,6 +1956,7 @@
                     },
                     dataType: "json",
                     success: function(res) {
+                        console.log(res);
                         var temp_c = [];
                         var hum_c = [];
                         var light_c = [];

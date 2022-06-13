@@ -6,8 +6,8 @@
     </div>
     <!--end breadcrumb-->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-4">
-                
-                
+
+
     <?php
         // session_start();
         require '../routes/connectdb.php';
@@ -36,42 +36,41 @@
         }
         $i = 1;
         // $row_ = $site_stmt->fetch(PDO::FETCH_BOTH);
+        if($siteID == 10){
+            $house_sn = 'TUSMT';
+            $drow_ = $dbcon->query("SELECT * FROM tbn_data_tu WHERE data_sn = '$house_sn' ORDER BY data_timestamp DESC")->fetch();
+        }
         foreach ($site_stmt as $row_) {
             // echo $url_link;
             // echo substr($row_["house_master"],0,3);
     ?>
         <div class="col-12 col-sm-12 col-md-4 col-lg-4  col-xl-3">
-            <a href="
-                <?php 
-                    // if(substr($row_["house_master"],0,3) == "TUS"){
-                    //     echo $url_link .'/tu/#'.encode($row_["house_siteID"].','.$row_["house_master"]);
-                    // }else{
-                        echo $url_link .'#'.encode($row_["house_siteID"].','.$row_["house_master"]);
-                    // } 
-                ?>">
+            <a href="<?= $url_link .'#'.encode($row_['house_webv'].','.$row_["house_siteID"].','.$row_["house_master"] ) ?>">
                 <div class="card" style="padding: 1.25rem;  border-radius:20px">
                     <img src="<?php if($row_["house_img"] == ""){echo "public/images/default.jpg";}else{echo "public/images/house/".$row_["house_img"];} ?>" style="height: 20vh; width: 100%;" class="card-img-top img-fluid" alt="site01">
-                    <!-- <div class="card"> -->
                     <h6 class="card-title text-bold text-center" style="margin-top: 15px">ชื่อ : <B><?= $row_["house_name"] ?></B></h6>
                     <h6 class="card-title text-bold text-center" style="margin-top: 10px">ขนาด : <B><?= substr($row_["house_size"],9,13) ?></B></h6>
-                    <!-- <div class="d-grid" style="overflow:auto; padding-left:10px; padding-right:10px;" id="style-3"> -->
-                    <?php 
-                        echo '<h6 class="card-title text-bold text-center" style="margin-top: 10px">สถานะ : <B> ออนไลน์</B></h6>';
-                        // foreach ($stmt2 as $row) {
-                        //     echo '<a class="btn btn-outline-info px-5 radius-30" style="margin-top: 10px" href="'. $url_link .'#'. encode($row["house_master"]) .'">'. $row["house_name"].'</a>';
-                        // }
+                    <?php
+                    if ($row_['house_webv'] == 3) {
+                        $house_master = $row_["house_master"];
+                        $row_ = $dbcon->query("SELECT data_timestamp FROM tb_data_sensor WHERE data_sn = '$house_master' ORDER BY data_timestamp DESC")->fetch();
+                        if(DateTime::createFromFormat("Y/m/d - H:i:s", $row_[0])->format("Y-m-d H:i:s") > date("Y-m-d H:i:s", strtotime('-2 minute')) ){
+                            echo '<h6 class="card-title text-bold text-center" style="margin-top: 10px">สถานะ : <B class="text-success"> ออนไลน์</B> ';
+                        }else {
+                            echo '<h6 class="card-title text-bold text-center" style="margin-top: 10px">สถานะ : <B class="text-danger"> ออฟไลน์</B>';
+                        }
+                    }else if ($row_['house_webv'] == 4) {
+                        if( $drow_['data_timestamp_'.intval(substr($row_['house_master'], 5,10))] > date("Y-m-d H:i:s", strtotime('-2 minute')) ){
+                            echo '<h6 class="card-title text-bold text-center" style="margin-top: 10px">สถานะ : <B class="text-success"> ออนไลน์</B> ';
+                        }else {
+                            echo '<h6 class="card-title text-bold text-center" style="margin-top: 10px">สถานะ : <B class="text-danger"> ออฟไลน์</B>';
+                        }
+                    }
                     ?>
-                    <!-- </div> -->
                 </div>
             </a>
         </div>
-
-
-
-
-
     <?php $i++;
     } ?>
-         
-    </div>   
+    </div>
 </div>

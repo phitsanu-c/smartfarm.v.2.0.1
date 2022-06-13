@@ -3444,7 +3444,7 @@ fieldset:disabled .btn {
 .btn-control:active {
     color: #3FC6F2;
     font-weight: 600;
-    outline: 0;
+    border-color: #3FC6F2;
     box-shadow: 0 0 0 .25rem rgba(13, 110, 253, 0)
 }
 
@@ -3542,9 +3542,9 @@ fieldset:disabled .btn {
 }
 
 .btn-outline-success:hover {
-    color: #fff;
-    background-color: #17a00e;
-    border-color: #17a00e
+    /* color: #fff; */
+    /* background-color: #17a00e; */
+        border-color: #17a00e
 }
 
 .btn-check:focus+.btn-outline-success,

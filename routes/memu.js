@@ -10,7 +10,7 @@ $(".memu_site").click(function() {
     }
     $(".memu_report").hide()
     $('.memu_control').hide()
-    if(url[0] == 10){
+    if(url[0] == 4){
         $(".memu_compare").show();
     }else{
         $(".memu_compare").hide();
@@ -18,7 +18,7 @@ $(".memu_site").click(function() {
 });
 $(".memu_house").click(function() {
     $(this).addClass('mm-active');
-    $("#load_pages").load('views/pages_house.php?s='+url[0]);
+    $("#load_pages").load('views/pages_house.php?s='+url[1]);
     if(house_master === '' || house_master.length != 8){
         $(".memu_dash").hide();
     }else{
@@ -26,7 +26,7 @@ $(".memu_house").click(function() {
     }
     $(".memu_report").hide()
     $('.memu_control').hide()
-    if(url[0] == 10){
+    if(url[0] == 4){
         $(".memu_compare").show();
     }else{
         $(".memu_compare").hide();
@@ -35,7 +35,7 @@ $(".memu_house").click(function() {
 $(".memu_compare").click(function(){
     $(this).addClass('mm-active');
     $(".memu_house").removeClass("mm-active")
-    $("#load_pages").load('routes/tu/pages_compare.php?s='+url[0]);
+    $("#load_pages").load('routes/tu/pages_compare.php?s='+url[1]);
 })
 // $(".memu_dash").click(function() {
 //     $(this).addClass('mm-active');

@@ -20,20 +20,28 @@
     $controlstatus[11] = intval($row_3["cn_status_11"]);
     $controlstatus[12] = intval($row_3["cn_status_12"]);
 
-    $row_6 = $dbcon->query("SELECT * FROM tb_set_maxmin WHERE set_maxmin_sn = '$house_master'")->fetch();
+    $row_4 = $dbcon->query("SELECT * FROM tb_set_maxmin WHERE set_maxmin_sn = '$house_master'")->fetch();
     $set_maxmin = [
-        'Tmin' => $row_6["set_Tmin"],
-        'Tmax' => $row_6["set_Tmax"],
-        'Hmin' => $row_6["set_Hmin"],
-        'Hmax' => $row_6["set_Hmax"],
-        'Lmin' => $row_6["set_Lmin"],
-        'Lmax' => $row_6["set_Lmax"],
-        'Smin' => $row_6["set_Smin"],
-        'Smax' => $row_6["set_Smax"]
+        'Tmin' => $row_4["set_Tmin"],
+        'Tmax' => $row_4["set_Tmax"],
+        'Hmin' => $row_4["set_Hmin"],
+        'Hmax' => $row_4["set_Hmax"],
+        'Lmin' => $row_4["set_Lmin"],
+        'Lmax' => $row_4["set_Lmax"],
+        'Smin' => $row_4["set_Smin"],
+        'Smax' => $row_4["set_Smax"]
     ];
-    $row_7 = $dbcon->query("SELECT * FROM tb_sensor");
-    foreach ($row_7 as $row_) {
+    $row_5 = $dbcon->query("SELECT * FROM tb_sensor");
+    foreach ($row_5 as $row_) {
         $sensor[] = $row_;
+    }
+    $account_id = $_SESSION['account_id'];
+    $houseID = $row_1['house_id'];
+    if($_SESSION['account_status'] > 2){
+        $row_6 = $dbcon->query("SELECT `userST_level` FROM `tbn_userst` WHERE `userST_accountID`=$account_id AND `userST_houseID`=$houseID")->fetch();
+        $account_status = $row_6[0];
+    }else {
+        $account_status = $_SESSION['account_status'];
     }
     echo json_encode([
         'account_user' => $_SESSION["account_user"],
@@ -43,32 +51,5 @@
         'controlstatus'=> $controlstatus,
         'set_maxmin' => $set_maxmin,
         'sensor' => $sensor,
-        // 'dashName'=> $dashName,
-        // 'dashSncanel'=> $dashSncanel,
-        // 'dashMode'=> $dashMode,
-        // 'dashImg'=> $dashImg,
-        // 'dashUnit'=> $dashUnit,
-        // 'conttrolname'=> $conttrolname,
-        // 'imgCon'=> [
-        //     'drip_1'=> $drip_1,
-        //     'drip_2'=> $drip_2,
-        //     'drip_3'=> $drip_3,
-        //     'drip_4'=> $drip_4,
-        //     'drip_5'=> $drip_5,
-        //     'drip_6'=> $drip_6,
-        //     'drip_7'=> $drip_7,
-        //     'drip_8'=> $drip_8,
-        //     'foggy'=> $foggy,
-        //     'fan'=> $fan,
-        //     'shader'=> $shader,
-        //     'fertilizer'=> $fertilizer
-        // ],
-        // 'ingMap' => $ingMap,
-        // 'meter_status' => $meter_status,
-        // 'meter_chenal' => $meter_chenal,
-        // 'meter_mode' => $meter_mode,
-        // 'meterImg' => $meterImg,
-        // 'meterUnit' => $meterUnit,
-        // 'time_update' => $r,
-        // 'theme' => $_SESSION["login_theme"]
+        'userLevel'=> $account_status
     ]);
