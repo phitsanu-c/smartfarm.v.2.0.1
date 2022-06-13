@@ -94,7 +94,7 @@
                             <div class="col-12">
                                 <!-- <div class="card-body radius-10 shadow-none"> -->
                                 <div class="d-flex">
-                                    <h5>ที่ตั้ง : <b>
+                                    <h5 class="text-responsive2">ที่ตั้ง : <b>
                                             <?= $s_master["site_address"] ?>
                                         </b></h5>
                                 </div>
@@ -103,14 +103,14 @@
                             <div class="col-12">
                                 <!-- <div class="card-body radius-10 shadow-none"> -->
                                 <div class="d-flex">
-                                    <h5>สถานะโรงเรือน : <b class="status_timeUpdate"></b></h5>
+                                    <h5 class="text-responsive2">สถานะโรงเรือน : <b class="status_timeUpdate"></b></h5>
                                 </div>
                                 <!-- </div> -->
                             </div>
                             <div class="col-12">
                                 <!-- <div class="card-body radius-10 shadow-none"> -->
                                 <div class="d-flex">
-                                    <h5>ขนาดโรงเรือน : <b><?= substr($s_master["house_size"],9,13) ?></b> เมตร</h5>
+                                    <h5 class="text-responsive2">ขนาดโรงเรือน : <b><?= substr($s_master["house_size"],9,13) ?></b> เมตร</h5>
                                 </div>
                                 <!-- </div> -->
                             </div>
@@ -118,21 +118,21 @@
                                 <div class="col-12">
                                     <!-- <div class="card-body radius-10 shadow-none"> -->
                                     <div class="d-flex">
-                                        <h5>ระบบอินเตอร์เน็ต : <b>Internet SIM</b></h5>
+                                        <h5 class="text-responsive2">ระบบอินเตอร์เน็ต : <b>Internet SIM</b></h5>
                                     </div>
                                     <!-- </div> -->
                                 </div>
                                 <div class="col-12">
                                     <!-- <div class="card-body radius-10 shadow-none"> -->
                                     <div class="d-flex">
-                                        <h5>หมายเลขอินเตอร์เน็ต : <b><?= $s_master["site_internet"] ?></b></h5>
+                                        <h5 class="text-responsive2">หมายเลขอินเตอร์เน็ต : <b><?= $s_master["site_internet"] ?></b></h5>
                                     </div>
                                     <!-- </div> -->
                                 </div>
                                 <div class="col-12">
                                     <!-- <div class="card-body radius-10 shadow-none"> -->
                                     <div class="d-flex">
-                                        <h5>วันหมดอายุ : <b><?= $s_master["site_internetO"] ?></b></h5>
+                                        <h5 class="text-responsive2">วันหมดอายุ : <b><?= $s_master["site_internetO"] ?></b></h5>
                                     </div>
                                     <!-- </div> -->
                                 </div>
@@ -189,14 +189,14 @@
                     <?php if($config_sn['sn_status_1'] == 1 || $config_sn['sn_status_2'] == 1 || $config_sn['sn_status_3'] == 1){?>
                         <div class="card radius-10 border shadow-none">
                             <div class="card-body">
-                                <h5 class="text-center">ข้อมูลเซนเซอร์นอกโรงเรือน</h5>
+                                <h5 class="text-center text-responsive2">ข้อมูลเซนเซอร์นอกโรงเรือน</h5>
                                 <div class="row text-center">
                                     <?php for($i = 1; $i <= 3; $i++){
                                         if($config_sn['sn_status_'.$i] == 1){ ?>
                                             <div class="col-lg-4 col-xl-4 col-sm-12">
                                                 <div class="card-body border radius-10 shadow-none mb-3">
                                                     <div class="col">
-                                                        <h5 class="card-title mt-2 "><B>
+                                                        <h5 class="card-title text-responsive2 mt-2 "><B>
                                                                 <?php //$config_sn['sn_name_'.$i]
                                                                     if($i == 1){echo "อุณหภูมิ";}elseif($i == 2){ echo "ความชื้น"; }elseif($i == 3){ echo "ความเข้มแสง"; }
                                                                 ?>
@@ -208,7 +208,7 @@
                                                         </div>
                                                     </div>
                                                     <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle" style="width:88px; margin-top:10px; text-align: center!important;">
-                                                    <h5 class="card-text text-center dash_data__<?= $i ?>" style="margin-top:20px; font-size:1.5vw">
+                                                    <h5 class="card-text text-center dash_data__<?= $i ?> text-responsive" style="margin-top:20px;">
                                                     </h5>
                                                 </div>
                                             </div>
@@ -220,14 +220,14 @@
                         <?php } ?>
                     <div class="card radius-10 border shadow-none">
                         <div class="card-body">
-                            <h5 class="text-center">ข้อมูลเซนเซอร์ในโรงเรือน</h5>
+                            <h5 class="text-center text-responsive2">ข้อมูลเซนเซอร์ในโรงเรือน</h5>
                             <div class="row text-center">
                                 <?php for($i = 4; $i <= 7; $i++){
                                     if($config_sn['sn_status_'.$i] == 1){ ?>
                                 <div class="col-lg-3 col-xl-3 col-sm-12">
                                     <div class="card-body border radius-10 shadow-none mb-3">
                                         <div class="col">
-                                            <h5 class="card-title text-center mt-2 ">
+                                            <h5 class="card-title text-responsive2 text-center mt-2 ">
                                                 <B> <?php if($i == 4){echo "อุณหภูมิ";}elseif($i == 5){ echo "ความชื้น"; }elseif($i == 6){ echo "ความเข้มแสง"; }elseif($i == 7){ echo "ความชื้นดิน"; } ?> </B>
                                             </h5>
                                             <div class="ms-auto mt-2 image-popups">
@@ -237,8 +237,8 @@
                                             </div>
                                         </div>
                                         <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle" style="width:88px; margin-top:10px; text-align: center!important;">
-                                        <h5 class="card-text text-center  dash_data__ <?= $i ?>" style="margin-top:20px;">
-                                        </h5>
+                                        <p class="card-text text-center  dash_data__<?= $i ?> text-responsive" style="margin-top:20px;">
+                                        </p>
                                     </div>
                                 </div>
                                 <?php } } ?>
@@ -255,11 +255,11 @@
             <div class="card w-100 radius-10">
                 <div class="card-body">
                     <div class="card-body text-center">
-                        <h5 class="card-title text-center"><b>สถานะการทำงาน </b></h5>
+                        <h5 class="card-title text-responsive2 text-center"><b>สถานะการทำงาน </b></h5>
                         <!-- <h5 class="card-title text-center"><b>โหมดอัตโนมัติ </b></h5> -->
                         <!-- <div class="row g-2"> -->
                         <!-- <div class="col-lg-6 col-xl-6 col-sm-12 col-12" > -->
-                        <button type="button" class="btn btn-outline-success px-5 radius-30 dash_mode active" style="font-size:1.25rem"></button>
+                        <button type="button" class="btn btn-outline-success text-responsive2 px-5 radius-30 dash_mode active"></button>
                         <!-- </div> -->
                         <!-- <div class="col-lg-6 col-xl-6 col-sm-12 col-12">
                                     <button type="button" class="col-lg-6 col-xl-6 col-sm-12 col-12 btn btn-outline-info px-5 radius-30 sw_mode_Manual" style="font-size:18px">โหมดสั่งงานด้วยตนเอง</button>
@@ -271,14 +271,14 @@
                             if($config_cn['cn_status_'.$i] == 1){ ?>
                                 <div class="col-lg-3 col-xl-3 col-sm-12">
                                     <div class="card-body border radius-10 shadow-none mb-3">
-                                        <div class="text-center"><h5 style="font-size:1.5vw"><b>
+                                        <div class="text-center text-responsive2"><b>
                                             <?php
                                                 if($i <= 4){echo 'น้ำหยด '.$i;}
                                                 elseif($i > 4 && $i <= 8){echo 'พัดลม '.($i-4);}
                                                 elseif($i > 8 && $i <= 10){echo 'พ่นหมอก '.($i-8);}
                                                 elseif($i == 11){echo 'สเปรย์';}
                                                 elseif($i == 12){echo 'ม่านพรางแสง';}
-                                            ?></b></h5>
+                                            ?></b>
                                         </div>
                                         <div class="text-center">
                                             <img class="dash_img_con_<?= $i ?>" style="width:15vh">
@@ -636,28 +636,28 @@
                         <li class="nav-item btn_ch_t" role="presentation">
                             <a class="nav-link btn_ch_t" data-bs-toggle="pill" href="#hreft_temp" role="tab" aria-selected="false">
                                 <div class="d-flex align-items-center">
-                                    <div class="tab-title">อุณหภูมิ</div>
+                                    <div class="tab-title text-responsive2">อุณหภูมิ</div>
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item " role="presentation">
                             <a class="nav-link btn_ch_h" data-bs-toggle="pill" href="#hreft_hum" role="tab" aria-selected="false">
                                 <div class="d-flex align-items-center">
-                                    <div class="tab-title">ความชื้นอากาศ</div>
+                                    <div class="tab-title text-responsive2">ความชื้นอากาศ</div>
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link btn_ch_l" data-bs-toggle="pill" href="#hreft_light" role="tab" aria-selected="true">
                                 <div class="d-flex align-items-center">
-                                    <div class="tab-title">ความเข้มแสง</div>
+                                    <div class="tab-title text-responsive2">ความเข้มแสง</div>
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link btn_ch_s" data-bs-toggle="pill" href="#hreft_soil" role="tab" aria-selected="true">
                                 <div class="d-flex align-items-center">
-                                    <div class="tab-title" >ความชื้นดิน</div>
+                                    <div class="tab-title text-responsive2" >ความชื้นดิน</div>
                                 </div>
                             </a>
                         </li>

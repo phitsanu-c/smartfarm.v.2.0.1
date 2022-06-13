@@ -2229,21 +2229,30 @@ input.search-control-2::placeholder {
     cursor: pointer
 }
 
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 921px) {
     .text-responsive {
-        font-size: 1vw
+        font-size: 1.5vw
+    }
+    .text-responsive2 {
+        font-size: 1.2vw
     }
 }
 
 @media only screen and (max-width: 920px) {
     .text-responsive {
-        font-size: 18px
+        font-size: 20px
+    }
+    .text-responsive2 {
+        font-size: 22px
     }
 }
 
 @media only screen and (max-width: 400px) {
     .text-responsive {
-        font-size: 16px
+        font-size: 22px
+    }
+    .text-responsive2 {
+        font-size: 22px
     }
 }
 
