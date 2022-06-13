@@ -237,7 +237,7 @@
                                             </div>
                                         </div>
                                         <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle" style="width:88px; margin-top:10px; text-align: center!important;">
-                                        <h5 class="card-text text-center dash_data__<?= $i ?>" style="margin-top:20px; font-size:1.5vw">
+                                        <h5 class="card-text text-center  dash_data__ <?= $i ?>" style="margin-top:20px;">
                                         </h5>
                                     </div>
                                 </div>
