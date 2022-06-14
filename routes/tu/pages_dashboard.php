@@ -316,39 +316,39 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 mt-2 ul_Auto">
+                            <div class="col-12 mt-2 ul_Auto control-mode">
                                 <div class="row">
-                                    <div class="col-12 col-lg-4">
+                                    <div class="col-12 col-lg-4 ">
                                         <div class="row"><?php
                                             if($config_cn['cn_status_1'] == 1){
                                                 echo '<div class="col-3 col-lg-6">
-                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="1">
-                                                            <div class="text_font_size">'.$config_cn['cn_name_1'].'</div>
-                                                             <img class="img_sw_sel_load_auto1" src="" width="70" />
+                                                         <button class="btn btn-control sw_sel_load_auto" id="1">
+                                                            <div class="control-text">'.$config_cn['cn_name_1'].'</div>
+                                                             <img class="img_sw_sel_load_auto1" src="" width="100%" />
                                                          </button>
                                                     </div>';
                                             }
                                             if($config_cn['cn_status_2'] == 1){
                                                 echo '<div class="col-3 col-lg-6">
-                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="2">
-                                                            <div class="text_font_size">'.$config_cn['cn_name_2'].'</div>
-                                                             <img class="img_sw_sel_load_auto2" src="" width="70" />
+                                                         <button class="btn btn-control sw_sel_load_auto"  id="2">
+                                                            <div class="control-text">'.$config_cn['cn_name_2'].'</div>
+                                                             <img class="img_sw_sel_load_auto2" src="" width="100%" />
                                                          </button>
                                                     </div>';
                                             }
                                             if($config_cn['cn_status_3'] == 1){
                                                 echo '<div class="col-3 col-lg-6">
-                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="3">
-                                                            <div class="text_font_size">'.$config_cn['cn_name_3'].'</div>
-                                                             <img class="img_sw_sel_load_auto3" src="" width="70" />
+                                                         <button class="btn btn-control sw_sel_load_auto"  id="3">
+                                                            <div class="control-text">'.$config_cn['cn_name_3'].'</div>
+                                                             <img class="img_sw_sel_load_auto3" src="" width="100%" />
                                                          </button>
                                                     </div>';
                                             }
                                             if($config_cn['cn_status_4'] == 1){
                                                 echo '<div class="col-3 col-lg-6">
-                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="4">
-                                                            <div class="text_font_size">'.$config_cn['cn_name_4'].'</div>
-                                                             <img class="img_sw_sel_load_auto4" src="" width="70" />
+                                                         <button class="btn btn-control sw_sel_load_auto"  id="4">
+                                                            <div class="control-text">'.$config_cn['cn_name_4'].'</div>
+                                                             <img class="img_sw_sel_load_auto4" src="" width="100%" />
                                                          </button>
                                                     </div>';
                                             } ?>
@@ -358,33 +358,33 @@
                                         <div class="row"><?php
                                             if($config_cn['cn_status_5'] == 1){
                                                 echo '<div class="col-3 col-lg-6">
-                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="5">
-                                                            <div class="text_font_size">'.$config_cn['cn_name_5'].'</div>
-                                                             <img class="img_sw_sel_load_auto5" src="" width="70" />
+                                                         <button class="btn btn-control sw_sel_load_auto" id="5">
+                                                            <div class="control-text">'.$config_cn['cn_name_5'].'</div>
+                                                             <img class="img_sw_sel_load_auto5" src="" width="100%" />
                                                          </button>
                                                     </div>';
                                             }
                                             if($config_cn['cn_status_6'] == 1){
                                                 echo '<div class="col-3 col-lg-6">
-                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="6">
-                                                            <div class="text_font_size">'.$config_cn['cn_name_6'].'</div>
-                                                             <img class="img_sw_sel_load_auto6" src="" width="70" />
+                                                         <button class="btn btn-control sw_sel_load_auto"" id="6">
+                                                            <div class="control-text">'.$config_cn['cn_name_6'].'</div>
+                                                             <img class="img_sw_sel_load_auto6" src="" width="100%" />
                                                          </button>
                                                     </div>';
                                             }
                                             if($config_cn['cn_status_7'] == 1){
                                                 echo '<div class="col-3 col-lg-6">
-                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="7">
-                                                            <div class="text_font_size">'.$config_cn['cn_name_7'].'</div>
-                                                             <img class="img_sw_sel_load_auto7" src="" width="70" />
+                                                         <button class="btn btn-control sw_sel_load_auto"  id="7">
+                                                            <div class="control-text">'.$config_cn['cn_name_7'].'</div>
+                                                             <img class="img_sw_sel_load_auto7" src="" width="100%" />
                                                          </button>
                                                     </div>';
                                             }
                                             if($config_cn['cn_status_8'] == 1){
                                                 echo '<div class="col-3 col-lg-6">
-                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="8">
-                                                            <div class="text_font_size">'.$config_cn['cn_name_8'].'</div>
-                                                             <img class="img_sw_sel_load_auto8" src="" width="70" />
+                                                         <button class="btn btn-control sw_sel_load_auto"  id="8">
+                                                            <div class="control-text">'.$config_cn['cn_name_8'].'</div>
+                                                             <img class="img_sw_sel_load_auto8" src="" width="100%" />
                                                          </button>
                                                     </div>';
                                             } ?>
@@ -394,33 +394,33 @@
                                         <div class="row"><?php
                                             if($config_cn['cn_status_9'] == 1){
                                                 echo '<div class="col-3 col-lg-6">
-                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="9">
-                                                            <div class="text_font_size">'.$config_cn['cn_name_9'].'</div>
-                                                             <img class="img_sw_sel_load_auto9" src="" width="70" />
+                                                         <button class="btn btn-control sw_sel_load_auto" id="9">
+                                                            <div class="control-text">'.$config_cn['cn_name_9'].'</div>
+                                                             <img class="img_sw_sel_load_auto9" src="" width="100%" />
                                                          </button>
                                                     </div>';
                                             }
                                             if($config_cn['cn_status_10'] == 1){
                                                 echo '<div class="col-3 col-lg-6">
-                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="10">
-                                                            <div class="text_font_size">'.$config_cn['cn_name_10'].'</div>
-                                                             <img class="img_sw_sel_load_auto10" src="" width="70" />
+                                                         <button class="btn btn-control sw_sel_load_auto" id="10">
+                                                            <div class="control-text">'.$config_cn['cn_name_10'].'</div>
+                                                             <img class="img_sw_sel_load_auto10" src="" width="100%" />
                                                          </button>
                                                     </div>';
                                             }
                                             if($config_cn['cn_status_11'] == 1){
                                                 echo '<div class="col-3 col-lg-6">
-                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="11">
-                                                            <div class="text_font_size">'.$config_cn['cn_name_11'].'</div>
-                                                             <img class="img_sw_sel_load_auto11" src="" width="70" />
+                                                         <button class="btn btn-control sw_sel_load_auto"id="11">
+                                                            <div class="control-text">'.$config_cn['cn_name_11'].'</div>
+                                                             <img class="img_sw_sel_load_auto11" src="" width="100%" />
                                                          </button>
                                                     </div>';
                                             }
                                             if($config_cn['cn_status_12'] == 1){
                                                 echo '<div class="col-3 col-lg-6">
-                                                         <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="12">
-                                                            <div class="text_font_size">พรางแสง</div>
-                                                             <img class="img_sw_sel_load_auto12" src="" width="70" />
+                                                         <button class="btn btn-control sw_sel_load_auto"  id="12">
+                                                            <div class="control-text">พรางแสง</div>
+                                                             <img class="img_sw_sel_load_auto12" src="" width="100%" />
                                                          </button>
                                                     </div>';
                                             } ?>
