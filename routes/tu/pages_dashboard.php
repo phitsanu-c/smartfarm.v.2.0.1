@@ -1629,7 +1629,7 @@
                     showCancelButton: true,
                     confirmButtonColor: '#32CD32',
                     cancelButtonColor: '#FF3333',
-                    confirmButtonText: 'ไช่',
+                    confirmButtonText: 'ใช่',
                     cancelButtonText: 'ยกเลิก'
                 }).
                 then((result) => {
@@ -1804,7 +1804,7 @@
                     showCancelButton: true,
                     confirmButtonColor: '#32CD32',
                     cancelButtonColor: '#FF3333',
-                    confirmButtonText: 'ไช่',
+                    confirmButtonText: 'ใช่',
                     cancelButtonText: 'ยกเลิก'
                 }).then((result) => {
                     if (result.value) {
@@ -1906,7 +1906,7 @@
                     showCancelButton: true,
                     confirmButtonColor: '#32CD32',
                     cancelButtonColor: '#FF3333',
-                    confirmButtonText: 'ไช่',
+                    confirmButtonText: 'ใช่',
                     cancelButtonText: 'ยกเลิก'
                 }).then((result) => {
                     if (result.value) {
@@ -2049,7 +2049,7 @@
                     showCancelButton: true,
                     confirmButtonColor: '#32CD32',
                     cancelButtonColor: '#FF3333',
-                    confirmButtonText: 'ไช่',
+                    confirmButtonText: 'ใช่',
                     cancelButtonText: 'ยกเลิก'
                 }).then((result) => {
                     // console.log(result)

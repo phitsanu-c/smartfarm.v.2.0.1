@@ -536,7 +536,7 @@ $siteID = $_GET["siteID"];
             showCancelButton: true,
             confirmButtonColor: '#00CC33',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'ไช่',
+            confirmButtonText: 'ใช่',
             cancelButtonText: 'ยกเลิก'
             }).then((result) => {
             if (result.value) {
