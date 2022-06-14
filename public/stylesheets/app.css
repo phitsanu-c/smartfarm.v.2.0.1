@@ -2239,6 +2239,9 @@ input.search-control-2::placeholder {
     .text-responsive3 {
         font-size: 1.1vw
     }
+    .img-hight {
+        height: 25vh;
+    }
 }
 
 @media only screen and (max-width: 920px) {
