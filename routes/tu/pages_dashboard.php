@@ -57,9 +57,9 @@
     ?>
 
     <!--breadcrumb-->
-    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3"> <h5><?= $s_master['site_name'] ?></h5> </div>
-        <div class="ps-3">
+    <div class="page-breadcrumb d-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3 d-none d-sm-block"> <h5><?= $s_master['site_name'] ?></h5> </div>
+        <div class="ps-3 d-none d-sm-block">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="javascript:;"><i class="-alt"></i></a> </li>
@@ -70,12 +70,12 @@
             </nav>
         </div>
         <div class="ms-auto">
-            <!-- <div class="btn-group"> -->
-                <!-- <span class="text-center"> -->
+            <div class="btn-group">
+                <span class="text-right">
                     <h5 class="date"></h5>
                     <!-- <span class="time"></span> -->
-                <!-- </span> -->
-            <!-- </div> -->
+                </span>
+            </div>
         </div>
     </div>
     <!--end breadcrumb-->
@@ -662,21 +662,21 @@
                         </li>
                     </ul>
                 </div>
-                <!-- <div class="tab-content" id="pills-tabContent"> -->
-					<!-- <div class="tab-pane fade" id="hreft_temp" role="tabpanel"> -->
-		                <!-- <div class="chartdiv" id="chart1"></div> -->
-					<!-- </div>
-					<div class="tab-pane fade" id="hreft_hum" role="tabpanel"> -->
-    				    <!-- <div class="chartdiv" id="chart2"></div> -->
-					<!-- </div>
-					<div class="tab-pane fade" id="hreft_light" role="tabpanel"> -->
-    				    <!-- <div class="chartdiv" id="chart3"></div> -->
-					<!-- </div>
-					<div class="tab-pane fade" id="hreft_soil" role="tabpanel"> -->
-    				    <!-- <div class="chartdiv" id="chart4"></div> -->
-					<!-- </div> -->
-				<!-- </div> -->
-                <div class="chartdiv" id="chart_realtime"></div>
+                <div class="tab-content" id="pills-tabContent">
+					<div class="tab-pane fade" id="hreft_temp" role="tabpanel">
+		                <div class="chartdiv" id="chart1"></div>
+					</div>
+					<div class="tab-pane fade" id="hreft_hum" role="tabpanel">
+    				    <div class="chartdiv" id="chart2"></div>
+					</div>
+					<div class="tab-pane fade" id="hreft_light" role="tabpanel">
+    				    <div class="chartdiv" id="chart3"></div>
+					</div>
+					<div class="tab-pane fade" id="hreft_soil" role="tabpanel">
+    				    <div class="chartdiv" id="chart4"></div>
+					</div>
+				</div>
+                <!-- <div class="chartdiv" id="chart_realtime"></div> -->
             </dic>
         </dic>
     </dic>
@@ -737,7 +737,7 @@
     }
     if(s_sensor.s_btnT > 0){
         $('.btn_ch_t').addClass('active');
-        // $('#hreft_temp').addClass('active show');
+        $('#hreft_temp').addClass('active show');
     }
     else {
         $('.btn_ch_t').hide();
@@ -921,10 +921,10 @@
                 y:(data_['soil_in'] * 1).toFixed(1)
             })
             // -------------------
-            if($('.btn_ch_t').hasClass('active') == true){
+            if(s_sensor.s_btnT > 0){
                 // console.log(data_temp_out);
                 // if(data_temp_out.length > 0){
-                    chartLine.updateSeries([
+                    chartLine1.updateSeries([
                         {
                             name: config_sn.sn_name_1,
                             data: data_temp_out
@@ -935,9 +935,9 @@
                     ])
                 // }
             }
-            if($('.btn_ch_h').hasClass('active') == true){
+            if(s_sensor.s_btnH > 0){
                 // if(data_hum_out.length > 0){
-                    chartLine.updateSeries([
+                    chartLine2.updateSeries([
                         {
                             name: config_sn.sn_name_2,
                             data: data_hum_out
@@ -948,9 +948,9 @@
                     ])
                 // }
             }
-            if($('.btn_ch_L').hasClass('active') == true){
+            if(s_sensor.s_btnL > 0){
                 // if(data_light_out.length > 0){
-                    chartLine.updateSeries([
+                    chartLine3.updateSeries([
                         {
                             name: config_sn.sn_name_3,
                             data: data_light_out
@@ -961,9 +961,9 @@
                     ])
                 // }
             }
-            if($('.btn_ch_s').hasClass('active') == true){
+            if(s_sensor.s_btnS > 0){
                 // if(data_soil_in.length > 0){
-                    chartLine.updateSeries([
+                    chartLine4.updateSeries([
                         {
                             name: config_sn.sn_name_7,
                             data: data_soil_in
@@ -1219,7 +1219,7 @@
         else if(message.destinationName == house_master + "/control/config/auto"){
             var result = message.payloadString;
             var n_result = result.split('\r\n')
-            console.log(n_result);
+            // console.log(n_result);
             var SW_drip1 = []
             var SW_drip2 = []
             var SW_drip3 = []
@@ -2958,23 +2958,23 @@
             },
         }
     }
-    var chartLine = new ApexCharts(document.querySelector('#chart_realtime'), optionsLine);
-    chartLine.render();
+    // var chartLine = new ApexCharts(document.querySelector('#chart1'), optionsLine);
+    // chartLine.render();
     // if(s_sensor.s_btnT > 0){
-    //     var chartLine1 = new ApexCharts(document.querySelector('#chart1'), optionsLine);
-    //     chartLine1.render();
+        var chartLine1 = new ApexCharts(document.querySelector('#chart1'), optionsLine);
+        chartLine1.render();
     // }
     // if(s_sensor.s_btnH > 0){
-    //     var chartLine2 = new ApexCharts(document.querySelector('#chart2'), optionsLine);
-    //     chartLine2.render();
+        var chartLine2 = new ApexCharts(document.querySelector('#chart2'), optionsLine);
+        chartLine2.render();
     // }
     // if(s_sensor.s_btnL > 0){
-    //     var chartLine3 = new ApexCharts(document.querySelector('#chart3'), optionsLine);
-    //     chartLine3.render();
+        var chartLine3 = new ApexCharts(document.querySelector('#chart3'), optionsLine);
+        chartLine3.render();
     // }
     // if(s_sensor.s_btnS > 0){
-    //     var chartLine4 = new ApexCharts(document.querySelector('#chart4'), optionsLine);
-    //     chartLine4.render();
+        var chartLine4 = new ApexCharts(document.querySelector('#chart4'), optionsLine);
+        chartLine4.render();
     // }
 
     $.ajax({ // Auto
@@ -2996,8 +2996,111 @@
             data_light_in = res.data.light_in;
             data_soil_in = res.data.soil_in;
 
+            // if(s_sensor.s_btnT > 0){
+            //     chartLine.updateSeries([
+            //         {
+            //             name: config_sn.sn_name_1,
+            //             data: data_temp_out
+            //         }, {
+            //             name: config_sn.sn_name_4,
+            //             data: data_temp_in
+            //         }
+            //     ])
+            //     chartLine.updateOptions({
+            //         title:  {text: 'อุณหภูมิ'},
+            //         tooltip: {
+            //             y: {
+            //             	formatter: function (val) {
+            //             		return  val + " ℃"
+            //             	}
+            //             }
+            //         },
+            //         subtitle: {
+            //             text: '(℃)',
+            //             offsetY: 55,
+            //             offsetX: 10
+            //         },
+            //     })
+            // }
+            // else if(s_sensor.s_btnT == 0 && s_sensor.s_btnH > 0){
+            //     chartLine.updateSeries([
+            //         {
+            //             name: config_sn.sn_name_2,
+            //             data: data_hum_out
+            //         }, {
+            //             name: config_sn.sn_name_5,
+            //             data: data_hum_in
+            //         }
+            //     ]);
+            //     // console.log(data_hum_out);
+            //     chartLine.updateOptions({
+            //         title:  {text: 'ความชื้นอากาศ'},
+            //         tooltip: {
+            //             y: {
+            //                 formatter: function (val) {
+            //                     return  val + " %Rh"
+            //                 }
+            //             }
+            //         },
+            //         subtitle: {
+            //             text: '(%Rh)',
+            //             offsetY: 55,
+            //             offsetX: 10
+            //         },
+            //     });
+            // }
+            // else if(s_sensor.s_btnT == 0 && s_sensor.s_btnH == 0 && s_sensor.s_btnL > 0){
+            //     chartLine.updateSeries([
+            //         {
+            //             name: config_sn.sn_name_3,
+            //             data: data_light_out
+            //         }, {
+            //             name: config_sn.sn_name_6,
+            //             data: data_light_in
+            //         }
+            //     ]);
+            //     chartLine.updateOptions({
+            //         title:  {text: 'ความเข้มแสง'},
+            //         tooltip: {
+            //             y: {
+            //                 formatter: function (val) {
+            //                     return  val + " KLux"
+            //                 }
+            //             }
+            //         },
+            //         subtitle: {
+            //             text: '(KLux)',
+            //             offsetY: 55,
+            //             offsetX: 10
+            //         },
+            //     })
+            // }
+            // else if(s_sensor.s_btnT == 0 && s_sensor.s_btnH == 0 && s_sensor.s_btnL == 0 && s_sensor.s_btnS > 0){
+            //     chartLine.updateSeries([
+            //         {
+            //             name: config_sn.sn_name_7,
+            //             data: data_soil_in
+            //         }]
+            //     )
+            //     chartLine.updateOptions({
+            //         title:  {text: 'ความชื้นดิน'},
+            //         tooltip: {
+            //             y: {
+            //                 formatter: function (val) {
+            //                     return  val + " %"
+            //                 }
+            //             }
+            //         },
+            //         subtitle: {
+            //             text: '(%)',
+            //             offsetY: 55,
+            //             offsetX: 10
+            //         },
+            //     })
+            // }
+
             if(s_sensor.s_btnT > 0){
-                chartLine.updateSeries([
+                chartLine1.updateSeries([
                     {
                         name: config_sn.sn_name_1,
                         data: data_temp_out
@@ -3006,7 +3109,7 @@
                         data: data_temp_in
                     }
                 ])
-                chartLine.updateOptions({
+                chartLine1.updateOptions({
                     title:  {text: 'อุณหภูมิ'},
                     tooltip: {
                         y: {
@@ -3022,8 +3125,8 @@
                     },
                 })
             }
-            else if(s_sensor.s_btnT == 0 && s_sensor.s_btnH > 0){
-                chartLine.updateSeries([
+            if(s_sensor.s_btnH > 0){
+                chartLine2.updateSeries([
                     {
                         name: config_sn.sn_name_2,
                         data: data_hum_out
@@ -3033,7 +3136,7 @@
                     }
                 ]);
                 // console.log(data_hum_out);
-                chartLine.updateOptions({
+                chartLine2.updateOptions({
                     title:  {text: 'ความชื้นอากาศ'},
                     tooltip: {
                         y: {
@@ -3049,8 +3152,8 @@
                     },
                 });
             }
-            else if(s_sensor.s_btnT == 0 && s_sensor.s_btnH == 0 && s_sensor.s_btnL > 0){
-                chartLine.updateSeries([
+            if(s_sensor.s_btnL > 0){
+                chartLine3.updateSeries([
                     {
                         name: config_sn.sn_name_3,
                         data: data_light_out
@@ -3059,7 +3162,7 @@
                         data: data_light_in
                     }
                 ]);
-                chartLine.updateOptions({
+                chartLine3.updateOptions({
                     title:  {text: 'ความเข้มแสง'},
                     tooltip: {
                         y: {
@@ -3075,14 +3178,14 @@
                     },
                 })
             }
-            else if(s_sensor.s_btnT == 0 && s_sensor.s_btnH == 0 && s_sensor.s_btnL == 0 && s_sensor.s_btnS > 0){
-                chartLine.updateSeries([
+            if(s_sensor.s_btnS > 0){
+                chartLine4.updateSeries([
                     {
                         name: config_sn.sn_name_7,
                         data: data_soil_in
                     }]
                 )
-                chartLine.updateOptions({
+                chartLine4.updateOptions({
                     title:  {text: 'ความชื้นดิน'},
                     tooltip: {
                         y: {
@@ -3100,119 +3203,119 @@
             }
         }
     });
-    $('.btn_ch_t').click(function(){
-        // $('#chart_realtime').html("")
-        // var chartLine = new ApexCharts(document.querySelector('#chart_realtime'), optionsLine);
-        // chartLine.render();
-        // data_temp_out = res.data.temp_out;
-        // data_temp_in = res.data.temp_in;
-        chartLine.updateSeries([
-            {
-                name: config_sn.sn_name_1,
-                data: data_temp_out
-            }, {
-                name: config_sn.sn_name_4,
-                data: data_temp_in
-            }
-        ])
-        chartLine.updateOptions({
-            title:  {text: 'อุณหภูมิ'},
-            tooltip: {
-                y: {
-                    formatter: function (val) {
-                        return  val + " ℃"
-                    }
-                }
-            },
-            subtitle: {
-                text: '(℃)',
-                offsetY: 55,
-                offsetX: 10
-            },
-        })
-    })
-    $('.btn_ch_h').click(function(){
-        // $('#chart_realtime').html("")
-        // chartLine.destroy();
-        // setTimeout(function () {
-            // var chartLine = new ApexCharts(document.querySelector('#chart_realtime'), optionsLine);
-            // chartLine.render();
-            // data_hum_out = res.data.hum_out;
-            // data_hum_in = res.data.hum_in;
-            chartLine.updateSeries([
-                {
-                    name: config_sn.sn_name_2,
-                    data: data_hum_out
-                }, {
-                    name: config_sn.sn_name_5,
-                    data: data_hum_in
-                }
-            ])
-            console.log(data_hum_out);
-            chartLine.updateOptions({
-                title:  {text: 'ความชื้นอากาศ'},
-                tooltip: {
-                    y: {
-                        formatter: function (val) {
-                            return  val + " %Rh"
-                        }
-                    }
-                },
-                subtitle: {
-                    text: '(%Rh)',
-                    offsetY: 55,
-                    offsetX: 10
-                },
-            });
-        // }, 2000);
-    })
-    $('.btn_ch_l').click(function(){
-        chartLine.updateSeries([
-            {
-                name: config_sn.sn_name_3,
-                data: data_light_out
-            }, {
-                name: config_sn.sn_name_6,
-                data: data_light_in
-            }
-        ]);
-        chartLine.updateOptions({
-            title:  {text: 'ความเข้มแสง'},
-            tooltip: {
-                y: {
-                    formatter: function (val) {
-                        return  val + " KLux"
-                    }
-                }
-            },
-            subtitle: {
-                text: '(KLux)',
-                offsetY: 55,
-                offsetX: 10
-            },
-        })
-    })
-    $('.btn_ch_s').click(function(){
-        chartLine.updateSeries([
-            {
-                name: config_sn.sn_name_7,
-                data: data_soil_in
-            }]
-        )
-        chartLine.updateOptions({
-            title:  {text: 'ความชื้นดิน'},
-            tooltip: {
-                y: {
-                    formatter: function (val) {
-                        return  val + " %"
-                    }
-                }
-            },
-            subtitle: {
-                text: '(%)',
-                offsetY: 55,
-                offsetX: 10
-            },
-        })
-    })
+    // $('.btn_ch_t').click(function(){
+    // //     // $('#chart_realtime').html("")
+    // //     // var chartLine = new ApexCharts(document.querySelector('#chart_realtime'), optionsLine);
+    //     chartLine1.render();
+    // //     // data_temp_out = res.data.temp_out;
+    // //     // data_temp_in = res.data.temp_in;
+    //     chartLine1.updateSeries([
+    //         {
+    //             name: config_sn.sn_name_1,
+    //             data: data_temp_out
+    //         }, {
+    //             name: config_sn.sn_name_4,
+    //             data: data_temp_in
+    //         }
+    //     ])
+    //     chartLine1.updateOptions({
+    //         title:  {text: 'อุณหภูมิ'},
+    //         tooltip: {
+    //             y: {
+    //                 formatter: function (val) {
+    //                     return  val + " ℃"
+    //                 }
+    //             }
+    //         },
+    //         subtitle: {
+    //             text: '(℃)',
+    //             offsetY: 55,
+    //             offsetX: 10
+    //         },
+    //     })
+    // })
+    // $('.btn_ch_h').click(function(){
+    //     // $('#chart_realtime').html("")
+    //     // chartLine.destroy();
+    //     // setTimeout(function () {
+    //         // var chartLine = new ApexCharts(document.querySelector('#chart_realtime'), optionsLine);
+    //         // chartLine.render();
+    //         // data_hum_out = res.data.hum_out;
+    //         // data_hum_in = res.data.hum_in;
+    //         chartLine2.updateSeries([
+    //             {
+    //                 name: config_sn.sn_name_2,
+    //                 data: data_hum_out
+    //             }, {
+    //                 name: config_sn.sn_name_5,
+    //                 data: data_hum_in
+    //             }
+    //         ])
+    //         console.log(data_hum_out);
+    //         chartLine2.updateOptions({
+    //             title:  {text: 'ความชื้นอากาศ'},
+    //             tooltip: {
+    //                 y: {
+    //                     formatter: function (val) {
+    //                         return  val + " %Rh"
+    //                     }
+    //                 }
+    //             },
+    //             subtitle: {
+    //                 text: '(%Rh)',
+    //                 offsetY: 55,
+    //                 offsetX: 10
+    //             },
+    //         });
+    //     // }, 2000);
+    // })
+    // $('.btn_ch_l').click(function(){
+    //     chartLine3.updateSeries([
+    //         {
+    //             name: config_sn.sn_name_3,
+    //             data: data_light_out
+    //         }, {
+    //             name: config_sn.sn_name_6,
+    //             data: data_light_in
+    //         }
+    //     ]);
+    //     chartLine3.updateOptions({
+    //         title:  {text: 'ความเข้มแสง'},
+    //         tooltip: {
+    //             y: {
+    //                 formatter: function (val) {
+    //                     return  val + " KLux"
+    //                 }
+    //             }
+    //         },
+    //         subtitle: {
+    //             text: '(KLux)',
+    //             offsetY: 55,
+    //             offsetX: 10
+    //         },
+    //     })
+    // })
+    // $('.btn_ch_s').click(function(){
+    //     chartLine4.updateSeries([
+    //         {
+    //             name: config_sn.sn_name_7,
+    //             data: data_soil_in
+    //         }]
+    //     )
+    //     chartLine4.updateOptions({
+    //         title:  {text: 'ความชื้นดิน'},
+    //         tooltip: {
+    //             y: {
+    //                 formatter: function (val) {
+    //                     return  val + " %"
+    //                 }
+    //             }
+    //         },
+    //         subtitle: {
+    //             text: '(%)',
+    //             offsetY: 55,
+    //             offsetX: 10
+    //         },
+    //     })
+    // })
 </script>
