@@ -87,7 +87,7 @@
             <div class="card radius-10">
                 <div class="card-body">
                     <div class="card radius-10 shadow-none ">
-                        <img src="public/images/site/<?= $house_img ?>" alt="..." class="card-img img-hight">
+                        <img src="public/images/site/<?= $house_img ?>" alt="..." class="card-img ">
                     </div>
                     <div class="card radius-10 shadow-none">
                         <div class="card-body border radius-10 shadow-none mb-3">
@@ -207,7 +207,7 @@
                                                                 }?>
                                                         </div>
                                                     </div>
-                                                    <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle" style="width:88px; margin-top:10px; text-align: center!important;">
+                                                    <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle sensor-responsive" style=" margin-top:10px; text-align: center!important;">
                                                     <h5 class="card-text text-center dash_data__<?= $i ?> text-responsive" style="margin-top:20px;">
                                                     </h5>
                                                 </div>
@@ -236,7 +236,7 @@
                                                     }?>
                                             </div>
                                         </div>
-                                        <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle" style="width:88px; margin-top:10px; text-align: center!important;">
+                                        <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle sensor-responsive" style="margin-top:10px; text-align: center!important;">
                                         <p class="card-text text-center  dash_data__<?= $i ?> text-responsive" style="margin-top:20px;">
                                         </p>
                                     </div>

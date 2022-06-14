@@ -2242,6 +2242,9 @@ input.search-control-2::placeholder {
     .img-hight {
         height: 25vh;
     }
+    .sensor-responsive {
+        width: 5vw
+    }
 }
 
 @media only screen and (max-width: 920px) {
