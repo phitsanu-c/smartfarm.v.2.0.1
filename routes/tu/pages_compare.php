@@ -141,7 +141,7 @@
                     <!-- เลือกเซ็นเซอร์ -->
                     <div class="mode_sn">
                         <h4 class="card-title text-center">
-                            <b>เลือกเซ็นเซอร์</b>
+                            <b>เลือกประเถท</b>
                         </h4><hr/>
                         <div class="d-flex mb-2">
                             <div class="form-check mb-3">
@@ -611,10 +611,10 @@
         $('.val_start').on('apply.daterangepicker', function(ev, picker) {
             $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm'));
             if($('.val_end').val() != ''){
-                if(moment($(this).val()).format('YYYY-MM-DD') < moment($('.val_end').val()).add(-30, 'days').format('YYYY-MM-DD')) {
+                if(moment($(this).val()).format('YYYY-MM-DD') < moment($('.val_end').val()).add(-31, 'days').format('YYYY-MM-DD')) {
                     Swal({
                         type: "warning",
-                        html: "เลือกวันได้สูงสุด<b> ไม่เกิน 30</b> วัน/ครั้ง",
+                        html: "เลือกวันได้สูงสุด<b> ไม่เกิน 31</b> วัน/ครั้ง",
                         // html: text,
                         allowOutsideClick: false
                     });
@@ -641,10 +641,10 @@
             $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm'));
             // console.log(moment($(this).val()).format('YYYY-MM-DD') +' ++ '+moment($('.val_start').val()).format('YYYY-MM-DD') )
             if($('.val_start').val() != ''){
-                if(moment($(this).val()).format('YYYY-MM-DD') > moment($('.val_start').val()).add(30, 'days').format('YYYY-MM-DD')) {
+                if(moment($(this).val()).format('YYYY-MM-DD') > moment($('.val_start').val()).add(31, 'days').format('YYYY-MM-DD')) {
                     Swal({
                         type: "warning",
-                        html: "เลือกวันได้สูงสุด<b> ไม่เกิน 30</b> วัน/ครั้ง",
+                        html: "เลือกวันได้สูงสุด<b> ไม่เกิน 31</b> วัน/ครั้ง",
                         // html: text,
                         allowOutsideClick: false
                     });

@@ -26,8 +26,8 @@
     if($_POST['mode_report'] == 're_cn'){ // re_cn
         $channel[] = "SUBSTRING(cn_timestamp,1,10) AS nDate";
         $channel[] = "SUBSTRING(cn_timestamp,-8, 5) AS nTime";
-        $channel[] = "cn_mode";
         $channel[] = "cn_user";
+        $channel[] = "cn_mode";
         if($config_cn['cn_status_1'] == 1){$channel[] = "cn_load_1 AS dripper_1";}
         if($config_cn['cn_status_2'] == 1){$channel[] = "cn_load_2 AS dripper_2";}
         if($config_cn['cn_status_3'] == 1){$channel[] = "cn_load_3 AS dripper_3";}
@@ -45,10 +45,27 @@
         // exit();
         $sql = "SELECT $channel1 FROM tbn_control_log WHERE cn_sn = '$house_master' AND cn_timestamp BETWEEN '$start_day' AND '$stop_day' ORDER BY cn_timestamp ";
         $stmt = $dbcon->query($sql);
-        $data0 = array();
+        $colcount = $stmt->columnCount();
         $i=1;
         while ($row = $stmt->fetch()) {
-            $data0[] = $row;
+            $data1[0] = $row[0];
+            $data1[1] = $row[1];
+            $data1[2] = $row[2];
+            if($row[3] == 'Manual'){$data1[3] = "กำหนดเอง";}else {$data1[3] = "อัตโนมัติ";}
+            if($colcount >= 4){ if($row[4] == 'ON'){$data1[4] = "เปิด";}else {$data1[4] = "ปิด";} }
+            if($colcount >= 5){ if($row[5] == 'ON'){$data1[5] = "เปิด";}else {$data1[5] = "ปิด";} }
+            if($colcount >= 6){ if($row[6] == 'ON'){$data1[6] = "เปิด";}else {$data1[6] = "ปิด";} }
+            if($colcount >= 7){ if($row[7] == 'ON'){$data1[7] = "เปิด";}else {$data1[7] = "ปิด";} }
+            if($colcount >= 8){ if($row[8] == 'ON'){$data1[8] = "เปิด";}else {$data1[8] = "ปิด";} }
+            if($colcount >= 9){ if($row[9] == 'ON'){$data1[9] = "เปิด";}else {$data1[9] = "ปิด";} }
+            if($colcount >= 10){ if($row[10] == 'ON'){$data1[10] = "เปิด";}else {$data1[10] = "ปิด";} }
+            if($colcount >= 11){ if($row[11] == 'ON'){$data1[11] = "เปิด";}else {$data1[11] = "ปิด";} }
+            if($colcount >= 12){ if($row[12] == 'ON'){$data1[12] = "เปิด";}else {$data1[12] = "ปิด";} }
+            if($colcount >= 13){ if($row[13] == 'ON'){$data1[13] = "เปิด";}else {$data1[13] = "ปิด";} }
+            if($colcount >= 14){ if($row[14] == 'ON'){$data1[14] = "เปิด";}else {$data1[14] = "ปิด";} }
+            if($colcount >= 15){ if($row[15] == 'ON'){$data1[15] = "เปิด";}else {$data1[15] = "ปิด";} }
+            $data0[] = $data1;
+            // $data0[] = $row;
             //  $data0[] =
             // [
             //     $i,
@@ -91,7 +108,8 @@
            // $data0['soil_in'][]   = $row['soil_in'];
            $i++;
         }
-    } elseif ($_POST['mode_report'] == 're_cnAuto') { // re_cnManual
+    }
+    elseif ($_POST['mode_report'] == 're_cnAuto') { // re_cnManual
         $table_name = 'tbn_control_au'.$_POST['load_select'];
         $channel[] = "SUBSTRING(load_timestamp,1,10) AS nDate";
         $channel[] = "SUBSTRING(load_timestamp,-8, 5) AS nTime";
@@ -118,7 +136,8 @@
         while ($row = $stmt->fetch()) {
             $data0[] = $row;
         }
-    } elseif ($_POST['mode_report'] == 're_cnManual') { // re_cnManual
+    }
+    elseif ($_POST['mode_report'] == 're_cnManual') { // re_cnManual
         $channel[] = "SUBSTRING(mn_timestamp,1,10) AS nDate";
         $channel[] = "SUBSTRING(mn_timestamp,-8, 5) AS nTime";
         $channel[] = "mn_user";
@@ -139,12 +158,27 @@
         // exit();
         $sql = "SELECT $channel1 FROM tbn_control_mn_log WHERE mn_sn = '$house_master' AND mn_timestamp BETWEEN '$start_day' AND '$stop_day' ORDER BY mn_timestamp ";
         $stmt = $dbcon->query($sql);
-        $data0 = array();
-        $i=1;
+        $colcount = $stmt->columnCount();
         while ($row = $stmt->fetch()) {
-            $data0[] = $row;
+            $data1[0] = $row[0];
+            $data1[1] = $row[1];
+            $data1[2] = $row[2];
+            if($colcount >= 3){ if($row[3] == 'ON'){$data1[3] = "เปิดใช้งาน";}else {$data1[3] = "ปิดใช้งาน";} }
+            if($colcount >= 4){ if($row[4] == 'ON'){$data1[4] = "เปิดใช้งาน";}else {$data1[4] = "ปิดใช้งาน";} }
+            if($colcount >= 5){ if($row[5] == 'ON'){$data1[5] = "เปิดใช้งาน";}else {$data1[5] = "ปิดใช้งาน";} }
+            if($colcount >= 6){ if($row[6] == 'ON'){$data1[6] = "เปิดใช้งาน";}else {$data1[6] = "ปิดใช้งาน";} }
+            if($colcount >= 7){ if($row[7] == 'ON'){$data1[7] = "เปิดใช้งาน";}else {$data1[7] = "ปิดใช้งาน";} }
+            if($colcount >= 8){ if($row[8] == 'ON'){$data1[8] = "เปิดใช้งาน";}else {$data1[8] = "ปิดใช้งาน";} }
+            if($colcount >= 9){ if($row[9] == 'ON'){$data1[9] = "เปิดใช้งาน";}else {$data1[9] = "ปิดใช้งาน";} }
+            if($colcount >= 10){ if($row[10] == 'ON'){$data1[10] = "เปิดใช้งาน";}else {$data1[10] = "ปิดใช้งาน";} }
+            if($colcount >= 11){ if($row[11] == 'ON'){$data1[11] = "เปิดใช้งาน";}else {$data1[11] = "ปิดใช้งาน";} }
+            if($colcount >= 12){ if($row[12] == 'ON'){$data1[12] = "เปิดใช้งาน";}else {$data1[12] = "ปิดใช้งาน";} }
+            if($colcount >= 13){ if($row[13] == 'ON'){$data1[13] = "เปิดใช้งาน";}else {$data1[13] = "ปิดใช้งาน";} }
+            if($colcount >= 14){ if($row[14] == 'ON'){$data1[14] = "เปิดใช้งาน";}else {$data1[14] = "ปิดใช้งาน";} }
+            $data0[] = $data1;
         }
-    }elseif ($_POST['mode_report'] == 're_sensor') { // re_sensor
+    }
+    elseif ($_POST['mode_report'] == 're_sensor') { // re_sensor
         $numb = intval(substr($house_master, 5,10));
         $data_channel = [];
         $channel[] = "SUBSTRING(data_timestamp,1,16) AS nDate";

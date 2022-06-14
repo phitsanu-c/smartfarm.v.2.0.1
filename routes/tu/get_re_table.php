@@ -74,6 +74,8 @@
             <tr>
                 <th class="text-center">#</th>
                 <th class="text-center">วัน - เวลา</th>
+                <th class="text-center">วัน</th>
+                <th class="text-center">เวลา</th>
                 <?php
                 for($i=0; $i < $count_columns; $i++){
                     echo '<th class="text-center">'.$config_cn[2][$i].'</th>';
@@ -94,7 +96,9 @@
                     $data0[] = $row;
                     echo '<tr>
                         <td>'.$i.'</td>
-                        <td>'.$row["nDate"].'</td>';
+                        <td>'.$row["nDate"].'</td>
+                        <td>'.substr($row["nDate"], 0 ,10).'</td>
+                        <td>'.substr($row["nDate"], 11 ,18).'</td>';
                         if ($count_columns >= 1) {
                             echo '<td>'.$row["data_cn1"].'</td>';
                         }
@@ -151,7 +155,7 @@
         //      <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>\n\
         // </span>&nbsp;&nbsp;&nbsp;&nbsp;Processing ...",
         "columnDefs": [{
-            // "targets": [ 1 ],
+            "targets": [ 1 ],
             // render: $.fn.dataTable.render.moment( 'X', 'YYYY/MM/DD' ),
             // "render": $.fn.dataTable.render.moment( 'YYYY/MM/DD' ),
             "visible": false,
@@ -163,12 +167,20 @@
                 title: "Smart Farm Report",
                 charset: 'utf-8',
                 extension: '.csv',
-                // exportOptions: {
-                //    columns: [ 0, 2, 5 ]
-                // },
+                format: {
+                    body: function (data, row, column, node) {
+                      var momentDate = moment(data, 'YYYY-MM-DD', true);
+                      if (momentDate.isValid()) {
+                        return momentDate.format('YYYY-MM-DD');
+                      }
+                      else {
+                        return data;
+                      }
+                    }
+                },
                 className:'btn btn-outline-success px-5 btnexport0',
                 extend: 'csv',
-                format: 'YYYY/MM/dd',
+                // format: 'YYYY/MM/dd',
                 // fieldSeparator: ';',
                 // fieldBoundary: '',
                 filename: 'smart_farm_'+datetime,

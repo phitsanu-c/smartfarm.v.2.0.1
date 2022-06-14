@@ -58,8 +58,8 @@
 
     <!--breadcrumb-->
     <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title d-none pe-3"> <h5><?= $s_master['site_name'] ?></h5> </div>
-        <div class="ps-3 d-none">
+        <div class="breadcrumb-title pe-3"> <h5><?= $s_master['site_name'] ?></h5> </div>
+        <div class="ps-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="javascript:;"><i class="-alt"></i></a> </li>
@@ -501,8 +501,7 @@
     				<div class="modal-body">
                         <div class="container ul_Auto">
                             <div class="row ridge">
-                                <div class="d-flex align-items-center"
-                                    style="background-color: #283A6C; text-align: justify;">
+                                <div class="d-flex align-items-center" style="background-color: #283A6C; text-align: justify;">
                                     <a><b class="title_load_auto " style="color:#FFF; font-size:20px"> </b></a>
                                     <div class="ms-auto">
                                         <a class="menu_config_auto" style="color:#FFF; font-size:16px" href="javascript:void(0)"><b> <i class='bx bx-cog'></i> ตั้งค่า</b></a>
@@ -514,7 +513,7 @@
                                             for($i = 1; $i <=6; $i++){
                                                 echo '<div class="col-12 border-bottom">
                                                     <div class="d-flex align-items-center mb-2 mt-2">
-                                                        <div class="pt-2">TIMER '.$i.'</div>
+                                                        <div class="pt-2"><b>ตั้งเวลา '.$i.'</b></div>
                                                         <div class="ms-auto">
                                                             <img class="img_sw img_'.$i.'" src="" alt="">
                                                             <div class="sw_toggle">
@@ -526,8 +525,8 @@
                                                         <div class="col-6">
                                                             <div class="form-group text-left">
                                                                 <div class="row">
-                                                                    <div class="col-md-3 align-vertical-center">
-                                                                        <small class="form-control-feedback"> START </small>
+                                                                    <div class="col-md-3 mt-2">
+                                                                        <small class="form-control-feedback text_font_size"> เริ่ม </small>
                                                                     </div>
                                                                     <div class="col-md-9">
                                                                         <input type="time" id="time_s_'.$i.'" class="form-control input_time">
@@ -538,8 +537,8 @@
                                                         <div class="col-6">
                                                             <div class="form-group text-left">
                                                                 <div class="row">
-                                                                    <div class="col-md-3">
-                                                                        <small class="form-control-feedback"> END </small>
+                                                                    <div class="col-md-3 mt-2">
+                                                                        <small class="form-control-feedback text_font_size"> สิ้นสุด </small>
                                                                     </div>
                                                                     <div class="col-md-9">
                                                                         <input type="time" id="time_e_'.$i.'" class="form-control input_time">
@@ -1085,6 +1084,69 @@
                 }else {
                     $('.img_sw_sel_load_manual_5').attr('src','public/images/icons/menu_control/shading_off.png');
                 }
+
+                // status control dashboard Manual
+                for (var i = 1; i <= 12; i++) {
+                    if (config_cn['cn_status_' + i] == 1) {
+                        if (i <= 4) {
+                            if (parseJSON['dripper_' + i] === 'OFF') {
+                                if(sw_log['dripper_'+i] == 'ON'){
+                                    $(".dash_img_con_" + i).attr("src", "public/images/control/TU/sprinkler-off.svg");
+                                }else {
+                                    $(".dash_img_con_" + i).attr("src", "public/images/control/TU/Sprinkler_disable.svg");
+                                }
+                                $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_off.png');
+                            } else {
+                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/sprinkler-on.svg");
+                                $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_on.png');
+                            }
+                        }
+                        if (i > 4 && i <= 8) {
+                            if (parseJSON['fan_' + (i - 4)] === 'OFF') {
+                                if(sw_log['fan_'+i] == 'ON'){
+                                    $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-off.svg");
+                                }else {
+                                    $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-disable.svg");
+                                }
+                                $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_off.png');
+                            } else {
+                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-on.svg");
+                                $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_on.png');
+                            }
+                        }
+                        if (i == 9 || i == 10) {
+                            if (parseJSON['foggy_' + (i - 8)] === 'OFF') {
+                                if(sw_log['foggy_'+i] == 'ON'){
+                                    $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-off.svg");
+                                }else {
+                                    $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-disable.svg");
+                                }
+                                $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_off.png');
+                            } else {
+                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-on.svg");
+                                $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_on.png');
+                            }
+                        }
+                        if (i == 11) {
+                            if (parseJSON['spray'] === 'OFF') {
+                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/spray-off.svg");
+                                $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_off.png');
+                            } else {
+                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/spray-on.svg");
+                                $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_on.png');
+                            }
+                        }
+                        if (i == 12) {
+                            if (parseJSON['shading'] === 'OFF') {
+                                $(".dash_img_con_" + i).attr("src", "public/images/control/Roof_OFF2.png");
+                                $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/shading_off.png');
+                            } else {
+                                $(".dash_img_con_" + i).attr("src", "public/images/control/Roof_ON2.png");
+                                $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/shading_on.png');
+                            }
+                        }
+                    }
+                }
             }
             else { // โหมดอัตโนมัติ
                 $('.dash_mode').html('โหมดอัตโนมัติ')
@@ -1102,53 +1164,53 @@
                     $(".sw_mode_Auto").attr('disabled', false);
                     $(".sw_mode_Manual").attr('disabled', false);
                 }
-            }
-            // status control dashboard
-            for (var i = 1; i <= 12; i++) {
-                if (config_cn['cn_status_' + i] == 1) {
-                    if (i <= 4) {
-                        if (parseJSON['dripper_' + i] === 'OFF') {
-                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/sprinkler-off.svg");
-                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_off.png');
-                        } else {
-                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/sprinkler-on.svg");
-                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_on.png');
+                // status control dashboard Auto
+                for (var i = 1; i <= 12; i++) {
+                    if (config_cn['cn_status_' + i] == 1) {
+                        if (i <= 4) {
+                            if (parseJSON['dripper_' + i] === 'OFF') {
+                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/sprinkler-off.svg");
+                                $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_off.png');
+                            } else {
+                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/sprinkler-on.svg");
+                                $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_on.png');
+                            }
                         }
-                    }
-                    if (i > 4 && i <= 8) {
-                        if (parseJSON['fan_' + (i - 4)] === 'OFF') {
-                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-off.svg");
-                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_off.png');
-                        } else {
-                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-on.svg");
-                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_on.png');
+                        if (i > 4 && i <= 8) {
+                            if (parseJSON['fan_' + (i - 4)] === 'OFF') {
+                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-off.svg");
+                                $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_off.png');
+                            } else {
+                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-on.svg");
+                                $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_on.png');
+                            }
                         }
-                    }
-                    if (i == 9 || i == 10) {
-                        if (parseJSON['foggy_' + (i - 8)] === 'OFF') {
-                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-off.svg");
-                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_off.png');
-                        } else {
-                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-on.svg");
-                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_on.png');
+                        if (i == 9 || i == 10) {
+                            if (parseJSON['foggy_' + (i - 8)] === 'OFF') {
+                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-off.svg");
+                                $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_off.png');
+                            } else {
+                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-on.svg");
+                                $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_on.png');
+                            }
                         }
-                    }
-                    if (i == 11) {
-                        if (parseJSON['spray'] === 'OFF') {
-                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/spray-off.svg");
-                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_off.png');
-                        } else {
-                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/spray-on.svg");
-                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_on.png');
+                        if (i == 11) {
+                            if (parseJSON['spray'] === 'OFF') {
+                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/spray-off.svg");
+                                $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_off.png');
+                            } else {
+                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/spray-on.svg");
+                                $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_on.png');
+                            }
                         }
-                    }
-                    if (i == 12) {
-                        if (parseJSON['shading'] === 'OFF') {
-                            $(".dash_img_con_" + i).attr("src", "public/images/control/Roof_OFF2.png");
-                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/shading_off.png');
-                        } else {
-                            $(".dash_img_con_" + i).attr("src", "public/images/control/Roof_ON2.png");
-                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/shading_on.png');
+                        if (i == 12) {
+                            if (parseJSON['shading'] === 'OFF') {
+                                $(".dash_img_con_" + i).attr("src", "public/images/control/Roof_OFF2.png");
+                                $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/shading_off.png');
+                            } else {
+                                $(".dash_img_con_" + i).attr("src", "public/images/control/Roof_ON2.png");
+                                $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/shading_on.png');
+                            }
                         }
                     }
                 }
@@ -1846,6 +1908,29 @@
 
                                     // );
                                     mqtt_send(house_master+'/control/config/manual', new_res, '')
+                                    for (var i = 1; i <= 10; i++) {
+                                        if(i <= 4){
+                                            if(res.data['dripper_'+i] == 'ON'){
+                                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/sprinkler-off.svg");
+                                            }else {
+                                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/Sprinkler_disable.svg");
+                                            }
+                                        }
+                                        else if (i > 4 && i <= 8) {
+                                            if(res.data['fan_'+(i-4)] == 'ON'){
+                                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-off.svg");
+                                            }else {
+                                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-disable.svg");
+                                            }
+                                        }
+                                        else if (i > 8) {
+                                            if(res.data['foggy_'+(i-8)] == 'ON'){
+                                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-off.svg");
+                                            }else {
+                                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-disable.svg");
+                                            }
+                                        }
+                                    }
                                     swal({
                                         title: 'บันทึกข้อมูลสำเร็จ',
                                         type: 'success',
@@ -2227,6 +2312,21 @@
             }
         });
         $('.menu_config_manual').click(function(){
+            var val = $('.hidden_select_sw_manual').val();
+            if($('.sw_manual_on').hasClass('active') === true){
+                if(val == 1){var name = 'น้ำหยด';}
+                else if (val == 2) {var name = 'พัดลม';}
+                else if (val == 3) {var name = 'พ่นหมอก';}
+                swal({
+                    title: 'ข้อผิดพลาด !',
+                    text: "กรุณาปิด "+name+" ก่อน !!!",
+                    type: 'warning',
+                    allowOutsideClick: false,
+                    confirmButtonColor: '#32CD32',
+                    confirmButtonText: 'ตกลง',
+                });
+                return false;
+            }
             $(this).hide();
             $('.status_config_manual').show();
             $('#close_manual_cont').show();
@@ -2234,7 +2334,6 @@
             $(".sw_mode_Manual").attr('disabled', true);
             // fn_label_manual($('.hidden_select_sw_manual').val());
             // =================================================
-            var val = $('.hidden_select_sw_manual').val();
             var sw_log = $.parseJSON($('#val_sw_manual').val());
             $('.label_1').show();
             $('.label_2').show();
