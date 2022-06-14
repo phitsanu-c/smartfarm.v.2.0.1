@@ -33,12 +33,12 @@
                         <ul class="nav nav-pills mb-1" role="tablist">
                             <li class="nav-item col-12 col-sm-6 col-lg-3 col-xl-3 mb-1" role="presentation">
                                 <a class="nav-link active r_reSensor text-center" data-bs-toggle="pill" href="#pills_report_sn" role="tab" aria-selected="true" style="border: 1px solid transparent; border-color: #6c757d;">
-                                    <div class="tab-title">ข้อมูลเซ็นเซอร์</div>
+                                    <div class="tab-title">ข้อมูลสภาพแวดล้อม</div>
                                 </a>
                             </li>
                             <li class="nav-item col-12 col-sm-6 col-lg-3 col-xl-3 mb-1" role="presentation">
                                 <a class="nav-link r_reControl text-center" data-bs-toggle="pill" href="#pills_report_cn" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
-                                    <div class="tab-title">ประวัติระบบควบคุม</div>
+                                    <div class="tab-title">ประวัติการทำงาน</div>
                                 </a>
                             </li>
                             <li class="nav-item col-12 col-sm-6 col-lg-3 col-xl-3 mb-1" role="presentation">
@@ -96,7 +96,7 @@
                     <div class="tab-pane fade show active" id="pills_report_sn" role="tabpanel">
                         <div id="report_sensor">
                             <div class="tab-content">
-                                <div class="tab-pane fade show active" id="p-chart" role="tabpanel">
+                                <div class="tab-pane fade show active chart" id="p-chart" role="tabpanel">
                                     <div id="chart_report" style=""></div>
                                 </div>
                                 <div class="tab-pane fade" id="p-table" role="tabpanel">
@@ -155,29 +155,29 @@
                                     <tr>
                                         <!-- <th rowspan="2" class="text-center">#</th> -->
                                         <th colspan="3" class="text-center text_autoTable"></th>
-                                        <th colspan="2" class="text-center">Timer 1</th>
-                                        <th colspan="2" class="text-center">Timer 2</th>
-                                        <th colspan="2" class="text-center">Timer 3</th>
-                                        <th colspan="2" class="text-center">Timer 4</th>
-                                        <th colspan="2" class="text-center">Timer 5</th>
-                                        <th colspan="2" class="text-center">Timer 6</th>
+                                        <th colspan="2" class="text-center">ตั้งเวลา 1</th>
+                                        <th colspan="2" class="text-center">ตั้งเวลา 2</th>
+                                        <th colspan="2" class="text-center">ตั้งเวลา 3</th>
+                                        <th colspan="2" class="text-center">ตั้งเวลา 4</th>
+                                        <th colspan="2" class="text-center">ตั้งเวลา 5</th>
+                                        <th colspan="2" class="text-center">ตั้งเวลา 6</th>
                                     </tr>
                                     <tr>
                                         <th class="text-center">วัน </th>
                                         <th class="text-center">เวลา</th>
                                         <th class="text-center">ผู้บันทึก</th>
-                                        <th class="text-center" > Start </th>
-                                        <th class="text-center" > End</th>
-                                        <th class="text-center" > Start </th>
-                                        <th class="text-center" > End</th>
-                                        <th class="text-center" > Start </th>
-                                        <th class="text-center" > End</th>
-                                        <th class="text-center" > Start </th>
-                                        <th class="text-center" > End</th>
-                                        <th class="text-center" > Start </th>
-                                        <th class="text-center" > End</th>
-                                        <th class="text-center" > Start </th>
-                                        <th class="text-center" > End</th>
+                                        <th class="text-center" > เริ่ม </th>
+                                        <th class="text-center" > สิ้นสุด</th>
+                                        <th class="text-center" > เริ่ม </th>
+                                        <th class="text-center" > สิ้นสุด</th>
+                                        <th class="text-center" > เริ่ม </th>
+                                        <th class="text-center" > สิ้นสุด</th>
+                                        <th class="text-center" > เริ่ม </th>
+                                        <th class="text-center" > สิ้นสุด</th>
+                                        <th class="text-center" > เริ่ม </th>
+                                        <th class="text-center" > สิ้นสุด</th>
+                                        <th class="text-center" > เริ่ม </th>
+                                        <th class="text-center" > สิ้นสุด</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -188,18 +188,18 @@
                                             <th class="text-center">วัน </th>
                                             <th class="text-center">เวลา</th>
                                             <th class="text-center">ผู้บันทึก</th>
-                                            <th class="text-center" >Timer 1 Start </th>
-                                            <th class="text-center" >Timer 1 End</th>
-                                            <th class="text-center" >Timer 2 Start </th>
-                                            <th class="text-center" >Timer 2 End</th>
-                                            <th class="text-center" >Timer 3 Start </th>
-                                            <th class="text-center" >Timer 3 End</th>
-                                            <th class="text-center" >Timer 4 Start </th>
-                                            <th class="text-center" >Timer 4 End</th>
-                                            <th class="text-center" >Timer 5 Start </th>
-                                            <th class="text-center" >Timer 5 End</th>
-                                            <th class="text-center" >Timer 6 Start </th>
-                                            <th class="text-center" >Timer 6 End</th>
+                                            <th class="text-center" >ตั้งเวลา 1 เริ่ม </th>
+                                            <th class="text-center" >ตั้งเวลา 1 สิ้นสุด</th>
+                                            <th class="text-center" >ตั้งเวลา 2 เริ่ม </th>
+                                            <th class="text-center" >ตั้งเวลา 2 สิ้นสุด</th>
+                                            <th class="text-center" >ตั้งเวลา 3 เริ่ม </th>
+                                            <th class="text-center" >ตั้งเวลา 3 สิ้นสุด</th>
+                                            <th class="text-center" >ตั้งเวลา 4 เริ่ม </th>
+                                            <th class="text-center" >ตั้งเวลา 4 สิ้นสุด</th>
+                                            <th class="text-center" >ตั้งเวลา 5 เริ่ม </th>
+                                            <th class="text-center" >ตั้งเวลา 5 สิ้นสุด</th>
+                                            <th class="text-center" >ตั้งเวลา 6 เริ่ม </th>
+                                            <th class="text-center" >ตั้งเวลา 6 สิ้นสุด</th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -269,7 +269,7 @@
                     <!-- เลือกเซ็นเซอร์ -->
                     <div class="mode_sn">
                         <h4 class="card-title text-center">
-                            <b>เลือกเซ็นเซอร์</b>
+                            <b>เลือกประเภท</b>
                         </h4><hr/>
                         <div class="d-flex mb-2">
                             <div class="form-check mb-3">
@@ -507,10 +507,10 @@
         $('.val_start').on('apply.daterangepicker', function(ev, picker) {
             $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm'));
             if($('.val_end').val() != ''){
-                if(moment($(this).val()).format('YYYY-MM-DD') < moment($('.val_end').val()).add(-30, 'days').format('YYYY-MM-DD')) {
+                if(moment($(this).val()).format('YYYY-MM-DD') < moment($('.val_end').val()).add(-31, 'days').format('YYYY-MM-DD')) {
                     Swal({
                         type: "warning",
-                        html: "เลือกวันได้สูงสุด<b> ไม่เกิน 30</b> วัน/ครั้ง",
+                        html: "เลือกวันได้สูงสุด<b> ไม่เกิน 31</b> วัน/ครั้ง",
                         // html: text,
                         allowOutsideClick: false
                     });
@@ -537,10 +537,10 @@
             $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm'));
             // console.log(moment($(this).val()).format('YYYY-MM-DD') +' ++ '+moment($('.val_start').val()).format('YYYY-MM-DD') )
             if($('.val_start').val() != ''){
-                if(moment($(this).val()).format('YYYY-MM-DD') > moment($('.val_start').val()).add(30, 'days').format('YYYY-MM-DD')) {
+                if(moment($(this).val()).format('YYYY-MM-DD') > moment($('.val_start').val()).add(31, 'days').format('YYYY-MM-DD')) {
                     Swal({
                         type: "warning",
-                        html: "เลือกวันได้สูงสุด<b> ไม่เกิน 30</b> วัน/ครั้ง",
+                        html: "เลือกวันได้สูงสุด<b> ไม่เกิน 31</b> วัน/ครั้ง",
                         // html: text,
                         allowOutsideClick: false
                     });
@@ -756,7 +756,8 @@
             ch_value.push(checked);
             ch_value.push(d_name);
             ch_value.push(d_mode);
-        }else{
+        }
+        else{
             if ($("#radio_temp").prop('checked') == true) {
                 ch_value.push("อุณหภูมิ");
                 $("input[name='checkbox_temp[]']:checked").map(function (){
@@ -1627,7 +1628,7 @@
             },
             dataType: 'json',
             success: function(res) {
-                // console.log(res);
+                console.log(res);
                 if(res.length > 0){
                     table3.button('.btnexport3').nodes().css("display", "block")
                 }
