@@ -2257,6 +2257,9 @@ input.search-control-2::placeholder {
     .text-responsive3 {
         font-size: 22px
     }
+    .sensor-responsive {
+        width: 88px
+    }
 }
 
 @media only screen and (max-width: 400px) {
@@ -2268,6 +2271,9 @@ input.search-control-2::placeholder {
     }
     .text-responsive3 {
         font-size: 22px
+    }
+    .sensor-responsive {
+        width: 80px
     }
 }
 
