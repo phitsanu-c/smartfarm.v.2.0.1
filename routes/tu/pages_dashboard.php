@@ -1108,37 +1108,37 @@
                 if (config_cn['cn_status_' + i] == 1) {
                     if (i <= 4) {
                         if (parseJSON['dripper_' + i] === 'OFF') {
-                            $(".dash_img_con_" + i).attr("src", "public/images/control/Sprinkler_OFF2.svg");
+                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/sprinkler-off.svg");
                             $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_off.png');
                         } else {
-                            $(".dash_img_con_" + i).attr("src", "public/images/control/Sprinkler_ON2.svg");
+                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/sprinkler-on.svg");
                             $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_on.png');
                         }
                     }
                     if (i > 4 && i <= 8) {
                         if (parseJSON['fan_' + (i - 4)] === 'OFF') {
-                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/Fan2_OFF.svg");
+                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-off.svg");
                             $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_off.png');
                         } else {
-                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/Fan2_ON.svg");
+                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-on.svg");
                             $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_on.png');
                         }
                     }
                     if (i == 9 || i == 10) {
                         if (parseJSON['foggy_' + (i - 8)] === 'OFF') {
-                            $(".dash_img_con_" + i).attr("src", "public/images/control/new_foggy-off.svg");
+                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-off.svg");
                             $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_off.png');
                         } else {
-                            $(".dash_img_con_" + i).attr("src", "public/images/control/new_foggy-on.svg");
+                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-on.svg");
                             $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_on.png');
                         }
                     }
                     if (i == 11) {
                         if (parseJSON['spray'] === 'OFF') {
-                            $(".dash_img_con_" + i).attr("src", "public/images/control/Sprinkler_OFF.svg");
+                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/spray-off.svg");
                             $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_off.png');
                         } else {
-                            $(".dash_img_con_" + i).attr("src", "public/images/control/Sprinkler_ON.svg");
+                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/spray-on.svg");
                             $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_on.png');
                         }
                     }
