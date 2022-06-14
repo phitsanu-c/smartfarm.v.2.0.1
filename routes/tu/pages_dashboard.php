@@ -57,9 +57,9 @@
     ?>
 
     <!--breadcrumb-->
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3"> <h5><?= $s_master['site_name'] ?></h5> </div>
-        <div class="ps-3">
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title d-none pe-3"> <h5><?= $s_master['site_name'] ?></h5> </div>
+        <div class="ps-3 d-none">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="javascript:;"><i class="-alt"></i></a> </li>
