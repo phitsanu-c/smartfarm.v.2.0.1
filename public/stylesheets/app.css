@@ -2236,6 +2236,9 @@ input.search-control-2::placeholder {
     .text-responsive2 {
         font-size: 1.2vw
     }
+    .text-responsive3 {
+        font-size: 1.1vw
+    }
 }
 
 @media only screen and (max-width: 920px) {
@@ -2245,6 +2248,9 @@ input.search-control-2::placeholder {
     .text-responsive2 {
         font-size: 22px
     }
+    .text-responsive3 {
+        font-size: 22px
+    }
 }
 
 @media only screen and (max-width: 400px) {
@@ -2252,6 +2258,9 @@ input.search-control-2::placeholder {
         font-size: 22px
     }
     .text-responsive2 {
+        font-size: 22px
+    }
+    .text-responsive3 {
         font-size: 22px
     }
 }

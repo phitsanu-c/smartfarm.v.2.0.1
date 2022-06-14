@@ -1,14 +1,15 @@
-
 .chartdiv {
     width: 100%;
     height: 400px;
 }
+
 .switch2 {
     position: relative;
     display: inline-block;
     width: 45px;
     height: 20px;
 }
+
 
 /* Hide default HTML checkbox */
 
@@ -17,6 +18,7 @@
     width: 0;
     height: 0;
 }
+
 
 /* The slider */
 
@@ -63,9 +65,11 @@ input:checked+.slider2:before {
     -ms-transform: translateX(24px);
     transform: translateX(24px);
     background: rgb(8, 7, 70) url('https://i.ibb.co/FxzBYR9/night.png');
+    box-shadow: 0 0px 15px #2020203d;
     background-repeat: no-repeat;
     background-position: center;
 }
+
 
 /* Rounded sliders */
 
@@ -76,5 +80,6 @@ input:checked+.slider2:before {
 .slider2.round:before {
     border-radius: 50%;
 }
+
 
 /* Header */

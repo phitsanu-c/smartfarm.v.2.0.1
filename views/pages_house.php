@@ -48,22 +48,22 @@
             <a href="<?= $url_link .'#'.encode($row_['house_webv'].','.$row_["house_siteID"].','.$row_["house_master"] ) ?>">
                 <div class="card" style="padding: 1.25rem;  border-radius:20px">
                     <img src="<?php if($row_["house_img"] == ""){echo "public/images/default.jpg";}else{echo "public/images/house/".$row_["house_img"];} ?>" style="height: 20vh; width: 100%;" class="card-img-top img-fluid" alt="site01">
-                    <h6 class="card-title text-bold text-center" style="margin-top: 15px">ชื่อ : <B><?= $row_["house_name"] ?></B></h6>
-                    <h6 class="card-title text-bold text-center" style="margin-top: 10px">ขนาด : <B><?= substr($row_["house_size"],9,13) ?></B></h6>
+                    <h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 15px">ชื่อ : <B><?= $row_["house_name"] ?></B></h6>
+                    <h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">ขนาด : <B><?= substr($row_["house_size"],9,13) ?></B></h6>
                     <?php
                     if ($row_['house_webv'] == 3) {
                         $house_master = $row_["house_master"];
                         $row_ = $dbcon->query("SELECT data_timestamp FROM tb_data_sensor WHERE data_sn = '$house_master' ORDER BY data_timestamp DESC")->fetch();
                         if(DateTime::createFromFormat("Y/m/d - H:i:s", $row_[0])->format("Y-m-d H:i:s") > date("Y-m-d H:i:s", strtotime('-2 minute')) ){
-                            echo '<h6 class="card-title text-bold text-center" style="margin-top: 10px">สถานะ : <B class="text-success"> ออนไลน์</B> ';
+                            echo '<h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">สถานะ : <B class="text-success"> ออนไลน์</B> ';
                         }else {
-                            echo '<h6 class="card-title text-bold text-center" style="margin-top: 10px">สถานะ : <B class="text-danger"> ออฟไลน์</B>';
+                            echo '<h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">สถานะ : <B class="text-danger"> ออฟไลน์</B>';
                         }
                     }else if ($row_['house_webv'] == 4) {
                         if( $drow_['data_timestamp_'.intval(substr($row_['house_master'], 5,10))] > date("Y-m-d H:i:s", strtotime('-2 minute')) ){
-                            echo '<h6 class="card-title text-bold text-center" style="margin-top: 10px">สถานะ : <B class="text-success"> ออนไลน์</B> ';
+                            echo '<h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">สถานะ : <B class="text-success"> ออนไลน์</B> ';
                         }else {
-                            echo '<h6 class="card-title text-bold text-center" style="margin-top: 10px">สถานะ : <B class="text-danger"> ออฟไลน์</B>';
+                            echo '<h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">สถานะ : <B class="text-danger"> ออฟไลน์</B>';
                         }
                     }
                     ?>
