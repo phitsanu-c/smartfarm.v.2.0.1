@@ -86,8 +86,8 @@
         <div class="col-12 col-lg-4 col-xl-4 col-sm-12 d-flex">
             <div class="card radius-10">
                 <div class="card-body">
-                    <div class="card radius-10 shadow-none">
-                        <img src="public/images/site/<?= $house_img ?>" alt="..." class="card-img">
+                    <div class="card radius-10 shadow-none ">
+                        <img src="public/images/site/<?= $house_img ?>" alt="..." class="card-img img-hight">
                     </div>
                     <div class="card radius-10 shadow-none">
                         <div class="card-body border radius-10 shadow-none mb-3">
