@@ -72,13 +72,13 @@
                             <button type="button" class="col-sm-6 btn btn-outline-secondary px-2 all_from_to">กำหนดเอง</button>
                         </div>
                     </div> -->
-                    <div class="col-lg-6 col-xl-6 col-12 mb-2 ">
-                        <div class="row">
+                    <div class="d-flex col-lg-6 col-xl-6 col-12 ">
+                        
                             <button type="button" class="col-3 btn btn-outline-secondary px-2 all_day">1 วัน</button>
                             <button type="button" class="col-3 btn btn-outline-secondary px-2 all_week">1 สัปดาห์</button>
                             <button type="button" class="col-3 btn btn-outline-secondary px-2 all_month">1 เดือน</button>
                             <button type="button" class="col-3 btn btn-outline-secondary px-2 all_from_to">กำหนดเอง</button>
-                        </div>
+                      
                     </div>
                     <!-- <div class="col-12 d-sm-none mode_sn">
                         <div class="row nav nav-pills">
