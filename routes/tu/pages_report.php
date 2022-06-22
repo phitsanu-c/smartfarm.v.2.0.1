@@ -91,7 +91,7 @@
                     </div>
                     <div class="tab-pane fade" id="pills_report_cn" role="tabpanel">
                         <div class="table-responsive m-t-10">
-                            <table id="example" class="table table-striped table-bordered dataTable" style="width:100%">
+                            <table id="tb_re_cn" class="table table-striped table-bordered dataTable" style="width:100%">
                                 <thead>
                                     <tr>
                                         <!-- <th class="text-center">#</th> -->
@@ -1334,7 +1334,7 @@
         $(".all_month").removeClass('active')
         $(".all_from_to").removeClass('active')
         $(".mode_dwm").val('');
-        $('#example').wrap('<div id="hide" style="display:none"/>');
+        $('#tb_re_cn').wrap('<div id="hide" style="display:none"/>');
         $('#hide').css( 'display', 'none' );
         $('.val_start').val('').removeClass('is-invalid');
         $('.val_end').val('').removeClass('is-invalid');
@@ -1390,7 +1390,7 @@
     function report_cn_table(mode_dwm){
         $('#hide').css( 'display', 'block' );
         active_btn(mode_dwm);
-        var table = $('#example').DataTable({
+        var table = $('#tb_re_cn').DataTable({
             "scrollY": 330,
             "scrollX": true,
             "scrollCollapse": false,
