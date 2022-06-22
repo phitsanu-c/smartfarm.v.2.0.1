@@ -35,43 +35,7 @@
     <div class="col-12 col-lg-12 col-xl-12 d-flex">
         <div class="card w-100 radius-10">
             <div class="card-body">
-                <!-- <div class="row">
-                    <div class="col-12">
-                        <ul class="nav nav-pills mb-1" role="tablist">
-                            <li class="nav-item col-12 col-sm-6 col-lg-3 col-xl-3 mb-1" role="presentation">
-                                <a class="nav-link active r_reSensor text-center" data-bs-toggle="pill" href="#pills_report_sn" role="tab" aria-selected="true" style="border: 1px solid transparent; border-color: #6c757d;">
-                                    <div class="tab-title">ข้อมูลเซ็นเซอร์</div>
-                                </a>
-                            </li>
-                            <li class="nav-item col-12 col-sm-6 col-lg-3 col-xl-3 mb-1" role="presentation">
-                                <a class="nav-link r_reControl text-center" data-bs-toggle="pill" href="#pills_report_cn" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
-                                    <div class="tab-title">ประวัติระบบควบคุม</div>
-                                </a>
-                            </li>
-                            <li class="nav-item col-12 col-sm-6 col-lg-3 col-xl-3 mb-1" role="presentation">
-                                <a class="nav-link r_reAutoControl text-center" data-bs-toggle="pill" href="#pills_report_cnAuto" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
-                                    <div class="tab-title">ประวัติการตั้งค่าโหมดอัตโนมัติ</div>
-                                </a>
-                            </li>
-                            <li class="nav-item col-12 col-sm-6 col-lg-3 col-xl-3 mb-1" role="presentation">
-                                <a class="nav-link r_reManualControl text-center" data-bs-toggle="pill" href="#pills_report_cnManual" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
-                                    <div class="tab-title">ประวัติการตั้งค่าโหมดกำหนดเอง</div>
-                                </a>
-                            </li>
-                            <input type="hidden" id="mode_report">
-                        </ul>
-                    </div>
-                </div> -->
-
                 <div class="d-sm-flex">
-                    <!-- <div class="col-lg-6 col-xl-6 col-12 mb-2 ">
-                        <div class="row">
-                            <button type="button" class="col-sm-6 btn btn-outline-secondary px-2 all_day">1 วัน</button>
-                            <button type="button" class="col-sm-6 btn btn-outline-secondary px-2 all_week">1 สัปดาห์</button>
-                            <button type="button" class="col-sm-6 btn btn-outline-secondary px-2 all_month">1 เดือน</button>
-                            <button type="button" class="col-sm-6 btn btn-outline-secondary px-2 all_from_to">กำหนดเอง</button>
-                        </div>
-                    </div> -->
                     <div class="col-lg-6 col-xl-6 col-12 mb-2 ">
                         <div class="row">
                             <button type="button" class="col-3 btn btn-outline-secondary px-2 all_day">1 วัน</button>
@@ -80,16 +44,6 @@
                             <button type="button" class="col-3 btn btn-outline-secondary px-2 all_from_to">กำหนดเอง</button>
                         </div>
                     </div>
-                    <!-- <div class="col-12 d-sm-none mode_sn">
-                        <div class="row nav nav-pills">
-                            <a class="nav-item col-6 active text-center re_ch" data-bs-toggle="pill" href="#p-chart" role="tab" aria-selected="true" style="border: 1px solid transparent; border-color: #6c757d;">
-                                <i class="fadeIn animated bx bx-line-chart"></i> กราฟ
-                            </a>
-                            <a class="nav-item col-6 text-center re_tb" data-bs-toggle="pill" href="#p-table" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
-                                <i class="fadeIn animated bx bx-table"></i> ตาราง
-                            </a>
-                        </div>
-                    </div> -->
                     <ul class="ms-auto col-lg-3 col-md-4 col-xl-3 col-12 nav nav-pills mode_sn" role="tablist">
                         <li class="nav-item col-6" role="presentation">
                             <a class="nav-link active text-center re_ch" data-bs-toggle="pill" href="#p-chart" role="tab" aria-selected="true" style="border: 1px solid transparent; border-color: #6c757d;">
@@ -102,20 +56,6 @@
                             </a>
                         </li>
                     </ul>
-                    <!-- <div class="ms-auto d-none d-sm-block ">
-                        <ul class="nav nav-pills mode_sn"  role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link active re_ch" data-bs-toggle="pill" href="#p-chart" role="tab" aria-selected="true" style="border: 1px solid transparent; border-color: #6c757d;">
-                                    <i class="fadeIn animated bx bx-line-chart"></i> กราฟ
-                                </a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link re_tb" data-bs-toggle="pill" href="#p-table" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
-                                    <i class="fadeIn animated bx bx-table"></i> ตาราง
-                                </a>
-                            </li>
-                        </ul>
-                    </div> -->
                 </div><br>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="p-chart" role="tabpanel">
