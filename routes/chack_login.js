@@ -31,17 +31,22 @@ $.getJSON('routes/login.php', function(msg) {
     // }
 
     // -----------------------------------------------------
+    $('#load_pages_dashboard').hide();
+    $('#load_pages_report').hide();
     if (msg.sn['account_status'] == 1) { // supportadmin
+        $("#load_pages_site").load('views/pages_site.php');
         if (url[1] === '') { // site = nail
             $(".memu_site").addClass("mm-active")
-            $("#load_pages").load('views/pages_site.php');
             $(".memu_house").hide();
             $(".memu_dash").hide();
             $(".memu_report").hide();
             $('.memu_control').hide();
             $('.memu_compare').hide();
+            $('#load_pages_site').show();
         }
         else { // site != nail
+            $('#load_pages_site').hide();
+            $("#load_pages_house").load('views/pages_house.php?s=' + url[1]);
             if (house_master === '' || house_master.length != 8) { // chack sn != nail or ไม่ถูกต้อง
                 $(".memu_site").removeClass("mm-active")
                 $(".memu_house").show().addClass("mm-active")
@@ -49,11 +54,15 @@ $.getJSON('routes/login.php', function(msg) {
                 $(".memu_report").hide();
                 $('.memu_control').hide();
                 $('.memu_compare').hide();
-                $("#load_pages").load('views/pages_house.php?s=' + url[1]);
+                // $("#load_pages_house").load('views/pages_house.php?s=' + url[1]);
+                $('#load_pages_house').show();
+                $('#load_pages_compare').hide();
+                $('#load_pages_profile').hide();
             }
             else {
                 $(".memu_site").removeClass("mm-active")
                 $(".memu_house").removeClass("mm-active")
+                $('#load_pages_house').hide();
             }
             if (url[0] == 4) {
                 $(".memu_compare").show();
@@ -72,14 +81,16 @@ $.getJSON('routes/login.php', function(msg) {
                 $(".memu_report").show().removeClass("mm-active")
             }
             else { // 1 site > 1 house
-                $(".memu_site").hide()
+                $(".memu_site").hide();
+                $("#load_pages_house").load('views/pages_house.php?s=' + url[1]);
                 if (house_master === '' || house_master.length != 8) {
                     $(".memu_house").show().addClass("mm-active")
                     $(".memu_dash").hide();
-                    $("#load_pages").load('views/pages_house.php?s=' + msg.sn['siteID']);
+                    $('#load_pages_house').show();
                 }else {
                     $(".memu_house").show().removeClass("mm-active")
                     $(".memu_dash").show();
+                    $('#load_pages_house').hide();
                 }
                 $(".memu_report").hide();
                 $('.memu_control').hide();
@@ -90,16 +101,16 @@ $.getJSON('routes/login.php', function(msg) {
                 $(".memu_compare").hide();
             }
         } else { // > 1 site
-            // if(msg.sn['count_house'] == 1){
+            $("#load_pages_site").load('views/pages_site.php');
             if (url[1] === '') { // site = nail
                 $(".memu_site").addClass("mm-active")
-                $("#load_pages").load('views/pages_site.php');
                 $(".memu_house").hide();
                 $(".memu_dash").hide();
                 $(".memu_report").hide();
                 $('.memu_control').hide();
                 $('.memu_compare').hide();
             } else { // site != nail
+                $("#load_pages_house").load('views/pages_house.php?s=' + url[1]);
                 if (house_master === '' || house_master.length != 8) { // chack sn != nail or ไม่ถูกต้อง
                     $(".memu_site").removeClass("mm-active")
                     $(".memu_house").show().addClass("mm-active")
@@ -107,7 +118,7 @@ $.getJSON('routes/login.php', function(msg) {
                     $(".memu_report").hide();
                     $('.memu_control').hide();
                     $('.memu_compare').hide();
-                    $("#load_pages").load('views/pages_house.php?s=' + url[1]);
+                    $('#load_pages_house').show();
                 } else {
                     $(".memu_site").removeClass("mm-active")
                     $(".memu_house").removeClass("mm-active")
@@ -116,6 +127,7 @@ $.getJSON('routes/login.php', function(msg) {
                     } else {
                         $(".memu_compare").hide();
                     }
+                    $('#load_pages_house').hide();
                 }
             }
             // }
@@ -131,28 +143,6 @@ $.getJSON('routes/login.php', function(msg) {
         $("#toggleTheme").attr('checked', false);
     }
     $("html").attr("class", msg.theme)
-        // if (msg.theme === "dark-theme") {
-        //     $("#lightmode").attr('checked', false);
-        //     $("#darkmode").attr('checked', true);
-        //     $("#semidark").attr('checked', false);
-        //     $("#minimaltheme").attr('checked', false);
-        // } else if (msg.theme === "semi-dark") {
-        //     $("#lightmode").attr('checked', false);
-        //     $("#darkmode").attr('checked', false);
-        //     $("#semidark").attr('checked', true);
-        //     $("#minimaltheme").attr('checked', false);
-        // } else if (msg.theme === "minimal-theme") {
-        //     $("#lightmode").attr('checked', false);
-        //     $("#darkmode").attr('checked', false);
-        //     $("#semidark").attr('checked', false);
-        //     $("#minimaltheme").attr('checked', true);
-        // } else {
-        //     $("#lightmode").attr('checked', true);
-        //     $("#darkmode").attr('checked', false);
-        //     $("#semidark").attr('checked', false);
-        //     $("#minimaltheme").attr('checked', false);
-        // }
-        // $("#theme").addClass(msg.theme);
     $(".btn_modal_sg").click(function() {
         $(".sg_name").val(msg.username);
         $(".sg_tel").val(msg.tel);
@@ -160,16 +150,6 @@ $.getJSON('routes/login.php', function(msg) {
         $(".sg_text").val("");
         $("#modal_sg").modal("show");
     });
-
-    // window.addEventListener("beforeunload", function (e) {
-    //   logout()
-    //   return;
-    // });
-    // window.onunload = function(){
-    //     logout()
-    // alert("The window is closing now!");
-    // }
-
 });
 
 
@@ -226,8 +206,8 @@ function toggleTheme(val) {
         $("html").addClass('dark-theme');
         var theme = 'dark-theme';
     } else {
-        $("html").attr("class", "color-sidebar sidebarcolor2 color-header headercolor2")
-        var theme = "color-sidebar sidebarcolor2 color-header headercolor2";
+        $("html").removeClass('dark-theme').addClass('light-theme'); //attr("class", "color-sidebar sidebarcolor2 color-header headercolor2")
+        var theme = "light-theme";
     }
     $.ajax({
         url: "routes/setting_theme.php",

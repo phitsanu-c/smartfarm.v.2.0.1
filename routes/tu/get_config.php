@@ -20,7 +20,7 @@
     $controlstatus[11] = intval($row_3["cn_status_11"]);
     $controlstatus[12] = intval($row_3["cn_status_12"]);
 
-    $row_4 = $dbcon->query("SELECT * FROM tb_set_maxmin WHERE set_maxmin_sn = '$house_master'")->fetch();
+    $row_4 = $dbcon->query("SELECT * FROM tbn_set_maxmin WHERE set_maxmin_sn = '$house_master'")->fetch();
     $set_maxmin = [
         'Tmin' => $row_4["set_Tmin"],
         'Tmax' => $row_4["set_Tmax"],
@@ -39,7 +39,7 @@
     $houseID = $row_1['house_id'];
     if($_SESSION['account_status'] > 2){
         $row_6 = $dbcon->query("SELECT `userST_level` FROM `tbn_userst` WHERE `userST_accountID`=$account_id AND `userST_houseID`=$houseID")->fetch();
-        $account_status = $row_6[0];
+        $account_status = $row_6['userST_level'];
     }else {
         $account_status = $_SESSION['account_status'];
     }
@@ -51,5 +51,6 @@
         'controlstatus'=> $controlstatus,
         'set_maxmin' => $set_maxmin,
         'sensor' => $sensor,
-        'userLevel'=> $account_status
+        'userLevel'=> $account_status,
+        'h' => "SELECT `userST_level` FROM `tbn_userst` WHERE `userST_accountID`=$account_id AND `userST_houseID`=$houseID"
     ]);

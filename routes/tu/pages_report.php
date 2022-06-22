@@ -59,33 +59,19 @@
                 <div class="d-sm-flex">
                     <div class="col-lg-6 col-xl-6 col-sm-12 mb-2 ">
                         <div class="row">
-                            <button type="button" class="col-sm-3 btn btn-outline-secondary px-2 all_day">1 วัน</button>
-                            <button type="button" class="col-sm-3 btn btn-outline-secondary px-2 all_week">1 สัปดาห์</button>
-                            <button type="button" class="col-sm-3 btn btn-outline-secondary px-2 all_month">1 เดือน</button>
-                            <button type="button" class="col-sm-3 btn btn-outline-secondary px-2 all_from_to">กำหนดเอง</button>
+                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_day">1 วัน</button>
+                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_week">1 สัปดาห์</button>
+                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_month">1 เดือน</button>
+                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_from_to">กำหนดเอง</button>
                         </div>
                     </div>
-                    <div class="ms-auto d-none d-sm-block ">
-                        <ul class="nav nav-pills mode_sn"  role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link active re_ch" data-bs-toggle="pill" href="#p-chart" role="tab" aria-selected="true" style="border: 1px solid transparent; border-color: #6c757d;">
-                                    <i class="fadeIn animated bx bx-line-chart"></i> กราฟ
-                                </a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link re_tb" data-bs-toggle="pill" href="#p-table" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
-                                    <i class="fadeIn animated bx bx-table"></i> ตาราง
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <ul class="nav nav-pills d-sm-none mode_sn" role="tablist">
-                        <li class="nav-item col-sm-6" role="presentation">
+                    <ul class="ms-auto col-lg-3 col-md-4 col-xl-3 col-12 nav nav-pills mode_sn" role="tablist">
+                        <li class="nav-item col-6" role="presentation">
                             <a class="nav-link active text-center re_ch" data-bs-toggle="pill" href="#p-chart" role="tab" aria-selected="true" style="border: 1px solid transparent; border-color: #6c757d;">
                                 <i class="fadeIn animated bx bx-line-chart"></i> กราฟ
                             </a>
                         </li>
-                        <li class="nav-item col-sm-6" role="presentation">
+                        <li class="nav-item col-6" role="presentation">
                             <a class="nav-link text-center re_tb" data-bs-toggle="pill" href="#p-table" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
                                 <i class="fadeIn animated bx bx-table"></i> ตาราง
                             </a>
@@ -136,7 +122,8 @@
                     </div>
                     <div class="tab-pane fade" id="pills_report_cnAuto" role="tabpanel">
                         <ul class="nav nav-pills mb-3" role="tablist">
-                            <?php for($i=1; $i <= 12; $i++){
+                            <?php
+                             for($i=1; $i <= 12; $i++){
                                 if($config_cn['cn_status_'.$i] == 1){
                                 echo '<li class="nav-item" role="presentation">
                                         <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
