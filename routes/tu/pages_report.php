@@ -90,33 +90,7 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="pills_report_cn" role="tabpanel">
-                        <div class="table-responsive m-t-10">
-                            <table id="tb_re_cn" class="table table-striped table-bordered dataTable" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <!-- <th class="text-center">#</th> -->
-                                        <th class="text-center">วัน </th>
-                                        <th class="text-center">เวลา</th>
-                                        <th class="text-center">ผู้ดำเนินการ</th>
-                                        <th class="text-center">โหมด</th>
-                                        <?php
-                                            if($config_cn['cn_status_1'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_1'].'</th>';}
-                                            if($config_cn['cn_status_2'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_2'].'</th>';}
-                                            if($config_cn['cn_status_3'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_3'].'</th>';}
-                                            if($config_cn['cn_status_4'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_4'].'</th>';}
-                                            if($config_cn['cn_status_5'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_5'].'</th>';}
-                                            if($config_cn['cn_status_6'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_6'].'</th>';}
-                                            if($config_cn['cn_status_7'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_7'].'</th>';}
-                                            if($config_cn['cn_status_8'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_8'].'</th>';}
-                                            if($config_cn['cn_status_9'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_9'].'</th>';}
-                                            if($config_cn['cn_status_10'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_10'].'</th>';}
-                                            if($config_cn['cn_status_11'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_11'].'</th>';}
-                                            if($config_cn['cn_status_12'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_12'].'</th>';}
-                                        ?>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
+                        <div id="table_report_control"></div>
                     </div>
                     <div class="tab-pane fade" id="pills_report_cnAuto" role="tabpanel">
                         <ul class="nav nav-pills mb-3" role="tablist">
@@ -192,32 +166,7 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="pills_report_cnManual" role="tabpanel">
-                        <div class="table-responsive m-t-10">
-                            <table id="table_re_cnManual" class="table table-striped table-bordered dataTable" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <!-- <th class="text-center">#</th> -->
-                                        <th class="text-center">วัน </th>
-                                        <th class="text-center">เวลา</th>
-                                        <th class="text-center">ผู้ดำเนินการ</th>
-                                        <?php
-                                            if($config_cn['cn_status_1'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_1'].'</th>';}
-                                            if($config_cn['cn_status_2'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_2'].'</th>';}
-                                            if($config_cn['cn_status_3'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_3'].'</th>';}
-                                            if($config_cn['cn_status_4'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_4'].'</th>';}
-                                            if($config_cn['cn_status_5'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_5'].'</th>';}
-                                            if($config_cn['cn_status_6'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_6'].'</th>';}
-                                            if($config_cn['cn_status_7'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_7'].'</th>';}
-                                            if($config_cn['cn_status_8'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_8'].'</th>';}
-                                            if($config_cn['cn_status_9'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_9'].'</th>';}
-                                            if($config_cn['cn_status_10'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_10'].'</th>';}
-                                            if($config_cn['cn_status_11'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_11'].'</th>';}
-                                            if($config_cn['cn_status_12'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_12'].'</th>';}
-                                        ?>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
+                        <div id="table_report_control_Manual"></div>
                     </div>
                 </div>
             </div>
@@ -1361,8 +1310,8 @@
             $('.text_autoTable').html(config_cn['cn_name_'+$(this).attr('rec_auto')])
             $('.rec_auto').removeClass('active')
             $(this).addClass('active')
-            if($(".mode_dwm").val() !=''){
-                report_cnAuto_table()
+            if($(".mode_dwm").val() != ''){
+                report_cnAuto_table($(".mode_dwm").val());
             }
         });
     })
@@ -1388,57 +1337,15 @@
                 // + currentdate.getSeconds();
 
     function report_cn_table(mode_dwm){
-        $('#hide').css( 'display', 'block' );
+        // $('#hide').css( 'display', 'block' );
+        $("#table_report_control").html('');
         active_btn(mode_dwm);
-        var table = $('#tb_re_cn').DataTable({
-            "scrollY": 330,
-            "scrollX": true,
-            "scrollCollapse": false,
-            "paging":    false,
-            "searching": false,
-            "destroy": true,
-            "order": [
-                [0, "desc"]
-            ],
-          //   "processing": true,
-          //   'language':{
-          //     "loadingRecords": "&nbsp;",
-          //     "processing": "Loading..."
-          // },
-            "columnDefs": [
-                {
-                    // "targets": [ 1 ],
-                    // render: $.fn.dataTable.render.moment( 'X', 'YYYY/MM/DD' ),
-                    // "render": $.fn.dataTable.render.moment( 'YYYY/MM/DD' ),
-                    "visible": false,
-                    "searchable": false,
-                },
-            ],
-            dom: "<'floatRight'B><'clear'>frtip",
-            buttons: [{
-                    text: 'Export csv',
-                    title: "Smart Farm Report Control",
-                    charset: 'utf-8',
-                    extension: '.csv',
-                    // exportOptions: {
-                    //    columns: [ 0, 2, 5 ]
-                    // },
-                    className:'btn btn-outline-success px-5 btnexport',
-                    extend: 'csv',
-                    format: 'YYYY/MM/dd',
-                    // fieldSeparator: ';',
-                    // fieldBoundary: '',
-                    filename: 'smart_farm_control_'+datetime,
-                    // className: 'btn-info',
-                    bom: true
-                }
-            ]
-        });
-        table.button('.btnexport').nodes().css("display", "none")
-        table.clear().draw();
+        // table.button('.btnexport').nodes().css("display", "none")
+        // table.clear().draw();
         $.ajax({
             type: "POST",
-            url: "routes/tu/get_report_cn_table.php",
+            url: "routes/tu/report_control.php",
+            // url: "routes/tu/get_report_cn_table.php",
             data: {
                 house_master: house_master,
                 mode : mode_dwm,
@@ -1447,13 +1354,14 @@
                 val_start : $(".val_start").val(),
                 val_end : $(".val_end").val(),
             },
-            dataType: 'json',
+            // dataType: 'json',
             success: function(res) {
                 // console.log(res);
-                if(res.length > 0){
-                    table.button('.btnexport').nodes().css("display", "block")
-                }
-                table.clear().rows.add(res).draw();
+                $('#table_report_control').html(res);
+                // if(res.length > 0){
+                //     table.button('.btnexport').nodes().css("display", "block")
+                // }
+                // table.clear().rows.add(res).draw();
             }
         });
     }
@@ -1542,9 +1450,9 @@
                             }
                         ],drawCallback: function() {
                     $('.btnexport22').click()
-                    // setTimeout(function() {
-                    //         $('#table_re_cnAuto2').DataTable().destroy(false);
-                    //         }, 200)
+                    setTimeout(function() {
+                            $('#table_re_cnAuto2').DataTable().destroy(false);
+                            }, 200)
                         }
                     });
                 })
@@ -1552,57 +1460,13 @@
         });
     }
     function report_cnManual_table(mode_dwm){
-        $('#hide3').css( 'display', 'block' );
+        // $('#hide3').css( 'display', 'block' );
+        $("#table_report_control_Manual").html('')
         active_btn(mode_dwm);
-        var table3 = $('#table_re_cnManual').DataTable({
-            "scrollY": 330,
-            "scrollX": true,
-            "scrollCollapse": false,
-            "paging":    false,
-            "searching": false,
-            "destroy": true,
-            "order": [
-                [0, "desc"]
-            ],
-          //   "processing": true,
-          //   'language':{
-          //     "loadingRecords": "&nbsp;",
-          //     "processing": "Loading..."
-          // },
-            "columnDefs": [
-                {
-                    // "targets": [ 1 ],
-                    // render: $.fn.dataTable.render.moment( 'X', 'YYYY/MM/DD' ),
-                    // "render": $.fn.dataTable.render.moment( 'YYYY/MM/DD' ),
-                    "visible": false,
-                    "searchable": false,
-                },
-            ],
-            dom: "<'floatRight'B><'clear'>frtip",
-            buttons: [{
-                    text: 'Export csv',
-                    title: "Smart Farm Report Setting Control",
-                    charset: 'utf-8',
-                    extension: '.csv',
-                    // exportOptions: {
-                    //    columns: [ 0, 2, 5 ]
-                    // },
-                    className:'btn btn-outline-success px-5 btnexport3',
-                    extend: 'csv',
-                    format: 'YYYY/MM/dd',
-                    // fieldSeparator: ';',
-                    // fieldBoundary: '',
-                    filename: 'smart_farm_control_Setting_'+datetime,
-                    // className: 'btn-info',
-                    bom: true
-                }
-            ]
-        });
-        table3.button('.btnexport3').nodes().css("display", "none")
-        table3.clear().draw();
         $.ajax({
             type: "POST",
-            url: "routes/tu/get_report_cn_table.php",
+            url:'routes/tu/report_controlManual.php',
+            // url: "routes/tu/get_report_cn_table.php",
             data: {
                 house_master: house_master,
                 mode : mode_dwm,
@@ -1611,13 +1475,10 @@
                 val_start : $(".val_start").val(),
                 val_end : $(".val_end").val(),
             },
-            dataType: 'json',
+            // dataType: 'json',
             success: function(res) {
-                console.log(res);
-                if(res.length > 0){
-                    table3.button('.btnexport3').nodes().css("display", "block")
-                }
-                table3.clear().rows.add(res).draw();
+                // console.log(res);
+                $("#table_report_control_Manual").html(res);
             }
         });
     }
