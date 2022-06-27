@@ -36,13 +36,12 @@
         <div class="card w-100 radius-10">
             <div class="card-body">
                 <div class="d-sm-flex">
-                    <div class="col-lg-6 col-xl-6 col-12 mb-2 ">
-                        <div class="row">
+                    <div class="d-flex col-lg-6 col-xl-6 col-12  ">
                             <button type="button" class="col-3 btn btn-outline-secondary px-2 all_day">1 วัน</button>
                             <button type="button" class="col-3 btn btn-outline-secondary px-2 all_week">1 สัปดาห์</button>
                             <button type="button" class="col-3 btn btn-outline-secondary px-2 all_month">1 เดือน</button>
                             <button type="button" class="col-3 btn btn-outline-secondary px-2 all_from_to">กำหนดเอง</button>
-                        </div>
+                      
                     </div>
                     <ul class="ms-auto col-lg-3 col-md-4 col-xl-3 col-12 nav nav-pills mode_sn" role="tablist">
                         <li class="nav-item col-6" role="presentation">
@@ -57,7 +56,7 @@
                         </li>
                     </ul>
                 </div><br>
-                <div class="tab-content">
+                <div class="tab-content chart">
                     <div class="tab-pane fade show active" id="p-chart" role="tabpanel">
                         <div id="chart_compare" style=""></div>
                     </div>

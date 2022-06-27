@@ -93,11 +93,11 @@
                         <div id="table_report_control"></div>
                     </div>
                     <div class="tab-pane fade" id="pills_report_cnAuto" role="tabpanel">
-                        <ul class="nav nav-pills mb-3" role="tablist">
+                        <ul class="nav nav-pills" role="tablist">
                             <?php
                              for($i=1; $i <= 12; $i++){
                                 if($config_cn['cn_status_'.$i] == 1){
-                                echo '<li class="nav-item" role="presentation">
+                                echo '<li class="col-4 col-lg-1 col-xl-1  nav-item text-center" role="presentation">
                                         <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
                                             <div class="d-flex align-items-center">
                                                 <div class="tab-title">'.$config_cn['cn_name_'.$i].'</div>
