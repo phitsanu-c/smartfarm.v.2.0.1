@@ -14,7 +14,7 @@
         $url_host = 'http://' . $_SERVER['HTTP_HOST'];
         $url_part = explode("/", $_SERVER["PHP_SELF"]);
         $url_link = $url_host . '/' . $url_part[1];
-        $siteID = $_GET["s"];
+        $siteID = $_POST["s"];
         // echo $_GET["s"];
         // exit();
         $accountID = $_SESSION['account_id'];
@@ -43,9 +43,10 @@
         foreach ($site_stmt as $row_) {
             // echo $url_link;
             // echo substr($row_["house_master"],0,3);
+            // $url_link .
     ?>
         <div class="col-12 col-sm-12 col-md-4 col-lg-4  col-xl-3">
-            <a href="<?= $url_link .'#'.encode($row_['house_webv'].','.$row_["house_siteID"].','.$row_["house_master"] ) ?>">
+            <a href="javascript:;" class="sw_house" url="<?= '#'.encode($row_['house_webv'].','.$row_["house_siteID"].','.$row_["house_master"] ) ?>">
                 <div class="card" style="padding: 1.25rem;  border-radius:20px">
                     <img src="<?php if($row_["house_img"] == ""){echo "public/images/default.jpg";}else{echo "public/images/house/".$row_["house_img"];} ?>" style="height: 20vh; width: 100%;" class="card-img-top img-fluid" alt="site01">
                     <h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 15px">ชื่อ : <B><?= $row_["house_name"] ?></B></h6>
@@ -74,3 +75,9 @@
     } ?>
     </div>
 </div>
+<script type="text/javascript">
+    // $('.sw_house').click(function(){
+    //     // alert($(this).attr("url"))
+    //     window.location.href = $(this).attr("url");
+    // })
+</script>

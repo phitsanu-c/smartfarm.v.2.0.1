@@ -23,6 +23,7 @@
     }catch(PDOException $ex){
         echo $ex->getMessage();
     }
+    ini_set("memory_limit","12800000000M");
 
     //วันที่
     date_default_timezone_set('Asia/Bangkok');

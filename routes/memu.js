@@ -25,6 +25,7 @@ $(".memu_site").click(function() {
     $('#load_pages_dashboard').hide();
     $('#load_pages_report').hide();
     $('#load_pages_profile').hide();
+    $('.memu_setting').hide()
 });
 $(".memu_house").click(function() {
     $(this).addClass('mm-active');
@@ -47,6 +48,24 @@ $(".memu_house").click(function() {
     $('#load_pages_report').hide();
     $('#load_pages_profile').hide();
     // $("#load_pages").load('views/pages_house.php?s='+url[1]);
+    $.ajax({
+        url: "views/pages_house.php",
+        method: "POST",
+        data: {
+            s: url[1]
+        },
+        // dataType: "json",
+        success: function(res_dash) {
+            $("#load_pages_house").html(res_dash);
+            $('.sw_house').click(function(){
+                window.location.hash = $(this).attr("url");
+                location.reload();
+                // alert($(this).attr("url"))
+                // window.location.href = $(this).attr("url");
+            })
+        }
+    })
+    $('.memu_setting').hide()
 });
 $(".memu_compare").click(function(){
     $(this).addClass('mm-active');
@@ -54,6 +73,7 @@ $(".memu_compare").click(function(){
     $('#load_pages_site').hide();
     $('#load_pages_house').hide();
     $("#load_pages_compare").show().load('routes/tu/pages_compare.php?s='+url[1]);
+    $('.memu_setting').hide()
 })
 $(".memu_dash").click(function() {
     $(this).addClass('mm-active');
@@ -66,6 +86,7 @@ $(".memu_dash").click(function() {
     $('#load_pages_dashboard').show();
     $('#load_pages_report').hide();
     $('#load_pages_profile').hide();
+    $('.memu_setting').hide()
 });
 $(".memu_report").click(function() {
     $('.memu_control').hide()
@@ -74,6 +95,7 @@ $(".memu_report").click(function() {
     $('#load_pages_dashboard').hide();
     $('#load_pages_report').show();
     $('#load_pages_profile').hide();
+    $('.memu_setting').hide()
 });
 // $(".memu_report").click(function() {
 //     $(this).addClass('mm-active');
@@ -90,90 +112,95 @@ $(".memu_report").click(function() {
 
 // --------------
 
-$(".dpd_profile").click(function() {
-    $(".memu_sel").removeClass('mm-active');
+$(".menu_setting").click(function() {
+    $('.memu_setting').show().addClass('mm-active');
+    $(".memu_site").removeClass('mm-active');
+    $(".memu_house").removeClass("mm-active")
     $(".memu_dash").removeClass('mm-active');
+    $('.memu_control').hide()
     $(".memu_report").removeClass('mm-active');
-    $('#pills-selectSite').hide();
-    $("#pills-selectHome").hide();
-    $("#pills-selectReport").hide();
-    $("#pills-profile").show();
+    $('#load_pages_site').hide();
+    $('#load_pages_house').hide();
+    $('#load_pages_compare').hide();
+    $('#load_pages_dashboard').hide();
+    $('#load_pages_report').hide();
+    $("#load_pages_profile").show();
     $.ajax({
         url: "views/setting_profile.php",
         method: "post",
         data: {
             // s_master: res.s_master,
-            pt: 1
+            pt: $(this).attr('menu')
         },
         // dataType: "json",
         success: function(resp) {
-            $("#pills-profile").html(resp);
+            $("#load_pages_profile").html(resp);
         }
     });
 });
-$(".dpd_setSite").click(function() {
-    $(".memu_sel").removeClass('mm-active');
-    $(".memu_dash").removeClass('mm-active');
-    $(".memu_report").removeClass('mm-active');
-    $('#pills-selectSite').hide();
-    $("#pills-selectHome").hide();
-    $("#pills-selectReport").hide();
-    $("#pills-profile").show();
-    $.ajax({
-        url: "views/setting_profile.php",
-        method: "post",
-        data: {
-            // s_master: res.s_master,
-            pt: 2
-        },
-        // dataType: "json",
-        success: function(resp) {
-            $("#pills-profile").html(resp);
-        }
-    });
-});
-$(".dpd_setHoune").click(function() {
-    $(".memu_sel").removeClass('mm-active');
-    $(".memu_dash").removeClass('mm-active');
-    $(".memu_report").removeClass('mm-active');
-    $('#pills-selectSite').hide();
-    $("#pills-selectHome").hide();
-    $("#pills-selectReport").hide();
-    $("#pills-profile").show();
-    $.ajax({
-        url: "views/setting_profile.php",
-        method: "post",
-        data: {
-            // s_master: res.s_master,
-            pt: 3
-        },
-        // dataType: "json",
-        success: function(resp) {
-            $("#pills-profile").html(resp);
-        }
-    });
-});
-$(".dpd_setting").click(function() {
-    $(".memu_sel").removeClass('mm-active');
-    $(".memu_dash").removeClass('mm-active');
-    $(".memu_report").removeClass('mm-active');
-    $('#pills-selectSite').hide();
-    $("#pills-selectHome").hide();
-    $("#pills-selectReport").hide();
-    $("#pills-profile").show();
-    $.ajax({
-        url: "views/setting_profile.php",
-        method: "post",
-        data: {
-            // s_master: res.s_master,
-            pt: 4
-        },
-        // dataType: "json",
-        success: function(resp) {
-            $("#pills-profile").html(resp);
-        }
-    });
-});
+// $(".dpd_setSite").click(function() {
+//     $(".memu_sel").removeClass('mm-active');
+//     $(".memu_dash").removeClass('mm-active');
+//     $(".memu_report").removeClass('mm-active');
+//     $('#pills-selectSite').hide();
+//     $("#pills-selectHome").hide();
+//     $("#pills-selectReport").hide();
+//     $("#pills-profile").show();
+//     $.ajax({
+//         url: "views/setting_profile.php",
+//         method: "post",
+//         data: {
+//             // s_master: res.s_master,
+//             pt: 2
+//         },
+//         // dataType: "json",
+//         success: function(resp) {
+//             $("#load_pages_profile").html(resp);
+//         }
+//     });
+// });
+// $(".dpd_setHoune").click(function() {
+//     $(".memu_sel").removeClass('mm-active');
+//     $(".memu_dash").removeClass('mm-active');
+//     $(".memu_report").removeClass('mm-active');
+//     $('#pills-selectSite').hide();
+//     $("#pills-selectHome").hide();
+//     $("#pills-selectReport").hide();
+//     $("#pills-profile").show();
+//     $.ajax({
+//         url: "views/setting_profile.php",
+//         method: "post",
+//         data: {
+//             // s_master: res.s_master,
+//             pt: 3
+//         },
+//         // dataType: "json",
+//         success: function(resp) {
+//             $("#load_pages_profile").html(resp);
+//         }
+//     });
+// });
+// $(".dpd_setting").click(function() {
+//     $(".memu_sel").removeClass('mm-active');
+//     $(".memu_dash").removeClass('mm-active');
+//     $(".memu_report").removeClass('mm-active');
+//     $('#pills-selectSite').hide();
+//     $("#pills-selectHome").hide();
+//     $("#pills-selectReport").hide();
+//     $("#pills-profile").show();
+//     $.ajax({
+//         url: "views/setting_profile.php",
+//         method: "post",
+//         data: {
+//             // s_master: res.s_master,
+//             pt: 4
+//         },
+//         // dataType: "json",
+//         success: function(resp) {
+//             $("#load_pages_profile").html(resp);
+//         }
+//     });
+// });
 
 // $("#lightmode").click(function(){
 

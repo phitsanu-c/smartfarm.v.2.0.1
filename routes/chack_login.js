@@ -1,9 +1,11 @@
+
 var url = $.base64.decode(window.location.hash.substring(1))
 if (url === "") {
     url = ',,'.split(',')
 } else {
     url = url.split(',')
 }
+// alert(window.location.hash)
 var house_master = url[2].substring(0, 8);
 // alert(url[0])
 console.log(house_master);
@@ -33,6 +35,8 @@ $.getJSON('routes/login.php', function(msg) {
     // -----------------------------------------------------
     $('#load_pages_dashboard').hide();
     $('#load_pages_report').hide();
+    $('.memu_setting').hide();
+    $("#load_pages_profile").hide();
     if (msg.sn['account_status'] == 1) { // supportadmin
         $("#load_pages_site").load('views/pages_site.php');
         if (url[1] === '') { // site = nail
@@ -46,7 +50,23 @@ $.getJSON('routes/login.php', function(msg) {
         }
         else { // site != nail
             $('#load_pages_site').hide();
-            $("#load_pages_house").load('views/pages_house.php?s=' + url[1]);
+            $.ajax({
+                url: "views/pages_house.php",
+                method: "POST",
+                data: {
+                    s: url[1]
+                },
+                // dataType: "json",
+                success: function(res_dash) {
+                    $("#load_pages_house").html(res_dash);
+                    $('.sw_house').click(function(){
+                        window.location.hash =$(this).attr("url");
+                        location.reload();
+                        // alert($(this).attr("url"))
+                        // window.location.href = $(this).attr("url");
+                    })
+                }
+            })
             if (house_master === '' || house_master.length != 8) { // chack sn != nail or ไม่ถูกต้อง
                 $(".memu_site").removeClass("mm-active")
                 $(".memu_house").show().addClass("mm-active")
@@ -82,7 +102,24 @@ $.getJSON('routes/login.php', function(msg) {
             }
             else { // 1 site > 1 house
                 $(".memu_site").hide();
-                $("#load_pages_house").load('views/pages_house.php?s=' + url[1]);
+                // $("#load_pages_house").load('views/pages_house.php?s=' + url[1]);
+                $.ajax({
+                    url: "views/pages_house.php",
+                    method: "POST",
+                    data: {
+                        s: url[1]
+                    },
+                    // dataType: "json",
+                    success: function(res_dash) {
+                        $("#load_pages_house").html(res_dash);
+                        $('.sw_house').click(function(){
+                            window.location.hash =$(this).attr("url");
+                            location.reload();
+                            // alert($(this).attr("url"))
+                            // window.location.href = $(this).attr("url");
+                        })
+                    }
+                })
                 if (house_master === '' || house_master.length != 8) {
                     $(".memu_house").show().addClass("mm-active")
                     $(".memu_dash").hide();
@@ -110,7 +147,24 @@ $.getJSON('routes/login.php', function(msg) {
                 $('.memu_control').hide();
                 $('.memu_compare').hide();
             } else { // site != nail
-                $("#load_pages_house").load('views/pages_house.php?s=' + url[1]);
+                // $("#load_pages_house").load('views/pages_house.php?s=' + url[1]);
+                $.ajax({
+                    url: "views/pages_house.php",
+                    method: "POST",
+                    data: {
+                        s: url[1]
+                    },
+                    // dataType: "json",
+                    success: function(res_dash) {
+                        $("#load_pages_house").html(res_dash);
+                        $('.sw_house').click(function(){
+                            window.location.hash =$(this).attr("url");
+                            location.reload();
+                            // alert($(this).attr("url"))
+                            // window.location.href = $(this).attr("url");
+                        })
+                    }
+                })
                 if (house_master === '' || house_master.length != 8) { // chack sn != nail or ไม่ถูกต้อง
                     $(".memu_site").removeClass("mm-active")
                     $(".memu_house").show().addClass("mm-active")
@@ -134,8 +188,6 @@ $.getJSON('routes/login.php', function(msg) {
         }
     }
 
-    $("#pills-selectReport").hide();
-
     // theme
     if (msg.theme === "dark-theme") {
         $("#toggleTheme").attr('checked', true);
@@ -151,16 +203,6 @@ $.getJSON('routes/login.php', function(msg) {
         $("#modal_sg").modal("show");
     });
 });
-
-
-function verticalNoTitle() {
-    var loading = new Loading({
-        discription: 'Loading...',
-        defaultApply: true,
-    });
-    return loading;
-    // loadingOut(loading);
-}
 
 // logout
 countdown(number = 1800); // วินาที
@@ -197,6 +239,14 @@ function logout() {
     });
 }
 
+function verticalNoTitle() {
+    var loading = new Loading({
+        discription: 'Loading...',
+        defaultApply: true,
+    });
+    return loading;
+    // loadingOut(loading);
+}
 function loadingOut(loading) {
     setTimeout(() => loading.out(), 100);
 }

@@ -27,8 +27,6 @@
     </div>
     <!--end breadcrumb-->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-4">
-
-
     <?php
         // session_start();
         require '../routes/connectdb.php';
@@ -50,9 +48,9 @@
         // }
 
         if ($_SESSION["sn"]['account_status'] == 1) {
-            $site_stmt = $dbcon->query("SELECT * FROM tbn_house INNER JOIN tbn_site ON tbn_house.house_siteID = tbn_site.site_id GROUP BY house_siteID ");
+            $site_stmt = $dbcon->query("SELECT *, max(`house_webv`) AS nWebv FROM tbn_house INNER JOIN tbn_site ON tbn_house.house_siteID = tbn_site.site_id GROUP BY house_siteID ");
         } else {
-            $site_stmt = $dbcon->query("SELECT * FROM `tbn_userst` INNER JOIN tbn_site ON tbn_userst.userST_siteID = tbn_site.site_id INNER JOIN tbn_house ON tbn_userst.userST_houseID = tbn_house.house_id WHERE tbn_userst.userST_accountID = '$accountID' GROUP BY userST_siteID ");
+            $site_stmt = $dbcon->query("SELECT *, max(`house_webv`) AS nWebv FROM `tbn_userst` INNER JOIN tbn_site ON tbn_userst.userST_siteID = tbn_site.site_id INNER JOIN tbn_house ON tbn_userst.userST_houseID = tbn_house.house_id WHERE tbn_userst.userST_accountID = '$accountID' GROUP BY userST_siteID ");
         }
         $i = 1;
         // $row_ = $site_stmt->fetch(PDO::FETCH_BOTH);
@@ -68,12 +66,12 @@
             <a href="
                 <?php
                     if($count_house[0] != 1){
-                        echo $url_link .'#'.encode(','.$row_["site_id"].',');
+                        echo $url_link .'#'.encode($row_['nWebv'].','.$row_["site_id"].',');
                     }else{
                         // if(substr($row_["house_master"],0,2) == "TUS"){
                         //     echo $url_link .'/tu/#'.encode($row_["site_id"].','.$row_["house_master"]);
                         // }else{
-                            echo $url_link .'#'.encode(','.$row_["site_id"].','.$row_["house_master"]);
+                            echo $url_link .'#'.encode($row_['nWebv'].','.$row_["site_id"].','.$row_["house_master"]);
                         // }
                     } ?>">
                 <div class="card" style="padding: 1.25rem; border-radius:20px"><!-- height:350px; -->

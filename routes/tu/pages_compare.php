@@ -41,7 +41,7 @@
                             <button type="button" class="col-3 btn btn-outline-secondary px-2 all_week">1 สัปดาห์</button>
                             <button type="button" class="col-3 btn btn-outline-secondary px-2 all_month">1 เดือน</button>
                             <button type="button" class="col-3 btn btn-outline-secondary px-2 all_from_to">กำหนดเอง</button>
-                      
+
                     </div>
                     <ul class="ms-auto col-lg-3 col-md-4 col-xl-3 col-12 nav nav-pills mode_sn" role="tablist">
                         <li class="nav-item col-6" role="presentation">
@@ -127,7 +127,7 @@
                                 <div class="col-lg-3 col-xl-3 col-sm-12 d-flex">
                                     <div class="card-body border radius-10 shadow-none mb-3">
                                         <div class="form-check">
-                                            <input class="form-check-input" name="radio_c" id="radio_temp" type="radio" onchange="ch_radio('temp')" ><!-- checked -->
+                                            <input class="form-check-input" name="radio_c" id="radio_temp" type="radio" onchange="ch_radio('temp', $(this))" ><!-- checked -->
                                             <h5>อุณหภูมิ</h5>
                                             <!-- <div class="form-check mb-3">
                                                 <input type="checkbox" class="form-check-input" name="checkbox_all_temp" onchange="checkbox_all('temp',$(this))" checked >
@@ -633,23 +633,27 @@
     $(".re_ch").click(function () {
         $(this).addClass("active");
         $(".re_tb").removeClass("active");
-        if($("#p-chart").hasClass("active") == false){
-            if( $(".all_day").hasClass("active") != false ||
-                $(".all_week").hasClass("active") != false ||
-                $(".all_month").hasClass("active") != false ||
-                $(".all_from_to").hasClass("active") != false
-            ){ report_sn(); }
+        if($(".mode_dwm").val() != ""){
+            if($("#p-chart").hasClass("active") == false){
+                if( $(".all_day").hasClass("active") != false ||
+                    $(".all_week").hasClass("active") != false ||
+                    $(".all_month").hasClass("active") != false ||
+                    $(".all_from_to").hasClass("active") != false
+                ){ report_sn(); }
+            }
         }
     });
     $(".re_tb").click(function () {
         $(".re_ch").removeClass("active");
         $(this).addClass("active");
-        if($("#p-table").hasClass("active") == false){
-            if( $(".all_day").hasClass("active") != false ||
-                $(".all_week").hasClass("active") != false ||
-                $(".all_month").hasClass("active") != false ||
-                $(".all_from_to").hasClass("active") != false
-            ){report_sn();}
+        if($(".mode_dwm").val() != ""){
+            if($("#p-table").hasClass("active") == false){
+                if( $(".all_day").hasClass("active") != false ||
+                    $(".all_week").hasClass("active") != false ||
+                    $(".all_month").hasClass("active") != false ||
+                    $(".all_from_to").hasClass("active") != false
+                ){report_sn();}
+            }
         }
     });
 
@@ -836,6 +840,7 @@
             });
         }
         function report_chart_sn(val, mode_dwm){
+            $('#chart_compare').html('');
             var options = {
                 chart: {
                     id: 'realtime',

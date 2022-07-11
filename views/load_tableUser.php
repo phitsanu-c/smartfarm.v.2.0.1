@@ -1,7 +1,7 @@
 <?php
 // session_start();
-require "../routes/connectdb.php";
-$user_id = $_SESSION['user_id'];
+require "routes/connectdb.php";
+$user_id = $_SESSION['account_id'];
 $siteID = $_GET["siteID"];
 // echo $siteID;
 // exit();
@@ -26,10 +26,10 @@ $siteID = $_GET["siteID"];
         </thead>
         <tbody>
             <?php
-            if ($_SESSION["login_status"] == 1) {
-                $stmt = $dbcon->prepare("SELECT * FROM tb3_userst INNER JOIN tb2_login ON tb3_userst.userST_loginID = tb2_login.login_id INNER JOIN tb2_house ON tb3_userst.userST_houseID = tb2_house.house_id WHERE userST_siteID='$siteID' GROUP BY userST_loginID ");
+            if ($_SESSION["sn"]['account_status'] == 1) {
+                $stmt = $dbcon->prepare("SELECT * FROM tbn_userst INNER JOIN tbn_account ON tbn_userst.userST_accountID = tbn_account.account_id INNER JOIN tbn_house ON tbn_userst.userST_houseID = tbn_house.house_id WHERE userST_siteID='$siteID' GROUP BY userST_accountID ");
             } else {
-                $stmt = $dbcon->prepare("SELECT * FROM tb3_userst INNER JOIN tb2_login ON tb3_userst.userST_loginID = tb2_login.login_id INNER JOIN tb2_house ON tb3_userst.userST_houseID = tb2_house.house_id WHERE userST_siteID='$siteID' AND userST_main='$user_id' GROUP BY userST_loginID ");
+                $stmt = $dbcon->prepare("SELECT * FROM tbn_userst INNER JOIN tbn_account ON tbn_userst.userST_accountID = tbn_account.account_id INNER JOIN tbn_house ON tbn_userst.userST_houseID = tbn_house.house_id WHERE userST_siteID='$siteID' AND userST_main='$user_id' GROUP BY userST_accountID ");
             }
             $stmt->execute();
             $count = $stmt->rowCount();
@@ -45,34 +45,34 @@ $siteID = $_GET["siteID"];
                 } else {
                     echo '<td class="text-center"><img src="public/images/users/' . $row["login_image"] . '" width="50"  height="50" alt="..."></td>';
                 }
-                echo '  <td class="text-center">' . $row["login_user"] . '</td>
-                        <td class="text-center">' . $row["login_email"] . '</td>
-                        <td class="text-center">' . $row["login_tel"] . '</td>
+                echo '  <td class="text-center">' . $row["account_user"] . '</td>
+                        <td class="text-center">' . $row["account_email"] . '</td>
+                        <td class="text-center">' . $row["account_tel"] . '</td>
                         ';//<td class="text-center">' . $row["site_name"] . '</td>';
-                if ($row["userST_user_status"] == 1) {
+                if ($row["userST_level"] == 1) {
                     echo '<td class="text-center"><span class="badge bg-info"> Support Admin <span></td>';
-                } else if ($row["userST_user_status"] == 2) {
+                } else if ($row["userST_level"] == 2) {
                     echo '<td class="text-center"><span class="badge bg-info"> Admin <span></td>';
-                } else if ($row["userST_user_status"] == 3) {
+                } else if ($row["userST_level"] == 3) {
                     echo '<td class="text-center"><span class="badge bg-info"> User <span></td>';
                 }
                 echo '<td class="text-center">
                         <div class="buttons">
                             <a href="javascript:void(0)" class="text-info u_edit"
                                 userST_id="' . $row["userST_id"] . '"
-                                houseID="' . $row["userST_houseID"] . '" 
-                                name="' . $row["login_user"] . '" 
-                                email="' . $row["login_email"] . '" 
-                                img="' . $row["login_image"] . '" 
-                                tel="' . $row["login_tel"] . '" 
-                                status="' . $row["userST_user_status"] . '">
+                                houseID="' . $row["userST_houseID"] . '"
+                                name="' . $row["account_user"] . '"
+                                email="' . $row["account_email"] . '"
+                                img="' . $row["account_image"] . '"
+                                tel="' . $row["account_tel"] . '"
+                                status="' . $row["userST_level"] . '">
                                 <i class="fadeIn animated bx bx-message-square-edit"></i>
                             </a>';
-                            if($_SESSION["login_status"] == 1 || $row["userST_user_status"] == 2){
-                                echo '<a href="javascript:void(0)" class="text-danger delete_user" 
-                                    user_id="' . $row["login_id"] . '" 
-                                    name="' . $row["login_user"] . '" 
-                                    img="' . $row["login_image"] . '">
+                            if($_SESSION["sn"]['account_status'] == 1 || $row["userST_level"] == 2){
+                                echo '<a href="javascript:void(0)" class="text-danger delete_user"
+                                    user_id="' . $row["account_id"] . '"
+                                    name="' . $row["account_user"] . '"
+                                    img="' . $row["account_image"] . '">
                                     <i class="fadeIn animated bx bx-trash"></i>
                                 </a>';
                             }else{echo '<a class="text-secondary" onclick="return false;"><i class="fadeIn animated bx bx-trash"></i></a>';}
@@ -84,201 +84,6 @@ $siteID = $_GET["siteID"];
             ?>
         </tbody>
     </table>
-
-    <div class="modal fade text-left" id="modal_User" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title title_mUser"></h4>
-                </div>
-                <div class="modal-body">
-                    <form method="post" id="user_form" enctype="multipart/form-data" onSubmit="return false;">
-                        <div class="row us_user_sel">
-                            <div class="col-md-4">
-                                <label>สถานที่</label>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="form-group has-icon-left">
-                                    <div class="position-relative">
-                                        <input type="hidden" class="use_site" name="use_site">
-                                        <select class="form-control use_site" name="use_site" disabled>
-                                            <?php 
-                                                $site_stmt = $dbcon->prepare("SELECT * FROM tb2_site ");
-                                                $site_stmt->execute();
-                                                while ($row_site = $site_stmt->fetch(PDO::FETCH_BOTH)) {
-                                                    echo '<option value="'.$row_site["site_id"].'">'.$row_site["site_name"].'</option>';
-                                                } ?>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label>โรงเรือน <span class="text-danger">*</span></label>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="form-group has-icon-left">
-                                    <div class="position-relative">
-                                        <select class="form-control use_house" name="use_house">
-                                            <?php 
-                                                echo '<option value="0">เลือกโรงเรือน</option>';
-                                                $house_stmt = $dbcon->prepare("SELECT * FROM tb2_house WHERE house_siteID ='$siteID' ");
-                                                $house_stmt->execute();
-                                                while ($row_house = $house_stmt->fetch(PDO::FETCH_BOTH)) {
-                                                    echo '<option value="'.$row_house["house_id"].'">'.$row_house["house_name"].'</option>';
-                                                } ?>
-                                        </select>
-                                        <div class="invalid-feedback">กรุณาระบุโรงเรือน</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label>เลือกผู้ใช้งาน</label>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="form-group has-icon-left">
-                                    <div class="position-relative">
-                                        <select name="use_userID" class="form-control use_userID">
-                                            <option value="0">เลือกผู้ใช้งาน</option>
-                                        </select>
-                                        <div class="invalid-feedback buse_userID"></div><br>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <img class="w-25 u_img mb-2" alt="...">
-                            <input type="hidden" name="mode_insert" class="mode_insert">
-                            <input type="hidden" name="userST_id" class="mode_userST_id">
-                            <input type="hidden" name="u_imgDF" class="u_imgDF">
-                        </div>
-                        <div class="form-body">
-                            <div class="row">
-                                <!-- <div class="input-group mt-3 us_img_user">
-                                    <div class="input-group mb-3">
-                                        <label class="col-md-4">Images </label>
-                                        <label class="input-group-text" style="margin-left: 10px;" for="Showimage_user"><i class="bi bi-upload"></i></label>
-                                        <input type="file" class="form-control" name="image_input" id="Showimage_user" onchange="Showimage2(this)">
-                                    </div>
-                                </div> -->
-                                <div class="col-md-4 us_img_user">
-                                    <label class="col-md-4">สถานที่ </label>
-                                </div>
-                                <div class="col-md-8 us_img_user">
-                                    <input type="file" class="form-control" name="u_img" id="u_img" onchange="Showimg_user(this)">
-                                </div>
-                                
-                                <div class="col-md-4 us_img_user">
-                                    <label>สถานที่</label>
-                                </div>
-                                <div class="col-md-8 us_img_user">
-                                    <div class="form-group has-icon-left">
-                                        <div class="position-relative">
-                                            <input type="hidden" name="u_site" class="u_site">
-                                            <select class="form-control u_site" name="u_site" disabled>
-                                                <?php 
-                                                    $site_stmt = $dbcon->prepare("SELECT * FROM tb2_site ");
-                                                    $site_stmt->execute();
-                                                    while ($row_site = $site_stmt->fetch(PDO::FETCH_BOTH)) {
-                                                        echo '<option value="'.$row_site["site_id"].'">'.$row_site["site_name"].'</option>';
-                                                    } ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 us_img_user">
-                                    <label>โรงเรือน <span class="text-danger">*</span></label>
-                                </div>
-                                <div class="col-md-8 us_img_user">
-                                    <div class="form-group has-icon-left">
-                                        <div class="position-relative">
-                                            <select class="form-control u_house" name="u_house">
-                                                <?php 
-                                                    echo '<option value="0">เลือกสถานที่</option>';
-                                                    $house_stmt = $dbcon->prepare("SELECT * FROM tb2_house WHERE house_siteID ='$siteID' ");
-                                                    $house_stmt->execute();
-                                                    while ($row_house = $house_stmt->fetch(PDO::FETCH_BOTH)) {
-                                                        echo '<option value="'.$row_house["house_id"].'">'.$row_house["house_name"].'</option>';
-                                                    } ?>
-                                            </select>
-                                            <div class="invalid-feedback">กรุณาระบุโรงเรือน</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label>ชื่อผู้ใช้งาน <span class="text-danger">*</span></label>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="form-group has-icon-left">
-                                        <div class="position-relative">
-                                            <input type="text" class="form-control u_user" name="u_user" placeholder="ชื่อผู้ใช้งาน">
-                                            <div class="invalid-feedback bu_user"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 us_pass">
-                                    <label>รหัสผ่าน <span class="text-danger">*</span></label>
-                                </div>
-                                <div class="col-md-8 us_pass">
-                                    <div class="form-group has-icon-left">
-                                        <div class="position-relative">
-                                            <input type="password" class="form-control u_pass" name="u_pass" placeholder="รหัสผ่าน" value="">
-                                            <div class="invalid-feedback bu_pass"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label>อีเมลล์ <span class="text-danger">*</span></label>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="form-group has-icon-left">
-                                        <div class="position-relative">
-                                            <input type="email" class="form-control u_email" name="u_email" placeholder="อีเมลล์">
-                                            <div class="invalid-feedback bu_email"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label>หมายเลขโทรศัพท์</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="form-group has-icon-left">
-                                        <div class="position-relative">
-                                            <input type="text" class="form-control u_tel" name="u_tel" placeholder="หมายเลขโทรศัพท์">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label>ระดับผู้ใช้งาน</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="form-group has-icon-left">
-                                        <div class="position-relative">
-                                            <select name="u_status" class="form-control u_status">
-                                                <?php
-                                                if ($_SESSION["login_status"] == 1) {
-                                                    echo '<option value="3">User</option>
-                                                          <option value="2">Admin</option>
-                                                          <option value="1">Supper Admin</option>';
-                                                } else {
-                                                    echo '<option value="3">User</option>
-                                                          <option value="2">Admin</option> ';
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success submit_u"><i class="fadeIn animated bx bx-save"></i>บันทึก</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fadeIn animated bx bx-window-close"></i>ยกเลิก</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 <script>
     function Showimg_user(input) {
@@ -356,7 +161,7 @@ $siteID = $_GET["siteID"];
         $(".u_status").val('3').attr("disabled",false);
         $("#modal_User").modal("show");
         // ----------------------------------------
-        $(".use_house").change(function () { 
+        $(".use_house").change(function () {
             $(".use_userID").load("routes/droupdown_sel_user.php?houseID="+$(this).val());
         });
         $(".use_userID").change(function() {
@@ -383,7 +188,7 @@ $siteID = $_GET["siteID"];
             });
         });
     });
-    $(".submit_u").click(function () { 
+    $(".submit_u").click(function () {
         if ($(".mode_insert").val() === "add_user") {
             if($(".u_house").val() === "0"){
                 $(".u_house").addClass("is-invalid");
@@ -432,8 +237,8 @@ $siteID = $_GET["siteID"];
         $.ajax({
             type: "POST",
             url: "routes/insert_setting.php",
-            data: new FormData($("#user_form")[0]), 
-            contentType: false, 
+            data: new FormData($("#user_form")[0]),
+            contentType: false,
             cache: false,
             processData: false,
             success: function(res) {
@@ -512,7 +317,7 @@ $siteID = $_GET["siteID"];
                         }
                     });
                     return false;
-                }  
+                }
                 if (parseJSON.status == "Insert_success"){
                     $("#user_access").load("views/load_tableUser.php?siteID="+$(".sel_main_site").val());
                     swal({
@@ -563,7 +368,7 @@ $siteID = $_GET["siteID"];
                                 }
                             });
                             return false;
-                        }  
+                        }
                         if (data.status == "Delete_success"){
                             $("#user_access").load("views/load_tableUser.php?siteID="+$(".sel_main_site").val());
                             swal({
@@ -579,7 +384,7 @@ $siteID = $_GET["siteID"];
             }
         });
     });
-    
+
     $('#tb_users').DataTable( {
         "scrollY": 330,
         "scrollX": true,
@@ -597,7 +402,7 @@ $siteID = $_GET["siteID"];
             "visible": false,
             "searchable": false
             },
-            
+
         ],
     });
 </script>

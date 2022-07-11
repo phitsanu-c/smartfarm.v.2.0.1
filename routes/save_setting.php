@@ -1,26 +1,29 @@
 <?php
-    session_start();
     require "connectdb.php";
-    $user_id = $_SESSION['user_id'];
+    $user_id = $_SESSION['account_id'];
     // echo $_POST["mode_insert"];
+    // exit();
     if($_POST["mode_insert"] == "edit_profile"){
+        // $query = $dbcon->query("SELECT * FROM tbn_account WHERE account_id = '$user_id' ")->fetch();
         // chack_user
-        if($_POST["p_name"] != $_SESSION["Username"]){
+        if($_POST["p_name"] != $_SESSION["account_user"]){
             $post_name = $_POST["p_name"];
-            $chack_user = $dbcon->query("SELECT COUNT('login_id') FROM tb2_login WHERE login_user = '$post_name' ")->fetch();
+            $chack_user = $dbcon->query("SELECT COUNT('account_id') FROM tbn_account WHERE account_user = '$post_name' ")->fetch();
             if($chack_user[0] > 0){
                 echo json_encode(['status' => "มีรายชื่อนี้แล้ว"], JSON_UNESCAPED_UNICODE );
                 exit();
             }
             $n_name = $_POST["p_name"];
-        }else{
+        }
+        else{
             $n_name = $_POST["p_name"];
         }
         // chack_pass
         if($_POST["p_pass"] == ""){
-            $n_pass = $_POST["p_passDF"];
-            $n_pass2 = $_POST["p_passDF2"];
-        }else{
+            $n_pass = $_SESSION["account_p"][0];
+            $n_pass2 = $_SESSION["account_p"][1];
+        }
+        else{
             //เข้ารหัส รหัสผ่าน
             $salt = 'tikde78uj4ujuhlaoikiksakeidke';
             $n_pass = hash_hmac('sha256', $_POST["p_pass"], $salt);
@@ -31,25 +34,30 @@
             echo json_encode(['status' => "รูปแบบ email ไม่ถูกต้อง"], JSON_UNESCAPED_UNICODE );
             exit();
         }
-        if($_POST["p_email"] != $_POST["p_emailDF"]){
+        if($_POST["p_email"] != $_SESSION["account_email"]){
             $post_email = $_POST["p_email"];
-            $chack_email = $dbcon->query("SELECT COUNT('login_id') FROM tb2_login WHERE login_email = '$post_email' ")->fetch();
+            $chack_email = $dbcon->query("SELECT COUNT('account_id') FROM tbn_account WHERE account_email = '$post_email' ")->fetch();
             if($chack_email[0] > 0){
                 echo json_encode(['status' => "มี email นี้แล้ว"], JSON_UNESCAPED_UNICODE );
                 exit();
             }
             $n_email = $_POST["p_email"];
-        }else{
+        }
+        else{
             $n_email = $_POST["p_email"];
         }
-        
+
         // chack_image
         $file = $_FILES['p_img']['name'];
         if($file == ""){
-            $n_img = $_POST["p_imgDF"];
+            if($_SESSION["account_img"] == "user.png"){
+                $n_img = '';
+            }else {
+                $n_img = $_SESSION["account_img"];
+            }
         }else{
-            if($_POST["p_imgDF"] != ""){
-                $img_user_del = "../public/images/users/".$_POST["p_imgDF"];
+            if($_SESSION["account_img"] != ""){
+                $img_user_del = "../public/images/users/".$_SESSION["account_img"];
                 unlink($img_user_del);
             }
 
@@ -73,17 +81,24 @@
             'p6' => $n_pass2,
             'p7' => $user_id
         ];
-        $sql = "UPDATE `tb2_login` SET `login_user`=:p1, `login_pass`=:p2, `login_email`=:p3, `login_tel`=:p4, `login_image`=:p5, `login_pa`=:p6 WHERE `login_id`=:p7";
+        // echo json_encode($data);
+        // exit();
+        $sql = "UPDATE `tbn_account` SET `account_user`=:p1, `account_pass`=:p2, `account_email`=:p3, `account_tel`=:p4, `account_img`=:p5, `account_pa`=:p6 WHERE `account_id`=:p7";
         if ($dbcon->prepare($sql)->execute($data) === TRUE) {
-            $_SESSION["Username"] = $n_name;
+            $_SESSION["account_user"] = $n_name;
+            $_SESSION["account_p"] = [$n_pass,$n_pass2];
+            $_SESSION["account_email"] = $n_email;
             if ($n_img === "") {
-                $_SESSION["login_image"] = "user.png";
+                $_SESSION["account_img"] = "user.png";
             } else {
-                $_SESSION["login_image"] = $n_img;
+                $_SESSION["account_img"] = $n_img;
             }
+            $_SESSION["account_tel"] = $_POST["p_tel"];
             $return = [
-                'user' => $_SESSION["Username"],
-                'image' => $_SESSION["login_image"]
+                'user'  => $_SESSION["account_user"],
+                'image' => $_SESSION["account_img"],
+                'email' => $_SESSION["account_email"],
+                'tel'   => $_SESSION["account_tel"]
             ];
             echo json_encode(['status' => "Insert_success", "data" => $return], JSON_UNESCAPED_UNICODE );
             exit();
@@ -96,7 +111,7 @@
     if($_POST["mode_insert"] == "add_site"){
         $n_name = $_POST["s_name"];
         $file	= $_FILES['s_img']['name'];
-        
+
         $chack_name = $dbcon->query("SELECT count(site_id) FROM tb2_site WHERE site_name = '$n_name' ")->fetch();
         if($chack_name[0] > 0){
             echo json_encode(['status' => "มีรายชื่อนี้แล้ว"], JSON_UNESCAPED_UNICODE );
@@ -170,7 +185,7 @@
                 exit();
             }
         }
-        
+
         $data = [
             'p1' => $n_name,
             'p2' => $_POST["s_address"],
@@ -322,7 +337,7 @@
         $n_sn = $_POST["h_sn"];
         $file	= $_FILES['h_img']['name'];
         $file2  = $_FILES['h_img_map']['name'];
-        
+
         $chack_name = $dbcon->query("SELECT count(house_id) FROM tb2_house WHERE house_master = '$n_sn' ")->fetch();
         if($chack_name[0] > 0){
             echo json_encode(['status' => "มีรายชื่อนี้แล้ว"], JSON_UNESCAPED_UNICODE );
@@ -670,7 +685,7 @@
 
     if($_POST["mode_insert"] == "add_user"){
         $n_name = $_POST["u_user"];
-        $chack_user = $dbcon->query("SELECT COUNT('login_id') FROM tb2_login WHERE login_user = '$n_name' ")->fetch();
+        $chack_user = $dbcon->query("SELECT COUNT('account_id') FROM tbn_account WHERE account_user = '$n_name' ")->fetch();
         if($chack_user[0] > 0){
             echo json_encode(['status' => "มีรายชื่อนี้แล้ว"], JSON_UNESCAPED_UNICODE );
             exit();
@@ -685,7 +700,7 @@
             exit();
         }
         $n_email = $_POST["u_email"];
-        $chack_email = $dbcon->query("SELECT COUNT('login_id') FROM tb2_login WHERE login_email = '$n_email' ")->fetch();
+        $chack_email = $dbcon->query("SELECT COUNT('account_id') FROM tbn_account WHERE account_email = '$n_email' ")->fetch();
         if($chack_email[0] > 0){
             echo json_encode(['status' => "มี email นี้แล้ว"], JSON_UNESCAPED_UNICODE );
             exit();
@@ -695,8 +710,8 @@
         if($file == ""){
             $n_img = "";
         }else{
-            $cont_img = $dbcon->query("SELECT login_id FROM tb2_login ORDER BY login_id DESC LIMIT 1 ")->fetch();
-            
+            $cont_img = $dbcon->query("SELECT account_id FROM tbn_account ORDER BY account_id DESC LIMIT 1 ")->fetch();
+
             $infoExt = getimagesize($_FILES['u_img']['tmp_name']);
             if(strtolower($infoExt['mime']) == 'image/gif' || strtolower($infoExt['mime']) == 'image/jpeg' || strtolower($infoExt['mime']) == 'image/jpg' || strtolower($infoExt['mime']) == 'image/png' || strtolower($infoExt['mime']) == 'image/svg'){
                 $img_part = pathinfo(basename($file),PATHINFO_EXTENSION); // ่สกุล
@@ -716,29 +731,76 @@
             'p5' => $n_img,
             'p6' => $n_pass2
         ];
-        // echo json_encode($_POST["u_site"]);
+        // echo json_encode($data);
         // exit();
-        $sql = "INSERT INTO `tb2_login` (`login_user`, `login_pass`, `login_email`, `login_tel`, `login_image`, `login_pa`) VALUE (:p1, :p2, :p3,:p4, :p5, :p6)";
+        $sql = "INSERT INTO `tbn_account` (`account_user`, `account_pass`, `account_email`, `account_tel`, `account_img`, `account_pa`) VALUE (:p1, :p2, :p3,:p4, :p5, :p6)";
         if ($dbcon->prepare($sql)->execute($data) === TRUE) {
             $last_id = $dbcon->lastInsertId();
-            $data2 = [
-                'p1' => $last_id,
-                'p2' => $_POST["u_site"],
-                'p3' => $_POST["u_house"],
-                'p4' => $_POST["u_status"],
-                'p5' => $user_id
-            ];
-            $sql2 = "INSERT INTO `tb3_userst`(`userST_loginID`, `userST_siteID`, `userST_houseID`, `userST_user_status`, `userST_main`) VALUES (:p1, :p2, :p3, :p4, :p5)";
-            if ($dbcon->prepare($sql2)->execute($data2) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_userst'], JSON_UNESCAPED_UNICODE );
-                exit();
+            if($_POST["u_house"] != 0){
+                $data2 = [
+                    'p1' => $last_id,
+                    'p2' => $_POST["u_site"],
+                    'p3' => $_POST["u_house"],
+                    'p4' => $_POST["u_status"],
+                    'p5' => $user_id
+                ];
+                $sql2 = "INSERT INTO `tbn_userst`(`userST_accountID`, `userST_siteID`, `userST_houseID`, `userST_level`, `userST_main`) VALUES (:p1, :p2, :p3, :p4, :p5)";
+                if ($dbcon->prepare($sql2)->execute($data2) === FALSE) {
+                    echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_userst'], JSON_UNESCAPED_UNICODE );
+                    exit();
+                }
+            }else {
+                $siteID = $_POST["u_site"];
+                $_stmt = $dbcon->query("SELECT * FROM tbn_userst INNER JOIN tbn_house ON tbn_userst.userST_houseID = tbn_house.house_id WHERE tbn_userst.userST_accountID='$user_id' AND tbn_userst.userST_siteID = '$siteID' GROUP BY `userST_houseID` ");
+                foreach ($_stmt as $row_) {
+                    $data2 = [
+                        'p1' => $last_id,
+                        'p2' => $siteID,
+                        'p3' => $row_["house_id"],
+                        'p4' => $_POST["u_status"],
+                        'p5' => $user_id
+                    ];
+                    $sql2 = "INSERT INTO `tbn_userst`(`userST_accountID`, `userST_siteID`, `userST_houseID`, `userST_level`, `userST_main`) VALUES (:p1, :p2, :p3, :p4, :p5)";
+                    if ($dbcon->prepare($sql2)->execute($data2) === FALSE) {
+                        echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_userst'], JSON_UNESCAPED_UNICODE );
+                        exit();
+                    }
+                }
             }
+            // exit();
             echo json_encode(['status' => "Insert_success", "data" => ""], JSON_UNESCAPED_UNICODE );
-            exit();
+            // exit();
         }else{
             echo json_encode(['status' => "Insert_Error"], JSON_UNESCAPED_UNICODE );
             exit();
         }
+    }
+    if($_POST["mode_insert"] == "add_user2"){
+        $siteID = $_POST["use_site"];
+        $houseID = $_POST["use_house"];
+        $userID = $_POST["use_userID"];
+        // echo json_encode([$houseID,$userID]);
+        $chack_user = $dbcon->query("SELECT COUNT('userST_id') FROM tbn_userst WHERE userST_houseID = '$houseID' AND userST_accountID = '$userID' ")->fetch();
+        if($chack_user[0] > 0){
+            echo json_encode(['status' => "house มีรายชื่อนี้แล้ว"], JSON_UNESCAPED_UNICODE );
+            exit();
+        }
+        $data = [
+            'p1' => $userID,
+            'p2' => $siteID,
+            'p3' => $houseID,
+            'p4' => $_POST["u_status"],
+            'p5' => $user_id
+        ];
+        // echo json_encode($data);
+        // exit();
+        $sql2 = "INSERT INTO `tbn_userst`(`userST_accountID`, `userST_siteID`, `userST_houseID`, `userST_level`, `userST_main`) VALUES (:p1, :p2, :p3, :p4, :p5)";
+        if ($dbcon->prepare($sql2)->execute($data) === FALSE) {
+            echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_userst'], JSON_UNESCAPED_UNICODE );
+            exit();
+        }
+        echo json_encode(['status' => "Insert_success", "data" => ""], JSON_UNESCAPED_UNICODE );
+        exit();
     }
     if($_POST["mode_insert"] == "edit_user"){
         $data = [
@@ -752,43 +814,20 @@
         echo json_encode(['status' => "Insert_success", "data" => ""], JSON_UNESCAPED_UNICODE );
         exit();
     }
-    if($_POST["mode_insert"] == "add_user2"){
-        $siteID = $_POST["use_site"];
-        $houseID = $_POST["use_house"];
-        $userID = $_POST["use_userID"];
-        // echo json_encode([$houseID,$userID]);
-        $chack_user = $dbcon->query("SELECT COUNT('userST_id') FROM tb3_userst WHERE userST_houseID = '$houseID' AND userST_loginID = '$userID' ")->fetch();
-        if($chack_user[0] > 0){
-            echo json_encode(['status' => "house มีรายชื่อนี้แล้ว"], JSON_UNESCAPED_UNICODE );
-            exit();
+    if($_POST["mode_insert"] == "delete_userST"){
+        $puser_id = $_POST['user_id'];
+        if ($dbcon->prepare("DELETE FROM tbn_userst WHERE userST_id = :id")->execute(['id'=>$_POST["userST_id"]]) === TRUE) {
+            $chack_user = $dbcon->query("SELECT COUNT('userST_id') FROM tbn_userst WHERE userST_accountID = '$puser_id' ")->fetch();
+            echo json_encode(['status' => "Delete_success",'count_userST' => 0/*$chack_user[0]*/], JSON_UNESCAPED_UNICODE );
         }
-        $data = [
-            'p1' => $userID,
-            'p2' => $siteID,
-            'p3' => $houseID,
-            'p4' => $_POST["u_status"],
-            'p5' => $user_id
-        ];
-        $sql2 = "INSERT INTO `tb3_userst`(`userST_loginID`, `userST_siteID`, `userST_houseID`, `userST_user_status`, `userST_main`) VALUES (:p1, :p2, :p3, :p4, :p5)";
-        if ($dbcon->prepare($sql2)->execute($data) === FALSE) {
-            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_userst'], JSON_UNESCAPED_UNICODE );
-            exit();
-        }
-        echo json_encode(['status' => "Insert_success", "data" => ""], JSON_UNESCAPED_UNICODE );
-        exit();
     }
-    if($_POST["mode_insert"] == "delete_user"){
+    if($_POST["mode_insert"] == "delete_account"){
         $house_img = $_POST["img"];
         if($house_img != ""){
             $Delete_image = "../public/images/users/".$house_img;
             unlink($Delete_image);
         }
-        if ($dbcon->prepare("DELETE FROM tb2_login WHERE login_id = :id")->execute(['id'=>$_POST["user_id"]]) === TRUE) {
-            if ($dbcon->prepare("DELETE FROM `tb3_userst` WHERE `userST_loginID`= :id")->execute(['id'=>$_POST["user_id"]]) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_userst'], JSON_UNESCAPED_UNICODE );
-                exit();
-            }
+        if ($dbcon->prepare("DELETE FROM tbn_account WHERE account_id = :id")->execute(['id' => $_POST["user_id"]]) === TRUE) {
             echo json_encode(['status' => "Delete_success"], JSON_UNESCAPED_UNICODE );
-            exit();
         }
     }
