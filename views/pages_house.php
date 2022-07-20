@@ -80,4 +80,11 @@
     //     // alert($(this).attr("url"))
     //     window.location.href = $(this).attr("url");
     // })
+
+    $('.sw_house').click(function(){
+        window.location.hash =$(this).attr("url");
+        location.reload();
+        // alert($(this).attr("url"))
+        // window.location.href = $(this).attr("url");
+    })
 </script>

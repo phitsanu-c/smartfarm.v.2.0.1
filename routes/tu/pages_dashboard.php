@@ -460,50 +460,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row cols-10 text-center mt-2 ul_Manual">
-                                <?php
-                                    if($config_cn['cn_status_1'] == 1 || $config_cn['cn_status_2'] == 1 || $config_cn['cn_status_3'] == 1 || $config_cn['cn_status_4'] == 1){
-                                        echo '<div class="cols-3 cols-lg-5">
-                                                <button class="btn btn-control sw_sel_load_manual" style="width:100% border-radius:20px;" id="s1">
-                                                    <div class="text_font_size">น้ำหยด</div>
-                                                    <img class="img_sw_sel_load_manual_1" width="70"  src=""  />
-                                                </button>
-                                           </div>';
-                                    }
-                                    if($config_cn['cn_status_9'] == 1 || $config_cn['cn_status_10'] == 1){
-                                        echo '<div class="cols-3 cols-lg-5" >
-                                                <button class="btn btn-control sw_sel_load_manual" style="width:100% " id="s3">
-                                                    <div class="text_font_size">พ่นหมอก</div>
-                                                    <img class="img_sw_sel_load_manual_3" src="" width="70" />
-                                                </button>
-                                           </div>';
-                                    }
-                                    if($config_cn['cn_status_11'] == 1){
-                                        echo '<div class="cols-3 cols-lg-5">
-                                                <button class="btn btn-control sw_sel_load_manual" style="width:100% " id="s4">
-                                                    <div class="text_font_size">สเปรย์</div>
-                                                    <img class="img_sw_sel_load_manual_4" src="" width="70" />
-                                                </button>
-                                           </div>';
-                                    }
-                                    if($config_cn['cn_status_5'] == 1 || $config_cn['cn_status_6'] == 1 || $config_cn['cn_status_7'] == 1 || $config_cn['cn_status_8'] == 1){
-                                        echo '<div class="cols-3 cols-lg-5">
-                                                <button class="btn btn-control sw_sel_load_manual" style="width:100% " id="s2">
-                                                    <div class="text_font_size">พัดลม</div>
-                                                    <img class="img_sw_sel_load_manual_2" src="" width="70" />
-                                                </button>
-                                           </div>';
-                                    }
-                                    if($config_cn['cn_status_12'] == 1){
-                                        echo '<div class="cols-3 cols-lg-5">
-                                                <button class="btn btn-control sw_sel_load_manual" style="width:100% " id="s5">
-                                                    <div class="text_font_size">พรางแสง</div>
-                                                    <img class="img_sw_sel_load_manual_5" src="" width="70" />
-                                                </button>
-                                           </div>';
-                                    }
-                                ?>
-                            </div>
+
                         </div>
     				</div>
     				<div class="modal-body">
@@ -557,6 +514,52 @@
                             </div>
                         </div> <!-- Exit ul_Auto -->
                         <!-- ================================ -->
+                        <div class="col-12">
+                            <div class="row cols-10 text-center mt-2 mb-2 ">
+                                <?php
+                                    if($config_cn['cn_status_1'] == 1 || $config_cn['cn_status_2'] == 1 || $config_cn['cn_status_3'] == 1 || $config_cn['cn_status_4'] == 1){
+                                        echo '<div class="cols-3 cols-lg-5">
+                                                <button class="btn btn-control sw_sel_load_manual" style="width:100% border-radius:20px;" id="s1">
+                                                    <div class="text_font_size">น้ำหยด</div>
+                                                    <img class="img_sw_sel_load_manual_1" width="70"  src=""  />
+                                                </button>
+                                           </div>';
+                                    }
+                                    if($config_cn['cn_status_9'] == 1 || $config_cn['cn_status_10'] == 1){
+                                        echo '<div class="cols-3 cols-lg-5" >
+                                                <button class="btn btn-control sw_sel_load_manual" style="width:100% " id="s3">
+                                                    <div class="text_font_size">พ่นหมอก</div>
+                                                    <img class="img_sw_sel_load_manual_3" src="" width="70" />
+                                                </button>
+                                           </div>';
+                                    }
+                                    if($config_cn['cn_status_11'] == 1){
+                                        echo '<div class="cols-3 cols-lg-5">
+                                                <button class="btn btn-control sw_sel_load_manual" style="width:100% " id="s4">
+                                                    <div class="text_font_size">สเปรย์</div>
+                                                    <img class="img_sw_sel_load_manual_4" src="" width="70" />
+                                                </button>
+                                           </div>';
+                                    }
+                                    if($config_cn['cn_status_5'] == 1 || $config_cn['cn_status_6'] == 1 || $config_cn['cn_status_7'] == 1 || $config_cn['cn_status_8'] == 1){
+                                        echo '<div class="cols-3 cols-lg-5">
+                                                <button class="btn btn-control sw_sel_load_manual" style="width:100% " id="s2">
+                                                    <div class="text_font_size">พัดลม</div>
+                                                    <img class="img_sw_sel_load_manual_2" src="" width="70" />
+                                                </button>
+                                           </div>';
+                                    }
+                                    if($config_cn['cn_status_12'] == 1){
+                                        echo '<div class="cols-3 cols-lg-5">
+                                                <button class="btn btn-control sw_sel_load_manual" style="width:100% " id="s5">
+                                                    <div class="text_font_size">พรางแสง</div>
+                                                    <img class="img_sw_sel_load_manual_5" src="" width="70" />
+                                                </button>
+                                           </div>';
+                                    }
+                                ?>
+                            </div>
+                        </div>
                         <div class="container ul_Manual">
                             <div class="row ridge">
                                 <h3 class="text-center title_load_manual" style="background-color: #283A6C; color:#FFF"></h3>

@@ -28,23 +28,28 @@
                                 ข้อมูลผู้ใช้งาน
                             </a>
                         </li>
-                        <?php //if($_SESSION['count_statusUser'] != 0){ ?>
-                        <li class="nav-item6" role="presentation">
-                            <a class="nav-link text-center <?php if($_POST['pt'] == 2){echo 'active';} ?>" data-bs-toggle="pill" href="#p-st" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
-                                สถานที่
-                            </a>
-                        </li>
-                        <li class="nav-item6" role="presentation">
-                            <a class="nav-link text-center <?php if($_POST['pt'] == 3){echo 'active';} ?>" data-bs-toggle="pill" href="#p-ht" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
-                                โรงเรือน
-                            </a>
-                        </li>
-                        <li class="nav-item6" role="presentation">
-                            <a class="nav-link text-center <?php if($_POST['pt'] == 4){echo 'active';} ?>" data-bs-toggle="pill" href="#p-ust" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
-                                กำหนดสิทธิ์ผู้ใช้งาน
-                            </a>
-                        </li>
-                        <!-- //}?> -->
+                        <?php if ($_SESSION["sn"]['account_status'] < 3) {?>
+                            <li class="nav-item6" role="presentation">
+                                <a class="nav-link text-center <?php if($_POST['pt'] == 2){echo 'active';} ?>" data-bs-toggle="pill" href="#p-st" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
+                                    สถานที่
+                                </a>
+                            </li>
+                            <li class="nav-item6" role="presentation">
+                                <a class="nav-link text-center <?php if($_POST['pt'] == 3){echo 'active';} ?>" data-bs-toggle="pill" href="#p-ht" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
+                                    โรงเรือน
+                                </a>
+                            </li>
+                            <li class="nav-item6" role="presentation">
+                                <a class="nav-link text-center <?php if($_POST['pt'] == 4){echo 'active';} ?>" data-bs-toggle="pill" href="#p-ust" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
+                                    กำหนดสิทธิ์ผู้ใช้งาน
+                                </a>
+                            </li>
+                            <li class="nav-item6" role="presentation">
+                                <a class="nav-link text-center <?php if($_POST['pt'] == 5){echo 'active';} ?> c_pt" data-bs-toggle="pill" href="#p-sst" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
+                                    ประวัติการเข้าสู่ระบบ
+                                </a>
+                            </li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>
@@ -97,197 +102,208 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade <?php if($_POST['pt'] == 2){echo "show active";} ?>" id="p-st" role="tabpanel">
-                        <?php if ($_SESSION["sn"]['account_status'] == 1) {?>
-                            <div class="d-flex justify-content-end">
-                                <button class="btn btn-outline-success me-1 s_add mb-3"><i class="bi bi-plus-square"></i> เพิ่มสถานที่</button>
-                            </div>
-                        <?php } ?>
-                        <div class="table-responsive">
-                            <table id="table1" class="table table-striped table-bordered dataTable" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center">#</th>
-                                        <th class="text-center">Images</th>
-                                        <th class="text-center">ชื่อสถานที่</th>
-                                        <th class="text-center">ที่อยู่</th>
-                                        <th class="text-center">ละติจูด</th>
-                                        <th class="text-center">ลองจิจูด</th>
-                                        <th class="text-center">อินเตอร์เน็ต</th>
-                                        <th class="text-center">วันอินเตอร์เน็ตหมด</th>
-                                        <th class="text-center">ผู้บันทึกล่าสุด</th>
-                                        <th class="text-center">วัน-เวลาอัพเดท</th>
-                                        <th class="text-center">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    if ($_SESSION["sn"]['account_status'] == 1) {
-                                        $stmt = $dbcon->prepare("SELECT * FROM tbn_site INNER JOIN tbn_account ON tbn_site.site_userST_id = tbn_account.account_id ");
-                                    } else {
-                                        $stmt = $dbcon->prepare("SELECT * FROM tbn_userst INNER JOIN tbn_site ON tbn_userst.userST_siteID = tbn_site.site_id INNER JOIN tbn_account ON tbn_site.site_userST_id = tbn_account.account_id WHERE userST_accountID = '$user_id' GROUP BY tbn_userst.userST_siteID ");
-                                    }
-                                    $stmt->execute();
-                                    $count = $stmt->rowCount();
-
-                                    // if($count != 0){
-                                    $inc = 1;
-                                    $data0 = array();
-                                    while ($row = $stmt->fetch(PDO::FETCH_BOTH)) {
-                                        echo '<tr>
-                                                    <td class="text-center">' . $inc . '</td>';
-                                        if ($row["site_img"] == "") {
-                                            echo '<td class="text-center"><img src="public/images/default.jpg" width="50"  height="50" alt="..."></td>';
+                    <?php if ($_SESSION["sn"]['account_status'] < 3) {?>
+                        <div class="tab-pane fade <?php if($_POST['pt'] == 2){echo "show active";} ?>" id="p-st" role="tabpanel">
+                            <?php if ($_SESSION["sn"]['account_status'] == 1) {?>
+                                <div class="d-flex justify-content-end">
+                                    <button class="btn btn-outline-success me-1 s_add mb-3"><i class="bi bi-plus-square"></i> เพิ่มสถานที่</button>
+                                </div>
+                            <?php } ?>
+                            <div class="table-responsive">
+                                <table id="table1" class="table table-striped table-bordered dataTable" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">#</th>
+                                            <th class="text-center">Images</th>
+                                            <th class="text-center">ชื่อสถานที่</th>
+                                            <th class="text-center">ที่อยู่</th>
+                                            <th class="text-center">ละติจูด</th>
+                                            <th class="text-center">ลองจิจูด</th>
+                                            <th class="text-center">อินเตอร์เน็ต</th>
+                                            <th class="text-center">วันอินเตอร์เน็ตหมด</th>
+                                            <th class="text-center">ผู้บันทึกล่าสุด</th>
+                                            <th class="text-center">วัน-เวลาอัพเดท</th>
+                                            <th class="text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        if ($_SESSION["sn"]['account_status'] == 1) {
+                                            $stmt = $dbcon->prepare("SELECT * FROM tbn_site INNER JOIN tbn_account ON tbn_site.site_userST_id = tbn_account.account_id ");
                                         } else {
-                                            echo '<td class="text-center"><img src="public/images/site/' . $row["site_img"] . '" width="50"  height="50" alt="..."></td>';
+                                            $stmt = $dbcon->prepare("SELECT * FROM tbn_userst INNER JOIN tbn_site ON tbn_userst.userST_siteID = tbn_site.site_id INNER JOIN tbn_account ON tbn_site.site_userST_id = tbn_account.account_id WHERE userST_accountID = '$user_id' GROUP BY tbn_userst.userST_siteID ");
                                         }
-                                        echo '  <td class="text-center">' . $row["site_name"] . '</td>
-                                                    <td class="text-center">' . $row["site_address"] . '</td>
-                                                    <td class="text-center">' . $row["site_Latitude"] . '</td>
-                                                    <td class="text-center">' . $row["site_Longitude"] . '</td>
-                                                    <td class="text-center">' . $row["site_internet"] . '</td>
-                                                    <td class="text-center">' . $row["site_internetO"] . '</td>
-                                                    <td class="text-center">' . $row["account_user"] . '</td>
-                                                    <td class="text-center">' . $row["site_timestamp"] . '</td>
+                                        $stmt->execute();
+                                        $count = $stmt->rowCount();
+
+                                        // if($count != 0){
+                                        $inc = 1;
+                                        $data0 = array();
+                                        while ($row = $stmt->fetch(PDO::FETCH_BOTH)) {
+                                            echo '<tr>
+                                                        <td class="text-center">' . $inc . '</td>';
+                                            if ($row["site_img"] == "") {
+                                                echo '<td class="text-center"><img src="public/images/default.jpg" width="50"  height="50" alt="..."></td>';
+                                            } else {
+                                                echo '<td class="text-center"><img src="public/images/site/' . $row["site_img"] . '" width="50"  height="50" alt="..."></td>';
+                                            }
+                                            echo '  <td class="text-center">' . $row["site_name"] . '</td>
+                                                        <td class="text-center">' . $row["site_address"] . '</td>
+                                                        <td class="text-center">' . $row["site_Latitude"] . '</td>
+                                                        <td class="text-center">' . $row["site_Longitude"] . '</td>
+                                                        <td class="text-center">' . $row["site_internet"] . '</td>
+                                                        <td class="text-center">' . $row["site_internetO"] . '</td>
+                                                        <td class="text-center">' . $row["account_user"] . '</td>
+                                                        <td class="text-center">' . $row["site_timestamp"] . '</td>
+                                                        <td  class="text-center">
+                                                            <div class="buttons">
+                                                                <a href="javascript:void(0)" class="text-info edit_site"
+                                                                    site_id="' . $row["site_id"] . '"
+                                                                    img="' . $row["site_img"] . '"
+                                                                    name="' . $row["site_name"] . '"
+                                                                    adss="' . $row["site_address"] . '"
+                                                                    la="' . $row["site_Latitude"] . '"
+                                                                    long="' . $row["site_Longitude"] . '"
+                                                                    inte="' . $row["site_internet"] . '"
+                                                                    inteO="' . $row["site_internetO"] . '">
+                                                                    <i class="fadeIn animated bx bx-message-square-edit"></i>
+                                                                </a>';
+                                                            if($_SESSION["sn"]['account_status'] == 1){
+                                                                echo '<a href="javascript:void(0)" class="text-danger delete_site"
+                                                                    site_id="' . $row["site_id"] . '"
+                                                                    name="' . $row["site_name"] . '"
+                                                                    img="' . $row["site_img"] . '">
+                                                                    <i class="fadeIn animated bx bx-trash"></i>
+                                                                </a>';
+                                                            }else{echo '<a class="text-secondary" onclick="return false;"><i class="fadeIn animated bx bx-trash"></i></a>';}
+                                                            echo '</div>
+                                                        </td>
+                                                    </tr>';
+                                            $inc++;
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade <?php if($_POST['pt'] == 3){echo "show active";} ?>" id="p-ht" role="tabpanel">
+                            <?php if ($_SESSION["sn"]['account_status'] == 1) {?>
+                                <div class="d-flex justify-content-end">
+                                    <button class="btn btn-outline-success me-1 h_add mb-3"><i class="bi bi-plus-square"></i> เพิ่มโรงเรือน</button>
+                                </div>
+                            <?php } ?>
+                            <div class="table-responsive">
+                                <table id="table2" class="table table-striped table-bordered dataTable" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">#</th>
+                                            <th class="text-center">สถานที่</th>
+                                            <th class="text-center">ชื่อโรงเรือน</th>
+                                            <th class="text-center">หมายเลขซีเรียล</th>
+                                            <th class="text-center">โรงเรือน</th>
+                                            <!-- <th class="text-center">จุดติดตั้งเซ็นเซอร์ทั้งหมด</th> -->
+                                            <th class="text-center">ผู้บันทึกล่าสุด</th>
+                                            <th class="text-center">วัน-เวลาอัพเดท</th>
+                                            <th class="text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        if ($_SESSION["sn"]['account_status'] == 1) {
+                                            $stmt = $dbcon->prepare("SELECT * FROM tbn_house INNER JOIN tbn_site ON tbn_house.house_siteID = tbn_site.site_id INNER JOIN tbn_account ON tbn_house.house_userST_id = tbn_account.account_id ORDER BY house_siteID");
+                                        } else {
+                                            $stmt = $dbcon->prepare("SELECT * FROM tbn_userst INNER JOIN tbn_site ON tbn_userst.userST_siteID = tbn_site.site_id INNER JOIN tbn_house ON tbn_userst.userST_houseID = tbn_house.house_id INNER JOIN tbn_account ON tbn_site.site_userST_id = tbn_account.account_id WHERE userST_accountID = '$user_id'  ORDER BY tbn_userst.userST_siteID");
+                                        }
+                                        $stmt->execute();
+                                        $count = $stmt->rowCount();
+
+                                        // if($count != 0){
+                                        $inc = 1;
+                                        $data0 = array();
+                                        while ($row = $stmt->fetch(PDO::FETCH_BOTH)) {
+                                            echo '<tr>
+                                                        <td class="text-center">' . $inc . '</td>
+                                                        <td class="text-center">' . $row["site_name"] . '</td>
+                                                        <td class="text-center">' . $row["house_name"] . '</td>
+                                                        <td class="text-center">' . $row["house_master"] . '</td>';
+                                            if ($row["house_img"] == "") {
+                                                echo '<td class="text-center"><img src="public/images/default.jpg" width="50" height="50" alt="..."></td>';
+                                            } else {
+                                                echo '<td class="text-center"><img src="public/images/house/' . $row["house_img"] . '" width="50"  height="50" alt="..."></td>';
+                                            }
+                                            // if ($row["house_img_map"] == "") {
+                                            //     echo '<td class="text-center"><img src="public/images/default.jpg" width="50" height="50" alt="..."></td>';
+                                            // } else {
+                                            //     echo '<td class="text-center"><img src="public/images/img_map/' . $row["house_img_map"] . '" width="50"  height="50" alt="..."></td>';
+                                            // }
+                                            echo   '<td class="text-center">' . $row["account_user"] . '</td>
+                                                    <td class="text-center">' . $row["house_timpstamp"] . '</td>
                                                     <td  class="text-center">
                                                         <div class="buttons">
-                                                            <a href="javascript:void(0)" class="text-info edit_site"
-                                                                site_id="' . $row["site_id"] . '"
-                                                                img="' . $row["site_img"] . '"
-                                                                name="' . $row["site_name"] . '"
-                                                                adss="' . $row["site_address"] . '"
-                                                                la="' . $row["site_Latitude"] . '"
-                                                                long="' . $row["site_Longitude"] . '"
-                                                                inte="' . $row["site_internet"] . '"
-                                                                inteO="' . $row["site_internetO"] . '">
+                                                            <a href="javascript:void(0)" class="text-info h_edit"
+                                                                house_id="' . $row["house_id"] . '"
+                                                                site_id="' . $row["house_siteID"] . '"
+                                                                name="' . $row["house_name"] . '"
+                                                                sn="' . $row["house_master"] . '"
+                                                                img="' . $row["house_img"] . '">
                                                                 <i class="fadeIn animated bx bx-message-square-edit"></i>
                                                             </a>';
-                                                        if($_SESSION["sn"]['account_status'] == 1){
-                                                            echo '<a href="javascript:void(0)" class="text-danger delete_site"
-                                                                site_id="' . $row["site_id"] . '"
-                                                                name="' . $row["site_name"] . '"
-                                                                img="' . $row["site_img"] . '">
-                                                                <i class="fadeIn animated bx bx-trash"></i>
-                                                            </a>';
-                                                        }else{echo '<a class="text-secondary" onclick="return false;"><i class="fadeIn animated bx bx-trash"></i></a>';}
-                                                        echo '</div>
+                                                            if($_SESSION["sn"]['account_status'] == 1){
+                                                                echo '<a href="javascript:void(0)" class="text-danger delete_house"
+                                                                    house_id="' . $row["house_id"] . '"
+                                                                    sn="' . $row["house_master"] . '"
+                                                                    name="' . $row["house_name"] . '"
+                                                                    img="' . $row["house_img"] . '">
+                                                                    <i class="fadeIn animated bx bx-trash"></i>
+                                                                </a>';
+                                                            }else{echo '<a class="text-secondary" onclick="return false;"><i class="fadeIn animated bx bx-trash"></i></a>';}
+                                                    echo '</div>
                                                     </td>
                                                 </tr>';
-                                        $inc++;
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade <?php if($_POST['pt'] == 3){echo "show active";} ?>" id="p-ht" role="tabpanel">
-                        <?php if ($_SESSION["sn"]['account_status'] == 1) {?>
-                            <div class="d-flex justify-content-end">
-                                <button class="btn btn-outline-success me-1 h_add mb-3"><i class="bi bi-plus-square"></i> เพิ่มโรงเรือน</button>
-                            </div>
-                        <?php } ?>
-                        <div class="table-responsive">
-                            <table id="table2" class="table table-striped table-bordered dataTable" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center">#</th>
-                                        <th class="text-center">สถานที่</th>
-                                        <th class="text-center">ชื่อโรงเรือน</th>
-                                        <th class="text-center">หมายเลขซีเรียล</th>
-                                        <th class="text-center">โรงเรือน</th>
-                                        <!-- <th class="text-center">จุดติดตั้งเซ็นเซอร์ทั้งหมด</th> -->
-                                        <th class="text-center">ผู้บันทึกล่าสุด</th>
-                                        <th class="text-center">วัน-เวลาอัพเดท</th>
-                                        <th class="text-center">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    if ($_SESSION["sn"]['account_status'] == 1) {
-                                        $stmt = $dbcon->prepare("SELECT * FROM tbn_house INNER JOIN tbn_site ON tbn_house.house_siteID = tbn_site.site_id INNER JOIN tbn_account ON tbn_house.house_userST_id = tbn_account.account_id ORDER BY house_siteID");
-                                    } else {
-                                        $stmt = $dbcon->prepare("SELECT * FROM tbn_userst INNER JOIN tbn_site ON tbn_userst.userST_siteID = tbn_site.site_id INNER JOIN tbn_house ON tbn_userst.userST_houseID = tbn_house.house_id INNER JOIN tbn_account ON tbn_site.site_userST_id = tbn_account.account_id WHERE userST_accountID = '$user_id'  ORDER BY tbn_userst.userST_siteID");
-                                    }
-                                    $stmt->execute();
-                                    $count = $stmt->rowCount();
-
-                                    // if($count != 0){
-                                    $inc = 1;
-                                    $data0 = array();
-                                    while ($row = $stmt->fetch(PDO::FETCH_BOTH)) {
-                                        echo '<tr>
-                                                    <td class="text-center">' . $inc . '</td>
-                                                    <td class="text-center">' . $row["site_name"] . '</td>
-                                                    <td class="text-center">' . $row["house_name"] . '</td>
-                                                    <td class="text-center">' . $row["house_master"] . '</td>';
-                                        if ($row["house_img"] == "") {
-                                            echo '<td class="text-center"><img src="public/images/default.jpg" width="50" height="50" alt="..."></td>';
-                                        } else {
-                                            echo '<td class="text-center"><img src="public/images/house/' . $row["house_img"] . '" width="50"  height="50" alt="..."></td>';
+                                            $inc++;
                                         }
-                                        // if ($row["house_img_map"] == "") {
-                                        //     echo '<td class="text-center"><img src="public/images/default.jpg" width="50" height="50" alt="..."></td>';
-                                        // } else {
-                                        //     echo '<td class="text-center"><img src="public/images/img_map/' . $row["house_img_map"] . '" width="50"  height="50" alt="..."></td>';
-                                        // }
-                                        echo   '<td class="text-center">' . $row["account_user"] . '</td>
-                                                <td class="text-center">' . $row["house_timpstamp"] . '</td>
-                                                <td  class="text-center">
-                                                    <div class="buttons">
-                                                        <a href="javascript:void(0)" class="text-info h_edit"
-                                                            house_id="' . $row["house_id"] . '"
-                                                            site_id="' . $row["house_siteID"] . '"
-                                                            name="' . $row["house_name"] . '"
-                                                            sn="' . $row["house_master"] . '"
-                                                            img="' . $row["house_img"] . '">
-                                                            <i class="fadeIn animated bx bx-message-square-edit"></i>
-                                                        </a>';
-                                                        if($_SESSION["sn"]['account_status'] == 1){
-                                                            echo '<a href="javascript:void(0)" class="text-danger delete_house"
-                                                                house_id="' . $row["house_id"] . '"
-                                                                sn="' . $row["house_master"] . '"
-                                                                name="' . $row["house_name"] . '"
-                                                                img="' . $row["house_img"] . '">
-                                                                <i class="fadeIn animated bx bx-trash"></i>
-                                                            </a>';
-                                                        }else{echo '<a class="text-secondary" onclick="return false;"><i class="fadeIn animated bx bx-trash"></i></a>';}
-                                                echo '</div>
-                                                </td>
-                                            </tr>';
-                                        $inc++;
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade <?php if($_POST['pt'] == 4){echo "show active";} ?>" id="p-ust" role="tabpanel">
-                        <div class="d-sm-flex">
-                            <div class="ps-3">
-                                <h5>เลือกสถานที &nbsp;
-                                <select class="btn btn-outline-info me-1 sel_main_site">
-                                    <?php
-                                        if ($_SESSION["sn"]['account_status'] != 1) {
-                                            $site_stmt = $dbcon->prepare("SELECT * FROM `tbn_userst` INNER JOIN tbn_site ON tbn_userst.userST_siteID = tbn_site.site_id WHERE tbn_userst.userST_accountID = '$user_id' GROUP BY userST_siteID ");
-                                        } else {
-                                            $site_stmt = $dbcon->prepare("SELECT * FROM tbn_site ");
-                                        }
-                                        $site_stmt->execute();
-                                        while ($row_site = $site_stmt->fetch(PDO::FETCH_BOTH)) {
-                                            echo '<option value="'.$row_site["site_id"].'">'.$row_site["site_name"].'</option>';
-                                        }
-                                    ?>
-                                </select></h5>
-                            </div>
-                            <div class="ms-auto">
-                                <button class="btn btn-outline-success me-1 u_add mb-3"><i class="bi bi-plus-square"></i> เพิ่มผู้ใช้งานใหม่</button>
-                                <button class="btn btn-outline-success me-1 u_Suser mb-3"><i class="bi bi-plus-square"></i> เพิ่มผู้ใช้งานจากที่มีอยู่</button>
+                                        ?>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div class="table-responsive m-t-10">
+                        <div class="tab-pane fade <?php if($_POST['pt'] == 4){echo "show active";} ?>" id="p-ust" role="tabpanel">
+                            <div class="d-sm-flex">
+                                <div class="ps-3">
+                                    <h5>เลือกสถานที &nbsp;
+                                    <select class="btn btn-outline-info me-1 sel_main_site">
+                                        <?php
+                                            if ($_SESSION["sn"]['account_status'] != 1) {
+                                                $site_stmt = $dbcon->prepare("SELECT * FROM `tbn_userst` INNER JOIN tbn_site ON tbn_userst.userST_siteID = tbn_site.site_id WHERE tbn_userst.userST_accountID = '$user_id' GROUP BY userST_siteID ");
+                                            } else {
+                                                $site_stmt = $dbcon->prepare("SELECT * FROM tbn_site ");
+                                            }
+                                            $site_stmt->execute();
+                                            while ($row_site = $site_stmt->fetch(PDO::FETCH_BOTH)) {
+                                                echo '<option value="'.$row_site["site_id"].'">'.$row_site["site_name"].'</option>';
+                                            }
+                                        ?>
+                                    </select></h5>
+                                </div>
+                                <div class="ms-auto">
+                                    <button class="btn btn-outline-success me-1 u_add mb-3"><i class="bi bi-plus-square"></i> เพิ่มผู้ใช้งานใหม่</button>
+                                    <button class="btn btn-outline-success me-1 u_Suser mb-3"><i class="bi bi-plus-square"></i> เพิ่มผู้ใช้งานจากที่มีอยู่</button>
+                                </div>
+                            </div>
                             <div id="user_access"></div>
                         </div>
-                    </div>
+                        <div class="tab-pane fade <?php if($_POST['pt'] == 5){echo "show active";} ?>" id="p-sst" role="tabpanel">
+                            <div class="d-sm-flex">
+                                <div class="d-flex col-lg-6 col-xl-6 col-12 ms-auto ">
+                                    <button type="button" class="col-3 btn btn-outline-secondary px-2 u_day">1 วัน</button>
+                                    <button type="button" class="col-3 btn btn-outline-secondary px-2 u_week">1 สัปดาห์</button>
+                                    <button type="button" class="col-3 btn btn-outline-secondary px-2 u_month">1 เดือน</button>
+                                    <button type="button" class="col-3 btn btn-outline-secondary px-2 u_from_to">กำหนดเอง</button>
+                                </div>
+                            </div>
+                            <div id="user_report"></div>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -544,8 +560,8 @@
             <div class="modal-body">
                 <form method="post" id="user_form" enctype="multipart/form-data" onSubmit="return false;">
                     <div class="row us_user_sel">
-                        <div class="col-md-4">
-                            <label>สถานที่</label>
+                        <div class="col-md-4 text-end mb-2">
+                            <label class="col-form-label mt-1">สถานที่</label>
                         </div>
                         <div class="col-md-8">
                             <div class="form-group has-icon-left">
@@ -562,30 +578,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <label>โรงเรือน <span class="text-danger">*</span></label>
+                        <div class="col-md-4 text-end mb-2">
+                            <label class="col-form-label mt-1">โรงเรือน <span class="text-danger">*</span></label>
                         </div>
                         <div class="col-md-8">
                             <div class="form-group has-icon-left">
                                 <div class="position-relative">
-                                    <select class="form-control use_house" name="use_house">
-                                        <?php
-                                            // $siteID =
-                                            // echo '<option value="0">เลือกโรงเรือน</option>';
-                                            // $house_stmt = $dbcon->prepare("SELECT * FROM tbn_house WHERE house_siteID ='$siteID' ");
-                                            // $house_stmt->execute();
-                                            // while ($row_house = $house_stmt->fetch(PDO::FETCH_BOTH)) {
-                                            //     echo '<option value="'.$row_house["house_id"].'">'.$row_house["house_name"].'</option>';
-                                            // } ?>
-                                    </select>
+                                    <select class="form-control use_house" name="use_house"></select>
                                     <div class="invalid-feedback">กรุณาระบุโรงเรือน</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <label>เลือกผู้ใช้งาน</label>
+                        <div class="col-md-4 user_edit text-end mb-2">
+                            <label class="col-form-label mt-1">เลือกผู้ใช้งาน</label>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-8 user_edit">
                             <div class="form-group has-icon-left">
                                 <div class="position-relative">
                                     <select name="use_userID" class="form-control use_userID">
@@ -599,18 +606,10 @@
                     <div class="text-center">
                         <img class="w-25 u_img mb-2" alt="...">
                         <input type="hidden" name="mode_insert" class="mode_insert">
-                        <input type="hidden" name="userST_id" class="mode_userST_id">
-                        <input type="hidden" name="u_imgDF" class="u_imgDF">
+                        <input type="hidden" name="userST_id" class="userST_id">
                     </div>
                     <div class="form-body">
                         <div class="row">
-                            <!-- <div class="input-group mt-3 us_img_user">
-                                <div class="input-group mb-3">
-                                    <label class="col-md-4">Images </label>
-                                    <label class="input-group-text" style="margin-left: 10px;" for="Showimage_user"><i class="bi bi-upload"></i></label>
-                                    <input type="file" class="form-control" name="image_input" id="Showimage_user" onchange="Showimage2(this)">
-                                </div>
-                            </div> -->
                             <div class="col-md-4 us_img_user text-end mb-2">
                                 <label class="col-form-label mt-1">สถานที่ </label>
                             </div>
@@ -640,7 +639,7 @@
                                 <label class="col-form-label mt-1">โรงเรือน <span class="text-danger">*</span></label>
                             </div>
                             <div class="col-md-8 us_img_user">
-                                <div class="form-group has-icon-left">
+                                <div class="form-group has-icon-left mb-2">
                                     <div class="position-relative">
                                         <select class="form-control u_house" name="u_house"></select>
                                         <div class="invalid-feedback">กรุณาระบุโรงเรือน</div>
@@ -724,6 +723,44 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="Modal_fromto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog-scrollable modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title">
+                    <b class="">วัน - เวลา</b>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row hide_dwm">
+                    <div class="col-lg-6 col-xl-6 col-sm-12">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text col-sm-4" id="basic-addon3">เวลาเริ่ม</span>
+                            <input type="text" class="form-control text-center val_start" placeholder="วันเวลาเริ่มต้น" aria-label="วันเวลาเริ่มต้น" aria-describedby="button-addon2">
+                            <div class="invalid-feedback">กรุณาระบุเวลาเริ่ม</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6 col-sm-12">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text col-sm-4" id="basic-addon3">เวลาสิ้นสุด</span>
+                            <input type="text" class="form-control text-center val_end" placeholder="วันเวลาสิ้นสุด" aria-label="วันเวลาสิ้นสุด" aria-describedby="button-addon2">
+                            <div class="invalid-feedback">กรุณาระบุเวลาสิ้นสุด</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-right">
+                <button type="button" id="submit_fromTo" class="btn btn-success waves-light">
+                <i class="fadeIn animated bx bx-check"></i> ตกลง
+                </button>
+                <button type="button" class="btn btn-danger waves-effect" data-bs-dismiss="modal">
+                    <i class="fadeIn animated bx bx-window-close"></i> ยกเลิก
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- exit Modal_select_sn -->
 <script type="text/javascript"> // profile
     $(".edit_p").click(function () {
         $(".p_img").attr('src','public/images/users/'+$('.pt_img').val());
@@ -935,7 +972,7 @@
         var loading = verticalNoTitle();
         $.ajax({
             type: "POST",
-            url: "routes/insert_setting.php",
+            url: "routes/save_setting.php",
             data: new FormData($("#site_form")[0]),
             contentType: false,
             cache: false,
@@ -986,10 +1023,12 @@
                         url: "views/setting_profile.php",
                         method: "post",
                         data: {
+                            // s_master: res.s_master,
                             pt: 2
                         },
+                        // dataType: "json",
                         success: function(resp) {
-                            $("#pills-profile").html(resp);
+                            $("#load_pages_profile").html(resp);
                         }
                     });
                     swal({
@@ -1019,7 +1058,7 @@
             if (result.value) {
                 var loading = verticalNoTitle();
                 $.ajax({
-                    url: 'routes/insert_setting.php',
+                    url: 'routes/save_setting.php',
                     type: 'POST',
                     data: {
                         site_id : $(this).attr("site_id"),
@@ -1048,10 +1087,12 @@
                                 url: "views/setting_profile.php",
                                 method: "post",
                                 data: {
+                                    // s_master: res.s_master,
                                     pt: 2
                                 },
+                                // dataType: "json",
                                 success: function(resp) {
-                                    $("#pills-profile").html(resp);
+                                    $("#load_pages_profile").html(resp);
                                 }
                             });
                             swal({
@@ -1668,405 +1709,592 @@
     });
 </script>
 <script type="text/javascript"> // access control
-    // function table_user(){
-    //     var loading = verticalNoTitle();
-    $.ajax({
-        url: "routes/get_tableUser.php",
-        method: "GET",
-        data: {
-            siteID: $(".sel_main_site").val()
-        },
-        // dataType: "json",
-        success: function(res) {
-            $("#user_access").html(res);
-            function Showimg_user(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-                        $('.u_img').attr('src', e.target.result);
+    $(".sel_main_site").change(function(){
+        table_user()
+    });
+    table_user();
+    function table_user(){
+        //     var loading = verticalNoTitle();
+        $.ajax({
+            url: "routes/get_tableUser.php",
+            method: "GET",
+            data: {
+                siteID: $(".sel_main_site").val()
+            },
+            // dataType: "json",
+            success: function(res) {
+                $("#user_access").html(res);
+                function Showimg_user(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            $('.u_img').attr('src', e.target.result);
+                        }
+                        reader.readAsDataURL(input.files[0]);
                     }
-                    reader.readAsDataURL(input.files[0]);
                 }
-            }
-            $(".u_add").click(function() {
-                $(".title_mUser").html("ลงทะเบียนผู้ใช้ใหม่");
-                $(".us_user_sel").hide();
-                $(".us_img_user").show();
-                $('.u_img').attr("src", "public/images/default.jpg").removeClass("mb-3");
-                $("#u_img").val("");
-                $(".mode_insert").val("add_user");
-                $(".mode_userST_id").val("");
-                $(".u_imgDF").val("");
-                $(".u_site").val($(".sel_main_site").val());
+                $(".u_add").click(function() {
+                    $(".title_mUser").html("ลงทะเบียนผู้ใช้ใหม่");
+                    $(".us_user_sel").hide();
+                    $(".us_img_user").show();
+                    $('.u_img').attr("src", "public/images/default.jpg").removeClass("mb-3");
+                    $("#u_img").val("");
+                    $(".mode_insert").val("add_user");
+                    $(".userST_id").val("");
+                    $(".u_site").val($(".sel_main_site").val());
 
-                $(".u_house").removeClass("is-invalid").val("0").attr("disabled",false).load('routes/op_house.php?siteID='+$('.sel_main_site').val());
-                $(".u_user").removeClass("is-invalid").val("").attr("disabled",false);
-                $(".us_pass").show();
-                $(".u_pass").removeClass("is-invalid").val("");
-                $(".u_email").removeClass("is-invalid").val("").attr("disabled",false);
-                $(".u_tel").val("").attr("disabled",false);
-                $(".u_status").val("3").attr("disabled",false);
-                $("#modal_User").modal("show");
-            });
-            $(".u_Suser").click(function() {
-                $(".title_mUser").html("เพิ่มผู้ใช้งานจากรายชื้อที่มี");
-                $(".us_user_sel").show();
-                $(".use_site").val($(".sel_main_site").val());
-                $(".use_house").val('').load("routes/op_house.php?siteID="+$(".sel_main_site").val()+'&us=1');
-                $(".use_userID").val("0").removeClass("is-invalid");
-                $(".us_img_user").hide();
-                $('.u_img').attr("src", "public/images/default.jpg")
-                $("#u_img").val("");
-                $(".mode_insert").val("add_user2");
-                $(".mode_userID").val("");
-                $(".u_imgDF").val("");
-
-                $(".u_site").val($(".sel_main_site").val());
-                $(".u_house").removeClass("is-invalid").val("0").attr("disabled",false);
-                $(".u_user").removeClass("is-invalid").val("").attr("disabled",true);
-                $(".us_pass").hide();
-                $(".u_pass").removeClass("is-invalid").val("");
-                $(".u_email").removeClass("is-invalid").val("").attr("disabled",true);
-                $(".u_tel").val("").attr("disabled",true);
-                $(".u_status").val('3').attr("disabled",false);
-                $("#modal_User").modal("show");
-                // ----------------------------------------
-                $(".use_house").change(function () {
-                    $(".use_userID").load("routes/op_user.php?houseID="+$(this).val());
+                    $(".u_house").removeClass("is-invalid").val("0").attr("disabled",false).load('routes/op_house.php?siteID='+$('.sel_main_site').val());
+                    $(".u_user").removeClass("is-invalid").val("").attr("disabled",false);
+                    $(".us_pass").show();
+                    $(".u_pass").removeClass("is-invalid").val("");
+                    $(".u_email").removeClass("is-invalid").val("").attr("disabled",false);
+                    $(".u_tel").val("").attr("disabled",false);
+                    $(".u_status").val("3").attr("disabled",false);
+                    $("#modal_User").modal("show");
                 });
-                $(".use_userID").change(function() {
-                    var user_id = $(this).val();
-                    $.ajax({
-                        url: "routes/get_user_detel.php",
-                        method: "post",
-                        data: {
-                            user_id: user_id
-                        },
-                        dataType: "json",
-                        success: function(res) {
-                            console.log(res);
-                            var img = res.account_img;
-                            if(img === ""){
-                                $('.u_img').attr("src", "public/images/users/user.png").addClass("mb-3");
-                            }else{
-                                $('.u_img').attr("src", "public/images/users/"+img).addClass("mb-3");
+                $(".u_Suser").click(function() {
+                    $(".title_mUser").html("เพิ่มผู้ใช้งานจากรายชื้อที่มี");
+                    $(".us_user_sel").show();
+                    $(".use_site").val($(".sel_main_site").val());
+                    $(".use_house").val('').load("routes/op_house.php?siteID="+$(".sel_main_site").val()+'&us=1');
+                    $(".use_userID").val("0").removeClass("is-invalid");
+                    $(".us_img_user").hide();
+                    $('.user_edit').show();
+                    $('.u_img').attr("src", "public/images/default.jpg")
+                    $("#u_img").val("");
+                    $(".mode_insert").val("add_user2");
+                    $(".userST_id").val("");
+
+                    $(".u_site").val($(".sel_main_site").val());
+                    $(".u_house").removeClass("is-invalid").val("0").attr("disabled",false);
+                    $(".u_user").removeClass("is-invalid").val("").attr("disabled",true);
+                    $(".us_pass").hide();
+                    $(".u_pass").removeClass("is-invalid").val("");
+                    $(".u_email").removeClass("is-invalid").val("").attr("disabled",true);
+                    $(".u_tel").val("").attr("disabled",true);
+                    $(".u_status").val('3').attr("disabled",false);
+                    $("#modal_User").modal("show");
+                    // ----------------------------------------
+                    $(".use_house").change(function () {
+                        $(".use_userID").load("routes/op_user.php?houseID="+$(this).val());
+                    });
+                    $(".use_userID").change(function() {
+                        var user_id = $(this).val();
+                        $.ajax({
+                            url: "routes/get_user_detel.php",
+                            method: "post",
+                            data: {
+                                user_id: user_id
+                            },
+                            dataType: "json",
+                            success: function(res) {
+                                console.log(res);
+                                var img = res.account_img;
+                                if(img === ""){
+                                    $('.u_img').attr("src", "public/images/users/user.png").addClass("mb-3");
+                                }else{
+                                    $('.u_img').attr("src", "public/images/users/"+img).addClass("mb-3");
+                                }
+                                $(".u_user").val(res.account_user);
+                                $(".u_email").val(res.account_email);
+                                $(".u_tel").val(res.account_tel);
                             }
-                            $(".u_user").val(res.account_user);
-                            $(".u_email").val(res.account_email);
-                            $(".u_tel").val(res.account_tel);
+                        });
+                    });
+                });
+                $(".u_edit").click(function(){
+                    var houseID = $(this).attr('houseID');
+                    $(".title_mUser").html("แก้ไขผู้ใช้งาน");
+                    $(".us_user_sel").show();
+                    $(".use_site").val($(".sel_main_site").val());
+                    $(".use_house").load("routes/op_house.php?siteID="+$(".sel_main_site").val()+'&us=1').attr("disabled",true);
+                    setTimeout(function() {
+                        $(".use_house").val(houseID);
+                        // alert(houseID)
+                    }, 500);
+                    $(".use_userID").val("0").removeClass("is-invalid");
+                    $(".us_img_user").hide();
+                    $('.user_edit').hide();
+                    $('.u_img').attr("src", "public/images/default.jpg")
+                    $("#u_img").val("");
+                    $(".mode_insert").val("edit_user");
+                    $(".userST_id").val($(this).attr('userST_id'));
+
+                    $(".u_site").val($(".sel_main_site").val());
+                    $(".u_house").removeClass("is-invalid").val("0").attr("disabled",false);
+                    $(".u_user").removeClass("is-invalid").val($(this).attr('name')).attr("disabled",true);
+                    $(".us_pass").hide();
+                    $(".u_pass").removeClass("is-invalid").val("");
+                    $(".u_email").removeClass("is-invalid").val($(this).attr('email')).attr("disabled",true);
+                    $(".u_tel").val($(this).attr('tel')).attr("disabled",true);
+                    $(".u_status").val($(this).attr('status')).attr("disabled",false);
+                    $("#modal_User").modal("show");
+                });
+                $(".submit_u").click(function () {
+                    alert($(".mode_insert").val())
+                    if ($(".mode_insert").val() === "add_user") {
+                        if($(".u_house").val() === ""){
+                            $(".u_house").addClass("is-invalid");
+                            return false;
+                        }else{
+                            $(".u_house").removeClass("is-invalid");
+                        }
+                        if($(".u_user").val() === ""){
+                            $(".u_user").addClass("is-invalid");
+                            $(".bu_user").html("กรถณาระบุชื่อผู้ใช้งาน");
+                            return false;
+                        }else{
+                            $(".u_user").removeClass("is-invalid");
+                        }
+                        if($(".u_pass").val() === ""){
+                            $(".u_pass").addClass("is-invalid");
+                            $(".bu_pass").html("กรถณาระบุรหัสผ่าน");
+                            return false;
+                        }else{
+                            $(".u_pass").removeClass("is-invalid");
+                        }
+                        if($(".u_email").val() === ""){
+                            $(".u_email").addClass("is-invalid");
+                            $(".bu_email").html("กรถณาระบุอีเมลล์");
+                            return false;
+                        }else{
+                            $(".u_email").removeClass("is-invalid");
+                        }
+                    }
+                    if($(".mode_insert").val() === "add_user2") {
+                        if($(".use_house").val() === "0"){
+                            $(".use_house").addClass("is-invalid");
+                            return false;
+                        }else{
+                            $(".use_house").removeClass("is-invalid");
+                        }
+                        if($(".use_userID").val() === "0"){
+                            $(".use_userID").addClass("is-invalid");
+                            $(".buse_userID").html("กรุณาระบุโรงเรือน");
+                            return false;
+                        }else{
+                            $(".use_userID").removeClass("is-invalid");
+                        }
+                    }
+                    // var loading = verticalNoTitle();
+                    $.ajax({
+                        type: "POST",
+                        url: "routes/save_setting.php",
+                        data: new FormData($("#user_form")[0]),
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function(res) {
+                            // loadingOut(loading);
+                            var parseJSON = $.parseJSON(res);
+                            // console.log(parseJSON.data)
+                            // return false
+                            if (parseJSON.status === "มีรายชื่อนี้แล้ว") {
+                                swal({
+                                    title: 'มีรายชื่อนี้แล้ว !',
+                                    // text: "" + sw_name + " ?",
+                                    type: 'warning',
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: '#32CD32'
+                                });
+                                $(".u_user").addClass("is-invalid");
+                                $(".bu_user").html("กรถณาระบุชื่อผู้ใช้งานใหม่");
+                                return false;
+                            }
+                            if (parseJSON.status === "house มีรายชื่อนี้แล้ว") {
+                                swal({
+                                    title: 'ผู้ใช้งานนี้เข้าถึงโรงเรือนนี้อยู่แล้ว !',
+                                    text: "กรุณาเลือกผู้ใช้งานใหม่",
+                                    type: 'warning',
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: '#32CD32'
+                                });
+                                $(".use_userID").addClass("is-invalid");
+                                $(".buse_userID").html("กรถณาระบุชื่อผู้ใช้งานใหม่");
+                                return false;
+                            }
+                            if (parseJSON.status === "รูปแบบ email ไม่ถูกต้อง") {
+                                swal({
+                                    title: 'รูปแบบอีเมลล์ไม่ถูกต้อง !',
+                                    // text: "" + sw_name + " ?",
+                                    type: 'warning',
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: '#32CD32'
+                                });
+                                $(".u_email").addClass("is-invalid");
+                                $(".bu_email").html('กรถณาระบุแีเมลล์ใหม่');
+                                return false;
+                            }
+                            if (parseJSON.status === "มี email นี้แล้ว") {
+                                swal({
+                                    title: 'มีอีเมลล์นีในระบบแล้ว !',
+                                    // text: "" + sw_name + " ?",
+                                    type: 'warning',
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: '#32CD32'
+                                });
+                                $(".u_email").addClass("is-invalid");
+                                $(".bu_email").html('กรถณาระบุแีเมลล์ใหม่');
+                                return false;
+                            }
+                            if (parseJSON.status === "สกุลไฟล์ไม่ถูกต้อง") {
+                                swal({
+                                    title: 'รูปภาพไม่ถูกต้อง !',
+                                    text: "โปรดเลือกไฟล์สกุล gif, jpeg, jpg, png หรือ svg",
+                                    type: 'warning',
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: '#32CD32'
+                                });
+                                return false;
+                            }
+                            if (parseJSON.status == "Insert_Error") {
+                                swal({
+                                    title: 'เกิดข้อผลิดพลาด !',
+                                    text: "บันทึกไม่สำเร็จ !!!",
+                                    type: 'error',
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: '#32CD32'
+                                }).then((result) => {
+                                    if (result.value) {
+                                        location.reload();
+                                    }
+                                });
+                                return false;
+                            }
+                            if (parseJSON.status == "Insert_success"){
+                                $("#user_access").load("routes/get_tableUser.php?siteID="+$(".sel_main_site").val());
+                                swal({
+                                    title: 'บันทึกข้อมูลสำเร็จ.',
+                                    // text: "" + sw_name + " ?",
+                                    type: 'success',
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: '#32CD32'
+                                });
+                                $("#modal_User").modal("hide");
+                            }
                         }
                     });
                 });
-            });
-            $(".u_edit").click(function(){
-                $(".title_mUser").html("แก้ไขผู้ใช้งาน");
-                $(".us_user_sel").hide();
-                $(".us_img_user").hide();
-                var img = $(this).attr("img");
-                if(img === ""){
-                    $('.u_img').attr("src", "public/images/users/user.png").addClass("mb-3");
-                }else{
-                    $('.u_img').attr("src", "public/images/users/"+img).addClass("mb-3");
-                }
-                $("#u_img").val("");
-                $(".mode_insert").val("edit_user");
-                $(".mode_userST_id").val($(this).attr("userST_id"));
-                $(".u_imgDF").val(img);
-                $(".u_site").val($(".sel_main_site").val());
-                $(".u_house").removeClass("is-invalid").val($(this).attr("houseID")).attr("disabled",true);
-                $(".u_user").removeClass("is-invalid").val($(this).attr("name")).attr("disabled",true);
-                $(".us_pass").hide();
-                $(".u_pass").removeClass("is-invalid").val("");
-                $(".u_email").removeClass("is-invalid").val($(this).attr("email")).attr("disabled",true);
-                $(".u_tel").val($(this).attr("tel")).attr("disabled",true);
-                $(".u_status").val($(this).attr("status")).attr("disabled",false);
-                $("#modal_User").modal("show");
-            });
-            $(".submit_u").click(function () {
-                if ($(".mode_insert").val() === "add_user") {
-                    if($(".u_house").val() === ""){
-                        $(".u_house").addClass("is-invalid");
-                        return false;
-                    }else{
-                        $(".u_house").removeClass("is-invalid");
-                    }
-                    if($(".u_user").val() === ""){
-                        $(".u_user").addClass("is-invalid");
-                        $(".bu_user").html("กรถณาระบุชื่อผู้ใช้งาน");
-                        return false;
-                    }else{
-                        $(".u_user").removeClass("is-invalid");
-                    }
-                    if($(".u_pass").val() === ""){
-                        $(".u_pass").addClass("is-invalid");
-                        $(".bu_pass").html("กรถณาระบุรหัสผ่าน");
-                        return false;
-                    }else{
-                        $(".u_pass").removeClass("is-invalid");
-                    }
-                    if($(".u_email").val() === ""){
-                        $(".u_email").addClass("is-invalid");
-                        $(".bu_email").html("กรถณาระบุอีเมลล์");
-                        return false;
-                    }else{
-                        $(".u_email").removeClass("is-invalid");
-                    }
-                }
-                if($(".mode_insert").val() === "add_user2") {
-                    if($(".use_house").val() === "0"){
-                        $(".use_house").addClass("is-invalid");
-                        return false;
-                    }else{
-                        $(".use_house").removeClass("is-invalid");
-                    }
-                    if($(".use_userID").val() === "0"){
-                        $(".use_userID").addClass("is-invalid");
-                        $(".buse_userID").html("กรุณาระบุโรงเรือน");
-                        return false;
-                    }else{
-                        $(".use_userID").removeClass("is-invalid");
-                    }
-                }
-                // var loading = verticalNoTitle();
-                $.ajax({
-                    type: "POST",
-                    url: "routes/save_setting.php",
-                    data: new FormData($("#user_form")[0]),
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    success: function(res) {
-                        // loadingOut(loading);
-                        var parseJSON = $.parseJSON(res);
-                        // console.log(parseJSON.data)
-                        // return false
-                        if (parseJSON.status === "มีรายชื่อนี้แล้ว") {
-                            swal({
-                                title: 'มีรายชื่อนี้แล้ว !',
-                                // text: "" + sw_name + " ?",
-                                type: 'warning',
-                                allowOutsideClick: false,
-                                confirmButtonColor: '#32CD32'
-                            });
-                            $(".u_user").addClass("is-invalid");
-                            $(".bu_user").html("กรถณาระบุชื่อผู้ใช้งานใหม่");
-                            return false;
-                        }
-                        if (parseJSON.status === "house มีรายชื่อนี้แล้ว") {
-                            swal({
-                                title: 'ผู้ใช้งานนี้เข้าถึงโรงเรือนนี้อยู่แล้ว !',
-                                text: "กรุณาเลือกผู้ใช้งานใหม่",
-                                type: 'warning',
-                                allowOutsideClick: false,
-                                confirmButtonColor: '#32CD32'
-                            });
-                            $(".use_userID").addClass("is-invalid");
-                            $(".buse_userID").html("กรถณาระบุชื่อผู้ใช้งานใหม่");
-                            return false;
-                        }
-                        if (parseJSON.status === "รูปแบบ email ไม่ถูกต้อง") {
-                            swal({
-                                title: 'รูปแบบอีเมลล์ไม่ถูกต้อง !',
-                                // text: "" + sw_name + " ?",
-                                type: 'warning',
-                                allowOutsideClick: false,
-                                confirmButtonColor: '#32CD32'
-                            });
-                            $(".u_email").addClass("is-invalid");
-                            $(".bu_email").html('กรถณาระบุแีเมลล์ใหม่');
-                            return false;
-                        }
-                        if (parseJSON.status === "มี email นี้แล้ว") {
-                            swal({
-                                title: 'มีอีเมลล์นีในระบบแล้ว !',
-                                // text: "" + sw_name + " ?",
-                                type: 'warning',
-                                allowOutsideClick: false,
-                                confirmButtonColor: '#32CD32'
-                            });
-                            $(".u_email").addClass("is-invalid");
-                            $(".bu_email").html('กรถณาระบุแีเมลล์ใหม่');
-                            return false;
-                        }
-                        if (parseJSON.status === "สกุลไฟล์ไม่ถูกต้อง") {
-                            swal({
-                                title: 'รูปภาพไม่ถูกต้อง !',
-                                text: "โปรดเลือกไฟล์สกุล gif, jpeg, jpg, png หรือ svg",
-                                type: 'warning',
-                                allowOutsideClick: false,
-                                confirmButtonColor: '#32CD32'
-                            });
-                            return false;
-                        }
-                        if (parseJSON.status == "Insert_Error") {
-                            swal({
-                                title: 'เกิดข้อผลิดพลาด !',
-                                text: "บันทึกไม่สำเร็จ !!!",
-                                type: 'error',
-                                allowOutsideClick: false,
-                                confirmButtonColor: '#32CD32'
-                            }).then((result) => {
-                                if (result.value) {
-                                    location.reload();
-                                }
-                            });
-                            return false;
-                        }
-                        if (parseJSON.status == "Insert_success"){
-                            $("#user_access").load("routes/get_tableUser.php?siteID="+$(".sel_main_site").val());
-                            swal({
-                                title: 'บันทึกข้อมูลสำเร็จ.',
-                                // text: "" + sw_name + " ?",
-                                type: 'success',
-                                allowOutsideClick: false,
-                                confirmButtonColor: '#32CD32'
-                            });
-                            $("#modal_User").modal("hide");
-                        }
-                    }
+                $('#tb_users').DataTable({
+                    "scrollY": 330,
+                    "scrollX": true,
+                    "scrollCollapse": false,
+                    "paging":    false,
+                    "searching": false,
+                    "destroy": true,
+                    "order": [
+                        [0, "desc"]
+                    ],
+                    "columnDefs": [
+                        {
+                            // "targets": [ 1 ],
+                            // render: $.fn.dataTable.render.moment( 'X', 'YYYY/MM/DD' ),
+                            // "render": $.fn.dataTable.render.moment( 'YYYY/MM/DD' ),
+                            "visible": false,
+                            "searchable": false,
+                        },
+                    ],
                 });
-            });
-            $('#tb_users').DataTable({
-                "scrollY": 330,
-                "scrollX": true,
-                "scrollCollapse": false,
-                "paging":    false,
-                "searching": false,
-                "destroy": true,
-                "order": [
-                    [0, "desc"]
-                ],
-                "columnDefs": [
-                    {
-                        // "targets": [ 1 ],
-                        // render: $.fn.dataTable.render.moment( 'X', 'YYYY/MM/DD' ),
-                        // "render": $.fn.dataTable.render.moment( 'YYYY/MM/DD' ),
-                        "visible": false,
-                        "searchable": false,
-                    },
-                ],
-            });
-            $(".delete_user").click(function(){
-                var img = $(this).attr("img");
-                var user_id = $(this).attr("user_id");
-                swal({
-                    title: "ลบผู้ใช้งานออกจากโรงเรือน !",
-                    html: "คุณต้องการที่จะลบผู้ใช้งาน : <b>"+$(this).attr("name")+"</b><br> ออกจากโรงเรือน : <b>"+$(this).attr('house')+"</b> หรือไม่ ?",
-                    type: 'warning',
-                    allowOutsideClick: false,
-                    showCancelButton: true,
-                    confirmButtonColor: '#00CC33',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'ใช่',
-                    cancelButtonText: 'ยกเลิก'
-                    }).then((result) => {
-                    if (result.value) {
-                        $.ajax({
-                            url: 'routes/save_setting.php',
-                            type: 'POST',
-                            data: {
-                                userST_id : $(this).attr('userST_id'),
-                                user_id : user_id,
-                                mode_insert : "delete_userST",
-                                // img : $(this).attr("img")
-                            },
-                            dataType: 'json',
-                            success: function(data) {
-                                if (data.status == "Insert_Error") {
-                                    swal({
-                                        title: 'เกิดข้อผลิดพลาด !',
-                                        text: "บันทึกไม่สำเร็จ !!!",
-                                        type: 'error',
-                                        allowOutsideClick: false,
-                                        confirmButtonColor: '#32CD32'
-                                    }).then((result) => {
-                                        if (result.value) {
-                                            location.reload();
-                                        }
-                                    });
-                                    return false;
-                                }
-                                if (data.status == "Delete_success"){
-                                    $("#user_access").load("routes/get_tableUser.php?siteID="+$(".sel_main_site").val() );
-                                    if(data.count_userST === 0){
+                $(".delete_user").click(function(){
+                    var img = $(this).attr("img");
+                    var user_id = $(this).attr("user_id");
+                    swal({
+                        title: "ลบผู้ใช้งานออกจากโรงเรือน !",
+                        html: "คุณต้องการที่จะลบผู้ใช้งาน : <b>"+$(this).attr("name")+"</b><br> ออกจากโรงเรือน : <b>"+$(this).attr('house')+"</b> หรือไม่ ?",
+                        type: 'warning',
+                        allowOutsideClick: false,
+                        showCancelButton: true,
+                        confirmButtonColor: '#00CC33',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'ใช่',
+                        cancelButtonText: 'ยกเลิก'
+                        }).then((result) => {
+                        if (result.value) {
+                            $.ajax({
+                                url: 'routes/save_setting.php',
+                                type: 'POST',
+                                data: {
+                                    userST_id : $(this).attr('userST_id'),
+                                    user_id : user_id,
+                                    mode_insert : "delete_userST",
+                                    // img : $(this).attr("img")
+                                },
+                                dataType: 'json',
+                                success: function(data) {
+                                    if (data.status == "Insert_Error") {
                                         swal({
-                                            title: 'ลบข้อมูลสำเร็จ.',
-                                            // text: "" + sw_name + " ?",
-                                            type: 'success',
+                                            title: 'เกิดข้อผลิดพลาด !',
+                                            text: "บันทึกไม่สำเร็จ !!!",
+                                            type: 'error',
                                             allowOutsideClick: false,
                                             confirmButtonColor: '#32CD32'
                                         }).then((result) => {
                                             if (result.value) {
-                                                swal({
-                                                    title: 'ลบผู้ใช้งานจากระบบ !',
-                                                    html: "คุณต้องการที่จะลบผู้ใช้งาน : <b>"+$(this).attr("name")+"</b><br> ออกจากระบบหรือไม่ ?",
-                                                    type: 'warning',
-                                                    allowOutsideClick: false,
-                                                    showCancelButton: true,
-                                                    confirmButtonColor: '#00CC33',
-                                                    cancelButtonColor: '#d33',
-                                                    confirmButtonText: 'ใช่',
-                                                    cancelButtonText: 'ยกเลิก'
-                                                    }).then((result) => {
-                                                    if (result.value) {
-                                                        $.ajax({
-                                                            url: 'routes/save_setting.php',
-                                                            type: 'POST',
-                                                            data: {
-                                                                user_id : user_id,
-                                                                mode_insert : "delete_account",
-                                                                img : img
-                                                            },
-                                                            dataType: 'json',
-                                                            success: function(data) {
-                                                                if (data.status == "Insert_Error") {
-                                                                    swal({
-                                                                        title: 'เกิดข้อผลิดพลาด !',
-                                                                        text: "บันทึกไม่สำเร็จ !!!",
-                                                                        type: 'error',
-                                                                        allowOutsideClick: false,
-                                                                        confirmButtonColor: '#32CD32'
-                                                                    }).then((result) => {
-                                                                        if (result.value) {
-                                                                            location.reload();
-                                                                        }
-                                                                    });
-                                                                    return false;
-                                                                }
-                                                                if (data.status == "Delete_success"){
-                                                                    swal({
-                                                                        title: 'ลบข้อมูลสำเร็จ.',
-                                                                        // text: "" + sw_name + " ?",
-                                                                        type: 'success',
-                                                                        allowOutsideClick: false,
-                                                                        confirmButtonColor: '#32CD32'
-                                                                    });
-                                                                }
-                                                            }
-                                                        });
-                                                    }
-                                                });
+                                                location.reload();
                                             }
                                         });
+                                        return false;
                                     }
-                                    else {
-                                        swal({
-                                            title: 'ลบข้อมูลสำเร็จ.',
-                                            // text: "" + sw_name + " ?",
-                                            type: 'success',
-                                            allowOutsideClick: false,
-                                            confirmButtonColor: '#32CD32'
-                                        });
+                                    if (data.status == "Delete_success"){
+                                        $("#user_access").load("routes/get_tableUser.php?siteID="+$(".sel_main_site").val() );
+                                        if(data.count_userST === 0){
+                                            swal({
+                                                title: 'ลบข้อมูลสำเร็จ.',
+                                                // text: "" + sw_name + " ?",
+                                                type: 'success',
+                                                allowOutsideClick: false,
+                                                confirmButtonColor: '#32CD32'
+                                            }).then((result) => {
+                                                if (result.value) {
+                                                    swal({
+                                                        title: 'ลบผู้ใช้งานจากระบบ !',
+                                                        html: "คุณต้องการที่จะลบผู้ใช้งาน : <b>"+$(this).attr("name")+"</b><br> ออกจากระบบหรือไม่ ?",
+                                                        type: 'warning',
+                                                        allowOutsideClick: false,
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: '#00CC33',
+                                                        cancelButtonColor: '#d33',
+                                                        confirmButtonText: 'ใช่',
+                                                        cancelButtonText: 'ยกเลิก'
+                                                        }).then((result) => {
+                                                        if (result.value) {
+                                                            $.ajax({
+                                                                url: 'routes/save_setting.php',
+                                                                type: 'POST',
+                                                                data: {
+                                                                    user_id : user_id,
+                                                                    mode_insert : "delete_account",
+                                                                    img : img
+                                                                },
+                                                                dataType: 'json',
+                                                                success: function(data) {
+                                                                    if (data.status == "Insert_Error") {
+                                                                        swal({
+                                                                            title: 'เกิดข้อผลิดพลาด !',
+                                                                            text: "บันทึกไม่สำเร็จ !!!",
+                                                                            type: 'error',
+                                                                            allowOutsideClick: false,
+                                                                            confirmButtonColor: '#32CD32'
+                                                                        }).then((result) => {
+                                                                            if (result.value) {
+                                                                                location.reload();
+                                                                            }
+                                                                        });
+                                                                        return false;
+                                                                    }
+                                                                    if (data.status == "Delete_success"){
+                                                                        swal({
+                                                                            title: 'ลบข้อมูลสำเร็จ.',
+                                                                            // text: "" + sw_name + " ?",
+                                                                            type: 'success',
+                                                                            allowOutsideClick: false,
+                                                                            confirmButtonColor: '#32CD32'
+                                                                        });
+                                                                    }
+                                                                }
+                                                            });
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        }
+                                        else {
+                                            swal({
+                                                title: 'ลบข้อมูลสำเร็จ.',
+                                                // text: "" + sw_name + " ?",
+                                                type: 'success',
+                                                allowOutsideClick: false,
+                                                confirmButtonColor: '#32CD32'
+                                            });
+                                        }
                                     }
                                 }
-                            }
-                        });
-                    }
+                            });
+                        }
+                    });
                 });
-            });
+            }
+        });
+    //     loadingOut(loading);
+    }
+
+</script>
+<script type="text/javascript"> // user_report
+    var pt = '<?= $_POST['pt'] ?>';
+    if(pt == 5){
+        get_reportUser("day");
+    }
+    $('.val_start').daterangepicker({
+        autoUpdateInput: false,
+        singleDatePicker: true,
+        showDropdowns: true,
+        timePicker: true,
+        timePicker24Hour: true,
+        minYear: 2016,
+        // maxYear: parseInt(moment().format('YYYY'), 10),
+        locale: {
+            cancelLabel: 'Close'
         }
     });
-    //     loadingOut(loading);
-    // }
+    $('.val_end').daterangepicker({
+        autoUpdateInput: false,
+        singleDatePicker: true,
+        showDropdowns: true,
+        timePicker: true,
+        timePicker24Hour: true,
+        minYear: 2016,
+        // maxDate: moment($('.val_start').val()).add(30, 'days'),
+        // maxYear: parseInt(moment('2022-05-20').format('YYYY-MM-DD'), 10),
+        locale: {
+           cancelLabel: 'Close'
+        },
+    });
+    $('.c_pt').click(function(){
+        get_reportUser("day")
+    });
+    $('.u_day').click(function(){
+        get_reportUser("day")
+    });
+    $('.u_week').click(function(){
+        get_reportUser("week")
+    });
+    $('.u_month').click(function(){
+        get_reportUser("month")
+    });
+    $('#submit_fromTo').click(function(){
+        if ($(".val_start").val() === "") {
+            $(".val_start").addClass('is-invalid');
+            return false;
+        }else{
+            $(".val_start").removeClass('is-invalid');
+        }
+        if ($(".val_end").val() === "") {
+            $(".val_end").addClass('is-invalid');
+            return false;
+        }else{
+            $(".val_end").removeClass('is-invalid');
+        }
+        if ($(".val_start").val() >= $(".val_end").val()) {
+            $(".val_start").addClass('is-invalid');
+            $(".val_end").addClass('is-invalid');
+            Swal({
+                type: "warning",
+                html: "เวลาเริ่มต้น <b>ต้องน้อยกว่า</b> เวลาสิ้นสุด",
+                // html: text,
+                allowOutsideClick: false
+            });
+            return false;
+        }else{
+            $(".val_start").removeClass('is-invalid');
+            $(".val_end").removeClass('is-invalid');
+        }
+        // alert($('.val_start').val())
+        // return false;
+        get_reportUser("from_to")
+        $('#Modal_fromto').modal('hide');
+    });
+    $('.u_from_to').click(function(){
+        $('.val_start').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('YYYY-MM-DD'));
+            if($('.val_end').val() != ''){
+                if(moment($(this).val()).format('YYYY-MM-DD') < moment($('.val_end').val()).add(-31, 'days').format('YYYY-MM-DD')) {
+                    Swal({
+                        type: "warning",
+                        html: "เลือกวันได้สูงสุด<b> ไม่เกิน 31</b> วัน/ครั้ง",
+                        // html: text,
+                        allowOutsideClick: false
+                    });
+                    $(this).val('').addClass('is-invalid');
+                    return false;
+                }else if(moment($(this).val()).format('YYYY-MM-DD') >= moment($('.val_end').val()).format('YYYY-MM-DD')) {
+                    Swal({
+                        type: "warning",
+                        html: "เวลาเริ่มต้น <b>ต้องน้อยกว่า</b> เวลาสิ้นสุด",
+                        // html: text,
+                        allowOutsideClick: false
+                    });
+                    $(this).val('').addClass('is-invalid');
+                    return false;
+                }else {
+                    $(this).val(picker.startDate.format('YYYY-MM-DD')).removeClass('is-invalid');
+                }
+            }else {
+                $(this).val(picker.startDate.format('YYYY-MM-DD')).removeClass('is-invalid');
+            }
+        });
 
+        $('.val_end').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('YYYY-MM-DD'));
+            // console.log(moment($(this).val()).format('YYYY-MM-DD') +' ++ '+moment($('.val_start').val()).format('YYYY-MM-DD') )
+            if($('.val_start').val() != ''){
+                if(moment($(this).val()).format('YYYY-MM-DD') > moment($('.val_start').val()).add(31, 'days').format('YYYY-MM-DD')) {
+                    Swal({
+                        type: "warning",
+                        html: "เลือกวันได้สูงสุด<b> ไม่เกิน 31</b> วัน/ครั้ง",
+                        // html: text,
+                        allowOutsideClick: false
+                    });
+                    $(this).val('').addClass('is-invalid');
+                    return false;
+                    return false;
+                }else if(moment($(this).val()).format('YYYY-MM-DD') <= moment($('.val_start').val()).format('YYYY-MM-DD')) {
+                    Swal({
+                        type: "warning",
+                        html: "เวลาเริ่มต้น <b>ต้องน้อยกว่า</b> เวลาสิ้นสุด",
+                        // html: text,
+                        allowOutsideClick: false
+                    });
+                    $(this).val('').addClass('is-invalid');
+                    return false;
+                }else {
+                    $(this).val(picker.startDate.format('YYYY-MM-DD')).removeClass('is-invalid');
+                }
+            }else {
+                $(this).val(picker.startDate.format('YYYY-MM-DD')).removeClass('is-invalid');
+            }
+        });
+        $('#Modal_fromto').modal('show');
+    });
+    function get_reportUser(val){
+        if(val === 'day'){
+            $('.u_day').addClass('active');
+            $('.u_week').removeClass('active');
+            $('.u_month').removeClass('active');
+            $('.u_from_to').removeClass('active');
+        }
+        else if (val === 'week') {
+            $('.u_day').removeClass('active');
+            $('.u_week').addClass('active');
+            $('.u_month').removeClass('active');
+            $('.u_from_to').removeClass('active');
+        }
+        else if (val === 'month') {
+            $('.u_day').removeClass('active');
+            $('.u_week').removeClass('active');
+            $('.u_month').addClass('active');
+            $('.u_from_to').removeClass('active');
+        }
+        else if (val === 'from_to') {
+            $('.u_day').removeClass('active');
+            $('.u_week').removeClass('active');
+            $('.u_month').removeClass('active');
+            $('.u_from_to').addClass('active');
+        }
+        var loading = verticalNoTitle();
+        $.ajax({
+            url: "routes/get_reportUser.php",
+            method: "post",
+            data: {
+                siteID: url[1],
+                status : val,
+                s_time : $('.val_start').val(),
+                e_time : $('.val_end').val(),
+            },
+            // dataType: "json",
+            success: function(res) {
+                $('#user_report').html(res)
+                loadingOut(loading);
+            }
+        });
+    }
 </script>

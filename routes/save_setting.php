@@ -112,7 +112,7 @@
         $n_name = $_POST["s_name"];
         $file	= $_FILES['s_img']['name'];
 
-        $chack_name = $dbcon->query("SELECT count(site_id) FROM tb2_site WHERE site_name = '$n_name' ")->fetch();
+        $chack_name = $dbcon->query("SELECT count(site_id) FROM tbn_site WHERE site_name = '$n_name' ")->fetch();
         if($chack_name[0] > 0){
             echo json_encode(['status' => "มีรายชื่อนี้แล้ว"], JSON_UNESCAPED_UNICODE );
             exit();
@@ -120,7 +120,7 @@
         if($file == ""){
             $n_img = "";
         }else{
-            $cont_img = $dbcon->query("SELECT site_id FROM tb2_site ORDER BY site_id DESC LIMIT 1 ")->fetch();
+            $cont_img = $dbcon->query("SELECT site_id FROM tbn_site ORDER BY site_id DESC LIMIT 1 ")->fetch();
             // echo $cont_img[0]+1;
             // exit();
             $infoExt = getimagesize($_FILES['s_img']['tmp_name']);
@@ -144,7 +144,9 @@
             'p7' => $_POST["s_internetO"],
             'p8' => $user_id
         ];
-        $sql = "INSERT INTO `tb2_site`(`site_name`, `site_address`, `site_Latitude`, `site_Longitude`, `site_img`, `site_internet`, `site_internetO`, `site_userST_id`) VALUES (:p1, :p2, :p3, :p4, :p5, :p6, :p7, :p8)";
+        // echo json_encode($data);
+        // exit();
+        $sql = "INSERT INTO `tbn_site`(`site_name`, `site_address`, `site_Latitude`, `site_Longitude`, `site_img`, `site_internet`, `site_internetO`, `site_userST_id`) VALUES (:p1, :p2, :p3, :p4, :p5, :p6, :p7, :p8)";
         if ($dbcon->prepare($sql)->execute($data) === TRUE) {
             // $last_id = $dbcon->lastInsertId();
             echo json_encode(['status' => "Insert_success"], JSON_UNESCAPED_UNICODE );
@@ -160,7 +162,7 @@
             $n_name = $_POST["s_name"];
         }else{
             $post_name = $_POST["s_name"];
-            $chack_name = $dbcon->query("SELECT count(site_id) FROM tb2_site WHERE site_name = '$post_name' ")->fetch();
+            $chack_name = $dbcon->query("SELECT count(site_id) FROM tbn_site WHERE site_name = '$post_name' ")->fetch();
             if($chack_name[0] > 0){
                 echo json_encode(['status' => "มีรายชื่อนี้แล้ว"], JSON_UNESCAPED_UNICODE );
                 exit();
@@ -187,6 +189,7 @@
         }
 
         $data = [
+            'ps' => date("Y-m-d H:i:s"),
             'p1' => $n_name,
             'p2' => $_POST["s_address"],
             'p3' => $_POST["s_la"],
@@ -197,7 +200,9 @@
             'p8' => $user_id,
             'p_id' => $_POST["site_id"],
         ];
-        $sql = "UPDATE `tb2_site` SET `site_name`=:p1, `site_address`=:p2, `site_Latitude`=:p3, `site_Longitude`=:p4, `site_img`=:p5, `site_internet`=:p6, `site_internetO`=:p7, `site_userST_id`=:p8 WHERE `site_id`=:p_id ";
+        // echo json_encode($data);
+        // exit();
+        $sql = "UPDATE `tbn_site` SET `site_timestamp`=:ps, `site_name`=:p1, `site_address`=:p2, `site_Latitude`=:p3, `site_Longitude`=:p4, `site_img`=:p5, `site_internet`=:p6, `site_internetO`=:p7, `site_userST_id`=:p8 WHERE `site_id`=:p_id ";
         if ($dbcon->prepare($sql)->execute($data) === TRUE) {
             // $last_id = $dbcon->lastInsertId();
             echo json_encode(['status' => "Insert_success"], JSON_UNESCAPED_UNICODE );
@@ -208,124 +213,218 @@
         }
     }
     if($_POST["mode_insert"] == "delete_site"){
+        // ---------------- delete img house
+        $siteID = $_POST['site_id'];
+        // --------------------
         $site_img = $_POST["img"];
         if($site_img != ""){
             $Delete_image = "../public/images/site/".$site_img;
             unlink($Delete_image);
         }
-        // ---------------- delete img house
-        $siteID = $_POST['site_id'];
-        $stmt = $dbcon->query("SELECT house_img, house_img_map FROM tb2_house WHERE house_siteID = '$siteID' ");
-        while ($row = $stmt->fetch()) {
-            if($row["house_img"] != ""){
-                $Delete_image2 = "../public/images/house/".$row["house_img"];
-                unlink($Delete_image2);
-            }
-            if($row["house_img_map"] != ""){
-                $Delete_image3 = "../public/images/img_map/".$row["house_img_map"];
-                unlink($Delete_image3);
-            }
-        }
         // ----------------
         $data = ['site_id'=> $siteID];
-        if ($dbcon->prepare("DELETE FROM tb2_site WHERE site_id = :site_id")->execute($data) === TRUE) {
-            // ---------------------------------------------
-            if ($dbcon->prepare("DELETE FROM `tb2_house` WHERE `house_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb2_house'], JSON_UNESCAPED_UNICODE );
-                exit();
-            }
-            if ($dbcon->prepare("DELETE FROM `tb3_userst` WHERE `userST_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_userst'], JSON_UNESCAPED_UNICODE );
-                exit();
-            }
-            if ($dbcon->prepare("DELETE FROM `tb3_control` WHERE `control_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_control'], JSON_UNESCAPED_UNICODE );
-                exit();
-            }
-            if ($dbcon->prepare("DELETE FROM `tb3_controlcanel` WHERE `controlcanel_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_controlcanel'], JSON_UNESCAPED_UNICODE );
-                exit();
-            }
-            if ($dbcon->prepare("DELETE FROM `tb3_controlstatus` WHERE `controlstatus_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_controlstatus'], JSON_UNESCAPED_UNICODE );
-                exit();
-            }
-            if ($dbcon->prepare("DELETE FROM `tb3_conttrolname` WHERE `conttrolname_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_conttrolname'], JSON_UNESCAPED_UNICODE );
-                exit();
-            }
+        if ($dbcon->prepare("DELETE FROM tbn_site WHERE site_id = :site_id")->execute($data) === TRUE) {
+            $stmt = $dbcon->query("SELECT * FROM tbn_house WHERE house_siteID = '$siteID' ");
+            $count = $stmt->rowCount();
+            // echo $count;
+            // exit();
+            if ($count > 0) {
+                while ($row = $stmt->fetch()) {
+                    if($row['house_webv'] == 4){
+                        if($row["house_img"] != ""){
+                            $Delete_image2 = "../public/images/house/".$row["house_img"];
+                            unlink($Delete_image2);
+                        }
+                        $house_sn = $row["house_master"];
+                        if ($dbcon->prepare("DELETE FROM `tbn_control_au1` WHERE `load_sn`='$house_sn'")->execute() === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_control_au1'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_control_au2` WHERE `load_sn`='$house_sn'")->execute() === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_control_au2'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_control_au3` WHERE `load_sn`='$house_sn'")->execute() === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_control_au3'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_control_au4` WHERE `load_sn`='$house_sn'")->execute() === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_control_au4'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_control_au5` WHERE `load_sn`='$house_sn'")->execute() === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_control_au5'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_control_au6` WHERE `load_sn`='$house_sn'")->execute() === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_control_au6'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_control_au7` WHERE `load_sn`='$house_sn'")->execute() === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_control_au7'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_control_au8` WHERE `load_sn`='$house_sn'")->execute() === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_control_au8'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_control_au9` WHERE `load_sn`='$house_sn'")->execute() === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_control_au9'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_control_au10` WHERE `load_sn`='$house_sn'")->execute() === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_control_au10'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_control_au11` WHERE `load_sn`='$house_sn'")->execute() === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_control_au11'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_control_au12` WHERE `load_sn`='$house_sn'")->execute() === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_control_au12'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_control_log` WHERE `cn_sn`='$house_sn'")->execute() === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_control_log'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_control_mn_log` WHERE `mn_sn`='$house_sn'")->execute() === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_control_mn_log'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_house` WHERE `house_master`='$house_sn'")->execute() === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_house'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_set_maxmin` WHERE `set_maxmin_sn`='$house_sn'")->execute() === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_set_maxmin'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_status_cn` WHERE `cn_status_sn` = '$house_sn'")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_status_cn'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_status_sn` WHERE `sn_status_an` = '$house_sn'")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_status_sn'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                    }
+                    else { // != V4
+                        if($row["house_img"] != ""){
+                            $Delete_image2 = "../public/images/house/".$row["house_img"];
+                            unlink($Delete_image2);
+                        }
+                        if($row["house_img_map"] != ""){
+                            $Delete_image3 = "../public/images/img_map/".$row["house_img_map"];
+                            unlink($Delete_image3);
+                        }
+                        // ---------------------------------------------
+                        if ($dbcon->prepare("DELETE FROM `tbn_house` WHERE `house_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb2_house'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_userst` WHERE `userST_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_userst'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_control` WHERE `control_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_control'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_controlcanel` WHERE `controlcanel_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_controlcanel'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_controlstatus` WHERE `controlstatus_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_controlstatus'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_conttrolname` WHERE `conttrolname_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_conttrolname'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_dashname` WHERE `dashname_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_dashname'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_dashstatus` WHERE `dashstatus_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_dashstatus'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_sncanel` WHERE `sncanel_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_sncanel'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_statussn` WHERE `statussn_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_statussn'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_map_img` WHERE `map_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_map_img'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
 
-            if ($dbcon->prepare("DELETE FROM `tb3_dashname` WHERE `dashname_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_dashname'], JSON_UNESCAPED_UNICODE );
+                        if ($dbcon->prepare("DELETE FROM `tbn_meter_chenal_mode` WHERE `meter_chenal_mode_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_meter_chenal_mode'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tbn_meter_status` WHERE `meter_status_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_meter_status'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tb3_load_1` WHERE `load_1_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_load_1'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tb3_load_2` WHERE `load_2_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_load_2'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tb3_load_3` WHERE `load_3_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_load_3'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tb3_load_4` WHERE `load_4_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_load_4'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tb3_load_5` WHERE `load_5_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_load_5'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tb3_load_6` WHERE `load_6_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_load_6'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tb3_load_7` WHERE `load_7_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_load_7'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tb3_load_8` WHERE `load_8_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_load_8'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tb3_load_9` WHERE `load_9_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_load_9'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tb3_load_10` WHERE `load_10_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_load_10'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                        if ($dbcon->prepare("DELETE FROM `tb3_load_11` WHERE `load_11_siteID` = :site_id")->execute($data) === FALSE) {
+                            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_load_11'], JSON_UNESCAPED_UNICODE );
+                            exit();
+                        }
+                    }
+                }
+            }
+            if ($dbcon->prepare("DELETE FROM `tbn_login_log` WHERE `logLogin_siteID`='$siteID'")->execute() === FALSE) {
+                echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_login_log'], JSON_UNESCAPED_UNICODE );
                 exit();
             }
-            if ($dbcon->prepare("DELETE FROM `tb3_dashstatus` WHERE `dashstatus_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_dashstatus'], JSON_UNESCAPED_UNICODE );
-                exit();
-            }
-            if ($dbcon->prepare("DELETE FROM `tb3_sncanel` WHERE `sncanel_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_sncanel'], JSON_UNESCAPED_UNICODE );
-                exit();
-            }
-            if ($dbcon->prepare("DELETE FROM `tb3_statussn` WHERE `statussn_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_statussn'], JSON_UNESCAPED_UNICODE );
-                exit();
-            }
-            if ($dbcon->prepare("DELETE FROM `tb3_map_img` WHERE `map_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_map_img'], JSON_UNESCAPED_UNICODE );
-                exit();
-            }
-
-            if ($dbcon->prepare("DELETE FROM `tb3_meter_chenal_mode` WHERE `meter_chenal_mode_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_meter_chenal_mode'], JSON_UNESCAPED_UNICODE );
-                exit();
-            }
-            if ($dbcon->prepare("DELETE FROM `tb3_meter_status` WHERE `meter_status_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_meter_status'], JSON_UNESCAPED_UNICODE );
-                exit();
-            }
-            if ($dbcon->prepare("DELETE FROM `tb3_load_1` WHERE `load_1_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_load_1'], JSON_UNESCAPED_UNICODE );
-                exit();
-            }
-            if ($dbcon->prepare("DELETE FROM `tb3_load_2` WHERE `load_2_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_load_2'], JSON_UNESCAPED_UNICODE );
-                exit();
-            }
-            if ($dbcon->prepare("DELETE FROM `tb3_load_3` WHERE `load_3_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_load_3'], JSON_UNESCAPED_UNICODE );
-                exit();
-            }
-            if ($dbcon->prepare("DELETE FROM `tb3_load_4` WHERE `load_4_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_load_4'], JSON_UNESCAPED_UNICODE );
-                exit();
-            }
-            if ($dbcon->prepare("DELETE FROM `tb3_load_5` WHERE `load_5_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_load_5'], JSON_UNESCAPED_UNICODE );
-                exit();
-            }
-            if ($dbcon->prepare("DELETE FROM `tb3_load_6` WHERE `load_6_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_load_6'], JSON_UNESCAPED_UNICODE );
-                exit();
-            }
-            if ($dbcon->prepare("DELETE FROM `tb3_load_7` WHERE `load_7_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_load_7'], JSON_UNESCAPED_UNICODE );
-                exit();
-            }
-            if ($dbcon->prepare("DELETE FROM `tb3_load_8` WHERE `load_8_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_load_8'], JSON_UNESCAPED_UNICODE );
-                exit();
-            }
-            if ($dbcon->prepare("DELETE FROM `tb3_load_9` WHERE `load_9_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_load_9'], JSON_UNESCAPED_UNICODE );
-                exit();
-            }
-            if ($dbcon->prepare("DELETE FROM `tb3_load_10` WHERE `load_10_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_load_10'], JSON_UNESCAPED_UNICODE );
-                exit();
-            }
-            if ($dbcon->prepare("DELETE FROM `tb3_load_11` WHERE `load_11_siteID` = :site_id")->execute($data) === FALSE) {
-                echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_load_11'], JSON_UNESCAPED_UNICODE );
+            if ($dbcon->prepare("DELETE FROM `tbn_userst` WHERE `userST_siteID`='$siteID'")->execute() === FALSE) {
+                echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_userst'], JSON_UNESCAPED_UNICODE );
                 exit();
             }
             echo json_encode(['status' => "Delete_success"], JSON_UNESCAPED_UNICODE );
@@ -805,14 +904,15 @@
     if($_POST["mode_insert"] == "edit_user"){
         $data = [
             'u_status' => $_POST["u_status"],
-            'u_stID' => $_POST["userST_id"]
+            'userST_id' => $_POST["userST_id"]
         ];
-        if ($dbcon->prepare("UPDATE `tb3_userst` SET `userST_user_status`=:u_status WHERE `userST_id`=:u_stID")->execute($data) === FALSE) {
-            echo json_encode(['status' => "Insert_Error",'tb'=>'tb3_userst'], JSON_UNESCAPED_UNICODE );
+        // echo json_encode($data);
+        // exit();
+        if ($dbcon->prepare("UPDATE `tbn_userst` SET `userST_level`=:u_status WHERE `userST_id`=:userST_id")->execute($data) === FALSE) {
+            echo json_encode(['status' => "Insert_Error",'tb'=>'tbn_userst'], JSON_UNESCAPED_UNICODE );
             exit();
         }
         echo json_encode(['status' => "Insert_success", "data" => ""], JSON_UNESCAPED_UNICODE );
-        exit();
     }
     if($_POST["mode_insert"] == "delete_userST"){
         $puser_id = $_POST['user_id'];

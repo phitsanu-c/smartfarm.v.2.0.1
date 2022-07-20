@@ -38,7 +38,7 @@
     $account_id = $_SESSION['account_id'];
     $houseID = $row_1['house_id'];
     if($_SESSION['account_status'] > 2){
-        $row_6 = $dbcon->query("SELECT `userST_level` FROM `tbn_userst` WHERE `userST_accountID`=$account_id AND `userST_houseID`=$houseID")->fetch();
+        +
         $account_status = $row_6['userST_level'];
     }else {
         $account_status = $_SESSION['account_status'];

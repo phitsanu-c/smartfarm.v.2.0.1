@@ -43,7 +43,7 @@ if ($mqtt->connect(true,NULL,$username,$password)) {
             }
         }
         // if(substr($data_mq, 2) != 0){
-        //     $check_ulogin = $dbcon->query("SELECT COUNT(`fe_id`) FROM `tbn_login_re` WHERE `re_userID`='$account_id'")->fetch();
+        //     $check_ulogin = $dbcon->query("SELECT COUNT(`re_id`) FROM `tbn_login_re` WHERE `re_userID`='$account_id'")->fetch();
         //     if($check_ulogin[0] >= 1){
         //         echo json_encode(['name_login'  => "already logged in", 'a'=>$check_ulogin], JSON_UNESCAPED_UNICODE);
         //         exit();
@@ -56,16 +56,17 @@ if ($mqtt->connect(true,NULL,$username,$password)) {
             // print_r($rowc); echo $rowc['count_site'] ;exit();
             if($rowc['count_site'] == 1 ){ // 1 Site chack house
                 $userST_siteID = $rowc['userST_siteID'];
-                $check_uslogin = $dbcon->query("SELECT COUNT(`fe_id`) FROM `tbn_login_re` WHERE `re_siteID`='$userST_siteID'")->fetch();
+                $check_uslogin = $dbcon->query("SELECT COUNT(`re_id`) FROM `tbn_login_re` WHERE `re_siteID`='$userST_siteID'")->fetch();
                 if($check_uslogin[0] > 10){
                     echo json_encode(['name_login'  => "site > 10"], JSON_UNESCAPED_UNICODE);
                     exit();
                 }
                 $rowc2 = $dbcon->query("SELECT COUNT('userST_houseID') FROM `tbn_userst` WHERE `userST_accountID`='$account_id' AND userST_siteID = '$userST_siteID'")->fetch();
+                $row_6 = $dbcon->query("SELECT MAX(`userST_level`) FROM `tbn_userst` WHERE `userST_accountID`=$account_id AND userST_siteID = '$userST_siteID'")->fetch();
                 if($rowc2[0] == 1){ // == 1 Site  1 house
-                    $_SESSION["sn"] = array('count_site' => $rowc['count_site'], 'count_house' => $rowc2[0], 'siteID' => $userST_siteID, 'master' => $rowc['house_master'], 'en_url' => encode($rowc['house_webv'].','.$userST_siteID.','.$rowc['house_master']), 'account_status'=>$row_count["account_status"] );
+                    $_SESSION["sn"] = array('count_site' => $rowc['count_site'], 'count_house' => $rowc2[0], 'siteID' => $userST_siteID, 'master' => $rowc['house_master'], 'en_url' => encode($rowc['house_webv'].','.$userST_siteID.','.$rowc['house_master']), 'account_status'=>$row_6[0] );
                 }else{ // == 1 Site  > 1 house
-                    $_SESSION["sn"] = array('count_site' => $rowc['count_site'], 'count_house' => $rowc2[0], 'siteID' => $userST_siteID, 'en_url' => encode($rowc['house_webv'].','.$userST_siteID.','), 'account_status' => $row_count["account_status"] );
+                    $_SESSION["sn"] = array('count_site' => $rowc['count_site'], 'count_house' => $rowc2[0], 'siteID' => $userST_siteID, 'en_url' => encode($rowc['house_webv'].','.$userST_siteID.','), 'account_status' => $row_6[0] );
                 }
                 $log_login = [
                     'dt'   => date("Y-m-d").' '.date("H:i:s"),

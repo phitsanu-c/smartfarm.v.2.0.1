@@ -59,12 +59,12 @@ $.getJSON('routes/login.php', function(msg) {
                 // dataType: "json",
                 success: function(res_dash) {
                     $("#load_pages_house").html(res_dash);
-                    $('.sw_house').click(function(){
-                        window.location.hash =$(this).attr("url");
-                        location.reload();
-                        // alert($(this).attr("url"))
-                        // window.location.href = $(this).attr("url");
-                    })
+                    // $('.sw_house').click(function(){
+                    //     window.location.hash =$(this).attr("url");
+                    //     location.reload();
+                    //     // alert($(this).attr("url"))
+                    //     // window.location.href = $(this).attr("url");
+                    // })
                 }
             })
             if (house_master === '' || house_master.length != 8) { // chack sn != nail or ไม่ถูกต้อง
@@ -187,7 +187,17 @@ $.getJSON('routes/login.php', function(msg) {
             // }
         }
     }
-
+    if (msg.sn['account_status'] < 3) {
+        $('.menu2').show();
+        $('.menu3').show();
+        $('.menu4').show();
+        $('.menu5').show();
+    }else {
+        $('.menu2').hide();
+        $('.menu3').hide();
+        $('.menu4').hide();
+        $('.menu5').hide();
+    }
     // theme
     if (msg.theme === "dark-theme") {
         $("#toggleTheme").attr('checked', true);

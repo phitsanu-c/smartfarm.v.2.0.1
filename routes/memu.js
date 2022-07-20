@@ -73,6 +73,7 @@ $(".memu_compare").click(function(){
     $('#load_pages_site').hide();
     $('#load_pages_house').hide();
     $("#load_pages_compare").show().load('routes/tu/pages_compare.php?s='+url[1]);
+    $('#load_pages_profile').hide();
     $('.memu_setting').hide()
 })
 $(".memu_dash").click(function() {
