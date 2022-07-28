@@ -147,6 +147,7 @@ $.getJSON('routes/login.php', function(msg) {
                 $('.memu_control').hide();
                 $('.memu_compare').hide();
             } else { // site != nail
+                $("#load_pages_site").hide();
                 // $("#load_pages_house").load('views/pages_house.php?s=' + url[1]);
                 $.ajax({
                     url: "views/pages_house.php",
@@ -212,25 +213,30 @@ $.getJSON('routes/login.php', function(msg) {
         $(".sg_text").val("");
         $("#modal_sg").modal("show");
     });
-});
 
-// logout
-countdown(number = 1800); // วินาที
+    // logout
+    countdown(number = 1800); // วินาที
 
-function countdown() {
-    clearTimeout(countdown);
-    setTimeout(countdown, 1000);
-    // console.log(number)
-    // $('#redirect').html("Redirecting in " + number + " seconds.");
-    number--;
-    if (number < 0) {
-        number = 0;
-    }
-    if(number == 0){
+    function countdown() {
         clearTimeout(countdown);
-        logout();}
-    // $("#test_timr").html("countdown : " + number);
-}
+        setTimeout(countdown, 1000);
+        var dt = new Date();
+        var time = dt.getHours() + ":" + dt.getMinutes()+ ":" + dt.getSeconds();
+        // console.log(msg.dt.substring(11,19))
+        // $('#redirect').html("Redirecting in " + number + " seconds.");
+        number--;
+        if (number < 0) {
+            number = 0;
+        }
+        if(number == 0){
+            clearTimeout(countdown);
+            if(time >= msg.dt.substring(11,19)){
+                logout();
+            }
+        }
+        // $("#test_timr").html("countdown : " + number);
+    }
+});
 
 function logout() {
     $.ajax({

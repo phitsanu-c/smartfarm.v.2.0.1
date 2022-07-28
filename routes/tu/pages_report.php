@@ -58,9 +58,9 @@
 
                 <div class="d-sm-flex">
                     <div class="d-flex col-lg-6 col-xl-6 col-sm-12">
-                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_day">1 วัน</button>
-                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_week">1 สัปดาห์</button>
-                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_month">1 เดือน</button>
+                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_day">24 ชั่วโมง</button>
+                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_week">7 วัน</button>
+                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_month">30 วัน</button>
                             <button type="button" class="col-3 btn btn-outline-secondary px-2 all_from_to">กำหนดเอง</button>
                     </div>
                     <ul class="ms-auto col-lg-3 col-md-4 col-xl-3 col-12 nav nav-pills mode_sn" role="tablist">
@@ -113,7 +113,7 @@
                                 <thead>
                                     <tr>
                                         <!-- <th rowspan="2" class="text-center">#</th> -->
-                                        <th colspan="3" class="text-center text_autoTable"></th>
+                                        <th colspan="3" class="text-center"><b class="text_autoTable"></b></th>
                                         <th colspan="2" class="text-center">ตั้งเวลา 1</th>
                                         <th colspan="2" class="text-center">ตั้งเวลา 2</th>
                                         <th colspan="2" class="text-center">ตั้งเวลา 3</th>
@@ -1344,8 +1344,7 @@
         // table.clear().draw();
         $.ajax({
             type: "POST",
-            url: "routes/tu/report_control.php",
-            // url: "routes/tu/get_report_cn_table.php",
+            url: "routes/tu/get_report_control.php",
             data: {
                 house_master: house_master,
                 mode : mode_dwm,
@@ -1465,8 +1464,7 @@
         active_btn(mode_dwm);
         $.ajax({
             type: "POST",
-            url:'routes/tu/report_controlManual.php',
-            // url: "routes/tu/get_report_cn_table.php",
+            url:'routes/tu/get_report_controlManual.php',
             data: {
                 house_master: house_master,
                 mode : mode_dwm,

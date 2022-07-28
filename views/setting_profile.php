@@ -84,6 +84,12 @@
                                     <input type="tel" class="form-control pt_tel" placeholder="โทรศัพท์" value="<?= $_SESSION["account_tel"] ?>" disabled>
                                 </div>
                             </div>
+                            <div class="col-12">
+                                <label for="Mobite" class="form-label">Token Line</label>
+                                <div class="input-group input-group-lg"> <span class="input-group-text bg-transparent"><img src="public/images/icons/icons8-line.svg" style="width: 23px;"></span>
+                                    <input type="text" class="form-control pt_token" placeholder="Token Line" value="<?= $_SESSION["account_token"] ?>" disabled>
+                                </div>
+                            </div>
                             <!-- <div class="col-12"> -->
                                 <!-- <label for="Mobite" class="form-label">สถานะผู้ใช้งาน</label> -->
                                 <!-- <div class="input-group input-group-lg">
@@ -295,9 +301,9 @@
                         <div class="tab-pane fade <?php if($_POST['pt'] == 5){echo "show active";} ?>" id="p-sst" role="tabpanel">
                             <div class="d-sm-flex">
                                 <div class="d-flex col-lg-6 col-xl-6 col-12 ms-auto ">
-                                    <button type="button" class="col-3 btn btn-outline-secondary px-2 u_day">1 วัน</button>
-                                    <button type="button" class="col-3 btn btn-outline-secondary px-2 u_week">1 สัปดาห์</button>
-                                    <button type="button" class="col-3 btn btn-outline-secondary px-2 u_month">1 เดือน</button>
+                                    <button type="button" class="col-3 btn btn-outline-secondary px-2 u_day">วันนี้</button>
+                                    <button type="button" class="col-3 btn btn-outline-secondary px-2 u_week">7 วัน</button>
+                                    <button type="button" class="col-3 btn btn-outline-secondary px-2 u_month">30 วัน</button>
                                     <button type="button" class="col-3 btn btn-outline-secondary px-2 u_from_to">กำหนดเอง</button>
                                 </div>
                             </div>
@@ -349,6 +355,12 @@
                         <label for="Mobite" class="form-label">โทรศัพท์</label>
                         <div class="input-group input-group-lg"> <span class="input-group-text bg-transparent"><i class="fadeIn animated bx bx-mobile"></i></span>
                             <input type="tel" class="form-control border-start-0 p_tel" name="p_tel" placeholder="โทรศัพท์">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="Mobite" class="form-label">Token Line</label>
+                        <div class="input-group input-group-lg"> <span class="input-group-text bg-transparent"><img src="public/images/icons/icons8-line.svg" style="width: 23px;"></span>
+                            <input type="text" class="form-control border-start-0 pt_token" name="pt_token" placeholder="Token Line" value="<?= $_SESSION["account_token"] ?>">
                         </div>
                     </div>
                 </form>
@@ -489,10 +501,10 @@
                                         <select class="form-control h_site" name="h_site">
                                             <?php
                                                 echo '<option value="0">เลือกสถานที่</option>';
-                                                if ($_SESSION["login_status"] != 1) {
-                                                    $site_stmt = $dbcon->prepare("SELECT * FROM `tb3_userst` INNER JOIN tb2_site ON tb3_userst.userST_siteID = tb2_site.site_id WHERE tb3_userst.userST_loginID = '$user_id' GROUP BY userST_siteID ");
+                                                if ($_SESSION["sn"]['account_status'] != 1) {
+                                                    $site_stmt = $dbcon->prepare("SELECT * FROM `tbn_userst` INNER JOIN tbn_site ON tbn_userst.userST_siteID = tbn_site.site_id WHERE tbn_userst.userST_accountID = '$user_id' GROUP BY userST_siteID ");
                                                 } else {
-                                                    $site_stmt = $dbcon->prepare("SELECT * FROM tb2_site ");
+                                                    $site_stmt = $dbcon->prepare("SELECT * FROM tbn_site ");
                                                 }
                                                 $site_stmt->execute();
                                                 while ($row_site = $site_stmt->fetch(PDO::FETCH_BOTH)) {
@@ -870,6 +882,7 @@
                     $('.pt_name').val(parseJSON.data.user);
                     $('.pt_email').val(parseJSON.data.email);
                     $('.pt_tel').val(parseJSON.data.tel);
+                    $('.pt_token').val(parseJSON.data.token)
                     $.ajax({
                         url: "views/setting_profile.php",
                         method: "post",

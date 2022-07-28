@@ -112,7 +112,7 @@
     elseif ($_POST['mode_report'] == 're_cnAuto') { // re_cnManual
         $table_name = 'tbn_control_au'.$_POST['load_select'];
         $channel[] = "SUBSTRING(load_timestamp,1,10) AS nDate";
-        $channel[] = "SUBSTRING(load_timestamp,-8, 5) AS nTime";
+        $channel[] = "SUBSTRING(load_timestamp,-8, 8) AS nTime";
         $channel[] = "load_user";
         $channel[] = "load_s_1";
         $channel[] = "load_e_1";
@@ -129,7 +129,7 @@
 
         $channel1 = implode(', ',$channel);
         // exit();
-        $sql = "SELECT $channel1 FROM $table_name WHERE load_sn = '$house_master' AND load_timestamp BETWEEN '$start_day' AND '$stop_day' ORDER BY load_timestamp ";
+        $sql = "SELECT $channel1 FROM $table_name WHERE load_sn = '$house_master' AND load_timestamp BETWEEN '$start_day' AND '$stop_day' ORDER BY load_timestamp DESC";
         $stmt = $dbcon->query($sql);
         $data0 = array();
         $i=1;
@@ -211,7 +211,7 @@
         // $stop_day2 = date("Y/m/d H:i:s",strtotime($stop_day));
         // exit();
         $sel_all_every = $_POST["sel_all_every"];
-        $sql = "SELECT $channel1 FROM tbn_data_tu WHERE data_sn = '$house_master2' AND data_timestamp BETWEEN '$start_day' AND '$stop_day' AND mod(minute(`data_timestamp`),'$sel_all_every') = 0 ORDER BY data_timestamp ";
+        $sql = "SELECT $channel1 FROM tbn_data_tu WHERE data_sn = '$house_master2' AND data_timestamp BETWEEN '$start_day' AND '$stop_day' AND mod(minute(`data_timestamp`),'$sel_all_every') = 0 ORDER BY data_timestamp DESC";
         $stmt = $dbcon->query($sql);
         $data0 = array();
         $i=1;

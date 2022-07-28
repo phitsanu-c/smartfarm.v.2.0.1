@@ -79,11 +79,12 @@
             'p4' => $_POST["p_tel"],
             'p5' => $n_img,
             'p6' => $n_pass2,
-            'p7' => $user_id
+            'p7' => $_POST["pt_token"],
+            'p_id' => $user_id
         ];
         // echo json_encode($data);
         // exit();
-        $sql = "UPDATE `tbn_account` SET `account_user`=:p1, `account_pass`=:p2, `account_email`=:p3, `account_tel`=:p4, `account_img`=:p5, `account_pa`=:p6 WHERE `account_id`=:p7";
+        $sql = "UPDATE `tbn_account` SET `account_user`=:p1, `account_pass`=:p2, `account_email`=:p3, `account_tel`=:p4, `account_img`=:p5, `account_pa`=:p6, `account_token`=:p7 WHERE `account_id`=:p_id";
         if ($dbcon->prepare($sql)->execute($data) === TRUE) {
             $_SESSION["account_user"] = $n_name;
             $_SESSION["account_p"] = [$n_pass,$n_pass2];
@@ -94,11 +95,13 @@
                 $_SESSION["account_img"] = $n_img;
             }
             $_SESSION["account_tel"] = $_POST["p_tel"];
+            $_SESSION["account_token"] = $_POST["pt_token"];
             $return = [
                 'user'  => $_SESSION["account_user"],
                 'image' => $_SESSION["account_img"],
                 'email' => $_SESSION["account_email"],
-                'tel'   => $_SESSION["account_tel"]
+                'tel'   => $_SESSION["account_tel"],
+                'token' => $_SESSION["account_token"]
             ];
             echo json_encode(['status' => "Insert_success", "data" => $return], JSON_UNESCAPED_UNICODE );
             exit();

@@ -21,7 +21,7 @@
     }
 
     $channel[] = "SUBSTRING(cn_timestamp,1,10) AS nDate";
-    $channel[] = "SUBSTRING(cn_timestamp,-8, 5) AS nTime";
+    $channel[] = "SUBSTRING(cn_timestamp,-8, 8) AS nTime";
     $channel[] = "cn_user";
     $channel[] = "cn_mode";
     if($config_cn['cn_status_1'] == 1){$channel[] = "cn_load_1 AS dripper_1";}
@@ -68,7 +68,7 @@
         </thead>
         <tbody>
             <?php
-                $sql = "SELECT $channel1 FROM tbn_control_log WHERE cn_sn = '$house_master' AND cn_timestamp BETWEEN '$start_day' AND '$stop_day' ORDER BY cn_timestamp ";
+                $sql = "SELECT $channel1 FROM tbn_control_log WHERE cn_sn = '$house_master' AND cn_timestamp BETWEEN '$start_day' AND '$stop_day' ORDER BY cn_timestamp DESC";
                 $stmt = $dbcon->query($sql);
                 $rowCount = $stmt->rowCount();
                 $colcount = $stmt->columnCount();

@@ -37,9 +37,9 @@
             <div class="card-body">
                 <div class="d-sm-flex">
                     <div class="d-flex col-lg-6 col-xl-6 col-12  ">
-                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_day">1 วัน</button>
-                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_week">1 สัปดาห์</button>
-                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_month">1 เดือน</button>
+                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_day">24 ชั่วโมง</button>
+                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_week">7 วัน</button>
+                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_month">30 วัน</button>
                             <button type="button" class="col-3 btn btn-outline-secondary px-2 all_from_to">กำหนดเอง</button>
 
                     </div>

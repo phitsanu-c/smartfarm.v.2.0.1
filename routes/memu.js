@@ -14,11 +14,11 @@ $(".memu_site").click(function() {
     }
     $(".memu_report").hide()
     $('.memu_control').hide()
-    if(url[0] == 4){
-        $(".memu_compare").show();
-    }else{
+    // if(url[0] == 4){
+    //     $(".memu_compare").show();
+    // }else{
         $(".memu_compare").hide();
-    }
+    // }
     $('#load_pages_site').show();
     $('#load_pages_house').hide();
     $('#load_pages_compare').hide();

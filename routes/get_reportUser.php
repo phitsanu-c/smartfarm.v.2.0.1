@@ -19,22 +19,22 @@
             if($status == 'day'){
                 // $start_day = date("Y/m/d", strtotime('-1 day'));
                 $_day = date("Y-m-d");
-                $stmt = $dbcon->prepare("SELECT * FROM `tbn_login_log` INNER JOIN `tbn_account`ON  `tbn_login_log`.`logLogin_UserID`= `tbn_account`.`account_id` WHERE `logLogin_siteID`=$siteID AND substr(`logLogin_timestamp`, 1,10) = '$_day' GROUP BY `logLogin_timestamp` ORDER BY `logLogin_timestamp` ");
+                $stmt = $dbcon->prepare("SELECT * FROM `tbn_login_log` INNER JOIN `tbn_account` ON `tbn_login_log`.`logLogin_UserID` = `tbn_account`.`account_id` WHERE `logLogin_siteID`= '$siteID' AND substr(`logLogin_timestamp`, 1,10) = '$_day' GROUP BY `logLogin_timestamp` ORDER BY `logLogin_timestamp` ");
             }
             if($status == 'week'){
                 $start_day = date("Y-m-d", strtotime('-6 day'));
                 $stop_day = date("Y-m-d");
-                $stmt = $dbcon->prepare("SELECT * FROM `tbn_login_log` INNER JOIN `tbn_account`ON  `tbn_login_log`.`logLogin_UserID`= `tbn_account`.`account_id` WHERE `logLogin_siteID`=$siteID AND substr(`logLogin_timestamp`, 1,10) BETWEEN '$start_day' AND '$stop_day' GROUP BY `logLogin_timestamp` ORDER BY `logLogin_timestamp` ");
+                $stmt = $dbcon->prepare("SELECT * FROM `tbn_login_log` INNER JOIN `tbn_account` ON `tbn_login_log`.`logLogin_UserID` = `tbn_account`.`account_id` WHERE `logLogin_siteID`= '$siteID' AND substr(`logLogin_timestamp`, 1,11) BETWEEN '$start_day' AND '$stop_day' GROUP BY `logLogin_timestamp` ORDER BY `logLogin_timestamp` ");
             }
             if($status == 'month'){
                 $start_day = date("Y-m-d", strtotime('-30 day'));
                 $stop_day = date("Y-m-d");
-                $stmt = $dbcon->prepare("SELECT * FROM `tbn_login_log` INNER JOIN `tbn_account`ON  `tbn_login_log`.`logLogin_UserID`= `tbn_account`.`account_id` WHERE `logLogin_siteID`=$siteID AND substr(`logLogin_timestamp`, 1,10) BETWEEN '$start_day' AND '$stop_day' GROUP BY `logLogin_timestamp` ORDER BY `logLogin_timestamp` ");
+                $stmt = $dbcon->prepare("SELECT * FROM `tbn_login_log` INNER JOIN `tbn_account` ON `tbn_login_log`.`logLogin_UserID`= `tbn_account`.`account_id` WHERE `logLogin_siteID`= '$siteID' AND substr(`logLogin_timestamp`, 1,10) BETWEEN '$start_day' AND '$stop_day' GROUP BY `logLogin_timestamp` ORDER BY `logLogin_timestamp` ");
             }
             if($status == 'from_to'){
                 $start_day = $_POST['s_time'];
                 $stop_day = $_POST['e_time'];
-                $stmt = $dbcon->prepare("SELECT * FROM `tbn_login_log` INNER JOIN `tbn_account`ON  `tbn_login_log`.`logLogin_UserID`= `tbn_account`.`account_id` WHERE `logLogin_siteID`=$siteID AND substr(`logLogin_timestamp`, 1,10) BETWEEN '$start_day' AND '$stop_day' GROUP BY `logLogin_timestamp` ORDER BY `logLogin_timestamp` ");
+                $stmt = $dbcon->prepare("SELECT * FROM `tbn_login_log` INNER JOIN `tbn_account`ON  `tbn_login_log`.`logLogin_UserID`= `tbn_account`.`account_id` WHERE `logLogin_siteID`= '$siteID' AND substr(`logLogin_timestamp`, 1,10) BETWEEN '$start_day' AND '$stop_day' GROUP BY `logLogin_timestamp` ORDER BY `logLogin_timestamp` ");
             }
             $stmt->execute();
             $count = $stmt->rowCount();

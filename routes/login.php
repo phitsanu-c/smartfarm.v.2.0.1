@@ -96,14 +96,15 @@ if ($mqtt->connect(true,NULL,$username,$password)) {
         }
         $_SESSION["account_email"] = $row_count["account_email"];
         $_SESSION["account_tel"] = $row_count["account_tel"];
+        $_SESSION["account_token"] = $row_count["account_token"];
         $_SESSION["account_status"] = $row_count["account_status"];
         $log_re = [
-            'dt'   => date("Y-m-d").' '.date("H:i:s", strtotime('3 minute')),
+            'dt'   => date("Y-m-d").' '.date("H:i:s", strtotime('31 minute')),
             'userID'  => $_SESSION['account_id'],
             'siteID'  => $_SESSION['sn']['siteID']
         ];
         $dbcon->prepare("INSERT INTO `tbn_login_re`(`re_datetime`, `re_userID`, `re_siteID`) VALUES (:dt, :userID, :siteID)")->execute($log_re);
-        $new_dt = ['account_id' => $_SESSION['account_id'], 'dt' => date("Y-m-d").' '.date("H:i:s", strtotime('31 minute')), 'siteID' => $_SESSION["sn"]['siteID'], 'count_site' => $_SESSION['sn']['count_site']]; // '-6 hour'));
+        $new_dt = ['account_id' => $_SESSION['account_id'], 'name' => $_SESSION["account_user"], 'dt' => date("Y-m-d").' '.date("H:i:s", strtotime('31 minute')), 'siteID' => $_SESSION["sn"]['siteID'], 'count_site' => $_SESSION['sn']['count_site']]; // '-6 hour'));
         $decodedJson[$_SESSION['account_id']] = $new_dt;
         $message = json_encode($decodedJson);
         $mqtt->publish($topic,$message, 1);
@@ -115,7 +116,8 @@ if ($mqtt->connect(true,NULL,$username,$password)) {
             'theme' => $_SESSION["login_theme"],
             'email' => $_SESSION["account_email"],
             'tel' => $_SESSION["account_tel"],
-            'sn'  => $_SESSION["sn"]
+            'sn'  => $_SESSION["sn"],
+            'dt' => date("Y-m-d").' '.date("H:i:s", strtotime('31 minute'))
         ], JSON_UNESCAPED_UNICODE);
         exit();
     }
@@ -185,7 +187,7 @@ if ($mqtt->connect(true,NULL,$username,$password)) {
                 echo json_encode(['name_login'  => ""]);
                 exit();
             }else {
-                $new_dt = ['account_id' => $_SESSION['account_id'], 'dt' => date("Y-m-d").' '.date("H:i:s", strtotime('31 minute')), 'siteID' => $_SESSION["sn"]['siteID'], 'count_site' => $_SESSION['sn']['count_site']]; // '-6 hour'));
+                $new_dt = ['account_id' => $_SESSION['account_id'], 'name' => $_SESSION["account_user"], 'dt' => date("Y-m-d").' '.date("H:i:s", strtotime('31 minute')), 'siteID' => $_SESSION["sn"]['siteID'], 'count_site' => $_SESSION['sn']['count_site']]; // '-6 hour'));
                 $decodedJson[$_SESSION['account_id']] = $new_dt;
                 $message = json_encode($decodedJson);
                 $mqtt->publish($topic,$message, 1);
@@ -204,7 +206,8 @@ if ($mqtt->connect(true,NULL,$username,$password)) {
             'theme' => $_SESSION["login_theme"],
             'email' => $_SESSION["account_email"],
             'tel' => $_SESSION["account_tel"],
-            'sn'  => $_SESSION["sn"]
+            'sn'  => $_SESSION["sn"],
+            'dt' => date("Y-m-d").' '.date("H:i:s", strtotime('31 minute'))
         ], JSON_UNESCAPED_UNICODE);
     } else {
         echo json_encode(['name_login'  => ""]);
