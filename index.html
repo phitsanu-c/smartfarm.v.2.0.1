@@ -44,10 +44,12 @@
     <link href="public/stylesheets/css.css" rel="stylesheet">
     <title>Smart Green House by AI 5.0 AGRICULTURE INNOVATION</title>
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+
     <!--plugins-->
     <script src="public/javascripts/jquery.min.js"></script>
     <script src="public/javascripts/decode.js"></script>
     <script src="routes/chack_login.js"></script>
+
     <style>
         /* .parent {
         display: flex;
@@ -168,8 +170,8 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item menu_setting" menu="1" href="javascript:;"><i class="bx bx-user"></i><span>บัญชี</span></a></li>
-                            <li><a class="dropdown-item menu_setting menu2" menu="2" href="javascript:;"><i class="bx bx-cog"></i><span>ตั้งค่าสถานที่</span></a></li>
-                            <li><a class="dropdown-item menu_setting menu3" menu="3" href="javascript:;"><i class="bx bx-cog"></i><span>ตั้งค่าโรงเรือน</span></a></li>
+                            <!-- <li><a class="dropdown-item menu_setting menu2" menu="2" href="javascript:;"><i class="bx bx-cog"></i><span>ตั้งค่าสถานที่</span></a></li>
+                            <li><a class="dropdown-item menu_setting menu3" menu="3" href="javascript:;"><i class="bx bx-cog"></i><span>ตั้งค่าโรงเรือน</span></a></li> -->
                             <li><a class="dropdown-item menu_setting menu4" menu="4" href="javascript:;"><i class="bx bx-cog"></i><span>กำหนดสิทธิ์ผู้ใช้งาน</span></a></li>
                             <li><a class="dropdown-item menu_setting menu5" menu="5" href="javascript:;"><i class="bx bx-cog"></i><span>ประวัติการเข้าสู่ระบบ</span></a></li>
                             <!-- <li><a class="dropdown-item btn_modal_sg" href="javascript:"><i class="lni lni-headphone-alt"></i><span>รายงานปัญหา</span></a></li> -->
@@ -381,7 +383,7 @@
 
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
-    <script src="public/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
+    <script src="public/plugins/apexcharts-bundle/js/apexcharts.js"></script>
 
     <script src="routes/memu.js"></script>
     <!-- <script src="https://unpkg.com/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script> -->
@@ -391,7 +393,548 @@
             logout()
         });
         if (house_master.length == 8) {
-            if (url[0] ==3) {
+            var loading = verticalNoTitle();
+            if (url[0] == 2) {
+                $.ajax({
+                    url: "routes/kmu/get_config.php",
+                    method: "post",
+                    data: {
+                        house_master: house_master
+                    },
+                    dataType: "json",
+                    success: function(res) {
+                        // console.log(res);
+                        var config_sn = res.config_sn;
+                        var config_cn = res.config_cn;
+                        var set_maxmin = res.set_maxmin;
+                        var sensor = res.sensor;
+                        var data_temp_out = [];
+                        var data_temp_in = [];
+                        var data_hum_out = [];
+                        var data_hum_in = [];
+                        var data_light_out = [];
+                        var data_light_in = [];
+                        var data_soil_in1 = [];
+                        var data_soil_in2 = [];
+                        check_menu_control()
+                        function check_menu_control(){
+                            if(res.userLevel < 3){
+                                if(getArraySum(res.controlstatus) > 0){
+                                    $('.memu_control').show()
+                                }else {
+                                    $('.memu_control').hide()
+                                }
+                            }else {
+                                $('.memu_control').hide()
+                            }
+                        }
+                        $(".memu_dash").click(function() {
+                            check_menu_control();
+                        });
+                        $(".memu_dash").show().addClass("mm-active");
+                        $(".memu_report").show();
+                        $(".memu_compare").hide();
+                        $('#load_pages_dashboard').show();
+                        $.ajax({
+                            url: "routes/kmu/pages_dashboard.php",
+                            method: "post",
+                            data: {
+                                data: res,
+                            },
+                            // dataType: "json",
+                            success: function(res_dash) {
+                                $("#load_pages").html(res_dash);
+                                // Global variables
+                                var client = null;
+                                // These are configs
+                                var hostname = "203.150.37.144"; //'103.2.115.15'; // 203.150.37.144   decccloud.com
+                                var port = "8083";
+                                var clientId = "mqtt_js_3074" + parseInt(Math.random() * 100000, 10);
+                                var count = 0;
+
+                                function connect() {
+                                    client = new Paho.MQTT.Client(hostname, Number(port), clientId);
+                                    console.info('Connecting to Server: Hostname: ', hostname, '. Port: ', port, '. Client ID: ', clientId);
+
+                                    client.onConnectionLost = onConnectionLost;
+                                    client.onMessageArrived = onMessageArrived;
+
+                                    var options = {
+                                        onSuccess: onConnect, // after connected, subscribes
+                                        onFailure: onFail // useful for logging / debugging
+                                    };
+                                    // connect the client
+                                    client.connect(options);
+                                    console.info('Connecting...');
+                                }
+                                // ---------------------------------------------------------------------------------------
+                                function onConnect(context) {
+                                    console.log("Client Connected");
+                                    // And subscribe to our topics	-- both with the same callback function
+                                    options = {
+                                        qos: 1,
+                                        onSuccess: function (context) {
+                                            // console.log("ไม่สามารถเชื่อมต่อกับ เครื่อง ได้ !!!!");
+                                            // setInterval(function() {
+                                            //     location.reload();
+                                            // }, 30000);
+                                            console.log("subscribed");
+                                        }
+                                    }
+                                    client.subscribe(house_master + "/1/data_update/data_filter", options);
+                                    client.subscribe(house_master + "/1/control/mode", options);
+                                    client.subscribe(house_master + "/1/control/control_st_1", options);
+                                    client.subscribe(house_master + "/1/control/control_st_2", options);
+                                    client.subscribe(house_master + "/1/control/control_st_3", options);
+                                    client.subscribe(house_master + "/1/control/control_st_4", options);
+                                    client.subscribe(house_master + "/1/control/control_st_5", options);
+                                }
+
+                                function onFail(context) {
+                                    location.reload();
+                                }
+
+                                function onConnectionLost(responseObject) {
+                                    if (responseObject.errorCode !== 0) {
+                                        console.log("Connection Lost: " + responseObject.errorMessage);
+                                        connect();
+                                        // location.reload();
+                                        // window.alert("Someone else took my websocket!\nRefresh to take it back.");
+                                    }
+                                }
+                                function onMessageArrived(message) {
+                                    if(message.destinationName == house_master + "/1/data_update/data_filter") {
+                                        var result = message.payloadString;
+                                        var p_json = $.parseJSON(result);
+                                        var parseJSON = p_json['data_update']['data'][0];
+                                        // console.log('parseJSON')
+                                        var time_t = parseJSON['time'];
+                                        var ntime = time_t.substring(0, 5);
+                                        $(".date").html(parseJSON['date']+' '+ntime);
+                                        // $(".time").html(ntime);
+                                        var data_ = parseJSON['data']
+                                        // console.log(data_)
+                                        // return false
+                                        if(parseJSON['date']+' '+ntime > moment(new Date()).add(-30, 'minutes').format('YYYY/MM/DD HH:mm') ){
+                                            $('.status_timeUpdate').html('ออนไลน์').addClass('text-success')
+                                        }else {
+                                            $('.status_timeUpdate').html('ออฟไลน์').addClass('text-danger')
+                                        }
+                                        for (var i = 1; i <= 8; i++) {
+                                            // console.log(config_sn['sn_sensor_'+i])
+                                            //
+                                            if (config_sn['sn_status_' + i] == 1) {
+                                                if (i == 1) {
+                                                    dash_status(sn_data = (data_['data_st2_3'] * 1).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                                                } else if (i == 2) {
+                                                    dash_status(sn_data = (data_['data_st2_4'] * 1).toFixed(1), max = set_maxmin.Hmax, min = set_maxmin.Hmin)
+                                                } else if (i == 3) {
+                                                    dash_status(sn_data = (data_['data_st2_2'] * 1).toFixed(1), max = set_maxmin.Lmax, min = set_maxmin.Lmin)
+                                                } else if (i == 4) {
+                                                    dash_status(sn_data = (data_['data_st1_3'] * 1).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                                                } else if (i == 5) {
+                                                    dash_status(sn_data = (data_['data_st1_4'] * 1).toFixed(1), max = set_maxmin.Hmax, min = set_maxmin.Hmin)
+                                                } else if (i == 6) {
+                                                    dash_status(sn_data = (data_['data_st1_2'] * 1).toFixed(1), max = set_maxmin.Lmax, min = set_maxmin.Lmin)
+                                                } else if (i == 7) {
+                                                    dash_status(sn_data = (data_['data_st3_2'] * 1).toFixed(1), max = set_maxmin.Smax, min = set_maxmin.Smin)
+                                                } else if (i == 8) {
+                                                    dash_status(sn_data = (data_['data_st3_4'] * 1).toFixed(1), max = set_maxmin.Smax, min = set_maxmin.Smin)
+                                                }
+                                            }
+                                            function dash_status(sn_data, max, min) {
+                                                if (sn_data >= max) {
+                                                    $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_imgMax);
+                                                } else if (sn_data < min) {
+                                                    $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_imgMin);
+                                                } else {
+                                                    $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_imgNor);
+                                                }
+                                                if (sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_unit == 1) {
+                                                    $(".dash_data__" + i).html(sn_data + " ℃");
+                                                } else {
+                                                    $(".dash_data__" + i).html(sn_data + " " + sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_unit);
+                                                }
+                                            }
+                                        }
+                                        return false
+                                        // Chart ----------------------------------------
+                                        data_temp_out.shift();
+                                        data_temp_in.shift();
+                                        data_temp_out.push({
+                                            x: parseJSON['date']+' - '+ntime,
+                                            y:(data_['data_st2_3'] * 1).toFixed(1)
+                                        })
+                                        data_temp_in.push({
+                                            x: parseJSON['date']+' - '+ntime,
+                                            y:(data_['data_st1_3'] * 1).toFixed(1)
+                                        })
+                                        // -------------------
+                                        data_hum_out.shift();
+                                        data_hum_in.shift();
+                                        data_hum_out.push({
+                                            x: parseJSON['date']+' - '+ntime,
+                                            y: (data_['data_st2_4'] * 1).toFixed(1)
+                                        })
+                                        data_hum_in.push({
+                                            x: parseJSON['date']+' - '+ntime,
+                                            y: (data_['data_st1_4'] * 1).toFixed(1)
+                                        })
+                                        // -------------------
+                                        data_light_out.shift();
+                                        data_light_in.shift();
+                                        data_light_out.push({
+                                            x: parseJSON['date']+' - '+ntime,
+                                            y:(data_['data_st2_2'] * 1).toFixed(1)
+                                        })
+                                        data_light_in.push({
+                                            x: parseJSON['date']+' - '+ntime,
+                                            y:(data_['data_st1_2'] * 1).toFixed(1)
+                                        })
+                                        // -------------------
+                                        data_soil_in1.shift();
+                                        data_soil_in2.shift();
+                                        data_soil_in1.push({
+                                            x: parseJSON['date']+' - '+ntime,
+                                            y:(data_['data_st3_2'] * 1).toFixed(1)
+                                        })
+                                        data_soil_in2.push({
+                                            x: parseJSON['date']+' - '+ntime,
+                                            y:(data_['data_st3_4'] * 1).toFixed(1)
+                                        })
+                                    }
+                                    else if (message.destinationName == house_master + "/1/control/mode") {
+                                        var cont_status = message.payloadString;
+                                        if (cont_status === "on") { //Auto
+                                            $('.dash_mode').html('โหมดอัตโนมัติ')
+                                            $('.sw_mode_Auto').addClass('btn-success').removeClass('btn-outline-success')
+                                            $('.sw_mode_Manual').removeClass('btn-success').addClass('btn-outline-success')
+                                            $('.ul_Auto').show();
+                                            $('.ul_Manual').hide();
+                                        } else {
+                                            $('.dash_mode').html('โหมดกำหนดเอง');
+                                            $('.sw_mode_Auto').removeClass('btn-success').addClass('btn-outline-success');
+                                            $('.sw_mode_Manual').addClass('btn-success').removeClass('btn-outline-success');
+                                            $('.ul_Auto').hide();
+                                            $('.ul_Manual').show();
+                                        }
+                                    }
+                                    else if (message.destinationName == house_master + "/1/control/control_st_1") {
+                                        var cont_status = message.payloadString;
+                                        if(cont_status === "off"){
+                                            $(".dash_img_con_1").attr("src", "public/images/control/TU/sprinkler-off.svg");
+                                            $('.sw_manual_on_1').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="40" />');
+                                            $('.sw_manual_off_1').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="40" />');
+                                        }
+                                        else {
+                                            $(".dash_img_con_1").attr("src", "public/images/control/TU/sprinkler-on.svg");
+                                            $('.sw_manual_on_1').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="40" />');
+                                            $('.sw_manual_off_1').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="40" />');
+                                        }
+                                    }
+                                    else if (message.destinationName == house_master + "/1/control/control_st_2") {
+                                        var cont_status = message.payloadString;
+                                        if (cont_status === "off") {
+                                            $(".dash_img_con_2").attr("src", "public/images/control/TU/sprinkler-off.svg");
+                                            $('.sw_manual_on_2').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="40" />');
+                                            $('.sw_manual_off_2').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="40" />');
+                                            // $(".sw_manual_2").bootstrapToggle('off');
+                                        } else {
+                                            $(".dash_img_con_2").attr("src", "public/images/control/TU/sprinkler-on.svg");
+                                            $('.sw_manual_on_2').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="40" />');
+                                            $('.sw_manual_off_2').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="40" />');
+                                            // $(".sw_manual_2").bootstrapToggle('on');
+                                        }
+                                    }
+                                    else if (message.destinationName == house_master + "/1/control/control_st_3") {
+                                        var cont_status = message.payloadString;
+                                        if (cont_status === "off") {
+                                            $(".dash_img_con_3").attr("src", "public/images/control/TU/foggy-off.svg");
+                                            $('.sw_manual_on_3').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="40" />');
+                                            $('.sw_manual_off_3').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="40" />');
+                                            // $(".sw_manual_3").bootstrapToggle('off');
+                                        } else {
+                                            $(".dash_img_con_3").attr("src", "public/images/control/TU/foggy-on.svg");
+                                            $('.sw_manual_on_3').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="40" />');
+                                            $('.sw_manual_off_3').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="40" />');
+                                            // $(".sw_manual_3").bootstrapToggle('on');
+                                        }
+                                    }
+                                    else if (message.destinationName == house_master + "/1/control/control_st_4") {
+                                        var cont_status = message.payloadString;
+                                        if (cont_status === "off") {
+                                            $(".dash_img_con_4").attr("src", "public/images/control/foggy_OFF.svg");
+                                            $('.sw_manual_on_4').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="40" />');
+                                            $('.sw_manual_off_4').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="40" />');
+                                            // $(".sw_manual_4").bootstrapToggle('off');
+                                        } else {
+                                            $(".dash_img_con_4").attr("src", "public/images/control/foggy_ON.svg");
+                                            $('.sw_manual_on_4').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="40" />');
+                                            $('.sw_manual_off_4').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="40" />');
+                                            // $(".sw_manual_4").bootstrapToggle('on');
+                                        }
+                                    }
+                                    else if (message.destinationName == house_master + "/1/control/control_st_5") {
+                                        var cont_status = message.payloadString;
+                                        if (cont_status === "off") {
+                                            $(".dash_img_con_5").attr("src", "public/images/control/Roof_OFF2.png");
+                                            $('.sw_manual_on_5').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="40" />');
+                                            $('.sw_manual_off_5').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="40" />');
+                                            // $(".sw_manual_5").bootstrapToggle('off');
+                                        } else {
+                                            $(".dash_img_con_5").attr("src", "public/images/control/Roof_ON2.png");
+                                            $('.sw_manual_on_5').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="40" />');
+                                            $('.sw_manual_off_5').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="40" />');
+                                            // $(".sw_manual_5").bootstrapToggle('on');
+                                        }
+                                    }
+                                }// exit_message
+                                connect();
+                                loadingOut(loading);
+                            }
+                        });
+                        // $.ajax({
+                        //     url: "routes/kmu/pages_report.php",
+                        //     method: "post",
+                        //     data: {
+                        //         data: res,
+                        //         s_sensor: s_sensor,
+                        //         count_cn: getArraySum(res.controlstatus)
+                        //     },
+                        //     // dataType: "json",
+                        //     success: function(res_dash) {
+                        //         $("#load_pages_report").html(res_dash);
+                        //     }
+                        // });
+                        var optionsLine = {
+                            chart: {
+                                id: 'realtime',
+                                foreColor: '#9ba7b2',
+                                height: 560,
+                                type: 'line',
+                                toolbar: {
+                                    show: false,
+                                    tools: {
+                                        download: false,
+                                        selection: true,
+                                         zoom: true,
+                                         zoomin: true,
+                                         zoomout: true,
+                                         pan: true,
+                                    }
+                                },
+                                dropShadow: {
+                                    enabled: true,
+                                    top: 3,
+                                    left: 2,
+                                    blur: 4,
+                                    opacity: 0.1,
+                                }
+                            },
+                            stroke: {
+                                curve: 'smooth',
+                                width: 3
+                            },
+                            // colors: ["#0d6efd", '#212529'],
+                            // series: [{
+                            //   data: data.slice()
+                            // }],
+                            series: [],
+                            // [{
+                            //     name: "temp_out",
+                            //     data: res.data.temp_out//[1, 15, 56, 20, 33, 27]
+                            // }, {
+                            //     name: "temp_in",
+                            //     data: res.data.temp_in//[30, 33, 21, 42, 19, 32]
+                            // }],
+                            title: {
+                                // text: 'Multiline Chart',
+                                align: 'left',
+                                offsetY: 30,
+                                // offsetX: 20
+                            },
+                            animations: {
+                              enabled: true,
+                              easing: 'linear',
+                              // dynamicAnimation: {
+                              //   speed: 1000
+                              // }
+                            },
+                            markers: {
+                                size: 1,
+                                strokeWidth: 0,
+                                hover: {
+                                    size: 6
+                                }
+                            },
+                            grid: {
+                                show: true,
+                                padding: {
+                                    bottom: 0
+                                }
+                            },
+                            xaxis: {
+                                type: 'datetime',
+                                // categories:res.data.timestamp,
+                                labels: {
+                                    datetimeUTC: false,
+                                    // format: 'dd/MM HH:mm',
+                                    datetimeFormatter: {
+                                        year: 'yyyy',
+                                        month: 'MMM \'yy',
+                                        day: 'dd MMM',
+                                        hour: 'HH:mm'
+                                    }
+                                }
+                            },
+                            legend: {
+                                // position: 'top',
+                                // horizontalAlign: 'right',
+                                // offsetY: -30
+                            },
+                            fill: {
+                                type: "solid",
+                                fillOpacity: 0.7
+                            },
+                            noData: {
+                                text: 'Loading...'
+                            },
+                            tooltip: {
+                                x: {
+                                    format: 'yyyy-MM-dd HH:mm'
+                                },
+                            }
+                        }
+                        var chartLine1 = new ApexCharts(document.querySelector('#chart1'), optionsLine);
+                        chartLine1.render();
+                        var chartLine2 = new ApexCharts(document.querySelector('#chart2'), optionsLine);
+                        chartLine2.render();
+                        var chartLine3 = new ApexCharts(document.querySelector('#chart3'), optionsLine);
+                        chartLine3.render();
+                        var chartLine4 = new ApexCharts(document.querySelector('#chart4'), optionsLine);
+                        chartLine4.render();
+
+                        $.ajax({
+                            url: "routes/kmu/get_chart_realtime.php",
+                            method: "post",
+                            data: {
+                                house_master: house_master
+                            },
+                            dataType: "json",
+                            success: function(res) {
+                                console.log(res);
+                                // console.log(res.data);
+                                data_temp_out = res.data.temp_out;
+                                data_temp_in = res.data.temp_in;
+                                data_hum_out = res.data.hum_out;
+                                data_hum_in = res.data.hum_in;
+                                data_light_out = res.data.light_out;
+                                data_light_in = res.data.light_in;
+                                data_soil_in1 = res.data.soil_in1;
+                                data_soil_in2 = res.data.soil_in2;
+
+                                chartLine1.updateSeries([
+                                    {
+                                        name: 'อุณหภูมินอกโรงเรือน',
+                                        data: data_temp_out
+                                    }, {
+                                        name: 'อุณหภูมินอกโรงเรือน',
+                                        data: data_temp_in
+                                    }
+                                ])
+                                chartLine1.updateOptions({
+                                    title:  {text: 'อุณหภูมิ (℃)'},
+                                    tooltip: {
+                                        y: {
+                                        	formatter: function (val) {
+                                        		return  val + " ℃"
+                                        	}
+                                        }
+                                    },
+                                    // subtitle: {
+                                    //     text: '(℃)',
+                                    //     offsetY: 55,
+                                    //     offsetX: 10
+                                    // },
+                                })
+                                chartLine2.updateSeries([
+                                    {
+                                        name: 'ความชื้นนอกโรงเรือน',
+                                        data: data_hum_out
+                                    }, {
+                                        name: 'ความชื้นในโรงเรือน',
+                                        data: data_hum_in
+                                    }
+                                ]);
+                                chartLine2.updateOptions({
+                                    title:  {text: 'ความชื้นอากาศ (%Rh)'},
+                                    tooltip: {
+                                        y: {
+                                            formatter: function (val) {
+                                                return  val + " %Rh"
+                                            }
+                                        }
+                                    },
+                                    // subtitle: {
+                                    //     text: '(%Rh)',
+                                    //     offsetY: 55,
+                                    //     offsetX: 10
+                                    // },
+                                });
+                                chartLine3.updateSeries([
+                                    {
+                                        name: 'ความเข้มแสงนอกโรงเรือน',
+                                        data: data_light_out
+                                    }, {
+                                        name: 'ความเข้มแสงในโรงเรือน',
+                                        data: data_light_in
+                                    }
+                                ]);
+                                chartLine3.updateOptions({
+                                    title:  {text: 'ความเข้มแสง (KLux)'},
+                                    tooltip: {
+                                        y: {
+                                            formatter: function (val) {
+                                                return  val + " KLux"
+                                            }
+                                        }
+                                    },
+                                    // subtitle: {
+                                    //     text: '(KLux)',
+                                    //     offsetY: 55,
+                                    //     offsetX: 10
+                                    // },
+                                })
+                                chartLine4.updateSeries([
+                                    {
+                                        name: 'ความชื้นดิน 1',
+                                        data: data_soil_in1
+                                    },{
+                                        name: 'ความชื้นดิน 2',
+                                        data: data_soil_in2
+                                    }]
+                                )
+                                chartLine4.updateOptions({
+                                    title:  {text: 'ความชื้นดิน (%)'},
+                                    tooltip: {
+                                        y: {
+                                            formatter: function (val) {
+                                                return  val + " %"
+                                            }
+                                        }
+                                    },
+                                    // subtitle: {
+                                    //     text: '(%)',
+                                    //     offsetY: 55,
+                                    //     offsetX: 10
+                                    // },
+                                })
+                            }
+                        });
+                    }
+                });
+            } // V2
+            else if (url[0] == 3) {
                 if (house_master !== "KMUMT001") {
                     $(".title_km").html("ประวัติการตั้งเวลา");
                 } else {
@@ -1843,9 +2386,8 @@
 
                     }
                 });
-
-            }
-            else if (url[0] ==4) {
+            } // V3
+            else if (url[0] == 4) {
                 // = มธ.
                 $.ajax({
                     url: "routes/tu/get_config.php",
@@ -2439,6 +2981,13 @@
                                         // $(".time").html(ntime);
                                         var data_ = parseJSON['data']
                                         // console.log(sensor)
+                                        // alert(moment(new Date()).add(-5, 'minutes').format('YYYY-MM-DD HH:mm'));
+                                        if(parseJSON['date']+' '+ntime > moment(new Date()).add(-5, 'minutes').format('YYYY-MM-DD HH:mm') ){
+                                            $('.status_timeUpdate').html('ออนไลน์').addClass('text-success')
+                                        }else {
+                                            $('.status_timeUpdate').html('ออฟไลน์').addClass('text-danger')
+                                        }
+
                                         for (var i = 1; i <= 7; i++) {
                                             // console.log(config_sn['sn_sensor_'+i])
                                             //
@@ -2446,17 +2995,17 @@
                                                 if (i == 1) {
                                                     dash_status(sn_data = (data_['temp_out'] * 1).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
                                                 } else if (i == 2) {
-                                                    dash_status(sn_data = (data_['hum_out'] * 1).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                                                    dash_status(sn_data = (data_['hum_out'] * 1).toFixed(1), max = set_maxmin.Hmax, min = set_maxmin.Hmin)
                                                 } else if (i == 3) {
-                                                    dash_status(sn_data = (data_['light_out'] / 1000).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                                                    dash_status(sn_data = (data_['light_out'] / 1000).toFixed(1), max = set_maxmin.Lmax, min = set_maxmin.Lmin)
                                                 } else if (i == 4) {
                                                     dash_status(sn_data = (data_['temp_in'] * 1).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
                                                 } else if (i == 5) {
-                                                    dash_status(sn_data = (data_['hum_in'] * 1).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                                                    dash_status(sn_data = (data_['hum_in'] * 1).toFixed(1), max = set_maxmin.Hmax, min = set_maxmin.Hmin)
                                                 } else if (i == 6) {
-                                                    dash_status(sn_data = (data_['light_in'] / 1000).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                                                    dash_status(sn_data = (data_['light_in'] / 1000).toFixed(1), max = set_maxmin.Lmax, min = set_maxmin.Lmin)
                                                 } else if (i == 7) {
-                                                    dash_status(sn_data = (data_['soil_in'] * 1).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                                                    dash_status(sn_data = (data_['soil_in'] * 1).toFixed(1), max = set_maxmin.Smax, min = set_maxmin.Smin)
                                                 }
                                             }
                                             function dash_status(sn_data, max, min) {
@@ -2836,6 +3385,7 @@
                                     }
                                 }// exit_message
                                 connect();
+                                loadingOut(loading);
                                 // ++++++++++++++++++++++++++++++++++
                             }
                         });
@@ -3230,7 +3780,7 @@
                         // ===============================================
                     }
                 }); // ajax
-            }
+            } // V4
         } else { // No sn
             $(".memu_dash").hide()
             $(".memu_report").hide();

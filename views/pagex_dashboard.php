@@ -52,7 +52,7 @@
     <div class="row">
         <div class="col-12 col-lg-4 col-xl-4 d-flex">
             <div class="card w-100 radius-10">
-                <div class="card-body"> 
+                <div class="card-body">
                     <div class="card radius-10 shadow-none">
                         <img src="public/images/site/<?= $house_img ?>" alt="..." class="card-img">
                     </div>
@@ -118,7 +118,7 @@
         </div>
         <div class="col-12 col-lg-8 col-xl-8 d-flex">
             <div class="card w-100 radius-10">
-                <div class="card-body"> 
+                <div class="card-body">
                     <!-- <div class="card radius-10 border shadow-none">
                         <div class="card-body">
                             <h5 class="text-center">สภาพอากาศจากกรมอุตุนิยมวิทยา</h5>
@@ -156,7 +156,7 @@
                             <div class="row">
                                 <h5 class="text-center">ข้อมูลเซ็นเซอร์</h5>
                                 <?php for($i = 1; $i <= array_count_values($dashStatus)['1']; $i++){?>
-                                    <div class="<?php 
+                                    <div class="<?php
                                         if(array_count_values($dashStatus)['1'] == 1){ echo 'col-lg-6 col-xl-6';
                                         }elseif(array_count_values($dashStatus)['1'] == 2){  echo 'col-lg-6 col-xl-6';
                                         }elseif(array_count_values($dashStatus)['1'] == 3){  echo 'col-lg-4 col-xl-4';
@@ -315,7 +315,7 @@
             </div>
         </div>
     </div><!--end row-->
-    
+
     <?php if($_POST["count_stcont"] != 0){?>
         <div class="col-12 col-lg-12 col-xl-12 d-flex">
             <div class="card w-100 radius-10">
@@ -337,12 +337,12 @@
                             $controlstatus[$i] == 1){ //array_count_values($controlstatus)['1'] ?>
                             <div class="col-lg-3 col-xl-3 col-sm-12">
                                 <div class="card-body border radius-10 shadow-none mb-3">
-                                
+
                                     <!-- <div class="card-body"> -->
                                         <div class="d-flex">
                                             <h5 class="mb-0 mmn"><b><?= $conttrolname[$i] ?></b></h5>
                                             <div class="ms-auto">
-                                                <?php 
+                                                <?php
                                                     if($i == 12){
                                                         echo '<div class="Dsw_manual_'.$i.'">
                                                                 <input type="checkbox" class="sw_manual_'.$i.'" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-size="xs" data-style="ios">
@@ -368,7 +368,7 @@
                                                             echo '<div class="sw_manual Dsw_manual_'.$i.'">
                                                                 <input type="checkbox" class="sw_manual_'.$i.'" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-size="xs" data-style="ios">
                                                             </div>';
-                                                        } 
+                                                        }
                                                         echo '<a class="font-20 sw_auto" href="javascript:;" id="'.$i.'" name="'.$conttrolname[$i].'">	<i class="lni lni-cog"></i> </a>';
                                                     }
                                                 ?>
@@ -399,7 +399,7 @@
                     <div class="modal-header border-4">
                             <!-- <div><i class="bx bxs-user me-1 font-22 text-info"></i></div> -->
                             <b class="modal_autoText"></b>
-                       
+
                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -510,7 +510,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>    
+                                    </div>
                                 </div>
                                 <div class="border p-4 rounded">
                                     <div class="d-flex mb-2">
@@ -803,6 +803,150 @@
                                 <!-- </div> -->
                             </form>
                         </div>
+
+                            <div class="col-md-12 row ridge">
+                                <div class="col-md-6 show_contdrip1">
+                                    <br>
+                                    <h5 class="text-center text_load_1"></h5>
+                                    <div class="text-center row">
+                                        <br>
+                                        <br>
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-sm btn-rounded sw_drip1_on m-l-20"><i class="fa fa-square-o"></i> ON</button>
+                                        </div>
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-sm btn-rounded sw_drip1_off m-r-20 text-white btn-danger active"><i class="fa fa-check-square-o"></i> OFF</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 show_contdrip2">
+                                    <br>
+                                    <h5 class="text-center text_load_2"></h5>
+                                    <div class="text-center row">
+                                        <br>
+                                        <br>
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-sm btn-rounded sw_drip2_on m-l-20"><i class="fa fa-square-o"></i> ON</button>
+                                        </div>
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-sm btn-rounded sw_drip2_off m-r-20 text-white btn-danger active"><i class="fa fa-check-square-o"></i> OFF</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 show_contdrip3">
+                                    <br>
+                                    <h5 class="text-center text_load_3"></h5>
+                                    <div class="text-center row">
+                                        <br>
+                                        <br>
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-sm btn-rounded sw_drip3_on m-l-20"><i class="fa fa-square-o"></i> ON</button>
+                                        </div>
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-sm btn-rounded sw_drip3_off m-r-20 text-white btn-danger active"><i class="fa fa-check-square-o"></i> OFF</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 show_contdrip4">
+                                    <br>
+                                    <h5 class="text-center text_load_4"></h5>
+                                    <div class="text-center row">
+                                        <br>
+                                        <br>
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-sm btn-rounded sw_drip4_on m-l-20"><i class="fa fa-square-o"></i> ON</button>
+                                        </div>
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-sm btn-rounded sw_drip4_off m-r-20 text-white btn-danger active"><i class="fa fa-check-square-o"></i> OFF</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 show_contdrip5">
+                                    <br>
+                                    <h5 class="text-center text_load_5"></h5>
+                                    <div class="text-center row">
+                                        <br>
+                                        <br>
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-sm btn-rounded sw_drip5_on m-l-20"><i class="fa fa-square-o"></i> ON</button>
+                                        </div>
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-sm btn-rounded sw_drip5_off m-r-20 text-white btn-danger active"><i class="fa fa-check-square-o"></i> OFF</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 show_contdrip6">
+                                    <br>
+                                    <h5 class="text-center text_load_6"></h5>
+                                    <div class="text-center row">
+                                        <br>
+                                        <br>
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-sm btn-rounded sw_drip6_on m-l-20"></button>
+                                        </div>
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-sm btn-rounded sw_drip6_off m-r-20"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 show_contdrip7">
+                                    <br>
+                                    <h5 class="text-center text_load_7"></h5>
+                                    <div class="text-center row">
+                                        <br>
+                                        <br>
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-sm btn-rounded sw_drip7_on m-l-20"></button>
+                                        </div>
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-sm btn-rounded sw_drip7_off m-r-20"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 show_contdrip8">
+                                    <br>
+                                    <h5 class="text-center text_load_8"></h5>
+                                    <div class="text-center row">
+                                        <br>
+                                        <br>
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-sm btn-rounded sw_drip8_on m-l-20"></button>
+                                        </div>
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-sm btn-rounded sw_drip8_off m-r-20"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 show_contfoggy">
+                                    <br>
+                                    <h5 class="text-center text_load_9"></h5>
+                                    <div class="text-center row">
+                                        <br>
+                                        <br>
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-sm btn-rounded sw_foggy_on m-l-20"></button>
+                                        </div>
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-sm btn-rounded sw_foggy_off m-r-20"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 show_contfan">
+                                    <br>
+                                    <h5 class="text-center text_load_10"></h5>
+                                    <div class="text-center row">
+                                        <br>
+                                        <br>
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-sm btn-rounded sw_fan_on m-l-20"></button>
+                                        </div>
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-sm btn-rounded sw_fan_off m-r-20"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="save_auto_cont" class="btn btn-success waves-light">
@@ -1045,7 +1189,7 @@
             }
             // $('.sw_manual_1').attr('checked')
             // alert($(".sw_manual_1").is(":checked"))
-            
+
             $(".Dsw_manual_1").click(function() {
                 setTimeout(function(){
                     // alert($(".sw_manual_1").prop('checked'));
@@ -1405,7 +1549,7 @@
                         var newTime_d4 = new Date(new Date("1970/01/01 " + $("#time_s_3").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
                         var newTime_d5 = new Date(new Date("1970/01/01 " + $("#time_s_4").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
                         var newTime_d6 = new Date(new Date("1970/01/01 " + $("#time_s_5").val()).getTime() + minsToAdd * 60000).toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
-                        
+
                             // ----------
                         if($("#sw_1").prop('checked') == true){
                             if($("#time_s_1").val() === ""){
@@ -1731,7 +1875,7 @@
                                             message.qos = 1;
                                             message.retained = true;
                                             client.send(message);
-                                        
+
                                             swal({
                                                 title: 'บันทึกข้อมูลสำเร็จ',
                                                 type: 'success',
@@ -1892,7 +2036,7 @@
         connect();
     }
 
-    $(".sw_auto").click(function () { 
+    $(".sw_auto").click(function () {
         if (house_master !== "KMUMT001") {
             $(".seve_auto").show();
             $(".seve_auto_kmutt").hide();
@@ -1926,7 +2070,7 @@
             $.ajax({
                 url: "routes/get_auto_control.php",
                 method: "post",
-                data: { 
+                data: {
                     house_master: house_master,
                     channel : channel
                 },
@@ -1935,7 +2079,7 @@
                     $(".channel").val(channel);
                     // alert(channel)
                     console.log(res)
-                    
+
                     if(channel != 9){
                         $(".time_loop").hide();
                     }else{
@@ -2074,7 +2218,7 @@
                         $("#time_se_4").hide();
                         $("#time_se_5").hide();
                         $("#time_se_6").hide();
-                        
+
                         if(res.st_1 == 0){
                             $("#sw_1").bootstrapToggle('off');
                             $("#time_s_1").prop('disabled', true).val("");
@@ -2131,7 +2275,7 @@
                         }
                     }
                     $("#Modal_Auto_control").modal("show");
-                    
+
                     $('.input_check').change(function() {
                         var input_num = this.id.split("_");
                         // alert(Number(input_num[1]));
@@ -2172,7 +2316,7 @@
                                 }
                             }else{ // sw_!7
                                 if ($(this).prop('checked') === true) { // on
-                                    $("#sw_7").bootstrapToggle('off'); 
+                                    $("#sw_7").bootstrapToggle('off');
                                     $("#time_s_" + Number(input_num[1])).prop('disabled', false).val(eval("res.t_s_" + Number(input_num[1])));
                                     $("#time_e_" + Number(input_num[1])).prop('disabled', false).val(eval("res.t_s_" + Number(input_num[1])));
                                 }else{ // off
@@ -2338,7 +2482,7 @@
             $.ajax({
                 url: "routes/get_auto_control.php",
                 method: "post",
-                data: { 
+                data: {
                     house_master: house_master
                 },
                 dataType: "json",
@@ -2351,8 +2495,8 @@
                         max1 = res.maxmin_max_1, max2 = res.maxmin_max_2, max3 = res.maxmin_max_3, max5 = res.maxmin_max_5,
                         disb = false
                     );
-                    
-                    $(".range_control").change(function () { 
+
+                    $(".range_control").change(function () {
                         btn_save_show();
                     });
                     function btn_save_show(){
@@ -2390,7 +2534,7 @@
                     }
                 }
             });
-            
+
             function kmutt_auto_mode(min1, min2, min3, min5, max1, max2, max3, max5, disb) {
                 var $range1 = $(".range_control1"),
                     range_instance1;
@@ -2470,7 +2614,7 @@
         }
     });
 
-    
+
     $('.image-popups').magnificPopup({
         delegate: 'a',
         type: 'image',

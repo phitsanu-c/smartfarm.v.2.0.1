@@ -2803,6 +2803,7 @@
   	toolbar: {
   		exportToSVG: "Download SVG",
   		exportToPNG: "Download PNG",
+  		exportToJPG: "Download JPG",
   		exportToCSV: "Download CSV",
   		menu: "Menu",
   		selection: "Selection",
@@ -9880,9 +9881,25 @@
         });
       }
     }, {
+      key: "exportToJpg",
+      value: function exportToJpg() {
+        var _this3 = this;
+
+        this.dataURI().then(function (_ref) {
+          var imgURI = _ref.imgURI,
+              blob = _ref.blob;
+
+          if (blob) {
+            navigator.msSaveOrOpenBlob(blob, _this3.w.globals.chartID + '.jpg');
+          } else {
+            _this3.triggerDownload(imgURI, '.jpg');
+          }
+        });
+      }
+    }, {
       key: "exportToCSV",
       value: function exportToCSV(_ref2) {
-        var _this3 = this;
+        var _this4 = this;
 
         var series = _ref2.series,
             _ref2$columnDelimiter = _ref2.columnDelimiter,
@@ -14531,6 +14548,9 @@
           name: 'exportPNG',
           title: this.localeValues.exportToPNG
         }, {
+          name: 'exportJPG',
+          title: this.localeValues.exportToJPG
+        }, {
           name: 'exportCSV',
           title: this.localeValues.exportToCSV
         }];
@@ -14567,7 +14587,9 @@
             m.addEventListener('click', _this2.handleDownload.bind(_this2, 'svg'));
           } else if (m.classList.contains('exportPNG')) {
             m.addEventListener('click', _this2.handleDownload.bind(_this2, 'png'));
-          } else if (m.classList.contains('exportCSV')) {
+        } else if (m.classList.contains('exportJPG')) {
+            m.addEventListener('click', _this2.handleDownload.bind(_this2, 'jpg'));
+          }else if (m.classList.contains('exportCSV')) {
             m.addEventListener('click', _this2.handleDownload.bind(_this2, 'csv'));
           }
         });
@@ -14806,6 +14828,10 @@
 
           case 'png':
             exprt.exportToPng(this.ctx);
+            break;
+
+          case 'jpg':
+            exprt.exportToJpg(this.ctx);
             break;
 
           case 'csv':
@@ -25641,25 +25667,25 @@
       inherit: SVG.Shape,
       // Add class methods
       extend: {
-        // (re)load image	
+        // (re)load image
         load: function load(url) {
           if (!url) return this;
           var self = this,
-              img = new window.Image(); // preload image	
+              img = new window.Image(); // preload image
 
           SVG.on(img, 'load', function () {
             SVG.off(img);
             var p = self.parent(SVG.Pattern);
-            if (p === null) return; // ensure image size	
+            if (p === null) return; // ensure image size
 
             if (self.width() == 0 && self.height() == 0) {
               self.size(img.width, img.height);
-            } // ensure pattern size if not set	
+            } // ensure pattern size if not set
 
 
             if (p && p.width() == 0 && p.height() == 0) {
               p.size(self.width(), self.height());
-            } // callback	
+            } // callback
 
 
             if (typeof self._loaded === 'function') {
@@ -25680,7 +25706,7 @@
           });
           return this.attr('href', img.src = this.src = url, SVG.xlink);
         },
-        // Add loaded callback	
+        // Add loaded callback
         loaded: function loaded(_loaded) {
           this._loaded = _loaded;
           return this;
@@ -25692,7 +25718,7 @@
       },
       // Add parent method
       construct: {
-        // create image element, load image and set its size	
+        // create image element, load image and set its size
         image: function image(source, width, height) {
           return this.put(new SVG.Image()).load(source).size(width || 0, height || width || 0);
         }
@@ -26390,10 +26416,10 @@
     } // Create matrix array for looping
 
 
-    var abcdef = 'abcdef'.split(''); // Add CustomEvent to IE9 and IE10	
+    var abcdef = 'abcdef'.split(''); // Add CustomEvent to IE9 and IE10
 
     if (typeof window.CustomEvent !== 'function') {
-      // Code from: https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent	
+      // Code from: https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent
       var CustomEventPoly = function CustomEventPoly(event, options) {
         options = options || {
           bubbles: false,

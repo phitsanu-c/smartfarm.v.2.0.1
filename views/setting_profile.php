@@ -29,16 +29,16 @@
                             </a>
                         </li>
                         <?php if ($_SESSION["sn"]['account_status'] < 3) {?>
-                            <li class="nav-item6" role="presentation">
-                                <a class="nav-link text-center <?php if($_POST['pt'] == 2){echo 'active';} ?>" data-bs-toggle="pill" href="#p-st" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
+                            <!-- <li class="nav-item6" role="presentation">
+                                <a class="nav-link text-center <?php// if($_POST['pt'] == 2){echo 'active';} ?>" data-bs-toggle="pill" href="#p-st" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
                                     สถานที่
                                 </a>
                             </li>
                             <li class="nav-item6" role="presentation">
-                                <a class="nav-link text-center <?php if($_POST['pt'] == 3){echo 'active';} ?>" data-bs-toggle="pill" href="#p-ht" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
+                                <a class="nav-link text-center <?php// if($_POST['pt'] == 3){echo 'active';} ?>" data-bs-toggle="pill" href="#p-ht" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
                                     โรงเรือน
                                 </a>
-                            </li>
+                            </li> -->
                             <li class="nav-item6" role="presentation">
                                 <a class="nav-link text-center <?php if($_POST['pt'] == 4){echo 'active';} ?>" data-bs-toggle="pill" href="#p-ust" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
                                     กำหนดสิทธิ์ผู้ใช้งาน
@@ -88,6 +88,11 @@
                                 <label for="Mobite" class="form-label">Token Line</label>
                                 <div class="input-group input-group-lg"> <span class="input-group-text bg-transparent"><img src="public/images/icons/icons8-line.svg" style="width: 23px;"></span>
                                     <input type="text" class="form-control pt_token" placeholder="Token Line" value="<?= $_SESSION["account_token"] ?>" disabled>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="ms-auto">
+                                    <label for="Mobite" class="form-control"><a href="line_token.html" target="_blank"> <-- วิธีสร้าง Token Line Notify --> </a></label>
                                 </div>
                             </div>
                             <!-- <div class="col-12"> -->
@@ -361,6 +366,12 @@
                         <label for="Mobite" class="form-label">Token Line</label>
                         <div class="input-group input-group-lg"> <span class="input-group-text bg-transparent"><img src="public/images/icons/icons8-line.svg" style="width: 23px;"></span>
                             <input type="text" class="form-control border-start-0 pt_token" name="pt_token" placeholder="Token Line" value="<?= $_SESSION["account_token"] ?>">
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center">
+                        <div class="ms-auto">
+                            <label for="Mobite" class="form-control"><a href="line_token.html" target="_blank"> <-- วิธีสร้าง Token Line Notify --> </a></label>
                         </div>
                     </div>
                 </form>

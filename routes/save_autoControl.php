@@ -82,7 +82,7 @@
         //     exit();
         $tb_name = 'tb3_load_'.$channel;
         $wh_sn = 'load_'.$channel.'_sn';
-        if($channel == 9){    
+        if($channel == 9){
             $colume = '(load_'.$channel.'_sn,
                         load_'.$channel.'_user,
                         load_'.$channel.'_st_1,
@@ -145,7 +145,7 @@
         // $wh_sn = 'load_'.$channel.'_sn';
         // echo $post_data;
         // exit();
-        
+
         $stmt = "INSERT INTO $tb_name VALUES $value";
         if ($dbcon->prepare($stmt)->execute($post_data) === TRUE) {
             if($channel == 9){
@@ -158,7 +158,7 @@
                     $data = [];
                     // echo intval($s_7);
                     // exit();
-                    
+
                     if($s_7 < 10){ $ns_7 = "0".strval($s_7);}else{$ns_7 = $s_7;}
                     if(($s_7+1) < 10){ $ns2_7 = "0".strval(($s_7+1));}else{$ns2_7 = ($s_7+1);}
                     if(($s_7+2) < 10){ $ns3_7 = "0".strval(($s_7+2));}else{$ns3_7 = ($s_7+2);}
@@ -172,7 +172,7 @@
                     if(($s_7+10) < 10){ $ns11_7 = "0".strval(($s_7+10));}else{$ns11_7 = ($s_7+10);}
                     if(($s_7+11) < 10){ $ns12_7 = "0".strval(($s_7+11));}else{$ns12_7 = ($s_7+11);}
                     if(($s_7+12) < 10){ $ns13_7 = "0".strval(($s_7+12));}else{$ns13_7 = ($s_7+12);}
-                
+
                     if($on_7 == 5){
                         if($off_7 == 5){
                             $num = 6;
@@ -2034,7 +2034,7 @@
             echo json_encode(['status' => "Insert_Error tb3_load_".$channel, 'data' => '' ], JSON_UNESCAPED_UNICODE );
         }
     }else{ // = KMUMT001
-        $A1 =  explode(";",$_POST["A1"]); 
+        $A1 =  explode(";",$_POST["A1"]);
         $A2 =  explode(";",$_POST["A2"]);
         $A3 =  explode(";",$_POST["A3"]);
         // $A4 =  explode(";",$_POST["A4"]);
@@ -2055,7 +2055,7 @@
             'sn'   => $house_master,
             'userID' => $_SESSION['user_id']
         ];
-        // print_r($new_minmax); 
+        // print_r($new_minmax);
         // exit();
         $sql_maxmin = "INSERT INTO tb_control_maxmin (
                                 maxmin_min_1, maxmin_max_1, maxmin_min_2, maxmin_max_2,

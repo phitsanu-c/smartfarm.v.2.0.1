@@ -387,12 +387,8 @@
     ch_radio('temp');
     $(".mode_dwm").val('');
     $('#mode_report').val('re_sensor');
-    // $('#table_re_Sensor').wrap('<div id="hide0" style="display:none"/></div>');
-    // $('#hide0').css( 'display', 'none' );
-    $('#chart_report').html('')
-    $('#table_report').html('')
-    $("#table_report_control").html('');
-    $("#table_report_control_Manual").html('')
+    $('#table_re_Sensor').wrap('<div id="hide0" style="display:none"/>');
+    $('#hide0').css( 'display', 'none' );
     $(".all_day").click(function() {
         // alert($('#mode_report').val())
         $(".mode_dwm").val('day');
@@ -798,124 +794,124 @@
         }
 
         // var loading = verticalNoTitle();
-        // function report_chart(){
-        //     $("#report_chart").addClass("report_chart");
-        //     $.ajax({
-        //         type: "POST",
-        //         url: "routes/report_allChart.php",
-        //         data: {
-        //             house_master: $(".house_master").val(),
-        //             mode : $(".mode_dwm").val(),
-        //             ch_value : ch_value,
-        //             val_start : $(".val_start").val(),
-        //             val_end : $(".val_end").val(),
-        //             sel_all_every : $("#sel_all_every").val()
-        //         },
-        //         dataType: 'json',
-        //         success: function(res) {
-        //             if(res.theme === "dark-theme"){
-        //                 var theme = 'dark';
-        //             }else{
-        //                 var theme = '';
-        //             }
-        //             // console.log(res)
-        //             // alert(ch_value[1][1])
-        //             var data_chart = [];
-        //             // var c_unit = [];
-        //             for(var k =1; k<=ch_value[1].length; k++){
-        //                 data_chart.push({
-        //                         name: ch_value[2][(k-1)],
-        //                         type: 'line',
-        //                         showSymbol: false,
-        //                         // areaStyle: {},
-        //                         data: res.data['data_'+k]
-        //                 })
-        //             }
-        //             if(ch_value[0] === "other"){
-        //                 var chart_name = 'other';
-        //             }else{
-        //                 var chart_name = ch_value[0];
-        //             }
-        //             // console.log(data_chart)
-        //             // return false;
-        //             var myChart = echarts.init(document.getElementById('report_chart'), theme);
-        //             // var unt = "µmol m[baseline-shift: super; font-size: 10;]-2[baseline-shift: baseline;]s[baseline-shift: super; font-size: 10;]-1[baseline-shift: baseline;]";
-        //             if(ch_value[3][(0)] == 1){
-        //                 var unt = "℃";
-        //             }else if(ch_value[3][(0)] == 2){
-        //                 var unt = "%Rh";
-        //             }else if(ch_value[3][(0)] == 3){
-        //                 var unt = "%";
-        //             }else if(ch_value[3][(0)] == 4 || ch_value[3][(0)] == 6 ){
-        //                 var unt = "KLux";
-        //             }else if(ch_value[3][(0)] == 5 || ch_value[3][(0)] == 7){
-        //                 var unt = "µmol m^2 s^(-1)";
-        //             }else{
-        //                 var unt = "W";
-        //             }
-        //             // alert(ch_value[3][(0)])
-        //             // specify chart configuration item and data
-        //             var option = {
-        //                 title: {
-        //                     text: chart_name
-        //                 },
-        //                 tooltip: {
-        //                     trigger: 'axis',
-        //                     axisPointer: {
-        //                         type: 'cross',
-        //                         label: {
-        //                             backgroundColor: '#6a7985'
-        //                         }
-        //                     }
-        //                 },
-        //                 legend: {
-        //                     data: ch_value[2]
-        //                 },
-        //                 xAxis: {
-        //                     type: 'time',//'category',
-        //                     boundaryGap: false,
-        //                     axisLabel: {
-        //                         formatter: (function(value){
-        //                             return moment(value).format('YYYY/MM/DD HH:mm:ss');
-        //                         })
-        //                     },
-        //                     // data: res.data.timestamp,
-        //                 },
-        //                 yAxis: {
-        //                     type: 'value',
-        //                     name: unt//'µmol m<sup>-2</sup>s<sup>-1</sup>',
-        //                     // axisLabel : {
-        //                     //     formatter: '{value} (µmol m<sup>-2</sup>s<sup>-1</sup>)'
-        //                     // }
-        //                 },
-        //                 toolbox: {
-        //                     feature: {
-        //                         saveAsImage: {}
-        //                     }
-        //                 },
-        //                 dataZoom: [{
-        //                     type: 'inside',
-        //                     start: 0,
-        //                     end: 100
-        //                     }, {
-        //                     start: 0,
-        //                     end: 100
-        //                 }],
-        //                 grid: {
-        //                     left: '2%',
-        //                     right: '1%',
-        //                     bottom: '2%',
-        //                     containLabel: true
-        //                 },
-        //                 series:data_chart
-        //             };
-        //
-        //             // use configuration item and data specified to show chart
-        //             myChart.setOption(option);
-        //             loadingOut(loading);
-        //         }
-        //     });
-        // }
+        function report_chart(){
+            $("#report_chart").addClass("report_chart");
+            $.ajax({
+                type: "POST",
+                url: "routes/report_allChart.php",
+                data: {
+                    house_master: $(".house_master").val(),
+                    mode : $(".mode_dwm").val(),
+                    ch_value : ch_value,
+                    val_start : $(".val_start").val(),
+                    val_end : $(".val_end").val(),
+                    sel_all_every : $("#sel_all_every").val()
+                },
+                dataType: 'json',
+                success: function(res) {
+                    if(res.theme === "dark-theme"){
+                        var theme = 'dark';
+                    }else{
+                        var theme = '';
+                    }
+                    // console.log(res)
+                    // alert(ch_value[1][1])
+                    var data_chart = [];
+                    // var c_unit = [];
+                    for(var k =1; k<=ch_value[1].length; k++){
+                        data_chart.push({
+                                name: ch_value[2][(k-1)],
+                                type: 'line',
+                                showSymbol: false,
+                                // areaStyle: {},
+                                data: res.data['data_'+k]
+                        })
+                    }
+                    if(ch_value[0] === "other"){
+                        var chart_name = 'other';
+                    }else{
+                        var chart_name = ch_value[0];
+                    }
+                    // console.log(data_chart)
+                    // return false;
+                    var myChart = echarts.init(document.getElementById('report_chart'), theme);
+                    // var unt = "µmol m[baseline-shift: super; font-size: 10;]-2[baseline-shift: baseline;]s[baseline-shift: super; font-size: 10;]-1[baseline-shift: baseline;]";
+                    if(ch_value[3][(0)] == 1){
+                        var unt = "℃";
+                    }else if(ch_value[3][(0)] == 2){
+                        var unt = "%Rh";
+                    }else if(ch_value[3][(0)] == 3){
+                        var unt = "%";
+                    }else if(ch_value[3][(0)] == 4 || ch_value[3][(0)] == 6 ){
+                        var unt = "KLux";
+                    }else if(ch_value[3][(0)] == 5 || ch_value[3][(0)] == 7){
+                        var unt = "µmol m^2 s^(-1)";
+                    }else{
+                        var unt = "W";
+                    }
+                    // alert(ch_value[3][(0)])
+                    // specify chart configuration item and data
+                    var option = {
+                        title: {
+                            text: chart_name
+                        },
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {
+                                type: 'cross',
+                                label: {
+                                    backgroundColor: '#6a7985'
+                                }
+                            }
+                        },
+                        legend: {
+                            data: ch_value[2]
+                        },
+                        xAxis: {
+                            type: 'time',//'category',
+                            boundaryGap: false,
+                            axisLabel: {
+                                formatter: (function(value){
+                                    return moment(value).format('YYYY/MM/DD HH:mm:ss');
+                                })
+                            },
+                            // data: res.data.timestamp,
+                        },
+                        yAxis: {
+                            type: 'value',
+                            name: unt//'µmol m<sup>-2</sup>s<sup>-1</sup>',
+                            // axisLabel : {
+                            //     formatter: '{value} (µmol m<sup>-2</sup>s<sup>-1</sup>)'
+                            // }
+                        },
+                        toolbox: {
+                            feature: {
+                                saveAsImage: {}
+                            }
+                        },
+                        dataZoom: [{
+                            type: 'inside',
+                            start: 0,
+                            end: 100
+                            }, {
+                            start: 0,
+                            end: 100
+                        }],
+                        grid: {
+                            left: '2%',
+                            right: '1%',
+                            bottom: '2%',
+                            containLabel: true
+                        },
+                        series:data_chart
+                    };
+
+                    // use configuration item and data specified to show chart
+                    myChart.setOption(option);
+                    loadingOut(loading);
+                }
+            });
+        }
         $("#Modal_select_sn").modal("hide");
         // alert($(".re_tb").hasClass("active"))
         // return false
@@ -928,7 +924,6 @@
             report_table_sn(ch_value, $(".mode_dwm").val());
         }
         function report_table_sn(val, mode_dwm){
-            var loading = verticalNoTitle();
             $.ajax({
                 type: "POST",
                 url: "routes/tu/get_re_table.php",
@@ -943,7 +938,7 @@
                 },
                 // dataType: 'json',
                 success: function(res) {
-                    setTimeout(function () {$("#table_report").html(res);loadingOut(loading);}, 2000);
+                    setTimeout(function () {$("#table_report").html(res);}, 2000);
                 }
             });
             // // $('#hide0').css( 'display', 'block' );
@@ -1097,22 +1092,10 @@
                         tools: {
                             download: true,
                             selection: true,
-                            zoom: true,
-                            zoomin: true,
-                            zoomout: true,
-                            pan: true,
-                            export: {
-                                svg: {
-                                    filename: SVG,
-                                },
-                                png: {
-                                    filename: undefined,
-                                },
-                                jpg: {
-                                    filename: undefined,
-                                },
-                                csv: false
-                            }
+                             zoom: true,
+                             zoomin: true,
+                             zoomout: true,
+                             pan: true,
                         }
                     },
                     dropShadow: {
@@ -1287,10 +1270,8 @@
         $(".all_week").removeClass('active')
         $(".all_month").removeClass('active')
         $(".all_from_to").removeClass('active')
-        $('#chart_report').html('')
-        $('#table_report').html('')
-        // $('#table_re_Sensor').wrap('<div id="hide0" style="display:none"/></div>');
-        // $('#hide0').css( 'display', 'none' );
+        $('#table_re_Sensor').wrap('<div id="hide0" style="display:none"/>');
+        $('#hide0').css( 'display', 'none' );
         $('.val_start').val('').removeClass('is-invalid');
         $('.val_end').val('').removeClass('is-invalid');
     })
@@ -1302,9 +1283,8 @@
         $(".all_month").removeClass('active')
         $(".all_from_to").removeClass('active')
         $(".mode_dwm").val('');
-        // $('#tb_re_cn').wrap('<div id="hide" style="display:none"/>');
-        // $('#hide').css( 'display', 'none' );
-        $("#table_report_control").html('');
+        $('#tb_re_cn').wrap('<div id="hide" style="display:none"/>');
+        $('#hide').css( 'display', 'none' );
         $('.val_start').val('').removeClass('is-invalid');
         $('.val_end').val('').removeClass('is-invalid');
     })
@@ -1320,7 +1300,7 @@
         $('.text_autoTable').html(config_cn['cn_name_1'])
         $("a[rec_auto=1]").addClass('active')
         $('#hide_table').hide();
-        $('#table_re_cnAuto').wrap('<div id="hide2" style="display:none"/></div>');
+        $('#table_re_cnAuto').wrap('<div id="hide2" style="display:none"/>');
         $('#hide2').css( 'display', 'none' );
         $('.val_start').val('').removeClass('is-invalid');
         $('.val_end').val('').removeClass('is-invalid');
@@ -1343,9 +1323,8 @@
         $(".all_month").removeClass('active')
         $(".all_from_to").removeClass('active')
         $(".mode_dwm").val('');
-        $("#table_report_control_Manual").html('')
-        // $('#table_re_cnManual').wrap('<div id="hide3" style="display:none"/>');
-        // $('#hide3').css( 'display', 'none' );
+        $('#table_re_cnManual').wrap('<div id="hide3" style="display:none"/>');
+        $('#hide3').css( 'display', 'none' );
         $('.val_start').val('').removeClass('is-invalid');
         $('.val_end').val('').removeClass('is-invalid');
     })
@@ -1358,7 +1337,6 @@
                 // + currentdate.getSeconds();
 
     function report_cn_table(mode_dwm){
-        var loading = verticalNoTitle();
         // $('#hide').css( 'display', 'block' );
         $("#table_report_control").html('');
         active_btn(mode_dwm);
@@ -1379,7 +1357,6 @@
             success: function(res) {
                 // console.log(res);
                 $('#table_report_control').html(res);
-                loadingOut(loading);
                 // if(res.length > 0){
                 //     table.button('.btnexport').nodes().css("display", "block")
                 // }
@@ -1388,7 +1365,6 @@
         });
     }
     function report_cnAuto_table(mode_dwm){
-        var loading = verticalNoTitle();
         $('#hide2').css( 'display', 'block' );
         active_btn(mode_dwm);
         var table2 = $('#table_re_cnAuto').DataTable({
@@ -1453,11 +1429,10 @@
                     table2.button('.btnexport2').nodes().css("display", "block")
                 }
                 table2.clear().rows.add(res).draw();
-                loadingOut(loading);
                 $('.btnexport2').on('click', function() {
                     var table22 = $('#table_re_cnAuto2').DataTable({
                         data: res,
-                        destroy: true,
+                        "destroy": true,
                         dom: "<'floatRight'B><'clear'>frtip",
                         buttons: [{
                                 text: 'Export csv',
@@ -1484,7 +1459,6 @@
         });
     }
     function report_cnManual_table(mode_dwm){
-        var loading = verticalNoTitle();
         // $('#hide3').css( 'display', 'block' );
         $("#table_report_control_Manual").html('')
         active_btn(mode_dwm);
@@ -1503,7 +1477,6 @@
             success: function(res) {
                 // console.log(res);
                 $("#table_report_control_Manual").html(res);
-                loadingOut(loading);
             }
         });
     }

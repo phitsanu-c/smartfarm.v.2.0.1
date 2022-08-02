@@ -52,5 +52,4 @@
         'set_maxmin' => $set_maxmin,
         'sensor' => $sensor,
         'userLevel'=> $account_status,
-        'h' => "SELECT `userST_level` FROM `tbn_userst` WHERE `userST_accountID`=$account_id AND `userST_houseID`=$houseID"
     ]);

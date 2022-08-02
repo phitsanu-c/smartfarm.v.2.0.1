@@ -37,10 +37,10 @@
             <div class="card-body">
                 <div class="d-sm-flex">
                     <div class="d-flex col-lg-6 col-xl-6 col-12  ">
-                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_day">24 ชั่วโมง</button>
-                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_week">7 วัน</button>
-                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_month">30 วัน</button>
-                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_from_to">กำหนดเอง</button>
+                            <button type="button" class="col-3 btn btn-outline-secondary px-2 c_day">24 ชั่วโมง</button>
+                            <button type="button" class="col-3 btn btn-outline-secondary px-2 c_week">7 วัน</button>
+                            <button type="button" class="col-3 btn btn-outline-secondary px-2 c_month">30 วัน</button>
+                            <button type="button" class="col-3 btn btn-outline-secondary px-2 c_from_to">กำหนดเอง</button>
 
                     </div>
                     <ul class="ms-auto col-lg-3 col-md-4 col-xl-3 col-12 nav nav-pills mode_sn" role="tablist">
@@ -540,26 +540,26 @@
     // $('#mode_report').val('re_sensor');
     $('#table_re_Sensor').wrap('<div id="hide0" style="display:none"/>');
     $('#hide0').css( 'display', 'none' );
-    $(".all_day").click(function() {
+    $(".c_day").click(function() {
         // alert($('#mode_report').val())
         $(".mode_dwm").val('day');
         $(".title_mod").html('แสดงข้อมูลย้อนหลัง 1 วัน');
         $(".hide_dwm").hide();
         $("#Modal_select_sn").modal("show");
     });
-    $(".all_week").click(function() {
+    $(".c_week").click(function() {
         $(".mode_dwm").val('week');
         $(".title_mod").html('แสดงข้อมูลย้อนหลัง 7 วัน');
         $(".hide_dwm").hide();
         $("#Modal_select_sn").modal("show");
     });
-    $(".all_month").click(function() {
+    $(".c_month").click(function() {
         $(".mode_dwm").val('month');
         $(".title_mod").html('แสดงข้อมูลย้อนหลัง 30 วัน');
         $(".hide_dwm").hide();
         $("#Modal_select_sn").modal("show");
     });
-    $(".all_from_to").click(function() {
+    $(".c_from_to").click(function() {
         $(".mode_dwm").val('from_to');
         $(".title_mod").html('แสดงข้อมูลย้อนหลัง &nbsp; &nbsp;&nbsp;');
         $(".hide_dwm").show();
@@ -635,10 +635,10 @@
         $(".re_tb").removeClass("active");
         if($(".mode_dwm").val() != ""){
             if($("#p-chart").hasClass("active") == false){
-                if( $(".all_day").hasClass("active") != false ||
-                    $(".all_week").hasClass("active") != false ||
-                    $(".all_month").hasClass("active") != false ||
-                    $(".all_from_to").hasClass("active") != false
+                if( $(".c_day").hasClass("active") != false ||
+                    $(".c_week").hasClass("active") != false ||
+                    $(".c_month").hasClass("active") != false ||
+                    $(".c_from_to").hasClass("active") != false
                 ){ report_sn(); }
             }
         }
@@ -648,10 +648,10 @@
         $(this).addClass("active");
         if($(".mode_dwm").val() != ""){
             if($("#p-table").hasClass("active") == false){
-                if( $(".all_day").hasClass("active") != false ||
-                    $(".all_week").hasClass("active") != false ||
-                    $(".all_month").hasClass("active") != false ||
-                    $(".all_from_to").hasClass("active") != false
+                if( $(".c_day").hasClass("active") != false ||
+                    $(".c_week").hasClass("active") != false ||
+                    $(".c_month").hasClass("active") != false ||
+                    $(".c_from_to").hasClass("active") != false
                 ){report_sn();}
             }
         }
@@ -821,6 +821,7 @@
             report_table_sn(ch_value, $(".mode_dwm").val());
         }
         function report_table_sn(val, mode_dwm){
+            var loading = verticalNoTitle();
             $.ajax({
                 type: "POST",
                 url: "routes/tu/get_re_table.php",
@@ -835,7 +836,7 @@
                 },
                 // dataType: 'json',
                 success: function(res) {
-                    setTimeout(function () {$("#tablr_compare").html(res);}, 2000);
+                    setTimeout(function () {$("#tablr_compare").html(res);loadingOut(loading);}, 2000);
                 }
             });
         }
@@ -999,25 +1000,25 @@
     }
     function active_btn(mode_dwm){
         if(mode_dwm === 'day'){
-            $(".all_day").addClass('active')
-            $(".all_week").removeClass('active')
-            $(".all_month").removeClass('active')
-            $(".all_from_to").removeClass('active')
+            $(".c_day").addClass('active')
+            $(".c_week").removeClass('active')
+            $(".c_month").removeClass('active')
+            $(".c_from_to").removeClass('active')
         }else if(mode_dwm === 'week'){
-            $(".all_day").removeClass('active')
-            $(".all_week").addClass('active')
-            $(".all_month").removeClass('active')
-            $(".all_from_to").removeClass('active')
+            $(".c_day").removeClass('active')
+            $(".c_week").addClass('active')
+            $(".c_month").removeClass('active')
+            $(".c_from_to").removeClass('active')
         }else if(mode_dwm === 'month'){
-            $(".all_day").removeClass('active')
-            $(".all_week").removeClass('active')
-            $(".all_month").addClass('active')
-            $(".all_from_to").removeClass('active')
+            $(".c_day").removeClass('active')
+            $(".c_week").removeClass('active')
+            $(".c_month").addClass('active')
+            $(".c_from_to").removeClass('active')
         }else if(mode_dwm === 'from_to'){
-            $(".all_day").removeClass('active')
-            $(".all_week").removeClass('active')
-            $(".all_month").removeClass('active')
-            $(".all_from_to").addClass('active')
+            $(".c_day").removeClass('active')
+            $(".c_week").removeClass('active')
+            $(".c_month").removeClass('active')
+            $(".c_from_to").addClass('active')
         }
     }
 

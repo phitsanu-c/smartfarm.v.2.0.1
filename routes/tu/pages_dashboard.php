@@ -24,6 +24,10 @@
         font-size:16px;
     }
 </style>
+
+<link rel="stylesheet" href="public/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.min.css">
+<script src="public/plugins/bootstrap-material-datetimepicker/js/moment.min.js"></script>
+<script src="public/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.min.js"></script>
     <?php
         $config = $_POST['data'];
         $account_user = $config["account_user"];
@@ -90,6 +94,20 @@
                     </div>
                     <div class="card radius-10 shadow-none">
                         <div class="card-body border radius-10 shadow-none mb-3">
+                            <div class="col-12">
+                                <div class="d-flex">
+                                    <h5 class="text-responsive2">สถานที่ : <b>
+                                            <?= $s_master["site_name"] ?>
+                                        </b></h5>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex">
+                                    <h5 class="text-responsive2">โรงเรือน : <b>
+                                            <?= $s_master["house_name"] ?>
+                                        </b></h5>
+                                </div>
+                            </div>
                             <div class="col-12">
                                 <!-- <div class="card-body radius-10 shadow-none"> -->
                                 <div class="d-flex">
@@ -487,7 +505,7 @@
                                                                         <small class="form-control-feedback text_font_size"> เริ่ม </small>
                                                                     </div>
                                                                     <div class="col-md-9">
-                                                                        <input type="time" id="time_s_'.$i.'" class="form-control input_time">
+                                                                        <input type="text" id="time_s_'.$i.'" class="form-control input_time">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -499,7 +517,7 @@
                                                                         <small class="form-control-feedback text_font_size"> สิ้นสุด </small>
                                                                     </div>
                                                                     <div class="col-md-9">
-                                                                        <input type="time" id="time_e_'.$i.'" class="form-control input_time">
+                                                                        <input type="text" id="time_e_'.$i.'" class="form-control input_time">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -641,6 +659,14 @@
     var set_maxmin = $.parseJSON('<?= json_encode($set_maxmin) ?>');
     var sensor = $.parseJSON('<?= json_encode($sensor) ?>');
     var s_sensor = $.parseJSON('<?= json_encode($s_sensor) ?>');
+    $('.input_time').bootstrapMaterialDatePicker({
+		date: false,
+		format: 'HH:mm'
+	});
+    $('#time').bootstrapMaterialDatePicker({
+		date: false,
+		format: 'HH:mm'
+	});
     // console.log(sensor);
     // var data_temp_out = [];
     // var data_temp_in = [];
@@ -734,14 +760,16 @@
                         } else {
                             $('#time_e_+i').removeClass('is-invalid')
                         }
-                        if ($("#time_s_"+i).val() >= $("#time_e_"+i).val()) {
-                            swal_c(type = 'error', title = 'Error...', text = 'TIMMER '+i+' : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
-                            $('#time_s_1').addClass('is-invalid')
-                            $('#time_e_1').addClass('is-invalid')
-                            return false;
-                        } else {
-                            $('#time_s_'+i).removeClass('is-invalid')
-                            $('#time_e_'+i).removeClass('is-invalid')
+                        if($('#12').hasClass('active') == false){
+                            if ($("#time_s_"+i).val() >= $("#time_e_"+i).val()) {
+                                swal_c(type = 'error', title = 'Error...', text = 'TIMMER '+i+' : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
+                                $('#time_s_1').addClass('is-invalid')
+                                $('#time_e_1').addClass('is-invalid')
+                                return false;
+                            } else {
+                                $('#time_s_'+i).removeClass('is-invalid')
+                                $('#time_e_'+i).removeClass('is-invalid')
+                            }
                         }
                     }
                 }
@@ -753,6 +781,8 @@
                         allowOutsideClick: false
                     });
                 }
+                // alert($('#12').hasClass('active'));
+                // return false
                 swal({
                     title: 'บันทึกการเปลี่ยนแปลง',
                     text: "คุณต้องการบันทึกการเปลี่ยนแปลง ?",
@@ -1756,6 +1786,10 @@
                 $(".sw_mode_Auto").attr('disabled', false);
                 $(".sw_mode_Manual").attr('disabled', false);
                 // $(".close_modal").show();
+                for (var i = 1; i <= 6; i++){
+                    $('#time_s_'+i).removeClass('is-invalid')
+                    $('#time_e_'+i).removeClass('is-invalid')
+                }
             } else {
                 swal({
                     title: 'คุณแน่ใจหรือไม่?',
@@ -1778,11 +1812,16 @@
                         $(".close_modal").show();
                         fn_df_logdata_auto(chanel);
                         $("#save_auto_cont").hide();
-                        // $("#close_auto_cont").hide();
+                        $("#close_auto_cont").hide();
+                        for (var i = 1; i <= 6; i++){
+                            $('#time_s_'+i).removeClass('is-invalid')
+                            $('#time_e_'+i).removeClass('is-invalid')
+                        }
                     }
                 });
             }
-        }else {
+        }
+        else {
             if (JSON.stringify(res['load_'+chanel]) === JSON.stringify(sw_gd2)) {
                 $("#save_auto_cont").hide();
             } else {
