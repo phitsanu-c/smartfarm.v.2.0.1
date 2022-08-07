@@ -1,13 +1,18 @@
 <?php
     $config = $_POST['data'];
     $account_user = $config["account_user"];
-    $s_sensor = $_POST['s_sensor'];
-    // print_r($config);
-    // exit();
+
+    $s_sensor = $config['s_master'];
     $config_sn = $config['config_sn'];
     $config_cn = $config['config_cn'];
     $sensor = $config['sensor'];
-    $house_master = $config_sn["sn_status_an"];
+    $house_master = $s_sensor["house_master"];
+    $s_sensor['s_btnT'] = 2;
+    $s_sensor['s_btnH'] = 2;
+    $s_sensor['s_btnL'] = 2;
+    $s_sensor['s_btnS'] = 2;
+    // print_r($s_sensor['house_name']);
+    // exit();
 ?>
 <div class="page-content">
     <!--breadcrumb-->
@@ -19,7 +24,7 @@
                     <li class="breadcrumb-item"><a href="javascript:;"><i class="-alt"></i></a>
                     </li>
                     <li class="breadcrumb-item te_ht" aria-current="page"></li>
-                    <li class="breadcrumb-item" aria-current="page"> รายงาน </li>
+                    <li class="breadcrumb-item" aria-current="page"> รายงาน <?= $s_sensor['house_name'] ?></li>
                 </ol>
             </nav>
         </div>
@@ -41,16 +46,11 @@
                                     <div class="tab-title">ประวัติการทำงาน</div>
                                 </a>
                             </li>
-                            <li class="nav-item col-12 col-sm-6 col-lg-3 col-xl-3 mb-1" role="presentation">
+                            <!-- <li class="nav-item col-12 col-sm-6 col-lg-3 col-xl-3 mb-1" role="presentation">
                                 <a class="nav-link r_reAutoControl text-center" data-bs-toggle="pill" href="#pills_report_cnAuto" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
                                     <div class="tab-title">ประวัติการตั้งค่าโหมดอัตโนมัติ</div>
                                 </a>
-                            </li>
-                            <li class="nav-item col-12 col-sm-6 col-lg-3 col-xl-3 mb-1" role="presentation">
-                                <a class="nav-link r_reManualControl text-center" data-bs-toggle="pill" href="#pills_report_cnManual" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
-                                    <div class="tab-title">ประวัติการตั้งค่าโหมดกำหนดเอง</div>
-                                </a>
-                            </li>
+                            </li> -->
                             <input type="hidden" id="mode_report">
                         </ul>
                     </div>
@@ -93,80 +93,7 @@
                         <div id="table_report_control"></div>
                     </div>
                     <div class="tab-pane fade" id="pills_report_cnAuto" role="tabpanel">
-                        <ul class="nav nav-pills" role="tablist">
-                            <?php
-                             for($i=1; $i <= 12; $i++){
-                                if($config_cn['cn_status_'.$i] == 1){
-                                echo '<li class="col-4 col-lg-1 col-xl-1  nav-item text-center" role="presentation">
-                                        <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
-                                            <div class="d-flex align-items-center">
-                                                <div class="tab-title">'.$config_cn['cn_name_'.$i].'</div>
-                                            </div>
-                                        </a>
-                                    </li>';
-                                }
-                            }?>
-                        </ul>
-                        <input type="hidden" id="AutoMode_select">
-                        <div class="table-responsive m-t-10">
-                            <table id="table_re_cnAuto" class="table table-striped table-bordered dataTable" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <!-- <th rowspan="2" class="text-center">#</th> -->
-                                        <th colspan="3" class="text-center"><b class="text_autoTable"></b></th>
-                                        <th colspan="2" class="text-center">ตั้งเวลา 1</th>
-                                        <th colspan="2" class="text-center">ตั้งเวลา 2</th>
-                                        <th colspan="2" class="text-center">ตั้งเวลา 3</th>
-                                        <th colspan="2" class="text-center">ตั้งเวลา 4</th>
-                                        <th colspan="2" class="text-center">ตั้งเวลา 5</th>
-                                        <th colspan="2" class="text-center">ตั้งเวลา 6</th>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-center">วัน </th>
-                                        <th class="text-center">เวลา</th>
-                                        <th class="text-center">ผู้บันทึก</th>
-                                        <th class="text-center" > เริ่ม </th>
-                                        <th class="text-center" > สิ้นสุด</th>
-                                        <th class="text-center" > เริ่ม </th>
-                                        <th class="text-center" > สิ้นสุด</th>
-                                        <th class="text-center" > เริ่ม </th>
-                                        <th class="text-center" > สิ้นสุด</th>
-                                        <th class="text-center" > เริ่ม </th>
-                                        <th class="text-center" > สิ้นสุด</th>
-                                        <th class="text-center" > เริ่ม </th>
-                                        <th class="text-center" > สิ้นสุด</th>
-                                        <th class="text-center" > เริ่ม </th>
-                                        <th class="text-center" > สิ้นสุด</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                            <div id="hide_table">
-                                <table id="table_re_cnAuto2" class="table table-striped table-bordered dataTable" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">วัน </th>
-                                            <th class="text-center">เวลา</th>
-                                            <th class="text-center">ผู้บันทึก</th>
-                                            <th class="text-center" >ตั้งเวลา 1 เริ่ม </th>
-                                            <th class="text-center" >ตั้งเวลา 1 สิ้นสุด</th>
-                                            <th class="text-center" >ตั้งเวลา 2 เริ่ม </th>
-                                            <th class="text-center" >ตั้งเวลา 2 สิ้นสุด</th>
-                                            <th class="text-center" >ตั้งเวลา 3 เริ่ม </th>
-                                            <th class="text-center" >ตั้งเวลา 3 สิ้นสุด</th>
-                                            <th class="text-center" >ตั้งเวลา 4 เริ่ม </th>
-                                            <th class="text-center" >ตั้งเวลา 4 สิ้นสุด</th>
-                                            <th class="text-center" >ตั้งเวลา 5 เริ่ม </th>
-                                            <th class="text-center" >ตั้งเวลา 5 สิ้นสุด</th>
-                                            <th class="text-center" >ตั้งเวลา 6 เริ่ม </th>
-                                            <th class="text-center" >ตั้งเวลา 6 สิ้นสุด</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills_report_cnManual" role="tabpanel">
-                        <div id="table_report_control_Manual"></div>
+                        <div id="table_report_control_auto"></div>
                     </div>
                 </div>
             </div>
@@ -216,9 +143,9 @@
                             <div class="ms-auto">
                                 <label class="form-check-label" for="flexSwitchCheckCheckedDanger">แสดงข้อมูล : </label>
                                 <select id="sel_all_every" class="form-check-label">
-                                    <option value="1">ทุก ๆ 1 นาที</option>
+                                    <!-- <option value="1">ทุก ๆ 1 นาที</option>
                                     <option value="5">ทุก ๆ 5 นาที</option>
-                                    <option value="10">ทุก ๆ 10 นาที</option>
+                                    <option value="10">ทุก ๆ 10 นาที</option> -->
                                     <option value="15">ทุก ๆ 15 นาที</option>
                                     <option value="30">ทุก ๆ 30 นาที</option>
                                     <option value="60">ทุก ๆ 1 ชั่วโมง</option>
@@ -226,14 +153,14 @@
                             </div>
                         </div>
                         <div class="row">
-                            <?php if($s_sensor['s_btnT'] > 0){?>
+                            <?php //if($s_sensor['s_btnT'] > 0){?>
                                 <div class="col-lg-3 col-xl-3 col-sm-12 d-flex">
                                     <div class="card-body border radius-10 shadow-none mb-3">
                                         <div class="form-check">
-                                            <input class="form-check-input" name="radio_c" id="radio_temp" type="radio" onchange="ch_radio('temp')" <?php if($s_sensor['s_btnT'] > 0){echo 'checked';}?>>
+                                            <input class="form-check-input" name="radio_c" id="radio_temp" type="radio" onchange="ch_radio('temp')" checked>
                                             <h5>อุณหภูมิ</h5>
                                             <div class="form-check mb-3">
-                                                <input type="checkbox" class="form-check-input" name="checkbox_all_temp" onchange="checkbox_all('temp')" <?php if($s_sensor['s_btnT'] > 0){echo 'checked';}?>>
+                                                <input type="checkbox" class="form-check-input" name="checkbox_all_temp" onchange="checkbox_all('temp')" checked>
                                                 <label class="form-check-label">เลือกทั้งหมด </label>
                                             </div>
                                             <hr/>
@@ -248,7 +175,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            <?php } if($s_sensor['s_btnH'] > 0){?>
+                            <?php //} if($s_sensor['s_btnH'] > 0){?>
                                 <div class="col-lg-3 col-xl-3 col-sm-12 d-flex">
                                     <div class="card-body border radius-10 shadow-none mb-3">
                                         <div class="form-check">
@@ -259,7 +186,7 @@
                                                 <label class="form-check-label">เลือกทั้งหมด</label>
                                             </div>
                                             <hr/>
-                                            <?php for($i=1; $i <= 7; $i++ ){
+                                            <?php for($i=1; $i <= 8; $i++ ){
                                                 if($config_sn['sn_status_'.$i] == 1){
                                                     if($config_sn['sn_sensor_'.$i] == 2){ ?>
                                                         <div class="form-check mb-3">
@@ -270,7 +197,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            <?php } if($s_sensor['s_btnL'] > 0){?>
+                            <?php //} if($s_sensor['s_btnL'] > 0){?>
                                 <div class="col-lg-3 col-xl-3 col-sm-12 d-flex">
                                     <div class="card-body border radius-10 shadow-none mb-3">
                                         <div class="form-check">
@@ -281,7 +208,7 @@
                                                 <label class="form-check-label">เลือกทั้งหมด</label>
                                             </div>
                                             <hr/>
-                                            <?php for($i=1; $i <= 7; $i++ ){
+                                            <?php for($i=1; $i <= 8; $i++ ){
                                                 if($config_sn['sn_status_'.$i] == 1){
                                                     if($config_sn['sn_sensor_'.$i] == 4){
                                                         echo '<div class="form-check mb-3">
@@ -313,7 +240,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            <?php } if($s_sensor['s_btnS'] > 0){?>
+                            <?php //} if($s_sensor['s_btnS'] > 0){?>
                                 <div class="col-lg-3 col-xl-3 col-sm-12 d-flex">
                                     <div class="card-body border radius-10 shadow-none mb-3">
                                         <div class="form-check">
@@ -324,7 +251,7 @@
                                                 <label class="form-check-label">เลือกทั้งหมด</label>
                                             </div>
                                             <hr/>
-                                            <?php for($i=1; $i <= 7; $i++ ){
+                                            <?php for($i=1; $i <= 8; $i++ ){
                                                 if($config_sn['sn_status_'.$i] == 1){
                                                     if($config_sn['sn_sensor_'.$i] == 3){ ?>
                                                         <div class="form-check mb-3">
@@ -335,7 +262,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            <?php } ?>
+                            <?php //} ?>
                         </div>
                     </div>
                 </div>
@@ -387,8 +314,12 @@
     ch_radio('temp');
     $(".mode_dwm").val('');
     $('#mode_report').val('re_sensor');
-    $('#table_re_Sensor').wrap('<div id="hide0" style="display:none"/>');
-    $('#hide0').css( 'display', 'none' );
+    $('#chart_report').html('')
+    $('#table_report').html('')
+    $("#table_report_control").html('');
+    $("#table_report_control_auto").html('');
+    // $('#table_re_Sensor').wrap('<div id="hide0" style="display:none"/>');
+    // $('#hide0').css( 'display', 'none' );
     $(".all_day").click(function() {
         // alert($('#mode_report').val())
         $(".mode_dwm").val('day');
@@ -439,9 +370,9 @@
         $("#Modal_select_sn").modal("show");
 
         $('.val_start').on('apply.daterangepicker', function(ev, picker) {
-            $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm'));
+            $(this).val(picker.startDate.format('YYYY/MM/DD - HH:mm'));
             if($('.val_end').val() != ''){
-                if(moment($(this).val()).format('YYYY-MM-DD') < moment($('.val_end').val()).add(-31, 'days').format('YYYY-MM-DD')) {
+                if(moment($(this).val()).format('YYYY/MM/DD') < moment($('.val_end').val()).add(-31, 'days').format('YYYY/MM/DD')) {
                     Swal({
                         type: "warning",
                         html: "เลือกวันได้สูงสุด<b> ไม่เกิน 31</b> วัน/ครั้ง",
@@ -537,7 +468,7 @@
                 report_cnManual_table('from_to')
             }
         }else {
-            report_sn()
+            report_sn('')
             // $('.new_mode_dwm')
         }
     });
@@ -581,7 +512,7 @@
                 $(".all_week").hasClass("active") != false ||
                 $(".all_month").hasClass("active") != false ||
                 $(".all_from_to").hasClass("active") != false
-            ){ report_sn(); }
+            ){ report_sn('click_chart_menu'); }
         }
     });
     $(".re_tb").click(function () {
@@ -592,7 +523,7 @@
                 $(".all_week").hasClass("active") != false ||
                 $(".all_month").hasClass("active") != false ||
                 $(".all_from_to").hasClass("active") != false
-            ){report_sn();}
+            ){report_sn('');}
         }
     });
 
@@ -656,7 +587,7 @@
         }
         // alert("cl "+count_ch.length+" +all "+count)
     }
-    function report_sn(){
+    function report_sn(c_menu){
         var ch_value = [];
         var checked = [];
         var d_name = [];
@@ -793,125 +724,7 @@
             }
         }
 
-        // var loading = verticalNoTitle();
-        function report_chart(){
-            $("#report_chart").addClass("report_chart");
-            $.ajax({
-                type: "POST",
-                url: "routes/report_allChart.php",
-                data: {
-                    house_master: $(".house_master").val(),
-                    mode : $(".mode_dwm").val(),
-                    ch_value : ch_value,
-                    val_start : $(".val_start").val(),
-                    val_end : $(".val_end").val(),
-                    sel_all_every : $("#sel_all_every").val()
-                },
-                dataType: 'json',
-                success: function(res) {
-                    if(res.theme === "dark-theme"){
-                        var theme = 'dark';
-                    }else{
-                        var theme = '';
-                    }
-                    // console.log(res)
-                    // alert(ch_value[1][1])
-                    var data_chart = [];
-                    // var c_unit = [];
-                    for(var k =1; k<=ch_value[1].length; k++){
-                        data_chart.push({
-                                name: ch_value[2][(k-1)],
-                                type: 'line',
-                                showSymbol: false,
-                                // areaStyle: {},
-                                data: res.data['data_'+k]
-                        })
-                    }
-                    if(ch_value[0] === "other"){
-                        var chart_name = 'other';
-                    }else{
-                        var chart_name = ch_value[0];
-                    }
-                    // console.log(data_chart)
-                    // return false;
-                    var myChart = echarts.init(document.getElementById('report_chart'), theme);
-                    // var unt = "µmol m[baseline-shift: super; font-size: 10;]-2[baseline-shift: baseline;]s[baseline-shift: super; font-size: 10;]-1[baseline-shift: baseline;]";
-                    if(ch_value[3][(0)] == 1){
-                        var unt = "℃";
-                    }else if(ch_value[3][(0)] == 2){
-                        var unt = "%Rh";
-                    }else if(ch_value[3][(0)] == 3){
-                        var unt = "%";
-                    }else if(ch_value[3][(0)] == 4 || ch_value[3][(0)] == 6 ){
-                        var unt = "KLux";
-                    }else if(ch_value[3][(0)] == 5 || ch_value[3][(0)] == 7){
-                        var unt = "µmol m^2 s^(-1)";
-                    }else{
-                        var unt = "W";
-                    }
-                    // alert(ch_value[3][(0)])
-                    // specify chart configuration item and data
-                    var option = {
-                        title: {
-                            text: chart_name
-                        },
-                        tooltip: {
-                            trigger: 'axis',
-                            axisPointer: {
-                                type: 'cross',
-                                label: {
-                                    backgroundColor: '#6a7985'
-                                }
-                            }
-                        },
-                        legend: {
-                            data: ch_value[2]
-                        },
-                        xAxis: {
-                            type: 'time',//'category',
-                            boundaryGap: false,
-                            axisLabel: {
-                                formatter: (function(value){
-                                    return moment(value).format('YYYY/MM/DD HH:mm:ss');
-                                })
-                            },
-                            // data: res.data.timestamp,
-                        },
-                        yAxis: {
-                            type: 'value',
-                            name: unt//'µmol m<sup>-2</sup>s<sup>-1</sup>',
-                            // axisLabel : {
-                            //     formatter: '{value} (µmol m<sup>-2</sup>s<sup>-1</sup>)'
-                            // }
-                        },
-                        toolbox: {
-                            feature: {
-                                saveAsImage: {}
-                            }
-                        },
-                        dataZoom: [{
-                            type: 'inside',
-                            start: 0,
-                            end: 100
-                            }, {
-                            start: 0,
-                            end: 100
-                        }],
-                        grid: {
-                            left: '2%',
-                            right: '1%',
-                            bottom: '2%',
-                            containLabel: true
-                        },
-                        series:data_chart
-                    };
-
-                    // use configuration item and data specified to show chart
-                    myChart.setOption(option);
-                    loadingOut(loading);
-                }
-            });
-        }
+        if(c_menu != ''){var loading = verticalNoTitle();}
         $("#Modal_select_sn").modal("hide");
         // alert($(".re_tb").hasClass("active"))
         // return false
@@ -924,9 +737,10 @@
             report_table_sn(ch_value, $(".mode_dwm").val());
         }
         function report_table_sn(val, mode_dwm){
+            var loading = verticalNoTitle();
             $.ajax({
                 type: "POST",
-                url: "routes/tu/get_re_table.php",
+                url: "routes/kmu/get_re_table.php",
                 data: {
                     house_master: house_master,
                     mode : mode_dwm,
@@ -938,147 +752,12 @@
                 },
                 // dataType: 'json',
                 success: function(res) {
-                    setTimeout(function () {$("#table_report").html(res);}, 2000);
+                    setTimeout(function () {
+                        $("#table_report").html(res);
+                        loadingOut(loading);
+                    }, 2000);
                 }
             });
-            // // $('#hide0').css( 'display', 'block' );
-            // // console.log(val[1])
-            // // alert(val[1].length);
-            // var column_tb = []
-            // column_tb.push({title: "วัน-เวลา"})
-            // for(var i =1; i <= val[1].length; i++){
-            //     column_tb.push({title: val[2][(i-1)],"sClass": "center",
-            //     "orderable":      false,
-            //     // "data":           null,
-            //     "defaultContent": ""})
-            //     // if(i <= val[1].length){
-            //     //     $('.th_'+i).html(val[2][(i-1)])
-            //     // }else {
-            //     //     $('.th_'+i).hide()
-            //     // }
-            // }
-            // var table = $('#table_re_Sensor').DataTable({
-            //     "scrollY": '90vh',
-            //     "scrollX": true,
-            //     "scrollCollapse": false,
-            //     "paging":    false,
-            //     "searching": false,
-            //     "destroy": true,
-            //     "order": [
-            //         [0, "desc"]
-            //     ],
-            //     //  "processing": "<span class='fa-stack fa-lg'>\n\
-            //     //      <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>\n\
-            //     // </span>&nbsp;&nbsp;&nbsp;&nbsp;Processing ...",
-            //     "language": {
-            //        "processing": "<span class='fa-stack fa-lg'>\n\
-            //             <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>\n\
-            //         </span>&emsp;Processing ...",
-            //     },
-            //     columns: column_tb,
-            //     "columnDefs": [{
-            //         // "targets": [ 1 ],
-            //         // render: $.fn.dataTable.render.moment( 'X', 'YYYY/MM/DD' ),
-            //         // "render": $.fn.dataTable.render.moment( 'YYYY/MM/DD' ),
-            //         "visible": false,
-            //         // "searchable": false,
-            //     }],
-            //     dom: "<'floatRight'B><'clear'>frtip",
-            //     buttons: [{
-            //             text: 'Export csv',
-            //             title: "Smart Farm Report",
-            //             charset: 'utf-8',
-            //             extension: '.csv',
-            //             // exportOptions: {
-            //             //    columns: [ 0, 2, 5 ]
-            //             // },
-            //             className:'btn btn-outline-success px-5 btnexport0',
-            //             extend: 'csv',
-            //             format: 'YYYY/MM/dd',
-            //             // fieldSeparator: ';',
-            //             // fieldBoundary: '',
-            //             filename: 'smart_farm_'+datetime,
-            //             // className: 'btn-info',
-            //             bom: true
-            //         }
-            //     ]
-            // });
-            // // $("thead", table).remove();
-            // console.log(column_tb);
-            // table.button('.btnexport0').nodes().css("display", "none")
-            // table.reload()
-            // // return false;
-            // $.ajax({
-            //     type: "POST",
-            //     url: "routes/tu/get_report_cn_table.php",
-            //     data: {
-            //         house_master: house_master,
-            //         mode : mode_dwm,
-            //         mode_report: $('#mode_report').val(),
-            //         config_cn : val,
-            //         val_start : $(".val_start").val(),
-            //         val_end : $(".val_end").val(),
-            //         sel_all_every : $("#sel_all_every").val()
-            //     },
-            //     dataType: 'json',
-            //     success: function(res) {
-            //         // console.log(res);
-            //         if(res.length > 0){
-            //             table.button('.btnexport0').nodes().css("display", "block")
-            //
-            //         }
-            //         // else {
-            //         //     $('#table_re_Sensor').DataTable({
-            //         //         "scrollY": '90vh',
-            //         //         "scrollX": true,
-            //         //         "scrollCollapse": false,
-            //         //         "paging":    false,
-            //         //         "searching": false,
-            //         //         "destroy": true,
-            //         //         "order": [
-            //         //             [0, "desc"]
-            //         //         ],
-            //         //         //  "processing": "<span class='fa-stack fa-lg'>\n\
-            //         //         //      <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>\n\
-            //         //         // </span>&nbsp;&nbsp;&nbsp;&nbsp;Processing ...",
-            //         //         "language": {
-            //         //            "processing": "<span class='fa-stack fa-lg'>\n\
-            //         //                 <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>\n\
-            //         //             </span>&emsp;Processing ...",
-            //         //         },
-            //         //         columns: column_tb,
-            //         //         "columnDefs": [{
-            //         //             orderable: false,
-            //         //             // "targets": [ 1 ],
-            //         //             // render: $.fn.dataTable.render.moment( 'X', 'YYYY/MM/DD' ),
-            //         //             // "render": $.fn.dataTable.render.moment( 'YYYY/MM/DD' ),
-            //         //             "visible": false,
-            //         //             // "searchable": false,
-            //         //         }],
-            //         //         // dom: "<'floatRight'B><'clear'>frtip",
-            //         //         // buttons: [{
-            //         //         //         text: 'Export csv',
-            //         //         //         title: "Smart Farm Report",
-            //         //         //         charset: 'utf-8',
-            //         //         //         extension: '.csv',
-            //         //         //         // exportOptions: {
-            //         //         //         //    columns: [ 0, 2, 5 ]
-            //         //         //         // },
-            //         //         //         className:'btn btn-outline-success px-5 btnexport0',
-            //         //         //         extend: 'csv',
-            //         //         //         format: 'YYYY/MM/dd',
-            //         //         //         // fieldSeparator: ';',
-            //         //         //         // fieldBoundary: '',
-            //         //         //         filename: 'smart_farm_'+datetime,
-            //         //         //         // className: 'btn-info',
-            //         //         //         bom: true
-            //         //         //     }
-            //         //         // ]
-            //         //     });
-            //         // }
-            //         table.clear().rows.add(res).draw();
-            //     }
-            // });
         }
         function report_chart_sn(val, mode_dwm){
             var options = {
@@ -1192,9 +871,11 @@
             }
             var chart = new ApexCharts(document.querySelector('#chart_report'), options);
             chart.render();
+            // console.log(val);
+            // return false
             $.ajax({
                 type: "POST",
-                url: "routes/tu/get_report_cn_table.php",
+                url: "routes/kmu/get_report_chart.php",
                 data: {
                     house_master: house_master,
                     mode : mode_dwm,
@@ -1232,6 +913,8 @@
                             }
                         });
                     // }
+                    $('.exportCSV').hide();
+                    if(c_menu != ''){loadingOut(loading);}
                 }
             });
         }
@@ -1315,19 +998,7 @@
             }
         });
     })
-    $('.r_reManualControl').click(function(){
-        $('.mode_sn').hide()
-        $('#mode_report').val('re_cnManual');
-        $(".all_day").removeClass('active')
-        $(".all_week").removeClass('active')
-        $(".all_month").removeClass('active')
-        $(".all_from_to").removeClass('active')
-        $(".mode_dwm").val('');
-        $('#table_re_cnManual').wrap('<div id="hide3" style="display:none"/>');
-        $('#hide3').css( 'display', 'none' );
-        $('.val_start').val('').removeClass('is-invalid');
-        $('.val_end').val('').removeClass('is-invalid');
-    })
+
     var currentdate = new Date();
     var datetime = currentdate.getFullYear() + "-"
                 + (currentdate.getMonth()+1)  + "-"
@@ -1344,7 +1015,7 @@
         // table.clear().draw();
         $.ajax({
             type: "POST",
-            url: "routes/tu/get_report_control.php",
+            url: "routes/kmu/get_report_control.php",
             data: {
                 house_master: house_master,
                 mode : mode_dwm,
@@ -1365,106 +1036,14 @@
         });
     }
     function report_cnAuto_table(mode_dwm){
-        $('#hide2').css( 'display', 'block' );
+        // $('#hide').css( 'display', 'block' );
+        $("#table_report_control_auto").html('');
         active_btn(mode_dwm);
-        var table2 = $('#table_re_cnAuto').DataTable({
-            "scrollY": 330,
-            "scrollX": true,
-            "scrollCollapse": false,
-            "paging":    false,
-            "searching": false,
-            "destroy": true,
-            "order": [
-                [0, "desc"]
-            ],
-          //   "processing": true,
-          //   'language':{
-          //     "loadingRecords": "&nbsp;",
-          //     "processing": "Loading..."
-          // },
-            "columnDefs": [
-                {
-                    // "targets": [ 1 ],
-                    // render: $.fn.dataTable.render.moment( 'X', 'YYYY/MM/DD' ),
-                    // "render": $.fn.dataTable.render.moment( 'YYYY/MM/DD' ),
-                    "visible": false,
-                    "searchable": false,
-                },
-            ],
-            dom: "<'floatRight'B><'clear'>frtip",
-            buttons: [{
-                    text: 'Export csv',
-                    // title: "Smart Farm Report Control",
-                    // charset: 'utf-8',
-                    // extension: '.csv',
-                    className:'btn btn-outline-success px-5 btnexport2',
-                    // extend: 'csv',
-                    // format: 'YYYY/MM/dd',
-                    // // fieldSeparator: ';',
-                    // // fieldBoundary: '',
-                    // filename: 'smart_farm_control_'+datetime,
-                    // // className: 'btn-info',
-                    // bom: true
-                }
-            ]
-        });
-        table2.button('.btnexport2').nodes().css("display", "none")
-        table2.clear().draw();
+        // table.button('.btnexport').nodes().css("display", "none")
+        // table.clear().draw();
         $.ajax({
             type: "POST",
-            url: "routes/tu/get_report_cn_table.php",
-            data: {
-                house_master: house_master,
-                mode : mode_dwm,
-                mode_report: $('#mode_report').val(),
-                load_select:$("#AutoMode_select").val(),
-                config_cn : config_cn,
-                val_start : $(".val_start").val(),
-                val_end : $(".val_end").val(),
-            },
-            dataType: 'json',
-            success: function(res) {
-                // console.log(res);
-                if(res.length > 0){
-                    table2.button('.btnexport2').nodes().css("display", "block")
-                }
-                table2.clear().rows.add(res).draw();
-                $('.btnexport2').on('click', function() {
-                    var table22 = $('#table_re_cnAuto2').DataTable({
-                        data: res,
-                        "destroy": true,
-                        dom: "<'floatRight'B><'clear'>frtip",
-                        buttons: [{
-                                text: 'Export csv',
-                                className:'btn btn-outline-success px-5 btnexport22',
-                                title: "Smart Farm Report Control",
-                                charset: 'utf-8',
-                                extension: '.csv',
-                                extend: 'csv',
-                                format: 'YYYY/MM/dd',
-                                // fieldSeparator: ';',
-                                // fieldBoundary: '',
-                                filename: 'smart_farm_control_'+datetime,
-                                bom: true
-                            }
-                        ],drawCallback: function() {
-                    $('.btnexport22').click()
-                    setTimeout(function() {
-                            $('#table_re_cnAuto2').DataTable().destroy(false);
-                            }, 200)
-                        }
-                    });
-                })
-            }
-        });
-    }
-    function report_cnManual_table(mode_dwm){
-        // $('#hide3').css( 'display', 'block' );
-        $("#table_report_control_Manual").html('')
-        active_btn(mode_dwm);
-        $.ajax({
-            type: "POST",
-            url:'routes/tu/get_report_controlManual.php',
+            url: "routes/kmu/get_report_control_auto.php",
             data: {
                 house_master: house_master,
                 mode : mode_dwm,
@@ -1476,7 +1055,11 @@
             // dataType: 'json',
             success: function(res) {
                 // console.log(res);
-                $("#table_report_control_Manual").html(res);
+                $('#table_report_control_auto').html(res);
+                // if(res.length > 0){
+                //     table.button('.btnexport').nodes().css("display", "block")
+                // }
+                // table.clear().rows.add(res).draw();
             }
         });
     }

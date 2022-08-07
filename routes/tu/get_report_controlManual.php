@@ -21,7 +21,7 @@
     }
 
     $channel[] = "SUBSTRING(mn_timestamp,1,10) AS nDate";
-    $channel[] = "SUBSTRING(mn_timestamp,-8, 5) AS nTime";
+    $channel[] = "SUBSTRING(mn_timestamp,-8, 8) AS nTime";
     $channel[] = "mn_user";
     if($config_cn['cn_status_1'] == 1){$channel[] = "mn_load_1 AS dripper_1";}
     if($config_cn['cn_status_2'] == 1){$channel[] = "mn_load_2 AS dripper_2";}
@@ -59,7 +59,7 @@
                     if($config_cn['cn_status_9'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_9'].'</th>';}
                     if($config_cn['cn_status_10'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_10'].'</th>';}
                     if($config_cn['cn_status_11'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_11'].'</th>';}
-                    if($config_cn['cn_status_12'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_12'].'</th>';}
+                    if($config_cn['cn_status_12'] == 1){echo '<th class="text-center">ม่านพรางแสง</th>';}
                 ?>
             </tr>
         </thead>
@@ -97,7 +97,7 @@
     var countColumn = '<?= $rowCount ?>';
     if(countColumn == 0){
         $('#table_re_cnManual').DataTable({
-            "scrollY": 330,
+            "scrollY": '90vh',
             "scrollX": true,
             "scrollCollapse": false,
             "paging":    false,

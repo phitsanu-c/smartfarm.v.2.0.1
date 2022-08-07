@@ -2,7 +2,7 @@
     $config = $_POST['data'];
     $account_user = $config["account_user"];
     $s_sensor = $_POST['s_sensor'];
-    // print_r($config);
+    // print_r($config['s_master']);
     // exit();
     $config_sn = $config['config_sn'];
     $config_cn = $config['config_cn'];
@@ -19,7 +19,7 @@
                     <li class="breadcrumb-item"><a href="javascript:;"><i class="-alt"></i></a>
                     </li>
                     <li class="breadcrumb-item te_ht" aria-current="page"></li>
-                    <li class="breadcrumb-item" aria-current="page"> รายงาน </li>
+                    <li class="breadcrumb-item" aria-current="page"> รายงาน <?= $config['s_master']['house_name'] ?></li>
                 </ol>
             </nav>
         </div>
@@ -97,13 +97,24 @@
                             <?php
                              for($i=1; $i <= 12; $i++){
                                 if($config_cn['cn_status_'.$i] == 1){
-                                echo '<li class="col-4 col-lg-1 col-xl-1  nav-item text-center" role="presentation">
-                                        <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
-                                            <div class="d-flex align-items-center">
-                                                <div class="tab-title">'.$config_cn['cn_name_'.$i].'</div>
-                                            </div>
-                                        </a>
-                                    </li>';
+                                    if($i != 12){
+                                        echo '<li class="col-4 col-lg-1 col-xl-1  nav-item text-center" role="presentation">
+                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="tab-title">'.$config_cn['cn_name_'.$i].'</div>
+                                                    </div>
+                                                </a>
+                                            </li>';
+                                    }else {
+                                        echo '<li class="col-4 col-lg-1 col-xl-1  nav-item text-center" role="presentation">
+                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="tab-title">ม่านพรางแสง
+</div>
+                                                    </div>
+                                                </a>
+                                            </li>';
+                                    }
                                 }
                             }?>
                         </ul>
@@ -125,18 +136,18 @@
                                         <th class="text-center">วัน </th>
                                         <th class="text-center">เวลา</th>
                                         <th class="text-center">ผู้บันทึก</th>
-                                        <th class="text-center" > เริ่ม </th>
-                                        <th class="text-center" > สิ้นสุด</th>
-                                        <th class="text-center" > เริ่ม </th>
-                                        <th class="text-center" > สิ้นสุด</th>
-                                        <th class="text-center" > เริ่ม </th>
-                                        <th class="text-center" > สิ้นสุด</th>
-                                        <th class="text-center" > เริ่ม </th>
-                                        <th class="text-center" > สิ้นสุด</th>
-                                        <th class="text-center" > เริ่ม </th>
-                                        <th class="text-center" > สิ้นสุด</th>
-                                        <th class="text-center" > เริ่ม </th>
-                                        <th class="text-center" > สิ้นสุด</th>
+                                        <th class="text-center tL_start">  </th>
+                                        <th class="text-center tL_stop"> </th>
+                                        <th class="text-center tL_start">  </th>
+                                        <th class="text-center tL_stop"> </th>
+                                        <th class="text-center tL_start">  </th>
+                                        <th class="text-center tL_stop"> </th>
+                                        <th class="text-center tL_start">  </th>
+                                        <th class="text-center tL_stop"> </th>
+                                        <th class="text-center tL_start">  </th>
+                                        <th class="text-center tL_stop"> </th>
+                                        <th class="text-center tL_start">  </th>
+                                        <th class="text-center tL_stop"> </th>
                                     </tr>
                                 </thead>
                             </table>
@@ -147,18 +158,18 @@
                                             <th class="text-center">วัน </th>
                                             <th class="text-center">เวลา</th>
                                             <th class="text-center">ผู้บันทึก</th>
-                                            <th class="text-center" >ตั้งเวลา 1 เริ่ม </th>
-                                            <th class="text-center" >ตั้งเวลา 1 สิ้นสุด</th>
-                                            <th class="text-center" >ตั้งเวลา 2 เริ่ม </th>
-                                            <th class="text-center" >ตั้งเวลา 2 สิ้นสุด</th>
-                                            <th class="text-center" >ตั้งเวลา 3 เริ่ม </th>
-                                            <th class="text-center" >ตั้งเวลา 3 สิ้นสุด</th>
-                                            <th class="text-center" >ตั้งเวลา 4 เริ่ม </th>
-                                            <th class="text-center" >ตั้งเวลา 4 สิ้นสุด</th>
-                                            <th class="text-center" >ตั้งเวลา 5 เริ่ม </th>
-                                            <th class="text-center" >ตั้งเวลา 5 สิ้นสุด</th>
-                                            <th class="text-center" >ตั้งเวลา 6 เริ่ม </th>
-                                            <th class="text-center" >ตั้งเวลา 6 สิ้นสุด</th>
+                                            <th class="text-center" >ตั้งเวลา 1 <div class="tL_start"></div> </th>
+                                            <th class="text-center" >ตั้งเวลา 1 <div class="tL_stop"></div></th>
+                                            <th class="text-center" >ตั้งเวลา 2 <div class="tL_start"></div> </th>
+                                            <th class="text-center" >ตั้งเวลา 2 <div class="tL_stop"></div></th>
+                                            <th class="text-center" >ตั้งเวลา 3 <div class="tL_start"></div> </th>
+                                            <th class="text-center" >ตั้งเวลา 3 <div class="tL_stop"></div></th>
+                                            <th class="text-center" >ตั้งเวลา 4 <div class="tL_start"></div> </th>
+                                            <th class="text-center" >ตั้งเวลา 4 <div class="tL_stop"></div></th>
+                                            <th class="text-center" >ตั้งเวลา 5 <div class="tL_start"></div> </th>
+                                            <th class="text-center" >ตั้งเวลา 5 <div class="tL_stop"></div></th>
+                                            <th class="text-center" >ตั้งเวลา 6 <div class="tL_start"></div> </th>
+                                            <th class="text-center" >ตั้งเวลา 6 <div class="tL_stop"></div></th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -541,7 +552,7 @@
                 report_cnManual_table('from_to')
             }
         }else {
-            report_sn()
+            report_sn('')
             // $('.new_mode_dwm')
         }
     });
@@ -585,7 +596,7 @@
                 $(".all_week").hasClass("active") != false ||
                 $(".all_month").hasClass("active") != false ||
                 $(".all_from_to").hasClass("active") != false
-            ){ report_sn(); }
+            ){ report_sn('click_chart_menu'); }
         }
     });
     $(".re_tb").click(function () {
@@ -596,7 +607,7 @@
                 $(".all_week").hasClass("active") != false ||
                 $(".all_month").hasClass("active") != false ||
                 $(".all_from_to").hasClass("active") != false
-            ){report_sn();}
+            ){report_sn('');}
         }
     });
 
@@ -660,7 +671,7 @@
         }
         // alert("cl "+count_ch.length+" +all "+count)
     }
-    function report_sn(){
+    function report_sn(c_menu){
         var ch_value = [];
         var checked = [];
         var d_name = [];
@@ -796,8 +807,8 @@
                 $(".val_end").removeClass('is-invalid');
             }
         }
-
-        // var loading = verticalNoTitle();
+        // alert(c_menu)
+        if(c_menu != ''){var loading = verticalNoTitle();}
         // function report_chart(){
         //     $("#report_chart").addClass("report_chart");
         //     $.ajax({
@@ -943,7 +954,10 @@
                 },
                 // dataType: 'json',
                 success: function(res) {
-                    setTimeout(function () {$("#table_report").html(res);loadingOut(loading);}, 2000);
+                    setTimeout(function () {
+                        $("#table_report").html(res);
+                        loadingOut(loading);
+                    }, 2000);
                 }
             });
             // // $('#hide0').css( 'display', 'block' );
@@ -1249,6 +1263,8 @@
                             }
                         });
                     // }
+                    $('.exportCSV').hide();
+                    if(c_menu != ''){loadingOut(loading);}
                 }
             });
         }
@@ -1434,6 +1450,15 @@
         });
         table2.button('.btnexport2').nodes().css("display", "none")
         table2.clear().draw();
+
+        // alert($("#AutoMode_select").val())
+        if($("#AutoMode_select").val() == 12){
+            $('.tL_start').html('เปิดรับแสง');
+            $('.tL_stop').html('ปิดรับแสง');
+        }else {
+            $('.tL_start').html('เริ่ม');
+            $('.tL_stop').html('สิ้นสุด');
+        }
         $.ajax({
             type: "POST",
             url: "routes/tu/get_report_cn_table.php",

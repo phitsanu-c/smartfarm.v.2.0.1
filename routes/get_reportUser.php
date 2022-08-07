@@ -62,81 +62,81 @@
     </table>
 </div>
 <script type="text/javascript">
-    var countColumn = '<?= $count ?>';
-    var currentdate = new Date();
-    var datetime = currentdate.getFullYear() + "-"
-                + (currentdate.getMonth()+1)  + "-"
-                + currentdate.getDate() + "_"
-                + currentdate.getHours() + "."
-                + currentdate.getMinutes(); //+ ":"
-                // + currentdate.getSeconds();
-
-    if(countColumn == 0){
-        $('#tb_users2').DataTable({
-            "scrollY": 330,
-            "scrollX": true,
-            "scrollCollapse": false,
-            "paging":    false,
-            "searching": false,
-            "destroy": true,
-            "order": [
-                [0, "desc"]
-            ],
-            "columnDefs": [
-                {
-                    // "targets": [ 1 ],
-                    // render: $.fn.dataTable.render.moment( 'X', 'YYYY/MM/DD' ),
-                    // "render": $.fn.dataTable.render.moment( 'YYYY/MM/DD' ),
-                    "visible": false,
-                    "searchable": false,
-                },
-            ],
-        });
-    }
-    else {
-        $('#tb_users2').DataTable({
-            "scrollY": 330,
-            "scrollX": true,
-            "scrollCollapse": false,
-            "paging":    false,
-            "searching": false,
-            "destroy": true,
-            "order": [
-                [0, "desc"]
-            ],
-          //   "processing": true,
-          //   'language':{
-          //     "loadingRecords": "&nbsp;",
-          //     "processing": "Loading..."
-          // },
-            "columnDefs": [
-                {
-                    // "targets": [ 1 ],
-                    // render: $.fn.dataTable.render.moment( 'X', 'YYYY/MM/DD' ),
-                    // "render": $.fn.dataTable.render.moment( 'YYYY/MM/DD' ),
-                    "visible": false,
-                    "searchable": false,
-                },
-            ],
-            dom: "<'floatRight'B><'clear'>frtip",
-            buttons: [{
-                    text: 'Export csv',
-                    title: "Smart Farm Access Control",
-                    charset: 'utf-8',
-                    extension: '.csv',
-                    // exportOptions: {
-                    //    columns: [ 0, 2, 5 ]
-                    // },
-                    className:'btn btn-outline-success px-5 btnexport3',
-                    extend: 'csv',
-                    format: 'YYYY/MM/dd',
-                    // fieldSeparator: ';',
-                    // fieldBoundary: '',
-                    filename: 'smart_farm_access_control_'+datetime,
-                    // className: 'btn-info',
-                    bom: true
-                }
-            ]
-        });
-    }
+    // var countColumn = '<?= $count ?>';
+    // var currentdate = new Date();
+    // var datetime = currentdate.getFullYear() + "-"
+    //             + (currentdate.getMonth()+1)  + "-"
+    //             + currentdate.getDate() + "_"
+    //             + currentdate.getHours() + "."
+    //             + currentdate.getMinutes(); //+ ":"
+    //             // + currentdate.getSeconds();
+    //
+    // if(countColumn == 0){
+    //     $('#tb_users2').DataTable({
+    //         "scrollY": '90vh',
+    //         "scrollX": true,
+    //         "scrollCollapse": false,
+    //         "paging":    false,
+    //         "searching": false,
+    //         "destroy": true,
+    //         "order": [
+    //             [0, "desc"]
+    //         ],
+    //         "columnDefs": [
+    //             {
+    //                 // "targets": [ 1 ],
+    //                 // render: $.fn.dataTable.render.moment( 'X', 'YYYY/MM/DD' ),
+    //                 // "render": $.fn.dataTable.render.moment( 'YYYY/MM/DD' ),
+    //                 "visible": false,
+    //                 "searchable": false,
+    //             },
+    //         ],
+    //     });
+    // }
+    // else {
+    //     $('#tb_users2').DataTable({
+    //         "scrollY": 330,
+    //         "scrollX": true,
+    //         "scrollCollapse": false,
+    //         "paging":    false,
+    //         "searching": false,
+    //         "destroy": true,
+    //         "order": [
+    //             [0, "desc"]
+    //         ],
+    //       //   "processing": true,
+    //       //   'language':{
+    //       //     "loadingRecords": "&nbsp;",
+    //       //     "processing": "Loading..."
+    //       // },
+    //         "columnDefs": [
+    //             {
+    //                 // "targets": [ 1 ],
+    //                 // render: $.fn.dataTable.render.moment( 'X', 'YYYY/MM/DD' ),
+    //                 // "render": $.fn.dataTable.render.moment( 'YYYY/MM/DD' ),
+    //                 "visible": false,
+    //                 "searchable": false,
+    //             },
+    //         ],
+    //         dom: "<'floatRight'B><'clear'>frtip",
+    //         buttons: [{
+    //                 text: 'Export csv',
+    //                 title: "Smart Farm Access Control",
+    //                 charset: 'utf-8',
+    //                 extension: '.csv',
+    //                 // exportOptions: {
+    //                 //    columns: [ 0, 2, 5 ]
+    //                 // },
+    //                 className:'btn btn-outline-success px-5 btnexport3',
+    //                 extend: 'csv',
+    //                 format: 'YYYY/MM/dd',
+    //                 // fieldSeparator: ';',
+    //                 // fieldBoundary: '',
+    //                 filename: 'smart_farm_access_control_'+datetime,
+    //                 // className: 'btn-info',
+    //                 bom: true
+    //             }
+    //         ]
+    //     });
+    // }
 </script>

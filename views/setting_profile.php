@@ -84,17 +84,20 @@
                                     <input type="tel" class="form-control pt_tel" placeholder="โทรศัพท์" value="<?= $_SESSION["account_tel"] ?>" disabled>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <label for="Mobite" class="form-label">Token Line</label>
-                                <div class="input-group input-group-lg"> <span class="input-group-text bg-transparent"><img src="public/images/icons/icons8-line.svg" style="width: 23px;"></span>
-                                    <input type="text" class="form-control pt_token" placeholder="Token Line" value="<?= $_SESSION["account_token"] ?>" disabled>
+                            <?php if($_SESSION["account_user"] != 'KMUTT'){ ?>
+                                <div class="col-12">
+                                    <label for="Mobite" class="form-label">Token Line</label>
+                                    <div class="input-group input-group-lg"> <span class="input-group-text bg-transparent"><img src="public/images/icons/icons8-line.svg" style="width: 23px;"></span>
+                                        <input type="text" class="form-control pt_token" placeholder="Token Line" value="<?= $_SESSION["account_token"] ?>" disabled>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <div class="ms-auto">
-                                    <label for="Mobite" class="form-control"><a href="line_token.html" target="_blank"> <-- วิธีสร้าง Token Line Notify --> </a></label>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="ms-auto">
+                                        <label for="Mobite" class="form-control"><a href="line_token.html" target="_blank"> <-- วิธีสร้าง Token Line Notify --> </a></label>
+                                    </div>
                                 </div>
-                            </div>
+                            <<?php } ?>
                             <!-- <div class="col-12"> -->
                                 <!-- <label for="Mobite" class="form-label">สถานะผู้ใช้งาน</label> -->
                                 <!-- <div class="input-group input-group-lg">
@@ -362,18 +365,20 @@
                             <input type="tel" class="form-control border-start-0 p_tel" name="p_tel" placeholder="โทรศัพท์">
                         </div>
                     </div>
-                    <div class="col-12">
-                        <label for="Mobite" class="form-label">Token Line</label>
-                        <div class="input-group input-group-lg"> <span class="input-group-text bg-transparent"><img src="public/images/icons/icons8-line.svg" style="width: 23px;"></span>
-                            <input type="text" class="form-control border-start-0 pt_token" name="pt_token" placeholder="Token Line" value="<?= $_SESSION["account_token"] ?>">
+                    <?php if($_SESSION["account_user"] != 'KMUTT'){ ?>
+                        <div class="col-12">
+                            <label for="Mobite" class="form-label">Token Line</label>
+                            <div class="input-group input-group-lg"> <span class="input-group-text bg-transparent"><img src="public/images/icons/icons8-line.svg" style="width: 23px;"></span>
+                                <input type="text" class="form-control border-start-0 pt_token" name="pt_token" placeholder="Token Line" value="<?= $_SESSION["account_token"] ?>">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="d-flex align-items-center">
-                        <div class="ms-auto">
-                            <label for="Mobite" class="form-control"><a href="line_token.html" target="_blank"> <-- วิธีสร้าง Token Line Notify --> </a></label>
+                        <div class="d-flex align-items-center">
+                            <div class="ms-auto">
+                                <label for="Mobite" class="form-control"><a href="line_token.html" target="_blank"> <-- วิธีสร้าง Token Line Notify --> </a></label>
+                            </div>
                         </div>
-                    </div>
+                    <?php } ?>
                 </form>
             </div>
             <div class="modal-footer">
@@ -1839,7 +1844,12 @@
                     $(".use_userID").val("0").removeClass("is-invalid");
                     $(".us_img_user").hide();
                     $('.user_edit').hide();
-                    $('.u_img').attr("src", "public/images/default.jpg")
+                    if($(this).attr('img') === ''){
+                        $('.u_img').attr("src", "public/images/users/user.png")
+                    }else {
+                        $('.u_img').attr("src", "public/images/users/"+$(this).attr('img'))
+                    }
+
                     $("#u_img").val("");
                     $(".mode_insert").val("edit_user");
                     $(".userST_id").val($(this).attr('userST_id'));
@@ -2000,7 +2010,7 @@
                     });
                 });
                 $('#tb_users').DataTable({
-                    "scrollY": 330,
+                    "scrollY": '90vh',
                     "scrollX": true,
                     "scrollCollapse": false,
                     "paging":    false,
@@ -2317,6 +2327,83 @@
             // dataType: "json",
             success: function(res) {
                 $('#user_report').html(res)
+                var countColumn = '<?= $count ?>';
+                var currentdate = new Date();
+                var datetime = currentdate.getFullYear() + "-"
+                            + (currentdate.getMonth()+1)  + "-"
+                            + currentdate.getDate() + "_"
+                            + currentdate.getHours() + "."
+                            + currentdate.getMinutes(); //+ ":"
+                            // + currentdate.getSeconds();
+
+                if(countColumn == 0){
+                    $('#tb_users2').DataTable({
+                        "scrollY": '90vh',
+                        "scrollX": true,
+                        "scrollCollapse": false,
+                        "paging":    false,
+                        "searching": false,
+                        "destroy": true,
+                        "order": [
+                            [0, "desc"]
+                        ],
+                        "columnDefs": [
+                            {
+                                // "targets": [ 1 ],
+                                // render: $.fn.dataTable.render.moment( 'X', 'YYYY/MM/DD' ),
+                                // "render": $.fn.dataTable.render.moment( 'YYYY/MM/DD' ),
+                                "visible": false,
+                                "searchable": false,
+                            },
+                        ],
+                    });
+                }
+                else {
+                    $('#tb_users2').DataTable({
+                        "scrollY": 330,
+                        "scrollX": true,
+                        "scrollCollapse": false,
+                        "paging":    false,
+                        "searching": false,
+                        "destroy": true,
+                        "order": [
+                            [0, "desc"]
+                        ],
+                      //   "processing": true,
+                      //   'language':{
+                      //     "loadingRecords": "&nbsp;",
+                      //     "processing": "Loading..."
+                      // },
+                        "columnDefs": [
+                            {
+                                // "targets": [ 1 ],
+                                // render: $.fn.dataTable.render.moment( 'X', 'YYYY/MM/DD' ),
+                                // "render": $.fn.dataTable.render.moment( 'YYYY/MM/DD' ),
+                                "visible": false,
+                                "searchable": false,
+                            },
+                        ],
+                        dom: "<'floatRight'B><'clear'>frtip",
+                        buttons: [{
+                                text: 'Export csv',
+                                title: "Smart Farm Access Control",
+                                charset: 'utf-8',
+                                extension: '.csv',
+                                // exportOptions: {
+                                //    columns: [ 0, 2, 5 ]
+                                // },
+                                className:'btn btn-outline-success px-5 btnexport3',
+                                extend: 'csv',
+                                format: 'YYYY/MM/dd',
+                                // fieldSeparator: ';',
+                                // fieldBoundary: '',
+                                filename: 'smart_farm_access_control_'+datetime,
+                                // className: 'btn-info',
+                                bom: true
+                            }
+                        ]
+                    });
+                }
                 loadingOut(loading);
             }
         });

@@ -73,12 +73,25 @@
                         }else {
                             echo '<h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">สถานะ : <B class="text-danger"> ออฟไลน์</B>';
                         }
-                    }else if ($row_['house_webv'] == 4) {
-                        if( $drow_['data_timestamp_'.intval(substr($row_['house_master'], 5,10))] > date("Y-m-d H:i:s", strtotime('-2 minute')) ){
-                            echo '<h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">สถานะ : <B class="text-success"> ออนไลน์</B> ';
+                    }
+                    else if ($row_['house_webv'] == 4) {
+                        $house_master = $row_["house_master"];
+                        if($house_master == 'TUSMT008'){
+                            // echo $house_master;
+                            $row_tt = $dbcon->query("SELECT * FROM tbn_data_tu WHERE data_sn = '$house_sn' ORDER BY data_timestamp DESC")->fetch();
+                            if(DateTime::createFromFormat("Y-m-d H:i:s", $row_tt['data_timestamp'])->format("Y-m-d H:i:s") > date("Y-m-d H:i:s", strtotime('-2 minute')) ){
+                                echo '<h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">สถานะ : <B class="text-success"> ออนไลน์</B> ';
+                            }else {
+                                echo '<h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">สถานะ : <B class="text-danger"> ออฟไลน์</B>';
+                            }
                         }else {
-                            echo '<h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">สถานะ : <B class="text-danger"> ออฟไลน์</B>';
+                            if( $drow_['data_timestamp_'.intval(substr($row_['house_master'], 5,10))] > date("Y-m-d H:i:s", strtotime('-2 minute')) ){
+                                echo '<h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">สถานะ : <B class="text-success"> ออนไลน์</B> ';
+                            }else {
+                                echo '<h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">สถานะ : <B class="text-danger"> ออฟไลน์</B>';
+                            }
                         }
+
                     }
                     ?>
                 </div>

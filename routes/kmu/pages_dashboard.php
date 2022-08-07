@@ -312,7 +312,7 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                     <div class="col-12">
                         <div class="d-flex align-items-center">
-                            <h4 class="modal-title"><b>ระบบควบคุม</b></h4>
+                            <h4 class="modal-title"><b>ระบบควบคุม <?= $s_master['house_name'] ?></b></h4>
                             <div class="ms-auto">
                                 <button type="button" class="btn-close close_modal" data-bs-dismiss="modal"
                                     aria-label="Close"> <span aria-hidden="true"></span> </button>

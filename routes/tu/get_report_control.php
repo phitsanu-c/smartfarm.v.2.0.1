@@ -62,7 +62,7 @@
                     if($config_cn['cn_status_9'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_9'].'</th>';}
                     if($config_cn['cn_status_10'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_10'].'</th>';}
                     if($config_cn['cn_status_11'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_11'].'</th>';}
-                    if($config_cn['cn_status_12'] == 1){echo '<th class="text-center">'.$config_cn['cn_name_12'].'</th>';}
+                    if($config_cn['cn_status_12'] == 1){echo '<th class="text-center">ม่านพรางแสง</th>';}
                 ?>
             </tr>
         </thead>
@@ -100,7 +100,7 @@
     var countColumn = '<?= $rowCount ?>';
     if(countColumn == 0){
         $('#tb_re_cn').DataTable({
-            "scrollY": 330,
+            "scrollY": '1000',
             "scrollX": true,
             "scrollCollapse": false,
             "paging":    false,

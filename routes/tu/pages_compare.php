@@ -1,13 +1,13 @@
 <?php
     require "../connectdb.php";
     $siteID = $_GET['s'];
-    $house_master1 = 'TUSMT001';
-    $house_master2 = 'TUSMT002';
+    $house_master1 = 'TUSMT006';
+    $house_master2 = 'TUSMT007';
     $house_master3 = 'TUSMT003';
     $house_master4 = 'TUSMT004';
     $house_master5 = 'TUSMT005';
-    $house_master6 = 'TUSMT006';
-    $house_master7 = 'TUSMT007';
+    $house_master6 = 'TUSMT001';
+    $house_master7 = 'TUSMT002';
     $row_1 = $dbcon->query("SELECT * FROM tbn_status_sn INNER JOIN tbn_house ON tbn_status_sn.sn_status_an = tbn_house.house_master WHERE tbn_status_sn.sn_status_an = '$house_master1'")->fetch();
     $row_2 = $dbcon->query("SELECT * FROM tbn_status_sn INNER JOIN tbn_house ON tbn_status_sn.sn_status_an = tbn_house.house_master WHERE tbn_status_sn.sn_status_an = '$house_master2'")->fetch();
     $row_3 = $dbcon->query("SELECT * FROM tbn_status_sn INNER JOIN tbn_house ON tbn_status_sn.sn_status_an = tbn_house.house_master WHERE tbn_status_sn.sn_status_an = '$house_master3'")->fetch();
@@ -543,25 +543,25 @@
     $(".c_day").click(function() {
         // alert($('#mode_report').val())
         $(".mode_dwm").val('day');
-        $(".title_mod").html('แสดงข้อมูลย้อนหลัง 1 วัน');
+        $(".title_mod").html('เปรียบเทียบข้อมูลย้อนหลัง 1 วัน');
         $(".hide_dwm").hide();
         $("#Modal_select_sn").modal("show");
     });
     $(".c_week").click(function() {
         $(".mode_dwm").val('week');
-        $(".title_mod").html('แสดงข้อมูลย้อนหลัง 7 วัน');
+        $(".title_mod").html('เปรียบเทียบข้อมูลย้อนหลัง 7 วัน');
         $(".hide_dwm").hide();
         $("#Modal_select_sn").modal("show");
     });
     $(".c_month").click(function() {
         $(".mode_dwm").val('month');
-        $(".title_mod").html('แสดงข้อมูลย้อนหลัง 30 วัน');
+        $(".title_mod").html('เปรียบเทียบข้อมูลย้อนหลัง 30 วัน');
         $(".hide_dwm").hide();
         $("#Modal_select_sn").modal("show");
     });
     $(".c_from_to").click(function() {
         $(".mode_dwm").val('from_to');
-        $(".title_mod").html('แสดงข้อมูลย้อนหลัง &nbsp; &nbsp;&nbsp;');
+        $(".title_mod").html('เปรียบเทียบข้อมูลย้อนหลัง &nbsp; &nbsp;&nbsp;');
         $(".hide_dwm").show();
         $("#Modal_select_sn").modal("show");
 
@@ -627,7 +627,7 @@
     });
 
     $('#submit_fromTo').click(function() {
-        report_sn()
+        report_sn('')
     });
 
     $(".re_ch").click(function () {
@@ -639,7 +639,7 @@
                     $(".c_week").hasClass("active") != false ||
                     $(".c_month").hasClass("active") != false ||
                     $(".c_from_to").hasClass("active") != false
-                ){ report_sn(); }
+                ){ report_sn('click_chart_menu'); }
             }
         }
     });
@@ -652,7 +652,7 @@
                     $(".c_week").hasClass("active") != false ||
                     $(".c_month").hasClass("active") != false ||
                     $(".c_from_to").hasClass("active") != false
-                ){report_sn();}
+                ){report_sn('');}
             }
         }
     });
@@ -713,7 +713,7 @@
         }
     }
 
-    function report_sn(){
+    function report_sn(c_menu){
         var ch_value = [];
         var checked = [];
         var d_name = [];
@@ -808,7 +808,7 @@
             }
         }
 
-        // var loading = verticalNoTitle();
+        if(c_menu != ''){var loading = verticalNoTitle();}
         $("#Modal_select_sn").modal("hide");
         // alert($(".re_tb").hasClass("active"))
         // return false
@@ -994,6 +994,8 @@
                             }
                         });
                     // }
+                    $('.exportCSV').hide();
+                    if(c_menu != ''){loadingOut(loading);}
                 }
             });
         }

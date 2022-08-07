@@ -53,21 +53,21 @@
     <style>
         /* .parent {
         display: flex;
-    }
+        }
 
-    .child {
-        padding-left: 20px;
-    }
+        .child {
+            padding-left: 20px;
+        }
 
-    .child2 {
-        padding-left: 0px;
-        padding-right: 0px;
-    }
+        .child2 {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
 
-    .child1 {
-        margin-left: auto;
-        padding-right: 20px;
-    } */
+        .child1 {
+            margin-left: auto;
+            padding-right: 20px;
+        } */
 
         .ridge {
             border-style: ridge;
@@ -403,7 +403,7 @@
                     },
                     dataType: "json",
                     success: function(res) {
-                        // console.log(res);
+                        console.log(res);
                         var config_sn = res.config_sn;
                         var config_cn = res.config_cn;
                         var set_maxmin = res.set_maxmin;
@@ -416,7 +416,7 @@
                         var data_light_in = [];
                         var data_soil_in1 = [];
                         var data_soil_in2 = [];
-                        check_menu_control()
+                        check_menu_control();
                         function check_menu_control(){
                             if(res.userLevel < 3){
                                 if(getArraySum(res.controlstatus) > 0){
@@ -693,19 +693,19 @@
                                 loadingOut(loading);
                             }
                         });
-                        // $.ajax({
-                        //     url: "routes/kmu/pages_report.php",
-                        //     method: "post",
-                        //     data: {
-                        //         data: res,
-                        //         s_sensor: s_sensor,
-                        //         count_cn: getArraySum(res.controlstatus)
-                        //     },
-                        //     // dataType: "json",
-                        //     success: function(res_dash) {
-                        //         $("#load_pages_report").html(res_dash);
-                        //     }
-                        // });
+                        $.ajax({
+                            url: "routes/kmu/pages_report.php",
+                            method: "post",
+                            data: {
+                                data: res,
+                                // s_sensor: s_sensor,
+                                // count_cn: getArraySum(res.controlstatus)
+                            },
+                            // dataType: "json",
+                            success: function(res_dash) {
+                                $("#load_pages_report").html(res_dash);
+                            }
+                        });
                         var optionsLine = {
                             chart: {
                                 id: 'realtime',

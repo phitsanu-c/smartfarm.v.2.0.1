@@ -94,8 +94,89 @@
                     </dic>
                     <div class="card-body">
                         <h3>LINE Notify คืออะไร?</h3>
-                        <h4>LINE คือ แอปพลิเคชันที่เติบโตมาจากการเป็นแอปสำหรับส่งข้อความคุยกัน แม้ปัจจุบันจะสามารถควบรวมบริการต่างๆ ทำให้ทำอย่างอื่นได้อีกมากมาย แค่บริการหลักก็ยังเป็นเครื่องมือสำหรับสื่อสารส่งข้อความกันระหว่างผู้ใช้ ซึ่ง LINE Notify เป็นบริการของ LINE ให้เราใช้ส่งข้อความเพื่อแจ้งเตือนเหมือนเป็นบอทส่วนตัว</h4>
-                        <h4>ระบบแจ้งเตือน Line Notify ช่วยให้เจ้าของร้านได้รับทุกการแจ้งเตือนผ่านระบบ Line Notify สามารถแจ้งเตือนได้ตั้งแต่รายการสั่งซื้อ รายการชำระเงินของลูกค้า ไปจนถึงการแจ้งเตือนสต็อคสินค้าเมื่อถึงจุด Low Stock หรือสินค้านั้นมีการ Out of Stock อีกทั้งข้อความที่ติดต่อผ่านเข้ามาทางเว็บไซต์ ระบบ Line Notify ก็จะแจ้งเตือนให้ทันที</h4>
+                        <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LINE คือ แอปพลิเคชันที่เติบโตมาจากการเป็นแอปสำหรับส่งข้อความคุยกัน แม้ปัจจุบันจะสามารถควบรวมบริการต่างๆ ทำให้ทำอย่างอื่นได้อีกมากมาย แค่บริการหลักก็ยังเป็นเครื่องมือสำหรับสื่อสารส่งข้อความกันระหว่างผู้ใช้ ซึ่ง LINE Notify เป็นบริการของ LINE ให้เราใช้ส่งข้อความเพื่อแจ้งเตือนเหมือนเป็นบอทส่วนตัว</h4>
+                        <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ระบบแจ้งเตือน Line Notify ช่วยให้เจ้าของร้านได้รับทุกการแจ้งเตือนผ่านระบบ Line Notify สามารถแจ้งเตือนได้ตั้งแต่รายการสั่งซื้อ รายการชำระเงินของลูกค้า ไปจนถึงการแจ้งเตือนสต็อคสินค้าเมื่อถึงจุด Low Stock หรือสินค้านั้นมีการ Out of Stock อีกทั้งข้อความที่ติดต่อผ่านเข้ามาทางเว็บไซต์ ระบบ Line Notify ก็จะแจ้งเตือนให้ทันที</h4>
+                        <br>
+                        <h4><b>ขั้นตอน การขอ Token จาก Line Notify เพื่อรับการแจ้งเตือนจากเว็บเซอร์วิสทาง LINE</b></h4>
+                        <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ขั้นตอนการขอ Token จาก Line notify เพื่อรับการแจ้งเตือนต่างๆ จาก LINE นิยมนำมาใช้อย่างแพร่หลายกับวงการ Arduino และ NodeMCU โดยนำมาเป็นช่องทางการแจ้งเตือน Error ต่างๆของระบบ หรือส่ง ข้อความ รูปภาพ ไปยังไลน์ (LINE) </h4>
+
+
+                        <div class="text-center">
+                            <p>
+                                <br />&nbsp;<br />
+                                <strong><span style="font-size: 16px;">ขั้นตอนที่ 1 </span></strong>
+                                <span style="font-size: 16px;">เข้าไปยังลิงค์ </span>
+                                <span style="color: #ff0000;">
+                                    <a href="https://notify-bot.line.me/th/" style="color: #ff0000;">https://notify-bot.line.me/th/&nbsp; </a>
+                                </span>
+                                <br />
+                                <span style="">เพื่อไปยังหน้าเว็บของ LINE Nofity แล้วทำการ Login Email ของเราที่เชื่อมต่อกับ LINE<br /></span>
+                                <br />
+                                <strong>
+                                    <span style="font-size: 16px;">
+                                        <img src="https://dw.lnwfile.com/_/dw/_raw/49/qx/54.jpg" alt="" width="600" />
+                                        <br /><br />ขั้นตอนที่ 2
+                                    </span>
+                                </strong>
+                                <span style="font-size: 16px;">หลังจาก Login เสร็จ เข้าไปเลือกเมนู</span>
+                                <strong>
+                                    <span style="font-size: 16px;">
+                                        <span style="color: #ff0000;">หน้าของฉัน<br /></span>
+                                        <br />
+                                        <img src="https://dw.lnwfile.com/_/dw/_raw/l5/y4/76.jpg" alt="" width="600" />
+                                        <br />
+                                    </span>
+                                </strong>
+                            </p>
+                            <p>
+                                <strong>
+                                    <span style="font-size: 16px;">ขั้นตอนที่ 3 </span>
+                                </strong>
+                                <span style="font-size: 16px;">
+                                    หลังจากทำตามขั้นตอนที่ 2 เสร็จเลื่อนลงมาข้างล่างหน่อย ก็จะเจอ เมนู
+                                </span>
+                                <span style="font-size: 16px;">
+                                    <span style="color: #ff0000;">
+                                        ออก Token&nbsp;
+                                        <span style="color: #000000;">กดเข้าไปได้เลย</span>
+                                    </span>
+                                </span>
+                                <strong>
+                                    <span style="font-size: 16px;"><br />
+                                        <br />
+                                        <img src="https://dw.lnwfile.com/_/dw/_raw/uq/dt/65.jpg" alt="" width="600" />
+                                        <br />
+                                        <br />
+                                        ขั้นตอนที่ 4&nbsp; &nbsp;
+                                    </span>
+                                </strong>
+                                <span style="font-size: 16px;">
+                                    ตั้งชื่อ แล้วเลือกช่องแชทที่จะให้ Line nofity ส่งข้อความไปให้เรา แล้กด
+                                    <span style="color: #ff0000;">
+                                        ออก Token&nbsp;
+                                    </span>
+                                </span>
+                                <strong>
+                                    <span style="font-size: 16px;">
+                                        <br />
+                                        <br />
+                                        <img src="https://dw.lnwfile.com/_/dw/_raw/s8/nn/1q.jpg" alt="" width="600" />
+                                        <br />
+                                        <br />
+                                    </span>
+                                </strong>
+                                <span style="font-size: 16px;">
+                                    จากนั้นเราก็จะได้ Token LINE มาใช้กับโปรแกรมของเราแล้ว
+                                    <br />
+                                </span>
+                                <span style="font-size: 16px;">
+                                    <br />
+                                    <strong>หมายเหตุ**</strong>
+                                    ควร Copy Token ไว้เพราะ Token จะเห็นได้เพียง 1 ครั้งเท่านั้นหากเราออกจากหน้า Token ที่ออกแล้วจะไม่สามารถดู Token ได้อีกเลย แต่!! สามารถออก Token ได้อีกเรื่อย ๆ ไม่จำกัด
+                                    <br />
+                                </span>
+                            </p>
+                        </div>
                     </dic>
                 </div>
             </div>

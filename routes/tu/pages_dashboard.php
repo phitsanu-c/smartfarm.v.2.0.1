@@ -90,7 +90,8 @@
             <div class="card radius-10">
                 <div class="card-body">
                     <div class="card radius-10 shadow-none ">
-                        <img src="public/images/site/<?= $house_img ?>" alt="..." class="card-img ">
+                        <?php if($s_master["house_img"] == ''){echo '<img src="public/images/site/'. $house_img .'" alt="..." class="card-img ">';}
+                        else {echo '<img src="public/images/house/'. $s_master["house_img"] .'" alt="..." class="card-img ">';} ?>
                     </div>
                     <div class="card radius-10 shadow-none">
                         <div class="card-body border radius-10 shadow-none mb-3">
@@ -299,6 +300,7 @@
                                                 elseif($i == 12){echo 'ม่านพรางแสง';}
                                             ?></b>
                                         </div>
+                                        <h6 class="text-center"><?= $config_cn['cn_name_'.$i] ?></h6>
                                         <div class="text-center">
                                             <img class="dash_img_con_<?= $i ?>" style="width:15vh">
                                         </div>
@@ -319,7 +321,7 @@
     					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                         <div class="col-12">
                             <div class="d-flex align-items-center">
-                                <h4 class="modal-title"><b>ระบบควบคุม</b></h4>
+                                <h4 class="modal-title"><b>ระบบควบคุม <?= $s_master['house_name'] ?></b></h4>
                                 <div class="ms-auto">
                                     <button type="button" class="btn-close close_modal" data-bs-dismiss="modal"
                                         aria-label="Close"> <span aria-hidden="true"></span> </button>
@@ -346,7 +348,7 @@
                                             if($config_cn['cn_status_1'] == 1){
                                                 echo '<div class="col-3 col-lg-6">
                                                          <button class="btn btn-control sw_sel_load_auto" id="1">
-                                                            <div class="control-text">'.$config_cn['cn_name_1'].'</div>
+                                                            <div class="control-text">น้ำหยด 1</div>
                                                              <img class="img_sw_sel_load_auto1" src="" width="100%" />
                                                          </button>
                                                     </div>';
@@ -354,7 +356,7 @@
                                             if($config_cn['cn_status_2'] == 1){
                                                 echo '<div class="col-3 col-lg-6">
                                                          <button class="btn btn-control sw_sel_load_auto"  id="2">
-                                                            <div class="control-text">'.$config_cn['cn_name_2'].'</div>
+                                                            <div class="control-text">น้ำหยด 2</div>
                                                              <img class="img_sw_sel_load_auto2" src="" width="100%" />
                                                          </button>
                                                     </div>';
@@ -362,7 +364,7 @@
                                             if($config_cn['cn_status_3'] == 1){
                                                 echo '<div class="col-3 col-lg-6">
                                                          <button class="btn btn-control sw_sel_load_auto"  id="3">
-                                                            <div class="control-text">'.$config_cn['cn_name_3'].'</div>
+                                                            <div class="control-text">น้ำหยด 3</div>
                                                              <img class="img_sw_sel_load_auto3" src="" width="100%" />
                                                          </button>
                                                     </div>';
@@ -370,7 +372,7 @@
                                             if($config_cn['cn_status_4'] == 1){
                                                 echo '<div class="col-3 col-lg-6">
                                                          <button class="btn btn-control sw_sel_load_auto"  id="4">
-                                                            <div class="control-text">'.$config_cn['cn_name_4'].'</div>
+                                                            <div class="control-text">น้ำหยด 1</div>
                                                              <img class="img_sw_sel_load_auto4" src="" width="100%" />
                                                          </button>
                                                     </div>';
@@ -382,7 +384,7 @@
                                             if($config_cn['cn_status_5'] == 1){
                                                 echo '<div class="col-3 col-lg-6">
                                                          <button class="btn btn-control sw_sel_load_auto" id="5">
-                                                            <div class="control-text">'.$config_cn['cn_name_5'].'</div>
+                                                            <div class="control-text">พัดลม 1</div>
                                                              <img class="img_sw_sel_load_auto5" src="" width="100%" />
                                                          </button>
                                                     </div>';
@@ -390,7 +392,7 @@
                                             if($config_cn['cn_status_6'] == 1){
                                                 echo '<div class="col-3 col-lg-6">
                                                          <button class="btn btn-control sw_sel_load_auto"" id="6">
-                                                            <div class="control-text">'.$config_cn['cn_name_6'].'</div>
+                                                            <div class="control-text">พัดลม 2</div>
                                                              <img class="img_sw_sel_load_auto6" src="" width="100%" />
                                                          </button>
                                                     </div>';
@@ -398,7 +400,7 @@
                                             if($config_cn['cn_status_7'] == 1){
                                                 echo '<div class="col-3 col-lg-6">
                                                          <button class="btn btn-control sw_sel_load_auto"  id="7">
-                                                            <div class="control-text">'.$config_cn['cn_name_7'].'</div>
+                                                            <div class="control-text">พัดลม 3</div>
                                                              <img class="img_sw_sel_load_auto7" src="" width="100%" />
                                                          </button>
                                                     </div>';
@@ -406,7 +408,7 @@
                                             if($config_cn['cn_status_8'] == 1){
                                                 echo '<div class="col-3 col-lg-6">
                                                          <button class="btn btn-control sw_sel_load_auto"  id="8">
-                                                            <div class="control-text">'.$config_cn['cn_name_8'].'</div>
+                                                            <div class="control-text">พัดลม 4</div>
                                                              <img class="img_sw_sel_load_auto8" src="" width="100%" />
                                                          </button>
                                                     </div>';
@@ -418,7 +420,7 @@
                                             if($config_cn['cn_status_9'] == 1){
                                                 echo '<div class="col-3 col-lg-6">
                                                          <button class="btn btn-control sw_sel_load_auto" id="9">
-                                                            <div class="control-text">'.$config_cn['cn_name_9'].'</div>
+                                                            <div class="control-text">พ่นหมอก 1</div>
                                                              <img class="img_sw_sel_load_auto9" src="" width="100%" />
                                                          </button>
                                                     </div>';
@@ -426,7 +428,7 @@
                                             if($config_cn['cn_status_10'] == 1){
                                                 echo '<div class="col-3 col-lg-6">
                                                          <button class="btn btn-control sw_sel_load_auto" id="10">
-                                                            <div class="control-text">'.$config_cn['cn_name_10'].'</div>
+                                                            <div class="control-text">พ่นหมอก 2</div>
                                                              <img class="img_sw_sel_load_auto10" src="" width="100%" />
                                                          </button>
                                                     </div>';
@@ -434,7 +436,7 @@
                                             if($config_cn['cn_status_11'] == 1){
                                                 echo '<div class="col-3 col-lg-6">
                                                          <button class="btn btn-control sw_sel_load_auto"id="11">
-                                                            <div class="control-text">'.$config_cn['cn_name_11'].'</div>
+                                                            <div class="control-text">สเปรย์</div>
                                                              <img class="img_sw_sel_load_auto11" src="" width="100%" />
                                                          </button>
                                                     </div>';
@@ -450,28 +452,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <?php
-                                   // echo '<ul class="nav mt-3">';
-                                   // for($i = 1; $i <= 12; $i++){
-                                   //      if($config_cn['cn_status_'.$i] == 1){
-                                   //          if($i == 12){
-                                   //              echo '<li class="nav-item col-3 col-lg-2">
-                                   //                      <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="'.$i.'">พรางแสง<br>
-                                   //                          <img class="img_sw_sel_load_auto'.$i.'" src="" width="70" />
-                                   //                      </button>
-                                   //                 </li>';
-                                   //          }else {
-                                   //              echo '<li class="nav-item col-3 col-lg-2">
-                                   //                  <button class="btn btn-control sw_sel_load_auto" style="width:100% " id="'.$i.'">'.$config_cn['cn_name_'.$i].'<br>
-                                   //                      <img class="img_sw_sel_load_auto'.$i.'" src="" width="70" />
-                                   //                  </button>
-                                   //             </li>';
-                                   //          }
-                                   //      }
-                                   //  }
-                                   // echo "</ul>";
-                                ?>
-                                <div class="container col-12 mt-3 ridge">
+                            </div>
+                            <div class="row ridge">
+                                <div class="col-12 ridge">
                                     <div class="row">
                                         <div class="d-flex align-items-center" style="background-color: #283A6C; height: 50px; text-align: justify;">
                                             <a><b class="title_load_auto " style="color:#FFF; font-size:20px"> </b></a>
@@ -481,8 +464,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row ridge">
                                 <!-- <div class="col-12"> -->
                                     <!-- <div class="row"> -->
                                         <?php
@@ -501,10 +482,10 @@
                                                         <div class="col-6">
                                                             <div class="form-group text-left">
                                                                 <div class="row">
-                                                                    <div class="col-md-3 mt-2">
-                                                                        <small class="form-control-feedback text_font_size"> เริ่ม </small>
+                                                                    <div class="col-md-4 mt-2 text-end ">
+                                                                        <small class="form-control-feedback text_font_size L_start"> เริ่ม </small>
                                                                     </div>
-                                                                    <div class="col-md-9">
+                                                                    <div class="col-md-8">
                                                                         <input type="text" id="time_s_'.$i.'" class="form-control input_time">
                                                                     </div>
                                                                 </div>
@@ -513,10 +494,10 @@
                                                         <div class="col-6">
                                                             <div class="form-group text-left">
                                                                 <div class="row">
-                                                                    <div class="col-md-3 mt-2">
-                                                                        <small class="form-control-feedback text_font_size"> สิ้นสุด </small>
+                                                                    <div class="col-md-4 mt-2 text-end ">
+                                                                        <small class="form-control-feedback text_font_size L_stop"> สิ้นสุด </small>
                                                                     </div>
-                                                                    <div class="col-md-9">
+                                                                    <div class="col-md-8">
                                                                         <input type="text" id="time_e_'.$i.'" class="form-control input_time">
                                                                     </div>
                                                                 </div>
@@ -1387,6 +1368,13 @@
                 fn_df_checkbox_auto(numb);
                 fn_df_logdata_auto(numb);
                 $("#save_auto_cont").hide();
+                if(numb == 12){
+                    $('.L_start').html('เปิดรับแสง');
+                    $('.L_stop').html('ปิดรับแสง');
+                }else {
+                    $('.L_start').html('เริ่ม');
+                    $('.L_stop').html('สิ้นสุด');
+                }
             }
         })
         // ================================================
@@ -1834,10 +1822,10 @@
         var sw_log = $.parseJSON($('#val_sw_manual').val());
         if(val == 1){
             $('.title_load_manual').html('ควบคุมน้ำหยด');
-            $('.label_1').html(config_cn.cn_name_1);
-            $('.label_2').html(config_cn.cn_name_2);
-            $('.label_3').html(config_cn.cn_name_3);
-            $('.label_4').html(config_cn.cn_name_4);
+            $('.label_1').html('น้ำหยด 1');
+            $('.label_2').html('น้ำหยด 2');
+            $('.label_3').html('น้ำหยด 3');
+            $('.label_4').html('น้ำหยด 4');
             if($('#close_manual_cont').is(":hidden") == true){
                 if(sw_log.dripper_1 === 'ON'){
                     $('.label_1').show();
@@ -1863,10 +1851,10 @@
         }
         else if(val == 2){
             $('.title_load_manual').html('ควบคุมพัดลม');
-            $('.label_1').html(config_cn.cn_name_5);
-            $('.label_2').html(config_cn.cn_name_6);
-            $('.label_3').html(config_cn.cn_name_7);
-            $('.label_4').html(config_cn.cn_name_8);
+            $('.label_1').html('พัดลม 1');
+            $('.label_2').html('พัดลม 2');
+            $('.label_3').html('พัดลม 3');
+            $('.label_4').html('พัดลม 4');
             if($('#close_manual_cont').is(":hidden") == true){
                 if(sw_log.fan_1 === 'ON'){
                     $('.label_1').show();
@@ -1892,8 +1880,8 @@
         }
         else if(val == 3){
             $('.title_load_manual').html('ควบคุมพ่นหมอก');
-            $('.label_1').html(config_cn.cn_name_9);
-            $('.label_2').html(config_cn.cn_name_10);
+            $('.label_1').html('พ่นหมอก 1');
+            $('.label_2').html('พ่นหมอก 2');
             if($('#close_manual_cont').is(":hidden") == true){
                 if(sw_log.foggy_1 === 'ON'){
                     $('.label_1').show();
