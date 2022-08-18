@@ -2,8 +2,8 @@
     require "connectdb.php";
     $siteID = $_GET["siteID"];
     $userID = $_SESSION['account_id'];
-    echo '<option value="">เลือกโรงเรือน</option>';
     if(!isset($_GET['us'])){
+        echo '<option value="">เลือกโรงเรือน</option>';
         echo '<option value="0">ทุกโรงเรือน</option>';
     }
     if ($_SESSION["sn"]['account_status'] == 1){

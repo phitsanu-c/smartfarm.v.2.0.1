@@ -1,14 +1,13 @@
-<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+<!-- <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 <style>
   .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
   .toggle.ios .toggle-handle { border-radius: 20px; }
-</style>
+</style> -->
 <div class="page-content">
 <?php
     // session_start();
     $s_master = $_POST["s_master"];
-    $s_master = $_POST['s_master'];
     $dashStatus = $_POST['dashStatus'];
     $dashName = $_POST['dashName'];
     $controlstatus = $_POST['controlstatus'];
@@ -945,7 +944,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            
+
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -1058,7 +1057,7 @@
 </div>
 <script>
     var house_master = '<?= $s_master["house_master"] ?>';
-    var login_user = '<?= $_SESSION["account_user"] ?>';
+    var login_user = '<?= $_POST["user"] ?>';
     // alert(house_master)
     // return false;
     // ----------------------------------------------------------------------
@@ -1105,16 +1104,8 @@
             // client.subscribe(house_master + "/1/data_update/data_filter", options);
             // if (Contstatus !== 0) {
 
-            if (house_master !== "KMUMT001") {
-                client.subscribe(house_master + "/1/control/time_control", options);
-            } else {
-                client.subscribe(house_master + "/1/control/mode", options);
-            //     client.subscribe(house_master + "/1/control/control_st_1", options);
-            //     client.subscribe(house_master + "/1/control/control_st_2", options);
-            //     client.subscribe(house_master + "/1/control/control_st_3", options);
-            //     client.subscribe(house_master + "/1/control/control_st_4", options);
-            //     client.subscribe(house_master + "/1/control/control_st_5", options);
-            }
+            client.subscribe(house_master + "/1/control/time_control", options);
+
         }
 
         function onFail(context) {

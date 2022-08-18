@@ -2259,7 +2259,7 @@ input.search-control-2::placeholder {
         width: 88px
     }
     .control-text {
-        font-size: 22px
+        font-size: 13.5px
     }
 }
 
@@ -2277,7 +2277,7 @@ input.search-control-2::placeholder {
         width: 80px
     }
     .control-text {
-        font-size: 11px
+        font-size: 10px
     }
     .control-mode .row {
         --bs-gutter-x: 0;

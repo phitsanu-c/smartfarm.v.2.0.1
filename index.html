@@ -935,14 +935,1009 @@
                 });
             } // V2
             else if (url[0] == 3) {
-                if (house_master !== "KMUMT001") {
-                    $(".title_km").html("ประวัติการตั้งเวลา");
-                } else {
-                    $(".title_km").html("ประวัติการตั้งค่าโหมดอัตโนมัติ");
-                }
+                $.ajax({
+                    url: "routes/v.3/get_config.php",
+                    method: "post",
+                    data: {
+                        house_master: house_master
+                    },
+                    dataType: "json",
+                    success: function(res) {
+                        console.log(res);
+                        // return false
+                        var dashStatus = res.dashStatus;
+                        var dashSncanel = res.dashSncanel;
+                        var dashMode = res.dashMode;
+                        var sensor = res.s_sensor;
+                        var set_maxmin = res.set_maxmin;
+                        var controlStatus = res.controlStatus;
+                        var controlMode = res.controlMode;
+                        var control = res.s_control;
+                        var data_temp = [];
+                        var data_hum = [];
+                        var data_soil = [];
+                        var data_light = [];
+
+                        check_menu_control()
+                        function check_menu_control(){
+                            if(res.userLevel < 3){
+                                if(getArraySum(res.controlstatus) > 0){
+                                    $('.memu_control').show()
+                                }else {
+                                    $('.memu_control').hide()
+                                }
+                            }else {
+                                $('.memu_control').hide()
+                            }
+                        }
+                        $(".memu_dash").click(function() {
+                            check_menu_control();
+                        });
+                        $(".memu_dash").show().addClass("mm-active");
+                        $(".memu_report").show();
+                        $(".memu_compare").hide();
+                        $('#load_pages_dashboard').show();
+
+                        var temp_c = [];
+                        var hum_c = [];
+                        var light_c = [];
+                        var soil_c = [];
+                        for (var i = 1; i <= getArraySum(res.dashMode); i++) {
+                            if(res.dashStatus[i] == 1){
+                                if (res.dashMode[ i] == 1) {
+                                    temp_c.push(1);
+                                } else if (res.dashMode[ i] == 2) {
+                                    hum_c.push(1);
+                                } else if (res.dashMode[ i] == 3) {
+                                    soil_c.push(1);
+                                } else {
+                                    light_c.push(1);
+                                }
+                            }
+                        }
+                        var count_sensor = {
+                            s_btnT: getArraySum(temp_c),
+                            s_btnH: getArraySum(hum_c),
+                            s_btnS: getArraySum(soil_c),
+                            s_btnL: getArraySum(light_c),
+                        };
+                        if(getArraySum(temp_c) > 0){  $('.btn_ch_t').show();}else { $('.btn_ch_t').hide(); }
+                        if(getArraySum(hum_c) > 0){   $('.btn_ch_h').show();}else { $('.btn_ch_h').hide(); }
+                        if(getArraySum(light_c) > 0){ $('.btn_ch_l').show();}else { $('.btn_ch_l').hide(); }
+                        if(getArraySum(soil_c) > 0){  $('.btn_ch_s').show();}else { $('.btn_ch_s').hide(); }
+                        $.ajax({
+                            url: "routes/v.3/pages_dashboard.php",
+                            method: "post",
+                            data: {
+                                data: res,
+                                count_sensor: count_sensor,
+                                count_cn: getArraySum(res.controlStatus)
+                            },
+                            // dataType: "json",
+                            success: function(res_dash) {
+                                $("#load_pages").html(res_dash);
+
+                                $('.image-popups').magnificPopup({
+                                    delegate: 'a',
+                                    type: 'image',
+                                    removalDelay: 500, //delay removal by X to allow out-animation
+                                    callbacks: {
+                                        beforeOpen: function() {
+                                            // just a hack that adds mfp-anim class to markup
+                                            this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
+                                            this.st.mainClass = this.st.el.attr('data-effect');
+                                        }
+                                    },
+                                    closeOnContentClick: false,
+                                    midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+                                });
+
+                                // Global variables
+                                var client = null;
+                                // These are configs
+                                var hostname = "203.150.37.144"; //'103.2.115.15'; // 203.150.37.144   decccloud.com
+                                var port = "8083";
+                                var clientId = "mqtt_js_3074" + parseInt(Math.random() * 100000, 10);
+                                var count = 0;
+
+                                function connect() {
+                                    client = new Paho.MQTT.Client(hostname, Number(port), clientId);
+                                    console.info('Connecting to Server: Hostname: ', hostname, '. Port: ', port, '. Client ID: ', clientId);
+
+                                    client.onConnectionLost = onConnectionLost;
+                                    client.onMessageArrived = onMessageArrived;
+
+                                    var options = {
+                                        onSuccess: onConnect, // after connected, subscribes
+                                        onFailure: onFail // useful for logging / debugging
+                                    };
+                                    // connect the client
+                                    client.connect(options);
+                                    console.info('Connecting...');
+                                }
+                                // ---------------------------------------------------------------------------------------
+                                function onConnect(context) {
+                                    console.log("Client Connected");
+                                    // And subscribe to our topics	-- both with the same callback function
+                                    options = {
+                                        qos: 1,
+                                        onSuccess: function (context) {
+                                            // console.log("ไม่สามารถเชื่อมต่อกับ เครื่อง ได้ !!!!");
+                                            // setInterval(function() {
+                                            //     location.reload();
+                                            // }, 30000);
+                                            console.log("subscribed");
+                                        }
+                                    }
+                                    client.subscribe(house_master + "/1/data_update/data_filter", options);
+                                    client.subscribe(house_master + "/1/control/json_control_filter", options);
+                                }
+
+                                function onFail(context) {
+                                    location.reload();
+                                }
+
+                                function onConnectionLost(responseObject) {
+                                    if (responseObject.errorCode !== 0) {
+                                        console.log("Connection Lost: " + responseObject.errorMessage);
+                                        connect();
+                                        // location.reload();
+                                        // window.alert("Someone else took my websocket!\nRefresh to take it back.");
+                                    }
+                                }
+                                function onMessageArrived(message) {
+                                    if(message.destinationName == house_master + "/1/data_update/data_filter") {
+                                        var result = message.payloadString;
+                                        var parseJSON = $.parseJSON(result);
+                                        // console.log('parseJSON')
+
+                                        var chart_timestamp = parseJSON['date_time'];
+                                        var time_t = parseJSON['time'];
+                                        var ntime = time_t.substring(0, 5);
+                                        $(".date").html(parseJSON['date']+' '+ntime);
+                                        if(parseJSON['date']+' - '+ntime > moment(new Date()).add(-5, 'minutes').format('YYYY/MM/DD - HH:mm') ){
+                                            $('.status_timeUpdate').html('ออนไลน์').addClass('text-success')
+                                        }else {
+                                            $('.status_timeUpdate').html('ออฟไลน์').addClass('text-danger')
+                                        }
+                                        var data_ = parseJSON['data'];
+                                        // console.log(data_)
+                                        // alert($.map(dashStatus, function(n, i) { return i; }).length)
+                                        // return false;
+
+                                        for (var i = 1; i <= $.map(dashStatus, function(n, i) { return i; }).length; i++) {
+                                            if (dashStatus[i] == 1) {
+                                                if (dashMode[i] == 1) {
+                                                    dash_status(sn_data = (data_[dashSncanel[i]]*1).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                                                } else if (dashMode[i] == 2) {
+                                                    dash_status(sn_data = (data_[dashSncanel[i]] * 1).toFixed(1), max = set_maxmin.Hmax, min = set_maxmin.Hmin)
+                                                } else if (dashMode[i] == 3) {
+                                                    dash_status(sn_data = (data_[dashSncanel[i]] * 1).toFixed(1), max = set_maxmin.Smax, min = set_maxmin.Smin)
+                                                } else if (dashMode[i] == 4) {
+                                                    dash_status(sn_data = (data_[dashSncanel[i]] / 1000).toFixed(1), max = set_maxmin.Lmax, min = set_maxmin.Lmin)
+                                                } else if (dashMode[i] == 5) {
+                                                    dash_status(sn_data = (data_[dashSncanel[i]] * 1).toFixed(1), max = set_maxmin.Lmax, min = set_maxmin.Lmin)
+                                                } else if (dashMode[i] == 6) {
+                                                    dash_status(sn_data = (data_[dashSncanel[i]] / 1000).toFixed(1), max = set_maxmin.Lmax, min = set_maxmin.Lmin)
+                                                } else if (dashMode[i] == 7) {
+                                                    dash_status(sn_data = (data_[dashSncanel[i]] * 1).toFixed(1), max = set_maxmin.Lmax, min = set_maxmin.Lmin)
+                                                }
+                                            }
+                                            function dash_status(sn_data, max, min) {
+                                                if (sn_data >= max) {
+                                                    $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(dashMode[i] - 1)].sensor_imgMax);
+                                                } else if (sn_data < min) {
+                                                    $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(dashMode[i] - 1)].sensor_imgMin);
+                                                } else {
+                                                    $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(dashMode[i] - 1)].sensor_imgNor);
+                                                }
+                                                if (sensor[(dashMode[i] - 1)].sensor_unit == 1) {
+                                                    $(".dash_data__" + i).html(sn_data + " ℃");
+                                                } else {
+                                                    $(".dash_data__" + i).html(sn_data + " " + sensor[(dashMode[i] - 1)].sensor_unit);
+                                                }
+                                            }
+                                        }
+                                        return false;
+                                        // Chart ----------------------------------------
+                                        data_temp_out.shift();
+                                        data_temp_in.shift();
+                                        data_temp_out.push({
+                                            x: parseJSON['date']+' '+ntime,
+                                            y:(data_['temp_out'] * 1).toFixed(1)
+                                        })
+                                        data_temp_in.push({
+                                            x: parseJSON['date']+' '+ntime,
+                                            y:(data_['temp_in'] * 1).toFixed(1)
+                                        })
+                                        // -------------------
+                                        data_hum_out.shift();
+                                        data_hum_in.shift();
+                                        data_hum_out.push({
+                                            x: parseJSON['date']+' '+ntime,
+                                            y: (data_['hum_out'] * 1).toFixed(1)
+                                        })
+                                        data_hum_in.push({
+                                            x: parseJSON['date']+' '+ntime,
+                                            y: (data_['hum_in'] * 1).toFixed(1)
+                                        })
+                                        // -------------------
+                                        data_light_out.shift();
+                                        data_light_in.shift();
+                                        data_light_out.push({
+                                            x: parseJSON['date']+' '+ntime,
+                                            y:(data_['light_out'] / 1000).toFixed(1)
+                                        })
+                                        data_light_in.push({
+                                            x: parseJSON['date']+' '+ntime,
+                                            y:(data_['light_in'] / 1000).toFixed(1)
+                                        })
+                                        // -------------------
+                                        data_soil_in.shift();
+                                        data_soil_in.push({
+                                            x: parseJSON['date']+' '+ntime,
+                                            y:(data_['soil_in'] * 1).toFixed(1)
+                                        })
+                                        // -------------------
+
+                                    }
+                                    else if(message.destinationName == house_master + "/1/control/json_control_filter") {
+                                        if (getArraySum(res.controlStatus) !== 0) {
+                                            var result = message.payloadString;
+                                            var parseJSON = $.parseJSON(result);
+                                            var data_array = parseJSON.control_status;
+                                            console.log(parseJSON);
+
+                                            if (data_array.Mode === "Auto") { //Auto
+                                                $(".sw_mode_Manual").removeClass("active");
+                                                $(".sw_mode_Auto").addClass("active");
+                                                $(".sw_manual").hide();
+                                                $(".sw_auto").show();
+                                            } else if (data_array.Mode === "Manual") {
+                                                $(".sw_mode_Auto").removeClass("active");
+                                                $(".sw_mode_Manual").addClass("active");
+                                                $(".sw_manual").show();
+                                                $(".sw_auto").hide();
+                                            }
+                                            // alert(imgCon['drip_1'][1])
+                                            // alert((controlMode[1]))
+                                            // return false;
+                                            for (var i = 1; i <= 12; i++) {
+                                                if(i <= 8){
+                                                    if (controlStatus[i] == 1) {
+                                                        //
+                                                        if (data_array['dripper_'+i] === "OFF") {
+                                                            $(".dash_img_con_"+i).attr("src", "public/images/control/" + control[(controlMode[i] - 1)].loard_imgOff);
+                                                            $(".sw_manual_"+i).bootstrapToggle('off');
+                                                        } else {
+                                                            $(".dash_img_con_"+i).attr("src", "public/images/control/" + control[(controlMode[i] - 1)].loard_imgOn);
+                                                            $(".sw_manual_"+i).bootstrapToggle('on');
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            return false;
+                                            // dripper_1
+                                            if (controlStatus[1] == 1) {
+                                                if (data_array.dripper_1 === "OFF") {
+                                                    $(".dash_img_con_1").attr("src", "public/images/control/" + imgCon['drip_1'][1]);
+                                                    $(".sw_manual_1").bootstrapToggle('off');
+                                                } else {
+                                                    $(".dash_img_con_1").attr("src", "public/images/control/" + imgCon['drip_1'][0]);
+                                                    $(".sw_manual_1").bootstrapToggle('on');
+                                                }
+                                                // cont_dash_show(img_c = "dash_img_con_1", c_dash = data_array.dripper_1, c_img_off = imgCon['drip_1'][1], c_img_on = imgCon['drip_1'][0], ch = '1');
+                                            }
+
+                                            // dripper_2
+                                            if (controlStatus[2] == 1) {
+                                                if (data_array.dripper_2 === "OFF") {
+                                                    $(".dash_img_con_2").attr("src", "public/images/control/" + imgCon['drip_2'][1]);
+                                                    $(".sw_manual_2").bootstrapToggle('off');
+                                                } else {
+                                                    $(".dash_img_con_2").attr("src", "public/images/control/" + imgCon['drip_2'][0]);
+                                                    $(".sw_manual_2").bootstrapToggle('on');
+                                                }
+                                                // cont_dash_show(img_c = "dash_img_con_2", c_dash = data_array.dripper_2, c_img_off = imgCon['drip_2'][1], c_img_on = imgCon['drip_2'][0], ch = '2');
+                                            }
+                                            // dripper_3
+                                            if (controlStatus[3] == 1) {
+                                                if (data_array.dripper_3 === "OFF") {
+                                                    $(".dash_img_con_3").attr("src", "public/images/control/" + imgCon['drip_3'][1]);
+                                                    $(".sw_manual_3").bootstrapToggle('off');
+                                                } else {
+                                                    $(".dash_img_con_3").attr("src", "public/images/control/" + imgCon['drip_3'][0]);
+                                                    $(".sw_manual_3").bootstrapToggle('on');
+                                                }
+                                                // cont_dash_show(img_c = "dash_img_con_3", c_dash = data_array.dripper_3, c_img_off = imgCon['drip_3'][1], c_img_on = imgCon['drip_3'][0], ch = '3');
+                                            }
+                                            // dripper_4
+                                            if (controlStatus[4] == 1) {
+                                                if (data_array.dripper_4 === "OFF") {
+                                                    $(".dash_img_con_4").attr("src", "public/images/control/" + imgCon['drip_4'][1]);
+                                                    $(".sw_manual_4").bootstrapToggle('off');
+                                                } else {
+                                                    $(".dash_img_con_4").attr("src", "public/images/control/" + imgCon['drip_4'][0]);
+                                                    $(".sw_manual_4").bootstrapToggle('on');
+                                                }
+                                                // cont_dash_show(img_c = "dash_img_con_4", c_dash = data_array.dripper_4, c_img_off = imgCon['drip_4'][1], c_img_on = imgCon['drip_4'][0], ch = '4');
+                                            }
+                                            // dripper_5
+                                            if (controlStatus[5] == 1) {
+                                                if (data_array.dripper_5 === "OFF") {
+                                                    $(".dash_img_con_5").attr("src", "public/images/control/" + imgCon['drip_5'][1]);
+                                                    $(".sw_manual_5").bootstrapToggle('off');
+                                                } else {
+                                                    $(".dash_img_con_5").attr("src", "public/images/control/" + imgCon['drip_5'][0]);
+                                                    $(".sw_manual_5").bootstrapToggle('on');
+                                                }
+                                                // cont_dash_show(img_c = "dash_img_con_5", c_dash = data_array.dripper_5, c_img_off = imgCon['drip_5'][1], c_img_on = imgCon['drip_5'][0], ch = '5');
+                                            }
+                                            // dripper_6
+                                            if (controlStatus[6] == 1) {
+                                                if (data_array.dripper_6 === "OFF") {
+                                                    $(".dash_img_con_6").attr("src", "public/images/control/" + imgCon['drip_6'][1]);
+                                                    $(".sw_manual_6").bootstrapToggle('off');
+                                                } else {
+                                                    $(".dash_img_con_6").attr("src", "public/images/control/" + imgCon['drip_6'][0]);
+                                                    $(".sw_manual_6").bootstrapToggle('on');
+                                                }
+                                                // cont_dash_show(img_c = "dash_img_con_6", c_dash = data_array.dripper_6, c_img_off = imgCon['drip_6'][1], c_img_on = imgCon['drip_6'][0], ch = '6');
+                                            }
+                                            // dripper_7
+                                            if (controlStatus[7] == 1) {
+                                                if (data_array.dripper_7 === "OFF") {
+                                                    $(".dash_img_con_7").attr("src", "public/images/control/" + imgCon['drip_7'][1]);
+                                                    $(".sw_manual_7").bootstrapToggle('off');
+                                                } else {
+                                                    $(".dash_img_con_7").attr("src", "public/images/control/" + imgCon['drip_7'][0]);
+                                                    $(".sw_manual_7").bootstrapToggle('on');
+                                                }
+                                                // cont_dash_show(img_c = "dash_img_con_7", c_dash = data_array.dripper_7, c_img_off = imgCon['drip_7'][1], c_img_on = imgCon['drip_7'][0], ch = '7');
+                                            }
+                                            // dripper_8
+                                            if (controlStatus[8] == 1) {
+                                                if (data_array.dripper_8 === "OFF") {
+                                                    $(".dash_img_con_8").attr("src", "public/images/control/" + imgCon['drip_8'][1]);
+                                                    $(".sw_manual_8").bootstrapToggle('off');
+                                                } else {
+                                                    $(".dash_img_con_8").attr("src", "public/images/control/" + imgCon['drip_8'][0]);
+                                                    $(".sw_manual_8").bootstrapToggle('on');
+                                                }
+                                                // cont_dash_show(img_c = "dash_img_con_8", c_dash = data_array.dripper_8, c_img_off = imgCon['drip_8'][1], c_img_on = imgCon['drip_8'][0], ch = '8');
+                                            }
+                                            // foggy
+                                            if (controlStatus[9] == 1) {
+                                                if (data_array.foggy === "OFF") {
+                                                    $(".dash_img_con_9").attr("src", "public/images/control/" + imgCon['foggy'][1]);
+                                                    $(".sw_manual_9").bootstrapToggle('off');
+                                                } else {
+                                                    $(".dash_img_con_9").attr("src", "public/images/control/" + imgCon['foggy'][0]);
+                                                    $(".sw_manual_9").bootstrapToggle('on');
+                                                }
+                                                // cont_dash_show(img_c = "dash_img_con_9", c_dash = data_array.foggy, c_img_off = imgCon['foggy'][1], c_img_on = imgCon['foggy'][0], ch = '9');
+                                            }
+                                            // fan
+                                            if (controlStatus[10] == 1) {
+                                                if (data_array.fan === "OFF") {
+                                                    $(".dash_img_con_10").attr("src", "public/images/control/" + imgCon['fan'][1]);
+                                                    $(".sw_manual_10").bootstrapToggle('off');
+                                                } else {
+                                                    $(".dash_img_con_10").attr("src", "public/images/control/" + imgCon['fan'][0]);
+                                                    $(".sw_manual_10").bootstrapToggle('on');
+                                                }
+                                                // cont_dash_show(img_c = "dash_img_con_10", c_dash = data_array.fan, c_img_off = imgCon['fan'][1], c_img_on = imgCon['fan'][1], ch = '10');
+                                            }
+
+                                            //Slan
+                                            if (controlStatus[11] == 1) {
+                                                if (data_array.shader === "0") {
+                                                    $(".dash_img_con_11").attr("src", "public/images/control/" + imgCon['shader'][0], ch = '11');
+                                                } else if (data_array.shader === "1") {
+                                                    $(".dash_img_con_11").attr("src", "public/images/control/" + imgCon['shader'][1], ch = '11');
+                                                } else if (data_array.shader === "2") {
+                                                    $(".dash_img_con_11").attr("src", "public/images/control/" + imgCon['shader'][2], ch = '11');
+                                                } else if (data_array.shader === "3") {
+                                                    $(".dash_img_con_11").attr("src", "public/images/control/" + imgCon['shader'][3], ch = '11');
+                                                } else if (data_array.shader === "4") {
+                                                    $(".dash_img_con_11").attr("src", "public/images/control/" + imgCon['shader'][4], ch = '11');
+                                                }
+
+                                                // modal_manual
+                                                if (data_array["shader"] == 0) {
+                                                    var shader_slw = "0 : ปิด 100%";
+                                                    $(".sw_shader0").addClass("active");
+                                                    $(".sw_shader1").removeClass("active");
+                                                    $(".sw_shader2").removeClass("active");
+                                                    $(".sw_shader3").removeClass("active");
+                                                    $(".sw_shader4").removeClass("active");
+                                                }
+                                                if (data_array["shader"] == 1) {
+                                                    var shader_slw = "1 : เปิด 25%";
+                                                    $(".sw_shader0").removeClass("active");
+                                                    $(".sw_shader1").addClass("active");
+                                                    $(".sw_shader2").removeClass("active");
+                                                    $(".sw_shader3").removeClass("active");
+                                                    $(".sw_shader4").removeClass("active");
+                                                }
+                                                if (data_array["shader"] == 2) {
+                                                    var shader_slw = "2 : เปิด 50%";
+                                                    $(".sw_shader0").removeClass("active");
+                                                    $(".sw_shader1").removeClass("active");
+                                                    $(".sw_shader2").addClass("active");
+                                                    $(".sw_shader3").removeClass("active");
+                                                    $(".sw_shader4").removeClass("active");
+                                                }
+                                                if (data_array["shader"] == 3) {
+                                                    var shader_slw = "3 : เปิด 75%";
+                                                    $(".sw_shader0").removeClass("active");
+                                                    $(".sw_shader1").removeClass("active");
+                                                    $(".sw_shader2").removeClass("active");
+                                                    $(".sw_shader3").addClass("active");
+                                                    $(".sw_shader4").removeClass("active");
+                                                }
+                                                if (data_array["shader"] == 4) {
+                                                    var shader_slw = "4 : เปิด 100%";
+                                                    $(".sw_shader0").removeClass("active");
+                                                    $(".sw_shader1").removeClass("active");
+                                                    $(".sw_shader2").removeClass("active");
+                                                    $(".sw_shader3").removeClass("active");
+                                                    $(".sw_shader4").addClass("active");
+                                                }
+                                                $(".shader_slw").html(shader_slw);
+                                            } else {
+                                                $(".dash_c11").hide();
+                                            }
+
+                                            // fertilizer
+                                            if (controlStatus[12] == 1) {
+                                                if (data_array.fertilizer === "OFF") {
+                                                    $(".dash_img_con_12").attr("src", "public/images/control/" + imgCon['fertilizer'][1]);
+                                                    $(".sw_manual_12").bootstrapToggle('off');
+                                                } else {
+                                                    $(".dash_img_con_12").attr("src", "public/images/control/" + imgCon['fertilizer'][0]);
+                                                    $(".sw_manual_12").bootstrapToggle('on');
+                                                }
+                                                // cont_dash_show(img_c = "dash_img_con_12", c_dash = data_array.fertilizer, c_img_off = imgCon['fertilizer'][1], c_img_on = imgCon['fertilizer'][0], ch = '12');
+                                            }
+
+                                            function cont_dash_show(img_c, c_dash, c_img_off, c_img_on, ch) {
+                                                console.log(c_dash)
+                                                if (c_dash === "OFF") {
+                                                    $("." + img_c).attr("src", "public/images/control/" + c_img_off);
+                                                    $(".sw_manual_" + ch).bootstrapToggle('on');
+                                                } else if (c_dash === "ON") {
+                                                    $("." + img_c).attr("src", "public/images/control/" + c_img_on);
+                                                    $(".sw_manual_1").bootstrapToggle('on');
+                                                }
+                                            }
+                                        }
+                                        // -------------------------------------------------------------------------------------
+                                        return false;
+                                        var result = message.payloadString;
+                                        var parseJSON = $.parseJSON(result);
+                                        // console.log(parseJSON)
+                                        if (parseJSON.mode === 'Manual') {
+                                            $('.dash_mode').html('โหมดกำหนดเอง');
+                                            $('.sw_mode_Auto').removeClass('btn-success').addClass('btn-outline-success');
+                                            $('.sw_mode_Manual').addClass('btn-success').removeClass('btn-outline-success');
+                                            $('.ul_Auto').hide();
+                                            $('.ul_Manual').show();
+                                            var sw_log = $.parseJSON($('#val_sw_manual').val());
+                                            var count_sw1 = [];
+                                            var count_stats1_on = [];
+                                            var count_sw2 = [];
+                                            var count_stats2_on = [];
+                                            var count_sw3 = [];
+                                            var count_stats3_on = [];
+                                            if(sw_log.dripper_1 == 'ON'){ count_sw1[1] = 1; }else { count_sw1[1] = 0; }
+                                            if(sw_log.dripper_2 == 'ON'){ count_sw1[2] = 1; }else { count_sw1[2] = 0; }
+                                            if(sw_log.dripper_3 == 'ON'){ count_sw1[3] = 1; }else { count_sw1[3] = 0; }
+                                            if(sw_log.dripper_4 == 'ON'){ count_sw1[4] = 1; }else { count_sw1[4] = 0; }
+                                            if(parseJSON.dripper_1 == 'ON'){ count_stats1_on[1] = 1; }else { count_stats1_on[1] = 0; }
+                                            if(parseJSON.dripper_2 == 'ON'){ count_stats1_on[2] = 1; }else { count_stats1_on[2] = 0; }
+                                            if(parseJSON.dripper_3 == 'ON'){ count_stats1_on[3] = 1; }else { count_stats1_on[3] = 0; }
+                                            if(parseJSON.dripper_4 == 'ON'){ count_stats1_on[4] = 1; }else { count_stats1_on[4] = 0; }
+                                            if(sw_log.fan_1 == 'ON'){ count_sw2[1] = 1; }else { count_sw2[1] = 0; }
+                                            if(sw_log.fan_2 == 'ON'){ count_sw2[2] = 1; }else { count_sw2[2] = 0; }
+                                            if(sw_log.fan_3 == 'ON'){ count_sw2[3] = 1; }else { count_sw2[3] = 0; }
+                                            if(sw_log.fan_4 == 'ON'){ count_sw2[4] = 1; }else { count_sw2[4] = 0; }
+                                            if(parseJSON.fan_1 == 'ON'){ count_stats2_on[1] = 1; }else { count_stats2_on[1] = 0; }
+                                            if(parseJSON.fan_2 == 'ON'){ count_stats2_on[2] = 1; }else { count_stats2_on[2] = 0; }
+                                            if(parseJSON.fan_3 == 'ON'){ count_stats2_on[3] = 1; }else { count_stats2_on[3] = 0; }
+                                            if(parseJSON.fan_4 == 'ON'){ count_stats2_on[4] = 1; }else { count_stats2_on[4] = 0; }
+                                            if(sw_log.foggy_1 == 'ON'){ count_sw3[1] = 1; }else { count_sw3[1] = 0; }
+                                            if(sw_log.foggy_2 == 'ON'){ count_sw3[2] = 1; }else { count_sw3[2] = 0; }
+                                            if(parseJSON.foggy_1 == 'ON'){ count_stats3_on[1] = 1; }else { count_stats3_on[1] = 0; }
+                                            if(parseJSON.foggy_2 == 'ON'){ count_stats3_on[2] = 1; }else { count_stats3_on[2] = 0; }
+
+                                            $('.sw_sel_load_manual').click(function(){
+                                                var numb = Number($(this).attr('id').substring(1));
+                                                if($('#close_manual_cont').is(":hidden") != false){
+                                                    fn_check_sw_on_off(numb);
+                                                }
+                                            });
+                                            fn_check_sw_on_off($('.hidden_select_sw_manual').val());
+                                            function fn_check_sw_on_off(val){
+                                                if(val == 1){ // dripper
+                                                    if(countElement(1,count_sw1) == countElement(1,count_stats1_on)){
+                                                        $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="75" />');
+                                                        $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="75" />');
+                                                    }
+                                                    else {
+                                                        $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="75" />');
+                                                        $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="75" />');
+                                                    }
+                                                }
+                                                else if(val == 2){ // FAN
+                                                    if(countElement(1,count_sw2) == countElement(1,count_stats2_on)){
+                                                        $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="75" />');
+                                                        $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="75" />');
+                                                    }else {
+                                                        $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="75" />');
+                                                        $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="75" />');
+                                                    }
+                                                }
+                                                else if(val == 3){ // foggy
+                                                    if(countElement(1,count_sw3) == countElement(1,count_stats3_on)){
+                                                        $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="75" />');
+                                                        $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="75" />');
+                                                    }else {
+                                                        $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="75" />');
+                                                        $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="75" />');
+                                                    }
+                                                }
+                                                else if(val == 4){ // spray
+                                                    if(parseJSON.spray == 'ON'){
+                                                        $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="75" />');
+                                                        $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="75" />');
+                                                    }else {
+                                                        $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="75" />');
+                                                        $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="75" />');
+                                                    }
+                                                }
+                                                else if(val == 5){ // shading
+                                                    if(parseJSON.shading == 'ON'){
+                                                        $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" width="75" />');
+                                                        $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" width="75" />');
+                                                    }else {
+                                                        $('.sw_manual_on').removeClass('active').html('<img src="public/images/icons/menu_control/on_off.png" width="75" />');
+                                                        $('.sw_manual_off').addClass('active').html('<img src="public/images/icons/menu_control/off_on.png" width="75" />');
+                                                    }
+                                                }
+                                            }
+                                            if(countElement(1,count_sw1) == countElement(1,count_stats1_on)){
+                                                $('.img_sw_sel_load_manual_1').attr('src','public/images/icons/menu_control/dripper_on.png');
+                                            }else {
+                                                $('.img_sw_sel_load_manual_1').attr('src','public/images/icons/menu_control/dripper_off.png');
+                                            }
+                                            if(countElement(1,count_sw2) == countElement(1,count_stats2_on)){
+                                                $('.img_sw_sel_load_manual_2').attr('src','public/images/icons/menu_control/fan_on.png');
+                                            }else {
+                                                $('.img_sw_sel_load_manual_2').attr('src','public/images/icons/menu_control/fan_off.png');
+                                            }
+                                            if(countElement(1,count_sw3) == countElement(1,count_stats3_on)){
+                                                $('.img_sw_sel_load_manual_3').attr('src','public/images/icons/menu_control/foggy_on.png');
+                                            }else {
+                                                $('.img_sw_sel_load_manual_3').attr('src','public/images/icons/menu_control/foggy_off.png');
+                                            }
+                                            if(parseJSON.spray == 'ON'){
+                                                $('.img_sw_sel_load_manual_4').attr('src','public/images/icons/menu_control/spray_on.png');
+                                            }else {
+                                                $('.img_sw_sel_load_manual_4').attr('src','public/images/icons/menu_control/spray_off.png');
+                                            }
+                                            if(parseJSON.shading == 'ON'){
+                                                $('.img_sw_sel_load_manual_5').attr('src','public/images/icons/menu_control/shading_on.png');
+                                            }else {
+                                                $('.img_sw_sel_load_manual_5').attr('src','public/images/icons/menu_control/shading_off.png');
+                                            }
+
+                                            // status control dashboard Manual
+                                            for (var i = 1; i <= 12; i++) {
+                                                if (config_cn['cn_status_' + i] == 1) {
+                                                    if (i <= 4) {
+                                                        if (parseJSON['dripper_' + i] === 'OFF') {
+                                                            if(sw_log['dripper_'+i] == 'ON'){
+                                                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/sprinkler-off.svg");
+                                                            }else {
+                                                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/Sprinkler_disable.svg");
+                                                            }
+                                                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_off.png');
+                                                        } else {
+                                                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/sprinkler-on.svg");
+                                                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_on.png');
+                                                        }
+                                                    }
+                                                    if (i > 4 && i <= 8) {
+                                                        if (parseJSON['fan_' + (i - 4)] === 'OFF') {
+                                                            if(sw_log['fan_'+(i - 4)] === 'ON'){
+                                                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-off.svg");
+                                                            }else {
+                                                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-disable.svg");
+                                                            }
+                                                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_off.png');
+                                                        } else {
+                                                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-on.svg");
+                                                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_on.png');
+                                                        }
+                                                    }
+                                                    if (i == 9 || i == 10) {
+                                                        if (parseJSON['foggy_' + (i - 8)] === 'OFF') {
+                                                            if(sw_log['foggy_'+(i - 8)] === 'ON'){
+                                                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-off.svg");
+                                                            }else {
+                                                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-disable.svg");
+                                                            }
+                                                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_off.png');
+                                                        } else {
+                                                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-on.svg");
+                                                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_on.png');
+                                                        }
+                                                    }
+                                                    if (i == 11) {
+                                                        if (parseJSON['spray'] === 'OFF') {
+                                                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/spray-off.svg");
+                                                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_off.png');
+                                                        } else {
+                                                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/spray-on.svg");
+                                                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_on.png');
+                                                        }
+                                                    }
+                                                    if (i == 12) {
+                                                        if (parseJSON['shading'] === 'OFF') {
+                                                            $(".dash_img_con_" + i).attr("src", "public/images/control/Roof_OFF2.png");
+                                                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/shading_off.png');
+                                                        } else {
+                                                            $(".dash_img_con_" + i).attr("src", "public/images/control/Roof_ON2.png");
+                                                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/shading_on.png');
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        else { // โหมดอัตโนมัติ
+                                            $('.dash_mode').html('โหมดอัตโนมัติ')
+                                            $('.sw_mode_Auto').addClass('btn-success').removeClass('btn-outline-success')
+                                            $('.sw_mode_Manual').removeClass('btn-success').addClass('btn-outline-success')
+                                            $('.ul_Auto').show()
+                                            $('.ul_Manual').hide()
+                                            if($('#Modal_control').hasClass('show') == true){
+                                                $(".img_sw").show();
+                                                $('.input_time').prop('disabled', true);
+                                                $(".sw_toggle").hide();
+                                                $(".menu_config_auto").show();
+                                                $("#save_auto_cont").hide();
+                                                $("#close_auto_cont").hide();
+                                                $(".sw_mode_Auto").attr('disabled', false);
+                                                $(".sw_mode_Manual").attr('disabled', false);
+                                            }
+                                            // status control dashboard Auto
+                                            for (var i = 1; i <= 12; i++) {
+                                                if (config_cn['cn_status_' + i] == 1) {
+                                                    if (i <= 4) {
+                                                        if (parseJSON['dripper_' + i] === 'OFF') {
+                                                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/sprinkler-off.svg");
+                                                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_off.png');
+                                                        } else {
+                                                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/sprinkler-on.svg");
+                                                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_on.png');
+                                                        }
+                                                    }
+                                                    if (i > 4 && i <= 8) {
+                                                        if (parseJSON['fan_' + (i - 4)] === 'OFF') {
+                                                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-off.svg");
+                                                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_off.png');
+                                                        } else {
+                                                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-on.svg");
+                                                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_on.png');
+                                                        }
+                                                    }
+                                                    if (i == 9 || i == 10) {
+                                                        if (parseJSON['foggy_' + (i - 8)] === 'OFF') {
+                                                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-off.svg");
+                                                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_off.png');
+                                                        } else {
+                                                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-on.svg");
+                                                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_on.png');
+                                                        }
+                                                    }
+                                                    if (i == 11) {
+                                                        if (parseJSON['spray'] === 'OFF') {
+                                                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/spray-off.svg");
+                                                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_off.png');
+                                                        } else {
+                                                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/spray-on.svg");
+                                                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_on.png');
+                                                        }
+                                                    }
+                                                    if (i == 12) {
+                                                        if (parseJSON['shading'] === 'OFF') {
+                                                            $(".dash_img_con_" + i).attr("src", "public/images/control/Roof_OFF2.png");
+                                                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/shading_off.png');
+                                                        } else {
+                                                            $(".dash_img_con_" + i).attr("src", "public/images/control/Roof_ON2.png");
+                                                            $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/shading_on.png');
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }// exit_message
+                                connect();
+                                loadingOut(loading);
+                                // ++++++++++++++++++++++++++++++++++
+                            }
+                        });
+
+                        // chart_realtime
+                        var optionsLine = {
+                            chart: {
+                                id: 'realtime',
+                                foreColor: '#9ba7b2',
+                                height: 560,
+                                type: 'line',
+                                toolbar: {
+                                    show: false,
+                                    tools: {
+                                        download: false,
+                                        selection: true,
+                                         zoom: true,
+                                         zoomin: true,
+                                         zoomout: true,
+                                         pan: true,
+                                    }
+                                },
+                                dropShadow: {
+                                    enabled: true,
+                                    top: 3,
+                                    left: 2,
+                                    blur: 4,
+                                    opacity: 0.1,
+                                }
+                            },
+                            stroke: {
+                                curve: 'smooth',
+                                width: 3
+                            },
+                            // colors: ["#0d6efd", '#212529'],
+                            // series: [{
+                            //   data: data.slice()
+                            // }],
+                            series: [],
+                            // [{
+                            //     name: "temp_out",
+                            //     data: res.data.temp_out//[1, 15, 56, 20, 33, 27]
+                            // }, {
+                            //     name: "temp_in",
+                            //     data: res.data.temp_in//[30, 33, 21, 42, 19, 32]
+                            // }],
+                            title: {
+                                // text: 'Multiline Chart',
+                                align: 'left',
+                                offsetY: 30,
+                                // offsetX: 20
+                            },
+                            animations: {
+                              enabled: true,
+                              easing: 'linear',
+                              // dynamicAnimation: {
+                              //   speed: 1000
+                              // }
+                            },
+                            markers: {
+                                size: 1,
+                                strokeWidth: 0,
+                                hover: {
+                                    size: 6
+                                }
+                            },
+                            grid: {
+                                show: true,
+                                padding: {
+                                    bottom: 0
+                                }
+                            },
+                            xaxis: {
+                                type: 'datetime',
+                                // categories:res.data.timestamp,
+                                labels: {
+                                    datetimeUTC: false,
+                                    // format: 'dd/MM HH:mm',
+                                    datetimeFormatter: {
+                                        year: 'yyyy',
+                                        month: 'MMM \'yy',
+                                        day: 'dd MMM',
+                                        hour: 'HH:mm'
+                                    }
+                                }
+                            },
+                            legend: {
+                                // position: 'top',
+                                // horizontalAlign: 'right',
+                                // offsetY: -30
+                            },
+                            fill: {
+                                type: "solid",
+                                fillOpacity: 0.7
+                            },
+                            noData: {
+                                text: 'Loading...'
+                            },
+                            tooltip: {
+                                x: {
+                                    format: 'yyyy-MM-dd HH:mm'
+                                },
+                            }
+                        }
+                        var chartLine1 = new ApexCharts(document.querySelector('#chart1'), optionsLine);
+                        chartLine1.render();
+                        var chartLine2 = new ApexCharts(document.querySelector('#chart2'), optionsLine);
+                        chartLine2.render();
+                        var chartLine3 = new ApexCharts(document.querySelector('#chart3'), optionsLine);
+                        chartLine3.render();
+                        var chartLine4 = new ApexCharts(document.querySelector('#chart4'), optionsLine);
+                        chartLine4.render();
+
+                        $.ajax({
+                            url: "routes/v.3/get_chart_realtime.php",
+                            method: "post",
+                            data: {
+                                house_master: house_master,
+                                data: res
+                            },
+                            dataType: "json",
+                            success: function(resp) {
+                                // alert($.map(resp.temp, function(n, i) { return i; }).length)
+                                // console.log(resp);
+                                if($.map(resp.temp, function(n, i) { return i; }).length > 0){
+                                    data_temp = resp.temp;
+                                    var n_data = [];
+                                    // console.log(data_temp['temp_1']);
+                                    for (var i = 1; i <= $.map(resp.temp, function(n, i) { return i; }).length; i++) {
+                                        n_data.push({
+                                            name:resp.Ntemp[(i-1)],
+                                            data: data_temp['temp_'+i]
+                                        })
+                                    }
+                                    chartLine1.updateSeries(n_data)
+                                    chartLine1.updateOptions({
+                                        title:  {text: 'อุณหภูมิ (℃)'},
+                                        tooltip: {
+                                            y: {
+                                            	formatter: function (val) {
+                                            		return  val + " ℃"
+                                            	}
+                                            }
+                                        },
+                                    })
+                                }
+                                // console.log(res.data);
+                                // var  [];
+                                // var data_hum = [];
+                                // var data_soil = [];
+                                // var data_light = [];
+                                return false;
+                                data_temp_out = res.data.temp_out;
+                                data_temp_in = res.data.temp_in;
+                                data_hum_out = res.data.hum_out;
+                                data_hum_in = res.data.hum_in;
+                                data_light_out = res.data.light_out;
+                                data_light_in = res.data.light_in;
+                                data_soil_in = res.data.soil_in;
+
+                                // if(s_sensor.s_btnT > 0){
+                                    chartLine1.updateSeries([
+                                        {
+                                            name: config_sn.sn_name_1,
+                                            data: data_temp_out
+                                        }, {
+                                            name: config_sn.sn_name_4,
+                                            data: data_temp_in
+                                        }
+                                    ])
+                                    chartLine1.updateOptions({
+                                        title:  {text: 'อุณหภูมิ (℃)'},
+                                        tooltip: {
+                                            y: {
+                                            	formatter: function (val) {
+                                            		return  val + " ℃"
+                                            	}
+                                            }
+                                        },
+                                        // subtitle: {
+                                        //     text: '(℃)',
+                                        //     offsetY: 55,
+                                        //     offsetX: 10
+                                        // },
+                                    })
+                                // }
+                                // if(s_sensor.s_btnH > 0){
+                                    chartLine2.updateSeries([
+                                        {
+                                            name: config_sn.sn_name_2,
+                                            data: data_hum_out
+                                        }, {
+                                            name: config_sn.sn_name_5,
+                                            data: data_hum_in
+                                        }
+                                    ]);
+                                    // console.log(data_hum_out);
+                                    chartLine2.updateOptions({
+                                        title:  {text: 'ความชื้นอากาศ (%Rh)'},
+                                        tooltip: {
+                                            y: {
+                                                formatter: function (val) {
+                                                    return  val + " %Rh"
+                                                }
+                                            }
+                                        },
+                                        // subtitle: {
+                                        //     text: '(%Rh)',
+                                        //     offsetY: 55,
+                                        //     offsetX: 10
+                                        // },
+                                    });
+                                // }
+                                // if(s_sensor.s_btnL > 0){
+                                    chartLine3.updateSeries([
+                                        {
+                                            name: config_sn.sn_name_3,
+                                            data: data_light_out
+                                        }, {
+                                            name: config_sn.sn_name_6,
+                                            data: data_light_in
+                                        }
+                                    ]);
+                                    chartLine3.updateOptions({
+                                        title:  {text: 'ความเข้มแสง (KLux)'},
+                                        tooltip: {
+                                            y: {
+                                                formatter: function (val) {
+                                                    return  val + " KLux"
+                                                }
+                                            }
+                                        },
+                                        // subtitle: {
+                                        //     text: '(KLux)',
+                                        //     offsetY: 55,
+                                        //     offsetX: 10
+                                        // },
+                                    })
+                                // }
+                                // if(s_sensor.s_btnS > 0){
+                                    chartLine4.updateSeries([
+                                        {
+                                            name: config_sn.sn_name_7,
+                                            data: data_soil_in
+                                        }]
+                                    )
+                                    chartLine4.updateOptions({
+                                        title:  {text: 'ความชื้นดิน (%)'},
+                                        tooltip: {
+                                            y: {
+                                                formatter: function (val) {
+                                                    return  val + " %"
+                                                }
+                                            }
+                                        },
+                                        // subtitle: {
+                                        //     text: '(%)',
+                                        //     offsetY: 55,
+                                        //     offsetX: 10
+                                        // },
+                                    })
+                                // }
+                            }
+                        });
+                    }
+                });
+            }
+            else if (url[0] == 33) {
+                $(".title_km").html("ประวัติการตั้งเวลา");
                 // return false;
                 $.ajax({
-                    url: "routes/get_dash.php",
+                    url: "routes/v.3/get_config.php",
                     method: "post",
                     data: {
                         house_master: house_master
@@ -977,8 +1972,6 @@
                         var meterImg = res.meterImg;
                         var meterUnit = res.meterUnit;
                         var time_update = res.time_update;
-
-
 
                         var array_realChT = [];
                         var array_realnameT = [];
@@ -1045,9 +2038,10 @@
                         var meter_count = getArraySum(meter_status);
                         // alert(meter_count);
                         $.ajax({
-                            url: "views/pagex_dashboard.php",
+                            url: "routes/v.3/pagex_dashboard.php",
                             method: "post",
                             data: {
+                                user:res.user,
                                 s_master: res.s_master,
                                 dashStatus: dashStatus,
                                 dashName: dashName,
@@ -1066,7 +2060,7 @@
                             success: function(res_dash) {
                                 $("#load_pages").html(res_dash);
 
-                                chack_realtime();
+                                // chack_realtime();
 
                                 function chack_realtime() {
                                     am4core.ready(function() {
@@ -1110,18 +2104,8 @@
                                                 }
                                             }
                                             client.subscribe(house_master + "/1/data_update/data_filter", options);
-                                            // if (Contstatus !== 0) {
+                                            client.subscribe(house_master + "/1/control/json_control_filter", options);
 
-                                            if (house_master !== "KMUMT001") {
-                                                client.subscribe(house_master + "/1/control/json_control_filter", options);
-                                            } else {
-                                                client.subscribe(house_master + "/1/control/mode", options);
-                                                client.subscribe(house_master + "/1/control/control_st_1", options);
-                                                client.subscribe(house_master + "/1/control/control_st_2", options);
-                                                client.subscribe(house_master + "/1/control/control_st_3", options);
-                                                client.subscribe(house_master + "/1/control/control_st_4", options);
-                                                client.subscribe(house_master + "/1/control/control_st_5", options);
-                                            }
                                         }
 
                                         function onFail(context) {
@@ -2292,9 +3276,10 @@
                                 // ----------------------------------------------------------------------
 
 
-
+                                loadingOut(loading);
                             }
                         });
+
                         // Report ------------------
                         // $(".memu_report").click(function() {
                         $(".te_st").html(res.s_master.site_name);
@@ -2465,7 +3450,8 @@
                         }
                         check_menu_control()
                         function check_menu_control(){
-                            if(res.userLevel < 3){
+                            // alert(res.userLevel)
+                            if(res.userLevel <= 3){
                                 if(getArraySum(res.controlstatus) > 0){
                                     $('.memu_control').show()
                                 }else {
@@ -2540,12 +3526,14 @@
                                     client.subscribe(house_master + "/data_sensor/filter", options);
                                     client.subscribe(house_master + "/control/response", options);
                                     client.subscribe(house_master + "/control/config/auto", options);
+                                    client.subscribe(house_master + "/monitor/_hardware/realtime", options);
+                                    client.subscribe("web_system", options);
                                 }
 
                                 function onFail(context) {
                                     location.reload();
                                 }
-
+                                var timeoutId = 0;
                                 function onConnectionLost(responseObject) {
                                     if (responseObject.errorCode !== 0) {
                                         console.log("Connection Lost: " + responseObject.errorMessage);
@@ -2971,6 +3959,21 @@
                                         $('#val_sw_auto').val(JSON.stringify(data_auto));
                                         // console.log($('#val_sw_auto').val());
                                     }
+                                    else if(message.destinationName == house_master + "/monitor/_hardware/realtime"){
+                                        var result = message.payloadString;
+                                        var parseJSON = $.parseJSON(result);
+                                        var time_t = parseJSON['time'];
+                                        var ntime = time_t.substring(0, 5);
+                                        // $(".time").html(ntime);
+                                        var data_ = parseJSON['data']
+                                        // console.log(sensor)
+                                        // alert(moment(new Date()).add(-5, 'minutes').format('YYYY-MM-DD HH:mm'));
+                                        if(parseJSON['date']+' '+ntime > moment(new Date()).add(-5, 'minutes').format('YYYY-MM-DD HH:mm') ){
+                                            $('.status_timeUpdate').html('ออนไลน์').addClass('text-success')
+                                        }else {
+                                            $('.status_timeUpdate').html('ออฟไลน์').addClass('text-danger')
+                                        }
+                                    }
                                     else if(message.destinationName == house_master + "/data_sensor/filter") {
                                         var result = message.payloadString;
                                         var parseJSON = $.parseJSON(result);
@@ -2982,11 +3985,6 @@
                                         var data_ = parseJSON['data']
                                         // console.log(sensor)
                                         // alert(moment(new Date()).add(-5, 'minutes').format('YYYY-MM-DD HH:mm'));
-                                        if(parseJSON['date']+' '+ntime > moment(new Date()).add(-5, 'minutes').format('YYYY-MM-DD HH:mm') ){
-                                            $('.status_timeUpdate').html('ออนไลน์').addClass('text-success')
-                                        }else {
-                                            $('.status_timeUpdate').html('ออฟไลน์').addClass('text-danger')
-                                        }
 
                                         for (var i = 1; i <= 7; i++) {
                                             // console.log(config_sn['sn_sensor_'+i])
@@ -3333,7 +4331,7 @@
                                             }
                                             // status control dashboard Auto
                                             for (var i = 1; i <= 12; i++) {
-                                                if (config_cn['cn_status_' + i] == 1) {
+                                                // if (config_cn['cn_status_' + i] == 1) {
                                                     if (i <= 4) {
                                                         if (parseJSON['dripper_' + i] === 'OFF') {
                                                             $(".dash_img_con_" + i).attr("src", "public/images/control/TU/sprinkler-off.svg");
@@ -3379,9 +4377,27 @@
                                                             $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/shading_on.png');
                                                         }
                                                     }
-                                                }
+                                                // }
                                             }
                                         }
+                                    }
+                                    else if(message.destinationName == "web_system"){
+                                        var result = message.payloadString;
+                                        var parseJSON = $.parseJSON(result);
+                                        // console.log(parseJSON[res.account_id]['dt'])
+                                        if(timeoutId != 0){clearInterval(timeoutId);}
+                                        timeoutId = setInterval(function() {
+                                            // console.log(
+                                            //     moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+                                                // new Date().toLocaleString()
+                                            // );
+                                            // console.log(moment('2022-08-12 11:03:10').format('YYYY-MM-DD HH:mm:ss'));
+                                            if(moment(new Date()).format('YYYY-MM-DD HH:mm:ss') >= moment(parseJSON[res.account_id]['dt']).format('YYYY-MM-DD HH:mm:ss') ){
+                                                logout();
+                                                // clearInterval(timeoutId);
+                                                // alert('ok')
+                                            }
+                                        }, 1000);
                                     }
                                 }// exit_message
                                 connect();
@@ -3586,8 +4602,11 @@
                                                 formatter: function (val) {
                                                     return  val + " %Rh"
                                                 }
-                                            }
+                                            },
                                         },
+                                        yaxis: {
+                                           max: 100
+                                        }
                                         // subtitle: {
                                         //     text: '(%Rh)',
                                         //     offsetY: 55,
@@ -3646,137 +4665,6 @@
                                 // }
                             }
                         });
-                        $('.btn_ch_t').click(function(){
-                            // $('#chart1').html("")
-                            // var chartLine = new ApexCharts(document.querySelector('#chart1'), optionsLine);
-                            // chartLine1.render();
-                            //     // data_temp_out = res.data.temp_out;
-                            //     // data_temp_in = res.data.temp_in;
-                            // chartLine1.updateSeries([
-                            //     {
-                            //         name: config_sn.sn_name_1,
-                            //         data: data_temp_out
-                            //     }, {
-                            //         name: config_sn.sn_name_4,
-                            //         data: data_temp_in
-                            //     }
-                            // ])
-                            // chartLine1.updateOptions({
-                            //     title:  {text: 'อุณหภูมิ'},
-                            //     tooltip: {
-                            //         y: {
-                            //             formatter: function (val) {
-                            //                 return  val + " ℃"
-                            //             }
-                            //         }
-                            //     },
-                            //     subtitle: {
-                            //         text: '(℃)',
-                            //         offsetY: 55,
-                            //         offsetX: 10
-                            //     },
-                            // })
-                            // $('#chart1').show()
-                            // $('#chart2').hide()
-                            // $('#chart3').hide()
-                            // $('#chart4').hide()
-                        })
-                        $('.btn_ch_h').click(function(){
-                            //     // $('#chart_realtime').html("")
-                            //     // chartLine.destroy();
-                            //     // setTimeout(function () {
-                            //         // var chartLine = new ApexCharts(document.querySelector('#chart_realtime'), optionsLine);
-                            //         // chartLine.render();
-                            //         // data_hum_out = res.data.hum_out;
-                            //         // data_hum_in = res.data.hum_in;
-                            //         chartLine2.updateSeries([
-                            //             {
-                            //                 name: config_sn.sn_name_2,
-                            //                 data: data_hum_out
-                            //             }, {
-                            //                 name: config_sn.sn_name_5,
-                            //                 data: data_hum_in
-                            //             }
-                            //         ])
-                            //         console.log(data_hum_out);
-                            //         chartLine2.updateOptions({
-                            //             title:  {text: 'ความชื้นอากาศ'},
-                            //             tooltip: {
-                            //                 y: {
-                            //                     formatter: function (val) {
-                            //                         return  val + " %Rh"
-                            //                     }
-                            //                 }
-                            //             },
-                            //             subtitle: {
-                            //                 text: '(%Rh)',
-                            //                 offsetY: 55,
-                            //                 offsetX: 10
-                            //             },
-                            //         });
-                            //     // }, 2000);
-                            // $('#chart1').hide()
-                            // $('#chart2').show()
-                            // $('#chart3').hide()
-                            // $('#chart4').hide()
-                        })
-                        $('.btn_ch_l').click(function(){
-                            //     chartLine3.updateSeries([
-                            //         {
-                            //             name: config_sn.sn_name_3,
-                            //             data: data_light_out
-                            //         }, {
-                            //             name: config_sn.sn_name_6,
-                            //             data: data_light_in
-                            //         }
-                            //     ]);
-                            //     chartLine3.updateOptions({
-                            //         title:  {text: 'ความเข้มแสง'},
-                            //         tooltip: {
-                            //             y: {
-                            //                 formatter: function (val) {
-                            //                     return  val + " KLux"
-                            //                 }
-                            //             }
-                            //         },
-                            //         subtitle: {
-                            //             text: '(KLux)',
-                            //             offsetY: 55,
-                            //             offsetX: 10
-                            //         },
-                            //     })
-                            // $('#chart1').hide()
-                            // $('#chart2').hide()
-                            // $('#chart3').show()
-                            // $('#chart4').hide()
-                        })
-                        $('.btn_ch_s').click(function(){
-                            //     chartLine4.updateSeries([
-                            //         {
-                            //             name: config_sn.sn_name_7,
-                            //             data: data_soil_in
-                            //         }]
-                            //     )
-                            //     chartLine4.updateOptions({
-                            //         title:  {text: 'ความชื้นดิน'},
-                            //         tooltip: {
-                            //             y: {
-                            //                 formatter: function (val) {
-                            //                     return  val + " %"
-                            //                 }
-                            //             }
-                            //         },
-                            //         subtitle: {
-                            //             text: '(%)',
-                            //             offsetY: 55,
-                            //             offsetX: 10
-                            //         },
-                            //     })
-                            // $('#chart1').hide()
-                            // $('#chart2').hide()
-                            // $('#chart3').hide()
-                            // $('#chart4').show()
-                        })
                         // ===============================================
                     }
                 }); // ajax

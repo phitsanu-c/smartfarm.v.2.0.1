@@ -94,24 +94,42 @@
                     </div>
                     <div class="tab-pane fade" id="pills_report_cnAuto" role="tabpanel">
                         <ul class="nav nav-pills" role="tablist">
+                            <!-- <li class="col-4 col-lg-1 col-xl-1  nav-item text-center" role="presentation">
+                                <a class="nav-link rec_auto" rec_auto="1" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
+                                    <div class="tab-title">น้ำหยด 1</div>
+                                </a>
+                            </li> -->
                             <?php
                              for($i=1; $i <= 12; $i++){
                                 if($config_cn['cn_status_'.$i] == 1){
-                                    if($i != 12){
+                                    if($i <= 4){
                                         echo '<li class="col-4 col-lg-1 col-xl-1  nav-item text-center" role="presentation">
                                                 <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="tab-title">'.$config_cn['cn_name_'.$i].'</div>
-                                                    </div>
+                                                    <div class="tab-title">น้ำหยด '.$i.'</div>
                                                 </a>
                                             </li>';
-                                    }else {
+                                    }elseif ($i > 4 && $i <= 8) {
                                         echo '<li class="col-4 col-lg-1 col-xl-1  nav-item text-center" role="presentation">
                                                 <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="tab-title">ม่านพรางแสง
-</div>
-                                                    </div>
+                                                    <div class="tab-title">พัดลม '.($i-4).'</div>
+                                                </a>
+                                            </li>';
+                                    }elseif ($i > 8 && $i <= 10) {
+                                        echo '<li class="col-4 col-lg-1 col-xl-1  nav-item text-center" role="presentation">
+                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
+                                                    <div class="tab-title">พ่นหมอก '.($i-8).'</div>
+                                                </a>
+                                            </li>';
+                                    }elseif ($i == 11) {
+                                        echo '<li class="col-4 col-lg-1 col-xl-1  nav-item text-center" role="presentation">
+                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
+                                                    <div class="tab-title">สเปรย์</div>
+                                                </a>
+                                            </li>';
+                                    }elseif ($i == 12) {
+                                        echo '<li class="col-4 col-lg-1 col-xl-1  nav-item text-center" role="presentation">
+                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
+                                                    <div class="tab-title">พรางแสง</div>
                                                 </a>
                                             </li>';
                                     }
@@ -1100,6 +1118,8 @@
             // });
         }
         function report_chart_sn(val, mode_dwm){
+            // alert( )
+            // return false;
             var options = {
                 chart: {
                     id: 'realtime',
@@ -1257,11 +1277,22 @@
                         //         data: data_temp_in
                         //     }
                         // ])
-                        chart.updateOptions({
-                            xaxis: {
-                              categories: res.timestamp
-                            }
-                        });
+                        if($('#checkbox_all_sn').prop('checked') == false && $('#radio_hum').prop('checked') == true){
+                            chart.updateOptions({
+                                xaxis: {
+                                  categories: res.timestamp
+                              },
+                              yaxis: {
+                                 max: 100
+                              }
+                            });
+                        }else {
+                            chart.updateOptions({
+                                xaxis: {
+                                  categories: res.timestamp
+                              },
+                            });
+                        }
                     // }
                     $('.exportCSV').hide();
                     if(c_menu != ''){loadingOut(loading);}
@@ -1333,8 +1364,9 @@
         $(".all_from_to").removeClass('active')
         $(".mode_dwm").val('');
         $("#AutoMode_select").val(1)
-        $('.text_autoTable').html(config_cn['cn_name_1'])
-        $("a[rec_auto=1]").addClass('active')
+        $(".rec_auto").removeClass('active');
+        $("a[rec_auto=1]").addClass('active');
+        $('.text_autoTable').html('ประวัต ิน้ำหยด 1 '+config_cn['cn_name_1'])
         $('#hide_table').hide();
         $('#table_re_cnAuto').wrap('<div id="hide2" style="display:none"/></div>');
         $('#hide2').css( 'display', 'none' );
@@ -1343,7 +1375,18 @@
         $('.rec_auto').click(function(){
             // alert($(this).attr('rec_auto'));
             $("#AutoMode_select").val($(this).attr('rec_auto'))
-            $('.text_autoTable').html(config_cn['cn_name_'+$(this).attr('rec_auto')])
+            if($(this).attr('rec_auto') <= 4){
+                $('.text_autoTable').html('ประวัติ น้ำหยด '+$(this).attr('rec_auto')+' '+config_cn['cn_name_'+$(this).attr('rec_auto')])
+            }else if ($(this).attr('rec_auto') > 4 && $(this).attr('rec_auto') <= 8) {
+                $('.text_autoTable').html('ประวัติ พัดลม '+($(this).attr('rec_auto')-4)+' '+config_cn['cn_name_'+$(this).attr('rec_auto')])
+            }else if ($(this).attr('rec_auto') > 8 && $(this).attr('rec_auto') <= 10) {
+                $('.text_autoTable').html('ประวัติ พ่นหมอก '+($(this).attr('rec_auto')-8)+' '+config_cn['cn_name_'+$(this).attr('rec_auto')])
+            }else if ($(this).attr('rec_auto') == 11) {
+                $('.text_autoTable').html('ประวัติ สเปรย์'+config_cn['cn_name_'+$(this).attr('rec_auto')])
+            }else if ($(this).attr('rec_auto') == 12) {
+                $('.text_autoTable').html('ประวัติ ม่านพรางแสง')
+            }
+            // $('.text_autoTable').html(config_cn['cn_name_'+$(this).attr('rec_auto')])
             $('.rec_auto').removeClass('active')
             $(this).addClass('active')
             if($(".mode_dwm").val() != ''){
@@ -1435,7 +1478,7 @@
             buttons: [{
                     text: 'Export csv',
                     // title: "Smart Farm Report Control",
-                    // charset: 'utf-8',
+                    // charset: 'UTF-8',
                     // extension: '.csv',
                     className:'btn btn-outline-success px-5 btnexport2',
                     // extend: 'csv',
@@ -1488,10 +1531,10 @@
                                 text: 'Export csv',
                                 className:'btn btn-outline-success px-5 btnexport22',
                                 title: "Smart Farm Report Control",
-                                charset: 'utf-8',
+                                charset: 'UTF-8',
                                 extension: '.csv',
                                 extend: 'csv',
-                                format: 'YYYY/MM/dd',
+                                format: 'YYYY-MM-dd',
                                 // fieldSeparator: ';',
                                 // fieldBoundary: '',
                                 filename: 'smart_farm_control_'+datetime,

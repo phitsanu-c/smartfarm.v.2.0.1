@@ -16,26 +16,20 @@
         $message = json_encode($decodedJson);
         $mqtt->publish($topic,$message, 1);
         $mqtt->close();
+        // echo json_encode($decodedJson);
     }
+    $siteID = $_GET['siteID'];
+    $house_master = $_GET["house_master"];
+    $row_1 = $dbcon->query("SELECT house_id FROM tbn_house WHERE house_master = '$house_master'")->fetch();
 
-    $house_master = $_POST["house_master"];
-    $config_cn = $_POST["config_cn"];
-    // echo $config_cn["cn_status_1"];
-    // exit();
-
-    $row = $dbcon->query("SELECT * FROM `tbn_control_mn_log` WHERE `mn_sn`= '$house_master' ORDER BY `mn_id` DESC LIMIT 1")->fetch();
-    $data = [
-        'dripper_1' => $row['mn_load_1'],
-        'dripper_2' => $row['mn_load_2'],
-        'dripper_3' => $row['mn_load_3'],
-        'dripper_4' => $row['mn_load_4'],
-        'fan_1'     => $row['mn_load_5'],
-        'fan_2'     => $row['mn_load_6'],
-        'fan_3'     => $row['mn_load_7'],
-        'fan_4'     => $row['mn_load_8'],
-        'foggy_1'   => $row['mn_load_9'],
-        'foggy_2'   => $row['mn_load_10'],
-        'spray'     => $row['mn_load_11'],
-        'shading'   => $row['mn_load_12']
-    ];
-    echo json_encode($data);
+    $row_ = $dbcon->query("SELECT count(re_id) FROM tbn_login_re WHERE re_siteID = '$siteID' AND re_level = 2")->fetch();
+    $account_id = $_SESSION['account_id'];
+    $houseID = $row_1['house_id'];
+    if($_SESSION['account_status'] > 2){
+        $row_6 = $dbcon->query("SELECT `userST_level` FROM `tbn_userst` WHERE `userST_accountID`=$account_id AND `userST_houseID`=$houseID")->fetch();
+        $account_status = $row_6['userST_level'];
+    }else {
+        $account_status = $_SESSION['account_status'];
+    }
+    echo json_encode(['count_level' => $row_[0], 'user_level' => $account_status]);
+    // echo json_encode($house_master);

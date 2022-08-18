@@ -215,27 +215,27 @@ $.getJSON('routes/login.php', function(msg) {
     });
 
     // logout
-    countdown(number = 1800); // วินาที
-
-    function countdown() {
-        clearTimeout(countdown);
-        setTimeout(countdown, 1000);
-        var dt = new Date();
-        var time = dt.getHours() + ":" + dt.getMinutes()+ ":" + dt.getSeconds();
-        // console.log(msg.dt.substring(11,19))
-        // $('#redirect').html("Redirecting in " + number + " seconds.");
-        number--;
-        if (number < 0) {
-            number = 0;
-        }
-        if(number == 0){
-            clearTimeout(countdown);
-            if(time >= msg.dt.substring(11,19)){
-                logout();
-            }
-        }
-        // $("#test_timr").html("countdown : " + number);
-    }
+    // countdown(number = 1800); // วินาที
+    //
+    // function countdown() {
+    //     clearTimeout(countdown);
+    //     setTimeout(countdown, 1000);
+    //     var dt = new Date();
+    //     var time = dt.getHours() + ":" + dt.getMinutes()+ ":" + dt.getSeconds();
+    //     // console.log(msg.dt.substring(11,19))
+    //     // $('#redirect').html("Redirecting in " + number + " seconds.");
+    //     number--;
+    //     if (number < 0) {
+    //         number = 0;
+    //     }
+    //     if(number == 0){
+    //         clearTimeout(countdown);
+    //         if(time >= msg.dt.substring(11,19)){
+    //             logout();
+    //         }
+    //     }
+    //     // $("#test_timr").html("countdown : " + number);
+    // }
 });
 
 function logout() {

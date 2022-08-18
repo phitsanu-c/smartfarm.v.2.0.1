@@ -73,9 +73,9 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <label for="E-mail" class="form-label">อีเมลล์</label>
+                                <label for="E-mail" class="form-label">อีเมล</label>
                                 <div class="input-group input-group-lg"> <span class="input-group-text bg-transparent"><i class="fadeIn animated bx bx-mail-send"></i></span>
-                                    <input type="email" class="form-control pt_email" placeholder="อีเมลล์" value="<?= $_SESSION["account_email"] ?>" disabled>
+                                    <input type="email" class="form-control pt_email" placeholder="อีเมล" value="<?= $_SESSION["account_email"] ?>" disabled>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -300,8 +300,8 @@
                                     </select></h5>
                                 </div>
                                 <div class="ms-auto">
-                                    <button class="btn btn-outline-success me-1 u_add mb-3"><i class="bi bi-plus-square"></i> เพิ่มผู้ใช้งานใหม่</button>
-                                    <button class="btn btn-outline-success me-1 u_Suser mb-3"><i class="bi bi-plus-square"></i> เพิ่มผู้ใช้งานจากที่มีอยู่</button>
+                                    <button class="btn btn-outline-success me-1 u_add mb-3"><i class="bi bi-plus-square"></i>เพิ่มผู้ใช้งานใหม่</button>
+                                    <button class="btn btn-outline-success me-1 u_Suser mb-3"><i class="bi bi-plus-square"></i>กำหนดสิทธิ์ผู้ใช้งาน</button>
                                 </div>
                             </div>
                             <div id="user_access"></div>
@@ -354,9 +354,9 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <label for="E-mail" class="form-label">อีเมลล์ <span class="text-danger">*</span></label>
+                        <label for="E-mail" class="form-label">อีเมล <span class="text-danger">*</span></label>
                         <div class="input-group input-group-lg"> <span class="input-group-text bg-transparent"><i class="fadeIn animated bx bx-mail-send"></i></span>
-                            <input type="email" class="form-control border-start-0 p_email" name="p_email" placeholder="อีเมลล์">
+                            <input type="email" class="form-control border-start-0 p_email" name="p_email" placeholder="อีเมล">
                         </div>
                     </div>
                     <div class="col-12">
@@ -639,7 +639,7 @@
                     <div class="form-body">
                         <div class="row">
                             <div class="col-md-4 us_img_user text-end mb-2">
-                                <label class="col-form-label mt-1">สถานที่ </label>
+                                <label class="col-form-label mt-1">รูปผู้ใช้งาน </label>
                             </div>
                             <div class="col-md-8 us_img_user">
                                 <input type="file" class="form-control" name="u_img" id="u_img" onchange="Showimg_user(this)">
@@ -697,12 +697,12 @@
                                 </div>
                             </div>
                             <div class="col-md-4 text-end mb-2">
-                                <label class="col-form-label mt-1">อีเมลล์ <span class="text-danger">*</span></label>
+                                <label class="col-form-label mt-1">อีเมล <span class="text-danger">*</span></label>
                             </div>
                             <div class="col-md-8">
                                 <div class="form-group has-icon-left">
                                     <div class="position-relative">
-                                        <input type="email" class="form-control u_email" name="u_email" placeholder="อีเมลล์">
+                                        <input type="email" class="form-control u_email" name="u_email" placeholder="อีเมล">
                                         <div class="invalid-feedback bu_email"></div>
                                     </div>
                                 </div>
@@ -843,7 +843,7 @@
                 }
                 if (parseJSON.status === "รูปแบบ email ไม่ถูกต้อง") {
                     swal({
-                        title: 'รูปแบบอีเมลล์ไม่ถูกต้อง !',
+                        title: 'รูปแบบอีเมลไม่ถูกต้อง !',
                         // text: "" + sw_name + " ?",
                         type: 'warning',
                         allowOutsideClick: false,
@@ -855,7 +855,7 @@
                 }
                 if (parseJSON.status === "มี email นี้แล้ว") {
                     swal({
-                        title: 'อีเมลล์นี้ถูกใช้งานแล้ว !',
+                        title: 'อีเมลนี้ถูกใช้งานแล้ว !',
                         // text: "" + sw_name + " ?",
                         type: 'warning',
                         allowOutsideClick: false,
@@ -1782,10 +1782,10 @@
                     $("#modal_User").modal("show");
                 });
                 $(".u_Suser").click(function() {
-                    $(".title_mUser").html("เพิ่มผู้ใช้งานจากรายชื้อที่มี");
+                    $(".title_mUser").html("กำหนดสิทธิ์ผู้ใช้งาน");
                     $(".us_user_sel").show();
                     $(".use_site").val($(".sel_main_site").val());
-                    $(".use_house").val('').load("routes/op_house.php?siteID="+$(".sel_main_site").val()+'&us=1');
+                    $(".use_house").val('').load("routes/op_house.php?siteID="+$(".sel_main_site").val()+'&us=1').attr("disabled",false);
                     $(".use_userID").val("0").removeClass("is-invalid");
                     $(".us_img_user").hide();
                     $('.user_edit').show();
@@ -1889,7 +1889,7 @@
                         }
                         if($(".u_email").val() === ""){
                             $(".u_email").addClass("is-invalid");
-                            $(".bu_email").html("กรถณาระบุอีเมลล์");
+                            $(".bu_email").html("กรถณาระบุอีเมล");
                             return false;
                         }else{
                             $(".u_email").removeClass("is-invalid");
@@ -1949,7 +1949,7 @@
                             }
                             if (parseJSON.status === "รูปแบบ email ไม่ถูกต้อง") {
                                 swal({
-                                    title: 'รูปแบบอีเมลล์ไม่ถูกต้อง !',
+                                    title: 'รูปแบบอีเมลไม่ถูกต้อง !',
                                     // text: "" + sw_name + " ?",
                                     type: 'warning',
                                     allowOutsideClick: false,
@@ -1961,7 +1961,7 @@
                             }
                             if (parseJSON.status === "มี email นี้แล้ว") {
                                 swal({
-                                    title: 'มีอีเมลล์นีในระบบแล้ว !',
+                                    title: 'มีอีเมลนีในระบบแล้ว !',
                                     // text: "" + sw_name + " ?",
                                     type: 'warning',
                                     allowOutsideClick: false,
@@ -2387,7 +2387,7 @@
                         buttons: [{
                                 text: 'Export csv',
                                 title: "Smart Farm Access Control",
-                                charset: 'utf-8',
+                                charset: 'UTF-8',
                                 extension: '.csv',
                                 // exportOptions: {
                                 //    columns: [ 0, 2, 5 ]

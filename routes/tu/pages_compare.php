@@ -869,9 +869,9 @@
                 },
                 stroke: {
                     curve: 'smooth',
-                    width: 5
+                    width: 2
                 },
-                // colors: ["#0d6efd", '#212529'],
+                colors: ["#85583F", '#00FF00','#0000FF', '#FFFF00', '#FF0000', '#9400D3', '#00FFFF','#406E1C'],
                 // series: [{
                 //   data: data.slice()
                 // }],
@@ -988,11 +988,22 @@
                         //         data: data_temp_in
                         //     }
                         // ])
-                        chart.updateOptions({
-                            xaxis: {
-                              categories: res.timestamp
-                            }
-                        });
+                        if($('#radio_hum').prop('checked') == true){
+                            chart.updateOptions({
+                                xaxis: {
+                                   categories: res.timestamp
+                                },
+                                yaxis: {
+                                   max: 100
+                                }
+                            });
+                        }else {
+                            chart.updateOptions({
+                                xaxis: {
+                                   categories: res.timestamp
+                                }
+                            });
+                        }
                     // }
                     $('.exportCSV').hide();
                     if(c_menu != ''){loadingOut(loading);}
