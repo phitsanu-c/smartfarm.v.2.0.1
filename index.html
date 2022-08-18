@@ -3962,17 +3962,20 @@
                                     else if(message.destinationName == house_master + "/monitor/_hardware/realtime"){
                                         var result = message.payloadString;
                                         var parseJSON = $.parseJSON(result);
-                                        var time_t = parseJSON['time'];
-                                        var ntime = time_t.substring(0, 5);
+                                        // var time_t = parseJSON['time'];
+                                        // var ntime = time_t.substring(0, 5);
                                         // $(".time").html(ntime);
-                                        var data_ = parseJSON['data']
-                                        // console.log(sensor)
+                                        // var data_ = parseJSON['data']
+                                        // console.log(parseJSON);
+                                        // console.log(moment(parseJSON['date']+' '+parseJSON['time']).format('YYYY-MM-DD HH:mm:ss'))
                                         // alert(moment(new Date()).add(-5, 'minutes').format('YYYY-MM-DD HH:mm'));
-                                        if(parseJSON['date']+' '+ntime > moment(new Date()).add(-5, 'minutes').format('YYYY-MM-DD HH:mm') ){
-                                            $('.status_timeUpdate').html('ออนไลน์').addClass('text-success')
-                                        }else {
-                                            $('.status_timeUpdate').html('ออฟไลน์').addClass('text-danger')
-                                        }
+                                        setInterval(function() {
+                                            if(moment(parseJSON['date']+' '+parseJSON['time']).format('YYYY-MM-DD HH:mm:ss') > moment(new Date()).add(-5, 'minutes').format('YYYY-MM-DD HH:mm:ss') ){
+                                                $('.status_timeUpdate').html('ออนไลน์').addClass('text-success')
+                                            }else {
+                                                $('.status_timeUpdate').html('ออฟไลน์').addClass('text-danger')
+                                            }
+                                        }, 1000);
                                     }
                                     else if(message.destinationName == house_master + "/data_sensor/filter") {
                                         var result = message.payloadString;
