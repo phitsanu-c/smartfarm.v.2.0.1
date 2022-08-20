@@ -115,6 +115,7 @@
                                         <!-- <div class="col-md-6 text-end btn_forgot "> <a href="javascript:; ">ลืมรหัสผ่าน ?</a></div> -->
                                         <div class="col-12">
                                             <div class="d-grid">
+                                                <input type="hidden" name="s_log" class="s_log">
                                                 <button type="submit" class="btn btn-primary"><i class="bx bxs-lock-open"></i>เข้าสู่ระบบ</button>
                                             </div>
                                         </div>
@@ -160,6 +161,7 @@
     <script src="public/javascripts/app.js"></script>
     <script>
         // alert(document.URL.substring(0, document.URL.length-15))
+        $('.s_log').val(0);
         $(".page-login").show();
         $(".page-forgot").hide();
         $(".btn_forgot").click(function() {
@@ -290,10 +292,60 @@
                     else if (res.name_login === "already logged in") {
                         swal({
                             title: 'ผู้ใช้งานนี้อยู่ในระบบ !',
-                            html: "กรุณาใช้ <b>ชื่อผู้ใช้/อีเมลล์</b> ใหม่",
+                            text: "คุณต้องการลงชื่อเข้าใชอีกครั้ง้หรือไม่ ?่",
                             type: 'warning',
                             allowOutsideClick: false,
-                            confirmButtonColor: '#32CD32'
+                            showCancelButton: true,
+                            confirmButtonColor: '#32CD32',
+                            cancelButtonColor: '#FF3333',
+                            confirmButtonText: 'ใช่',
+                            cancelButtonText: 'ยกเลิก'
+                        }).then((result) => {
+                            if (result.value) {
+                                $('.s_log').val(1);
+                                $.ajax({
+                                    type: 'POST',
+                                    url: "routes/login.php",
+                                    data: $('#login').serialize()+ '&status=' + status,
+                                    dataType: 'json',
+                                    success: function(res) {
+                                        console.log(res)
+                                        // return false
+                                        if (res.name_login === "site > 10") {
+                                            swal({
+                                                title: 'มีผู้ใช้งานในระบบมากเกินไป !',
+                                                html: "กรุณาลงชื่อเข้าใช้อีกครั้งในภายหลัง",
+                                                type: 'warning',
+                                                allowOutsideClick: false,
+                                                confirmButtonColor: '#32CD32'
+                                            });
+                                            $(".i_forgot_email").addClass('is-invalid');
+                                            return false;
+                                        }
+                                        else if (res.name_login != '') {
+                                            // alert(res.name_login)
+                                            if(res.sn['account_status'] == 1){
+                                                window.location.href = document.URL.substring(0, document.URL.length-15);
+                                            }else{
+                                                // alert(res.sn['count_house'])
+                                                if(res.sn['count_site'] == 1){ // 1 site
+                                                    // if(res.sn['count_house'] == 1){ // 1 site 1 house
+                                                        // if(res.sn['master'].substring(0, 3) == "TUS"){
+                                                        //     window.location.href = document.URL.substring(0, document.URL.length-15)+"/tu/#"+res.sn['en_url'];
+                                                        // }else{
+                                                            window.location.href = document.URL.substring(0, document.URL.length-15)+"#"+res.sn['en_url'];
+                                                        // }
+                                                //     }else{ // 1 site > 1 house
+                                                //         window.location.href = document.URL.substring(0, document.URL.length-15)+"#"+res.sn['en_url'];
+                                                //     }
+                                                }else{ // > 1 site
+                                                    window.location.href = document.URL.substring(0, document.URL.length-15);
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
+                            }
                         });
                         $(".i_forgot_email").addClass('is-invalid');
                         return false;

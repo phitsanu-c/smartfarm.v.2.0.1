@@ -461,46 +461,46 @@
                             <div class="col-12">
                                 <div class="row cols-10 text-center mt-2 mb-2 ">
                                     <?php
-                                        if($config_cn['cn_status_1'] == 1 || $config_cn['cn_status_2'] == 1 || $config_cn['cn_status_3'] == 1 || $config_cn['cn_status_4'] == 1){
+                                        // if($config_cn['cn_status_1'] == 1 || $config_cn['cn_status_2'] == 1 || $config_cn['cn_status_3'] == 1 || $config_cn['cn_status_4'] == 1){
                                             echo '<div class="cols-3 cols-lg-5">
                                                     <button class="btn btn-control sw_sel_load_manual" style="width:100% border-radius:20px;" id="s1">
                                                         <div class="text_font_size">น้ำหยด</div>
                                                         <img class="img_sw_sel_load_manual_1" width="70"  src=""  />
                                                     </button>
                                                </div>';
-                                        }
-                                        if($config_cn['cn_status_9'] == 1 || $config_cn['cn_status_10'] == 1){
+                                        // }
+                                        // if($config_cn['cn_status_9'] == 1 || $config_cn['cn_status_10'] == 1){
                                             echo '<div class="cols-3 cols-lg-5" >
                                                     <button class="btn btn-control sw_sel_load_manual" style="width:100% border-radius:20px" id="s3">
                                                         <div class="text_font_size">พ่นหมอก</div>
                                                         <img class="img_sw_sel_load_manual_3" src="" width="70" />
                                                     </button>
                                                </div>';
-                                        }
-                                        if($config_cn['cn_status_11'] == 1){
+                                        // }
+                                        // if($config_cn['cn_status_11'] == 1){
                                             echo '<div class="cols-3 cols-lg-5">
                                                     <button class="btn btn-control sw_sel_load_manual" style="width:100% border-radius:20px" id="s4">
                                                         <div class="text_font_size">สเปรย์</div>
                                                         <img class="img_sw_sel_load_manual_4" src="" width="70" />
                                                     </button>
                                                </div>';
-                                        }
-                                        if($config_cn['cn_status_5'] == 1 || $config_cn['cn_status_6'] == 1 || $config_cn['cn_status_7'] == 1 || $config_cn['cn_status_8'] == 1){
+                                        // }
+                                        // if($config_cn['cn_status_5'] == 1 || $config_cn['cn_status_6'] == 1 || $config_cn['cn_status_7'] == 1 || $config_cn['cn_status_8'] == 1){
                                             echo '<div class="cols-3 cols-lg-5">
                                                     <button class="btn btn-control sw_sel_load_manual" style="width:100% border-radius:20px" id="s2">
                                                         <div class="text_font_size">พัดลม</div>
                                                         <img class="img_sw_sel_load_manual_2" src="" width="70" />
                                                     </button>
                                                </div>';
-                                        }
-                                        if($config_cn['cn_status_12'] == 1){
+                                        // }
+                                        // if($config_cn['cn_status_12'] == 1){
                                             echo '<div class="cols-3 cols-lg-5">
                                                     <button class="btn btn-control sw_sel_load_manual" style="width:100% border-radius:20px" id="s5">
                                                         <div class="text_font_size ">พรางแสง</div>
                                                         <img class="img_sw_sel_load_manual_5" src="" width="70" />
                                                     </button>
                                                </div>';
-                                        }
+                                        // }
                                     ?>
                                 </div>
                             </div>
@@ -934,7 +934,7 @@
                     }
                     if(countElement(1,n_countSB) == 0){
                         swal({
-                            title: '้องมีอุปกรณ์เปิดใช้งานอย่างน้อย 1 ตัว !',
+                            html: 'ต้องมีอุปกรณ์เปิดใช้งาน<br>อย่างน้อย 1 ตัว !',
                             // text: "ต้องมีอุปกรณ์เปิดใช้งานอย่างน้อย 1 ตัว !",
                             type: 'warning',
                             allowOutsideClick: false,
@@ -1415,7 +1415,73 @@
                         confirmButtonColor: '#32CD32',
                         confirmButtonText: 'ตกลง',
                     });
+                    return false;
                 }else {
+                    if(numb == 1){
+                        if(countElement(1,status_dripper) == 0){
+                            swal({
+                                title: 'โหลดนี้ไม่ถูกต่อใช้งาน !!!',
+                                text: "กรุณาเลือกโหลดอื่น",
+                                type: 'warning',
+                                allowOutsideClick: false,
+                                confirmButtonColor: '#32CD32',
+                                confirmButtonText: 'ตกลง',
+                            });
+                            return false;
+                        }
+                    }
+                    else if(numb == 2){
+                        if(countElement(1,status_fan) == 0){
+                            swal({
+                                title: 'โหลดนี้ไม่ถูกต่อใช้งาน !!!',
+                                text: "กรุณาเลือกโหลดอื่น",
+                                type: 'warning',
+                                allowOutsideClick: false,
+                                confirmButtonColor: '#32CD32',
+                                confirmButtonText: 'ตกลง',
+                            });
+                            return false;
+                        }
+                    }
+                    else if(numb == 3){
+                        if(countElement(1,status_foggy) == 0){
+                            swal({
+                                title: 'โหลดนี้ไม่ถูกต่อใช้งาน !!!',
+                                text: "กรุณาเลือกโหลดอื่น",
+                                type: 'warning',
+                                allowOutsideClick: false,
+                                confirmButtonColor: '#32CD32',
+                                confirmButtonText: 'ตกลง',
+                            });
+                            return false;
+                        }
+                    }
+                    else if(numb == 4){
+                        if(parseInt(config_cn.cn_status_11) == 0){
+                            swal({
+                                title: 'โหลดนี้ไม่ถูกต่อใช้งาน !!!',
+                                text: "กรุณาเลือกโหลดอื่น",
+                                type: 'warning',
+                                allowOutsideClick: false,
+                                confirmButtonColor: '#32CD32',
+                                confirmButtonText: 'ตกลง',
+                            });
+                            return false;
+                        }
+                    }
+                    else if(numb == 5){
+                        if(parseInt(config_cn.cn_status_12) == 0){
+                            swal({
+                                title: 'โหลดนี้ไม่ถูกต่อใช้งาน !!!',
+                                text: "กรุณาเลือกโหลดอื่น",
+                                type: 'warning',
+                                allowOutsideClick: false,
+                                confirmButtonColor: '#32CD32',
+                                confirmButtonText: 'ตกลง',
+                            });
+                            return false;
+                        }
+                    }
                     $('.hidden_select_sw_manual').val(numb)
                     fn_df_sw_manual(numb);
                 }
@@ -2075,7 +2141,7 @@
         else if(val == 5){
             $('.title_load_manual').html('ควบคุมม่านพรางแสง');
         }
-        if(val > 4){
+        if(val >= 4){
             $('.menu_config_manual').hide();
             $('.label_1').hide();
             $('.label_2').hide();
@@ -2087,31 +2153,9 @@
     function fn_df_sw_manual(val){
         for (var i = 1; i <= 5; i++) {
             if(i == val){
-                $("#s"+i).addClass('active'); // .addClass('btn-outline-success') //
-                // if(i == 1){
-                //     $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/dripper_on.png');
-                // }else if (i == 2) {
-                //     $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/fan_on.png');
-                // }else if (i == 3) {
-                //     $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/foggy_on.png');
-                // }else if (i == 4) {
-                //     $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/spray_on.png');
-                // }else if (i == 5) {
-                //     $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/shading_on.png');
-                // }
+                $("#s"+i).addClass('active'); // .addClass('btn-outline-success')
             }else {
                 $('#s'+i).removeClass('active') //.removeClass('btn-outline-success')
-                // if(i == 1){
-                //     $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/dripper_off.png');
-                // }else if (i == 2) {
-                //     $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/fan_off.png');
-                // }else if (i == 3) {
-                //     $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/foggy_off.png');
-                // }else if (i == 4) {
-                //     $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/spray_off.png');
-                // }else if (i == 5) {
-                //     $('.img_sw_sel_load_manual_'+i).attr('src','public/images/icons/menu_control/shading_off.png');
-                // }
             }
         }
         fn_label_manual(val);

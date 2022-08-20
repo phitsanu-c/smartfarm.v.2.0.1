@@ -3534,6 +3534,7 @@
                                     location.reload();
                                 }
                                 var timeoutId = 0;
+                                var timeoutId2 = 0;
                                 function onConnectionLost(responseObject) {
                                     if (responseObject.errorCode !== 0) {
                                         console.log("Connection Lost: " + responseObject.errorMessage);
@@ -3967,13 +3968,16 @@
                                         // $(".time").html(ntime);
                                         // var data_ = parseJSON['data']
                                         // console.log(parseJSON);
-                                        // console.log(moment(parseJSON['date']+' '+parseJSON['time']).format('YYYY-MM-DD HH:mm:ss'))
                                         // alert(moment(new Date()).add(-5, 'minutes').format('YYYY-MM-DD HH:mm'));
-                                        setInterval(function() {
-                                            if(moment(parseJSON['date']+' '+parseJSON['time']).format('YYYY-MM-DD HH:mm:ss') > moment(new Date()).add(-5, 'minutes').format('YYYY-MM-DD HH:mm:ss') ){
-                                                $('.status_timeUpdate').html('ออนไลน์').addClass('text-success')
+                                        if(timeoutId2 != 0){clearInterval(timeoutId2);}
+                                        timeoutId2 = setInterval(function() {
+                                            // console.log( moment(new Date(parseJSON['date']+' '+parseJSON['time'])).format('YYYY-MM-DD HH:mm:ss') +' >= '+ moment(new Date()).add(-1, 'minutes').format('YYYY-MM-DD HH:mm:ss'))
+                                            if(moment(new Date(parseJSON['date']+' '+parseJSON['time'])).format('YYYY-MM-DD HH:mm:ss') >= moment(new Date()).add(-1, 'minutes').format('YYYY-MM-DD HH:mm:ss') ){
+                                                $('.status_timeUpdate').html('ออนไลน์').removeClass('text-danger').addClass('text-success')
+                                                // console.log('a');
                                             }else {
-                                                $('.status_timeUpdate').html('ออฟไลน์').addClass('text-danger')
+                                                $('.status_timeUpdate').html('ออฟไลน์').removeClass('text-success').addClass('text-danger')
+                                                // console.log('b');
                                             }
                                         }, 1000);
                                     }
@@ -3994,34 +3998,51 @@
                                             //
                                             if (config_sn['sn_status_' + i] == 1) {
                                                 if (i == 1) {
-                                                    dash_status(sn_data = (data_['temp_out'] * 1).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                                                    dash_status( (data_['temp_out'] * 1).toFixed(1), set_maxmin.Tmax, set_maxmin.Tmin, '', i)
                                                 } else if (i == 2) {
-                                                    dash_status(sn_data = (data_['hum_out'] * 1).toFixed(1), max = set_maxmin.Hmax, min = set_maxmin.Hmin)
+                                                    dash_status( (data_['hum_out'] * 1).toFixed(1), set_maxmin.Hmax, set_maxmin.Hmin, '', i)
                                                 } else if (i == 3) {
-                                                    dash_status(sn_data = (data_['light_out'] / 1000).toFixed(1), max = set_maxmin.Lmax, min = set_maxmin.Lmin)
+                                                    dash_status( (data_['light_out'] / 1000).toFixed(1), set_maxmin.Lmax, set_maxmin.Lmin, 4, i)
                                                 } else if (i == 4) {
-                                                    dash_status(sn_data = (data_['temp_in'] * 1).toFixed(1), max = set_maxmin.Tmax, min = set_maxmin.Tmin)
+                                                    dash_status( (data_['temp_in'] * 1).toFixed(1), set_maxmin.Tmax, set_maxmin.Tmin, '', i)
                                                 } else if (i == 5) {
-                                                    dash_status(sn_data = (data_['hum_in'] * 1).toFixed(1), max = set_maxmin.Hmax, min = set_maxmin.Hmin)
+                                                    dash_status( (data_['hum_in'] * 1).toFixed(1), set_maxmin.Hmax, set_maxmin.Hmin, '', i)
                                                 } else if (i == 6) {
-                                                    dash_status(sn_data = (data_['light_in'] / 1000).toFixed(1), max = set_maxmin.Lmax, min = set_maxmin.Lmin)
+                                                    dash_status( (data_['light_in'] / 1000).toFixed(1), set_maxmin.Lmax, set_maxmin.Lmin, 4, i)
                                                 } else if (i == 7) {
-                                                    dash_status(sn_data = (data_['soil_in'] * 1).toFixed(1), max = set_maxmin.Smax, min = set_maxmin.Smin)
+                                                    dash_status( (data_['soil_in'] * 1).toFixed(1), set_maxmin.Smax, set_maxmin.Smin, '', i)
                                                 }
                                             }
-                                            function dash_status(sn_data, max, min) {
-                                                if (sn_data >= max) {
+                                        }
+
+                                        function dash_status(sn_data, max, min, mode, i) {
+                                            // console.log('i='+i+' sn_data='+sn_data+' max='+max+' min='+min+' mode='+mode+' imgMax='+sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_imgMax+' imgMin='+sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_imgMin+' imgNor='+sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_imgNor);
+                                            if(mode >= 4 && mode < 8){
+                                                // alert(moment(new Date()).format('HH:mm') +' > '+ moment('18:40','HH:mm').format('HH:mm'))
+                                                if(moment(new Date()).format('HH:mm') > moment('18:40','HH:mm').format('HH:mm') || moment(new Date()).format('HH:mm') < moment('05:40','HH:mm').format('HH:mm')){
+                                                    $(".dash_img_" + i).attr("src", "public/images/Sensor/Light_Night.svg");
+                                                }else {
+                                                    if (parseInt(sn_data) >= parseInt(max)) {
+                                                        $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_imgMax);
+                                                    } else if (parseInt(sn_data) < parseInt(min)) {
+                                                        $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_imgMin);
+                                                    } else {
+                                                        $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_imgNor);
+                                                    }
+                                                }
+                                            }else {
+                                                if (parseInt(sn_data) >= parseInt(max)) {
                                                     $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_imgMax);
-                                                } else if (sn_data < min) {
+                                                } else if (parseInt(sn_data) < parseInt(min)) {
                                                     $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_imgMin);
                                                 } else {
                                                     $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_imgNor);
                                                 }
-                                                if (sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_unit == 1) {
-                                                    $(".dash_data__" + i).html(sn_data + " ℃");
-                                                } else {
-                                                    $(".dash_data__" + i).html(sn_data + " " + sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_unit);
-                                                }
+                                            }
+                                            if (sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_unit == 1) {
+                                                $(".dash_data__" + i).html(sn_data + " ℃");
+                                            } else {
+                                                $(".dash_data__" + i).html(sn_data + " " + sensor[(config_sn['sn_sensor_' + i] - 1)].sensor_unit);
                                             }
                                         }
                                         // Chart ----------------------------------------

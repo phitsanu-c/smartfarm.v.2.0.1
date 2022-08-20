@@ -14,7 +14,8 @@ if ($mqtt->connect(true,NULL,$username,$password)) {
     // echo json_encode($data_mq);
     // $mqtt->publish($topic,0, 1);
     // $mqtt->close();
-    // exit();
+    // print_r($_POST['data']);
+    // echo $_POST['s_log'];
     if (isset($_POST['name'])) {
         $username = $_POST['name'];
         $password = $_POST['pass'];
@@ -36,13 +37,33 @@ if ($mqtt->connect(true,NULL,$username,$password)) {
             exit();
         }
         $account_id = $row_count["account_id"];
-        if(substr($data_mq, 2) != "0"){ // เช็ค usrt login อยู่ในระบบหรือไม่
-            $decodedJson = json_decode(substr($data_mq, 2), true);
-            if(isset($decodedJson[$account_id]['account_id'])){
-                echo json_encode(['name_login'  => "already logged in"], JSON_UNESCAPED_UNICODE);
-                exit();
-            } else {
-                $dbcon->prepare("DELETE FROM `tbn_login_re` WHERE `re_userID`= '$account_id'")->execute();
+        if ($_POST['s_log'] == 0) {
+            if(substr($data_mq, 2) != "0"){ // เช็ค usrt login อยู่ในระบบหรือไม่
+                $decodedJson = json_decode(substr($data_mq, 2), true);
+                if(isset($decodedJson[$account_id]['account_id'])){
+                    echo json_encode(['name_login'  => "already logged in"], JSON_UNESCAPED_UNICODE);
+                    exit();
+                } else {
+                    $dbcon->prepare("DELETE FROM `tbn_login_re` WHERE `re_userID`= '$account_id'")->execute();
+                }
+            }
+        }else { // logout อีกครั้ง
+            if(substr($data_mq, 2) != "0"){ // เช็ค usrt login อยู่ในระบบหรือไม่
+                $decodedJson = json_decode(substr($data_mq, 2), true);
+                // echo $decodedJson[$account_id]['count_site'];
+                // exit();
+                if($decodedJson[$account_id]['count_site'] == 1){
+                    $jog_login = [
+                        'dt' => date("Y-m-d").' '.date("H:i:s"),
+                        'userID'    => $account_id,
+                        'status'    => 'ออกจากระบบ',
+                        'siteID'    => $decodedJson[$account_id]['siteID']
+                    ];
+                    // echo json_encode($jog_login);
+                    // exit();
+                    // $dbcon->prepare("INSERT INTO `tbn_login_log`( `logLogin_timestamp`, `logLogin_UserID`, `logLogin_status`, `logLogin_siteID`) VALUES (:dt, :userID, :status, :siteID)")->execute($jog_login);
+                }
+                $dbcon->prepare("DELETE FROM `tbn_login_re` WHERE `re_userID`= $account_id")->execute();
             }
         }
         // if(substr($data_mq, 2) != 0){
@@ -79,7 +100,9 @@ if ($mqtt->connect(true,NULL,$username,$password)) {
                 ];
                 // echo date("Y-m-d").' '.date("H:i");
                 // exit();
-                $dbcon->prepare("INSERT INTO `tbn_login_log`( `logLogin_timestamp`, `logLogin_UserID`, `logLogin_status`, `logLogin_siteID`) VALUES (:dt, :userID, :status, :siteID)")->execute($log_login);
+                if ($_POST['s_log'] == 0) {
+                    $dbcon->prepare("INSERT INTO `tbn_login_log`( `logLogin_timestamp`, `logLogin_UserID`, `logLogin_status`, `logLogin_siteID`) VALUES (:dt, :userID, :status, :siteID)")->execute($log_login);
+                }
             }else{ // > 1 Site
                 $_SESSION["sn"] = array('count_site' => $rowc['count_site'], 'count_house' => '', 'siteID' =>'', 'account_status'=>$row_count["account_status"]);
             }
@@ -126,7 +149,7 @@ if ($mqtt->connect(true,NULL,$username,$password)) {
         ], JSON_UNESCAPED_UNICODE);
         exit();
     }
-
+    // =============================================
     if (isset($_POST['logout'])) {
         $decodedJson = json_decode(substr($data_mq, 2), true);
         $userID = $_SESSION['account_id'];

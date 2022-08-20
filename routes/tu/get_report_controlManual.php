@@ -91,18 +91,18 @@
                         <td class="text-center">'.$row[0].'</td>
                         <td class="text-center">'.$row[1].'</td>
                         <td class="text-center">'.$row[2].'</td>';
-                        if($colcount >= 3){ if($row[3] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
-                        if($colcount >= 4){ if($row[4] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
-                        if($colcount >= 5){ if($row[5] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
-                        if($colcount >= 6){ if($row[6] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
-                        if($colcount >= 7){ if($row[7] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
-                        if($colcount >= 8){ if($row[8] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
-                        if($colcount >= 9){ if($row[9] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
-                        if($colcount >= 10){ if($row[10] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
-                        if($colcount >= 11){ if($row[11] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
-                        if($colcount >= 12){ if($row[12] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
-                        if($colcount >= 13){ if($row[13] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
-                        if($colcount >= 14){ if($row[14] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
+                        if($colcount >= 4){ if($row[3] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
+                        if($colcount >= 5){ if($row[4] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
+                        if($colcount >= 6){ if($row[5] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
+                        if($colcount >= 7){ if($row[6] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
+                        if($colcount >= 8){ if($row[7] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
+                        if($colcount >= 9){ if($row[8] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
+                        if($colcount >= 10){ if($row[9] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
+                        if($colcount >= 11){ if($row[10] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
+                        if($colcount >= 12){ if($row[11] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
+                        if($colcount >= 13){ if($row[12] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
+                        if($colcount >= 14){ if($row[13] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
+                        if($colcount >= 15){ if($row[14] == 'ON'){ echo '<td class="text-center text-success">เปิดใช้งาน</td>'; }else { echo '<td class="text-center text-danger">ปิดใช้งาน</td>'; } }
                     echo '</tr>';
                 }
                 ?>
