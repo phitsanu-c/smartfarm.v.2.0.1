@@ -1365,7 +1365,7 @@
                 if($('.menu_config_auto').is(":hidden") == true){
                     swal({
                         title: 'ข้อผิดพลาด !',
-                        text: "กรุณาบ้นทึกหรือยกเลิกการตั้งค่าก่อน !!!",
+                        text: "กรุณาบันทึกหรือยกเลิกการตั้งค่าก่อน !!!",
                         type: 'warning',
                         allowOutsideClick: false,
                         confirmButtonColor: '#32CD32',
@@ -1409,7 +1409,7 @@
                 if($('#close_manual_cont').is(":hidden") == false){
                     swal({
                         title: 'ข้อผิดพลาด !',
-                        text: "กรุณาบ้นทึกหรือยกเลิกการตั้งค่าก่อน !!!",
+                        text: "กรุณาบันทึกหรือยกเลิกการตั้งค่าก่อน !!!",
                         type: 'warning',
                         allowOutsideClick: false,
                         confirmButtonColor: '#32CD32',

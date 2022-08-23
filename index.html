@@ -3566,6 +3566,7 @@
                                         var result = message.payloadString;
                                         var n_result = result.split('\r\n')
                                         // console.log(n_result);
+                                        // return false;
                                         var SW_drip1 = []
                                         var SW_drip2 = []
                                         var SW_drip3 = []
@@ -3579,95 +3580,95 @@
                                         var SW_spray = []
                                         var SW_shading = []
                                         for(var i=1; i<=6; i++){
-                                            if(config_cn['cn_status_1'] == 1){
+                                            // if(config_cn['cn_status_1'] == 1){
                                                 if(n_result[i+(i-1)].split('=')[1] != '99:99' && n_result[i+1+(i-1)].split('=')[1] != '99:99'){
                                                     SW_drip1.push({ sw:1, s:n_result[i+(i-1)].split('=')[1], e:n_result[i+1+(i-1)].split('=')[1] });
                                                 }else {
                                                     SW_drip1.push({ sw:0, s:'', e:'' })
                                                 }
-                                            }
-                                            if(config_cn['cn_status_2'] == 1){
+                                            // }
+                                            // if(config_cn['cn_status_2'] == 1){
                                                 if(n_result[i+13+(i-1)].split('=')[1] != '99:99' && n_result[i+14+(i-1)].split('=')[1] != '99:99'){
                                                     SW_drip2.push({ sw:1, s:n_result[i+13+(i-1)].split('=')[1], e:n_result[i+14+(i-1)].split('=')[1] });
                                                 }else {
                                                     SW_drip2.push({ sw:0, s:'', e:'' });
                                                 }
-                                            }
-                                            if(config_cn['cn_status_3'] == 1){
+                                            // }
+                                            // if(config_cn['cn_status_3'] == 1){
                                                 if(n_result[i+26+(i-1)].split('=')[1] != '99:99' && n_result[i+27+(i-1)].split('=')[1] != '99:99'){
                                                     SW_drip3.push({ sw:1, s:n_result[i+26+(i-1)].split('=')[1], e:n_result[i+27+(i-1)].split('=')[1] });
                                                 }else {
                                                     SW_drip3.push({ sw:0, s:'', e:'' });
                                                 }
-                                            }
-                                            if(config_cn['cn_status_4'] == 1){
+                                            // }
+                                            // if(config_cn['cn_status_4'] == 1){
                                                 if(n_result[i+39+(i-1)].split('=')[1] != '99:99' && n_result[i+40+(i-1)].split('=')[1] != '99:99'){
                                                     SW_drip4.push({ sw:1, s:n_result[i+39+(i-1)].split('=')[1], e:n_result[i+40+(i-1)].split('=')[1] });
                                                 }else {
                                                     SW_drip4.push({ sw:0, s:'', e:'' });
                                                 }
-                                            }
-                                            if(config_cn['cn_status_5'] == 1){
+                                            // }
+                                            // if(config_cn['cn_status_5'] == 1){
                                                 if(n_result[i+52+(i-1)].split('=')[1] != '99:99' && n_result[i+53+(i-1)].split('=')[1] != '99:99'){
                                                     SW_fan1.push({ sw:1, s:n_result[i+52+(i-1)].split('=')[1], e:n_result[i+53+(i-1)].split('=')[1] });
                                                 }else {
                                                     SW_fan1.push({ sw:0, s:'', e:'' });
                                                 }
-                                            }
-                                            if(config_cn['cn_status_6'] == 1){
+                                            // }
+                                            // if(config_cn['cn_status_6'] == 1){
                                                 if(n_result[i+65+(i-1)].split('=')[1] != '99:99' && n_result[i+66+(i-1)].split('=')[1] != '99:99'){
                                                     SW_fan2.push({ sw:1, s:n_result[i+65+(i-1)].split('=')[1], e:n_result[i+66+(i-1)].split('=')[1] });
                                                 }else {
                                                     SW_fan2.push({ sw:0, s:'', e:'' });
                                                 }
-                                            }
-                                            if(config_cn['cn_status_7'] == 1){
+                                            // }
+                                            // if(config_cn['cn_status_7'] == 1){
                                                 if(n_result[i+78+(i-1)].split('=')[1] != '99:99' && n_result[i+79+(i-1)].split('=')[1] != '99:99'){
                                                     SW_fan3.push({ sw:1, s:n_result[i+78+(i-1)].split('=')[1], e:n_result[i+79+(i-1)].split('=')[1] });
                                                 }else {
                                                     SW_fan3.push({ sw:0, s:'', e:'' });
                                                 }
-                                            }
-                                            if(config_cn['cn_status_8'] == 1){
+                                            // }
+                                            // if(config_cn['cn_status_8'] == 1){
                                                 if(n_result[i+91+(i-1)].split('=')[1] != '99:99' && n_result[i+92+(i-1)].split('=')[1] != '99:99'){
                                                     SW_fan4.push({ sw:1, s:n_result[i+91+(i-1)].split('=')[1], e:n_result[i+92+(i-1)].split('=')[1] });
                                                 }else {
                                                     SW_fan4.push({ sw:0, s:'', e:'' });
                                                 }
-                                            }
-                                            if(config_cn['cn_status_9'] == 1){
+                                            // }
+                                            // if(config_cn['cn_status_9'] == 1){
                                                 if(n_result[i+104+(i-1)].split('=')[1] != '99:99' && n_result[i+105+(i-1)].split('=')[1] != '99:99'){
                                                     SW_foggy1.push({ sw:1, s:n_result[i+104+(i-1)].split('=')[1], e:n_result[i+105+(i-1)].split('=')[1] });
                                                 }else {
                                                     SW_foggy1.push({ sw:0, s:'', e:'' });
                                                 }
-                                            }
-                                            if(config_cn['cn_status_10'] == 1){
+                                            // }
+                                            // if(config_cn['cn_status_10'] == 1){
                                                 if(n_result[i+117+(i-1)].split('=')[1] != '99:99' && n_result[i+118+(i-1)].split('=')[1] != '99:99'){
                                                     SW_foggy2.push({ sw:1, s:n_result[i+117+(i-1)].split('=')[1], e:n_result[i+118+(i-1)].split('=')[1] });
                                                 }else {
                                                     SW_foggy2.push({ sw:0, s:'', e:'' });
                                                 }
-                                            }
-                                            if(config_cn['cn_status_11'] == 1){
+                                            // }
+                                            // if(config_cn['cn_status_11'] == 1){
                                                 if(n_result[i+130+(i-1)].split('=')[1] != '99:99' && n_result[i+131+(i-1)].split('=')[1] != '99:99'){
                                                     SW_spray.push({ sw:1, s:n_result[i+130+(i-1)].split('=')[1], e:n_result[i+131+(i-1)].split('=')[1] });
                                                 }else {
                                                     SW_spray.push({ sw:0, s:'', e:'' });
                                                 }
-                                            }
-                                            if(config_cn['cn_status_12'] == 1){
+                                            // }
+                                            // if(config_cn['cn_status_12'] == 1){
                                                 if(n_result[i+143+(i-1)].split('=')[1] != '99:99' && n_result[i+144+(i-1)].split('=')[1] != '99:99'){
                                                     SW_shading.push({ sw:1, s:n_result[i+143+(i-1)].split('=')[1], e:n_result[i+144+(i-1)].split('=')[1] });
                                                 }else {
                                                     SW_shading.push({ sw:0, s:'', e:'' });
                                                 }
-                                            }
+                                            // }
                                         }
                                         // console.log(SW_spray);
                                         // return false
                                         var data_auto = {};
-                                        if(config_cn['cn_status_1'] == 1){
+                                        // if(config_cn['cn_status_1'] == 1){
                                             $.extend(data_auto, {
                                                 'load_1':{
                                                     'load_st_1':SW_drip1[0].sw,
@@ -3690,8 +3691,8 @@
                                                     'load_e_6':SW_drip1[5].e
                                                 }
                                             });
-                                        }
-                                        if(config_cn['cn_status_2'] == 1){
+                                        // }
+                                        // if(config_cn['cn_status_2'] == 1){
                                             $.extend(data_auto, {
                                                 'load_2':{
                                                     'load_st_1':SW_drip2[0].sw,
@@ -3714,8 +3715,8 @@
                                                     'load_e_6':SW_drip2[5].e
                                                 }
                                             });
-                                        }
-                                        if(config_cn['cn_status_3'] == 1){
+                                        // }
+                                        // if(config_cn['cn_status_3'] == 1){
                                             $.extend(data_auto, {
                                                 'load_3':{
                                                     'load_st_1':SW_drip3[0].sw,
@@ -3738,8 +3739,8 @@
                                                     'load_e_6':SW_drip3[5].e
                                                 }
                                             });
-                                        }
-                                        if(config_cn['cn_status_4'] == 1){
+                                        // }
+                                        // if(config_cn['cn_status_4'] == 1){
                                             $.extend(data_auto, {
                                                 'load_4':{
                                                     'load_st_1':SW_drip4[0].sw,
@@ -3762,8 +3763,8 @@
                                                     'load_e_6':SW_drip4[5].e
                                                 }
                                             });
-                                        }
-                                        if(config_cn['cn_status_5'] == 1){
+                                        // }
+                                        // if(config_cn['cn_status_5'] == 1){
                                             $.extend(data_auto, {
                                                 'load_5':{
                                                     'load_st_1':SW_fan1[0].sw,
@@ -3786,8 +3787,8 @@
                                                     'load_e_6':SW_fan1[5].e
                                                 }
                                             });
-                                        }
-                                        if(config_cn['cn_status_6'] == 1){
+                                        // }
+                                        // if(config_cn['cn_status_6'] == 1){
                                             $.extend(data_auto, {
                                                 'load_6':{
                                                     'load_st_1':SW_fan2[0].sw,
@@ -3810,8 +3811,8 @@
                                                     'load_e_6':SW_fan2[5].e
                                                 }
                                             });
-                                        }
-                                        if(config_cn['cn_status_7'] == 1){
+                                        // }
+                                        // if(config_cn['cn_status_7'] == 1){
                                             $.extend(data_auto, {
                                                 'load_7':{
                                                     'load_st_1':SW_fan3[0].sw,
@@ -3834,8 +3835,8 @@
                                                     'load_e_6':SW_fan3[5].e
                                                 }
                                             });
-                                        }
-                                        if(config_cn['cn_status_8'] == 1){
+                                        // }
+                                        // if(config_cn['cn_status_8'] == 1){
                                             $.extend(data_auto, {
                                                 'load_8':{
                                                     'load_st_1':SW_fan4[0].sw,
@@ -3858,8 +3859,8 @@
                                                     'load_e_6':SW_fan4[5].e
                                                 }
                                             });
-                                        }
-                                        if(config_cn['cn_status_9'] == 1){
+                                        // }
+                                        // if(config_cn['cn_status_9'] == 1){
                                             $.extend(data_auto, {
                                                 'load_9':{
                                                     'load_st_1':SW_foggy1[0].sw,
@@ -3882,8 +3883,8 @@
                                                     'load_e_6':SW_foggy1[5].e
                                                 }
                                             });
-                                        }
-                                        if(config_cn['cn_status_10'] == 1){
+                                        // }
+                                        // if(config_cn['cn_status_10'] == 1){
                                             $.extend(data_auto, {
                                                 'load_10':{
                                                     'load_st_1':SW_foggy2[0].sw,
@@ -3906,8 +3907,8 @@
                                                     'load_e_6':SW_foggy2[5].e
                                                 }
                                             });
-                                        }
-                                        if(config_cn['cn_status_11'] == 1){
+                                        // }
+                                        // if(config_cn['cn_status_11'] == 1){
                                             $.extend(data_auto, {
                                                 'load_11':{
                                                     'load_st_1':SW_spray[0].sw,
@@ -3930,8 +3931,8 @@
                                                     'load_e_6':SW_spray[5].e
                                                 }
                                             });
-                                        }
-                                        if(config_cn['cn_status_12'] == 1){
+                                        // }
+                                        // if(config_cn['cn_status_12'] == 1){
                                             $.extend(data_auto, {
                                                 'load_12':{
                                                     'load_st_1':SW_shading[0].sw,
@@ -3954,7 +3955,7 @@
                                                     'load_e_6':SW_shading[5].e
                                                 }
                                             });
-                                        }
+                                        // }
                                         // console.log(data_auto);
                                         // console.log(JSON.stringify(data_auto) );
                                         $('#val_sw_auto').val(JSON.stringify(data_auto));

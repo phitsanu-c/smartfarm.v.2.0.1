@@ -83,44 +83,74 @@
             $array[] = '[shading]';
         }
 
-        if($parseJSON['load_'.$i]['load_st_1'] == 1){
-            $array[] = 'S_1='.$parseJSON['load_'.$i]['load_s_1'];
-            $array[] = 'E_1='.$parseJSON['load_'.$i]['load_e_1'];
+        if(isset($parseJSON['load_'.$i]['load_st_1'])){
+            if($parseJSON['load_'.$i]['load_st_1'] == 1){
+                $array[] = 'S_1='.$parseJSON['load_'.$i]['load_s_1'];
+                $array[] = 'E_1='.$parseJSON['load_'.$i]['load_e_1'];
+            }else {
+                $array[] = 'S_1=99:99';
+                $array[] = 'E_1=99:99';
+            }
         }else {
             $array[] = 'S_1=99:99';
             $array[] = 'E_1=99:99';
         }
-        if($parseJSON['load_'.$i]['load_st_2'] == 1){
-            $array[] = 'S_2='.$parseJSON['load_'.$i]['load_s_2'];
-            $array[] = 'E_2='.$parseJSON['load_'.$i]['load_e_2'];
+        if(isset($parseJSON['load_'.$i]['load_st_2'])){
+            if($parseJSON['load_'.$i]['load_st_2'] == 1){
+                $array[] = 'S_2='.$parseJSON['load_'.$i]['load_s_2'];
+                $array[] = 'E_2='.$parseJSON['load_'.$i]['load_e_2'];
+            }else {
+                $array[] = 'S_2=99:99';
+                $array[] = 'E_2=99:99';
+            }
         }else {
             $array[] = 'S_2=99:99';
             $array[] = 'E_2=99:99';
         }
-        if($parseJSON['load_'.$i]['load_st_3'] == 1){
-            $array[] = 'S_3='.$parseJSON['load_'.$i]['load_s_3'];
-            $array[] = 'E_3='.$parseJSON['load_'.$i]['load_e_3'];
+        if(isset($parseJSON['load_'.$i]['load_st_3'])){
+            if($parseJSON['load_'.$i]['load_st_3'] == 1){
+                $array[] = 'S_3='.$parseJSON['load_'.$i]['load_s_3'];
+                $array[] = 'E_3='.$parseJSON['load_'.$i]['load_e_3'];
+            }else {
+                $array[] = 'S_3=99:99';
+                $array[] = 'E_3=99:99';
+            }
         }else {
             $array[] = 'S_3=99:99';
             $array[] = 'E_3=99:99';
         }
-        if($parseJSON['load_'.$i]['load_st_4'] == 1){
-            $array[] = 'S_4='.$parseJSON['load_'.$i]['load_s_4'];
-            $array[] = 'E_4='.$parseJSON['load_'.$i]['load_e_4'];
+        if(isset($parseJSON['load_'.$i]['load_st_4'])){
+            if($parseJSON['load_'.$i]['load_st_4'] == 1){
+                $array[] = 'S_4='.$parseJSON['load_'.$i]['load_s_4'];
+                $array[] = 'E_4='.$parseJSON['load_'.$i]['load_e_4'];
+            }else {
+                $array[] = 'S_4=99:99';
+                $array[] = 'E_4=99:99';
+            }
         }else {
             $array[] = 'S_4=99:99';
             $array[] = 'E_4=99:99';
         }
-        if($parseJSON['load_'.$i]['load_st_5'] == 1){
-            $array[] = 'S_5='.$parseJSON['load_'.$i]['load_s_5'];
-            $array[] = 'E_5='.$parseJSON['load_'.$i]['load_e_5'];
+        if(isset($parseJSON['load_'.$i]['load_st_5'])){
+            if($parseJSON['load_'.$i]['load_st_5'] == 1){
+                $array[] = 'S_5='.$parseJSON['load_'.$i]['load_s_5'];
+                $array[] = 'E_5='.$parseJSON['load_'.$i]['load_e_5'];
+            }else {
+                $array[] = 'S_5=99:99';
+                $array[] = 'E_5=99:99';
+            }
         }else {
             $array[] = 'S_5=99:99';
             $array[] = 'E_5=99:99';
         }
-        if($parseJSON['load_'.$i]['load_st_6'] == 1){
-            $array[] = 'S_6='.$parseJSON['load_'.$i]['load_s_6'];
-            $array[] = 'E_6='.$parseJSON['load_'.$i]['load_e_6'];
+        if(isset($parseJSON['load_'.$i]['load_st_6'])){
+            if($parseJSON['load_'.$i]['load_st_6'] == 1){
+                $array[] = 'S_6='.$parseJSON['load_'.$i]['load_s_6'];
+                $array[] = 'E_6='.$parseJSON['load_'.$i]['load_e_6'];
+            }else {
+                $array[] = 'S_6=99:99';
+                $array[] = 'E_6=99:99';
+            }
         }else {
             $array[] = 'S_6=99:99';
             $array[] = 'E_6=99:99';
@@ -128,6 +158,7 @@
     }
     // $array2 = implode('\r\n',$array);
     // echo $array2;
+    // echo json_encode($parseJSON);
     // exit();
     $sql = "INSERT INTO $tb_name (`load_sn`, `load_user`,
                     `load_st_1`, `load_st_2`, `load_st_3`, `load_st_4`, `load_st_5`, `load_st_6`,

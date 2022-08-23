@@ -50,6 +50,13 @@
                                 </a>
                             </li>
                         <?php } ?>
+                        <?php if ($_SESSION["sn"]['account_status'] == 1) {?>
+                            <li class="nav-item6" role="presentation">
+                                <a class="nav-link text-center" data-bs-toggle="pill" href="#p-ct" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
+                                    ตั้งค่าคอนโทรลโรงเรือน
+                                </a>
+                            </li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>
@@ -316,6 +323,22 @@
                                 </div>
                             </div>
                             <div id="user_report"></div>
+                        </div>
+                    <?php } ?>
+                    <?php if ($_SESSION["sn"]['account_status'] == 1) {?>
+                        <div class="tab-pane fade" id="p-ct" role="tabpanel">
+                            <select class="cont_sel" name="">
+                                <option value="">เลือก</option>
+                                <option value="TUSMT006">โรง 1 โซนหน้า</option>
+                                <option value="TUSMT007">โรง 1 โซนหลัง</option>
+                                <option value="TUSMT003">โรง 2</option>
+                                <option value="TUSMT004">โรง 3</option>
+                                <option value="TUSMT005">โรง 4</option>
+                                <option value="TUSMT001">โรง 5</option>
+                                <option value="TUSMT002">โรง 6</option>
+                                <option value="TUSMT008">โรง Test </option>
+                            </select>
+                            <div id="get_set_cont"></div>
                         </div>
                     <?php } ?>
                 </div>
@@ -2408,4 +2431,22 @@
             }
         });
     }
+</script>
+<script type="text/javascript">
+    $('.cont_sel').change(function() {
+        // var sn = $(this).val();
+        if($(this).val() !== ''){
+            $.ajax({
+                url: "routes/tu/get_page_profile_control.php",
+                method: "post",
+                data: {
+                    sn: $(this).val()
+                },
+                // dataType: "json",
+                success: function(res) {
+                    $('#get_set_cont').html(res);
+                }
+            });
+        }
+    });
 </script>
