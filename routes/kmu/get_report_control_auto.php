@@ -1,5 +1,5 @@
 <?php
-    require "../connectdb.php";
+    require "../connectdb2.php";
 
     $house_master = $_POST["house_master"];
     $config_cn = $_POST["config_cn"];

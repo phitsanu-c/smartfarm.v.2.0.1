@@ -12,11 +12,11 @@ $row_9 = $dbcon->query("SELECT * FROM tbn_map_img WHERE map_sn = '$house_master'
 
 for($i = 1; $i <= 40; $i++){
     // if($row_2[($i+1)] == 1){
-        $dashStatus[$i] = $row_2[($i+1)];
-        $dashName[$i] = $row_3[($i+41)];
-        $dashName2[$i] = $row_3[($i+1)];
+        $dashStatus[$i] = intval($row_2[($i+1)]);
+        $dashName[$i] = $row_3[($i+41)]; // บน
+        $dashName2[$i] = $row_3[($i+1)];  // ล่าง
         $dashSncanel[$i] = $row_4[($i+1)];
-        $dashMode[$i] = $row_5[($i+1)];
+        $dashMode[$i] = intval($row_5[($i+1)]);
         $imgMap[$i] = $row_9[($i+1)];
     // }
 }
@@ -32,9 +32,9 @@ $row_7 = $dbcon->query("SELECT * FROM tbn_conttrolname WHERE conttrolname_sn = '
 $row_8 = $dbcon->query("SELECT * FROM tbn_controlmode WHERE controlmode_sn = '$house_master'")->fetch();
 for($i = 1; $i <= 12; $i++){
     // if($row_6[($i+1)] == 1){
-        $controlstatus[$i] = $row_6[($i+1)];
+        $controlstatus[$i] = intval($row_6[($i+1)]);
         $conttrolname[$i] = $row_7[($i+1)];
-        $controlcanel[$i] = $row_8[($i+1)];
+        $controlcanel[$i] = intval($row_8[($i+1)]);
     // }
 }
 

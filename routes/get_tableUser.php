@@ -87,3 +87,158 @@
         </tbody>
     </table>
 </div>
+
+<script type="text/javascript">
+    $(".u_edit").click(function(){
+        var houseID = $(this).attr('houseID');
+        $(".title_mUser").html("แก้ไขผู้ใช้งาน");
+        $(".us_user_sel").show();
+        $(".use_site").val($(".sel_main_site").val());
+        $(".use_house").load("routes/op_house.php?siteID="+$(".sel_main_site").val()+'&us=1').attr("disabled",true);
+        setTimeout(function() {
+            $(".use_house").val(houseID);
+            // alert(houseID)
+        }, 500);
+        $(".use_userID").val("0").removeClass("is-invalid");
+        $(".us_img_user").hide();
+        $('.user_edit').hide();
+        if($(this).attr('img') === ''){
+            $('.u_img').attr("src", "public/images/users/user.png")
+        }else {
+            $('.u_img').attr("src", "public/images/users/"+$(this).attr('img'))
+        }
+
+        $("#u_img").val("");
+        $(".mode_insert").val("edit_user");
+        $(".userST_id").val($(this).attr('userST_id'));
+
+        $(".u_site").val($(".sel_main_site").val());
+        $(".u_house").removeClass("is-invalid").val("0").attr("disabled",false);
+        $(".u_user").removeClass("is-invalid").val($(this).attr('name')).attr("disabled",true);
+        $(".us_pass").hide();
+        $(".u_pass").removeClass("is-invalid").val("");
+        $(".u_email").removeClass("is-invalid").val($(this).attr('email')).attr("disabled",true);
+        $(".u_tel").val($(this).attr('tel')).attr("disabled",true);
+        $(".u_status").val($(this).attr('status')).attr("disabled",false);
+        $("#modal_User").modal("show");
+    });
+
+    $(".delete_user").click(function(){
+        var img = $(this).attr("img");
+        var user_id = $(this).attr("user_id");
+        swal({
+            title: "ลบผู้ใช้งานออกจากโรงเรือน !",
+            html: "คุณต้องการที่จะลบผู้ใช้งาน : <b>"+$(this).attr("name")+"</b><br> ออกจากโรงเรือน : <b>"+$(this).attr('house')+"</b> หรือไม่ ?",
+            type: 'warning',
+            allowOutsideClick: false,
+            showCancelButton: true,
+            confirmButtonColor: '#00CC33',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ใช่',
+            cancelButtonText: 'ยกเลิก'
+            }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: 'routes/save_setting.php',
+                    type: 'POST',
+                    data: {
+                        userST_id : $(this).attr('userST_id'),
+                        user_id : user_id,
+                        mode_insert : "delete_userST",
+                        // img : $(this).attr("img")
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.status == "Insert_Error") {
+                            swal({
+                                title: 'เกิดข้อผลิดพลาด !',
+                                text: "บันทึกไม่สำเร็จ !!!",
+                                type: 'error',
+                                allowOutsideClick: false,
+                                confirmButtonColor: '#32CD32'
+                            }).then((result) => {
+                                if (result.value) {
+                                    location.reload();
+                                }
+                            });
+                            return false;
+                        }
+                        if (data.status == "Delete_success"){
+                            $("#user_access").load("routes/get_tableUser.php?siteID="+$(".sel_main_site").val() );
+                            if(data.count_userST === 0){
+                                swal({
+                                    title: 'ลบข้อมูลสำเร็จ.',
+                                    // text: "" + sw_name + " ?",
+                                    type: 'success',
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: '#32CD32'
+                                }).then((result) => {
+                                    if (result.value) {
+                                        swal({
+                                            title: 'ลบผู้ใช้งานจากระบบ !',
+                                            html: "คุณต้องการที่จะลบผู้ใช้งาน : <b>"+$(this).attr("name")+"</b><br> ออกจากระบบหรือไม่ ?",
+                                            type: 'warning',
+                                            allowOutsideClick: false,
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#00CC33',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'ใช่',
+                                            cancelButtonText: 'ยกเลิก'
+                                            }).then((result) => {
+                                            if (result.value) {
+                                                $.ajax({
+                                                    url: 'routes/save_setting.php',
+                                                    type: 'POST',
+                                                    data: {
+                                                        user_id : user_id,
+                                                        mode_insert : "delete_account",
+                                                        img : img
+                                                    },
+                                                    dataType: 'json',
+                                                    success: function(data) {
+                                                        if (data.status == "Insert_Error") {
+                                                            swal({
+                                                                title: 'เกิดข้อผลิดพลาด !',
+                                                                text: "บันทึกไม่สำเร็จ !!!",
+                                                                type: 'error',
+                                                                allowOutsideClick: false,
+                                                                confirmButtonColor: '#32CD32'
+                                                            }).then((result) => {
+                                                                if (result.value) {
+                                                                    location.reload();
+                                                                }
+                                                            });
+                                                            return false;
+                                                        }
+                                                        if (data.status == "Delete_success"){
+                                                            swal({
+                                                                title: 'ลบข้อมูลสำเร็จ.',
+                                                                // text: "" + sw_name + " ?",
+                                                                type: 'success',
+                                                                allowOutsideClick: false,
+                                                                confirmButtonColor: '#32CD32'
+                                                            });
+                                                        }
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                            else {
+                                swal({
+                                    title: 'ลบข้อมูลสำเร็จ.',
+                                    // text: "" + sw_name + " ?",
+                                    type: 'success',
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: '#32CD32'
+                                });
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>

@@ -1,0 +1,162 @@
+<script type="text/javascript">
+    if(time_stamp < 18:00 && time_stamp > 07:00){
+        // เริ่ม 07:00 - 18:00
+        if(Soil < Soil_min){
+            ON Dripper
+            Status_Soil = ON
+        }else if(Soil > Soil_max){
+            OFF Dripper
+            Status_Soil = OFF
+        }else { // Soil > soil_min && Soil < Soil_max
+            if(Status_Soil == ON){
+                Dripper = ON
+            }else {
+                Dripper = OFF
+            }
+        }
+        //  Hum
+        if(Soil <= Soil_max){
+            if(Hum < Hum_min){
+                ON Foggy 4 ทาง
+                OFF Spray 0.3 mm.
+                Status_Hum4 = ON
+                Status_Hum03 = OFF
+            }else if(Hum > Hum_max){
+                OFF Foggy 4 ทาง
+                OFF Spray 0.3 mm.
+                Status_Hum4 = OFF
+                Status_Hum03 = OFF
+            }else {
+                if(Hum > (Hum_max - 10%)){
+                    OFF Foggy
+                    ON Spray
+                    Status_Hum4 = OFF
+                    Status_Hum03 = ON
+                }else {
+                    if(Status_Foggy4 == ON){
+                        ON Foggy 4 ทาง
+                    }else {
+                        OFF Foggy 4 ทาง
+                    }
+                    if (Status_Spray03 == ON) {
+                        ON Spray 0.3 mm.
+                    }else {
+                        Status_Hum03 = OFF
+                    }
+                }
+            }
+        }
+        else { // Soil > Soil_max
+            OFF Foggy 4 ทาง
+            OFF Spray 0.3 mm.
+            Status_Hum4 = OFF
+            Status_Hum03 = OFF
+        }
+    }
+
+    if(Light < Light_min){ // แสงน้อยกว่า min เปิดรับแสง
+        ON Slan
+        Status_Slan = ON
+    }else if(Light > Light_max){ // แสงมากกว่า max ให้ปิดรับแสง
+        OFF Slan
+        Status_Slan = OFF
+    }else { // Light > Light_min && Light < Light_max // ถ้าแสง > min && < max
+        if(Status_Slan == ON){
+            ON Slan
+        }else {
+            OFF Slan
+        }
+    }
+
+    if(Temp > Temp_max){
+        ON Fan
+        Start_time_on_fan
+    }else if (Temp <= Temp_min) {
+        Fan = OFF
+        Start_time_on_fan = ''
+    }else {
+        if(Start_time_on_fan == ''){
+            Fan = OFF
+        }else {
+            Fan = ON
+        }
+    }
+
+    <!-- --------------------------- -->
+    // if(Fan = ON){
+    //     if(Start_time_on_fan != ''){
+    //         if(Start_time_on_fan > (Time_stamp + 5 minute) ){
+    //             if(Temp > Temp_min){
+    //                 if(Soil <= Soil_max){
+    //                     if(Hum < Hum_min){
+    //                         ON Foggy 4 ทาง
+    //                         OFF Spray 0.3 mm.
+    //                         Status_Hum4 = ON
+    //                         Status_Hum03 = OFF
+    //                     }else if(Hum > Hum_max){
+    //                         OFF Foggy 4 ทาง
+    //                         OFF Spray 0.3 mm.
+    //                         Status_Hum4 = OFF
+    //                         Status_Hum03 = OFF
+    //                     }else {
+    //                         if(Hum > (Hum_max - 10%)){
+    //                             OFF Foggy
+    //                             ON Spray
+    //                             Status_Hum4 = OFF
+    //                             Status_Hum03 = ON
+    //                         }else {
+    //                             if(Status_Foggy4 == ON){
+    //                                 ON Foggy 4 ทาง
+    //                             }else {
+    //                                 OFF Foggy 4 ทาง
+    //                             }
+    //                             if (Status_Spray03 == ON) {
+    //                                 ON Spray 0.3 mm.
+    //                             }else {
+    //                                 Status_Hum03 = OFF
+    //                             }
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    // else { // พัดลมปิดอยู่
+    //     if(Soil < Soil_min){
+    //         ON Dripper
+    //         min = 20 max = 80
+    //         if(Hum < Hum_min){
+    //             ON Foggy
+    //             OFF Spray 0.3 mm.
+    //         }else if(Hum ที่วัด >= (Hum_max - 10) ){ // min กับ max ต้องห่างกันไม่น้อยกว่า 15
+    //             OFF Foggy 4 ทาง
+    //             ON Spray 0.3 mm.
+    //         }else if (Hum >= Hum_max){
+    //             OFF Foggy 4 ทาง
+    //             OFF Spray 0.3 mm.
+    //         }
+    //     }else if (Soil >= Soil_max) {
+    //         OFF Dripper
+    //         OFF Foggy 4 ทาง
+    //         OFF Spray 0.3 mm.
+    //     }else { // Soil > Soil_min && Soil < Soil_max
+    //         min = 20 max = 80
+    //         if(Hum < Hum_min){
+    //             ON Foggy
+    //             OFF Spray 0.3 mm.
+    //         }else if(Hum ที่วัด >= (Hum_max - 10) ){ // min กับ max ต้องห่างกันไม่น้อยกว่า 15
+    //             OFF Foggy 4 ทาง
+    //             ON Spray 0.3 mm.
+    //         }else if (Hum >= Hum_max){
+    //             OFF Foggy 4 ทาง
+    //             OFF Spray 0.3 mm.
+    //         }
+    //     }
+    //     if(Light > Light_Max){
+    //         OFF Slan // ปิดรับแสง
+    //     }else {
+    //         ON Slan
+    //     }
+    // }
+</script>

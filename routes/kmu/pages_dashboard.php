@@ -275,29 +275,29 @@
                 </div>
                 <div class="row">
                     <?php for($i = 1; $i <= 5; $i++){
-                        if($config_cn['cn_status_'.$i] == 1){ ?>
-                            <div class="col-lg-3 col-xl-3 col-sm-12">
-                                <div class="card-body border radius-10 shadow-none mb-3">
-                                    <div class="text-center text-responsive2">
-                                        <div class="d-flex"><b>
-                                            <?php
-                                                if($i <= 2){echo 'น้ำหยด '.$i;}
-                                                // elseif($i > 2 && $i <= 4){echo 'พัดลม '.($i-4);}
-                                                elseif($i == 3){echo 'พ่นหมอกในโรงเรือน';}
-                                                elseif($i == 4){echo 'สปริสปริงเกอร์หลังคา';}
-                                                elseif($i == 5){echo 'ม่านพรางแสง';}
-                                            ?></b>
-                                            <div class="ms-auto">
-                                                <a href="javascript:void(0)" class="ico-chart memu_control" style="color: rgb(141, 151, 173);"><i class="bx bx-cog"></i></a>
-                                            </div>
+                        // if($config_cn['cn_status_'.$i] == 1){ ?>
+                        <div class="col-lg-3 col-xl-3 col-sm-12">
+                            <div class="card-body border radius-10 shadow-none mb-3">
+                                <div class="text-center text-responsive2">
+                                    <div class="d-flex"><b>
+                                        <?php
+                                            if($i <= 2){echo 'น้ำหยด '.$i;}
+                                            // elseif($i > 2 && $i <= 4){echo 'พัดลม '.($i-4);}
+                                            elseif($i == 3){echo 'พ่นหมอกในโรงเรือน';}
+                                            elseif($i == 4){echo 'สปริสปริงเกอร์หลังคา';}
+                                            elseif($i == 5){echo 'ม่านพรางแสง';}
+                                        ?></b>
+                                        <div class="ms-auto">
+                                            <a href="javascript:void(0)" class="ico-chart memu_control" style="color: rgb(141, 151, 173);"><i class="bx bx-cog"></i></a>
                                         </div>
                                     </div>
-                                    <div class="text-center">
-                                        <img class="dash_img_con_<?= $i ?>" style="width:15vh">
-                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <img class="dash_img_con_<?= $i ?>" style="width:15vh">
                                 </div>
                             </div>
-                        <?php }
+                        </div>
+                        <?php //}
                     } ?>
                 </div>
             </div>
@@ -468,8 +468,8 @@
 <script src="dist/plugin/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider-init.js"></script> -->
 
 <script>
-var house_master = '<?= $s_master["house_master"] ?>';
-var user = '<?= $account_user ?>';
+    var house_master = '<?= $s_master["house_master"] ?>';
+    var user = '<?= $account_user ?>';
     // alert(user)
     $('.memu_control').click(function () {
         $(".memu_dash").show().addClass("mm-active");

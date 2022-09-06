@@ -28,9 +28,9 @@
     $count_columns = count($config_cn[2]);
 
     for($i=0; $i < $count_columns; $i++){
-        if ($config_cn[3][$i] == 4 || $config_cn[3][$i] == 5) {
+        if ($config_cn[3][$i] == 4) {
             $channel[] = 'round('.$config_cn[1][$i].', 1) AS data_cn'.($i+1);
-        } elseif ($config_cn[3][$i] == 6 || $config_cn[3][$i] == 7) {
+        } elseif ($config_cn[3][$i] == 5) {
             $channel[] = 'round('.$config_cn[1][$i].'/54, 1) AS data_cn'.($i+1);
         } else {
             $channel[] = 'round('.$config_cn[1][$i].', 1) AS data_cn'.($i+1);

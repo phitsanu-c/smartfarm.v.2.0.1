@@ -8,13 +8,13 @@
     $house_master5 = 'TUSMT005';
     $house_master6 = 'TUSMT001';
     $house_master7 = 'TUSMT002';
-    $row_1 = $dbcon->query("SELECT * FROM tbn_status_sn INNER JOIN tbn_house ON tbn_status_sn.sn_status_an = tbn_house.house_master WHERE tbn_status_sn.sn_status_an = '$house_master1'")->fetch();
-    $row_2 = $dbcon->query("SELECT * FROM tbn_status_sn INNER JOIN tbn_house ON tbn_status_sn.sn_status_an = tbn_house.house_master WHERE tbn_status_sn.sn_status_an = '$house_master2'")->fetch();
-    $row_3 = $dbcon->query("SELECT * FROM tbn_status_sn INNER JOIN tbn_house ON tbn_status_sn.sn_status_an = tbn_house.house_master WHERE tbn_status_sn.sn_status_an = '$house_master3'")->fetch();
-    $row_4 = $dbcon->query("SELECT * FROM tbn_status_sn INNER JOIN tbn_house ON tbn_status_sn.sn_status_an = tbn_house.house_master WHERE tbn_status_sn.sn_status_an = '$house_master4'")->fetch();
-    $row_5 = $dbcon->query("SELECT * FROM tbn_status_sn INNER JOIN tbn_house ON tbn_status_sn.sn_status_an = tbn_house.house_master WHERE tbn_status_sn.sn_status_an = '$house_master5'")->fetch();
-    $row_6 = $dbcon->query("SELECT * FROM tbn_status_sn INNER JOIN tbn_house ON tbn_status_sn.sn_status_an = tbn_house.house_master WHERE tbn_status_sn.sn_status_an = '$house_master6'")->fetch();
-    $row_7 = $dbcon->query("SELECT * FROM tbn_status_sn INNER JOIN tbn_house ON tbn_status_sn.sn_status_an = tbn_house.house_master WHERE tbn_status_sn.sn_status_an = '$house_master7'")->fetch();
+    $row_1 = $dbcon->query("SELECT * FROM tbn_status_sn INNER JOIN tbn_house ON tbn_status_sn.sn_status_sn = tbn_house.house_master WHERE tbn_status_sn.sn_status_sn = '$house_master1'")->fetch();
+    $row_2 = $dbcon->query("SELECT * FROM tbn_status_sn INNER JOIN tbn_house ON tbn_status_sn.sn_status_sn = tbn_house.house_master WHERE tbn_status_sn.sn_status_sn = '$house_master2'")->fetch();
+    $row_3 = $dbcon->query("SELECT * FROM tbn_status_sn INNER JOIN tbn_house ON tbn_status_sn.sn_status_sn = tbn_house.house_master WHERE tbn_status_sn.sn_status_sn = '$house_master3'")->fetch();
+    $row_4 = $dbcon->query("SELECT * FROM tbn_status_sn INNER JOIN tbn_house ON tbn_status_sn.sn_status_sn = tbn_house.house_master WHERE tbn_status_sn.sn_status_sn = '$house_master4'")->fetch();
+    $row_5 = $dbcon->query("SELECT * FROM tbn_status_sn INNER JOIN tbn_house ON tbn_status_sn.sn_status_sn = tbn_house.house_master WHERE tbn_status_sn.sn_status_sn = '$house_master5'")->fetch();
+    $row_6 = $dbcon->query("SELECT * FROM tbn_status_sn INNER JOIN tbn_house ON tbn_status_sn.sn_status_sn = tbn_house.house_master WHERE tbn_status_sn.sn_status_sn = '$house_master6'")->fetch();
+    $row_7 = $dbcon->query("SELECT * FROM tbn_status_sn INNER JOIN tbn_house ON tbn_status_sn.sn_status_sn = tbn_house.house_master WHERE tbn_status_sn.sn_status_sn = '$house_master7'")->fetch();
 ?>
 <div class="page-content">
     <!--breadcrumb-->
@@ -568,7 +568,7 @@
         $('.val_start').on('apply.daterangepicker', function(ev, picker) {
             $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm'));
             if($('.val_end').val() != ''){
-                if(moment($(this).val()).format('YYYY-MM-DD') < moment($('.val_end').val()).add(-31, 'days').format('YYYY-MM-DD')) {
+                if(moment($(this).val()).format('YYYY-MM-DD HH:mm') < moment($('.val_end').val()).add(-31, 'days').format('YYYY-MM-DD HH:mm')) {
                     Swal({
                         type: "warning",
                         html: "เลือกวันได้สูงสุด<b> ไม่เกิน 31</b> วัน/ครั้ง",
@@ -577,7 +577,7 @@
                     });
                     $(this).val('').addClass('is-invalid');
                     return false;
-                }else if(moment($(this).val()).format('YYYY-MM-DD') >= moment($('.val_end').val()).format('YYYY-MM-DD')) {
+                }else if(moment($(this).val()).format('YYYY-MM-DD HH:mm') >= moment($('.val_end').val()).format('YYYY-MM-DD HH:mm')) {
                     Swal({
                         type: "warning",
                         html: "เวลาเริ่มต้น <b>ต้องน้อยกว่า</b> เวลาสิ้นสุด",
@@ -598,7 +598,7 @@
             $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm'));
             // console.log(moment($(this).val()).format('YYYY-MM-DD') +' ++ '+moment($('.val_start').val()).format('YYYY-MM-DD') )
             if($('.val_start').val() != ''){
-                if(moment($(this).val()).format('YYYY-MM-DD') > moment($('.val_start').val()).add(31, 'days').format('YYYY-MM-DD')) {
+                if(moment($(this).val()).format('YYYY-MM-DD HH:mm') > moment($('.val_start').val()).add(31, 'days').format('YYYY-MM-DD HH:mm')) {
                     Swal({
                         type: "warning",
                         html: "เลือกวันได้สูงสุด<b> ไม่เกิน 31</b> วัน/ครั้ง",
@@ -608,7 +608,7 @@
                     $(this).val('').addClass('is-invalid');
                     return false;
                     return false;
-                }else if(moment($(this).val()).format('YYYY-MM-DD') <= moment($('.val_start').val()).format('YYYY-MM-DD')) {
+                }else if(moment($(this).val()).format('YYYY-MM-DD HH:mm') <= moment($('.val_start').val()).format('YYYY-MM-DD HH:mm')) {
                     Swal({
                         type: "warning",
                         html: "เวลาเริ่มต้น <b>ต้องน้อยกว่า</b> เวลาสิ้นสุด",
@@ -988,6 +988,17 @@
                         //         data: data_temp_in
                         //     }
                         // ])
+                        if($('#radio_temp').prop('checked') == true){
+                            var title_chart = 'อุณหภูมิ (℃)';
+                        }else if($('#radio_hum').prop('checked') == true){
+                            var title_chart = 'ความชื้นอากาศ (%Rh)';
+                        }else if ($('#radio_light').prop('checked') == true) {
+                            var title_chart = 'ความเข้มแสง (kLux)';
+                        }else if ($('#radio_soil').prop('checked') == true) {
+                            var title_chart = 'ความชื้นดิน (%)';
+                        }else {
+                            var title_chart = '';
+                        }
                         if($('#radio_hum').prop('checked') == true){
                             chart.updateOptions({
                                 xaxis: {
@@ -995,13 +1006,15 @@
                                 },
                                 yaxis: {
                                    max: 100
-                                }
+                               },
+                                 title:  {text: title_chart},
                             });
                         }else {
                             chart.updateOptions({
                                 xaxis: {
                                    categories: res.timestamp
-                                }
+                               },
+                                title:  {text: title_chart},
                             });
                         }
                     // }

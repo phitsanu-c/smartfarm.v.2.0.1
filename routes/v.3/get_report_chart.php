@@ -31,11 +31,14 @@
         $count_columns = count($config_cn[3]);
 
         for($i=0; $i < $count_columns; $i++){
-            if ($config_cn[3][$i] == 4 || $config_cn[3][$i] == 5) {
+            if ($config_cn[3][$i] == 4 ) {
+                $unit = 4;
                 $channel[] = 'round('.$config_cn[1][$i].', 1) AS data_cn'.($i+1);
-            } elseif ($config_cn[3][$i] == 6 || $config_cn[3][$i] == 7) {
+            } elseif ($config_cn[3][$i] == 5) {
+                $unit = 5;
                 $channel[] = 'round('.$config_cn[1][$i].'/54, 1) AS data_cn'.($i+1);
             } else {
+                $unit = '';
                 $channel[] = 'round('.$config_cn[1][$i].', 1) AS data_cn'.($i+1);
             }
         }
@@ -79,11 +82,31 @@
             if($count_columns >= 7){
                 $data0['data_cn7'][]   = $row['data_cn7'];
             }
-
             if($count_columns >= 8){
                 $data0['data_cn8'][]   = $row['data_cn8'];
             }
+            if($count_columns >= 9){
+                $data0['data_cn9'][]   = $row['data_cn9'];
+            }
+            if($count_columns >= 10){
+                $data0['data_cn10'][]   = $row['data_cn10'];
+            }
+            if($count_columns >= 11){
+                $data0['data_cn11'][]   = $row['data_cn11'];
+            }
+            if($count_columns >= 12){
+                $data0['data_cn12'][]   = $row['data_cn12'];
+            }
+            if($count_columns >= 13){
+                $data0['data_cn13'][]   = $row['data_cn13'];
+            }
+            if($count_columns >= 14){
+                $data0['data_cn14'][]   = $row['data_cn14'];
+            }
+            if($count_columns >= 15){
+                $data0['data_cn15'][]   = $row['data_cn15'];
+            }
            $i++;
         }
-        echo json_encode($data0);
+        echo json_encode([$data0,$unit]);
     }

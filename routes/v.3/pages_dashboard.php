@@ -62,6 +62,13 @@
         // echo $uumb;
         // echo $_POST['count_cn'];
         // exit();
+
+        $n_dash = [];
+        for($v = 1; $v <= count($dashStatus); $v++){
+            if($v > 3){
+                if($dashStatus[$v] == 1){$n_dash[] = 1;}
+            }
+        }
     ?>
 
     <!--breadcrumb-->
@@ -211,7 +218,7 @@
                             </div>
                         </div>
                     </div><br/> -->
-                    <?php if($dashStatus[1] == 1 || $dashStatus[2] == 1 || $config_sn[3] == 1){?>
+                    <?php if($dashStatus[1] == 1 || $dashStatus[2] == 1 || $dashStatus[3] == 1){?>
                         <div class="card radius-10 border shadow-none">
                             <div class="card-body">
                                 <h5 class="text-center text-responsive2">ข้อมูลเซนเซอร์นอกโรงเรือน</h5>
@@ -237,32 +244,34 @@
                                 </div>
                             </div>
                         </div>
-                        <?php } ?>
-                    <div class="card radius-10 border shadow-none">
-                        <div class="card-body">
-                            <h5 class="text-center text-responsive2">ข้อมูลเซนเซอร์ในโรงเรือน</h5>
-                            <div class="row text-center">
-                                <?php for($i = 4; $i <= count($dashStatus); $i++){
-                                    if($dashStatus[$i] == 1){ ?>
-                                        <div class="col-lg-3 col-xl-3 col-sm-12">
-                                            <div class="card-body border radius-10 shadow-none mb-3">
-                                                <h5 class="card-title text-responsive2 mt-2 "><B><?= $dashName[$i] ?></B></h5>
-                                                <h6 class="card-title"><?= $dashName2[$i] ?></h6>
-                                                <div class="image-popups">
-                                                    <?php if($imgMap[$i] != ""){
-                                                            echo '<a href="public/images/img_map/'.$imgMap[$i].'"><img src="" alt="..." class="dash_img_'. $i .' rounded-circle sensor-responsive" style=" margin-top:10px; text-align: center!important;"></a>';
-                                                        }else {
-                                                            echo '<img src="" alt="..." class="dash_img_'. $i .' rounded-circle sensor-responsive" style=" margin-top:10px; text-align: center!important;">';
-                                                        }?>
+                    <?php } ?>
+                    <?php if(count($n_dash) > 0){?>
+                        <div class="card radius-10 border shadow-none">
+                            <div class="card-body">
+                                <h5 class="text-center text-responsive2">ข้อมูลเซนเซอร์ในโรงเรือน</h5>
+                                <div class="row text-center">
+                                    <?php for($i = 4; $i <= count($dashStatus); $i++){
+                                        if($dashStatus[$i] == 1){ ?>
+                                            <div class="col-lg-3 col-xl-3 col-sm-12">
+                                                <div class="card-body border radius-10 shadow-none mb-3">
+                                                    <h5 class="card-title text-responsive2 mt-2 "><B><?= $dashName[$i] ?></B></h5>
+                                                    <h6 class="card-title"><?= $dashName2[$i] ?></h6>
+                                                    <div class="image-popups">
+                                                        <?php if($imgMap[$i] != ""){
+                                                                echo '<a href="public/images/img_map/'.$imgMap[$i].'"><img src="" alt="..." class="dash_img_'. $i .' rounded-circle sensor-responsive" style=" margin-top:10px; text-align: center!important;"></a>';
+                                                            }else {
+                                                                echo '<img src="" alt="..." class="dash_img_'. $i .' rounded-circle sensor-responsive" style=" margin-top:10px; text-align: center!important;">';
+                                                            }?>
+                                                    </div>
+                                                    <p class="card-text text-center  dash_data__<?= $i ?> text-responsive" style="margin-top:20px;">
+                                                    </p>
                                                 </div>
-                                                <p class="card-text text-center  dash_data__<?= $i ?> text-responsive" style="margin-top:20px;">
-                                                </p>
                                             </div>
-                                        </div>
-                                <?php } } ?>
+                                    <?php } } ?>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -285,8 +294,8 @@
                         </div>
                             <!-- <div class="card-body"> -->
                     <div class="row">
-                        <?php for($i = 1; $i <= 12; $i++){ if(
-                            $controlStatus[$i] == 1){ //array_count_values($controlstatus)['1'] ?>
+                        <?php for($i = 1; $i <= 12; $i++){
+                            if($controlStatus[$i] == 1){ //array_count_values($controlstatus)['1'] ?>
                             <div class="col-lg-3 col-xl-3 col-sm-12">
                                 <div class="card-body border radius-10 shadow-none mb-3">
 
@@ -665,8 +674,8 @@
 
 
 <script>
-    // var house_master = '<?= $s_master["house_master"] ?>';
-    // var login_user = '<?= $account_user ?>';
+    // var house_master = '<?//= $s_master["house_master"] ?>';
+    // var login_user = '<?//= $account_user ?>';
     // var config_sn = $.parseJSON('<?// json_encode($config_sn) ?>');
     // var config_cn = $.parseJSON('<?// json_encode($config_cn) ?>');
     // var set_maxmin = $.parseJSON('<?// json_encode($set_maxmin) ?>');
