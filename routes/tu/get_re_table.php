@@ -11,7 +11,7 @@
     if ($mqtt->connect(true,NULL,$username,$password)) {
         $data_mq = $mqtt->subscribeAndWaitForMessage($topic, 1);
         $decodedJson = json_decode(substr($data_mq, 2), true);
-        $new_dt = ['account_id' => $_SESSION['account_id'], 'name' => $_SESSION["account_user"], 'dt' => date("Y-m-d").' '.date("H:i:s", strtotime('3 hour')), 'siteID' => $_SESSION["sn"]['siteID'], 'count_site' => $_SESSION['sn']['count_site']]; // '-6 hour'));
+        $new_dt = ['account_id' => $_SESSION['account_id'], 'name' => $_SESSION["account_user"], 'dt' => date("Y-m-d H:i:s", strtotime('3 hour')), 'siteID' => $_SESSION["sn"]['siteID'], 'count_site' => $_SESSION['sn']['count_site']]; // '-6 hour'));
         $decodedJson[$_SESSION['account_id']] = $new_dt;
         $message = json_encode($decodedJson);
         $mqtt->publish($topic,$message, 1);
@@ -46,33 +46,24 @@
 
     if($_POST['mode_report'] == 'compare'){
         for($i=0; $i < $count_columns; $i++){
-            if ($config_cn[3][$i] == 4 || $config_cn[3][$i] == 5) {
-                if($house_master == 'KMUMT001'){
-                    $channel[] = 'round('.$config_cn[1][$i].', 1) AS data_cn'.($i+1);
-                }else{
-                    $channel[] = 'round('.$config_cn[1][$i].'/1000, 1) AS data_cn'.($i+1);
-                }
-
-            } elseif ($config_cn[3][$i] == 6 || $config_cn[3][$i] == 7) {
+            if ($config_cn[3][$i] == 4) {
+                $channel[] = 'round('.$config_cn[1][$i].'/1000, 1) AS data_cn'.($i+1);
+            } elseif ($config_cn[3][$i] == 5) {
                 $channel[] = 'round('.$config_cn[1][$i].'/54, 1) AS data_cn'.($i+1);
             } else {
                 $channel[] = 'round('.$config_cn[1][$i].', 1) AS data_cn'.($i+1);
             }
         }
-    }else {
+    }
+    else {
         $numb = intval(substr($house_master, 5,10));
         for($i=0; $i < $count_columns; $i++){
-            if ($config_cn[3][$i] == 4 || $config_cn[3][$i] == 5) {
-                if($house_master == 'KMUMT001'){
-                    $channel[] = 'round('.$config_cn[1][$i].$numb.', 1) AS data_cn'.($i+1);
-                }else{
-                    $channel[] = 'round('.$config_cn[1][$i].$numb.'/1000, 1) AS data_cn'.($i+1);
-                }
-
-            } elseif ($config_cn[3][$i] == 6 || $config_cn[3][$i] == 7) {
-                $channel[] = 'round('.$config_cn[1][$i].$numb.'/54, 1) AS data_cn'.($i+1);
+            if ($config_cn[3][$i] == 4) {
+                $channel[] = 'round('.$config_cn[1][$i].'/1000, 1) AS data_cn'.($i+1);
+            } elseif ($config_cn[3][$i] == 5) {
+                $channel[] = 'round('.$config_cn[1][$i].'/54, 1) AS data_cn'.($i+1);
             } else {
-                $channel[] = 'round('.$config_cn[1][$i].$numb.', 1) AS data_cn'.($i+1);
+                $channel[] = 'round('.$config_cn[1][$i].', 1) AS data_cn'.($i+1);
             }
         }
     }

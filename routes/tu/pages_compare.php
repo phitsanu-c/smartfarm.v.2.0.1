@@ -123,7 +123,7 @@
                         </div>
                         <?php //echo json_encode($row_1);?>
                         <div class="row">
-                            <?php //if($s_sensor['s_btnT'] > 0){?>
+                            <?php //if($s_sensor['s_btnT'] > 0){ // อุณหภูมิ ?>
                                 <div class="col-lg-3 col-xl-3 col-sm-12 d-flex">
                                     <div class="card-body border radius-10 shadow-none mb-3">
                                         <div class="form-check">
@@ -139,7 +139,7 @@
                                                 if($row_1['sn_status_'.$i] == 1){
                                                     if($row_1['sn_sensor_'.$i] == 1){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_temp[]" value="<?= $row_1['sn_channel_'.$i].intval(substr($row_1['house_master'], 5,10)) ?>" d_name="<?= $row_1['house_name'].' - '.$row_1['sn_name_'.$i]." (℃)" ?>" d_mode="<?= $row_1['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'temp')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_temp[]" value="<?= $row_1['sn_channel_'.$i] ?>" d_name="<?= $row_1['house_name'].' - '.$row_1['sn_name_'.$i]." (℃)" ?>" d_mode="<?= $row_1['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'temp')" >
                                                             <label class="form-check-label"><?= $row_1['sn_name_'.$i] ?></label>
                                                         </div>
                                             <?php } } } ?>
@@ -149,7 +149,7 @@
                                                 if($row_2['sn_status_'.$i] == 1){
                                                     if($row_2['sn_sensor_'.$i] == 1){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_temp[]" value="<?= $row_2['sn_channel_'.$i].intval(substr($row_2['house_master'], 5,10)) ?>" d_name="<?= $row_2['house_name'].' - '.$row_2['sn_name_'.$i]." (℃)" ?>" d_mode="<?= $row_2['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'temp')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_temp[]" value="<?= $row_2['sn_channel_'.$i] ?>" d_name="<?= $row_2['house_name'].' - '.$row_2['sn_name_'.$i]." (℃)" ?>" d_mode="<?= $row_2['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'temp')" >
                                                             <label class="form-check-label"><?= $row_2['sn_name_'.$i] ?></label>
                                                         </div>
                                             <?php } } } ?>
@@ -159,7 +159,7 @@
                                                 if($row_3['sn_status_'.$i] == 1){
                                                     if($row_3['sn_sensor_'.$i] == 1){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_temp[]" value="<?= $row_3['sn_channel_'.$i].intval(substr($row_3['house_master'], 5,10)) ?>" d_name="<?= $row_3['house_name'].' - '.$row_3['sn_name_'.$i]." (℃)" ?>" d_mode="<?= $row_3['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'temp')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_temp[]" value="<?= $row_3['sn_channel_'.$i] ?>" d_name="<?= $row_3['house_name'].' - '.$row_3['sn_name_'.$i]." (℃)" ?>" d_mode="<?= $row_3['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'temp')" >
                                                             <label class="form-check-label"><?= $row_3['sn_name_'.$i] ?></label>
                                                         </div>
                                             <?php } } } ?>
@@ -169,7 +169,7 @@
                                                 if($row_4['sn_status_'.$i] == 1){
                                                     if($row_4['sn_sensor_'.$i] == 1){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_temp[]" value="<?= $row_4['sn_channel_'.$i].intval(substr($row_4['house_master'], 5,10)) ?>" d_name="<?= $row_4['house_name'].' - '.$row_4['sn_name_'.$i]." (℃)" ?>" d_mode="<?= $row_4['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'temp')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_temp[]" value="<?= $row_4['sn_channel_'.$i] ?>" d_name="<?= $row_4['house_name'].' - '.$row_4['sn_name_'.$i]." (℃)" ?>" d_mode="<?= $row_4['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'temp')" >
                                                             <label class="form-check-label"><?= $row_4['sn_name_'.$i] ?></label>
                                                         </div>
                                             <?php } } } ?>
@@ -179,7 +179,7 @@
                                                 if($row_5['sn_status_'.$i] == 1){
                                                     if($row_5['sn_sensor_'.$i] == 1){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_temp[]" value="<?= $row_5['sn_channel_'.$i].intval(substr($row_5['house_master'], 5,10)) ?>" d_name="<?= $row_5['house_name'].' - '.$row_5['sn_name_'.$i]." (℃)" ?>" d_mode="<?= $row_5['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'temp')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_temp[]" value="<?= $row_5['sn_channel_'.$i] ?>" d_name="<?= $row_5['house_name'].' - '.$row_5['sn_name_'.$i]." (℃)" ?>" d_mode="<?= $row_5['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'temp')" >
                                                             <label class="form-check-label"><?= $row_5['sn_name_'.$i] ?></label>
                                                         </div>
                                             <?php } } } ?>
@@ -189,7 +189,7 @@
                                                 if($row_6['sn_status_'.$i] == 1){
                                                     if($row_6['sn_sensor_'.$i] == 1){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_temp[]" value="<?= $row_6['sn_channel_'.$i].intval(substr($row_6['house_master'], 5,10)) ?>" d_name="<?= $row_6['house_name'].' - '.$row_6['sn_name_'.$i]." (℃)" ?>" d_mode="<?= $row_6['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'temp')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_temp[]" value="<?= $row_6['sn_channel_'.$i] ?>" d_name="<?= $row_6['house_name'].' - '.$row_6['sn_name_'.$i]." (℃)" ?>" d_mode="<?= $row_6['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'temp')" >
                                                             <label class="form-check-label"><?= $row_6['sn_name_'.$i] ?></label>
                                                         </div>
                                             <?php } } } ?>
@@ -199,14 +199,14 @@
                                                 if($row_7['sn_status_'.$i] == 1){
                                                     if($row_7['sn_sensor_'.$i] == 1){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_temp[]" value="<?= $row_7['sn_channel_'.$i].intval(substr($row_7['house_master'], 5,10)) ?>" d_name="<?= $row_7['house_name'].' - '.$row_7['sn_name_'.$i]." (℃)" ?>" d_mode="<?= $row_7['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'temp')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_temp[]" value="<?= $row_7['sn_channel_'.$i] ?>" d_name="<?= $row_7['house_name'].' - '.$row_7['sn_name_'.$i]." (℃)" ?>" d_mode="<?= $row_7['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'temp')" >
                                                             <label class="form-check-label"><?= $row_7['sn_name_'.$i] ?></label>
                                                         </div>
                                             <?php } } } ?>
                                         </div>
                                     </div>
                                 </div>
-                            <?php //} if($s_sensor['s_btnH'] > 0){?>
+                            <?php //} if($s_sensor['s_btnH'] > 0){ // ความชื้นอากาศ ?>
                                 <div class="col-lg-3 col-xl-3 col-sm-12 d-flex">
                                     <div class="card-body border radius-10 shadow-none mb-3">
                                         <div class="form-check">
@@ -222,7 +222,7 @@
                                                 if($row_1['sn_status_'.$i] == 1){
                                                     if($row_1['sn_sensor_'.$i] == 2){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_hum[]" value="<?= $row_1['sn_channel_'.$i].intval(substr($row_1['house_master'], 5,10)) ?>" d_name="<?= $row_1['house_name'].' - '.$row_1['sn_name_'.$i]." (%Rh)" ?>" d_mode="<?= $row_1['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'hum')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_hum[]" value="<?= $row_1['sn_channel_'.$i] ?>" d_name="<?= $row_1['house_name'].' - '.$row_1['sn_name_'.$i]." (%Rh)" ?>" d_mode="<?= $row_1['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'hum')" >
                                                             <label class="form-check-label"><?= $row_1['sn_name_'.$i] ?></label>
                                                         </div>
                                             <?php } } } ?>
@@ -232,7 +232,7 @@
                                                 if($row_2['sn_status_'.$i] == 1){
                                                     if($row_2['sn_sensor_'.$i] == 2){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_hum[]" value="<?= $row_2['sn_channel_'.$i].intval(substr($row_2['house_master'], 5,10)) ?>" d_name="<?= $row_2['house_name'].' - '.$row_2['sn_name_'.$i]." (%Rh)" ?>" d_mode="<?= $row_2['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'hum')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_hum[]" value="<?= $row_2['sn_channel_'.$i] ?>" d_name="<?= $row_2['house_name'].' - '.$row_2['sn_name_'.$i]." (%Rh)" ?>" d_mode="<?= $row_2['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'hum')" >
                                                             <label class="form-check-label"><?= $row_2['sn_name_'.$i] ?></label>
                                                         </div>
                                             <?php } } } ?>
@@ -242,7 +242,7 @@
                                                 if($row_3['sn_status_'.$i] == 1){
                                                     if($row_3['sn_sensor_'.$i] == 2){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_hum[]" value="<?= $row_3['sn_channel_'.$i].intval(substr($row_3['house_master'], 5,10)) ?>" d_name="<?= $row_3['house_name'].' - '.$row_3['sn_name_'.$i]." (%Rh)" ?>" d_mode="<?= $row_3['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'hum')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_hum[]" value="<?= $row_3['sn_channel_'.$i] ?>" d_name="<?= $row_3['house_name'].' - '.$row_3['sn_name_'.$i]." (%Rh)" ?>" d_mode="<?= $row_3['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'hum')" >
                                                             <label class="form-check-label"><?= $row_3['sn_name_'.$i] ?></label>
                                                         </div>
                                             <?php } } } ?>
@@ -252,7 +252,7 @@
                                                 if($row_4['sn_status_'.$i] == 1){
                                                     if($row_4['sn_sensor_'.$i] == 2){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_hum[]" value="<?= $row_4['sn_channel_'.$i].intval(substr($row_4['house_master'], 5,10)) ?>" d_name="<?= $row_4['house_name'].' - '.$row_4['sn_name_'.$i]." (%Rh)" ?>" d_mode="<?= $row_4['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'hum')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_hum[]" value="<?= $row_4['sn_channel_'.$i] ?>" d_name="<?= $row_4['house_name'].' - '.$row_4['sn_name_'.$i]." (%Rh)" ?>" d_mode="<?= $row_4['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'hum')" >
                                                             <label class="form-check-label"><?= $row_4['sn_name_'.$i] ?></label>
                                                         </div>
                                             <?php } } } ?>
@@ -262,7 +262,7 @@
                                                 if($row_5['sn_status_'.$i] == 1){
                                                     if($row_5['sn_sensor_'.$i] == 2){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_hum[]" value="<?= $row_5['sn_channel_'.$i].intval(substr($row_5['house_master'], 5,10)) ?>" d_name="<?= $row_5['house_name'].' - '.$row_5['sn_name_'.$i]." (%Rh)" ?>" d_mode="<?= $row_5['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'hum')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_hum[]" value="<?= $row_5['sn_channel_'.$i] ?>" d_name="<?= $row_5['house_name'].' - '.$row_5['sn_name_'.$i]." (%Rh)" ?>" d_mode="<?= $row_5['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'hum')" >
                                                             <label class="form-check-label"><?= $row_5['sn_name_'.$i] ?></label>
                                                         </div>
                                             <?php } } } ?>
@@ -272,7 +272,7 @@
                                                 if($row_6['sn_status_'.$i] == 1){
                                                     if($row_6['sn_sensor_'.$i] == 2){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_hum[]" value="<?= $row_6['sn_channel_'.$i].intval(substr($row_6['house_master'], 5,10)) ?>" d_name="<?= $row_6['house_name'].' - '.$row_6['sn_name_'.$i]." (%Rh)" ?>" d_mode="<?= $row_6['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'hum')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_hum[]" value="<?= $row_6['sn_channel_'.$i] ?>" d_name="<?= $row_6['house_name'].' - '.$row_6['sn_name_'.$i]." (%Rh)" ?>" d_mode="<?= $row_6['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'hum')" >
                                                             <label class="form-check-label"><?= $row_6['sn_name_'.$i] ?></label>
                                                         </div>
                                             <?php } } } ?>
@@ -282,14 +282,14 @@
                                                 if($row_7['sn_status_'.$i] == 1){
                                                     if($row_7['sn_sensor_'.$i] == 2){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_hum[]" value="<?= $row_7['sn_channel_'.$i].intval(substr($row_7['house_master'], 5,10)) ?>" d_name="<?= $row_7['house_name'].' - '.$row_7['sn_name_'.$i]." (%Rh)" ?>" d_mode="<?= $row_7['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'hum')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_hum[]" value="<?= $row_7['sn_channel_'.$i] ?>" d_name="<?= $row_7['house_name'].' - '.$row_7['sn_name_'.$i]." (%Rh)" ?>" d_mode="<?= $row_7['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'hum')" >
                                                             <label class="form-check-label"><?= $row_7['sn_name_'.$i] ?></label>
                                                         </div>
                                             <?php } } } ?>
                                         </div>
                                     </div>
                                 </div>
-                            <?php //} if($s_sensor['s_btnL'] > 0){?>
+                            <?php //} if($s_sensor['s_btnL'] > 0){ // ความเข้มแสง ?>
                                 <div class="col-lg-3 col-xl-3 col-sm-12 d-flex">
                                     <div class="card-body border radius-10 shadow-none mb-3">
                                         <div class="form-check">
@@ -303,14 +303,14 @@
                                             <label class="form-check-label"><?= $row_1['house_name'] ?> </label>
                                             <?php for($i=1; $i <= 7; $i++ ){
                                                 if($row_1['sn_status_'.$i] == 1){
-                                                    if($row_1['sn_sensor_'.$i] == 4 || $row_1['sn_sensor_'.$i] == 5){ ?>
+                                                    if($row_1['sn_sensor_'.$i] == 4){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_1['sn_channel_'.$i].intval(substr($row_1['house_master'], 5,10)) ?>" d_name="<?= $row_1['house_name'].' - '.$row_1['sn_name_'.$i]." (KLux)" ?>" d_mode="<?= $row_1['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_1['sn_channel_'.$i] ?>" d_name="<?= $row_1['house_name'].' - '.$row_1['sn_name_'.$i]." (KLux)" ?>" d_mode="<?= $row_1['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
                                                             <label class="form-check-label"><?= $row_1['sn_name_'.$i] ?></label>
                                                         </div>
-                                                <?php }else if($row_1['sn_sensor_'.$i] == 6 || $row_1['sn_sensor_'.$i] == 7){ ?>
+                                                <?php }else if($row_1['sn_sensor_'.$i] == 5){ ?>
                                                     <div class="form-check mb-3">
-                                                        <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_1['sn_channel_'.$i].intval(substr($row_1['house_master'], 5,10)) ?>" d_name="<?= $row_1['house_name'].' - '.$row_1['sn_name_'.$i]." (µmol m<sup>-2</sup>s<sup>-1</sup>)" ?>" d_mode="<?= $row_1['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
+                                                        <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_1['sn_channel_'.$i] ?>" d_name="<?= $row_1['house_name'].' - '.$row_1['sn_name_'.$i]." (µmol m<sup>-2</sup>s<sup>-1</sup>)" ?>" d_mode="<?= $row_1['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
                                                         <label class="form-check-label"><?= $row_1['sn_name_'.$i] ?></label>
                                                     </div>
                                             <?php } } } ?>
@@ -318,14 +318,14 @@
                                             <label class="form-check-label"><?= $row_2['house_name'] ?> </label>
                                             <?php for($i=1; $i <= 7; $i++ ){
                                                 if($row_2['sn_status_'.$i] == 1){
-                                                    if($row_2['sn_sensor_'.$i] == 4 || $row_2['sn_sensor_'.$i] == 5){ ?>
+                                                    if($row_2['sn_sensor_'.$i] == 4){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_2['sn_channel_'.$i].intval(substr($row_2['house_master'], 5,10)) ?>" d_name="<?= $row_2['house_name'].' - '.$row_2['sn_name_'.$i]." (KLux)" ?>" d_mode="<?= $row_2['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_2['sn_channel_'.$i] ?>" d_name="<?= $row_2['house_name'].' - '.$row_2['sn_name_'.$i]." (KLux)" ?>" d_mode="<?= $row_2['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
                                                             <label class="form-check-label"><?= $row_2['sn_name_'.$i] ?></label>
                                                         </div>
-                                                <?php }else if($row_2['sn_sensor_'.$i] == 6 || $row_2['sn_sensor_'.$i] == 7){ ?>
+                                                <?php }else if($row_2['sn_sensor_'.$i] == 5){ ?>
                                                     <div class="form-check mb-3">
-                                                        <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_2['sn_channel_'.$i].intval(substr($row_2['house_master'], 5,10)) ?>" d_name="<?= $row_2['house_name'].' - '.$row_2['sn_name_'.$i]." (µmol m<sup>-2</sup>s<sup>-1</sup>)" ?>" d_mode="<?= $row_2['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
+                                                        <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_2['sn_channel_'.$i] ?>" d_name="<?= $row_2['house_name'].' - '.$row_2['sn_name_'.$i]." (µmol m<sup>-2</sup>s<sup>-1</sup>)" ?>" d_mode="<?= $row_2['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
                                                         <label class="form-check-label"><?= $row_2['sn_name_'.$i] ?></label>
                                                     </div>
                                             <?php } } } ?>
@@ -333,14 +333,14 @@
                                             <label class="form-check-label"><?= $row_3['house_name'] ?> </label>
                                             <?php for($i=1; $i <= 7; $i++ ){
                                                 if($row_3['sn_status_'.$i] == 1){
-                                                    if($row_3['sn_sensor_'.$i] == 4 || $row_3['sn_sensor_'.$i] == 5){ ?>
+                                                    if($row_3['sn_sensor_'.$i] == 4){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_3['sn_channel_'.$i].intval(substr($row_3['house_master'], 5,10)) ?>" d_name="<?= $row_3['house_name'].' - '.$row_3['sn_name_'.$i]." (KLux)" ?>" d_mode="<?= $row_3['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_3['sn_channel_'.$i] ?>" d_name="<?= $row_3['house_name'].' - '.$row_3['sn_name_'.$i]." (KLux)" ?>" d_mode="<?= $row_3['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
                                                             <label class="form-check-label"><?= $row_3['sn_name_'.$i] ?></label>
                                                         </div>
-                                                <?php }else if($row_3['sn_sensor_'.$i] == 6 || $row_3['sn_sensor_'.$i] == 7){ ?>
+                                                <?php }else if($row_3['sn_sensor_'.$i] == 5){ ?>
                                                     <div class="form-check mb-3">
-                                                        <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_3['sn_channel_'.$i].intval(substr($row_3['house_master'], 5,10)) ?>" d_name="<?= $row_3['house_name'].' - '.$row_3['sn_name_'.$i]." (µmol m<sup>-2</sup>s<sup>-1</sup>)" ?>" d_mode="<?= $row_3['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
+                                                        <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_3['sn_channel_'.$i] ?>" d_name="<?= $row_3['house_name'].' - '.$row_3['sn_name_'.$i]." (µmol m<sup>-2</sup>s<sup>-1</sup>)" ?>" d_mode="<?= $row_3['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
                                                         <label class="form-check-label"><?= $row_3['sn_name_'.$i] ?></label>
                                                     </div>
                                             <?php } } } ?>
@@ -348,14 +348,14 @@
                                             <label class="form-check-label"><?= $row_4['house_name'] ?> </label>
                                             <?php for($i=1; $i <= 7; $i++ ){
                                                 if($row_4['sn_status_'.$i] == 1){
-                                                    if($row_4['sn_sensor_'.$i] == 4 || $row_4['sn_sensor_'.$i] == 5){ ?>
+                                                    if($row_4['sn_sensor_'.$i] == 4){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_4['sn_channel_'.$i].intval(substr($row_4['house_master'], 5,10)) ?>" d_name="<?= $row_4['house_name'].' - '.$row_4['sn_name_'.$i]." (KLux)" ?>" d_mode="<?= $row_4['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_4['sn_channel_'.$i] ?>" d_name="<?= $row_4['house_name'].' - '.$row_4['sn_name_'.$i]." (KLux)" ?>" d_mode="<?= $row_4['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
                                                             <label class="form-check-label"><?= $row_4['sn_name_'.$i] ?></label>
                                                         </div>
-                                                <?php }else if($row_4['sn_sensor_'.$i] == 6 || $row_4['sn_sensor_'.$i] == 7){ ?>
+                                                <?php }else if($row_4['sn_sensor_'.$i] == 5){ ?>
                                                     <div class="form-check mb-3">
-                                                        <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_4['sn_channel_'.$i].intval(substr($row_4['house_master'], 5,10)) ?>" d_name="<?= $row_4['house_name'].' - '.$row_4['sn_name_'.$i]." (µmol m<sup>-2</sup>s<sup>-1</sup>)" ?>" d_mode="<?= $row_4['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
+                                                        <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_4['sn_channel_'.$i] ?>" d_name="<?= $row_4['house_name'].' - '.$row_4['sn_name_'.$i]." (µmol m<sup>-2</sup>s<sup>-1</sup>)" ?>" d_mode="<?= $row_4['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
                                                         <label class="form-check-label"><?= $row_4['sn_name_'.$i] ?></label>
                                                     </div>
                                             <?php } } } ?>
@@ -363,14 +363,14 @@
                                             <label class="form-check-label"><?= $row_5['house_name'] ?> </label>
                                             <?php for($i=1; $i <= 7; $i++ ){
                                                 if($row_5['sn_status_'.$i] == 1){
-                                                    if($row_5['sn_sensor_'.$i] == 4 || $row_5['sn_sensor_'.$i] == 5){ ?>
+                                                    if($row_5['sn_sensor_'.$i] == 4){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_5['sn_channel_'.$i].intval(substr($row_5['house_master'], 5,10)) ?>" d_name="<?= $row_5['house_name'].' - '.$row_5['sn_name_'.$i]." (KLux)" ?>" d_mode="<?= $row_5['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_5['sn_channel_'.$i] ?>" d_name="<?= $row_5['house_name'].' - '.$row_5['sn_name_'.$i]." (KLux)" ?>" d_mode="<?= $row_5['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
                                                             <label class="form-check-label"><?= $row_5['sn_name_'.$i] ?></label>
                                                         </div>
-                                                <?php }else if($row_5['sn_sensor_'.$i] == 6 || $row_5['sn_sensor_'.$i] == 7){ ?>
+                                                <?php }else if($row_5['sn_sensor_'.$i] == 5){ ?>
                                                     <div class="form-check mb-3">
-                                                        <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_5['sn_channel_'.$i].intval(substr($row_5['house_master'], 5,10)) ?>" d_name="<?= $row_5['house_name'].' - '.$row_5['sn_name_'.$i]." (µmol m<sup>-2</sup>s<sup>-1</sup>)" ?>" d_mode="<?= $row_5['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
+                                                        <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_5['sn_channel_'.$i] ?>" d_name="<?= $row_5['house_name'].' - '.$row_5['sn_name_'.$i]." (µmol m<sup>-2</sup>s<sup>-1</sup>)" ?>" d_mode="<?= $row_5['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
                                                         <label class="form-check-label"><?= $row_5['sn_name_'.$i] ?></label>
                                                     </div>
                                             <?php } } } ?>
@@ -378,14 +378,14 @@
                                             <label class="form-check-label"><?= $row_6['house_name'] ?> </label>
                                             <?php for($i=1; $i <= 7; $i++ ){
                                                 if($row_6['sn_status_'.$i] == 1){
-                                                    if($row_6['sn_sensor_'.$i] == 4 || $row_6['sn_sensor_'.$i] == 5){ ?>
+                                                    if($row_6['sn_sensor_'.$i] == 4){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_6['sn_channel_'.$i].intval(substr($row_6['house_master'], 5,10)) ?>" d_name="<?= $row_6['house_name'].' - '.$row_6['sn_name_'.$i]." (KLux)" ?>" d_mode="<?= $row_6['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_6['sn_channel_'.$i] ?>" d_name="<?= $row_6['house_name'].' - '.$row_6['sn_name_'.$i]." (KLux)" ?>" d_mode="<?= $row_6['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
                                                             <label class="form-check-label"><?= $row_6['sn_name_'.$i] ?></label>
                                                         </div>
-                                                <?php }else if($row_6['sn_sensor_'.$i] == 6 || $row_6['sn_sensor_'.$i] == 7){ ?>
+                                                <?php }else if($row_6['sn_sensor_'.$i] == 5){ ?>
                                                     <div class="form-check mb-3">
-                                                        <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_6['sn_channel_'.$i].intval(substr($row_6['house_master'], 5,10)) ?>" d_name="<?= $row_6['house_name'].' - '.$row_6['sn_name_'.$i]." (µmol m<sup>-2</sup>s<sup>-1</sup>)" ?>" d_mode="<?= $row_6['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
+                                                        <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_6['sn_channel_'.$i] ?>" d_name="<?= $row_6['house_name'].' - '.$row_6['sn_name_'.$i]." (µmol m<sup>-2</sup>s<sup>-1</sup>)" ?>" d_mode="<?= $row_6['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
                                                         <label class="form-check-label"><?= $row_6['sn_name_'.$i] ?></label>
                                                     </div>
                                             <?php } } } ?>
@@ -393,14 +393,14 @@
                                             <label class="form-check-label"><?= $row_7['house_name'] ?> </label>
                                             <?php for($i=1; $i <= 7; $i++ ){
                                                 if($row_7['sn_status_'.$i] == 1){
-                                                    if($row_7['sn_sensor_'.$i] == 4 || $row_7['sn_sensor_'.$i] == 5){ ?>
+                                                    if($row_7['sn_sensor_'.$i] == 4){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_7['sn_channel_'.$i].intval(substr($row_7['house_master'], 5,10)) ?>" d_name="<?= $row_7['house_name'].' - '.$row_7['sn_name_'.$i]." (KLux)" ?>" d_mode="<?= $row_7['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_7['sn_channel_'.$i] ?>" d_name="<?= $row_7['house_name'].' - '.$row_7['sn_name_'.$i]." (KLux)" ?>" d_mode="<?= $row_7['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
                                                             <label class="form-check-label"><?= $row_7['sn_name_'.$i] ?></label>
                                                         </div>
-                                                <?php }else if($row_7['sn_sensor_'.$i] == 6 || $row_7['sn_sensor_'.$i] == 7){ ?>
+                                                <?php }else if($row_7['sn_sensor_'.$i] == 5){ ?>
                                                     <div class="form-check mb-3">
-                                                        <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_7['sn_channel_'.$i].intval(substr($row_7['house_master'], 5,10)) ?>" d_name="<?= $row_7['house_name'].' - '.$row_7['sn_name_'.$i]." (µmol m<sup>-2</sup>s<sup>-1</sup>)" ?>" d_mode="<?= $row_7['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
+                                                        <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="<?= $row_7['sn_channel_'.$i] ?>" d_name="<?= $row_7['house_name'].' - '.$row_7['sn_name_'.$i]." (µmol m<sup>-2</sup>s<sup>-1</sup>)" ?>" d_mode="<?= $row_7['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'light')" >
                                                         <label class="form-check-label"><?= $row_7['sn_name_'.$i] ?></label>
                                                     </div>
                                             <?php } } } ?>
@@ -423,7 +423,7 @@
                                                 if($row_1['sn_status_'.$i] == 1){
                                                     if($row_1['sn_sensor_'.$i] == 3){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_soil[]" value="<?= $row_1['sn_channel_'.$i].intval(substr($row_1['house_master'], 5,10)) ?>" d_name="<?= $row_1['house_name'].' - '.$row_1['sn_name_'.$i]." (%)" ?>" d_mode="<?= $row_1['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'soil')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_soil[]" value="<?= $row_1['sn_channel_'.$i] ?>" d_name="<?= $row_1['house_name'].' - '.$row_1['sn_name_'.$i]." (%)" ?>" d_mode="<?= $row_1['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'soil')" >
                                                             <label class="form-check-label"><?= $row_1['sn_name_'.$i] ?></label>
                                                         </div>
                                             <?php } } } ?>
@@ -433,7 +433,7 @@
                                                 if($row_2['sn_status_'.$i] == 1){
                                                     if($row_2['sn_sensor_'.$i] == 3){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_soil[]" value="<?= $row_2['sn_channel_'.$i].intval(substr($row_2['house_master'], 5,10)) ?>" d_name="<?= $row_2['house_name'].' - '.$row_2['sn_name_'.$i]." (%)" ?>" d_mode="<?= $row_2['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'soil')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_soil[]" value="<?= $row_2['sn_channel_'.$i] ?>" d_name="<?= $row_2['house_name'].' - '.$row_2['sn_name_'.$i]." (%)" ?>" d_mode="<?= $row_2['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'soil')" >
                                                             <label class="form-check-label"><?= $row_2['sn_name_'.$i] ?></label>
                                                         </div>
                                             <?php } } } ?>
@@ -443,7 +443,7 @@
                                                 if($row_3['sn_status_'.$i] == 1){
                                                     if($row_3['sn_sensor_'.$i] == 3){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_soil[]" value="<?= $row_3['sn_channel_'.$i].intval(substr($row_3['house_master'], 5,10)) ?>" d_name="<?= $row_3['house_name'].' - '.$row_3['sn_name_'.$i]." (%)" ?>" d_mode="<?= $row_3['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'soil')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_soil[]" value="<?= $row_3['sn_channel_'.$i] ?>" d_name="<?= $row_3['house_name'].' - '.$row_3['sn_name_'.$i]." (%)" ?>" d_mode="<?= $row_3['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'soil')" >
                                                             <label class="form-check-label"><?= $row_3['sn_name_'.$i] ?></label>
                                                         </div>
                                             <?php } } } ?>
@@ -453,7 +453,7 @@
                                                 if($row_4['sn_status_'.$i] == 1){
                                                     if($row_4['sn_sensor_'.$i] == 3){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_soil[]" value="<?= $row_4['sn_channel_'.$i].intval(substr($row_4['house_master'], 5,10)) ?>" d_name="<?= $row_4['house_name'].' - '.$row_4['sn_name_'.$i]." (%)" ?>" d_mode="<?= $row_4['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'soil')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_soil[]" value="<?= $row_4['sn_channel_'.$i] ?>" d_name="<?= $row_4['house_name'].' - '.$row_4['sn_name_'.$i]." (%)" ?>" d_mode="<?= $row_4['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'soil')" >
                                                             <label class="form-check-label"><?= $row_4['sn_name_'.$i] ?></label>
                                                         </div>
                                             <?php } } } ?>
@@ -463,7 +463,7 @@
                                                 if($row_5['sn_status_'.$i] == 1){
                                                     if($row_5['sn_sensor_'.$i] == 3){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_soil[]" value="<?= $row_5['sn_channel_'.$i].intval(substr($row_5['house_master'], 5,10)) ?>" d_name="<?= $row_5['house_name'].' - '.$row_5['sn_name_'.$i]." (%)" ?>" d_mode="<?= $row_5['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'soil')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_soil[]" value="<?= $row_5['sn_channel_'.$i] ?>" d_name="<?= $row_5['house_name'].' - '.$row_5['sn_name_'.$i]." (%)" ?>" d_mode="<?= $row_5['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'soil')" >
                                                             <label class="form-check-label"><?= $row_5['sn_name_'.$i] ?></label>
                                                         </div>
                                             <?php } } } ?>
@@ -473,7 +473,7 @@
                                                 if($row_6['sn_status_'.$i] == 1){
                                                     if($row_6['sn_sensor_'.$i] == 3){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_soil[]" value="<?= $row_6['sn_channel_'.$i].intval(substr($row_6['house_master'], 5,10)) ?>" d_name="<?= $row_6['house_name'].' - '.$row_6['sn_name_'.$i]." (%)" ?>" d_mode="<?= $row_6['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'soil')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_soil[]" value="<?= $row_6['sn_channel_'.$i] ?>" d_name="<?= $row_6['house_name'].' - '.$row_6['sn_name_'.$i]." (%)" ?>" d_mode="<?= $row_6['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'soil')" >
                                                             <label class="form-check-label"><?= $row_6['sn_name_'.$i] ?></label>
                                                         </div>
                                             <?php } } } ?>
@@ -483,7 +483,7 @@
                                                 if($row_7['sn_status_'.$i] == 1){
                                                     if($row_7['sn_sensor_'.$i] == 3){ ?>
                                                         <div class="form-check mb-3">
-                                                            <input type="checkbox" class="form-check-input" name="checkbox_soil[]" value="<?= $row_7['sn_channel_'.$i].intval(substr($row_7['house_master'], 5,10)) ?>" d_name="<?= $row_7['house_name'].' - '.$row_7['sn_name_'.$i]." (%)" ?>" d_mode="<?= $row_7['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'soil')" >
+                                                            <input type="checkbox" class="form-check-input" name="checkbox_soil[]" value="<?= $row_7['sn_channel_'.$i] ?>" d_name="<?= $row_7['house_name'].' - '.$row_7['sn_name_'.$i]." (%)" ?>" d_mode="<?= $row_7['sn_sensor_'.$i] ?>" onchange="checkbox_check($(this) ,'soil')" >
                                                             <label class="form-check-label"><?= $row_7['sn_name_'.$i] ?></label>
                                                         </div>
                                             <?php } } } ?>
@@ -939,11 +939,6 @@
                     x: {
                         format: 'yyyy-MM-dd HH:mm'
                     },
-                    y: {
-                        formatter: function (val) {
-                            return  val //+ " ℃"
-                        }
-                    }
                 },
                     // subtitle: {
                     //     text: '(℃)',
@@ -989,13 +984,17 @@
                         //     }
                         // ])
                         if($('#radio_temp').prop('checked') == true){
-                            var title_chart = 'อุณหภูมิ (℃)';
+                            var title_chart = 'อุณหภูมิ';
+                            var unit = '(℃)';
                         }else if($('#radio_hum').prop('checked') == true){
-                            var title_chart = 'ความชื้นอากาศ (%Rh)';
+                            var title_chart = 'ความชื้นอากาศ';
+                            var unit = '(%Rh)';
                         }else if ($('#radio_light').prop('checked') == true) {
-                            var title_chart = 'ความเข้มแสง (kLux)';
+                            var title_chart = 'ความเข้มแสง';
+                            var unit = '(µmol m<sup>-2</sup>s<sup>-1</sup>)';
                         }else if ($('#radio_soil').prop('checked') == true) {
-                            var title_chart = 'ความชื้นดิน (%)';
+                            var title_chart = 'ความชื้นดิน';
+                            var unit = '(%)';
                         }else {
                             var title_chart = '';
                         }
@@ -1007,7 +1006,14 @@
                                 yaxis: {
                                    max: 100
                                },
-                                 title:  {text: title_chart},
+                               title:  {text: title_chart},
+                               tooltip: {
+                                   y: {
+                                       formatter: function (val) {
+                                           return  val + unit
+                                       }
+                                   }
+                               }
                             });
                         }else {
                             chart.updateOptions({

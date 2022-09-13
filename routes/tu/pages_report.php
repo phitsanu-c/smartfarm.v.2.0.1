@@ -320,23 +320,24 @@
                                                             </div>';
                                                     }else if($config_sn['sn_sensor_'.$i] == 5){
                                                         echo '<div class="form-check mb-3">
-                                                                <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="'.$config_sn['sn_channel_'.$i] .'" d_name="'. $config_sn['sn_name_'.$i].'" d_mode="'. $config_sn['sn_sensor_'.$i] .'" onchange="checkbox_check('. $s_sensor['s_btnL'] .' ,"light")" ';
-                                                                if($s_sensor['s_btnT'] == 0 && $s_sensor['s_btnH'] == 0 && $s_sensor['s_btnS'] == 0 && $s_sensor['s_btnL'] == 1){echo 'checked';} echo '>';
-                                                                echo '<label class="form-check-label">'.$config_sn['sn_name_'.$i].'</label>
-                                                            </div>';
-                                                    }else if($config_sn['sn_sensor_'.$i] == 6){
-                                                        echo '<div class="form-check mb-3">
-                                                                <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="'.$config_sn['sn_channel_'.$i] .'" d_name="'. $config_sn['sn_name_'.$i].' (KLux)" d_mode="'. $config_sn['sn_sensor_'.$i] .'" onchange="checkbox_check('. $s_sensor['s_btnL'] .' ,"light")" ';
-                                                                if($s_sensor['s_btnT'] == 0 && $s_sensor['s_btnH'] == 0 && $s_sensor['s_btnS'] == 0 && $s_sensor['s_btnL'] == 1){echo 'checked';} echo '>';
-                                                                echo '<label class="form-check-label">'.$config_sn['sn_name_'.$i].'</label>
-                                                            </div>';
-                                                    }else if($config_sn['sn_sensor_'.$i] == 7){
-                                                        echo '<div class="form-check mb-3">
-                                                                <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="'.$config_sn['sn_channel_'.$i] .'" d_name="'. $config_sn['sn_name_'.$i].'" d_mode="'. $config_sn['sn_sensor_'.$i] .'" onchange="checkbox_check('. $s_sensor['s_btnL'] .' ,"light")" ';
+                                                                <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="'.$config_sn['sn_channel_'.$i] .'" d_name="'. $config_sn['sn_name_'.$i].' (µmol m<sup>-2</sup>s<sup>-1</sup>)" d_mode="'. $config_sn['sn_sensor_'.$i] .'" onchange="checkbox_check('. $s_sensor['s_btnL'] .' ,"light")" ';
                                                                 if($s_sensor['s_btnT'] == 0 && $s_sensor['s_btnH'] == 0 && $s_sensor['s_btnS'] == 0 && $s_sensor['s_btnL'] == 1){echo 'checked';} echo '>';
                                                                 echo '<label class="form-check-label">'.$config_sn['sn_name_'.$i].'</label>
                                                             </div>';
                                                     }
+                                                    // }else if($config_sn['sn_sensor_'.$i] == 6){
+                                                    //     echo '<div class="form-check mb-3">
+                                                    //             <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="'.$config_sn['sn_channel_'.$i] .'" d_name="'. $config_sn['sn_name_'.$i].' (KLux)" d_mode="'. $config_sn['sn_sensor_'.$i] .'" onchange="checkbox_check('. $s_sensor['s_btnL'] .' ,"light")" ';
+                                                    //             if($s_sensor['s_btnT'] == 0 && $s_sensor['s_btnH'] == 0 && $s_sensor['s_btnS'] == 0 && $s_sensor['s_btnL'] == 1){echo 'checked';} echo '>';
+                                                    //             echo '<label class="form-check-label">'.$config_sn['sn_name_'.$i].'</label>
+                                                    //         </div>';
+                                                    // }else if($config_sn['sn_sensor_'.$i] == 7){
+                                                    //     echo '<div class="form-check mb-3">
+                                                    //             <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="'.$config_sn['sn_channel_'.$i] .'" d_name="'. $config_sn['sn_name_'.$i].'" d_mode="'. $config_sn['sn_sensor_'.$i] .'" onchange="checkbox_check('. $s_sensor['s_btnL'] .' ,"light")" ';
+                                                    //             if($s_sensor['s_btnT'] == 0 && $s_sensor['s_btnH'] == 0 && $s_sensor['s_btnS'] == 0 && $s_sensor['s_btnL'] == 1){echo 'checked';} echo '>';
+                                                    //             echo '<label class="form-check-label">'.$config_sn['sn_name_'.$i].'</label>
+                                                    //         </div>';
+                                                    // }
                                                 }
                                             } ?>
                                         </div>
@@ -751,11 +752,11 @@
                 ch_value.push("ความเข้มแสง");
                 $("input[name='checkbox_light[]']:checked").map(function (){
                     checked.push($(this).val());
-                    if($(this).attr("d_mode") == 5 || $(this).attr("d_mode") == 7){
-                        d_name.push($(this).attr("d_name"));//(µmol m[baseline-shift: super; font-size: 10;]-2[baseline-shift: baseline;]s[baseline-shift: super; font-size: 10;]-1[baseline-shift: baseline;])");
-                    }else{
+                    // if($(this).attr("d_mode") == 5){
+                    //     d_name.push($(this).attr("d_name"));//(µmol m[baseline-shift: super; font-size: 10;]-2[baseline-shift: baseline;]s[baseline-shift: super; font-size: 10;]-1[baseline-shift: baseline;])");
+                    // }else{
                         d_name.push($(this).attr("d_name"));
-                    }
+                    // }
                     d_mode.push($(this).attr("d_mode"));
                 });
                 ch_value.push(checked);
@@ -1230,9 +1231,9 @@
                         format: 'yyyy-MM-dd HH:mm'
                     },
                     y: {
-                    	formatter: function (val) {
-                    		return  val //+ " ℃"
-                    	}
+                      formatter: function (val) {
+                          return  val
+                      }
                     }
                 },
                     // subtitle: {
@@ -1286,7 +1287,7 @@
                             }else if($('#radio_hum').prop('checked') == true){
                                 var title_chart = 'ความชื้นอากาศ (%Rh)';
                             }else if ($('#radio_light').prop('checked') == true) {
-                                var title_chart = 'ความเข้มแสง (kLux)';
+                                var title_chart = 'ความเข้มแสง';
                             }else if ($('#radio_soil').prop('checked') == true) {
                                 var title_chart = 'ความชื้นดิน (%)';
                             }else {
@@ -1306,9 +1307,9 @@
                         }else {
                             chart.updateOptions({
                                 xaxis: {
-                                  categories: res.timestamp
-                              },
-                              title:  {text: title_chart},
+                                    categories: res.timestamp
+                                },
+                                title:  {text: title_chart},
                             });
                         }
                         // alert($('#radio_hum').prop('checked'))
