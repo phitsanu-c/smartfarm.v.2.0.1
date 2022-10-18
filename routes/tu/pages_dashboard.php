@@ -1,33 +1,3 @@
-<style>
-    .toggle.ios,
-    .toggle-on.ios,
-    .toggle-off.ios {
-        border-radius: 20px;
-    }
-    
-    .toggle.ios .toggle-handle {
-        border-radius: 20px;
-    }
-    
-    .no-gutters {
-        margin-right: 0;
-        margin-left: 0;
-    }
-    
-    .no-gutters>.col,
-    .no-gutters>[class*="col-"] {
-        padding-right: 0;
-        padding-left: 0;
-    }
-    
-    .text_font_size {
-        font-size: 13.5px;
-    }
-</style>
-
-<link rel="stylesheet" href="public/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.min.css">
-<script src="public/plugins/bootstrap-material-datetimepicker/js/moment.min.js"></script>
-<script src="public/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.min.js"></script>
 <?php
         $config = $_POST['data'];
         $account_user = $config["account_user"];
@@ -279,712 +249,303 @@
     </div>
     <!--end row-->
     <?php if($_POST["count_cn"] != 0){?>
-    <div class="col-12 col-lg-12 col-xl-12 col-sm-12 d-flex">
-        <div class="card w-100 radius-10">
-            <div class="card-body">
-                <div class="card-body text-center">
-                    <h5 class="card-title text-responsive2 text-center"><b>สถานะการทำงาน</b></h5>
-                    <!-- <h5 class="card-title text-center"><b>โหมดอัตโนมัติ </b></h5> -->
-                    <!-- <div class="row g-2"> -->
-                    <!-- <div class="col-lg-6 col-xl-6 col-sm-12 col-12" > -->
-                    <button type="button" class="btn btn-outline-success text-responsive2 px-5 radius-30 dash_mode active"></button>
-                    <!-- </div> -->
-                    <!-- <div class="col-lg-6 col-xl-6 col-sm-12 col-12">
-                                    <button type="button" class="col-lg-6 col-xl-6 col-sm-12 col-12 btn btn-outline-info px-5 radius-30 sw_mode_Manual" style="font-size:18px">โหมดสั่งงานด้วยตนเอง</button>
-                                </div> -->
-                    <!-- </div> -->
-                </div>
-                <div class="row">
-                    <?php for($i = 1; $i <= 12; $i++){
-                            // if($config_cn['cn_status_'.$i] == 1){ ?>
-                    <div class="col-lg-3 col-xl-3 col-sm-12">
-                        <div class="card-body border radius-10 shadow-none mb-3">
-                            <div class="text-center text-responsive2"><b>
-                                            <?php
-                                                if($i <= 4){echo 'น้ำหยด '.$i;}
-                                                elseif($i > 4 && $i <= 8){echo 'พัดลม '.($i-4);}
-                                                elseif($i > 8 && $i <= 10){echo 'พ่นหมอก '.($i-8);}
-                                                elseif($i == 11){echo 'สเปรย์';}
-                                                elseif($i == 12){echo 'ม่านพรางแสง';}
-                                            ?></b>
-                            </div>
-                            <h6 class="text-center">
-                                <?php if($config_cn['cn_name_'.$i] == ''){echo "<br>";}else {echo $config_cn['cn_name_'.$i];} ?></h6>
-                            <div class="text-center">
-                                <img class="dash_img_con_<?= $i ?>" style="width:15vh">
-                            </div>
-                        </div>
+        <div class="col-12 col-lg-12 col-xl-12 col-sm-12 d-flex">
+            <div class="card w-100 radius-10">
+                <div class="card-body">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-responsive2 text-center"><b>สถานะการทำงาน</b></h5>
+                        <!-- <h5 class="card-title text-center"><b>โหมดอัตโนมัติ </b></h5> -->
+                        <!-- <div class="row g-2"> -->
+                        <!-- <div class="col-lg-6 col-xl-6 col-sm-12 col-12" > -->
+                        <button type="button" class="btn btn-outline-success text-responsive2 px-5 radius-30 dash_mode active"></button>
+                        <!-- </div> -->
+                        <!-- <div class="col-lg-6 col-xl-6 col-sm-12 col-12">
+                                        <button type="button" class="col-lg-6 col-xl-6 col-sm-12 col-12 btn btn-outline-info px-5 radius-30 sw_mode_Manual" style="font-size:18px">โหมดสั่งงานด้วยตนเอง</button>
+                                    </div> -->
+                        <!-- </div> -->
                     </div>
-                    <?php //}
-                        } ?>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal Control -->
-    <div class="modal fade" id="Modal_control" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-lg  modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <!-- <h5 class="modal-title">Modal title</h5>
-    					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-                    <div class="col-12">
-                        <div class="d-flex align-items-center">
-                            <h4 class="modal-title"><b>ระบบควบคุม <?= $s_master['house_name'] ?></b></h4>
-                            <div class="ms-auto">
-                                <button type="button" class="btn-close close_modal" data-bs-dismiss="modal" aria-label="Close"> <span aria-hidden="true"></span> </button>
-                            </div>
-                        </div>
-                        <div class="col-12 mt-2">
-                            <div class="row">
-                                <div class="col-6">
-                                    <button type="button" class="btn btn-lg sw_mode_Auto" style="width: 100%; border-radius:20px;">อัตโนมัติ</button>
-                                </div>
-                                <div class="col-6">
-                                    <button type="button" class="btn btn-lg  sw_mode_Manual" style="width: 100%;  border-radius:20px;">กำหนดเอง</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-body">
-                    <div class="container ul_Auto">
-                        <div class="col-12 mt-2 control-mode">
-                            <div class="row">
-                                <div class="col-12 col-lg-4 ">
-                                    <div class="row">
-                                        <?php
-                                            for($i=1; $i <=4; $i++){
-                                                echo '<div class="col-3 col-lg-6">
-                                                     <button class="btn btn-control sw_sel_load_auto"  id="'.$i.'">
-                                                        <div class="control-text">น้ำหยด '.$i.'</div>
-                                                         <img class="img_sw_sel_load_auto'.$i.'" src="" width="100%" />
-                                                     </button>
-                                                </div>';
-                                            } ?>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-4">
-                                    <div class="row">
-                                        <?php for($i=5; $i <=8; $i++){
-                                                echo '<div class="col-3 col-lg-6">
-                                                     <button class="btn btn-control sw_sel_load_auto"  id="'.$i.'">
-                                                        <div class="control-text">พัดลม '.($i-4).'</div>
-                                                         <img class="img_sw_sel_load_auto'.$i.'" src="" width="100%" />
-                                                     </button>
-                                                </div>';
-                                            } ?>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-4">
-                                    <div class="row">
-                                        <div class="col-3 col-lg-6">
-                                            <button class="btn btn-control sw_sel_load_auto" id="9">
-                                                    <div class="control-text">พ่นหมอก 1</div>
-                                                     <img class="img_sw_sel_load_auto9" src="" width="100%" />
-                                                 </button>
-                                        </div>
-                                        <div class="col-3 col-lg-6">
-                                            <button class="btn btn-control sw_sel_load_auto" id="10">
-                                                    <div class="control-text">พ่นหมอก 2</div>
-                                                     <img class="img_sw_sel_load_auto10" src="" width="100%" />
-                                                 </button>
-                                        </div>
-                                        <div class="col-3 col-lg-6">
-                                            <button class="btn btn-control sw_sel_load_auto" id="11">
-                                                    <div class="control-text">สเปรย์</div>
-                                                     <img class="img_sw_sel_load_auto11" src="" width="100%" />
-                                                 </button>
-                                        </div>
-                                        <div class="col-3 col-lg-6">
-                                            <button class="btn btn-control sw_sel_load_auto" id="12">
-                                                    <div class="control-text">พรางแสง</div>
-                                                     <img class="img_sw_sel_load_auto12" src="" width="100%" />
-                                                 </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row ridge">
-                            <div class="col-12 ridge">
-                                <div class="row">
-                                    <div class="d-flex align-items-center" style="background-color: #283A6C; height: 50px; text-align: justify;">
-                                        <a><b class="title_load_auto" style="color:#FFF; font-size:20px"> </b></a>
-                                        <div class="ms-auto">
-                                            <a class="menu_config_auto btn btn-sm btn-primary px-2 radius-30" style="color:#FFF; font-size:16px" href="javascript:void(0)"><b> <i class='bx bx-cog'></i> ตั้งค่า</b></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- <div class="col-12"> -->
-                            <!-- <div class="row"> -->
-
-                            <div class="col-12">
-
-                                <div class="card">
-                                    <div class="card-body ">
-                                        <ul class="nav nav-pills mb-3 " role="tablist">
-                                            <li class="nav-item col-6" role="presentation">
-                                                <a class="nav-link active" data-bs-toggle="pill" href="#primary-pills-home" role="tab" aria-selected="true">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="tab-icon"><i class='bx bx-time font-18 me-1'></i>
-                                                        </div>
-                                                        <div class="tab-title">ตั้งเวลาทำงาน</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item col-6" role="presentation">
-                                                <a class="nav-link " data-bs-toggle="pill" href="#primary-pills-profile" role="tab" aria-selected="false">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="tab-icon"><i class='bx bx-timer font-18 me-1'></i>
-                                                        </div>
-                                                        <div class="tab-title">โปรแกรมต่อเนื่อง</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        </ul>
-
-                                        <!----- ตั้งเวลาทำงาน เริ่ม---------->
-                                        <div class="tab-content" id="pills-tabContent">
-                                            <div class="tab-pane fade show active" id="primary-pills-home" role="tabpanel">
+                    <div class="row">
+                        <?php for($i = 1; $i <= 12; $i++){
+                                // if($config_cn['cn_status_'.$i] == 1){ ?>
+                        <div class="col-lg-3 col-xl-3 col-sm-12">
+                            <div class="card-body border radius-10 shadow-none mb-3">
+                                <div class="text-center text-responsive2"><b>
                                                 <?php
-                                            for($i = 1; $i <=6; $i++){
-                                                echo '<div class="col-12 border-bottom border-top">
-                                                    <div class="d-flex align-items-center mb-2 mt-2">
-                                                        <div class="pt-2"><b>ตั้งเวลา '.$i.'</b></div>
-                                                        <div class="ms-auto">
-                                                            <img class="img_sw img_'.$i.'" src="" alt="">
-                                                            <div class="sw_toggle">
-                                                                <input class="input_check" type="checkbox" id="swch_'.$i.'" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-4 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> เริ่ม </small>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <input type="text" id="time_s_'.$i.'" class="form-control input_time">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-4 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_stop"> สิ้นสุด </small>
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <input type="text" id="time_e_'.$i.'" class="form-control input_time">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>';
-                                            }
-                                        ?>
-                                            </div>
-                                            <!----- ตั้งเวลาทำงาน จบ---------->
-
-                                            <!----- โปรแกรมต่อเนื่อง เริ่ม---------->
-                                            <div class="tab-pane fade" id="primary-pills-profile" role="tabpanel">
-                                                <!----- ตั้งเวลา 1 เริ่ม---------->
-                                                <div class="col-12 border-bottom border-top">
-                                                    <div class="d-flex align-items-center mb-2 mt-2">
-                                                        <div class="pt-2"><b>ตั้งเวลา 1</b></div>
-                                                        <div class="ms-auto">
-                                                            <img class="img_sw img_1" src="" alt="">
-                                                            <div class="sw_toggle">
-                                                                <input class="input_check" type="checkbox" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> เริ่ม </small>
-                                                                    </div>
-                                                                    <div class="col-md-9">
-                                                                        <input type="text" class="form-control input_time">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_stop"> จำนวน </small>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" id="time_e_'.$i.'" class="form-control input_time">
-                                                                    </div>
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_stop"> รอบ </small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row mb-3">
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> เปิด </small>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" id="time_s_'.$i.'" class="form-control input_time">
-                                                                    </div>
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> นาที </small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_stop"> ปิด </small>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" id="time_e_'.$i.'" class="form-control input_time">
-                                                                    </div>
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> เปิด </small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <!----- ตั้งเวลา 1 จบ---------->
-                                                <!----- ตั้งเวลา 2 เริ่ม---------->
-                                                <div class="col-12 border-bottom border-top">
-                                                    <div class="d-flex align-items-center mb-2 mt-2">
-                                                        <div class="pt-2"><b>ตั้งเวลา 2</b></div>
-                                                        <div class="ms-auto">
-                                                            <img class="img_sw img_1" src="" alt="">
-                                                            <div class="sw_toggle">
-                                                                <input class="input_check" type="checkbox" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> เริ่ม </small>
-                                                                    </div>
-                                                                    <div class="col-md-9">
-                                                                        <input type="text" class="form-control input_time">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_stop"> จำนวน </small>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" id="time_e_'.$i.'" class="form-control input_time">
-                                                                    </div>
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_stop"> รอบ </small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row mb-3">
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> เปิด </small>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" id="time_s_'.$i.'" class="form-control input_time">
-                                                                    </div>
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> นาที </small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_stop"> ปิด </small>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" id="time_e_'.$i.'" class="form-control input_time">
-                                                                    </div>
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> เปิด </small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <!----- ตั้งเวลา 2 จบ---------->
-
-                                                <!----- ตั้งเวลา 3 เริ่ม---------->
-                                                <div class="col-12 border-bottom border-top">
-                                                    <div class="d-flex align-items-center mb-2 mt-2">
-                                                        <div class="pt-2"><b>ตั้งเวลา 3</b></div>
-                                                        <div class="ms-auto">
-                                                            <img class="img_sw img_1" src="" alt="">
-                                                            <div class="sw_toggle">
-                                                                <input class="input_check" type="checkbox" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> เริ่ม </small>
-                                                                    </div>
-                                                                    <div class="col-md-9">
-                                                                        <input type="text" class="form-control input_time">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_stop"> จำนวน </small>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" id="time_e_'.$i.'" class="form-control input_time">
-                                                                    </div>
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_stop"> รอบ </small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row mb-3">
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> เปิด </small>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" id="time_s_'.$i.'" class="form-control input_time">
-                                                                    </div>
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> นาที </small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_stop"> ปิด </small>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" id="time_e_'.$i.'" class="form-control input_time">
-                                                                    </div>
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> เปิด </small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <!----- ตั้งเวลา 3 จบ---------->
-
-                                                <!----- ตั้งเวลา 4 เริ่ม---------->
-                                                <div class="col-12 border-bottom border-top">
-                                                    <div class="d-flex align-items-center mb-2 mt-2">
-                                                        <div class="pt-2"><b>ตั้งเวลา 4</b></div>
-                                                        <div class="ms-auto">
-                                                            <img class="img_sw img_1" src="" alt="">
-                                                            <div class="sw_toggle">
-                                                                <input class="input_check" type="checkbox" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> เริ่ม </small>
-                                                                    </div>
-                                                                    <div class="col-md-9">
-                                                                        <input type="text" class="form-control input_time">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_stop"> จำนวน </small>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" id="time_e_'.$i.'" class="form-control input_time">
-                                                                    </div>
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_stop"> รอบ </small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row mb-3">
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> เปิด </small>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" id="time_s_'.$i.'" class="form-control input_time">
-                                                                    </div>
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> นาที </small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_stop"> ปิด </small>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" id="time_e_'.$i.'" class="form-control input_time">
-                                                                    </div>
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> เปิด </small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <!----- ตั้งเวลา 4 จบ---------->
-                                                <!----- ตั้งเวลา 5 เริ่ม---------->
-                                                <div class="col-12 border-bottom border-top">
-                                                    <div class="d-flex align-items-center mb-2 mt-2">
-                                                        <div class="pt-2"><b>ตั้งเวลา 5</b></div>
-                                                        <div class="ms-auto">
-                                                            <img class="img_sw img_1" src="" alt="">
-                                                            <div class="sw_toggle">
-                                                                <input class="input_check" type="checkbox" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> เริ่ม </small>
-                                                                    </div>
-                                                                    <div class="col-md-9">
-                                                                        <input type="text" class="form-control input_time">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_stop"> จำนวน </small>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" id="time_e_'.$i.'" class="form-control input_time">
-                                                                    </div>
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_stop"> รอบ </small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row mb-3">
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> เปิด </small>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" id="time_s_'.$i.'" class="form-control input_time">
-                                                                    </div>
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> นาที </small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_stop"> ปิด </small>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" id="time_e_'.$i.'" class="form-control input_time">
-                                                                    </div>
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> เปิด </small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <!----- ตั้งเวลา 5 จบ---------->
-
-                                                <!----- ตั้งเวลา 6 เริ่ม---------->
-                                                <div class="col-12  border-top">
-                                                    <div class="d-flex align-items-center mb-2 mt-2">
-                                                        <div class="pt-2"><b>ตั้งเวลา 6</b></div>
-                                                        <div class="ms-auto">
-                                                            <img class="img_sw img_1" src="" alt="">
-                                                            <div class="sw_toggle">
-                                                                <input class="input_check" type="checkbox" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> เริ่ม </small>
-                                                                    </div>
-                                                                    <div class="col-md-9">
-                                                                        <input type="text" class="form-control input_time">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_stop"> จำนวน </small>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" id="time_e_'.$i.'" class="form-control input_time">
-                                                                    </div>
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_stop"> รอบ </small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row mb-3">
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> เปิด </small>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" id="time_s_'.$i.'" class="form-control input_time">
-                                                                    </div>
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> นาที </small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group text-left">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_stop"> ปิด </small>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" id="time_e_'.$i.'" class="form-control input_time">
-                                                                    </div>
-                                                                    <div class="col-md-3 mt-2 text-center ">
-                                                                        <small class="form-control-feedback text_font_size L_start"> เปิด </small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <!----- ตั้งเวลา 6 จบ---------->
-
-                                            </div>
-                                            <!----- โปรแกรมต่อเนื่อง จบ---------->
-
-                                        </div>
-                                    </div>
+                                                    if($i <= 4){echo 'น้ำหยด '.$i;}
+                                                    elseif($i > 4 && $i <= 8){echo 'พัดลม '.($i-4);}
+                                                    elseif($i > 8 && $i <= 10){echo 'พ่นหมอก '.($i-8);}
+                                                    elseif($i == 11){echo 'สเปรย์';}
+                                                    elseif($i == 12){echo 'ม่านพรางแสง';}
+                                                ?></b>
                                 </div>
-
+                                <h6 class="text-center">
+                                    <?php if($config_cn['cn_name_'.$i] == ''){echo "<br>";}else {echo $config_cn['cn_name_'.$i];} ?></h6>
+                                <div class="text-center">
+                                    <img class="dash_img_con_<?= $i ?>" style="width:15vh">
+                                </div>
                             </div>
-
                         </div>
-
-
+                        <?php //}
+                            } ?>
                     </div>
-
-
                 </div>
             </div>
         </div>
-    </div>
+        <!-- Modal Control -->
+        <div class="modal fade" id="Modal_control" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg  modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- <h5 class="modal-title">Modal title</h5>
+        					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                        <div class="col-12">
+                            <div class="d-flex align-items-center">
+                                <h4 class="modal-title"><b>ระบบควบคุม <?= $s_master['house_name'] ?></b></h4>
+                                <div class="ms-auto">
+                                    <button type="button" class="btn-close close_modal" data-bs-dismiss="modal" aria-label="Close"> <span aria-hidden="true"></span> </button>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-2">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-lg sw_mode_Auto" style="width: 100%; border-radius:20px;">อัตโนมัติ</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-lg  sw_mode_Manual" style="width: 100%;  border-radius:20px;">กำหนดเอง</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-2 ul_Auto">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-lg sw_mode_tracking" style="width: 100%; border-radius:20px;">ตามเซนเซอร์</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-lg  sw_mode_timer" style="width: 100%;  border-radius:20px;">ตั้งเวลา</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="ul_sub_timer">
+                            <div class="container ul_Auto">
+                                <div class="col-12 mt-2 control-mode mb-1">
+                                    <div class="row">
+                                        <div class="col-12 col-lg-4 ">
+                                            <div class="row">
+                                                <?php
+                                                    for($i=1; $i <=4; $i++){
+                                                        echo '<div class="col-3 col-lg-6">
+                                                             <button class="btn btn-control sw_sel_load_auto"  id="'.$i.'">
+                                                                <div class="control-text">น้ำหยด '.$i.'</div>
+                                                                 <img class="img_sw_sel_load_auto'.$i.'" src="" width="100%" />
+                                                             </button>
+                                                        </div>';
+                                                    } ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-4">
+                                            <div class="row">
+                                                <?php for($i=5; $i <=8; $i++){
+                                                        echo '<div class="col-3 col-lg-6">
+                                                             <button class="btn btn-control sw_sel_load_auto"  id="'.$i.'">
+                                                                <div class="control-text">พัดลม '.($i-4).'</div>
+                                                                 <img class="img_sw_sel_load_auto'.$i.'" src="" width="100%" />
+                                                             </button>
+                                                        </div>';
+                                                    } ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-4">
+                                            <div class="row">
+                                                <div class="col-3 col-lg-6">
+                                                    <button class="btn btn-control sw_sel_load_auto" id="9">
+                                                        <div class="control-text">พ่นหมอก 1</div>
+                                                        <img class="img_sw_sel_load_auto9" src="" width="100%" />
+                                                     </button>
+                                                </div>
+                                                <div class="col-3 col-lg-6">
+                                                    <button class="btn btn-control sw_sel_load_auto" id="10">
+                                                        <div class="control-text">พ่นหมอก 2</div>
+                                                        <img class="img_sw_sel_load_auto10" src="" width="100%" />
+                                                     </button>
+                                                </div>
+                                                <div class="col-3 col-lg-6">
+                                                    <button class="btn btn-control sw_sel_load_auto" id="11">
+                                                        <div class="control-text">สเปรย์</div>
+                                                        <img class="img_sw_sel_load_auto11" src="" width="100%" />
+                                                     </button>
+                                                </div>
+                                                <div class="col-3 col-lg-6">
+                                                    <button class="btn btn-control sw_sel_load_auto" id="12">
+                                                        <div class="control-text">พรางแสง</div>
+                                                        <img class="img_sw_sel_load_auto12" src="" width="100%" />
+                                                     </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row ridge">
+                                    <div class="col-12 ridge">
+                                        <div class="row">
+                                            <div class="d-flex align-items-center" style="background-color: #283A6C; height: 50px; text-align: justify;">
+                                                <a><b class="title_load_auto" style="color:#FFF; font-size:20px"> </b></a>
+                                                <div class="ms-auto">
+                                                    <a class="menu_config_auto btn btn-sm btn-primary px-2 radius-30" style="color:#FFF; font-size:16px" href="javascript:void(0)"><b> <i class='bx bx-cog'></i> ตั้งค่า</b></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body ">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <button type="button" class="btn btn-lg sw_mode_timeSet" style="width: 100%; ">
+                                                            <i class='bx bx-time font-18 me-1'></i> ตั้งเวลาทำงาน
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <button type="button" class="btn btn-lg sw_mode_timeLoop" style="width: 100%; ">
+                                                            <i class='bx bx-timer font-18 me-1'></i> โปรแกรมต่อเนื่อง
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <!-- ตั้งเวลาทำงาน เริ่ม---------->
+                                                <div class="ul_mode_timeSet">
+                                                    <?php for($i = 1; $i <= 6; $i++){
+                                                        echo '<div class="col-12 border-bottom border-top">
+                                                            <div class="d-flex align-items-center mb-2 mt-2">
+                                                                <div class="pt-2"><b>ตั้งเวลา '.$i.'</b></div>
+                                                                <div class="ms-auto">
+                                                                    <img class="img_sw img_'.$i.'" src="" alt="">
+                                                                    <div class="sw_toggle">
+                                                                        <input class="input_check" type="checkbox" id="swch_'.$i.'" data-toggle="toggle" data-onstyle="success" data-size="sm" data-offstyle="secondary" data-style="ios">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <div class="col-6">
+                                                                    <div class="form-group text-left">
+                                                                        <div class="row">
+                                                                            <div class="col-md-4 mt-2 text-center ">
+                                                                                <small class="form-control-feedback text_font_size L_start"> เริ่ม </small>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input type="text" id="time_s_'.$i.'" class="form-control input_tSet">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="form-group text-left">
+                                                                        <div class="row">
+                                                                            <div class="col-md-4 mt-2 text-center ">
+                                                                                <small class="form-control-feedback text_font_size L_stop"> สิ้นสุด </small>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input type="text" id="time_e_'.$i.'" class="form-control input_tSet">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>';
+                                                    } ?>
+                                                </div>
+                                                <!----- ตั้งเวลาทำงาน จบ---------->
 
-    <!-- </div> -->
-    <!-- </div> -->
-    </div>
-    </div>
-    <!-- Exit ul_Auto -->
-    <!-- ================================ -->
+                                                <!----- โปรแกรมต่อเนื่อง เริ่ม---------->
+                                                <div class="ul_mode_timeLoop">
+                                                    <?php for($i = 1; $i <= 6; $i++){
+                                                        echo '<div class="col-12 border-bottom border-top">
+                                                            <div class="d-flex align-items-center mb-2 mt-2">
+                                                                <div class="pt-2"><b>ตั้งเวลา '.$i.'</b></div>
+                                                                <div class="ms-auto">
+                                                                    <img class="img_sw imgL_'.$i.'" src="" alt="">
+                                                                    <div class="sw_toggle">
+                                                                        <input class="input_check" id="swchL_'.$i.'" type="checkbox" data-toggle="toggle" data-onstyle="success" data-size="sm" data-offstyle="secondary" data-style="ios">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <div class="col-6">
+                                                                    <div class="form-group text-left">
+                                                                        <div class="row">
+                                                                            <div class="col-md-3 mt-2 text-center ">
+                                                                                <small class="form-control-feedback text_font_size L_start"> เริ่ม </small>
+                                                                            </div>
+                                                                            <div class="col-md-9">
+                                                                            <input type="text" id="time_sL_'.$i.'" class="form-control input_tLoop input_tL">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="form-group text-left">
+                                                                        <div class="row">
+                                                                            <div class="col-md-3 mt-2 text-center ">
+                                                                                <small class="form-control-feedback text_font_size L_stop"> จำนวน </small>
+                                                                            </div>
+                                                                            <div class="col-md-9"><div class="input-group">
+                                                                                <input type="text" class="form-control input_tLoop" id="time_cy_'.$i.'" placeholder="รอบ" min="0" onchange="if(this.value < 0){this.value = 0;}else { this.value = Math.round(this.value); }"> <span class="input-group-text">รอบ</span>
+                                                                            </div></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <div class="col-6">
+                                                                    <div class="form-group text-left">
+                                                                        <div class="row">
+                                                                            <div class="col-md-3 mt-2 text-center ">
+                                                                                <small class="form-control-feedback text_font_size"> เปิด </small>
+                                                                            </div>
+                                                                            <div class="col-md-9">
+                                                                                <div class="input-group">
+			                                                                        <input type="number" class="form-control input_tLoop" id="time_on1_'.$i.'" placeholder="mmm" min="0" max="999" onchange="if(Math.round(this.value) > 999){this.value = 999;}else if(this.value < 0){this.value = 0;}else { this.value = Math.round(this.value); }"> <span class="input-group-text">:</span>
+                                                                                    <input type="number" class="form-control input_tLoop" id="time_on2_'.$i.'" placeholder="ss"  min="0" max="59"  onchange="if(Math.round(this.value) > 59 ){this.value = 59; }else if(this.value < 0){this.value = 0;}else { this.value = Math.round(this.value); }"> <span class="input-group-text">นาที</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="form-group text-left">
+                                                                        <div class="row">
+                                                                            <div class="col-md-3 mt-2 text-center ">
+                                                                                <small class="form-control-feedback text_font_size L_stop"> ปิด </small>
+                                                                            </div>
+                                                                            <div class="col-md-9">
+                                                                                <div class="input-group">
+			                                                                        <input type="number" class="form-control input_tLoop" id="time_off1_'.$i.'" placeholder="mmm" min="0" max="999" onchange="if(Math.round(this.value) > 999){this.value = 999;}else if(this.value < 0){this.value = 0;}else { this.value = Math.round(this.value); }"> <span class="input-group-text">:</span>
+                                                                                    <input type="number" class="form-control input_tLoop" id="time_off2_'.$i.'" placeholder="ss"  min="0" max="59"  onchange="if(Math.round(this.value) > 59 ){this.value = 59; }else if(this.value < 0){this.value = 0;}else { this.value = Math.round(this.value); }"> <span class="input-group-text">นาที</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>';
+                                                    } ?>
+                                                </div>
+                                                <!----- โปรแกรมต่อเนื่อง จบ---------->
 
-    <div class="container ul_Manual">
-        <div class="col-12">
-            <div class="row cols-10 text-center mt-2 mb-2 ">
-                <?php
+                                                <!-- </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Exit ul_Auto -->
+                        </div>
+                        <!-- ================================ -->
+                        <div class="container ul_Manual">
+                            <div class="col-12">
+                                <div class="row cols-10 text-center mt-2 mb-2 ">
+                                    <?php
                                         // if($config_cn['cn_status_1'] == 1 || $config_cn['cn_status_2'] == 1 || $config_cn['cn_status_3'] == 1 || $config_cn['cn_status_4'] == 1){
                                             echo '<div class="cols-3 cols-lg-5">
                                                     <button class="btn btn-control sw_sel_load_manual" style="width:100% border-radius:20px;" id="s1">
@@ -1026,93 +587,142 @@
                                                </div>';
                                         // }
                                     ?>
-            </div>
-        </div>
-        <div class="row ridge">
-            <h3 class="text-center title_load_manual" style="background-color: #283A6C; color:#FFF"></h3>
-            <div class="col text-end  me-2 mb-3 mt-2">
-                <button class="btn sw_manual_on"></button>
-            </div>
-            <div class="col text-start ms-2 mb-3 mt-2">
-                <button class="btn sw_manual_off"></button>
-            </div>
-        </div>
-    </div>
-    </div>
-    <div class="modal-footer">
-        <div class="ul_Auto">
-            <button type="button" id="save_auto_cont" class="btn btn-success waves-light">
-                                <i class="fadeIn animated bx bx-save"></i> บันทึก
-                            </button>
-            <button type="button" id="close_auto_cont" class="btn btn-danger waves-effect">
-                                <i class="fadeIn animated bx bx-window-close"></i> ยกเลิก
-                            </button>
-        </div>
-        <div class="ul_Manual" style="width: 100%;">
-            <div class="d-flex align-items-center">
-                <div class="form-check status_config_manual">
-                    <input class="form-check-input " type="checkbox" id="checkbox_all_manual">
-                    <label class="form-check-label text_font_size ">เลือกทั้งหมด</label>
-                </div>
-                <div class="ms-auto">
-                    <a class="menu_config_manual btn btn-sm btn-primary px-2 radius-30" style="color:#FFF; font-size:16px" href="javascript:void(0)"><b> <i class='bx bx-cog'></i> ตั้งค่า</b></a>
-                    <!-- <button type="button" class="btn btn-primary px-2 radius-30 menu_config_manual"><label class="text_font_size">ตั้งค่า</label></button> -->
-                    <button type="button" id="save_manual_cont" class="btn btn-success waves-light">
+                                </div>
+                            </div>
+                            <div class="row ridge">
+                                <h3 class="text-center title_load_manual" style="background-color: #283A6C; color:#FFF"></h3>
+                                <div class="col text-end  me-2 mb-3 mt-2">
+                                    <button class="btn sw_manual_on"></button>
+                                </div>
+                                <div class="col text-start ms-2 mb-3 mt-2">
+                                    <button class="btn sw_manual_off"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ul_sub_sensor">
+                            <div class="container col-12 mt-3 ridge">
+                                <div class="row ridge">
+                                    <div class="col-12 ridge">
+                                        <div class="row">
+                                            <div class="d-flex align-items-center" style="background-color: #283A6C; height: 50px; text-align: justify;">
+                                                <a><b style="color:#FFF; font-size:20px"> ตั้งค่าโหมดตามเซนเซอร์ </b></a>
+                                                <div class="ms-auto">
+                                                    <a class="menu_config_auto btn btn-sm btn-primary px-2 radius-30" style="color:#FFF; font-size:16px" href="javascript:void(0)"><b> <i class='bx bx-cog'></i> ตั้งค่า</b></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="container col-md-12">
+                                                <div class="text-center"><br>
+                                                    <h5>ความชื้นดิน (%)</h5>
+                                                    <h6>เปิด - ปิด น้ำหยด 1</h6>
+                                                    <input type="text" class="range_control range_control1"/>
+                                                </div>
+                                            </div>
+                                            <div class="container col-md-12">
+                                                <div class="text-center"><br>
+                                                    <h5>ความชื้นอากาศ (%Rh)</h5>
+                                                    <h6>เปิด - ปิด น้ำหยด 2</h6>
+                                                    <input type="text" class="range_control range_control2"/>
+                                                </div>
+                                            </div>
+                                            <div class="container col-md-12">
+                                                <div class="text-center"><br>
+                                                    <h5>คว่มเข้าแสง (KLux)</h5>
+                                                    <h6>เปิด - ปิด ม่านพรางแสง</h6>
+                                                    <input type="text" class="range_control range_control5" />
+                                                </div>
+                                            </div>
+                                            <div class="container col-md-12">
+                                                <div class="text-center"><br>
+                                                    <h5>อุณหภูมิ (℃)</h5>
+                                                    <h6>เปิด - ปิด พ่นหมอกในโรงเรือน และ สปริสปริงเกอร์หลังคา</h6>
+                                                    <input type="text" class="range_control range_control3"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="ul_sub_timer">
+                            <div class="ul_Auto">
+                                <button type="button" id="save_auto_cont" class="btn btn-success waves-light">
+                                    <i class="fadeIn animated bx bx-save"></i> บันทึก
+                                </button>
+                                <button type="button" id="close_auto_cont" class="btn btn-danger waves-effect">
+                                    <i class="fadeIn animated bx bx-window-close"></i> ยกเลิก
+                                </button>
+                            </div>
+                        </div>
+                        <div class="ul_Manual" style="width: 100%;">
+                            <div class="d-flex align-items-center">
+                                <div class="form-check status_config_manual">
+                                    <input class="form-check-input " type="checkbox" id="checkbox_all_manual">
+                                    <label class="form-check-label text_font_size ">เลือกทั้งหมด</label>
+                                </div>
+                                <div class="ms-auto">
+                                    <a class="menu_config_manual btn btn-sm btn-primary px-2 radius-30" style="color:#FFF; font-size:16px" href="javascript:void(0)"><b> <i class='bx bx-cog'></i> ตั้งค่า</b></a>
+                                    <!-- <button type="button" class="btn btn-primary px-2 radius-30 menu_config_manual"><label class="text_font_size">ตั้งค่า</label></button> -->
+                                    <button type="button" id="save_manual_cont" class="btn btn-success waves-light">
                                         <i class="fadeIn animated bx bx-save"></i> บันทึก
                                     </button>
-                    <button type="button" id="close_manual_cont" class="btn btn-danger waves-effect">
+                                    <button type="button" id="close_manual_cont" class="btn btn-danger waves-effect">
                                         <i class="fadeIn animated bx bx-window-close"></i> ยกเลิก
                                     </button>
-                </div>
-            </div>
-            <div class="row mt-3 mb-3">
-                <div class="col-3 text-center">
-                    <label class="text_font_size label_1"></label>
-                    <div class="status_config_manual">
-                        <input class="input_check2" type="checkbox" id="label_1" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                    </div>
-                </div>
-                <div class="col-3 text-center">
-                    <label class="text_font_size label_2"></label>
-                    <div class="status_config_manual">
-                        <input class="input_check2" type="checkbox" id="label_2" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                    </div>
-                </div>
-                <div class="col-3 text-center">
-                    <label class="text_font_size label_3"></label>
-                    <div class="status_config_manual status_config_manual_3">
-                        <input class="input_check2" type="checkbox" id="label_3" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
-                    </div>
-                </div>
-                <div class="col-3 text-center">
-                    <label class="text_font_size label_4"></label>
-                    <div class="status_config_manual status_config_manual_4">
-                        <input class="input_check2" type="checkbox" id="label_4" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                </div>
+                            </div>
+                            <div class="row mt-3 mb-3">
+                                <div class="col-3 text-center">
+                                    <label class="text_font_size label_1"></label>
+                                    <div class="status_config_manual">
+                                        <input class="input_check2" type="checkbox" id="label_1" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                    </div>
+                                </div>
+                                <div class="col-3 text-center">
+                                    <label class="text_font_size label_2"></label>
+                                    <div class="status_config_manual">
+                                        <input class="input_check2" type="checkbox" id="label_2" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                    </div>
+                                </div>
+                                <div class="col-3 text-center">
+                                    <label class="text_font_size label_3"></label>
+                                    <div class="status_config_manual status_config_manual_3">
+                                        <input class="input_check2" type="checkbox" id="label_3" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                    </div>
+                                </div>
+                                <div class="col-3 text-center">
+                                    <label class="text_font_size label_4"></label>
+                                    <div class="status_config_manual status_config_manual_4">
+                                        <input class="input_check2" type="checkbox" id="label_4" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ul_sub_sensor"></div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    <!-- exit Modal Control -->
+        <!-- exit Modal Control -->
     <?php } ?>
-
-
     <script>
         var house_master = '<?= $s_master["house_master"] ?>';
-        var login_user = '<?= $account_user ?>';
+        // var login_user = '<?// $account_user ?>';
         var config_sn = $.parseJSON('<?= json_encode($config_sn) ?>');
         var config_cn = $.parseJSON('<?= json_encode($config_cn) ?>');
         var set_maxmin = $.parseJSON('<?= json_encode($set_maxmin) ?>');
         var sensor = $.parseJSON('<?= json_encode($sensor) ?>');
         var s_sensor = $.parseJSON('<?= json_encode($s_sensor) ?>');
-        $('.input_time').bootstrapMaterialDatePicker({
+        $('.input_tSet').bootstrapMaterialDatePicker({
             date: false,
             format: 'HH:mm'
         });
-        $('#time').bootstrapMaterialDatePicker({
+        $('.input_tL').bootstrapMaterialDatePicker({
             date: false,
             format: 'HH:mm'
         });
@@ -1129,15 +739,16 @@
         status_fan.push(parseInt(config_cn.cn_status_8))
         status_foggy.push(parseInt(config_cn.cn_status_9))
         status_foggy.push(parseInt(config_cn.cn_status_10))
-            // alert(countElement(1,status_fan))//
-            // var data_temp_out = [];
-            // var data_temp_in = [];
-            // var data_hum_out = [];
-            // var data_hum_in = [];
-            // var data_light_out = [];
-            // var data_light_in = [];
-            // var data_soil_in = [];
-            // console.log(Number(house_master.substring(5,10)))
+
+        // alert(countElement(1,status_fan))//
+        // var data_temp_out = [];
+        // var data_temp_in = [];
+        // var data_hum_out = [];
+        // var data_hum_in = [];
+        // var data_light_out = [];
+        // var data_light_in = [];
+        // var data_soil_in = [];
+        // console.log(Number(house_master.substring(5,10)))
 
         // ++++++++++++++++++++++++++++++++++
 
@@ -1189,43 +800,1508 @@
 
                 $(".memu_dash").show().addClass("mm-active");
                 $(this).removeClass("mm-active");
-                $("#Modal_control").modal('show', {
-                    backdrop: "static"
-                })
-                var client = null;
-                // These are configs
-                var hostname = "203.150.37.144"; //'103.2.115.15'; // 203.150.37.144   decccloud.com
-                var port = "8083";
-                var clientId = "mqtt_js_3074" + parseInt(Math.random() * 100000, 10);
-                // Create a client instance
-                client = new Paho.MQTT.Client(hostname, Number(port), "mqtt_control_324" + parseInt(Math.random() * 1000, 10));
-
-                // set callback handlers
-                client.onConnectionLost = onConnectionLost;
-                client.onMessageArrived = onMessageArrived;
-
-                // connect the client
-                client.connect({
-                    onSuccess: onConnect
+                $("#Modal_control").modal('show');
+                // var client = null;
+                // // These are configs
+                // var hostname = "203.150.37.144"; //'103.2.115.15'; // 203.150.37.144   decccloud.com
+                // var port = "8083";
+                // var clientId = "mqtt_js_3074" + parseInt(Math.random() * 100000, 10);
+                // // Create a client instance
+                // client = new Paho.MQTT.Client(hostname, Number(port), "mqtt_control_324" + parseInt(Math.random() * 1000, 10));
+                //
+                // // set callback handlers
+                // client.onConnectionLost = onConnectionLost;
+                // client.onMessageArrived = onMessageArrived;
+                //
+                // // connect the client
+                // client.connect({
+                //     onSuccess: onConnect
+                // });
+                //
+                // // called when the client connects
+                // function onConnect() {
+                //     // Once a connection has been made, make a subscription and send a message.
+                //     console.log("onConnect");
+                //     client.subscribe(house_master + "/control/config/auto");
+                // }
+                //
+                // // called when the client loses its connection
+                // function onConnectionLost(responseObject) {
+                //     if (responseObject.errorCode !== 0) {
+                //         console.log("onConnectionLost:" + responseObject.errorMessage);
+                //     }
+                // }
+                //
+                // // called when a message arrives
+                // function onMessageArrived(message) {
+                //     $("#save_auto_cont").click(function() {
+                //         for (var i = 1; i <= 6; i++) {
+                //             if ($("#swch_" + i).prop('checked') == true) {
+                //                 if ($("#time_s_" + i).val() === "") {
+                //                     $('#time_s_' + i).addClass('is-invalid')
+                //                     return false;
+                //                 } else {
+                //                     $('#time_s_' + i).removeClass('is-invalid')
+                //                 }
+                //                 if ($("#time_e_" + i).val() === "") {
+                //                     $('#time_e_' + i).addClass('is-invalid')
+                //                     return false;
+                //                 } else {
+                //                     $('#time_e_+i').removeClass('is-invalid')
+                //                 }
+                //                 if ($('#12').hasClass('active') == false) {
+                //                     if ($("#time_s_" + i).val() >= $("#time_e_" + i).val()) {
+                //                         swal_c(type = 'error', title = 'Error...', text = 'TIMMER ' + i + ' : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
+                //                         $('#time_s_1').addClass('is-invalid')
+                //                         $('#time_e_1').addClass('is-invalid')
+                //                         return false;
+                //                     } else {
+                //                         $('#time_s_' + i).removeClass('is-invalid')
+                //                         $('#time_e_' + i).removeClass('is-invalid')
+                //                     }
+                //                 }
+                //             }
+                //         }
+                //
+                //         function swal_c(type, title, text) {
+                //             Swal({
+                //                 type: type,
+                //                 title: title,
+                //                 html: text,
+                //                 allowOutsideClick: false
+                //             });
+                //         }
+                //         // alert($('#12').hasClass('active'));
+                //         // return false
+                //         swal({
+                //             title: 'บันทึกการเปลี่ยนแปลง',
+                //             text: "คุณต้องการบันทึกการเปลี่ยนแปลง ?",
+                //             type: 'warning',
+                //             allowOutsideClick: false,
+                //             showCancelButton: true,
+                //             confirmButtonColor: '#32CD32',
+                //             cancelButtonColor: '#FF3333',
+                //             confirmButtonText: 'ใช่',
+                //             cancelButtonText: 'ยกเลิก'
+                //         }).
+                //         then((result) => {
+                //             if (result.value) {
+                //                 if ($("#swch_1").prop('checked') == true) {
+                //                     var sw_1 = 1;
+                //                 } else {
+                //                     var sw_1 = 0;
+                //                 }
+                //                 if ($("#swch_2").prop('checked') == true) {
+                //                     var sw_2 = 1;
+                //                 } else {
+                //                     var sw_2 = 0;
+                //                 }
+                //                 if ($("#swch_3").prop('checked') == true) {
+                //                     var sw_3 = 1;
+                //                 } else {
+                //                     var sw_3 = 0;
+                //                 }
+                //                 if ($("#swch_4").prop('checked') == true) {
+                //                     var sw_4 = 1;
+                //                 } else {
+                //                     var sw_4 = 0;
+                //                 }
+                //                 if ($("#swch_5").prop('checked') == true) {
+                //                     var sw_5 = 1;
+                //                 } else {
+                //                     var sw_5 = 0;
+                //                 }
+                //                 if ($("#swch_6").prop('checked') == true) {
+                //                     var sw_6 = 1;
+                //                 } else {
+                //                     var sw_6 = 0;
+                //                 }
+                //                 $.ajax({
+                //                     type: "POST",
+                //                     url: "routes/tu/save_autoControl.php",
+                //                     data: {
+                //                         house_master: house_master,
+                //                         hidden_select_sw_auto: $(".hidden_select_sw_auto").val(),
+                //                         sw_1: sw_1,
+                //                         sw_2: sw_2,
+                //                         sw_3: sw_3,
+                //                         sw_4: sw_4,
+                //                         sw_5: sw_5,
+                //                         sw_6: sw_6,
+                //                         s_1: $("#time_s_1").val(),
+                //                         s_2: $("#time_s_2").val(),
+                //                         s_3: $("#time_s_3").val(),
+                //                         s_4: $("#time_s_4").val(),
+                //                         s_5: $("#time_s_5").val(),
+                //                         s_6: $("#time_s_6").val(),
+                //                         e_1: $("#time_e_1").val(),
+                //                         e_2: $("#time_e_2").val(),
+                //                         e_3: $("#time_e_3").val(),
+                //                         e_4: $("#time_e_4").val(),
+                //                         e_5: $("#time_e_5").val(),
+                //                         e_6: $("#time_e_6").val(),
+                //                         parseJSON: JSON.parse($('#val_sw_auto_time_set').val())
+                //                     },
+                //                     dataType: 'json',
+                //                     success: function(res) {
+                //                         console.log(res.data)
+                //                         if (res.status === "Insert_Success") {
+                //                             $("#Modal_Auto_control").modal("hide");
+                //                             var originalArray = res.data;
+                //                             var separator = '\r\n';
+                //                             var implodedArray = '';
+                //
+                //                             for (let i = 0; i < originalArray.length; i++) {
+                //
+                //                                 // add a string from original array
+                //                                 implodedArray += originalArray[i];
+                //
+                //                                 // unless the iterator reaches the end of
+                //                                 // the array add the separator string
+                //                                 if (i != originalArray.length - 1) {
+                //                                     implodedArray += separator;
+                //                                 }
+                //                             }
+                //                             // console.log(implodedArray);
+                //                             // if (message.destinationName == house_master + "/control/config/auto") {
+                //                             // var parseJSON = JSON.parse($('#val_sw_auto_time_set').val())
+                //                             // var result = message.payloadString;
+                //                             // var parseJSON = $.parseJSON(result);
+                //                             // console.log(parseJSON);
+                //                             // $.extend(parseJSON, res.data);
+                //                             // var json_msg = JSON.stringify(parseJSON);
+                //                             // console.log(parseJSON.length)
+                //                             mqtt_send(house_master + '/control/config/auto', implodedArray, '')
+                //                                 // }
+                //                             swal({
+                //                                 title: 'บันทึกข้อมูลสำเร็จ',
+                //                                 type: 'success',
+                //                                 allowOutsideClick: false,
+                //                                 confirmButtonColor: '#32CD32'
+                //                             });
+                //                             // fn_df_logdata_auto($('.hidden_select_sw_auto').val())
+                //                             for (var i = 1; i <= 6; i++) {
+                //                                 if ($("#swch_" + i).prop('checked') == true) {
+                //                                     $(".img_" + i).attr("src", "public/images/control/switck_on.png");
+                //                                 } else {
+                //                                     $(".img_" + i).attr("src", "public/images/control/switck_off.png");
+                //                                 }
+                //                             }
+                //                             $(".img_sw").show();
+                //                             $('.input_tSet').prop('disabled', true);
+                //                             $(".sw_toggle").hide();
+                //                             $(".menu_config_auto").show();
+                //                             $(".sw_mode_Auto").attr('disabled', false);
+                //                             $(".sw_mode_Manual").attr('disabled', false);
+                //                             $("#save_auto_cont").hide();
+                //                             $("#close_auto_cont").hide();
+                //                         } else {
+                //                             swal({
+                //                                 title: 'Error !',
+                //                                 text: "เกิดข้อผิดพลาด ?",
+                //                                 type: 'error',
+                //                                 allowOutsideClick: false,
+                //                                 confirmButtonColor: '#32CD32'
+                //                             }).then((result) => {
+                //                                 if (result.value) {
+                //                                     // location.reload();
+                //                                     return false;
+                //                                 }
+                //                             });
+                //                         }
+                //                     }
+                //                 });
+                //
+                //             }
+                //         });
+                //     }); // exit_save_Auto
+                //     $("#save_manual_cont").click(function() {
+                //         var log_sw = [];
+                //         var n_countSB = [];
+                //         var numb = $('.hidden_select_sw_manual').val();
+                //         if (numb == 1) {
+                //             if (parseInt(config_cn.cn_status_1) == 1) {
+                //                 if ($("#label_1").prop('checked') === true) {
+                //                     log_sw['sw_1'] = "ON";
+                //                     n_countSB.push(1);
+                //                 } else {
+                //                     log_sw['sw_1'] = "OFF";
+                //                     n_countSB.push(0);
+                //                 }
+                //             } else {
+                //                 log_sw['sw_1'] = "OFF";
+                //                 n_countSB.push(0);
+                //             }
+                //             if (parseInt(config_cn.cn_status_2) == 1) {
+                //                 if ($("#label_2").prop('checked') === true) {
+                //                     log_sw['sw_2'] = "ON";
+                //                     n_countSB.push(1);
+                //                 } else {
+                //                     log_sw['sw_2'] = "OFF";
+                //                     n_countSB.push(0);
+                //                 }
+                //             } else {
+                //                 log_sw['sw_2'] = "OFF";
+                //                 n_countSB.push(0);
+                //             }
+                //             if (parseInt(config_cn.cn_status_3) == 1) {
+                //                 if ($("#label_3").prop('checked') === true) {
+                //                     log_sw['sw_3'] = "ON";
+                //                     n_countSB.push(1);
+                //                 } else {
+                //                     log_sw['sw_3'] = "OFF";
+                //                     n_countSB.push(0);
+                //                 }
+                //             } else {
+                //                 log_sw['sw_3'] = "OFF";
+                //                 n_countSB.push(0);
+                //             }
+                //             if (parseInt(config_cn.cn_status_4) == 1) {
+                //                 if ($("#label_4").prop('checked') === true) {
+                //                     log_sw['sw_4'] = "ON";
+                //                     n_countSB.push(1);
+                //                 } else {
+                //                     log_sw['sw_4'] = "OFF";
+                //                     n_countSB.push(0);
+                //                 }
+                //             } else {
+                //                 log_sw['sw_4'] = "OFF";
+                //                 n_countSB.push(0);
+                //             }
+                //
+                //         } else if (numb == 2) {
+                //             if (parseInt(config_cn.cn_status_5) == 1) {
+                //                 if ($("#label_1").prop('checked') === true) {
+                //                     log_sw['sw_1'] = "ON";
+                //                     n_countSB.push(1);
+                //                 } else {
+                //                     log_sw['sw_1'] = "OFF";
+                //                     n_countSB.push(0);
+                //                 }
+                //             } else {
+                //                 log_sw['sw_1'] = "OFF";
+                //                 n_countSB.push(0);
+                //             }
+                //             if (parseInt(config_cn.cn_status_6) == 1) {
+                //                 if ($("#label_2").prop('checked') === true) {
+                //                     log_sw['sw_2'] = "ON";
+                //                     n_countSB.push(1);
+                //                 } else {
+                //                     log_sw['sw_2'] = "OFF";
+                //                     n_countSB.push(0);
+                //                 }
+                //             } else {
+                //                 log_sw['sw_2'] = "OFF";
+                //                 n_countSB.push(0);
+                //             }
+                //             if (parseInt(config_cn.cn_status_7) == 1) {
+                //                 if ($("#label_3").prop('checked') === true) {
+                //                     log_sw['sw_3'] = "ON";
+                //                     n_countSB.push(1);
+                //                 } else {
+                //                     log_sw['sw_3'] = "OFF";
+                //                     n_countSB.push(0);
+                //                 }
+                //             } else {
+                //                 log_sw['sw_3'] = "OFF";
+                //                 n_countSB.push(0);
+                //             }
+                //             if (parseInt(config_cn.cn_status_8) == 1) {
+                //                 if ($("#label_4").prop('checked') === true) {
+                //                     log_sw['sw_4'] = "ON";
+                //                     n_countSB.push(1);
+                //                 } else {
+                //                     log_sw['sw_4'] = "OFF";
+                //                     n_countSB.push(0);
+                //                 }
+                //             } else {
+                //                 log_sw['sw_4'] = "OFF";
+                //                 n_countSB.push(0);
+                //             }
+                //         } else if (numb == 3) {
+                //             if (parseInt(config_cn.cn_status_9) == 1) {
+                //                 if ($("#label_1").prop('checked') === true) {
+                //                     log_sw['sw_1'] = "ON";
+                //                     n_countSB.push(1);
+                //                 } else {
+                //                     log_sw['sw_1'] = "OFF";
+                //                     n_countSB.push(0);
+                //                 }
+                //             } else {
+                //                 log_sw['sw_1'] = "OFF";
+                //                 n_countSB.push(0);
+                //             }
+                //             if (parseInt(config_cn.cn_status_10) == 1) {
+                //                 if ($("#label_2").prop('checked') === true) {
+                //                     log_sw['sw_2'] = "ON";
+                //                     n_countSB.push(1);
+                //                 } else {
+                //                     log_sw['sw_2'] = "OFF";
+                //                     n_countSB.push(0);
+                //                 }
+                //             } else {
+                //                 log_sw['sw_2'] = "OFF";
+                //                 n_countSB.push(0);
+                //             }
+                //             log_sw['sw_3'] = "OFF";
+                //             log_sw['sw_4'] = "OFF";
+                //         }
+                //         if (countElement(1, n_countSB) == 0) {
+                //             swal({
+                //                     html: 'ต้องมีอุปกรณ์เปิดใช้งาน<br>อย่างน้อย 1 ตัว !',
+                //                     // text: "ต้องมีอุปกรณ์เปิดใช้งานอย่างน้อย 1 ตัว !",
+                //                     type: 'warning',
+                //                     allowOutsideClick: false,
+                //                     confirmButtonColor: '#32CD32'
+                //                 })
+                //                 // then((result) => {
+                //                 //     if (result.value) {
+                //                 //         location.reload();
+                //                 //         return false;
+                //                 //     }
+                //                 // });
+                //         } else {
+                //             swal({
+                //                 title: 'บันทึกการเปลี่ยนแปลง',
+                //                 text: "คุณต้องการบันทึกการเปลี่ยนแปลง ?",
+                //                 type: 'warning',
+                //                 allowOutsideClick: false,
+                //                 showCancelButton: true,
+                //                 confirmButtonColor: '#32CD32',
+                //                 cancelButtonColor: '#FF3333',
+                //                 confirmButtonText: 'ใช่',
+                //                 cancelButtonText: 'ยกเลิก'
+                //             }).then((result) => {
+                //                 if (result.value) {
+                //                     var log_sw2 = {
+                //                             'mode': numb,
+                //                             'sw_1': log_sw['sw_1'],
+                //                             'sw_2': log_sw['sw_2'],
+                //                             'sw_3': log_sw['sw_3'],
+                //                             'sw_4': log_sw['sw_4']
+                //                         }
+                //                         // console.log(log_sw)
+                //                     $.ajax({
+                //                         type: "POST",
+                //                         url: "routes/tu/save_manualControl.php",
+                //                         data: {
+                //                             house_master: house_master,
+                //                             log_sw: log_sw2
+                //                         },
+                //                         dataType: 'json',
+                //                         success: function(res) {
+                //                             // console.log(res.data)
+                //                             if (res.status === "Insert_Success") {
+                //                                 $("#Modal_Auto_control").modal("hide");
+                //                                 $('#val_sw_manual').val(JSON.stringify(res.data));
+                //                                 // console.log(res.data);
+                //                                 var new_res = //JSON.stringify(
+                //                                     '[config]' + '\r\n' +
+                //                                     'serial_id=' + house_master + '\r\n' +
+                //                                     'dripper_1=' + res.data['dripper_1'] + '\r\n' +
+                //                                     'dripper_2=' + res.data['dripper_2'] + '\r\n' +
+                //                                     'dripper_3=' + res.data['dripper_3'] + '\r\n' +
+                //                                     'dripper_4=' + res.data['dripper_4'] + '\r\n' +
+                //                                     'fan_1=' + res.data['fan_1'] + '\r\n' +
+                //                                     'fan_2=' + res.data['fan_2'] + '\r\n' +
+                //                                     'fan_3=' + res.data['fan_3'] + '\r\n' +
+                //                                     'fan_4=' + res.data['fan_4'] + '\r\n' +
+                //                                     'foggy_1=' + res.data['foggy_1'] + '\r\n' +
+                //                                     'foggy_2=' + res.data['foggy_2']
+                //
+                //                                 // );
+                //                                 mqtt_send(house_master + '/control/config/manual', new_res, '')
+                //                                 for (var i = 1; i <= 10; i++) {
+                //                                     if (i <= 4) {
+                //                                         if (config_cn['cn_status_' + i] == 1) {
+                //                                             if (res.data['dripper_' + i] == 'ON') {
+                //                                                 $(".dash_img_con_" + i).attr("src", "public/images/control/TU/sprinkler-off.svg");
+                //                                             } else {
+                //                                                 $(".dash_img_con_" + i).attr("src", "public/images/control/TU/Sprinkler_disable.svg");
+                //                                             }
+                //                                         } else {
+                //                                             $(".dash_img_con_" + i).attr("src", "public/images/control/TU/Sprinkler_disable.svg");
+                //                                         }
+                //                                     } else if (i > 4 && i <= 8) {
+                //                                         if (config_cn['cn_status_' + i] == 1) {
+                //                                             if (res.data['fan_' + (i - 4)] == 'ON') {
+                //                                                 $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-off.svg");
+                //                                             } else {
+                //                                                 $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-disable.svg");
+                //                                             }
+                //                                         } else {
+                //                                             $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-disable.svg");
+                //                                         }
+                //                                     } else if (i > 8) {
+                //                                         if (config_cn['cn_status_' + i] == 1) {
+                //                                             if (res.data['foggy_' + (i - 8)] == 'ON') {
+                //                                                 $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-off.svg");
+                //                                             } else {
+                //                                                 $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-disable.svg");
+                //                                             }
+                //                                         } else {
+                //                                             $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-disable.svg");
+                //                                         }
+                //                                     }
+                //                                 }
+                //                                 swal({
+                //                                     title: 'บันทึกข้อมูลสำเร็จ',
+                //                                     type: 'success',
+                //                                     allowOutsideClick: false,
+                //                                     confirmButtonColor: '#32CD32'
+                //                                 });
+                //                                 $(".menu_config_manual").show();
+                //                                 $('.status_config_manual').hide();
+                //                                 $(".sw_mode_Auto").attr('disabled', false);
+                //                                 $(".sw_mode_Manual").attr('disabled', false);
+                //                                 $("#save_manual_cont").hide();
+                //                                 $("#close_manual_cont").hide();
+                //                                 fn_label_manual($('.hidden_select_sw_manual').val());
+                //                             } else {
+                //                                 swal({
+                //                                     title: 'Error !',
+                //                                     text: "เกิดข้อผิดพลาด ?",
+                //                                     type: 'error',
+                //                                     allowOutsideClick: false,
+                //                                     confirmButtonColor: '#32CD32'
+                //                                 }).then((result) => {
+                //                                     if (result.value) {
+                //                                         location.reload();
+                //                                         return false;
+                //                                     }
+                //                                 });
+                //                             }
+                //                         }
+                //                     });
+                //
+                //                 }
+                //             });
+                //         }
+                //     }); // exit_save_Manual
+                //     function mqtt_send(msg_dn, msg, user) {
+                //         message = new Paho.MQTT.Message(msg);
+                //         message.destinationName = msg_dn;
+                //         message.qos = 1;
+                //         message.retained = true;
+                //         client.send(message);
+                //     }
+                //     $('.sw_mode_Auto').click(function() { // console.log($(this).attr("id"));
+                //         // alert($(this).attr("id"))
+                //         if ($(this).hasClass("active") === false) {
+                //             switch_mode(sw_name = "อัตโนมัติ", mess = "Auto");
+                //         }
+                //     });
+                //     $('.sw_mode_Manual').click(function() { // console.log($(this).attr("id"));
+                //         if ($(this).hasClass("btn-success") === false) {
+                //             switch_mode(sw_name = "กำหนดเอง", mess = "Manual");
+                //         }
+                //     });
+                //
+                //     function switch_mode(sw_name, mess, mqtt_name_us) {
+                //         swal({
+                //             title: 'เปลี่ยนโหมดการทำงาน !',
+                //             text: "คุณต้องการเปลี่ยนเป็นไปใช้โหมด" + sw_name + " ?",
+                //             type: 'warning',
+                //             allowOutsideClick: false,
+                //             showCancelButton: true,
+                //             confirmButtonColor: '#32CD32',
+                //             cancelButtonColor: '#FF3333',
+                //             confirmButtonText: 'ใช่',
+                //             cancelButtonText: 'ยกเลิก'
+                //         }).then((result) => {
+                //             if (result.value) {
+                //                 // console.log(login_user);
+                //                 // message = new Paho.MQTT.Message(login_user);
+                //                 // message.destinationName = house_master + "/control/status/user_control";
+                //                 // message.retained = true;
+                //                 // message.qos = 1;
+                //                 // client.send(message);
+                //                 //
+                //                 // message = new Paho.MQTT.Message(mess);
+                //                 // message.destinationName = house_master + "/control/status/mode";
+                //                 // message.retained = true;
+                //                 // message.qos = 1;
+                //                 // client.send(message);
+                //                 // ----------------------------------------------------------
+                //                 message = new Paho.MQTT.Message(login_user);
+                //                 message.destinationName = house_master + "/control/loads/user_control";
+                //                 message.retained = true;
+                //                 message.qos = 1;
+                //                 client.send(message);
+                //
+                //                 message = new Paho.MQTT.Message(mess);
+                //                 message.destinationName = house_master + "/control/loads/mode";
+                //                 message.retained = true;
+                //                 message.qos = 1;
+                //                 client.send(message);
+                //             }
+                //         });
+                //     }
+                //     $('.sw_manual_on').click(function() {
+                //         if ($(this).hasClass("active") === false) {
+                //             switch_control("ON", $('.hidden_select_sw_manual').val());
+                //         }
+                //     });
+                //     $('.sw_manual_off').click(function() {
+                //         if ($(this).hasClass("active") === false) {
+                //             switch_control("OFF", $('.hidden_select_sw_manual').val());
+                //         }
+                //     });
+                //
+                //     function switch_control(sts, val) {
+                //         if (sts === "ON") {
+                //             var status = 'เปิด';
+                //         } else {
+                //             var status = 'ปิด';
+                //         }
+                //         var sw_log = $.parseJSON($('#val_sw_manual').val());
+                //         if (val == 1) {
+                //             var name = 'น้ำหยด';
+                //             if (sw_log.dripper_1 == 'ON') {
+                //                 var sw_1 = 1;
+                //                 var mqtt_name_1 = 'dripper_1';
+                //             } else {
+                //                 var sw_1 = 0;
+                //             }
+                //             if (sw_log.dripper_2 == 'ON') {
+                //                 var sw_2 = 1;
+                //                 var mqtt_name_2 = 'dripper_2';
+                //             } else {
+                //                 var sw_2 = 0;
+                //             }
+                //             if (sw_log.dripper_3 == 'ON') {
+                //                 var sw_1 = 3;
+                //                 var mqtt_name_3 = 'dripper_3';
+                //             } else {
+                //                 var sw_3 = 0;
+                //             }
+                //             if (sw_log.dripper_4 == 'ON') {
+                //                 var sw_4 = 1;
+                //                 var mqtt_name_4 = 'dripper_4';
+                //             } else {
+                //                 var sw_4 = 0;
+                //             }
+                //         } else if (val == 2) {
+                //             var name = 'พัดลม';
+                //             if (sw_log.fan_1 == 'ON') {
+                //                 var sw_1 = 1;
+                //                 var mqtt_name_1 = 'fan_1';
+                //             } else {
+                //                 var sw_1 = 0;
+                //             }
+                //             if (sw_log.fan_2 == 'ON') {
+                //                 var sw_2 = 1;
+                //                 var mqtt_name_2 = 'fan_2';
+                //             } else {
+                //                 var sw_2 = 0;
+                //             }
+                //             if (sw_log.fan_3 == 'ON') {
+                //                 var sw_1 = 3;
+                //                 var mqtt_name_3 = 'fan_3';
+                //             } else {
+                //                 var sw_3 = 0;
+                //             }
+                //             if (sw_log.fan_4 == 'ON') {
+                //                 var sw_4 = 1;
+                //                 var mqtt_name_4 = 'fan_4';
+                //             } else {
+                //                 var sw_4 = 0;
+                //             }
+                //         } else if (val == 3) {
+                //             var name = 'พ่นหมอก';
+                //             if (sw_log.foggy_1 == 'ON') {
+                //                 var sw_1 = 1;
+                //                 var mqtt_name_1 = 'foggy_1';
+                //             } else {
+                //                 var sw_1 = 0;
+                //             }
+                //             if (sw_log.foggy_2 == 'ON') {
+                //                 var sw_2 = 1;
+                //                 var mqtt_name_2 = 'foggy_2';
+                //             } else {
+                //                 var sw_2 = 0;
+                //             }
+                //             var sw_3 = 0;
+                //             var sw_4 = 0;
+                //         } else if (val == 4) {
+                //             var name = 'สเปรย์';
+                //             var sw_1 = 1;
+                //             var mqtt_name_1 = 'spray';
+                //             var sw_2 = 0;
+                //             var sw_3 = 0;
+                //             var sw_4 = 0;
+                //         } else if (val == 5) {
+                //             var name = 'ม่านพรางแสง';
+                //             var mqtt_name_1 = 'shading';
+                //             var sw_1 = 1;
+                //             var sw_2 = 0;
+                //             var sw_3 = 0;
+                //             var sw_4 = 0;
+                //         }
+                //         swal({
+                //             title: 'คุณต้องการ ' + status + ' ' + name + ' ?',
+                //             // text: "คุณต้องการเปลี่ยนไปใช้โหมด Manual !!!",
+                //             type: 'warning',
+                //             allowOutsideClick: false,
+                //             showCancelButton: true,
+                //             confirmButtonColor: '#32CD32',
+                //             cancelButtonColor: '#FF3333',
+                //             confirmButtonText: 'ใช่',
+                //             cancelButtonText: 'ยกเลิก'
+                //         }).then((result) => {
+                //             // console.log(result)
+                //             if (result.value) {
+                //                 // alert(sta)
+                //                 // return false;
+                //
+                //                 // message = new Paho.MQTT.Message(login_user);
+                //                 // message.destinationName = house_master + "/control/status/user_control";
+                //                 // message.qos = 1;
+                //                 // message.retained = true;
+                //                 // client.send(message);
+                //                 // if(sw_1 == 1){
+                //                 //     message = new Paho.MQTT.Message(sts);
+                //                 //     message.destinationName = house_master + "/control/status/" + mqtt_name_1;
+                //                 //     message.qos = 1;
+                //                 //     message.retained = true;
+                //                 //     client.send(message);
+                //                 //     // console.log(message.qos);
+                //                 // }
+                //                 // if(sw_2 == 1){
+                //                 //     message = new Paho.MQTT.Message(sts);
+                //                 //     message.destinationName = house_master + "/control/status/" + mqtt_name_2;
+                //                 //     message.qos = 1;
+                //                 //     message.retained = true;
+                //                 //     client.send(message);
+                //                 // }
+                //                 // if(sw_3 == 1){
+                //                 //     message = new Paho.MQTT.Message(sts);
+                //                 //     message.destinationName = house_master + "/control/status/" + mqtt_name_3;
+                //                 //     message.qos = 1;
+                //                 //     message.retained = true;
+                //                 //     client.send(message);
+                //                 // }
+                //                 // if(sw_4 == 1){
+                //                 //     message = new Paho.MQTT.Message(sts);
+                //                 //     message.destinationName = house_master + "/control/status/" + mqtt_name_4;
+                //                 //     message.qos = 1;
+                //                 //     message.retained = true;
+                //                 //     client.send(message);
+                //                 // }
+                //
+                //                 message = new Paho.MQTT.Message(login_user);
+                //                 message.destinationName = house_master + "/control/loads/user_control";
+                //                 message.qos = 1;
+                //                 message.retained = true;
+                //                 client.send(message);
+                //                 if (val == 1) {
+                //                     message = new Paho.MQTT.Message(sts);
+                //                     message.destinationName = house_master + "/control/loads/dripper";
+                //                     message.qos = 1;
+                //                     message.retained = true;
+                //                     client.send(message);
+                //                 } else if (val == 2) {
+                //                     message = new Paho.MQTT.Message(sts);
+                //                     message.destinationName = house_master + "/control/loads/fan";
+                //                     message.qos = 1;
+                //                     message.retained = true;
+                //                     client.send(message);
+                //                 } else if (val == 3) {
+                //                     message = new Paho.MQTT.Message(sts);
+                //                     message.destinationName = house_master + "/control/loads/foggy";
+                //                     message.qos = 1;
+                //                     message.retained = true;
+                //                     client.send(message);
+                //                 } else if (val == 4) {
+                //                     message = new Paho.MQTT.Message(sts);
+                //                     message.destinationName = house_master + "/control/loads/spray";
+                //                     message.qos = 1;
+                //                     message.retained = true;
+                //                     client.send(message);
+                //                 } else if (val == 5) {
+                //                     message = new Paho.MQTT.Message(sts);
+                //                     message.destinationName = house_master + "/control/loads/shading";
+                //                     message.qos = 1;
+                //                     message.retained = true;
+                //                     client.send(message);
+                //
+                //                 }
+                //             }
+                //         });
+                //     }
+                // } // exit_message
+                // // ================================================
+                // Auto
+                // $(".menu_config_auto").show();
+                $(".img_sw").show();
+                $(".sw_toggle").hide();
+                $('.input_tSet').prop('disabled', true);
+                $('.input_tLoop').prop('disabled', true);
+                fn_df_checkbox_auto($('.hidden_select_sw_auto').val());
+                fn_df_logdata_auto($('.hidden_select_sw_auto').val())
+                $("#save_auto_cont").hide();
+                $("#close_auto_cont").hide();
+                $('.sw_mode_timeSet').prop('disabled', true)
+                $('.sw_mode_timeLoop').prop('disabled', true)
+                $(".menu_config_auto").show();
+                $(".menu_config_auto").click(function() { // เมนูตั้งค่า
+                    // var res = JSON.parse($('#val_sw_auto_time_set').val())
+                        // console.log(res);
+                        // $(".nav-link").addClass('disabled');
+                    var config_parse = JSON.parse($('#val_config').val());
+                    var res = config_parse.config_timeSet;
+                    var chanel = $('.hidden_select_sw_auto').val();
+                    if(chanel < 12 && chanel > 8 || chanel < 5){
+                        var res2 = config_parse.config_timeLoop;
+                    }
+                    $(this).hide();
+                    $(".img_sw").hide();
+                    $(".sw_toggle").show();
+                    $("#close_auto_cont").show();
+                    $(".sw_mode_Auto").attr('disabled', true);
+                    $(".sw_mode_Manual").attr('disabled', true);
+                    $('.sw_mode_tracking').prop('disabled', true)
+                    $('.sw_mode_timer').prop('disabled', true)
+                    $('.sw_mode_timeSet').prop('disabled', false)
+                    $('.sw_mode_timeLoop').prop('disabled', false)
+                    $(".close_modal").hide();
+                    // return false;
+                    for (var i = 1; i <= 6; i++) {
+                        if (res["load_" + $('.hidden_select_sw_auto').val()]["load_st_" + i] == 1) {
+                            $("#time_s_" + i).prop('disabled', false);
+                            $("#time_e_" + i).prop('disabled', false);
+                        } else {
+                            $("#time_s_" + i).prop('disabled', true);
+                            $("#time_e_" + i).prop('disabled', true);
+                        }
+                        if(chanel < 12 && chanel > 8 || chanel < 5){
+                            if (res2["load_" + $('.hidden_select_sw_auto').val()]["load_st_" + i] == 1) {
+                                $("#time_sL_" + i).prop('disabled', false);
+                                $("#time_cy_" + i).prop('disabled', false);
+                                $("#time_on1_" + i).prop('disabled', false);
+                                $("#time_on2_" + i).prop('disabled', false);
+                                $("#time_off1_" + i).prop('disabled', false);
+                                $("#time_off2_" + i).prop('disabled', false);
+                            }else {
+                                $("#time_sL_" + i).prop('disabled', true);
+                                $("#time_cy_" + i).prop('disabled', true);
+                                $("#time_on1_" + i).prop('disabled', true);
+                                $("#time_on2_" + i).prop('disabled', true);
+                                $("#time_off1_" + i).prop('disabled', true);
+                                $("#time_off2_" + i).prop('disabled', true);
+                            }
+                        }
+                    }
+                    $(".input_tSet").change(function() {
+                        fn_check_auto_save($('.hidden_select_sw_auto').val(), '');
+                    });
+                    $(".input_tLoop").change(function() {
+                        fn_check_auto_save($('.hidden_select_sw_auto').val(), '');
+                    });
                 });
-
-                // called when the client connects
-                function onConnect() {
-                    // Once a connection has been made, make a subscription and send a message.
-                    console.log("onConnect");
-                    client.subscribe(house_master + "/control/config/auto");
+                $('.input_check').change(function() { // bootstrap_switch
+                    var input_num = this.id.split("_");
+                    var config_parse = JSON.parse($('#val_config').val());
+                    var res = config_parse.config_timeSet;
+                    var chanel = $('.hidden_select_sw_auto').val();
+                    if(chanel < 12 && chanel > 8 || chanel < 5){
+                        var res2 = config_parse.config_timeLoop;
+                    }
+                    // return false;
+                    if(input_num[0] === 'swch'){
+                        if ($(this).prop('checked') === true) {
+                            $("#time_s_" + input_num[1]).prop('disabled', false).val(res["load_" + $('.hidden_select_sw_auto').val()]["load_s_" + input_num[1]]).removeClass('is-invalid');
+                            $("#time_e_" + input_num[1]).prop('disabled', false).val(res["load_" + $('.hidden_select_sw_auto').val()]["load_e_" + input_num[1]]).removeClass('is-invalid');
+                        } else {
+                            $("#time_s_" + input_num[1]).prop('disabled', true).val("").removeClass('is-invalid');
+                            $("#time_e_" + input_num[1]).prop('disabled', true).val("").removeClass('is-invalid');
+                        }
+                        fn_check_auto_save($('.hidden_select_sw_auto').val(), '');
+                    }
+                    else if (input_num[0] === 'swchL') {
+                        if ($(this).prop('checked') === true) {
+                            $("#time_sL_" + input_num[1]).prop('disabled', false).val(res2["load_" + $('.hidden_select_sw_auto').val()]["load_s_" + input_num[1]]).removeClass('is-invalid');
+                            if(res2["load_" + $('.hidden_select_sw_auto').val()]["load_cycle_" + input_num[1]] == 0){
+                                $("#time_cy_" + input_num[1]).prop('disabled', false).val(1).removeClass('is-invalid');
+                            }else {
+                                $("#time_cy_" + input_num[1]).prop('disabled', false).val(res2["load_" + $('.hidden_select_sw_auto').val()]["load_cycle_" + input_num[1]]).removeClass('is-invalid');
+                            }
+                            $("#time_on1_" + input_num[1]).prop('disabled', false).val(res2["load_" + $('.hidden_select_sw_auto').val()]["load_on_" + input_num[1]]).removeClass('is-invalid');
+                            $("#time_on2_" + input_num[1]).prop('disabled', false).val(res2["load_" + $('.hidden_select_sw_auto').val()]["load_on_" + input_num[1]]).removeClass('is-invalid');
+                            $("#time_off1_" + input_num[1]).prop('disabled', false).val(res2["load_" + $('.hidden_select_sw_auto').val()]["load_off_" + input_num[1]]).removeClass('is-invalid');
+                            $("#time_off2_" + input_num[1]).prop('disabled', false).val(res2["load_" + $('.hidden_select_sw_auto').val()]["load_off_" + input_num[1]]).removeClass('is-invalid');
+                        }else {
+                            $("#time_sL_" + input_num[1]).prop('disabled', true).val("").removeClass('is-invalid');
+                            $("#time_cy_" + input_num[1]).prop('disabled', true).val("").removeClass('is-invalid');
+                            $("#time_on1_" + input_num[1]).prop('disabled', true).val("").removeClass('is-invalid');
+                            $("#time_on2_" + input_num[1]).prop('disabled', true).val("").removeClass('is-invalid');
+                            $("#time_off1_" + input_num[1]).prop('disabled', true).val("").removeClass('is-invalid');
+                            $("#time_off2_" + input_num[1]).prop('disabled', true).val("").removeClass('is-invalid');
+                        }
+                        fn_check_auto_save($('.hidden_select_sw_auto').val(), '');
+                    }
+                });
+                $("#close_auto_cont").click(function() { // เมนู close การตั้งค่า
+                    fn_check_auto_save($('.hidden_select_sw_auto').val(), 'close')
+                });
+                $('.sw_sel_load_auto').click(function() { // เลือกโหลด_auto
+                    if ($('.menu_config_auto').is(":hidden") == true) {
+                        swal({
+                            title: 'ข้อผิดพลาด !',
+                            text: "กรุณาบันทึกหรือยกเลิกการตั้งค่าก่อน !!!",
+                            type: 'warning',
+                            allowOutsideClick: false,
+                            confirmButtonColor: '#32CD32',
+                            confirmButtonText: 'ตกลง',
+                        });
+                    } else {
+                        var numb = $(this).attr('id');
+                        if (parseInt(config_cn['cn_status_' + numb]) == 0) {
+                            swal({
+                                title: 'โหลดนี้ไม่ถูกต่อใช้งาน !!!',
+                                text: "กรุณาเลือกโหลดอื่น",
+                                type: 'warning',
+                                allowOutsideClick: false,
+                                confirmButtonColor: '#32CD32',
+                                confirmButtonText: 'ตกลง',
+                            });
+                        } else {
+                            $('.hidden_select_sw_auto').val(numb)
+                            fn_df_checkbox_auto(numb);
+                            fn_df_logdata_auto(numb);
+                            $("#save_auto_cont").hide();
+                            if (numb == 12) {
+                                $('.L_start').html('เปิดรับแสง');
+                                $('.L_stop').html('ปิดรับแสง');
+                            } else {
+                                $('.L_start').html('เริ่ม');
+                                $('.L_stop').html('สิ้นสุด');
+                            }
+                        }
+                    }
+                })
+                $('.sw_mode_Auto').click(function() { // console.log($(this).attr("id"));
+                    // alert($(this).hasClass("active"))
+                    if ($(this).hasClass("btn-success") === false) {
+                        switch_mode('อัตโนมัติ', 'Auto', '', 'mode');
+                    }
+                });
+                $('.sw_mode_Manual').click(function() { // console.log($(this).attr("id"));
+                    if ($(this).hasClass("btn-success") === false) {
+                        switch_mode('กำหนดเอง', 'Manual', '', 'mode');
+                    }
+                });
+                $('.sw_mode_tracking').click(function(){
+                    if($(this).hasClass('btn-info') == false){
+                        switch_mode('ตามเซนเซอร์', 'Tracking', '', 'submode');
+                    }
+                });
+                $('.sw_mode_timer').click(function(){
+                    if($(this).hasClass('btn-info') == false){
+                        switch_mode('ตั้งเวลา', 'Timer', '', 'submode');
+                    }
+                });
+                // Mode_Auto =====================================================
+                $('.sw_mode_timeSet').click(function(){
+                    if($(this).hasClass('btn-primary') == false){
+                        switch_mode('ตั้งเวลาทำงาน', 'Time_set', $('.hidden_select_sw_auto').val(), 'subtimer');
+                    }
+                });
+                $('.sw_mode_timeLoop').click(function(){
+                    if($(this).hasClass('btn-primary') == false){
+                        switch_mode('โปรแกรมต่อเนื่อง', 'Time_loop', $('.hidden_select_sw_auto').val(), 'subtimer');
+                    }
+                });
+                function switch_mode(sw_name, mess, channel, mode) { // หังก์ชั่นส่งค่าไปยัง mqtt
+                    swal({
+                        title: 'เปลี่ยนโหมดการทำงาน !',
+                        text: "คุณต้องการเปลี่ยนเป็นไปใช้โหมด " + sw_name + " ?",
+                        type: 'warning',
+                        allowOutsideClick: false,
+                        showCancelButton: true,
+                        confirmButtonColor: '#32CD32',
+                        cancelButtonColor: '#FF3333',
+                        confirmButtonText: 'ใช่',
+                        cancelButtonText: 'ยกเลิก'
+                    }).then((result) => {
+                        if (result.value) {
+                            $.ajax({
+                                type: "POST",
+                                url: "routes/tu/save_submode.php",
+                                data: {
+                                    house_master: house_master,
+                                    mess: mess,
+                                    channel: channel,
+                                    mode: mode
+                                },
+                                dataType: 'json',
+                                success: function(res) {
+                                    console.log(res.data)
+                                    return false;
+                                    if (res.status === "Insert_Success") {
+                                        swal({
+                                            title: 'บันทึกข้อมูลสำเร็จ',
+                                            type: 'success',
+                                            allowOutsideClick: false,
+                                            confirmButtonColor: '#32CD32'
+                                        });
+                                    } else {
+                                        swal({
+                                            title: 'Error !',
+                                            html: "เกิดข้อผิดพลาด <br> Reload the web page.",
+                                            type: 'error',
+                                            allowOutsideClick: false,
+                                            confirmButtonColor: '#32CD32'
+                                        }).then((result) => {
+                                            if (result.value) {
+                                                location.reload();
+                                                return false;
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    });
                 }
-
-                // called when the client loses its connection
-                function onConnectionLost(responseObject) {
-                    if (responseObject.errorCode !== 0) {
-                        console.log("onConnectionLost:" + responseObject.errorMessage);
+                // df sw Auto
+                function fn_df_checkbox_auto(val) { // switch_เลือกโหลด
+                    for (var i = 1; i <= 12; i++) {
+                        if (i == val) {
+                            if (i == 12) {
+                                $('.title_load_auto').html('ม่านพรางแสง');
+                            } else {
+                                $('.title_load_auto').html(config_cn['cn_name_' + i]);
+                            }
+                            $("#" + i).addClass('active');
+                        } else {
+                            $('#' + i).removeClass('active');
+                        }
+                    }
+                    if(val < 5 || val > 8 && val < 12){
+                        var parseJSON = JSON.parse($('#val_config').val());
+                        var sub_mode = parseJSON.sub_mode;
+                        if (sub_mode.sub_mode === 'Timer') {
+                            $('.sw_mode_tracking').show().removeClass('btn-info').addClass('btn-outline-info');
+                            $('.sw_mode_timer').show().addClass('btn-info').removeClass('btn-outline-info');
+                            $('.ul_sub_timer').show();
+                            $('.ul_sub_sensor').hide();
+                        }
+                        else {
+                            $('.sw_mode_tracking').show().addClass('btn-info').removeClass('btn-outline-info');
+                            $('.sw_mode_timer').show().removeClass('btn-info').addClass('btn-outline-info');
+                            $('.ul_sub_timer').hide();
+                            $('.ul_sub_sensor').show();
+                        }
+                        // alert($('.hidden_select_sw_auto').val())
+                        if (sub_mode['sub_mode_'+$('.hidden_select_sw_auto').val()] === 'Time_set') {
+                            $('.sw_mode_timeSet').show().addClass('btn-primary').removeClass('btn-outline-primary');
+                            $('.sw_mode_timeLoop').show().removeClass('btn-primary').addClass('btn-outline-primary');
+                            $('.ul_mode_timeSet').show();
+                            $('.ul_mode_timeLoop').hide();
+                        }
+                        else {
+                            $('.sw_mode_timeSet').show().removeClass('btn-primary').addClass('btn-outline-primary');
+                            $('.sw_mode_timeLoop').show().addClass('btn-primary').removeClass('btn-outline-primary');
+                            $('.ul_mode_timeSet').hide();
+                            $('.ul_mode_timeLoop').show();
+                        }
+                    }else {
+                        $('.sw_mode_timeSet').hide();//.addClass('btn-primary').removeClass('btn-outline-primary');
+                        $('.sw_mode_timeLoop').hide();//.removeClass('btn-primary').addClass('btn-outline-primary');
+                        $('.ul_mode_timeSet').show();
+                        $('.ul_mode_timeLoop').hide();
                     }
                 }
+                // df input Auto
+                function fn_df_logdata_auto(numb) { // input_value
+                    var config_parse = JSON.parse($('#val_config').val());
+                    var res = config_parse.config_timeSet;
+                    if(numb < 12 && numb > 8 || numb < 5){
+                        var res2 = config_parse.config_timeLoop;
+                    }
+                    // var res2 = JSON.parse($('#val_sw_auto_time_loop').val());
+                    // console.log(config_parse);
+                    // return false;
+                    for (var i = 1; i <= 6; i++) {
+                        if (res["load_" + numb]["load_st_" + i] == 1) {
+                            $("#swch_" + i).bootstrapToggle('on');
+                            $(".img_" + i).attr("src", "public/images/control/switck_on.png");
+                            $("#time_s_" + i).prop('disabled', true).val(res["load_" + numb]["load_s_" + i]);
+                            $("#time_e_" + i).prop('disabled', true).val(res["load_" + numb]["load_e_" + i]);
+                        } else {
+                            $("#swch_" + i).bootstrapToggle('off');
+                            $(".img_" + i).attr("src", "public/images/control/switck_off.png");
+                            $("#time_s_" + i).prop('disabled', true).val("");
+                            $("#time_e_" + i).prop('disabled', true).val("");
+                        }
+                        if(numb < 5 || numb > 8 && numb < 12){
+                            if (res2["load_" + numb]["load_st_" + i] == 1) {
+                                $("#swchL_" + i).bootstrapToggle('on');
+                                $(".imgL_" + i).attr("src", "public/images/control/switck_on.png");
+                                $("#time_sL_" + i).prop('disabled', true).val(res2["load_" + numb]["load_s_" + i]);
+                                $("#time_cy_" + i).prop('disabled', true).val(res2["load_" + numb]["load_cycle_" + i]);
+                                if(moment.utc(res2["load_" + numb]["load_on_" + i] * 1000).format("HH:mm:ss").split(':')[0] > 59){
+                                    $("#time_on1_" + i).prop('disabled', true).val( parseInt(moment.utc(res2["load_" + numb]["load_on_" + i] * 1000).format("HH:mm:ss").split(':')[0]) + parseInt(moment.utc(res2["load_" + numb]["load_on_" + i] * 1000).format("HH:mm:ss").split(':')[1]) );
+                                }else {
+                                    if(parseInt(moment.utc(res2["load_" + numb]["load_on_" + i] * 1000).format("HH:mm:ss").split(':')[1]) == 0){
+                                        $("#time_on1_" + i).prop('disabled', true).val("");
+                                    }else {
+                                        $("#time_on1_" + i).prop('disabled', true).val( parseInt(moment.utc(res2["load_" + numb]["load_on_" + i] * 1000).format("HH:mm:ss").split(':')[1]) );
+                                    }
+                                }
+                                if(parseInt(moment.utc(res2["load_" + numb]["load_on_" + i] * 1000).format("HH:mm:ss").split(':')[2]) == 0){
+                                    $("#time_on2_" + i).prop('disabled', true).val("");
+                                }else {
+                                    $("#time_on2_" + i).prop('disabled', true).val( parseInt(moment.utc(res2["load_" + numb]["load_on_" + i] * 1000).format("HH:mm:ss").split(':')[2]) );
+                                }
+                                if(moment.utc(res2["load_" + numb]["load_off_" + i] * 1000).format("HH:mm:ss").split(':')[0] > 59){
+                                    $("#time_off1_" + i).prop('disabled', true).val( parseInt(moment.utc(res2["load_" + numb]["load_off_" + i] * 1000).format("HH:mm:ss").split(':')[0]) + parseInt(moment.utc(res2["load_" + numb]["load_off_" + i] * 1000).format("HH:mm:ss").split(':')[1]) );
+                                }else {
+                                    if (parseInt(moment.utc(res2["load_" + numb]["load_off_" + i] * 1000).format("HH:mm:ss").split(':')[1]) == 0) {
+                                        $("#time_off1_" + i).prop('disabled', true).val("");
+                                    }else{
+                                        $("#time_off1_" + i).prop('disabled', true).val( parseInt(moment.utc(res2["load_" + numb]["load_off_" + i] * 1000).format("HH:mm:ss").split(':')[1]) );
+                                    }
+                                }
+                                if(parseInt(moment.utc(res2["load_" + numb]["load_off_" + i] * 1000).format("HH:mm:ss").split(':')[2]) == 0){
+                                    $("#time_off2_" + i).prop('disabled', true).val("");
+                                }else {
+                                    $("#time_off2_" + i).prop('disabled', true).val( parseInt(moment.utc(res2["load_" + numb]["load_off_" + i] * 1000).format("HH:mm:ss").split(':')[2]) );
+                                }
+                            }
+                            else {
+                                $("#swchL_" + i).bootstrapToggle('off');
+                                $(".imgL_" + i).attr("src", "public/images/control/switck_off.png");
+                                $("#time_sL_" + i).prop('disabled', true).val("");
+                                $("#time_cy_" + i).prop('disabled', true).val("");
+                                $("#time_on1_" + i).prop('disabled', true).val("");
+                                $("#time_on2_" + i).prop('disabled', true).val("");
+                                $("#time_off1_" + i).prop('disabled', true).val("");
+                                $("#time_off2_" + i).prop('disabled', true).val("");
+                            }
+                        }
+                    }
+                }
+                // check save Auto
+                function fn_check_auto_save(chanel, mode) {
+                    var config_parse = JSON.parse($('#val_config').val());
+                    var sub_mode = config_parse.sub_mode;
+                    if(chanel < 12 && chanel > 8 || chanel < 5){
+                        if(sub_mode.sub_mode === "Timer"){
+                            if(sub_mode['sub_mode_'+chanel] === "Time_set"){
+                                var res = config_parse.config_timeSet;
+                                var sw_gd = [];
+                                for (var i = 1; i <= 6; i++) {
+                                    if ($("#swch_" + i).prop('checked') === true) {
+                                        sw_gd['load_st_' + i] = 1;
+                                        sw_gd['load_s_' + i] = $("#time_s_" + i).val();
+                                        sw_gd['load_e_' + i] = $("#time_e_" + i).val();
+                                    } else {
+                                        sw_gd['load_st_' + i] = 0;
+                                        sw_gd['load_s_' + i] = "";
+                                        sw_gd['load_e_' + i] = "";
+                                    }
+                                }
+                                var sw_gd2 = {
+                                    'load_st_1': sw_gd['load_st_1'],
+                                    'load_st_2': sw_gd['load_st_2'],
+                                    'load_st_3': sw_gd['load_st_3'],
+                                    'load_st_4': sw_gd['load_st_4'],
+                                    'load_st_5': sw_gd['load_st_5'],
+                                    'load_st_6': sw_gd['load_st_6'],
+                                    'load_s_1': sw_gd['load_s_1'],
+                                    'load_s_2': sw_gd['load_s_2'],
+                                    'load_s_3': sw_gd['load_s_3'],
+                                    'load_s_4': sw_gd['load_s_4'],
+                                    'load_s_5': sw_gd['load_s_5'],
+                                    'load_s_6': sw_gd['load_s_6'],
+                                    'load_e_1': sw_gd['load_e_1'],
+                                    'load_e_2': sw_gd['load_e_2'],
+                                    'load_e_3': sw_gd['load_e_3'],
+                                    'load_e_4': sw_gd['load_e_4'],
+                                    'load_e_5': sw_gd['load_e_5'],
+                                    'load_e_6': sw_gd['load_e_6']
+                                };
+                                var df_log = res['load_'+chanel];
+                                delete df_log["user_control"];
+                                // console.log(JSON.stringify(res['load_'+chanel]));
+                                // console.log(JSON.stringify(sw_gd2));
+                                // console.log(sw_gd2);
 
-                // called when a message arrives
-                function onMessageArrived(message) {
-                    $("#save_auto_cont").click(function() {
+                                if (mode === 'close') {
+                                    if (JSON.stringify(df_log) === JSON.stringify(sw_gd2)) {
+                                        $(".img_sw").show();
+                                        $('.input_tSet').prop('disabled', true);
+                                        $(".sw_toggle").hide();
+                                        $(".menu_config_auto").show();
+                                        $("#save_auto_cont").hide();
+                                        $("#close_auto_cont").hide();
+                                        $(".sw_mode_Auto").attr('disabled', false);
+                                        $(".sw_mode_Manual").attr('disabled', false);
+                                        $('.sw_mode_tracking').prop('disabled', false)
+                                        $('.sw_mode_timer').prop('disabled', false)
+                                        $('.sw_mode_timeSet').prop('disabled', true)
+                                        $('.sw_mode_timeLoop').prop('disabled', true)
+                                        // $(".close_modal").show();
+                                        for (var i = 1; i <= 6; i++) {
+                                            $('#time_s_' + i).removeClass('is-invalid');
+                                            $('#time_e_' + i).removeClass('is-invalid');
+                                        }
+                                    } else {
+                                        swal({
+                                            title: 'คุณแน่ใจหรือไม่?',
+                                            text: "คุณต้องการยกเลิกการตั้งค่า?",
+                                            type: 'warning',
+                                            allowOutsideClick: false,
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#da3444',
+                                            cancelButtonColor: '#8e8e8e',
+                                            confirmButtonText: 'ยืนยัน',
+                                            cancelButtonText: 'ยกเลิก',
+                                        }).then((result) => {
+                                            if (result.value) {
+                                                $(".img_sw").show();
+                                                $('.input_tSet').removeClass("input_err").prop('disabled', true);
+                                                $(".sw_toggle").hide();
+                                                $(".menu_config_auto").show();
+                                                $(".sw_mode_Auto").attr('disabled', false);
+                                                $(".sw_mode_Manual").attr('disabled', false);
+                                                $('.sw_mode_tracking').prop('disabled', false)
+                                                $('.sw_mode_timer').prop('disabled', false)
+                                                $('.sw_mode_timeSet').prop('disabled', true)
+                                                $('.sw_mode_timeLoop').prop('disabled', true)
+                                                $(".close_modal").show();
+                                                fn_df_logdata_auto(chanel);
+                                                $("#save_auto_cont").hide();
+                                                $("#close_auto_cont").hide();
+                                                for (var i = 1; i <= 6; i++) {
+                                                    $('#time_s_' + i).removeClass('is-invalid')
+                                                    $('#time_e_' + i).removeClass('is-invalid')
+                                                }
+                                            }
+                                        });
+                                    }
+                                }
+                                else {
+                                    if (JSON.stringify(df_log) === JSON.stringify(sw_gd2)) {
+                                        $("#save_auto_cont").hide();
+                                    } else {
+                                        $("#save_auto_cont").show();
+                                    }
+                                }
+                            }
+                            else { // time_loop
+                                var res = config_parse.config_timeLoop;
+                                var sw = [];
+                                var Ton = [];
+                                var Toff = [];
+                                var cy = [];
+                                for(var s = 1; s < 7; s++){
+                                    if ($("#swchL_"+s).prop('checked') == true) {
+                                        sw[s] = 1;
+                                        cy[s] = parseInt($("#time_cy_"+s).val());
+                                        if($("#time_on1_" + s).val() == "" && $("#time_on2_" + s).val() != ""){
+                                            Ton[s] = $("#time_on2_" + s).val();
+                                        }else if($("#time_on1_" + s).val() != "" && $("#time_on2_" + s).val() == ""){
+                                            Ton[s] = $("#time_on1_" + s).val()*60;
+                                        }else {
+                                            Ton[s] = parseFloat($("#time_on1_" + s).val()*60) + parseFloat($("#time_on2_" + s).val());
+                                        }
+                                        if($("#time_off1_" + s).val() == "" && $("#time_off2_" + s).val() != ""){
+                                            Toff[s] = $("#time_off2_" + s).val();
+                                        }else if($("#time_off1_" + s).val() != "" && $("#time_off2_" + s).val() == ""){
+                                            Toff[s] = $("#time_off1_" + s).val()*60;
+                                        }else {
+                                            Toff[s] = parseFloat($("#time_off1_" + s).val()*60) + parseFloat($("#time_off2_" + s).val());
+                                        }
+                                    } else {
+                                        sw[s] = 0;
+                                        cy[s] = 0;
+                                        Ton[s] = "";
+                                        Toff[s] = "";
+                                    }
+                                }
+                                var sw_gd2 = {
+                                    load_st_1: sw[1],
+                                    load_st_2: sw[2],
+                                    load_st_3: sw[3],
+                                    load_st_4: sw[4],
+                                    load_st_5: sw[5],
+                                    load_st_6: sw[6],
+                                    load_s_1: $("#time_sL_1").val(),
+                                    load_s_2: $("#time_sL_2").val(),
+                                    load_s_3: $("#time_sL_3").val(),
+                                    load_s_4: $("#time_sL_4").val(),
+                                    load_s_5: $("#time_sL_5").val(),
+                                    load_s_6: $("#time_sL_6").val(),
+                                    load_cycle_1: cy[1],
+                                    load_cycle_2: cy[2],
+                                    load_cycle_3: cy[3],
+                                    load_cycle_4: cy[4],
+                                    load_cycle_5: cy[5],
+                                    load_cycle_6: cy[6],
+                                    load_on_1: Ton[1],
+                                    load_on_2: Ton[2],
+                                    load_on_3: Ton[3],
+                                    load_on_4: Ton[4],
+                                    load_on_5: Ton[5],
+                                    load_on_6: Ton[6],
+                                    load_off_1: Toff[1],
+                                    load_off_2: Toff[2],
+                                    load_off_3: Toff[3],
+                                    load_off_4: Toff[4],
+                                    load_off_5: Toff[5],
+                                    load_off_6: Toff[6]
+                                };
+                                var df_log = res['load_'+chanel];
+                                delete df_log["user_control"];
+                                // console.log(JSON.stringify(res['load_' + chanel]) +'==='+ JSON.stringify(sw_gd2));
+                                // console.log(df_log);
+                                // console.log(sw_gd2);
+                                // return false;
+                                if (mode === 'close') {
+                                    if (JSON.stringify(df_log) === JSON.stringify(sw_gd2)) {
+                                        $(".img_sw").show();
+                                        $('.input_tLoop').prop('disabled', true);
+                                        $(".sw_toggle").hide();
+                                        $(".menu_config_auto").show();
+                                        $("#save_auto_cont").hide();
+                                        $("#close_auto_cont").hide();
+                                        $(".sw_mode_Auto").attr('disabled', false);
+                                        $(".sw_mode_Manual").attr('disabled', false);
+                                        $('.sw_mode_tracking').prop('disabled', false)
+                                        $('.sw_mode_timer').prop('disabled', false)
+                                        $('.sw_mode_timeSet').prop('disabled', true)
+                                        $('.sw_mode_timeLoop').prop('disabled', true)
+                                        // $(".close_modal").show();
+                                        for (var i = 1; i <= 6; i++) {
+                                            $("#time_sL_" + i).removeClass('is-invalid');
+                                            $("#time_cy_" + i).removeClass('is-invalid');
+                                            $("#time_on1_" + i).removeClass('is-invalid');
+                                            $("#time_on2_" + i).removeClass('is-invalid');
+                                            $("#time_off1_" + i).removeClass('is-invalid');
+                                            $("#time_off2_" + i).removeClass('is-invalid');
+                                        }
+                                    } else {
+                                        swal({
+                                            title: 'คุณแน่ใจหรือไม่?',
+                                            text: "คุณต้องการยกเลิกการตั้งค่า?",
+                                            type: 'warning',
+                                            allowOutsideClick: false,
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#da3444',
+                                            cancelButtonColor: '#8e8e8e',
+                                            confirmButtonText: 'ยืนยัน',
+                                            cancelButtonText: 'ยกเลิก',
+                                        }).then((result) => {
+                                            if (result.value) {
+                                                $(".img_sw").show();
+                                                $('.input_tLoop').removeClass("input_err").prop('disabled', true);
+                                                $(".sw_toggle").hide();
+                                                $(".menu_config_auto").show();
+                                                $(".sw_mode_Auto").attr('disabled', false);
+                                                $(".sw_mode_Manual").attr('disabled', false);
+                                                $(".close_modal").show();
+                                                fn_df_logdata_auto(chanel);
+                                                $("#save_auto_cont").hide();
+                                                $("#close_auto_cont").hide();
+                                                for (var i = 1; i <= 6; i++) {
+                                                    $("#time_sL_" + i).removeClass('is-invalid');
+                                                    $("#time_cy_" + i).removeClass('is-invalid');
+                                                    $("#time_on1_" + i).removeClass('is-invalid');
+                                                    $("#time_on2_" + i).removeClass('is-invalid');
+                                                    $("#time_off1_" + i).removeClass('is-invalid');
+                                                    $("#time_off2_" + i).removeClass('is-invalid');
+                                                }
+                                            }
+                                        });
+                                    }
+                                }
+                                else {
+                                    if (JSON.stringify(df_log) === JSON.stringify(sw_gd2)) {
+                                        $("#save_auto_cont").hide();
+                                    } else {
+                                        $("#save_auto_cont").show();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else { // channel = 5,6,7,8,12
+                        var res = config_parse.config_timeSet;
+                        var sw_gd = [];
+                        for (var i = 1; i <= 6; i++) {
+                            if ($("#swch_" + i).prop('checked') === true) {
+                                sw_gd['load_st_' + i] = 1;
+                                sw_gd['load_s_' + i] = $("#time_s_" + i).val();
+                                sw_gd['load_e_' + i] = $("#time_e_" + i).val();
+                            } else {
+                                sw_gd['load_st_' + i] = 0;
+                                sw_gd['load_s_' + i] = "";
+                                sw_gd['load_e_' + i] = "";
+                            }
+                        }
+                        var sw_gd2 = {
+                            'load_st_1': sw_gd['load_st_1'],
+                            'load_st_2': sw_gd['load_st_2'],
+                            'load_st_3': sw_gd['load_st_3'],
+                            'load_st_4': sw_gd['load_st_4'],
+                            'load_st_5': sw_gd['load_st_5'],
+                            'load_st_6': sw_gd['load_st_6'],
+                            'load_s_1': sw_gd['load_s_1'],
+                            'load_s_2': sw_gd['load_s_2'],
+                            'load_s_3': sw_gd['load_s_3'],
+                            'load_s_4': sw_gd['load_s_4'],
+                            'load_s_5': sw_gd['load_s_5'],
+                            'load_s_6': sw_gd['load_s_6'],
+                            'load_e_1': sw_gd['load_e_1'],
+                            'load_e_2': sw_gd['load_e_2'],
+                            'load_e_3': sw_gd['load_e_3'],
+                            'load_e_4': sw_gd['load_e_4'],
+                            'load_e_5': sw_gd['load_e_5'],
+                            'load_e_6': sw_gd['load_e_6']
+                        };
+                        var df_log = res['load_'+chanel];
+                        delete df_log["user_control"];
+                        // console.log(JSON.stringify(df_log));
+                        // console.log(JSON.stringify(sw_gd2));
+                        // console.log(sw_gd2);
+
+                        if (mode === 'close') {
+                            if (JSON.stringify(df_log) === JSON.stringify(sw_gd2)) {
+                                $(".img_sw").show();
+                                $('.input_tSet').prop('disabled', true);
+                                $(".sw_toggle").hide();
+                                $(".menu_config_auto").show();
+                                $("#save_auto_cont").hide();
+                                $("#close_auto_cont").hide();
+                                $(".sw_mode_Auto").attr('disabled', false);
+                                $(".sw_mode_Manual").attr('disabled', false);
+                                $('.sw_mode_tracking').prop('disabled', false)
+                                $('.sw_mode_timer').prop('disabled', false)
+                                $('.sw_mode_timeSet').prop('disabled', true)
+                                $('.sw_mode_timeLoop').prop('disabled', true)
+                                // $(".close_modal").show();
+                                for (var i = 1; i <= 6; i++) {
+                                    $('#time_s_' + i).removeClass('is-invalid');
+                                    $('#time_e_' + i).removeClass('is-invalid');
+                                }
+                            }
+                            else {
+                                swal({
+                                    title: 'คุณแน่ใจหรือไม่?',
+                                    text: "คุณต้องการยกเลิกการตั้งค่า?",
+                                    type: 'warning',
+                                    allowOutsideClick: false,
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#da3444',
+                                    cancelButtonColor: '#8e8e8e',
+                                    confirmButtonText: 'ยืนยัน',
+                                    cancelButtonText: 'ยกเลิก',
+                                }).then((result) => {
+                                    if (result.value) {
+                                        $(".img_sw").show();
+                                        $('.input_tSet').removeClass("input_err").prop('disabled', true);
+                                        $(".sw_toggle").hide();
+                                        $(".menu_config_auto").show();
+                                        $(".sw_mode_Auto").attr('disabled', false);
+                                        $(".sw_mode_Manual").attr('disabled', false);
+                                        $('.sw_mode_tracking').prop('disabled', false)
+                                        $('.sw_mode_timer').prop('disabled', false)
+                                        $('.sw_mode_timeSet').prop('disabled', true)
+                                        $('.sw_mode_timeLoop').prop('disabled', true)
+                                        $(".close_modal").show();
+                                        fn_df_logdata_auto(chanel);
+                                        $("#save_auto_cont").hide();
+                                        $("#close_auto_cont").hide();
+                                        for (var i = 1; i <= 6; i++) {
+                                            $('#time_s_' + i).removeClass('is-invalid')
+                                            $('#time_e_' + i).removeClass('is-invalid')
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                        else {
+                            if (JSON.stringify(df_log) === JSON.stringify(sw_gd2)) {
+                                $("#save_auto_cont").hide();
+                            } else {
+                                $("#save_auto_cont").show();
+                            }
+                        }
+                    }
+                }
+                $("#save_auto_cont").click(function() {
+                    var channel = $('.hidden_select_sw_auto').val();
+                    if(channel < 12 && channel > 8 || channel < 5){
+                        if($('.sw_mode_timeSet').hasClass('btn-primary') == true){
+                            for (var i = 1; i <= 6; i++) {
+                                if ($("#swch_" + i).prop('checked') == true) {
+                                    if ($("#time_s_" + i).val() === "") {
+                                        $('#time_s_' + i).addClass('is-invalid')
+                                        return false;
+                                    } else {
+                                        $('#time_s_' + i).removeClass('is-invalid')
+                                    }
+                                    if ($("#time_e_" + i).val() === "") {
+                                        $('#time_e_' + i).addClass('is-invalid')
+                                        return false;
+                                    } else {
+                                        $('#time_e_+i').removeClass('is-invalid')
+                                    }
+                                    if ($('#12').hasClass('active') == false) {
+                                        if ($("#time_s_" + i).val() >= $("#time_e_" + i).val()) {
+                                            swal_c('error', 'Error...', 'TIMMER ' + i + ' : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
+                                            $('#time_s_' + i).addClass('is-invalid');
+                                            $('#time_e_' + i).addClass('is-invalid');
+                                            return false;
+                                        } else {
+                                            $('#time_s_' + i).removeClass('is-invalid')
+                                            $('#time_e_' + i).removeClass('is-invalid')
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else { // TLoop
+                            for (var i = 1; i <= 6; i++) {
+                                if ($("#swchL_" + i).prop('checked') == true) {
+                                    if ($("#time_sL_" + i).val() == "") {
+                                        $('#time_sL_' + i).addClass('is-invalid');
+                                        return false;
+                                    } else {
+                                        $('#time_sL_' + i).removeClass('is-invalid');
+                                    }
+                                    if($("#time_cy_" + i).val() == "" || $("#time_cy_" + i).val() == 0){
+                                        $('#time_cy_' + i).addClass('is-invalid');
+                                        return false;
+                                    } else {
+                                        $('#time_cy_' + i).removeClass('is-invalid');
+                                    }
+                                    if($("#time_on1_" + i).val() == "" && $("#time_on2_" + i).val() == ""){
+                                        $('#time_on1_' + i).addClass('is-invalid');
+                                        $('#time_on2_' + i).addClass('is-invalid');
+                                        swal_c('error', 'Error...', 'กรุณาระบุเวลาเปิด เป็นนาทีหรือวินาที</b> !');
+                                        return false;
+                                    } else {
+                                        $('#time_on1_' + i).removeClass('is-invalid');
+                                        $('#time_on2_' + i).removeClass('is-invalid');
+                                    }
+                                    if($("#time_off1_" + i).val() == "" && $("#time_off2_" + i).val() == ""){
+                                        $('#time_off1_' + i).addClass('is-invalid');
+                                        $('#time_off2_' + i).addClass('is-invalid');
+                                        swal_c('error', 'Error...', 'กรุณาระบุเวลาปิด เป็นนาทีหรือวินาที</b> !');
+                                        return false;
+                                    } else {
+                                        $('#time_off1_' + i).removeClass('is-invalid');
+                                        $('#time_off2_' + i).removeClass('is-invalid');
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else { // channel = 5,6,7,8,12
                         for (var i = 1; i <= 6; i++) {
                             if ($("#swch_" + i).prop('checked') == true) {
                                 if ($("#time_s_" + i).val() === "") {
@@ -1242,7 +2318,7 @@
                                 }
                                 if ($('#12').hasClass('active') == false) {
                                     if ($("#time_s_" + i).val() >= $("#time_e_" + i).val()) {
-                                        swal_c(type = 'error', title = 'Error...', text = 'TIMMER ' + i + ' : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
+                                        swal_c('error', 'Error...', 'TIMMER ' + i + ' : <b>เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด</b> !');
                                         $('#time_s_1').addClass('is-invalid')
                                         $('#time_e_1').addClass('is-invalid')
                                         return false;
@@ -1253,764 +2329,233 @@
                                 }
                             }
                         }
-
-                        function swal_c(type, title, text) {
-                            Swal({
-                                type: type,
-                                title: title,
-                                html: text,
-                                allowOutsideClick: false
-                            });
-                        }
-                        // alert($('#12').hasClass('active'));
-                        // return false
-                        swal({
-                            title: 'บันทึกการเปลี่ยนแปลง',
-                            text: "คุณต้องการบันทึกการเปลี่ยนแปลง ?",
-                            type: 'warning',
-                            allowOutsideClick: false,
-                            showCancelButton: true,
-                            confirmButtonColor: '#32CD32',
-                            cancelButtonColor: '#FF3333',
-                            confirmButtonText: 'ใช่',
-                            cancelButtonText: 'ยกเลิก'
-                        }).
-                        then((result) => {
-                            if (result.value) {
-                                if ($("#swch_1").prop('checked') == true) {
-                                    var sw_1 = 1;
-                                } else {
-                                    var sw_1 = 0;
+                    }
+                    function swal_c(type, title, text) {
+                        Swal({
+                            type: type,
+                            title: title,
+                            html: text,
+                            allowOutsideClick: false
+                        });
+                    }
+                    // alert( );
+                    // return false
+                    var s_time = [];
+                    for(var s=1; s<=6; s++){
+                        if($("#time_s_"+s).val().split(":").length == 2){ s_time['s_'+s] = $("#time_s_"+s).val()+':00'; }else { s_time['s_'+s] = $("#time_s_"+s).val(); }
+                        if($("#time_e_"+s).val().split(":").length == 2){ s_time['e_'+s] = $("#time_e_"+s).val()+':00'; }else { s_time['e_'+s] = $("#time_e_"+s).val(); }
+                    }
+                    // console.log( s_time);
+                    // return false
+                    swal({
+                        title: 'บันทึกการเปลี่ยนแปลง',
+                        text: "คุณต้องการบันทึกการเปลี่ยนแปลง ?",
+                        type: 'warning',
+                        allowOutsideClick: false,
+                        showCancelButton: true,
+                        confirmButtonColor: '#32CD32',
+                        cancelButtonColor: '#FF3333',
+                        confirmButtonText: 'ใช่',
+                        cancelButtonText: 'ยกเลิก'
+                    }).
+                    then((result) => {
+                        if (result.value) {
+                            if(channel < 12 && channel > 8 || channel < 5){
+                                if($('.sw_mode_timeSet').hasClass('btn-primary') == true){
+                                    var sw = [];
+                                    for(var s = 1; s < 7; s++){
+                                        if ($("#swch_"+s).prop('checked') == true) { sw[s] = 1;} else { sw[s] = 0; }
+                                    }
+                                    var mode = 'config_timeSet';
+                                    var mess = {
+                                        load_st_1: sw[1],
+                                        load_st_2: sw[2],
+                                        load_st_3: sw[3],
+                                        load_st_4: sw[4],
+                                        load_st_5: sw[5],
+                                        load_st_6: sw[6],
+                                        load_s_1: s_time['s_1'],
+                                        load_s_2: s_time['s_2'],
+                                        load_s_3: s_time['s_3'],
+                                        load_s_4: s_time['s_4'],
+                                        load_s_5: s_time['s_5'],
+                                        load_s_6: s_time['s_6'],
+                                        load_e_1: s_time['e_1'],
+                                        load_e_2: s_time['e_2'],
+                                        load_e_3: s_time['e_3'],
+                                        load_e_4: s_time['e_4'],
+                                        load_e_5: s_time['e_5'],
+                                        load_e_6: s_time['e_6']
+                                    };
                                 }
-                                if ($("#swch_2").prop('checked') == true) {
-                                    var sw_2 = 1;
-                                } else {
-                                    var sw_2 = 0;
-                                }
-                                if ($("#swch_3").prop('checked') == true) {
-                                    var sw_3 = 1;
-                                } else {
-                                    var sw_3 = 0;
-                                }
-                                if ($("#swch_4").prop('checked') == true) {
-                                    var sw_4 = 1;
-                                } else {
-                                    var sw_4 = 0;
-                                }
-                                if ($("#swch_5").prop('checked') == true) {
-                                    var sw_5 = 1;
-                                } else {
-                                    var sw_5 = 0;
-                                }
-                                if ($("#swch_6").prop('checked') == true) {
-                                    var sw_6 = 1;
-                                } else {
-                                    var sw_6 = 0;
-                                }
-                                $.ajax({
-                                    type: "POST",
-                                    url: "routes/tu/save_autoControl.php",
-                                    data: {
-                                        house_master: house_master,
-                                        hidden_select_sw_auto: $(".hidden_select_sw_auto").val(),
-                                        sw_1: sw_1,
-                                        sw_2: sw_2,
-                                        sw_3: sw_3,
-                                        sw_4: sw_4,
-                                        sw_5: sw_5,
-                                        sw_6: sw_6,
-                                        s_1: $("#time_s_1").val(),
-                                        s_2: $("#time_s_2").val(),
-                                        s_3: $("#time_s_3").val(),
-                                        s_4: $("#time_s_4").val(),
-                                        s_5: $("#time_s_5").val(),
-                                        s_6: $("#time_s_6").val(),
-                                        e_1: $("#time_e_1").val(),
-                                        e_2: $("#time_e_2").val(),
-                                        e_3: $("#time_e_3").val(),
-                                        e_4: $("#time_e_4").val(),
-                                        e_5: $("#time_e_5").val(),
-                                        e_6: $("#time_e_6").val(),
-                                        parseJSON: JSON.parse($('#val_sw_auto').val())
-                                    },
-                                    dataType: 'json',
-                                    success: function(res) {
-                                        console.log(res.data)
-                                        if (res.status === "Insert_Success") {
-                                            $("#Modal_Auto_control").modal("hide");
-                                            var originalArray = res.data;
-                                            var separator = '\r\n';
-                                            var implodedArray = '';
-
-                                            for (let i = 0; i < originalArray.length; i++) {
-
-                                                // add a string from original array
-                                                implodedArray += originalArray[i];
-
-                                                // unless the iterator reaches the end of
-                                                // the array add the separator string
-                                                if (i != originalArray.length - 1) {
-                                                    implodedArray += separator;
-                                                }
+                                else { // timeLoop
+                                    var sw = [];
+                                    var Ton = [];
+                                    var Toff = [];
+                                    var cy = [];
+                                    for(var s = 1; s < 7; s++){
+                                        if ($("#swchL_"+s).prop('checked') == true) {
+                                            sw[s] = 1;
+                                            cy[s] = parseInt($("#time_cy_"+s).val());
+                                            if($("#time_on1_" + s).val() == "" && $("#time_on2_" + s).val() != ""){
+                                                Ton[s] = $("#time_on2_" + s).val();
+                                            }else if($("#time_on1_" + s).val() != "" && $("#time_on2_" + s).val() == ""){
+                                                Ton[s] = $("#time_on1_" + s).val()*60;
+                                            }else {
+                                                Ton[s] = parseFloat($("#time_on1_" + s).val()*60) + parseFloat($("#time_on2_" + s).val());
                                             }
-                                            // console.log(implodedArray);
-                                            // if (message.destinationName == house_master + "/control/config/auto") {
-                                            // var parseJSON = JSON.parse($('#val_sw_auto').val())
-                                            // var result = message.payloadString;
-                                            // var parseJSON = $.parseJSON(result);
-                                            // console.log(parseJSON);
-                                            // $.extend(parseJSON, res.data);
-                                            // var json_msg = JSON.stringify(parseJSON);
-                                            // console.log(parseJSON.length)
-                                            mqtt_send(house_master + '/control/config/auto', implodedArray, '')
-                                                // }
-                                            swal({
-                                                title: 'บันทึกข้อมูลสำเร็จ',
-                                                type: 'success',
-                                                allowOutsideClick: false,
-                                                confirmButtonColor: '#32CD32'
-                                            });
-                                            // fn_df_logdata_auto($('.hidden_select_sw_auto').val())
-                                            for (var i = 1; i <= 6; i++) {
-                                                if ($("#swch_" + i).prop('checked') == true) {
-                                                    $(".img_" + i).attr("src", "public/images/control/switck_on.png");
-                                                } else {
-                                                    $(".img_" + i).attr("src", "public/images/control/switck_off.png");
-                                                }
+                                            if($("#time_off1_" + s).val() == "" && $("#time_off2_" + s).val() != ""){
+                                                Toff[s] = $("#time_off2_" + s).val();
+                                            }else if($("#time_off1_" + s).val() != "" && $("#time_off2_" + s).val() == ""){
+                                                Toff[s] = $("#time_off1_" + s).val()*60;
+                                            }else {
+                                                Toff[s] = parseFloat($("#time_off1_" + s).val()*60) + parseFloat($("#time_off2_" + s).val());
                                             }
-                                            $(".img_sw").show();
-                                            $('.input_time').prop('disabled', true);
-                                            $(".sw_toggle").hide();
-                                            $(".menu_config_auto").show();
-                                            $(".sw_mode_Auto").attr('disabled', false);
-                                            $(".sw_mode_Manual").attr('disabled', false);
-                                            $("#save_auto_cont").hide();
-                                            $("#close_auto_cont").hide();
                                         } else {
-                                            swal({
-                                                title: 'Error !',
-                                                text: "เกิดข้อผิดพลาด ?",
-                                                type: 'error',
-                                                allowOutsideClick: false,
-                                                confirmButtonColor: '#32CD32'
-                                            }).then((result) => {
-                                                if (result.value) {
-                                                    // location.reload();
-                                                    return false;
-                                                }
-                                            });
+                                            sw[s] = 0;
+                                            cy[s] = 0;
+                                            Ton[s] = "";
+                                            Toff[s] = "";
                                         }
                                     }
-                                });
-
-                            }
-                        });
-                    }); // exit_save_Auto
-                    $("#save_manual_cont").click(function() {
-                        var log_sw = [];
-                        var n_countSB = [];
-                        var numb = $('.hidden_select_sw_manual').val();
-                        if (numb == 1) {
-                            if (parseInt(config_cn.cn_status_1) == 1) {
-                                if ($("#label_1").prop('checked') === true) {
-                                    log_sw['sw_1'] = "ON";
-                                    n_countSB.push(1);
-                                } else {
-                                    log_sw['sw_1'] = "OFF";
-                                    n_countSB.push(0);
+                                    var mode = 'config_timeLoop';
+                                    var mess = {
+                                        load_st_1: sw[1],
+                                        load_st_2: sw[2],
+                                        load_st_3: sw[3],
+                                        load_st_4: sw[4],
+                                        load_st_5: sw[5],
+                                        load_st_6: sw[6],
+                                        load_s_1: $("#time_sL_1").val(),
+                                        load_s_2: $("#time_sL_2").val(),
+                                        load_s_3: $("#time_sL_3").val(),
+                                        load_s_4: $("#time_sL_4").val(),
+                                        load_s_5: $("#time_sL_5").val(),
+                                        load_s_6: $("#time_sL_6").val(),
+                                        load_cycle_1: cy[1],
+                                        load_cycle_2: cy[2],
+                                        load_cycle_3: cy[3],
+                                        load_cycle_4: cy[4],
+                                        load_cycle_5: cy[5],
+                                        load_cycle_6: cy[6],
+                                        load_on_1: Ton[1],
+                                        load_on_2: Ton[2],
+                                        load_on_3: Ton[3],
+                                        load_on_4: Ton[4],
+                                        load_on_5: Ton[5],
+                                        load_on_6: Ton[6],
+                                        load_off_1: Toff[1],
+                                        load_off_2: Toff[2],
+                                        load_off_3: Toff[3],
+                                        load_off_4: Toff[4],
+                                        load_off_5: Toff[5],
+                                        load_off_6: Toff[6]
+                                    };
+                                    // console.log(mess);
                                 }
-                            } else {
-                                log_sw['sw_1'] = "OFF";
-                                n_countSB.push(0);
                             }
-                            if (parseInt(config_cn.cn_status_2) == 1) {
-                                if ($("#label_2").prop('checked') === true) {
-                                    log_sw['sw_2'] = "ON";
-                                    n_countSB.push(1);
-                                } else {
-                                    log_sw['sw_2'] = "OFF";
-                                    n_countSB.push(0);
+                            else { // channel = 5,6,7,8,12
+                                var sw = [];
+                                for(var s = 1; s < 7; s++){
+                                    if ($("#swch_"+s).prop('checked') == true) { sw[s] = 1;} else { sw[s] = 0; }
                                 }
-                            } else {
-                                log_sw['sw_2'] = "OFF";
-                                n_countSB.push(0);
+                                var mode = 'config_timeSet';
+                                var mess = {
+                                    load_st_1: sw[1],
+                                    load_st_2: sw[2],
+                                    load_st_3: sw[3],
+                                    load_st_4: sw[4],
+                                    load_st_5: sw[5],
+                                    load_st_6: sw[6],
+                                    load_s_1: s_time['s_1'],
+                                    load_s_2: s_time['s_2'],
+                                    load_s_3: s_time['s_3'],
+                                    load_s_4: s_time['s_4'],
+                                    load_s_5: s_time['s_5'],
+                                    load_s_6: s_time['s_6'],
+                                    load_e_1: s_time['e_1'],
+                                    load_e_2: s_time['e_2'],
+                                    load_e_3: s_time['e_3'],
+                                    load_e_4: s_time['e_4'],
+                                    load_e_5: s_time['e_5'],
+                                    load_e_6: s_time['e_6']
+                                };
                             }
-                            if (parseInt(config_cn.cn_status_3) == 1) {
-                                if ($("#label_3").prop('checked') === true) {
-                                    log_sw['sw_3'] = "ON";
-                                    n_countSB.push(1);
-                                } else {
-                                    log_sw['sw_3'] = "OFF";
-                                    n_countSB.push(0);
-                                }
-                            } else {
-                                log_sw['sw_3'] = "OFF";
-                                n_countSB.push(0);
-                            }
-                            if (parseInt(config_cn.cn_status_4) == 1) {
-                                if ($("#label_4").prop('checked') === true) {
-                                    log_sw['sw_4'] = "ON";
-                                    n_countSB.push(1);
-                                } else {
-                                    log_sw['sw_4'] = "OFF";
-                                    n_countSB.push(0);
-                                }
-                            } else {
-                                log_sw['sw_4'] = "OFF";
-                                n_countSB.push(0);
-                            }
-
-                        } else if (numb == 2) {
-                            if (parseInt(config_cn.cn_status_5) == 1) {
-                                if ($("#label_1").prop('checked') === true) {
-                                    log_sw['sw_1'] = "ON";
-                                    n_countSB.push(1);
-                                } else {
-                                    log_sw['sw_1'] = "OFF";
-                                    n_countSB.push(0);
-                                }
-                            } else {
-                                log_sw['sw_1'] = "OFF";
-                                n_countSB.push(0);
-                            }
-                            if (parseInt(config_cn.cn_status_6) == 1) {
-                                if ($("#label_2").prop('checked') === true) {
-                                    log_sw['sw_2'] = "ON";
-                                    n_countSB.push(1);
-                                } else {
-                                    log_sw['sw_2'] = "OFF";
-                                    n_countSB.push(0);
-                                }
-                            } else {
-                                log_sw['sw_2'] = "OFF";
-                                n_countSB.push(0);
-                            }
-                            if (parseInt(config_cn.cn_status_7) == 1) {
-                                if ($("#label_3").prop('checked') === true) {
-                                    log_sw['sw_3'] = "ON";
-                                    n_countSB.push(1);
-                                } else {
-                                    log_sw['sw_3'] = "OFF";
-                                    n_countSB.push(0);
-                                }
-                            } else {
-                                log_sw['sw_3'] = "OFF";
-                                n_countSB.push(0);
-                            }
-                            if (parseInt(config_cn.cn_status_8) == 1) {
-                                if ($("#label_4").prop('checked') === true) {
-                                    log_sw['sw_4'] = "ON";
-                                    n_countSB.push(1);
-                                } else {
-                                    log_sw['sw_4'] = "OFF";
-                                    n_countSB.push(0);
-                                }
-                            } else {
-                                log_sw['sw_4'] = "OFF";
-                                n_countSB.push(0);
-                            }
-                        } else if (numb == 3) {
-                            if (parseInt(config_cn.cn_status_9) == 1) {
-                                if ($("#label_1").prop('checked') === true) {
-                                    log_sw['sw_1'] = "ON";
-                                    n_countSB.push(1);
-                                } else {
-                                    log_sw['sw_1'] = "OFF";
-                                    n_countSB.push(0);
-                                }
-                            } else {
-                                log_sw['sw_1'] = "OFF";
-                                n_countSB.push(0);
-                            }
-                            if (parseInt(config_cn.cn_status_10) == 1) {
-                                if ($("#label_2").prop('checked') === true) {
-                                    log_sw['sw_2'] = "ON";
-                                    n_countSB.push(1);
-                                } else {
-                                    log_sw['sw_2'] = "OFF";
-                                    n_countSB.push(0);
-                                }
-                            } else {
-                                log_sw['sw_2'] = "OFF";
-                                n_countSB.push(0);
-                            }
-                            log_sw['sw_3'] = "OFF";
-                            log_sw['sw_4'] = "OFF";
-                        }
-                        if (countElement(1, n_countSB) == 0) {
-                            swal({
-                                    html: 'ต้องมีอุปกรณ์เปิดใช้งาน<br>อย่างน้อย 1 ตัว !',
-                                    // text: "ต้องมีอุปกรณ์เปิดใช้งานอย่างน้อย 1 ตัว !",
-                                    type: 'warning',
-                                    allowOutsideClick: false,
-                                    confirmButtonColor: '#32CD32'
-                                })
-                                // then((result) => {
-                                //     if (result.value) {
-                                //         location.reload();
-                                //         return false;
-                                //     }
-                                // });
-                        } else {
-                            swal({
-                                title: 'บันทึกการเปลี่ยนแปลง',
-                                text: "คุณต้องการบันทึกการเปลี่ยนแปลง ?",
-                                type: 'warning',
-                                allowOutsideClick: false,
-                                showCancelButton: true,
-                                confirmButtonColor: '#32CD32',
-                                cancelButtonColor: '#FF3333',
-                                confirmButtonText: 'ใช่',
-                                cancelButtonText: 'ยกเลิก'
-                            }).then((result) => {
-                                if (result.value) {
-                                    var log_sw2 = {
-                                            'mode': numb,
-                                            'sw_1': log_sw['sw_1'],
-                                            'sw_2': log_sw['sw_2'],
-                                            'sw_3': log_sw['sw_3'],
-                                            'sw_4': log_sw['sw_4']
-                                        }
-                                        // console.log(log_sw)
-                                    $.ajax({
-                                        type: "POST",
-                                        url: "routes/tu/save_manualControl.php",
-                                        data: {
-                                            house_master: house_master,
-                                            log_sw: log_sw2
-                                        },
-                                        dataType: 'json',
-                                        success: function(res) {
-                                            // console.log(res.data)
-                                            if (res.status === "Insert_Success") {
-                                                $("#Modal_Auto_control").modal("hide");
-                                                $('#val_sw_manual').val(JSON.stringify(res.data));
-                                                // console.log(res.data);
-                                                var new_res = //JSON.stringify(
-                                                    '[config]' + '\r\n' +
-                                                    'serial_id=' + house_master + '\r\n' +
-                                                    'dripper_1=' + res.data['dripper_1'] + '\r\n' +
-                                                    'dripper_2=' + res.data['dripper_2'] + '\r\n' +
-                                                    'dripper_3=' + res.data['dripper_3'] + '\r\n' +
-                                                    'dripper_4=' + res.data['dripper_4'] + '\r\n' +
-                                                    'fan_1=' + res.data['fan_1'] + '\r\n' +
-                                                    'fan_2=' + res.data['fan_2'] + '\r\n' +
-                                                    'fan_3=' + res.data['fan_3'] + '\r\n' +
-                                                    'fan_4=' + res.data['fan_4'] + '\r\n' +
-                                                    'foggy_1=' + res.data['foggy_1'] + '\r\n' +
-                                                    'foggy_2=' + res.data['foggy_2']
-
-                                                // );
-                                                mqtt_send(house_master + '/control/config/manual', new_res, '')
-                                                for (var i = 1; i <= 10; i++) {
-                                                    if (i <= 4) {
-                                                        if (config_cn['cn_status_' + i] == 1) {
-                                                            if (res.data['dripper_' + i] == 'ON') {
-                                                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/sprinkler-off.svg");
-                                                            } else {
-                                                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/Sprinkler_disable.svg");
-                                                            }
-                                                        } else {
-                                                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/Sprinkler_disable.svg");
-                                                        }
-                                                    } else if (i > 4 && i <= 8) {
-                                                        if (config_cn['cn_status_' + i] == 1) {
-                                                            if (res.data['fan_' + (i - 4)] == 'ON') {
-                                                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-off.svg");
-                                                            } else {
-                                                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-disable.svg");
-                                                            }
-                                                        } else {
-                                                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-disable.svg");
-                                                        }
-                                                    } else if (i > 8) {
-                                                        if (config_cn['cn_status_' + i] == 1) {
-                                                            if (res.data['foggy_' + (i - 8)] == 'ON') {
-                                                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-off.svg");
-                                                            } else {
-                                                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-disable.svg");
-                                                            }
-                                                        } else {
-                                                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-disable.svg");
-                                                        }
-                                                    }
-                                                }
-                                                swal({
-                                                    title: 'บันทึกข้อมูลสำเร็จ',
-                                                    type: 'success',
-                                                    allowOutsideClick: false,
-                                                    confirmButtonColor: '#32CD32'
-                                                });
-                                                $(".menu_config_manual").show();
-                                                $('.status_config_manual').hide();
-                                                $(".sw_mode_Auto").attr('disabled', false);
-                                                $(".sw_mode_Manual").attr('disabled', false);
-                                                $("#save_manual_cont").hide();
-                                                $("#close_manual_cont").hide();
-                                                fn_label_manual($('.hidden_select_sw_manual').val());
+                            // console.log(mess);
+                            // return false
+                            $.ajax({
+                                type: "POST",
+                                url: "routes/tu/save_submode.php",
+                                data: {
+                                    house_master: house_master,
+                                    mess: mess,
+                                    channel: channel,
+                                    mode: mode
+                                },
+                                dataType: 'json',
+                                success: function(res) {
+                                    console.log(res)
+                                    // ======================================
+                                    if (res.status === "Insert_Success") {
+                                        fn_df_checkbox_auto($('.hidden_select_sw_auto').val());
+                                        $(".img_sw").show();
+                                        $(".sw_toggle").hide();
+                                        $("#close_auto_cont").hide();
+                                        $(".sw_mode_Auto").attr('disabled', false);
+                                        $(".sw_mode_Manual").attr('disabled', false);
+                                        $('.sw_mode_tracking').prop('disabled', false)
+                                        $('.sw_mode_timer').prop('disabled', false)
+                                        $('.sw_mode_timeSet').prop('disabled', true)
+                                        $('.sw_mode_timeLoop').prop('disabled', true)
+                                        $(".close_modal").show();
+                                        // return false;
+                                        for (var i = 1; i <= 6; i++) {
+                                            if ($("#swch_" + i).prop('checked') == true) {
+                                                $(".img_" + i).attr("src", "public/images/control/switck_on.png");
                                             } else {
-                                                swal({
-                                                    title: 'Error !',
-                                                    text: "เกิดข้อผิดพลาด ?",
-                                                    type: 'error',
-                                                    allowOutsideClick: false,
-                                                    confirmButtonColor: '#32CD32'
-                                                }).then((result) => {
-                                                    if (result.value) {
-                                                        location.reload();
-                                                        return false;
-                                                    }
-                                                });
+                                                $(".img_" + i).attr("src", "public/images/control/switck_off.png");
+                                            }
+                                            if(channel < 12 && channel > 8 || channel < 5){
+                                                if ($("#swchL_" + i).prop('checked') == true) {
+                                                    $(".imgL_" + i).attr("src", "public/images/control/switck_on.png");
+                                                } else {
+                                                    $(".imgL_" + i).attr("src", "public/images/control/switck_off.png");
+                                                }
                                             }
                                         }
-                                    });
-
+                                        swal({
+                                            title: 'บันทึกข้อมูลสำเร็จ',
+                                            type: 'success',
+                                            allowOutsideClick: false,
+                                            confirmButtonColor: '#32CD32'
+                                        });
+                                    }
+                                    else {
+                                        swal({
+                                            title: 'Error !',
+                                            text: "เกิดข้อผิดพลาด ?",
+                                            type: 'error',
+                                            allowOutsideClick: false,
+                                            confirmButtonColor: '#32CD32'
+                                        }).then((result) => {
+                                            if (result.value) {
+                                                location.reload();
+                                                return false;
+                                            }
+                                        });
+                                    }
+                                    // ======================================
                                 }
                             });
                         }
-                    }); // exit_save_Manual
-                    function mqtt_send(msg_dn, msg, user) {
-                        message = new Paho.MQTT.Message(msg);
-                        message.destinationName = msg_dn;
-                        message.qos = 1;
-                        message.retained = true;
-                        client.send(message);
-                    }
-                    $('.sw_mode_Auto').click(function() { // console.log($(this).attr("id"));
-                        // alert($(this).attr("id"))
-                        if ($(this).hasClass("active") === false) {
-                            switch_mode(sw_name = "อัตโนมัติ", mess = "Auto");
-                        }
                     });
-                    $('.sw_mode_Manual').click(function() { // console.log($(this).attr("id"));
-                        if ($(this).hasClass("btn-success") === false) {
-                            switch_mode(sw_name = "กำหนดเอง", mess = "Manual");
-                        }
-                    });
-
-                    function switch_mode(sw_name, mess, mqtt_name_us) {
-                        swal({
-                            title: 'เปลี่ยนโหมดการทำงาน !',
-                            text: "คุณต้องการเปลี่ยนเป็นไปใช้โหมด" + sw_name + " ?",
-                            type: 'warning',
-                            allowOutsideClick: false,
-                            showCancelButton: true,
-                            confirmButtonColor: '#32CD32',
-                            cancelButtonColor: '#FF3333',
-                            confirmButtonText: 'ใช่',
-                            cancelButtonText: 'ยกเลิก'
-                        }).then((result) => {
-                            if (result.value) {
-                                // console.log(login_user);
-                                // message = new Paho.MQTT.Message(login_user);
-                                // message.destinationName = house_master + "/control/status/user_control";
-                                // message.retained = true;
-                                // message.qos = 1;
-                                // client.send(message);
-                                //
-                                // message = new Paho.MQTT.Message(mess);
-                                // message.destinationName = house_master + "/control/status/mode";
-                                // message.retained = true;
-                                // message.qos = 1;
-                                // client.send(message);
-                                // ----------------------------------------------------------
-                                message = new Paho.MQTT.Message(login_user);
-                                message.destinationName = house_master + "/control/loads/user_control";
-                                message.retained = true;
-                                message.qos = 1;
-                                client.send(message);
-
-                                message = new Paho.MQTT.Message(mess);
-                                message.destinationName = house_master + "/control/loads/mode";
-                                message.retained = true;
-                                message.qos = 1;
-                                client.send(message);
-                            }
-                        });
-                    }
-                    $('.sw_manual_on').click(function() {
-                        if ($(this).hasClass("active") === false) {
-                            switch_control("ON", $('.hidden_select_sw_manual').val());
-                        }
-                    });
-                    $('.sw_manual_off').click(function() {
-                        if ($(this).hasClass("active") === false) {
-                            switch_control("OFF", $('.hidden_select_sw_manual').val());
-                        }
-                    });
-
-                    function switch_control(sts, val) {
-                        if (sts === "ON") {
-                            var status = 'เปิด';
-                        } else {
-                            var status = 'ปิด';
-                        }
-                        var sw_log = $.parseJSON($('#val_sw_manual').val());
-                        if (val == 1) {
-                            var name = 'น้ำหยด';
-                            if (sw_log.dripper_1 == 'ON') {
-                                var sw_1 = 1;
-                                var mqtt_name_1 = 'dripper_1';
-                            } else {
-                                var sw_1 = 0;
-                            }
-                            if (sw_log.dripper_2 == 'ON') {
-                                var sw_2 = 1;
-                                var mqtt_name_2 = 'dripper_2';
-                            } else {
-                                var sw_2 = 0;
-                            }
-                            if (sw_log.dripper_3 == 'ON') {
-                                var sw_1 = 3;
-                                var mqtt_name_3 = 'dripper_3';
-                            } else {
-                                var sw_3 = 0;
-                            }
-                            if (sw_log.dripper_4 == 'ON') {
-                                var sw_4 = 1;
-                                var mqtt_name_4 = 'dripper_4';
-                            } else {
-                                var sw_4 = 0;
-                            }
-                        } else if (val == 2) {
-                            var name = 'พัดลม';
-                            if (sw_log.fan_1 == 'ON') {
-                                var sw_1 = 1;
-                                var mqtt_name_1 = 'fan_1';
-                            } else {
-                                var sw_1 = 0;
-                            }
-                            if (sw_log.fan_2 == 'ON') {
-                                var sw_2 = 1;
-                                var mqtt_name_2 = 'fan_2';
-                            } else {
-                                var sw_2 = 0;
-                            }
-                            if (sw_log.fan_3 == 'ON') {
-                                var sw_1 = 3;
-                                var mqtt_name_3 = 'fan_3';
-                            } else {
-                                var sw_3 = 0;
-                            }
-                            if (sw_log.fan_4 == 'ON') {
-                                var sw_4 = 1;
-                                var mqtt_name_4 = 'fan_4';
-                            } else {
-                                var sw_4 = 0;
-                            }
-                        } else if (val == 3) {
-                            var name = 'พ่นหมอก';
-                            if (sw_log.foggy_1 == 'ON') {
-                                var sw_1 = 1;
-                                var mqtt_name_1 = 'foggy_1';
-                            } else {
-                                var sw_1 = 0;
-                            }
-                            if (sw_log.foggy_2 == 'ON') {
-                                var sw_2 = 1;
-                                var mqtt_name_2 = 'foggy_2';
-                            } else {
-                                var sw_2 = 0;
-                            }
-                            var sw_3 = 0;
-                            var sw_4 = 0;
-                        } else if (val == 4) {
-                            var name = 'สเปรย์';
-                            var sw_1 = 1;
-                            var mqtt_name_1 = 'spray';
-                            var sw_2 = 0;
-                            var sw_3 = 0;
-                            var sw_4 = 0;
-                        } else if (val == 5) {
-                            var name = 'ม่านพรางแสง';
-                            var mqtt_name_1 = 'shading';
-                            var sw_1 = 1;
-                            var sw_2 = 0;
-                            var sw_3 = 0;
-                            var sw_4 = 0;
-                        }
-                        swal({
-                            title: 'คุณต้องการ ' + status + ' ' + name + ' ?',
-                            // text: "คุณต้องการเปลี่ยนไปใช้โหมด Manual !!!",
-                            type: 'warning',
-                            allowOutsideClick: false,
-                            showCancelButton: true,
-                            confirmButtonColor: '#32CD32',
-                            cancelButtonColor: '#FF3333',
-                            confirmButtonText: 'ใช่',
-                            cancelButtonText: 'ยกเลิก'
-                        }).then((result) => {
-                            // console.log(result)
-                            if (result.value) {
-                                // alert(sta)
-                                // return false;
-
-                                // message = new Paho.MQTT.Message(login_user);
-                                // message.destinationName = house_master + "/control/status/user_control";
-                                // message.qos = 1;
-                                // message.retained = true;
-                                // client.send(message);
-                                // if(sw_1 == 1){
-                                //     message = new Paho.MQTT.Message(sts);
-                                //     message.destinationName = house_master + "/control/status/" + mqtt_name_1;
-                                //     message.qos = 1;
-                                //     message.retained = true;
-                                //     client.send(message);
-                                //     // console.log(message.qos);
-                                // }
-                                // if(sw_2 == 1){
-                                //     message = new Paho.MQTT.Message(sts);
-                                //     message.destinationName = house_master + "/control/status/" + mqtt_name_2;
-                                //     message.qos = 1;
-                                //     message.retained = true;
-                                //     client.send(message);
-                                // }
-                                // if(sw_3 == 1){
-                                //     message = new Paho.MQTT.Message(sts);
-                                //     message.destinationName = house_master + "/control/status/" + mqtt_name_3;
-                                //     message.qos = 1;
-                                //     message.retained = true;
-                                //     client.send(message);
-                                // }
-                                // if(sw_4 == 1){
-                                //     message = new Paho.MQTT.Message(sts);
-                                //     message.destinationName = house_master + "/control/status/" + mqtt_name_4;
-                                //     message.qos = 1;
-                                //     message.retained = true;
-                                //     client.send(message);
-                                // }
-
-                                message = new Paho.MQTT.Message(login_user);
-                                message.destinationName = house_master + "/control/loads/user_control";
-                                message.qos = 1;
-                                message.retained = true;
-                                client.send(message);
-                                if (val == 1) {
-                                    message = new Paho.MQTT.Message(sts);
-                                    message.destinationName = house_master + "/control/loads/dripper";
-                                    message.qos = 1;
-                                    message.retained = true;
-                                    client.send(message);
-                                } else if (val == 2) {
-                                    message = new Paho.MQTT.Message(sts);
-                                    message.destinationName = house_master + "/control/loads/fan";
-                                    message.qos = 1;
-                                    message.retained = true;
-                                    client.send(message);
-                                } else if (val == 3) {
-                                    message = new Paho.MQTT.Message(sts);
-                                    message.destinationName = house_master + "/control/loads/foggy";
-                                    message.qos = 1;
-                                    message.retained = true;
-                                    client.send(message);
-                                } else if (val == 4) {
-                                    message = new Paho.MQTT.Message(sts);
-                                    message.destinationName = house_master + "/control/loads/spray";
-                                    message.qos = 1;
-                                    message.retained = true;
-                                    client.send(message);
-                                } else if (val == 5) {
-                                    message = new Paho.MQTT.Message(sts);
-                                    message.destinationName = house_master + "/control/loads/shading";
-                                    message.qos = 1;
-                                    message.retained = true;
-                                    client.send(message);
-
-                                }
-                            }
-                        });
-                    }
-                } // exit_message
-                // ================================================
-                // Auto
-                $(".menu_config_auto").show();
-                $(".img_sw").show();
-                $(".sw_toggle").hide();
-                $('.input_time').prop('disabled', true);
-                fn_df_checkbox_auto($('.hidden_select_sw_auto').val());
-                fn_df_logdata_auto($('.hidden_select_sw_auto').val())
-                $("#save_auto_cont").hide();
-                $("#close_auto_cont").hide();
-                $(".menu_config_auto").click(function() {
-                    var res = JSON.parse($('#val_sw_auto').val())
-                        // console.log(res);
-                        // $(".nav-link").addClass('disabled');
-                    $(this).hide();
-                    $(".img_sw").hide();
-                    $(".sw_toggle").show();
-                    $("#close_auto_cont").show();
-                    $(".sw_mode_Auto").attr('disabled', true);
-                    $(".sw_mode_Manual").attr('disabled', true);
-                    $(".close_modal").hide();
-                    for (var i = 0; i <= 6; i++) {
-                        if (res["load_" + $('.hidden_select_sw_auto').val()]["load_st_" + i] == 1) {
-                            $("#time_s_" + i).prop('disabled', false);
-                            $("#time_e_" + i).prop('disabled', false);
-                        } else {
-                            $("#time_s_" + i).prop('disabled', true);
-                            $("#time_e_" + i).prop('disabled', true);
-                        }
-                    }
-                    $('.input_check').change(function() {
-                        var input_num = this.id.split("_");
-                        if ($(this).prop('checked') === true) {
-                            $("#time_s_" + input_num[1]).prop('disabled', false).val(res["load_" + $('.hidden_select_sw_auto').val()]["load_s_" + input_num[1]]);
-                            $("#time_e_" + input_num[1]).prop('disabled', false).val(res["load_" + $('.hidden_select_sw_auto').val()]["load_e_" + input_num[1]]);
-                        } else {
-                            $("#time_s_" + input_num[1]).prop('disabled', true).val("");
-                            $("#time_e_" + input_num[1]).prop('disabled', true).val("");
-                        }
-                        fn_check_auto_save($('.hidden_select_sw_auto').val(), '');
-                    });
-                    $(".input_time").change(function() {
-                        fn_check_auto_save($('.hidden_select_sw_auto').val(), '');
-                    });
-                });
-                $("#close_auto_cont").click(function() {
-                    fn_check_auto_save($('.hidden_select_sw_auto').val(), 'close')
-                });
-                $('.sw_sel_load_auto').click(function() {
-                        if ($('.menu_config_auto').is(":hidden") == true) {
-                            swal({
-                                title: 'ข้อผิดพลาด !',
-                                text: "กรุณาบันทึกหรือยกเลิกการตั้งค่าก่อน !!!",
-                                type: 'warning',
-                                allowOutsideClick: false,
-                                confirmButtonColor: '#32CD32',
-                                confirmButtonText: 'ตกลง',
-                            });
-                        } else {
-                            var numb = $(this).attr('id');
-                            if (parseInt(config_cn['cn_status_' + numb]) == 0) {
-                                swal({
-                                    title: 'โหลดนี้ไม่ถูกต่อใช้งาน !!!',
-                                    text: "กรุณาเลือกโหลดอื่น",
-                                    type: 'warning',
-                                    allowOutsideClick: false,
-                                    confirmButtonColor: '#32CD32',
-                                    confirmButtonText: 'ตกลง',
-                                });
-                            } else {
-                                $('.hidden_select_sw_auto').val(numb)
-                                fn_df_checkbox_auto(numb);
-                                fn_df_logdata_auto(numb);
-                                $("#save_auto_cont").hide();
-                                if (numb == 12) {
-                                    $('.L_start').html('เปิดรับแสง');
-                                    $('.L_stop').html('ปิดรับแสง');
-                                } else {
-                                    $('.L_start').html('เริ่ม');
-                                    $('.L_stop').html('สิ้นสุด');
-                                }
-                            }
-                        }
-                    })
-                    // ================================================
-                    // Manual
+                }); // exit_save_Auto
+                // Mode_Manual ================================================
+                // Manual
                 $('.status_config_manual').hide();
                 $('#save_manual_cont').hide();
                 $('#close_manual_cont').hide();
-                fn_df_sw_manual($('.hidden_select_sw_manual').val());
+                // fn_df_sw_manual($('.hidden_select_sw_manual').val());
                 $('.sw_sel_load_manual').click(function() {
                     var numb = Number($(this).attr('id').substring(1));
                     if ($('#close_manual_cont').is(":hidden") == false) {
@@ -2513,337 +3058,187 @@
                         }
                     }
                 });
-            });
-            // return false;
-        });
-
-        // df sw Auto
-        function fn_df_checkbox_auto(val) { // switch
-            for (var i = 1; i <= 12; i++) {
-                if (i == val) {
-                    if (i == 12) {
-                        $('.title_load_auto').html('ม่านพรางแสง');
-                    } else {
-                        $('.title_load_auto').html(config_cn['cn_name_' + i]);
-                    }
-                    $("#" + i).addClass('active');
-                    // if(i <= 4){
-                    //     $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_on.png');
-                    // }else if (i > 4 && i <= 8) {
-                    //     $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_on.png');
-                    // }else if (i > 8 && i <= 10) {
-                    //     $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_on.png');
-                    // }else if (i == 11) {
-                    //     $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_on.png');
-                    // }else if (i == 12) {
-                    //     $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/shading_on.png');
-                    // }
-                } else {
-                    $('#' + i).removeClass('active')
-                        // if(i <= 4){
-                        //     $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/dripper_off.png');
-                        // }else if (i > 4 && i <= 8) {
-                        //     $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/fan_off.png');
-                        // }else if (i > 8 && i <= 10) {
-                        //     $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/foggy_off.png');
-                        // }else if (i == 11) {
-                        //     $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/spray_off.png');
-                        // }else if (i == 12) {
-                        //     $('.img_sw_sel_load_auto'+i).attr('src','public/images/icons/menu_control/shading_off.png');
-                        // }
-                }
-            }
-        }
-        // df input Auto
-        function fn_df_logdata_auto(numb) { // input
-            var res = JSON.parse($('#val_sw_auto').val())
-            console.log(res);
-            // return false;
-            for (var i = 0; i <= 6; i++) {
-                if (res["load_" + numb]["load_st_" + i] == 1) {
-                    $("#swch_" + i).bootstrapToggle('on');
-                    $(".img_" + i).attr("src", "public/images/control/switck_on.png");
-                    $("#time_s_" + i).prop('disabled', true).val(res["load_" + numb]["load_s_" + i]);
-                    $("#time_e_" + i).prop('disabled', true).val(res["load_" + numb]["load_e_" + i]);
-                } else {
-                    $("#swch_" + i).bootstrapToggle('off');
-                    $(".img_" + i).attr("src", "public/images/control/switck_off.png");
-                    $("#time_s_" + i).prop('disabled', true).val("");
-                    $("#time_e_" + i).prop('disabled', true).val("");
-                }
-            }
-        }
-        // check save Auto
-        function fn_check_auto_save(chanel, mode) {
-            var res = JSON.parse($('#val_sw_auto').val())
-            var sw_gd = [];
-            for (var i = 1; i <= 6; i++) {
-                if ($("#swch_" + i).prop('checked') === true) {
-                    sw_gd['load_st_' + i] = 1;
-                    sw_gd['load_s_' + i] = $("#time_s_" + i).val();
-                    sw_gd['load_e_' + i] = $("#time_e_" + i).val();
-                } else {
-                    sw_gd['load_st_' + i] = 0;
-                    sw_gd['load_s_' + i] = "";
-                    sw_gd['load_e_' + i] = "";
-                }
-            }
-            var sw_gd2 = {
-                'load_st_1': sw_gd['load_st_1'],
-                'load_st_2': sw_gd['load_st_2'],
-                'load_st_3': sw_gd['load_st_3'],
-                'load_st_4': sw_gd['load_st_4'],
-                'load_st_5': sw_gd['load_st_5'],
-                'load_st_6': sw_gd['load_st_6'],
-                'load_s_1': sw_gd['load_s_1'],
-                'load_s_2': sw_gd['load_s_2'],
-                'load_s_3': sw_gd['load_s_3'],
-                'load_s_4': sw_gd['load_s_4'],
-                'load_s_5': sw_gd['load_s_5'],
-                'load_s_6': sw_gd['load_s_6'],
-                'load_e_1': sw_gd['load_e_1'],
-                'load_e_2': sw_gd['load_e_2'],
-                'load_e_3': sw_gd['load_e_3'],
-                'load_e_4': sw_gd['load_e_4'],
-                'load_e_5': sw_gd['load_e_5'],
-                'load_e_6': sw_gd['load_e_6']
-            };
-            // console.log(JSON.stringify(res['load_'+chanel]));
-            // console.log(JSON.stringify(sw_gd2));
-            // console.log(sw_gd2);
-
-            if (mode === 'close') {
-                if (JSON.stringify(res['load_' + chanel]) === JSON.stringify(sw_gd2)) {
-                    $(".img_sw").show();
-                    $('.input_time').prop('disabled', true);
-                    $(".sw_toggle").hide();
-                    $(".menu_config_auto").show();
-                    $("#save_auto_cont").hide();
-                    $("#close_auto_cont").hide();
-                    $(".sw_mode_Auto").attr('disabled', false);
-                    $(".sw_mode_Manual").attr('disabled', false);
-                    // $(".close_modal").show();
-                    for (var i = 1; i <= 6; i++) {
-                        $('#time_s_' + i).removeClass('is-invalid')
-                        $('#time_e_' + i).removeClass('is-invalid')
-                    }
-                } else {
-                    swal({
-                        title: 'คุณแน่ใจหรือไม่?',
-                        text: "คุณต้องการยกเลิกการตั้งค่า?",
-                        type: 'warning',
-                        allowOutsideClick: false,
-                        showCancelButton: true,
-                        confirmButtonColor: '#da3444',
-                        cancelButtonColor: '#8e8e8e',
-                        confirmButtonText: 'ยืนยัน',
-                        cancelButtonText: 'ยกเลิก',
-                    }).then((result) => {
-                        if (result.value) {
-                            $(".img_sw").show();
-                            $('.input_time').removeClass("input_err").prop('disabled', true);
-                            $(".sw_toggle").hide();
-                            $(".menu_config_auto").show();
-                            $(".sw_mode_Auto").attr('disabled', false);
-                            $(".sw_mode_Manual").attr('disabled', false);
-                            $(".close_modal").show();
-                            fn_df_logdata_auto(chanel);
-                            $("#save_auto_cont").hide();
-                            $("#close_auto_cont").hide();
-                            for (var i = 1; i <= 6; i++) {
-                                $('#time_s_' + i).removeClass('is-invalid')
-                                $('#time_e_' + i).removeClass('is-invalid')
+                // label_manual
+                function fn_label_manual(val) {
+                    var sw_log = $.parseJSON($('#val_sw_manual').val());
+                    if (val == 1) {
+                        $('.title_load_manual').html('ควบคุมน้ำหยด');
+                        $('.menu_config_manual').show();
+                        $('.label_1').html('น้ำหยด 1');
+                        $('.label_2').html('น้ำหยด 2');
+                        $('.label_3').html('น้ำหยด 3');
+                        $('.label_4').html('น้ำหยด 4');
+                        if ($('#close_manual_cont').is(":hidden") == true) {
+                            if (parseInt(config_cn.cn_status_1) == 1) {
+                                if (sw_log.dripper_1 === 'ON') {
+                                    $('.label_1').show();
+                                } else {
+                                    $('.label_1').hide();
+                                }
+                            } else {
+                                $('.label_1').hide();
+                                $('.status_config_manual_1').hide();
+                            }
+                            if (parseInt(config_cn.cn_status_2) == 1) {
+                                if (sw_log.dripper_2 === 'ON') {
+                                    $('.label_2').show();
+                                } else {
+                                    $('.label_2').hide();
+                                }
+                            } else {
+                                $('.label_2').hide();
+                                $('.status_config_manual_2').hide();
+                            }
+                            if (parseInt(config_cn.cn_status_3) == 1) {
+                                if (sw_log.dripper_3 === 'ON') {
+                                    $('.label_3').show();
+                                } else {
+                                    $('.label_3').hide();
+                                }
+                            } else {
+                                $('.label_3').hide();
+                                $('.status_config_manual_3').hide();
+                            }
+                            if (parseInt(config_cn.cn_status_4) == 1) {
+                                if (sw_log.dripper_4 === 'ON') {
+                                    $('.label_4').show();
+                                } else {
+                                    $('.label_4').hide();
+                                }
+                            } else {
+                                $('.label_4').hide();
+                                $('.status_config_manual_4').hide();
                             }
                         }
-                    });
-                }
-            } else {
-                if (JSON.stringify(res['load_' + chanel]) === JSON.stringify(sw_gd2)) {
-                    $("#save_auto_cont").hide();
-                } else {
-                    $("#save_auto_cont").show();
-                }
-            }
-        }
-        // label_manual
-        function fn_label_manual(val) {
-            var sw_log = $.parseJSON($('#val_sw_manual').val());
-            if (val == 1) {
-                $('.title_load_manual').html('ควบคุมน้ำหยด');
-                $('.menu_config_manual').show();
-                $('.label_1').html('น้ำหยด 1');
-                $('.label_2').html('น้ำหยด 2');
-                $('.label_3').html('น้ำหยด 3');
-                $('.label_4').html('น้ำหยด 4');
-                if ($('#close_manual_cont').is(":hidden") == true) {
-                    if (parseInt(config_cn.cn_status_1) == 1) {
-                        if (sw_log.dripper_1 === 'ON') {
-                            $('.label_1').show();
+                        if (countElement(1, status_dripper) > 1) {
+                            $('.menu_config_manual').show();
                         } else {
+                            $('.menu_config_manual').hide();
                             $('.label_1').hide();
-                        }
-                    } else {
-                        $('.label_1').hide();
-                        $('.status_config_manual_1').hide();
-                    }
-                    if (parseInt(config_cn.cn_status_2) == 1) {
-                        if (sw_log.dripper_2 === 'ON') {
-                            $('.label_2').show();
-                        } else {
                             $('.label_2').hide();
-                        }
-                    } else {
-                        $('.label_2').hide();
-                        $('.status_config_manual_2').hide();
-                    }
-                    if (parseInt(config_cn.cn_status_3) == 1) {
-                        if (sw_log.dripper_3 === 'ON') {
-                            $('.label_3').show();
-                        } else {
                             $('.label_3').hide();
-                        }
-                    } else {
-                        $('.label_3').hide();
-                        $('.status_config_manual_3').hide();
-                    }
-                    if (parseInt(config_cn.cn_status_4) == 1) {
-                        if (sw_log.dripper_4 === 'ON') {
-                            $('.label_4').show();
-                        } else {
                             $('.label_4').hide();
                         }
-                    } else {
-                        $('.label_4').hide();
-                        $('.status_config_manual_4').hide();
-                    }
-                }
-                if (countElement(1, status_dripper) > 1) {
-                    $('.menu_config_manual').show();
-                } else {
-                    $('.menu_config_manual').hide();
-                    $('.label_1').hide();
-                    $('.label_2').hide();
-                    $('.label_3').hide();
-                    $('.label_4').hide();
-                }
-            } else if (val == 2) {
-                $('.title_load_manual').html('ควบคุมพัดลม');
-                $('.label_1').html('พัดลม 1');
-                $('.label_2').html('พัดลม 2');
-                $('.label_3').html('พัดลม 3');
-                $('.label_4').html('พัดลม 4');
-                if ($('#close_manual_cont').is(":hidden") == true) {
-                    if (parseInt(config_cn.cn_status_5) == 1) {
-                        if (sw_log.fan_1 === 'ON') {
-                            $('.label_1').show();
+                    } else if (val == 2) {
+                        $('.title_load_manual').html('ควบคุมพัดลม');
+                        $('.label_1').html('พัดลม 1');
+                        $('.label_2').html('พัดลม 2');
+                        $('.label_3').html('พัดลม 3');
+                        $('.label_4').html('พัดลม 4');
+                        if ($('#close_manual_cont').is(":hidden") == true) {
+                            if (parseInt(config_cn.cn_status_5) == 1) {
+                                if (sw_log.fan_1 === 'ON') {
+                                    $('.label_1').show();
+                                } else {
+                                    $('.label_1').hide();
+                                }
+                            } else {
+                                $('.label_1').hide();
+                                $('.status_config_manual_1').hide();
+                            }
+                            if (parseInt(config_cn.cn_status_6) == 1) {
+                                if (sw_log.fan_2 === 'ON') {
+                                    $('.label_2').show();
+                                } else {
+                                    $('.label_2').hide();
+                                }
+                            } else {
+                                $('.label_2').hide();
+                                $('.status_config_manual_2').hide();
+                            }
+                            if (parseInt(config_cn.cn_status_7) == 1) {
+                                if (sw_log.fan_3 === 'ON') {
+                                    $('.label_3').show();
+                                } else {
+                                    $('.label_3').hide();
+                                }
+                            } else {
+                                $('.label_3').hide();
+                                $('.status_config_manual_3').hide();
+                            }
+                            if (parseInt(config_cn.cn_status_8) == 1) {
+                                if (sw_log.fan_4 === 'ON') {
+                                    $('.label_4').show();
+                                } else {
+                                    $('.label_4').hide();
+                                }
+                            } else {
+                                $('.label_4').hide();
+                                $('.status_config_manual_4').hide();
+                            }
+                        }
+                        if (countElement(1, status_fan) > 1) {
+                            $('.menu_config_manual').show();
                         } else {
+                            $('.menu_config_manual').hide();
                             $('.label_1').hide();
-                        }
-                    } else {
-                        $('.label_1').hide();
-                        $('.status_config_manual_1').hide();
-                    }
-                    if (parseInt(config_cn.cn_status_6) == 1) {
-                        if (sw_log.fan_2 === 'ON') {
-                            $('.label_2').show();
-                        } else {
                             $('.label_2').hide();
-                        }
-                    } else {
-                        $('.label_2').hide();
-                        $('.status_config_manual_2').hide();
-                    }
-                    if (parseInt(config_cn.cn_status_7) == 1) {
-                        if (sw_log.fan_3 === 'ON') {
-                            $('.label_3').show();
-                        } else {
                             $('.label_3').hide();
-                        }
-                    } else {
-                        $('.label_3').hide();
-                        $('.status_config_manual_3').hide();
-                    }
-                    if (parseInt(config_cn.cn_status_8) == 1) {
-                        if (sw_log.fan_4 === 'ON') {
-                            $('.label_4').show();
-                        } else {
                             $('.label_4').hide();
                         }
-                    } else {
-                        $('.label_4').hide();
-                        $('.status_config_manual_4').hide();
-                    }
-                }
-                if (countElement(1, status_fan) > 1) {
-                    $('.menu_config_manual').show();
-                } else {
-                    $('.menu_config_manual').hide();
-                    $('.label_1').hide();
-                    $('.label_2').hide();
-                    $('.label_3').hide();
-                    $('.label_4').hide();
-                }
-            } else if (val == 3) {
-                $('.title_load_manual').html('ควบคุมพ่นหมอก');
-                $('.label_1').html('พ่นหมอก 1');
-                $('.label_2').html('พ่นหมอก 2');
-                if ($('#close_manual_cont').is(":hidden") == true) {
-                    if (parseInt(config_cn.cn_status_9) == 1) {
-                        if (sw_log.foggy_1 === 'ON') {
-                            $('.label_1').show();
+                    } else if (val == 3) {
+                        $('.title_load_manual').html('ควบคุมพ่นหมอก');
+                        $('.label_1').html('พ่นหมอก 1');
+                        $('.label_2').html('พ่นหมอก 2');
+                        if ($('#close_manual_cont').is(":hidden") == true) {
+                            if (parseInt(config_cn.cn_status_9) == 1) {
+                                if (sw_log.foggy_1 === 'ON') {
+                                    $('.label_1').show();
+                                } else {
+                                    $('.label_1').hide();
+                                }
+                            } else {
+                                $('.label_1').hide();
+                                $('.status_config_manual_1').hide();
+                            }
+                            if (parseInt(config_cn.cn_status_10) == 1) {
+                                if (sw_log.foggy_2 === 'ON') {
+                                    $('.label_2').show();
+                                } else {
+                                    $('.label_2').hide();
+                                }
+                            } else {
+                                $('.label_2').hide();
+                                $('.status_config_manual_2').hide();
+                            }
+                            $('.label_3').hide();
+                            $('.label_4').hide();
+                            $('.status_config_manual_3').hide();
+                            $('.status_config_manual_4').hide();
+                        }
+                        if (countElement(1, status_foggy) > 1) {
+                            $('.menu_config_manual').show();
                         } else {
+                            $('.menu_config_manual').hide();
                             $('.label_1').hide();
-                        }
-                    } else {
-                        $('.label_1').hide();
-                        $('.status_config_manual_1').hide();
-                    }
-                    if (parseInt(config_cn.cn_status_10) == 1) {
-                        if (sw_log.foggy_2 === 'ON') {
-                            $('.label_2').show();
-                        } else {
                             $('.label_2').hide();
+                            $('.label_3').hide();
+                            $('.label_4').hide();
                         }
-                    } else {
-                        $('.label_2').hide();
-                        $('.status_config_manual_2').hide();
+                    } else if (val == 4) {
+                        $('.title_load_manual').html('ควบคุมสเปรย์');
+                    } else if (val == 5) {
+                        $('.title_load_manual').html('ควบคุมม่านพรางแสง');
                     }
-                    $('.label_3').hide();
-                    $('.label_4').hide();
-                    $('.status_config_manual_3').hide();
-                    $('.status_config_manual_4').hide();
+                    if (val >= 4) {
+                        $('.menu_config_manual').hide();
+                        $('.label_1').hide();
+                        $('.label_2').hide();
+                        $('.label_3').hide();
+                        $('.label_4').hide();
+                    }
                 }
-                if (countElement(1, status_foggy) > 1) {
-                    $('.menu_config_manual').show();
-                } else {
-                    $('.menu_config_manual').hide();
-                    $('.label_1').hide();
-                    $('.label_2').hide();
-                    $('.label_3').hide();
-                    $('.label_4').hide();
+                // switch_manual
+                function fn_df_sw_manual(val) {
+                    for (var i = 1; i <= 5; i++) {
+                        if (i == val) {
+                            $("#s" + i).addClass('active'); // .addClass('btn-outline-success')
+                        } else {
+                            $('#s' + i).removeClass('active') //.removeClass('btn-outline-success')
+                        }
+                    }
+                    fn_label_manual(val);
                 }
-            } else if (val == 4) {
-                $('.title_load_manual').html('ควบคุมสเปรย์');
-            } else if (val == 5) {
-                $('.title_load_manual').html('ควบคุมม่านพรางแสง');
-            }
-            if (val >= 4) {
-                $('.menu_config_manual').hide();
-                $('.label_1').hide();
-                $('.label_2').hide();
-                $('.label_3').hide();
-                $('.label_4').hide();
-            }
-        }
-        // switch_manual
-        function fn_df_sw_manual(val) {
-            for (var i = 1; i <= 5; i++) {
-                if (i == val) {
-                    $("#s" + i).addClass('active'); // .addClass('btn-outline-success')
-                } else {
-                    $('#s' + i).removeClass('active') //.removeClass('btn-outline-success')
-                }
-            }
-            fn_label_manual(val);
-        }
+            });
+        });
     </script>

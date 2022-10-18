@@ -53,7 +53,7 @@
                         <?php if ($_SESSION["sn"]['account_status'] == 1) {?>
                             <li class="nav-item6" role="presentation">
                                 <a class="nav-link text-center" data-bs-toggle="pill" href="#p-ct" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
-                                    ตั้งค่าคอนโทรลโรงเรือน
+                                    ตั้งค่าหน้า Dashboard และสมการ
                                 </a>
                             </li>
                         <?php } ?>

@@ -26,16 +26,13 @@
     <link rel="stylesheet" href="public/stylesheets/header-colors.css" />
     <!-- Date time Picker -->
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> -->
-    <link rel="stylesheet" href="public/stylesheets/daterangepicker.css">
+    <!-- <link rel="stylesheet" href="public/stylesheets/daterangepicker.css"> -->
 
     <link href="public/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
     <!-- <link rel="stylesheet" href="public/plugins/datatables/datatables.net.1.10.25.css"> -->
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"> -->
     <!-- Loading -->
     <link href="public/plugins/Customizable-Loading-Modal-Plugin/css/modal-loading.css" rel="stylesheet" type="text/css">
-    <!-- Bootstrap Toggle -->
-    <!-- <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script> -->
     <!-- Popup CSS -->
     <link href="public/plugins/Magnific-Popup-master/dist/magnific-popup.css" rel="stylesheet">
     <!--Range slider CSS -->
@@ -43,12 +40,19 @@
     <link href="public/plugins/ion-rangeslider/css/ion.rangeSlider.skinModern.css" rel="stylesheet">
     <link href="public/stylesheets/css.css" rel="stylesheet">
     <title>Smart Green House by AI 5.0 AGRICULTURE INNOVATION</title>
-    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
 
     <!--plugins-->
     <script src="public/javascripts/jquery.min.js"></script>
     <script src="public/javascripts/decode.js"></script>
     <script src="routes/chack_login.js"></script>
+    <!-- Bootstrap Toggle -->
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
+    <link rel="stylesheet" href="public/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.min.css">
+    <script src="public/plugins/bootstrap-material-datetimepicker/js/moment.min.js"></script>
+    <script src="public/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.min.js"></script>
+
 
     <style>
         /* .parent {
@@ -71,6 +75,30 @@
 
         .ridge {
             border-style: ridge;
+        }
+        .toggle.ios,
+        .toggle-on.ios,
+        .toggle-off.ios {
+            border-radius: 20px;
+        }
+
+        .toggle.ios .toggle-handle {
+            border-radius: 20px;
+        }
+
+        .no-gutters {
+            margin-right: 0;
+            margin-left: 0;
+        }
+
+        .no-gutters>.col,
+        .no-gutters>[class*="col-"] {
+            padding-right: 0;
+            padding-left: 0;
+        }
+
+        .text_font_size {
+            font-size: 13.5px;
         }
     </style>
 </head>
@@ -253,8 +281,10 @@
                     </div>
                     <input type="hidden" class="hidden_select_sw_manual">
                     <input type="hidden" class="hidden_select_sw_auto">
-                    <input type="hidden" id="val_sw_manual">
-                    <input type="hidden" id="val_sw_auto">
+                    <input type="hidden" id="val_config">
+                    <!-- <input type="hidden" id="val_sw_manual">
+                    <input type="hidden" id="val_sw_auto_time_set">
+                    <input type="hidden" id="val_sw_auto_time_loop"> -->
                 </div>
             </div>
 
@@ -352,12 +382,12 @@
     <script src="https://cdn.amcharts.com/lib/4/themes/frozen.js"></script>
     <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script> -->
 
-    <script type="text/javascript" src="public/javascripts/echarts.4.8.0.js"></script>
+    <!-- <script type="text/javascript" src="public/javascripts/echarts.4.8.0.js"></script> -->
 
     <!-- mqtt_plugin -->
     <script src="public/plugins/mqtt_plugin/lib/mqttws31.js"></script>
     <!-- Date time Picker -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script> -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     <script src="public/plugins/datatable/js/jquery.dataTables.min.js"></script>
@@ -380,8 +410,6 @@
     <!-- Range slider  -->
     <script src="public/plugins/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider.min.js"></script>
     <script src="public/plugins/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider-init.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
     <script src="public/plugins/apexcharts-bundle/js/apexcharts.js"></script>
 
@@ -3702,10 +3730,11 @@
                                             console.log("subscribed");
                                         }
                                     }
-                                    client.subscribe(house_master + "/control/config/manual", options);
-                                    client.subscribe(house_master + "/data_sensor/filter", options);
+                                    // client.subscribe(house_master + "/control/config/manual", options);
+                                    client.subscribe(house_master + "/control/set_config", options);
+                                    client.subscribe(house_master + "/data_sensor/filter_eq", options);
                                     client.subscribe(house_master + "/control/response", options);
-                                    client.subscribe(house_master + "/control/config/auto", options);
+                                    // client.subscribe(house_master + "/control/config/auto", options);
                                     client.subscribe(house_master + "/monitor/_hardware/realtime", options);
                                     client.subscribe("web_system", options);
                                 }
@@ -3724,422 +3753,471 @@
                                     }
                                 }
                                 function onMessageArrived(message) {
-                                    if(message.destinationName ==  house_master + "/control/config/manual"){
+                                    // if(message.destinationName ==  house_master + "/control/config/manual"){
+                                    //     var result = message.payloadString;
+                                    //     var n_result = result.split('\r\n')
+                                    //     // var parseJSON = $.parseJSON(result);
+                                    //     // console.log(n_result);
+                                    //     $('#val_sw_manual').val(JSON.stringify({
+                                    //       "dripper_1":  result.split('\r\n')[2].split('=')[1],
+                                    //       "dripper_2":  result.split('\r\n')[3].split('=')[1],
+                                    //       "dripper_3":  result.split('\r\n')[4].split('=')[1],
+                                    //       "dripper_4":  result.split('\r\n')[5].split('=')[1],
+                                    //       "fan_1":      result.split('\r\n')[6].split('=')[1],
+                                    //       "fan_2":      result.split('\r\n')[7].split('=')[1],
+                                    //       "fan_3":      result.split('\r\n')[8].split('=')[1],
+                                    //       "fan_4":      result.split('\r\n')[9].split('=')[1],
+                                    //       "foggy_1":    result.split('\r\n')[10].split('=')[1],
+                                    //       "foggy_2":    result.split('\r\n')[11].split('=')[1]
+                                    //     }));
+                                    // }
+                                    // else if(message.destinationName == house_master + "/control/config/auto"){
+                                    //     var result = message.payloadString;
+                                    //     var n_result = result.split('\r\n')
+                                    //     // console.log(n_result);
+                                    //     // return false;
+                                    //     var SW_drip1 = []
+                                    //     var SW_drip2 = []
+                                    //     var SW_drip3 = []
+                                    //     var SW_drip4 = []
+                                    //     var SW_fan1 = []
+                                    //     var SW_fan2 = []
+                                    //     var SW_fan3 = []
+                                    //     var SW_fan4 = []
+                                    //     var SW_foggy1 = []
+                                    //     var SW_foggy2 = []
+                                    //     var SW_spray = []
+                                    //     var SW_shading = []
+                                    //     for(var i=1; i<=6; i++){
+                                    //         // if(config_cn['cn_status_1'] == 1){
+                                    //             if(n_result[i+(i-1)].split('=')[1] != '99:99' && n_result[i+1+(i-1)].split('=')[1] != '99:99'){
+                                    //                 SW_drip1.push({ sw:1, s:n_result[i+(i-1)].split('=')[1], e:n_result[i+1+(i-1)].split('=')[1] });
+                                    //             }else {
+                                    //                 SW_drip1.push({ sw:0, s:'', e:'' })
+                                    //             }
+                                    //         // }
+                                    //         // if(config_cn['cn_status_2'] == 1){
+                                    //             if(n_result[i+13+(i-1)].split('=')[1] != '99:99' && n_result[i+14+(i-1)].split('=')[1] != '99:99'){
+                                    //                 SW_drip2.push({ sw:1, s:n_result[i+13+(i-1)].split('=')[1], e:n_result[i+14+(i-1)].split('=')[1] });
+                                    //             }else {
+                                    //                 SW_drip2.push({ sw:0, s:'', e:'' });
+                                    //             }
+                                    //         // }
+                                    //         // if(config_cn['cn_status_3'] == 1){
+                                    //             if(n_result[i+26+(i-1)].split('=')[1] != '99:99' && n_result[i+27+(i-1)].split('=')[1] != '99:99'){
+                                    //                 SW_drip3.push({ sw:1, s:n_result[i+26+(i-1)].split('=')[1], e:n_result[i+27+(i-1)].split('=')[1] });
+                                    //             }else {
+                                    //                 SW_drip3.push({ sw:0, s:'', e:'' });
+                                    //             }
+                                    //         // }
+                                    //         // if(config_cn['cn_status_4'] == 1){
+                                    //             if(n_result[i+39+(i-1)].split('=')[1] != '99:99' && n_result[i+40+(i-1)].split('=')[1] != '99:99'){
+                                    //                 SW_drip4.push({ sw:1, s:n_result[i+39+(i-1)].split('=')[1], e:n_result[i+40+(i-1)].split('=')[1] });
+                                    //             }else {
+                                    //                 SW_drip4.push({ sw:0, s:'', e:'' });
+                                    //             }
+                                    //         // }
+                                    //         // if(config_cn['cn_status_5'] == 1){
+                                    //             if(n_result[i+52+(i-1)].split('=')[1] != '99:99' && n_result[i+53+(i-1)].split('=')[1] != '99:99'){
+                                    //                 SW_fan1.push({ sw:1, s:n_result[i+52+(i-1)].split('=')[1], e:n_result[i+53+(i-1)].split('=')[1] });
+                                    //             }else {
+                                    //                 SW_fan1.push({ sw:0, s:'', e:'' });
+                                    //             }
+                                    //         // }
+                                    //         // if(config_cn['cn_status_6'] == 1){
+                                    //             if(n_result[i+65+(i-1)].split('=')[1] != '99:99' && n_result[i+66+(i-1)].split('=')[1] != '99:99'){
+                                    //                 SW_fan2.push({ sw:1, s:n_result[i+65+(i-1)].split('=')[1], e:n_result[i+66+(i-1)].split('=')[1] });
+                                    //             }else {
+                                    //                 SW_fan2.push({ sw:0, s:'', e:'' });
+                                    //             }
+                                    //         // }
+                                    //         // if(config_cn['cn_status_7'] == 1){
+                                    //             if(n_result[i+78+(i-1)].split('=')[1] != '99:99' && n_result[i+79+(i-1)].split('=')[1] != '99:99'){
+                                    //                 SW_fan3.push({ sw:1, s:n_result[i+78+(i-1)].split('=')[1], e:n_result[i+79+(i-1)].split('=')[1] });
+                                    //             }else {
+                                    //                 SW_fan3.push({ sw:0, s:'', e:'' });
+                                    //             }
+                                    //         // }
+                                    //         // if(config_cn['cn_status_8'] == 1){
+                                    //             if(n_result[i+91+(i-1)].split('=')[1] != '99:99' && n_result[i+92+(i-1)].split('=')[1] != '99:99'){
+                                    //                 SW_fan4.push({ sw:1, s:n_result[i+91+(i-1)].split('=')[1], e:n_result[i+92+(i-1)].split('=')[1] });
+                                    //             }else {
+                                    //                 SW_fan4.push({ sw:0, s:'', e:'' });
+                                    //             }
+                                    //         // }
+                                    //         // if(config_cn['cn_status_9'] == 1){
+                                    //             if(n_result[i+104+(i-1)].split('=')[1] != '99:99' && n_result[i+105+(i-1)].split('=')[1] != '99:99'){
+                                    //                 SW_foggy1.push({ sw:1, s:n_result[i+104+(i-1)].split('=')[1], e:n_result[i+105+(i-1)].split('=')[1] });
+                                    //             }else {
+                                    //                 SW_foggy1.push({ sw:0, s:'', e:'' });
+                                    //             }
+                                    //         // }
+                                    //         // if(config_cn['cn_status_10'] == 1){
+                                    //             if(n_result[i+117+(i-1)].split('=')[1] != '99:99' && n_result[i+118+(i-1)].split('=')[1] != '99:99'){
+                                    //                 SW_foggy2.push({ sw:1, s:n_result[i+117+(i-1)].split('=')[1], e:n_result[i+118+(i-1)].split('=')[1] });
+                                    //             }else {
+                                    //                 SW_foggy2.push({ sw:0, s:'', e:'' });
+                                    //             }
+                                    //         // }
+                                    //         // if(config_cn['cn_status_11'] == 1){
+                                    //             if(n_result[i+130+(i-1)].split('=')[1] != '99:99' && n_result[i+131+(i-1)].split('=')[1] != '99:99'){
+                                    //                 SW_spray.push({ sw:1, s:n_result[i+130+(i-1)].split('=')[1], e:n_result[i+131+(i-1)].split('=')[1] });
+                                    //             }else {
+                                    //                 SW_spray.push({ sw:0, s:'', e:'' });
+                                    //             }
+                                    //         // }
+                                    //         // if(config_cn['cn_status_12'] == 1){
+                                    //             if(n_result[i+143+(i-1)].split('=')[1] != '99:99' && n_result[i+144+(i-1)].split('=')[1] != '99:99'){
+                                    //                 SW_shading.push({ sw:1, s:n_result[i+143+(i-1)].split('=')[1], e:n_result[i+144+(i-1)].split('=')[1] });
+                                    //             }else {
+                                    //                 SW_shading.push({ sw:0, s:'', e:'' });
+                                    //             }
+                                    //         // }
+                                    //     }
+                                    //     // console.log(SW_spray);
+                                    //     // return false
+                                    //     var data_auto = {};
+                                    //     // if(config_cn['cn_status_1'] == 1){
+                                    //         $.extend(data_auto, {
+                                    //             'load_1':{
+                                    //                 'load_st_1':SW_drip1[0].sw,
+                                    //                 'load_st_2':SW_drip1[1].sw,
+                                    //                 'load_st_3':SW_drip1[2].sw,
+                                    //                 'load_st_4':SW_drip1[3].sw,
+                                    //                 'load_st_5':SW_drip1[4].sw,
+                                    //                 'load_st_6':SW_drip1[5].sw,
+                                    //                 'load_s_1':SW_drip1[0].s,
+                                    //                 'load_s_2':SW_drip1[1].s,
+                                    //                 'load_s_3':SW_drip1[2].s,
+                                    //                 'load_s_4':SW_drip1[3].s,
+                                    //                 'load_s_5':SW_drip1[4].s,
+                                    //                 'load_s_6':SW_drip1[5].s,
+                                    //                 'load_e_1':SW_drip1[0].e,
+                                    //                 'load_e_2':SW_drip1[1].e,
+                                    //                 'load_e_3':SW_drip1[2].e,
+                                    //                 'load_e_4':SW_drip1[3].e,
+                                    //                 'load_e_5':SW_drip1[4].e,
+                                    //                 'load_e_6':SW_drip1[5].e
+                                    //             }
+                                    //         });
+                                    //     // }
+                                    //     // if(config_cn['cn_status_2'] == 1){
+                                    //         $.extend(data_auto, {
+                                    //             'load_2':{
+                                    //                 'load_st_1':SW_drip2[0].sw,
+                                    //                 'load_st_2':SW_drip2[1].sw,
+                                    //                 'load_st_3':SW_drip2[2].sw,
+                                    //                 'load_st_4':SW_drip2[3].sw,
+                                    //                 'load_st_5':SW_drip2[4].sw,
+                                    //                 'load_st_6':SW_drip2[5].sw,
+                                    //                 'load_s_1':SW_drip2[0].s,
+                                    //                 'load_s_2':SW_drip2[1].s,
+                                    //                 'load_s_3':SW_drip2[2].s,
+                                    //                 'load_s_4':SW_drip2[3].s,
+                                    //                 'load_s_5':SW_drip2[4].s,
+                                    //                 'load_s_6':SW_drip2[5].s,
+                                    //                 'load_e_1':SW_drip2[0].e,
+                                    //                 'load_e_2':SW_drip2[1].e,
+                                    //                 'load_e_3':SW_drip2[2].e,
+                                    //                 'load_e_4':SW_drip2[3].e,
+                                    //                 'load_e_5':SW_drip2[4].e,
+                                    //                 'load_e_6':SW_drip2[5].e
+                                    //             }
+                                    //         });
+                                    //     // }
+                                    //     // if(config_cn['cn_status_3'] == 1){
+                                    //         $.extend(data_auto, {
+                                    //             'load_3':{
+                                    //                 'load_st_1':SW_drip3[0].sw,
+                                    //                 'load_st_2':SW_drip3[1].sw,
+                                    //                 'load_st_3':SW_drip3[2].sw,
+                                    //                 'load_st_4':SW_drip3[3].sw,
+                                    //                 'load_st_5':SW_drip3[4].sw,
+                                    //                 'load_st_6':SW_drip3[5].sw,
+                                    //                 'load_s_1':SW_drip3[0].s,
+                                    //                 'load_s_2':SW_drip3[1].s,
+                                    //                 'load_s_3':SW_drip3[2].s,
+                                    //                 'load_s_4':SW_drip3[3].s,
+                                    //                 'load_s_5':SW_drip3[4].s,
+                                    //                 'load_s_6':SW_drip3[5].s,
+                                    //                 'load_e_1':SW_drip3[0].e,
+                                    //                 'load_e_2':SW_drip3[1].e,
+                                    //                 'load_e_3':SW_drip3[2].e,
+                                    //                 'load_e_4':SW_drip3[3].e,
+                                    //                 'load_e_5':SW_drip3[4].e,
+                                    //                 'load_e_6':SW_drip3[5].e
+                                    //             }
+                                    //         });
+                                    //     // }
+                                    //     // if(config_cn['cn_status_4'] == 1){
+                                    //         $.extend(data_auto, {
+                                    //             'load_4':{
+                                    //                 'load_st_1':SW_drip4[0].sw,
+                                    //                 'load_st_2':SW_drip4[1].sw,
+                                    //                 'load_st_3':SW_drip4[2].sw,
+                                    //                 'load_st_4':SW_drip4[3].sw,
+                                    //                 'load_st_5':SW_drip4[4].sw,
+                                    //                 'load_st_6':SW_drip4[5].sw,
+                                    //                 'load_s_1':SW_drip4[0].s,
+                                    //                 'load_s_2':SW_drip4[1].s,
+                                    //                 'load_s_3':SW_drip4[2].s,
+                                    //                 'load_s_4':SW_drip4[3].s,
+                                    //                 'load_s_5':SW_drip4[4].s,
+                                    //                 'load_s_6':SW_drip4[5].s,
+                                    //                 'load_e_1':SW_drip4[0].e,
+                                    //                 'load_e_2':SW_drip4[1].e,
+                                    //                 'load_e_3':SW_drip4[2].e,
+                                    //                 'load_e_4':SW_drip4[3].e,
+                                    //                 'load_e_5':SW_drip4[4].e,
+                                    //                 'load_e_6':SW_drip4[5].e
+                                    //             }
+                                    //         });
+                                    //     // }
+                                    //     // if(config_cn['cn_status_5'] == 1){
+                                    //         $.extend(data_auto, {
+                                    //             'load_5':{
+                                    //                 'load_st_1':SW_fan1[0].sw,
+                                    //                 'load_st_2':SW_fan1[1].sw,
+                                    //                 'load_st_3':SW_fan1[2].sw,
+                                    //                 'load_st_4':SW_fan1[3].sw,
+                                    //                 'load_st_5':SW_fan1[4].sw,
+                                    //                 'load_st_6':SW_fan1[5].sw,
+                                    //                 'load_s_1':SW_fan1[0].s,
+                                    //                 'load_s_2':SW_fan1[1].s,
+                                    //                 'load_s_3':SW_fan1[2].s,
+                                    //                 'load_s_4':SW_fan1[3].s,
+                                    //                 'load_s_5':SW_fan1[4].s,
+                                    //                 'load_s_6':SW_fan1[5].s,
+                                    //                 'load_e_1':SW_fan1[0].e,
+                                    //                 'load_e_2':SW_fan1[1].e,
+                                    //                 'load_e_3':SW_fan1[2].e,
+                                    //                 'load_e_4':SW_fan1[3].e,
+                                    //                 'load_e_5':SW_fan1[4].e,
+                                    //                 'load_e_6':SW_fan1[5].e
+                                    //             }
+                                    //         });
+                                    //     // }
+                                    //     // if(config_cn['cn_status_6'] == 1){
+                                    //         $.extend(data_auto, {
+                                    //             'load_6':{
+                                    //                 'load_st_1':SW_fan2[0].sw,
+                                    //                 'load_st_2':SW_fan2[1].sw,
+                                    //                 'load_st_3':SW_fan2[2].sw,
+                                    //                 'load_st_4':SW_fan2[3].sw,
+                                    //                 'load_st_5':SW_fan2[4].sw,
+                                    //                 'load_st_6':SW_fan2[5].sw,
+                                    //                 'load_s_1':SW_fan2[0].s,
+                                    //                 'load_s_2':SW_fan2[1].s,
+                                    //                 'load_s_3':SW_fan2[2].s,
+                                    //                 'load_s_4':SW_fan2[3].s,
+                                    //                 'load_s_5':SW_fan2[4].s,
+                                    //                 'load_s_6':SW_fan2[5].s,
+                                    //                 'load_e_1':SW_fan2[0].e,
+                                    //                 'load_e_2':SW_fan2[1].e,
+                                    //                 'load_e_3':SW_fan2[2].e,
+                                    //                 'load_e_4':SW_fan2[3].e,
+                                    //                 'load_e_5':SW_fan2[4].e,
+                                    //                 'load_e_6':SW_fan2[5].e
+                                    //             }
+                                    //         });
+                                    //     // }
+                                    //     // if(config_cn['cn_status_7'] == 1){
+                                    //         $.extend(data_auto, {
+                                    //             'load_7':{
+                                    //                 'load_st_1':SW_fan3[0].sw,
+                                    //                 'load_st_2':SW_fan3[1].sw,
+                                    //                 'load_st_3':SW_fan3[2].sw,
+                                    //                 'load_st_4':SW_fan3[3].sw,
+                                    //                 'load_st_5':SW_fan3[4].sw,
+                                    //                 'load_st_6':SW_fan3[5].sw,
+                                    //                 'load_s_1':SW_fan3[0].s,
+                                    //                 'load_s_2':SW_fan3[1].s,
+                                    //                 'load_s_3':SW_fan3[2].s,
+                                    //                 'load_s_4':SW_fan3[3].s,
+                                    //                 'load_s_5':SW_fan3[4].s,
+                                    //                 'load_s_6':SW_fan3[5].s,
+                                    //                 'load_e_1':SW_fan3[0].e,
+                                    //                 'load_e_2':SW_fan3[1].e,
+                                    //                 'load_e_3':SW_fan3[2].e,
+                                    //                 'load_e_4':SW_fan3[3].e,
+                                    //                 'load_e_5':SW_fan3[4].e,
+                                    //                 'load_e_6':SW_fan3[5].e
+                                    //             }
+                                    //         });
+                                    //     // }
+                                    //     // if(config_cn['cn_status_8'] == 1){
+                                    //         $.extend(data_auto, {
+                                    //             'load_8':{
+                                    //                 'load_st_1':SW_fan4[0].sw,
+                                    //                 'load_st_2':SW_fan4[1].sw,
+                                    //                 'load_st_3':SW_fan4[2].sw,
+                                    //                 'load_st_4':SW_fan4[3].sw,
+                                    //                 'load_st_5':SW_fan4[4].sw,
+                                    //                 'load_st_6':SW_fan4[5].sw,
+                                    //                 'load_s_1':SW_fan4[0].s,
+                                    //                 'load_s_2':SW_fan4[1].s,
+                                    //                 'load_s_3':SW_fan4[2].s,
+                                    //                 'load_s_4':SW_fan4[3].s,
+                                    //                 'load_s_5':SW_fan4[4].s,
+                                    //                 'load_s_6':SW_fan4[5].s,
+                                    //                 'load_e_1':SW_fan4[0].e,
+                                    //                 'load_e_2':SW_fan4[1].e,
+                                    //                 'load_e_3':SW_fan4[2].e,
+                                    //                 'load_e_4':SW_fan4[3].e,
+                                    //                 'load_e_5':SW_fan4[4].e,
+                                    //                 'load_e_6':SW_fan4[5].e
+                                    //             }
+                                    //         });
+                                    //     // }
+                                    //     // if(config_cn['cn_status_9'] == 1){
+                                    //         $.extend(data_auto, {
+                                    //             'load_9':{
+                                    //                 'load_st_1':SW_foggy1[0].sw,
+                                    //                 'load_st_2':SW_foggy1[1].sw,
+                                    //                 'load_st_3':SW_foggy1[2].sw,
+                                    //                 'load_st_4':SW_foggy1[3].sw,
+                                    //                 'load_st_5':SW_foggy1[4].sw,
+                                    //                 'load_st_6':SW_foggy1[5].sw,
+                                    //                 'load_s_1':SW_foggy1[0].s,
+                                    //                 'load_s_2':SW_foggy1[1].s,
+                                    //                 'load_s_3':SW_foggy1[2].s,
+                                    //                 'load_s_4':SW_foggy1[3].s,
+                                    //                 'load_s_5':SW_foggy1[4].s,
+                                    //                 'load_s_6':SW_foggy1[5].s,
+                                    //                 'load_e_1':SW_foggy1[0].e,
+                                    //                 'load_e_2':SW_foggy1[1].e,
+                                    //                 'load_e_3':SW_foggy1[2].e,
+                                    //                 'load_e_4':SW_foggy1[3].e,
+                                    //                 'load_e_5':SW_foggy1[4].e,
+                                    //                 'load_e_6':SW_foggy1[5].e
+                                    //             }
+                                    //         });
+                                    //     // }
+                                    //     // if(config_cn['cn_status_10'] == 1){
+                                    //         $.extend(data_auto, {
+                                    //             'load_10':{
+                                    //                 'load_st_1':SW_foggy2[0].sw,
+                                    //                 'load_st_2':SW_foggy2[1].sw,
+                                    //                 'load_st_3':SW_foggy2[2].sw,
+                                    //                 'load_st_4':SW_foggy2[3].sw,
+                                    //                 'load_st_5':SW_foggy2[4].sw,
+                                    //                 'load_st_6':SW_foggy2[5].sw,
+                                    //                 'load_s_1':SW_foggy2[0].s,
+                                    //                 'load_s_2':SW_foggy2[1].s,
+                                    //                 'load_s_3':SW_foggy2[2].s,
+                                    //                 'load_s_4':SW_foggy2[3].s,
+                                    //                 'load_s_5':SW_foggy2[4].s,
+                                    //                 'load_s_6':SW_foggy2[5].s,
+                                    //                 'load_e_1':SW_foggy2[0].e,
+                                    //                 'load_e_2':SW_foggy2[1].e,
+                                    //                 'load_e_3':SW_foggy2[2].e,
+                                    //                 'load_e_4':SW_foggy2[3].e,
+                                    //                 'load_e_5':SW_foggy2[4].e,
+                                    //                 'load_e_6':SW_foggy2[5].e
+                                    //             }
+                                    //         });
+                                    //     // }
+                                    //     // if(config_cn['cn_status_11'] == 1){
+                                    //         $.extend(data_auto, {
+                                    //             'load_11':{
+                                    //                 'load_st_1':SW_spray[0].sw,
+                                    //                 'load_st_2':SW_spray[1].sw,
+                                    //                 'load_st_3':SW_spray[2].sw,
+                                    //                 'load_st_4':SW_spray[3].sw,
+                                    //                 'load_st_5':SW_spray[4].sw,
+                                    //                 'load_st_6':SW_spray[5].sw,
+                                    //                 'load_s_1':SW_spray[0].s,
+                                    //                 'load_s_2':SW_spray[1].s,
+                                    //                 'load_s_3':SW_spray[2].s,
+                                    //                 'load_s_4':SW_spray[3].s,
+                                    //                 'load_s_5':SW_spray[4].s,
+                                    //                 'load_s_6':SW_spray[5].s,
+                                    //                 'load_e_1':SW_spray[0].e,
+                                    //                 'load_e_2':SW_spray[1].e,
+                                    //                 'load_e_3':SW_spray[2].e,
+                                    //                 'load_e_4':SW_spray[3].e,
+                                    //                 'load_e_5':SW_spray[4].e,
+                                    //                 'load_e_6':SW_spray[5].e
+                                    //             }
+                                    //         });
+                                    //     // }
+                                    //     // if(config_cn['cn_status_12'] == 1){
+                                    //         $.extend(data_auto, {
+                                    //             'load_12':{
+                                    //                 'load_st_1':SW_shading[0].sw,
+                                    //                 'load_st_2':SW_shading[1].sw,
+                                    //                 'load_st_3':SW_shading[2].sw,
+                                    //                 'load_st_4':SW_shading[3].sw,
+                                    //                 'load_st_5':SW_shading[4].sw,
+                                    //                 'load_st_6':SW_shading[5].sw,
+                                    //                 'load_s_1':SW_shading[0].s,
+                                    //                 'load_s_2':SW_shading[1].s,
+                                    //                 'load_s_3':SW_shading[2].s,
+                                    //                 'load_s_4':SW_shading[3].s,
+                                    //                 'load_s_5':SW_shading[4].s,
+                                    //                 'load_s_6':SW_shading[5].s,
+                                    //                 'load_e_1':SW_shading[0].e,
+                                    //                 'load_e_2':SW_shading[1].e,
+                                    //                 'load_e_3':SW_shading[2].e,
+                                    //                 'load_e_4':SW_shading[3].e,
+                                    //                 'load_e_5':SW_shading[4].e,
+                                    //                 'load_e_6':SW_shading[5].e
+                                    //             }
+                                    //         });
+                                    //     // }
+                                    //     // console.log(data_auto);
+                                    //     // console.log(JSON.stringify(data_auto) );
+                                    //     $('#val_sw_auto_time_set').val(JSON.stringify(data_auto));
+                                    //     // console.log($('#val_sw_auto_time_set').val());
+                                    // }
+                                    if(message.destinationName == house_master + "/control/set_config") {
                                         var result = message.payloadString;
-                                        var n_result = result.split('\r\n')
-                                        // var parseJSON = $.parseJSON(result);
-                                        // console.log(n_result);
-                                        $('#val_sw_manual').val(JSON.stringify({
-                                          "dripper_1":  result.split('\r\n')[2].split('=')[1],
-                                          "dripper_2":  result.split('\r\n')[3].split('=')[1],
-                                          "dripper_3":  result.split('\r\n')[4].split('=')[1],
-                                          "dripper_4":  result.split('\r\n')[5].split('=')[1],
-                                          "fan_1":      result.split('\r\n')[6].split('=')[1],
-                                          "fan_2":      result.split('\r\n')[7].split('=')[1],
-                                          "fan_3":      result.split('\r\n')[8].split('=')[1],
-                                          "fan_4":      result.split('\r\n')[9].split('=')[1],
-                                          "foggy_1":    result.split('\r\n')[10].split('=')[1],
-                                          "foggy_2":    result.split('\r\n')[11].split('=')[1]
-                                        }));
-                                    }
-                                    else if(message.destinationName == house_master + "/control/config/auto"){
-                                        var result = message.payloadString;
-                                        var n_result = result.split('\r\n')
-                                        // console.log(n_result);
+                                        var parseJSON = $.parseJSON(result);
+                                        var sub_mode = parseJSON.sub_mode;
+                                        $('#val_config').val(result);
+                                        // $('#val_sw_manual').val(JSON.stringify(parseJSON.config_manual));
+                                        // $('#val_sw_auto_time_set').val(JSON.stringify(parseJSON.config_timeSet));
+                                        // $('#val_sw_auto_time_loop').val(JSON.stringify(parseJSON.config_timeLoop))
+                                        // console.log(parseJSON)
                                         // return false;
-                                        var SW_drip1 = []
-                                        var SW_drip2 = []
-                                        var SW_drip3 = []
-                                        var SW_drip4 = []
-                                        var SW_fan1 = []
-                                        var SW_fan2 = []
-                                        var SW_fan3 = []
-                                        var SW_fan4 = []
-                                        var SW_foggy1 = []
-                                        var SW_foggy2 = []
-                                        var SW_spray = []
-                                        var SW_shading = []
-                                        for(var i=1; i<=6; i++){
-                                            // if(config_cn['cn_status_1'] == 1){
-                                                if(n_result[i+(i-1)].split('=')[1] != '99:99' && n_result[i+1+(i-1)].split('=')[1] != '99:99'){
-                                                    SW_drip1.push({ sw:1, s:n_result[i+(i-1)].split('=')[1], e:n_result[i+1+(i-1)].split('=')[1] });
-                                                }else {
-                                                    SW_drip1.push({ sw:0, s:'', e:'' })
-                                                }
-                                            // }
-                                            // if(config_cn['cn_status_2'] == 1){
-                                                if(n_result[i+13+(i-1)].split('=')[1] != '99:99' && n_result[i+14+(i-1)].split('=')[1] != '99:99'){
-                                                    SW_drip2.push({ sw:1, s:n_result[i+13+(i-1)].split('=')[1], e:n_result[i+14+(i-1)].split('=')[1] });
-                                                }else {
-                                                    SW_drip2.push({ sw:0, s:'', e:'' });
-                                                }
-                                            // }
-                                            // if(config_cn['cn_status_3'] == 1){
-                                                if(n_result[i+26+(i-1)].split('=')[1] != '99:99' && n_result[i+27+(i-1)].split('=')[1] != '99:99'){
-                                                    SW_drip3.push({ sw:1, s:n_result[i+26+(i-1)].split('=')[1], e:n_result[i+27+(i-1)].split('=')[1] });
-                                                }else {
-                                                    SW_drip3.push({ sw:0, s:'', e:'' });
-                                                }
-                                            // }
-                                            // if(config_cn['cn_status_4'] == 1){
-                                                if(n_result[i+39+(i-1)].split('=')[1] != '99:99' && n_result[i+40+(i-1)].split('=')[1] != '99:99'){
-                                                    SW_drip4.push({ sw:1, s:n_result[i+39+(i-1)].split('=')[1], e:n_result[i+40+(i-1)].split('=')[1] });
-                                                }else {
-                                                    SW_drip4.push({ sw:0, s:'', e:'' });
-                                                }
-                                            // }
-                                            // if(config_cn['cn_status_5'] == 1){
-                                                if(n_result[i+52+(i-1)].split('=')[1] != '99:99' && n_result[i+53+(i-1)].split('=')[1] != '99:99'){
-                                                    SW_fan1.push({ sw:1, s:n_result[i+52+(i-1)].split('=')[1], e:n_result[i+53+(i-1)].split('=')[1] });
-                                                }else {
-                                                    SW_fan1.push({ sw:0, s:'', e:'' });
-                                                }
-                                            // }
-                                            // if(config_cn['cn_status_6'] == 1){
-                                                if(n_result[i+65+(i-1)].split('=')[1] != '99:99' && n_result[i+66+(i-1)].split('=')[1] != '99:99'){
-                                                    SW_fan2.push({ sw:1, s:n_result[i+65+(i-1)].split('=')[1], e:n_result[i+66+(i-1)].split('=')[1] });
-                                                }else {
-                                                    SW_fan2.push({ sw:0, s:'', e:'' });
-                                                }
-                                            // }
-                                            // if(config_cn['cn_status_7'] == 1){
-                                                if(n_result[i+78+(i-1)].split('=')[1] != '99:99' && n_result[i+79+(i-1)].split('=')[1] != '99:99'){
-                                                    SW_fan3.push({ sw:1, s:n_result[i+78+(i-1)].split('=')[1], e:n_result[i+79+(i-1)].split('=')[1] });
-                                                }else {
-                                                    SW_fan3.push({ sw:0, s:'', e:'' });
-                                                }
-                                            // }
-                                            // if(config_cn['cn_status_8'] == 1){
-                                                if(n_result[i+91+(i-1)].split('=')[1] != '99:99' && n_result[i+92+(i-1)].split('=')[1] != '99:99'){
-                                                    SW_fan4.push({ sw:1, s:n_result[i+91+(i-1)].split('=')[1], e:n_result[i+92+(i-1)].split('=')[1] });
-                                                }else {
-                                                    SW_fan4.push({ sw:0, s:'', e:'' });
-                                                }
-                                            // }
-                                            // if(config_cn['cn_status_9'] == 1){
-                                                if(n_result[i+104+(i-1)].split('=')[1] != '99:99' && n_result[i+105+(i-1)].split('=')[1] != '99:99'){
-                                                    SW_foggy1.push({ sw:1, s:n_result[i+104+(i-1)].split('=')[1], e:n_result[i+105+(i-1)].split('=')[1] });
-                                                }else {
-                                                    SW_foggy1.push({ sw:0, s:'', e:'' });
-                                                }
-                                            // }
-                                            // if(config_cn['cn_status_10'] == 1){
-                                                if(n_result[i+117+(i-1)].split('=')[1] != '99:99' && n_result[i+118+(i-1)].split('=')[1] != '99:99'){
-                                                    SW_foggy2.push({ sw:1, s:n_result[i+117+(i-1)].split('=')[1], e:n_result[i+118+(i-1)].split('=')[1] });
-                                                }else {
-                                                    SW_foggy2.push({ sw:0, s:'', e:'' });
-                                                }
-                                            // }
-                                            // if(config_cn['cn_status_11'] == 1){
-                                                if(n_result[i+130+(i-1)].split('=')[1] != '99:99' && n_result[i+131+(i-1)].split('=')[1] != '99:99'){
-                                                    SW_spray.push({ sw:1, s:n_result[i+130+(i-1)].split('=')[1], e:n_result[i+131+(i-1)].split('=')[1] });
-                                                }else {
-                                                    SW_spray.push({ sw:0, s:'', e:'' });
-                                                }
-                                            // }
-                                            // if(config_cn['cn_status_12'] == 1){
-                                                if(n_result[i+143+(i-1)].split('=')[1] != '99:99' && n_result[i+144+(i-1)].split('=')[1] != '99:99'){
-                                                    SW_shading.push({ sw:1, s:n_result[i+143+(i-1)].split('=')[1], e:n_result[i+144+(i-1)].split('=')[1] });
-                                                }else {
-                                                    SW_shading.push({ sw:0, s:'', e:'' });
-                                                }
-                                            // }
+                                        if (sub_mode.sub_mode === 'Timer') {
+                                            $('.sw_mode_tracking').removeClass('btn-info').addClass('btn-outline-info');
+                                            $('.sw_mode_timer').addClass('btn-info').removeClass('btn-outline-info');
+                                            $('.ul_sub_timer').show();
+                                            $('.ul_sub_sensor').hide();
                                         }
-                                        // console.log(SW_spray);
-                                        // return false
-                                        var data_auto = {};
-                                        // if(config_cn['cn_status_1'] == 1){
-                                            $.extend(data_auto, {
-                                                'load_1':{
-                                                    'load_st_1':SW_drip1[0].sw,
-                                                    'load_st_2':SW_drip1[1].sw,
-                                                    'load_st_3':SW_drip1[2].sw,
-                                                    'load_st_4':SW_drip1[3].sw,
-                                                    'load_st_5':SW_drip1[4].sw,
-                                                    'load_st_6':SW_drip1[5].sw,
-                                                    'load_s_1':SW_drip1[0].s,
-                                                    'load_s_2':SW_drip1[1].s,
-                                                    'load_s_3':SW_drip1[2].s,
-                                                    'load_s_4':SW_drip1[3].s,
-                                                    'load_s_5':SW_drip1[4].s,
-                                                    'load_s_6':SW_drip1[5].s,
-                                                    'load_e_1':SW_drip1[0].e,
-                                                    'load_e_2':SW_drip1[1].e,
-                                                    'load_e_3':SW_drip1[2].e,
-                                                    'load_e_4':SW_drip1[3].e,
-                                                    'load_e_5':SW_drip1[4].e,
-                                                    'load_e_6':SW_drip1[5].e
-                                                }
-                                            });
-                                        // }
-                                        // if(config_cn['cn_status_2'] == 1){
-                                            $.extend(data_auto, {
-                                                'load_2':{
-                                                    'load_st_1':SW_drip2[0].sw,
-                                                    'load_st_2':SW_drip2[1].sw,
-                                                    'load_st_3':SW_drip2[2].sw,
-                                                    'load_st_4':SW_drip2[3].sw,
-                                                    'load_st_5':SW_drip2[4].sw,
-                                                    'load_st_6':SW_drip2[5].sw,
-                                                    'load_s_1':SW_drip2[0].s,
-                                                    'load_s_2':SW_drip2[1].s,
-                                                    'load_s_3':SW_drip2[2].s,
-                                                    'load_s_4':SW_drip2[3].s,
-                                                    'load_s_5':SW_drip2[4].s,
-                                                    'load_s_6':SW_drip2[5].s,
-                                                    'load_e_1':SW_drip2[0].e,
-                                                    'load_e_2':SW_drip2[1].e,
-                                                    'load_e_3':SW_drip2[2].e,
-                                                    'load_e_4':SW_drip2[3].e,
-                                                    'load_e_5':SW_drip2[4].e,
-                                                    'load_e_6':SW_drip2[5].e
-                                                }
-                                            });
-                                        // }
-                                        // if(config_cn['cn_status_3'] == 1){
-                                            $.extend(data_auto, {
-                                                'load_3':{
-                                                    'load_st_1':SW_drip3[0].sw,
-                                                    'load_st_2':SW_drip3[1].sw,
-                                                    'load_st_3':SW_drip3[2].sw,
-                                                    'load_st_4':SW_drip3[3].sw,
-                                                    'load_st_5':SW_drip3[4].sw,
-                                                    'load_st_6':SW_drip3[5].sw,
-                                                    'load_s_1':SW_drip3[0].s,
-                                                    'load_s_2':SW_drip3[1].s,
-                                                    'load_s_3':SW_drip3[2].s,
-                                                    'load_s_4':SW_drip3[3].s,
-                                                    'load_s_5':SW_drip3[4].s,
-                                                    'load_s_6':SW_drip3[5].s,
-                                                    'load_e_1':SW_drip3[0].e,
-                                                    'load_e_2':SW_drip3[1].e,
-                                                    'load_e_3':SW_drip3[2].e,
-                                                    'load_e_4':SW_drip3[3].e,
-                                                    'load_e_5':SW_drip3[4].e,
-                                                    'load_e_6':SW_drip3[5].e
-                                                }
-                                            });
-                                        // }
-                                        // if(config_cn['cn_status_4'] == 1){
-                                            $.extend(data_auto, {
-                                                'load_4':{
-                                                    'load_st_1':SW_drip4[0].sw,
-                                                    'load_st_2':SW_drip4[1].sw,
-                                                    'load_st_3':SW_drip4[2].sw,
-                                                    'load_st_4':SW_drip4[3].sw,
-                                                    'load_st_5':SW_drip4[4].sw,
-                                                    'load_st_6':SW_drip4[5].sw,
-                                                    'load_s_1':SW_drip4[0].s,
-                                                    'load_s_2':SW_drip4[1].s,
-                                                    'load_s_3':SW_drip4[2].s,
-                                                    'load_s_4':SW_drip4[3].s,
-                                                    'load_s_5':SW_drip4[4].s,
-                                                    'load_s_6':SW_drip4[5].s,
-                                                    'load_e_1':SW_drip4[0].e,
-                                                    'load_e_2':SW_drip4[1].e,
-                                                    'load_e_3':SW_drip4[2].e,
-                                                    'load_e_4':SW_drip4[3].e,
-                                                    'load_e_5':SW_drip4[4].e,
-                                                    'load_e_6':SW_drip4[5].e
-                                                }
-                                            });
-                                        // }
-                                        // if(config_cn['cn_status_5'] == 1){
-                                            $.extend(data_auto, {
-                                                'load_5':{
-                                                    'load_st_1':SW_fan1[0].sw,
-                                                    'load_st_2':SW_fan1[1].sw,
-                                                    'load_st_3':SW_fan1[2].sw,
-                                                    'load_st_4':SW_fan1[3].sw,
-                                                    'load_st_5':SW_fan1[4].sw,
-                                                    'load_st_6':SW_fan1[5].sw,
-                                                    'load_s_1':SW_fan1[0].s,
-                                                    'load_s_2':SW_fan1[1].s,
-                                                    'load_s_3':SW_fan1[2].s,
-                                                    'load_s_4':SW_fan1[3].s,
-                                                    'load_s_5':SW_fan1[4].s,
-                                                    'load_s_6':SW_fan1[5].s,
-                                                    'load_e_1':SW_fan1[0].e,
-                                                    'load_e_2':SW_fan1[1].e,
-                                                    'load_e_3':SW_fan1[2].e,
-                                                    'load_e_4':SW_fan1[3].e,
-                                                    'load_e_5':SW_fan1[4].e,
-                                                    'load_e_6':SW_fan1[5].e
-                                                }
-                                            });
-                                        // }
-                                        // if(config_cn['cn_status_6'] == 1){
-                                            $.extend(data_auto, {
-                                                'load_6':{
-                                                    'load_st_1':SW_fan2[0].sw,
-                                                    'load_st_2':SW_fan2[1].sw,
-                                                    'load_st_3':SW_fan2[2].sw,
-                                                    'load_st_4':SW_fan2[3].sw,
-                                                    'load_st_5':SW_fan2[4].sw,
-                                                    'load_st_6':SW_fan2[5].sw,
-                                                    'load_s_1':SW_fan2[0].s,
-                                                    'load_s_2':SW_fan2[1].s,
-                                                    'load_s_3':SW_fan2[2].s,
-                                                    'load_s_4':SW_fan2[3].s,
-                                                    'load_s_5':SW_fan2[4].s,
-                                                    'load_s_6':SW_fan2[5].s,
-                                                    'load_e_1':SW_fan2[0].e,
-                                                    'load_e_2':SW_fan2[1].e,
-                                                    'load_e_3':SW_fan2[2].e,
-                                                    'load_e_4':SW_fan2[3].e,
-                                                    'load_e_5':SW_fan2[4].e,
-                                                    'load_e_6':SW_fan2[5].e
-                                                }
-                                            });
-                                        // }
-                                        // if(config_cn['cn_status_7'] == 1){
-                                            $.extend(data_auto, {
-                                                'load_7':{
-                                                    'load_st_1':SW_fan3[0].sw,
-                                                    'load_st_2':SW_fan3[1].sw,
-                                                    'load_st_3':SW_fan3[2].sw,
-                                                    'load_st_4':SW_fan3[3].sw,
-                                                    'load_st_5':SW_fan3[4].sw,
-                                                    'load_st_6':SW_fan3[5].sw,
-                                                    'load_s_1':SW_fan3[0].s,
-                                                    'load_s_2':SW_fan3[1].s,
-                                                    'load_s_3':SW_fan3[2].s,
-                                                    'load_s_4':SW_fan3[3].s,
-                                                    'load_s_5':SW_fan3[4].s,
-                                                    'load_s_6':SW_fan3[5].s,
-                                                    'load_e_1':SW_fan3[0].e,
-                                                    'load_e_2':SW_fan3[1].e,
-                                                    'load_e_3':SW_fan3[2].e,
-                                                    'load_e_4':SW_fan3[3].e,
-                                                    'load_e_5':SW_fan3[4].e,
-                                                    'load_e_6':SW_fan3[5].e
-                                                }
-                                            });
-                                        // }
-                                        // if(config_cn['cn_status_8'] == 1){
-                                            $.extend(data_auto, {
-                                                'load_8':{
-                                                    'load_st_1':SW_fan4[0].sw,
-                                                    'load_st_2':SW_fan4[1].sw,
-                                                    'load_st_3':SW_fan4[2].sw,
-                                                    'load_st_4':SW_fan4[3].sw,
-                                                    'load_st_5':SW_fan4[4].sw,
-                                                    'load_st_6':SW_fan4[5].sw,
-                                                    'load_s_1':SW_fan4[0].s,
-                                                    'load_s_2':SW_fan4[1].s,
-                                                    'load_s_3':SW_fan4[2].s,
-                                                    'load_s_4':SW_fan4[3].s,
-                                                    'load_s_5':SW_fan4[4].s,
-                                                    'load_s_6':SW_fan4[5].s,
-                                                    'load_e_1':SW_fan4[0].e,
-                                                    'load_e_2':SW_fan4[1].e,
-                                                    'load_e_3':SW_fan4[2].e,
-                                                    'load_e_4':SW_fan4[3].e,
-                                                    'load_e_5':SW_fan4[4].e,
-                                                    'load_e_6':SW_fan4[5].e
-                                                }
-                                            });
-                                        // }
-                                        // if(config_cn['cn_status_9'] == 1){
-                                            $.extend(data_auto, {
-                                                'load_9':{
-                                                    'load_st_1':SW_foggy1[0].sw,
-                                                    'load_st_2':SW_foggy1[1].sw,
-                                                    'load_st_3':SW_foggy1[2].sw,
-                                                    'load_st_4':SW_foggy1[3].sw,
-                                                    'load_st_5':SW_foggy1[4].sw,
-                                                    'load_st_6':SW_foggy1[5].sw,
-                                                    'load_s_1':SW_foggy1[0].s,
-                                                    'load_s_2':SW_foggy1[1].s,
-                                                    'load_s_3':SW_foggy1[2].s,
-                                                    'load_s_4':SW_foggy1[3].s,
-                                                    'load_s_5':SW_foggy1[4].s,
-                                                    'load_s_6':SW_foggy1[5].s,
-                                                    'load_e_1':SW_foggy1[0].e,
-                                                    'load_e_2':SW_foggy1[1].e,
-                                                    'load_e_3':SW_foggy1[2].e,
-                                                    'load_e_4':SW_foggy1[3].e,
-                                                    'load_e_5':SW_foggy1[4].e,
-                                                    'load_e_6':SW_foggy1[5].e
-                                                }
-                                            });
-                                        // }
-                                        // if(config_cn['cn_status_10'] == 1){
-                                            $.extend(data_auto, {
-                                                'load_10':{
-                                                    'load_st_1':SW_foggy2[0].sw,
-                                                    'load_st_2':SW_foggy2[1].sw,
-                                                    'load_st_3':SW_foggy2[2].sw,
-                                                    'load_st_4':SW_foggy2[3].sw,
-                                                    'load_st_5':SW_foggy2[4].sw,
-                                                    'load_st_6':SW_foggy2[5].sw,
-                                                    'load_s_1':SW_foggy2[0].s,
-                                                    'load_s_2':SW_foggy2[1].s,
-                                                    'load_s_3':SW_foggy2[2].s,
-                                                    'load_s_4':SW_foggy2[3].s,
-                                                    'load_s_5':SW_foggy2[4].s,
-                                                    'load_s_6':SW_foggy2[5].s,
-                                                    'load_e_1':SW_foggy2[0].e,
-                                                    'load_e_2':SW_foggy2[1].e,
-                                                    'load_e_3':SW_foggy2[2].e,
-                                                    'load_e_4':SW_foggy2[3].e,
-                                                    'load_e_5':SW_foggy2[4].e,
-                                                    'load_e_6':SW_foggy2[5].e
-                                                }
-                                            });
-                                        // }
-                                        // if(config_cn['cn_status_11'] == 1){
-                                            $.extend(data_auto, {
-                                                'load_11':{
-                                                    'load_st_1':SW_spray[0].sw,
-                                                    'load_st_2':SW_spray[1].sw,
-                                                    'load_st_3':SW_spray[2].sw,
-                                                    'load_st_4':SW_spray[3].sw,
-                                                    'load_st_5':SW_spray[4].sw,
-                                                    'load_st_6':SW_spray[5].sw,
-                                                    'load_s_1':SW_spray[0].s,
-                                                    'load_s_2':SW_spray[1].s,
-                                                    'load_s_3':SW_spray[2].s,
-                                                    'load_s_4':SW_spray[3].s,
-                                                    'load_s_5':SW_spray[4].s,
-                                                    'load_s_6':SW_spray[5].s,
-                                                    'load_e_1':SW_spray[0].e,
-                                                    'load_e_2':SW_spray[1].e,
-                                                    'load_e_3':SW_spray[2].e,
-                                                    'load_e_4':SW_spray[3].e,
-                                                    'load_e_5':SW_spray[4].e,
-                                                    'load_e_6':SW_spray[5].e
-                                                }
-                                            });
-                                        // }
-                                        // if(config_cn['cn_status_12'] == 1){
-                                            $.extend(data_auto, {
-                                                'load_12':{
-                                                    'load_st_1':SW_shading[0].sw,
-                                                    'load_st_2':SW_shading[1].sw,
-                                                    'load_st_3':SW_shading[2].sw,
-                                                    'load_st_4':SW_shading[3].sw,
-                                                    'load_st_5':SW_shading[4].sw,
-                                                    'load_st_6':SW_shading[5].sw,
-                                                    'load_s_1':SW_shading[0].s,
-                                                    'load_s_2':SW_shading[1].s,
-                                                    'load_s_3':SW_shading[2].s,
-                                                    'load_s_4':SW_shading[3].s,
-                                                    'load_s_5':SW_shading[4].s,
-                                                    'load_s_6':SW_shading[5].s,
-                                                    'load_e_1':SW_shading[0].e,
-                                                    'load_e_2':SW_shading[1].e,
-                                                    'load_e_3':SW_shading[2].e,
-                                                    'load_e_4':SW_shading[3].e,
-                                                    'load_e_5':SW_shading[4].e,
-                                                    'load_e_6':SW_shading[5].e
-                                                }
-                                            });
-                                        // }
-                                        // console.log(data_auto);
-                                        // console.log(JSON.stringify(data_auto) );
-                                        $('#val_sw_auto').val(JSON.stringify(data_auto));
-                                        // console.log($('#val_sw_auto').val());
+                                        else {
+                                            $('.sw_mode_tracking').addClass('btn-info').removeClass('btn-outline-info');
+                                            $('.sw_mode_timer').removeClass('btn-info').addClass('btn-outline-info');
+                                            $('.ul_sub_timer').hide();
+                                            $('.ul_sub_sensor').show();
+                                        }
+                                        // alert($('.hidden_select_sw_auto').val())
+                                        if (sub_mode['sub_mode_'+$('.hidden_select_sw_auto').val()] === 'Time_set') {
+                                            $('.sw_mode_timeSet').addClass('btn-primary').removeClass('btn-outline-primary');
+                                            $('.sw_mode_timeLoop').removeClass('btn-primary').addClass('btn-outline-primary');
+                                            $('.ul_mode_timeSet').show();
+                                            $('.ul_mode_timeLoop').hide();
+                                        }
+                                        else {
+                                            $('.sw_mode_timeSet').removeClass('btn-primary').addClass('btn-outline-primary');
+                                            $('.sw_mode_timeLoop').addClass('btn-primary').removeClass('btn-outline-primary');
+                                            $('.ul_mode_timeSet').hide();
+                                            $('.ul_mode_timeLoop').show();
+                                        }
+                                        $(".img_sw").show();
+                                        $('.input_tSet').prop('disabled', true);
+                                        $('.input_tLoop').prop('disabled', true);
+                                        $(".sw_toggle").hide();
+                                        $(".menu_config_auto").show();
+                                        $("#save_auto_cont").hide();
+                                        $("#close_auto_cont").hide();
+                                        $(".sw_mode_Auto").attr('disabled', false);
+                                        $(".sw_mode_Manual").attr('disabled', false);
+                                        $('.sw_mode_tracking').prop('disabled', false)
+                                        $('.sw_mode_timer').prop('disabled', false)
+                                        $('.sw_mode_timeSet').prop('disabled', true)
+                                        $('.sw_mode_timeLoop').prop('disabled', true)
                                     }
                                     else if(message.destinationName == house_master + "/monitor/_hardware/realtime"){
                                         var result = message.payloadString;
@@ -4162,7 +4240,7 @@
                                             }
                                         }, 1000);
                                     }
-                                    else if(message.destinationName == house_master + "/data_sensor/filter") {
+                                    else if(message.destinationName == house_master + "/data_sensor/filter_eq") {
                                         var result = message.payloadString;
                                         var parseJSON = $.parseJSON(result);
                                         // console.log('parseJSON')
@@ -4357,16 +4435,26 @@
                                         }
                                     }
                                     else if(message.destinationName == house_master + "/control/response") {
-                                        var result = message.payloadString;
+                                        var result = //'{"serial_id":"TUSMT008","timestamp":"2022-09-29 20:13:31.673963","version":"1.3.2.3r2","mode":"Auto","dripper_1":"ON","dripper_2":"ON","dripper_3":"ON","dripper_4":"ON","fan_1":"OFF","fan_2":"OFF","fan_3":"OFF","fan_4":"OFF","foggy_1":"OFF","foggy_2":"OFF","spray":"OFF","shading":"ON","user_control":"xzenzza"}' //
+                                        message.payloadString;
                                         var parseJSON = $.parseJSON(result);
                                         // console.log(parseJSON)
+
+                                        var parseJSON2 = $.parseJSON($('#val_config').val());
+                                        // console.log($('#val_sw_manual').val());
+                                        // return false;
                                         if (parseJSON.mode === 'Manual') {
                                             $('.dash_mode').html('โหมดกำหนดเอง');
                                             $('.sw_mode_Auto').removeClass('btn-success').addClass('btn-outline-success');
                                             $('.sw_mode_Manual').addClass('btn-success').removeClass('btn-outline-success');
                                             $('.ul_Auto').hide();
                                             $('.ul_Manual').show();
-                                            var sw_log = $.parseJSON($('#val_sw_manual').val());
+                                            $('.status_config_manual').hide();
+                                            $('#save_manual_cont').hide();
+                                            $('#close_manual_cont').hide();
+                                            var sw_log = parseJSON2.config_manual; //$.parseJSON($('#val_config').val());
+                                            // console.log($('#val_sw_manual').val());
+                                            // return false;
                                             var count_sw1 = [];
                                             var count_stats1_on = [];
                                             var count_sw2 = [];
@@ -4576,6 +4664,10 @@
                                                 $("#close_auto_cont").hide();
                                                 $(".sw_mode_Auto").attr('disabled', false);
                                                 $(".sw_mode_Manual").attr('disabled', false);
+                                                $('.sw_mode_tracking').prop('disabled', false)
+                                                $('.sw_mode_timer').prop('disabled', false)
+                                                $('.sw_mode_timeSet').prop('disabled', true)
+                                                $('.sw_mode_timeLoop').prop('disabled', true)
                                             }
                                             // status control dashboard Auto
                                             for (var i = 1; i <= 12; i++) {
@@ -4662,11 +4754,16 @@
                                             // );
                                             // console.log(moment('2022-08-12 11:03:10').format('YYYY-MM-DD HH:mm:ss'));
                                             // console.log(moment(parseJSON[res.account_id]['dt']).format('YYYY-MM-DD HH:mm:ss'));
-                                            if(moment(new Date()).format('YYYY-MM-DD HH:mm:ss') >= moment(parseJSON[res.account_id]['dt']).format('YYYY-MM-DD HH:mm:ss') ){
+                                            if(isset(parseJSON[res.account_id]['dt']) == false){
+                                                // alert('a')
                                                 logout();
                                                 clearInterval(timeoutId);
-                                                // alert('ok')
                                             }
+                                            // if(moment(new Date()).format('YYYY-MM-DD HH:mm:ss') >= moment(parseJSON[res.account_id]['dt']).format('YYYY-MM-DD HH:mm:ss') ){
+                                            //     logout();
+                                            //     clearInterval(timeoutId);
+                                            //     // alert('ok')
+                                            // }
                                         }, 1000);
                                     }
                                 }// exit_message
@@ -5004,6 +5101,12 @@
             $.each(array, function(i,v) { if (v === item) count++; });
             return count;
         }
+        function isset(v){
+            if(v === 'undefined'){
+                return false;
+            }
+            return true;
+        }
         // sn2 start '2022-07-06 11:11',
         //           '2022-07-07 09:26',
         // sn2 start '2022-08-15 14:57', ///
@@ -5021,7 +5124,8 @@
         // sn6 start '2022-08-17 15:45', ///
 
         // sn7 start '2022-08-10 15:55', ///
-
+        // 2022-09-13 16:56:00
+        // 2022-09-20 18:00:00
     </script>
 
     <script>

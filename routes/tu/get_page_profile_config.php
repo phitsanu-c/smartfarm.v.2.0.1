@@ -15,6 +15,51 @@
     <h3 Class="text-center"><?= $row_3["house_name"] ?></h3>
     <div class="card-body border radius-10 shadow-none mb-3">
         <div class="d-flex">
+            <h4 class="mt-2">ระบบควบคุม</h4>
+            <div class="ms-auto">
+                <button class="btn btn-info me-1 cn_edit me-3" val=""><i class="bi bi-plus-square"></i> แก้ไข</button>
+                <button class="btn btn-success me-1 cn_save me-3" val=""><i class="bi bi-plus-square"></i> บันทึก</button>
+                <button class="btn btn-danger me-1 cn_close me-3" val=""><i class="bi bi-plus-square"></i> ยกเลิก</button>
+            </div>
+        </div>
+        <div class="col-12 col-lg-12 col-xl-12 col-sm-12 d-flex">
+            <div class="row">
+                <form class="row g-3" id="config_control_from" enctype="multipart/form-data" onSubmit="return false;">
+                    <input type="hidden" name="mode" value="control">
+                    <input type="hidden" name="house_master" value="<?= $house_master ?>">
+                    <?php for($i=1; $i<=12; $i++){?>
+                        <div class="col-lg-3 col-xl-3 col-sm-12">
+                            <div class="card-body border radius-10 shadow-none mb-3">
+                                <div class="text-center text-responsive2"><b>
+                                    <?php
+                                    if($i <= 4){echo 'น้ำหยด '.$i;}
+                                    elseif($i > 4 && $i <= 8){echo 'พัดลม '.($i-4);}
+                                    elseif($i > 8 && $i <= 10){echo 'พ่นหมอก '.($i-8);}
+                                    elseif($i == 11){echo 'สเปรย์';}
+                                    elseif($i == 12){echo 'ม่านพรางแสง';}
+                                    // if ($i == 12) { echo "<br><br>"; }else{ echo '<br>'.$row_3['cn_name_'.$i];}?></b>
+                                </div>
+								<div class="input-group mb-3">
+									<label class="input-group-text" for="">Status </label>
+									<select class="form-select sel_<?= $i ?> sel_" name="sel_<?= $i ?>">
+										<option value="0">ปิดใช้งาน</option>
+										<option value="1">เปิดใช้งาน</option>
+									</select>
+								</div>
+                                <div class="input-group mb-3">
+									<label class="input-group-text" for="">Name </label>
+									<input class="form-control name_<?= $i ?> name_" name="name_<?= $i ?>">
+								</div>
+                            </div>
+                        </div>
+
+                    <?php } ?>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card-body border radius-10 shadow-none mb-3">
+        <div class="d-flex">
             <h4 class="mt-2">เซนเซอร์</h4>
             <div class="ms-auto">
                 <button class="btn me-1 me-3 btn-info sn_edit" val=""><i class="bi bi-plus-square"></i> แก้ไข</button>
@@ -171,46 +216,47 @@
     </div>
     <div class="card-body border radius-10 shadow-none mb-3">
         <div class="d-flex">
-            <h4 class="mt-2">ระบบควบคุม</h4>
-            <div class="ms-auto">
+            <h4 class="mt-2">ประวัติการเปลี่ยนแปลงสมการ</h4>
+            <!-- <div class="ms-auto">
                 <button class="btn btn-info me-1 cn_edit me-3" val=""><i class="bi bi-plus-square"></i> แก้ไข</button>
                 <button class="btn btn-success me-1 cn_save me-3" val=""><i class="bi bi-plus-square"></i> บันทึก</button>
                 <button class="btn btn-danger me-1 cn_close me-3" val=""><i class="bi bi-plus-square"></i> ยกเลิก</button>
-            </div>
+            </div> -->
         </div>
         <div class="col-12 col-lg-12 col-xl-12 col-sm-12 d-flex">
-            <div class="row">
-                <form class="row g-3" id="config_control_from" enctype="multipart/form-data" onSubmit="return false;">
-                    <input type="hidden" name="mode" value="control">
-                    <input type="hidden" name="house_master" value="<?= $house_master ?>">
-                    <?php for($i=1; $i<=12; $i++){?>
-                        <div class="col-lg-3 col-xl-3 col-sm-12">
-                            <div class="card-body border radius-10 shadow-none mb-3">
-                                <div class="text-center text-responsive2"><b>
-                                    <?php
-                                    if($i <= 4){echo 'น้ำหยด '.$i;}
-                                    elseif($i > 4 && $i <= 8){echo 'พัดลม '.($i-4);}
-                                    elseif($i > 8 && $i <= 10){echo 'พ่นหมอก '.($i-8);}
-                                    elseif($i == 11){echo 'สเปรย์';}
-                                    elseif($i == 12){echo 'ม่านพรางแสง';}
-                                    // if ($i == 12) { echo "<br><br>"; }else{ echo '<br>'.$row_3['cn_name_'.$i];}?></b>
-                                </div>
-								<div class="input-group mb-3">
-									<label class="input-group-text" for="">Status </label>
-									<select class="form-select sel_<?= $i ?> sel_" name="sel_<?= $i ?>">
-										<option value="0">ปิดใช้งาน</option>
-										<option value="1">เปิดใช้งาน</option>
-									</select>
-								</div>
-                                <div class="input-group mb-3">
-									<label class="input-group-text" for="">Name </label>
-									<input class="form-control name_<?= $i ?> name_" name="name_<?= $i ?>">
-								</div>
-                            </div>
-                        </div>
-
-                    <?php } ?>
-                </form>
+            <div class="table-responsive m-t-10">
+                <table id="table_compare" class="table table-striped table-bordered dataTable" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th class="text-center">วัน - เวลา</th>
+                            <th class="text-center">ผู้บันทึก</th>
+                            <?php for($i=1; $i < 8; $i++){echo '<th class="text-center">'.$row_2['sn_name_'.$i].'</th>';} ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            $stmt_eq = $dbcon->query("SELECT * FROM `tbn_equation` WHERE `equation_sn`= '$house_master'");
+                            $i=1;
+                            // echo $sql;
+                            // exit();
+                            while ($row_eq = $stmt_eq->fetch()) {
+                                echo '<tr>
+                                    <td>'.$i.'</td>
+                                    <td>'.$row_eq['equation_timestamp'].'</td>
+                                    <td>'.$row_eq['equation_user'].'</td>
+                                    <td>'.$row_eq['equation_ch_1'].'</td>
+                                    <td>'.$row_eq['equation_ch_2'].'</td>
+                                    <td>'.$row_eq['equation_ch_3'].'</td>
+                                    <td>'.$row_eq['equation_ch_4'].'</td>
+                                    <td>'.$row_eq['equation_ch_5'].'</td>
+                                    <td>'.$row_eq['equation_ch_6'].'</td>
+                                    <td>'.$row_eq['equation_ch_7'].'</td>
+                                </tr>';
+                            }
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -221,7 +267,7 @@
     var data_sn = <?= json_encode($row_2) ?>;
     var data_equation = <?= json_encode($row_4) ?>;
     $('.df_val').val(JSON.stringify(data_sn))
-    $('.df_val_eq').val(JSON.stringify(data_equation))
+    $('.df_val_eq').val(JSON.stringify(data_equation));
     // console.log(data_equation)
     for(var i=1; i<= 7; i++){
         $('.status_sn_'+i).val(data_sn['sn_status_'+i]);
@@ -260,7 +306,7 @@
         $('.name_sn_').prop('disabled', true);
         $('.channel_sn_').prop('disabled', true);
         $('.mode_sn_').prop('disabled', true);
-        $('.equation_sn_').prop('disabled', true);
+        $('.equation_sn_').prop('disabled', true).removeClass('is-invalid');
         $('.sn_edit').show();
         $('.sn_save').hide();
         $('.sn_close').hide();
@@ -271,21 +317,22 @@
                 $('.equation_sn_'+i).addClass('is-invalid');
                 return false;
             }
-            // else if ( $('.equation_sn_'+i).val().substring(0, 2) != '(x' ) {
-            //     $('.equation_sn_'+i).addClass('is-invalid');
-            //     swal({
-            //         title: 'รูปแบบสมการไม่รูกต้อง !',
-            //         html: "สมการต้องขึ้นต้นด้วย (x เช่น (x *5) + 10 หรือ <br>(x + 2) - 15 เป็นต้น !!!",
-            //         type: 'warning',
-            //         allowOutsideClick: false,
-            //         confirmButtonColor: '#32CD32'
-            //     })
-            //     return false;
-            // }
+            else if ( $('.equation_sn_'+i).val().includes("x") == false ) {
+                $('.equation_sn_'+i).addClass('is-invalid');
+                swal({
+                    title: 'รูปแบบสมการไม่ถูกต้อง !',
+                    html: "ต้องกำหนดตัวแปร x เพื่อแทนค่า sensor เช่น (x *5) + 10 หรือ <br>(x + 2) - 15 เป็นต้น !!!",
+                    type: 'warning',
+                    allowOutsideClick: false,
+                    confirmButtonColor: '#32CD32'
+                })
+                return false;
+            }
             else {
                 $('.equation_sn_'+i).removeClass('is-invalid');
             }
         }
+        // console.log($('.equation_sn_1').val().includes("x"))
         // return false;
         // else {
         swal({

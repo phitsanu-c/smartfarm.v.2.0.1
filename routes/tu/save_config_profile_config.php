@@ -129,7 +129,8 @@
             }else {
                 echo json_encode(['status' => "Insert_success"], JSON_UNESCAPED_UNICODE );
             }
-        }else {
+        }
+        else {
             $topic = $house_master."/control/config/auto";
             $data_mq = $mqtt->subscribeAndWaitForMessage($topic, 1);
             $array_mq = explode(PHP_EOL,$data_mq);

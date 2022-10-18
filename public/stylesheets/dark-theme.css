@@ -763,7 +763,7 @@
     html.dark-theme .form-control {
         color: #c0c8d1;
         background-color: #26244C;
-        border: 1px solid /*rgb(255 255 255 / 34%) */
+        /* border: 1px solid /*rgb(255 255 255 / 34%) */ */
     }
 
     html.dark-theme .form-select {

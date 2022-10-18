@@ -141,7 +141,7 @@
                     </a>
                 </div>
                 <?php if ($_SESSION["sn"]['account_status'] == 1) {?>
-                    <script> $(".memu_compare").show(); </script>
+                    <!-- <script> $(".memu_compare").show(); </script> -->
                 <?php }else { ?>
                     <script>
                         var userLevel = '<?= $row_['userST_level'] ?>';
@@ -149,7 +149,7 @@
                             // alert(userLevel)
                             $(".memu_compare").hide();
                         }else {
-                            $(".memu_compare").show();
+                            // $(".memu_compare").show();
                         }
                     </script>
                 <?php }
@@ -223,7 +223,7 @@
                     </a>
                 </div>
                 <?php if ($_SESSION["sn"]['account_status'] == 1) {?>
-                    <script> $(".memu_compare").show(); </script>
+                    <!-- <script> $(".memu_compare").show(); </script> -->
                 <?php }else { ?>
                     <script>
                         var userLevel = '<?= $row_['userST_level'] ?>';
@@ -231,7 +231,7 @@
                             // alert(userLevel)
                             $(".memu_compare").hide();
                         }else {
-                            $(".memu_compare").show();
+                            // $(".memu_compare").show();
                         }
                     </script>
                 <?php } $i++;
