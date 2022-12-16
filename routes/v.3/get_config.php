@@ -51,16 +51,19 @@ if($_SESSION['account_status'] > 2){
 }else {
     $account_status = $_SESSION['account_status'];
 }
-$row_4 = $dbcon->query("SELECT * FROM tbn_set_maxmin WHERE set_maxmin_sn = '$house_master'")->fetch();
+$row_m = $dbcon->query("SELECT * FROM tbn_set_maxmin WHERE set_maxmin_sn = '$house_master'")->fetch();
+// echo "SELECT * FROM tbn_set_maxmin WHERE set_maxmin_sn = '$house_master'<br>";
+// echo json_encode($row_m);
+// exit();
 $set_maxmin = [
-    'Tmin' => $row_4["set_Tmin"],
-    'Tmax' => $row_4["set_Tmax"],
-    'Hmin' => $row_4["set_Hmin"],
-    'Hmax' => $row_4["set_Hmax"],
-    'Lmin' => $row_4["set_Lmin"],
-    'Lmax' => $row_4["set_Lmax"],
-    'Smin' => $row_4["set_Smin"],
-    'Smax' => $row_4["set_Smax"]
+    'Tmin' => $row_m["set_Tmin"],
+    'Tmax' => $row_m["set_Tmax"],
+    'Hmin' => $row_m["set_Hmin"],
+    'Hmax' => $row_m["set_Hmax"],
+    'Lmin' => $row_m["set_Lmin"],
+    'Lmax' => $row_m["set_Lmax"],
+    'Smin' => $row_m["set_Smin"],
+    'Smax' => $row_m["set_Smax"]
 ];
 echo json_encode([
     's_master'=> $row_master,
@@ -85,6 +88,7 @@ echo json_encode([
     // 'theme' => $_SESSION["login_theme"],
     'account_user' => $_SESSION['account_user'],
     'userLevel'=> $account_status,
+    // $row_m
 ]);
 
 exit();

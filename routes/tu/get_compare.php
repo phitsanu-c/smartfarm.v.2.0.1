@@ -69,7 +69,12 @@
     // echo $channel1;
     // exit();
     $sel_all_every = $_POST["sel_all_every"];
-    $sql = "SELECT $channel1 FROM tbn_data_tu WHERE data_sn = '$house_master2' AND data_timestamp BETWEEN '$start_day' AND '$stop_day' AND mod(minute(`data_timestamp`),'$sel_all_every') = 0 ORDER BY data_timestamp ";
+    if($_POST['eq'] == 0){
+        $tb_name = 'tbn_data_tu';
+    }else {
+        $tb_name = 'tbn_data_tu_eq';
+    }
+    $sql = "SELECT $channel1 FROM $tb_name WHERE data_sn = '$house_master2' AND data_timestamp BETWEEN '$start_day' AND '$stop_day' AND mod(minute(`data_timestamp`),'$sel_all_every') = 0 ORDER BY data_timestamp ";
     $stmt = $dbcon->query($sql);
     $data0 = array();
     $i=1;

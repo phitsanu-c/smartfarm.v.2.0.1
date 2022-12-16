@@ -41,6 +41,7 @@
     $channel[] = "SUBSTRING(cn_timestamp,-8, 8) AS nTime";
     $channel[] = "cn_user";
     $channel[] = "cn_mode";
+    $channel[] = "cn_submode";
     if($config_cn['cn_status_1'] == 1){$channel[] = "cn_load_1 AS dripper_1";}
     if($config_cn['cn_status_2'] == 1){$channel[] = "cn_load_2 AS dripper_2";}
     if($config_cn['cn_status_3'] == 1){$channel[] = "cn_load_3 AS dripper_3";}
@@ -67,6 +68,7 @@
                 <th class="text-center">เวลา</th>
                 <th class="text-center">ผู้ดำเนินการ</th>
                 <th class="text-center">โหมด</th>
+                <th class="text-center">โหมดย่อย</th>
                 <?php
                     if($config_cn['cn_status_1'] == 1){echo '<th class="text-center">น้ำหยด 1 '.$config_cn['cn_name_1'].'</th>';}
                     if($config_cn['cn_status_2'] == 1){echo '<th class="text-center">น้ำหยด 2 '.$config_cn['cn_name_2'].'</th>';}
@@ -85,7 +87,7 @@
         </thead>
         <tbody>
             <?php
-                $sql = "SELECT $channel1 FROM tbn_control_log WHERE cn_sn = '$house_master' AND cn_timestamp BETWEEN '$start_day' AND '$stop_day' ORDER BY cn_timestamp DESC";
+                $sql = "SELECT $channel1 FROM tbn_control_log WHERE cn_sn = '$house_master' AND cn_timestamp BETWEEN '$start_day' AND '$stop_day' ORDER BY cn_timestamp DESC, cn_id DESC";
                 $stmt = $dbcon->query($sql);
                 $rowCount = $stmt->rowCount();
                 $colcount = $stmt->columnCount();
@@ -95,7 +97,10 @@
                         <td class="text-center">'.$row[1].'</td>
                         <td class="text-center">'.$row[2].'</td>';
                     if($row[3] == 'Manual'){ echo '<td class="text-center text-success">กำหนดเอง</td>'; }else { echo '<td class="text-center text-primary">อัตโนมัติ</td>';}
-                    if($colcount >= 5){ if($row[4] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                    if($row[4] == 'Time_set'){echo '<td class="text-center">ตั้งเวลา</td>';}
+                    elseif($row[4] == 'Time_loop'){ echo '<td class="text-center">ตั้งเวลาต่อเนื่อง</td>'; }
+                    elseif($row[4] == 'Manual'){ echo '<td class="text-center">-</td>'; }
+                    else {echo '<td class="text-center">'.$row[4].'</td>';}
                     if($colcount >= 6){ if($row[5] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
                     if($colcount >= 7){ if($row[6] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
                     if($colcount >= 8){ if($row[7] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
@@ -107,6 +112,7 @@
                     if($colcount >= 14){ if($row[13] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
                     if($colcount >= 15){ if($row[14] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
                     if($colcount >= 16){ if($row[15] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                    if($colcount >= 17){ if($row[16] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
                     echo '</tr>';
                 }
             ?>

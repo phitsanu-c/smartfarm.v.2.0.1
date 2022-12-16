@@ -1,7 +1,7 @@
 <?php
-    session_start();
+    // session_start();
     require "connectdb.php";
-    
+
         if($_POST["theme"] == "light-theme" || $_POST["theme"] == "dark-theme" || $_POST["theme"] == "semi-dark" || $_POST["theme"] == "minimal-theme"){
             $postdata = $_POST["theme"];
         }else if(explode(" ",$_POST["theme"])[0] == "color-sidebar"){
@@ -17,15 +17,15 @@
                 $postdata = $_POST["theme"];
             }
         }
-    
-    
+
+
     // echo $postdata;
     // exit();
     $data = [
         'theme' => $postdata,
-        'id'=>$_SESSION['user_id']
+        'id'=> $_SESSION['account_id']
     ];
-    $stmt = "UPDATE `tb2_login` SET `login_theme`=:theme WHERE `login_id`=:id";
+    $stmt = "UPDATE `tbn_account` SET `account_theme`=:theme WHERE `account_id`=:id";
     if ($dbcon->prepare($stmt)->execute($data) === TRUE) {
 // echo "OK";
     }else{echo "NO";}

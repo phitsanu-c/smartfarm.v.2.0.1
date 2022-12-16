@@ -1,7 +1,11 @@
+
+
 <?php
     $config = $_POST['data'];
     $account_user = $config["account_user"];
     $s_sensor = $_POST['s_sensor'];
+    $eq = $config['s_master']['house_eq'];
+    // print_r($_POST);
     // print_r($config['s_master']);
     // exit();
     $config_sn = $config['config_sn'];
@@ -216,14 +220,14 @@
                         <div class="col-lg-6 col-xl-6 col-sm-12">
                             <div class="input-group mb-3">
                                 <span class="input-group-text col-sm-4" id="basic-addon3">เวลาเริ่ม</span>
-                                <input type="text" class="form-control text-center val_start" placeholder="วันเวลาเริ่มต้น" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                <input type="text" class="form-control text-center val_start" placeholder="วันเวลาเริ่มต้น" data-field="datetime" data-view="Popup" data-format="yyyy-MM-dd hh:mm">
                                 <div class="invalid-feedback">กรุณาระบุเวลาเริ่ม</div>
                             </div>
                         </div>
                         <div class="col-lg-6 col-xl-6 col-sm-12">
                             <div class="input-group mb-3">
                                 <span class="input-group-text col-sm-4" id="basic-addon3">เวลาสิ้นสุด</span>
-                                <input type="text" class="form-control text-center val_end" placeholder="วันเวลาสิ้นสุด" aria-label="วันเวลาสิ้นสุด" aria-describedby="button-addon2">
+                                <input type="text" class="form-control text-center val_end" placeholder="วันเวลาสิ้นสุด" data-field="datetime" data-view="Popup" data-format="yyyy-MM-dd hh:mm">
                                 <div class="invalid-feedback">กรุณาระบุเวลาสิ้นสุด</div>
                             </div>
                         </div>
@@ -381,37 +385,40 @@
         </div>
     </div>
     <!-- exit Modal_select_sn -->
+
 </div>
 <script>
     var house_master = '<?= $house_master ?>';
     var login_user = '<?= $account_user ?>';
     var config_sn = $.parseJSON('<?= json_encode($config_sn) ?>');
     var config_cn = $.parseJSON('<?= json_encode($config_cn) ?>');
-    $('.val_start').daterangepicker({
-        autoUpdateInput: false,
-        singleDatePicker: true,
-        showDropdowns: true,
-        timePicker: true,
-        timePicker24Hour: true,
-        minYear: 2016,
-        // maxYear: parseInt(moment().format('YYYY'), 10),
-        locale: {
-            cancelLabel: 'Close'
-        }
-    });
-    $('.val_end').daterangepicker({
-        autoUpdateInput: false,
-        singleDatePicker: true,
-        showDropdowns: true,
-        timePicker: true,
-        timePicker24Hour: true,
-        minYear: 2016,
-        // maxDate: moment($('.val_start').val()).add(30, 'days'),
-        // maxYear: parseInt(moment('2022-05-20').format('YYYY-MM-DD'), 10),
-        locale: {
-           cancelLabel: 'Close'
-        },
-    });
+    var eq = '<?= $eq ?>';
+    // $('.val_start').daterangepicker({
+    //     autoUpdateInput: false,
+    //     singleDatePicker: true,
+    //     showDropdowns: true,
+    //     datePicker: false,
+    //     timePicker: true,
+    //     timePicker24Hour: true,
+    //     minYear: 2016,
+    //     // maxYear: parseInt(moment().format('YYYY'), 10),
+    //     locale: {
+    //         cancelLabel: 'Close'
+    //     }
+    // });
+    // $('.val_end').daterangepicker({
+    //     autoUpdateInput: false,
+    //     singleDatePicker: true,
+    //     showDropdowns: true,
+    //     timePicker: true,
+    //     timePicker24Hour: true,
+    //     minYear: 2016,
+    //     // maxDate: moment($('.val_start').val()).add(30, 'days'),
+    //     // maxYear: parseInt(moment('2022-05-20').format('YYYY-MM-DD'), 10),
+    //     locale: {
+    //        cancelLabel: 'Close'
+    //     },
+    // });
 
     $('.mode_sn').show()
     ch_radio('temp');
@@ -472,95 +479,109 @@
         $(".hide_dwm").show();
         $("#Modal_select_sn").modal("show");
 
-        $('.val_start').on('apply.daterangepicker', function(ev, picker) {
-            $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm'));
-            if($('.val_end').val() != ''){
-                if(moment($(this).val()).format('YYYY-MM-DD HH:mm') < moment($('.val_end').val()).add(-31, 'days').format('YYYY-MM-DD HH:mm')) {
-                    Swal({
-                        type: "warning",
-                        html: "เลือกวันได้สูงสุด<b> ไม่เกิน 31</b> วัน/ครั้ง",
-                        // html: text,
-                        allowOutsideClick: false
-                    });
-                    $(this).val('').addClass('is-invalid');
-                    return false;
-                }else if(moment($(this).val()).format('YYYY-MM-DD HH:mm') >= moment($('.val_end').val()).format('YYYY-MM-DD HH:mm')) {
-                    Swal({
-                        type: "warning",
-                        html: "เวลาเริ่มต้น <b>ต้องน้อยกว่า</b> เวลาสิ้นสุด",
-                        // html: text,
-                        allowOutsideClick: false
-                    });
-                    $(this).val('').addClass('is-invalid');
-                    return false;
-                }else {
-                    $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm')).removeClass('is-invalid');
-                }
-            }else {
-                $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm')).removeClass('is-invalid');
-            }
-        });
-
-        $('.val_end').on('apply.daterangepicker', function(ev, picker) {
-            $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm'));
-            // console.log(moment($(this).val()).format('YYYY-MM-DD') +' ++ '+moment($('.val_start').val()).format('YYYY-MM-DD') )
-            if($('.val_start').val() != ''){
-                if(moment($(this).val()).format('YYYY-MM-DD HH:mm') > moment($('.val_start').val()).add(31, 'days').format('YYYY-MM-DD HH:mm')) {
-                    Swal({
-                        type: "warning",
-                        html: "เลือกวันได้สูงสุด<b> ไม่เกิน 31</b> วัน/ครั้ง",
-                        // html: text,
-                        allowOutsideClick: false
-                    });
-                    $(this).val('').addClass('is-invalid');
-                    return false;
-                    return false;
-                }else if(moment($(this).val()).format('YYYY-MM-DD HH:mm') <= moment($('.val_start').val()).format('YYYY-MM-DD HH:mm')) {
-                    Swal({
-                        type: "warning",
-                        html: "เวลาเริ่มต้น <b>ต้องน้อยกว่า</b> เวลาสิ้นสุด",
-                        // html: text,
-                        allowOutsideClick: false
-                    });
-                    $(this).val('').addClass('is-invalid');
-                    return false;
-                }else {
-                    $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm')).removeClass('is-invalid');
-                }
-            }else {
-                $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm')).removeClass('is-invalid');
-            }
-        });
+        // $('.dtpicker-buttonSet').click(function(e) {
+        //     // alert(this.val())
+        //     // $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm'));
+        //     // if($('.val_end').val() != ''){
+        //     //     if(moment($(this).val()).format('YYYY-MM-DD HH:mm') < moment($('.val_end').val()).add(-31, 'days').format('YYYY-MM-DD HH:mm')) {
+        //     //         Swal({
+        //     //             type: "warning",
+        //     //             html: "เลือกวันได้สูงสุด<b> ไม่เกิน 31</b> วัน/ครั้ง",
+        //     //             // html: text,
+        //     //             allowOutsideClick: false
+        //     //         });
+        //     //         $(this).val('').addClass('is-invalid');
+        //     //         return false;
+        //     //     }else if(moment($(this).val()).format('YYYY-MM-DD HH:mm') >= moment($('.val_end').val()).format('YYYY-MM-DD HH:mm')) {
+        //     //         Swal({
+        //     //             type: "warning",
+        //     //             html: "เวลาเริ่มต้น <b>ต้องน้อยกว่า</b> เวลาสิ้นสุด",
+        //     //             // html: text,
+        //     //             allowOutsideClick: false
+        //     //         });
+        //     //         $(this).val('').addClass('is-invalid');
+        //     //         return false;
+        //     //     }else {
+        //     //         $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm')).removeClass('is-invalid');
+        //     //     }
+        //     // }else {
+        //     //     $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm')).removeClass('is-invalid');
+        //     // }
+        // });
+        //
+        // $('.val_end').on('apply.daterangepicker', function(ev, picker) {
+        //     $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm'));
+        //     // console.log(moment($(this).val()).format('YYYY-MM-DD') +' ++ '+moment($('.val_start').val()).format('YYYY-MM-DD') )
+        //     if($('.val_start').val() != ''){
+        //         if(moment($(this).val()).format('YYYY-MM-DD HH:mm') > moment($('.val_start').val()).add(31, 'days').format('YYYY-MM-DD HH:mm')) {
+        //             Swal({
+        //                 type: "warning",
+        //                 html: "เลือกวันได้สูงสุด<b> ไม่เกิน 31</b> วัน/ครั้ง",
+        //                 // html: text,
+        //                 allowOutsideClick: false
+        //             });
+        //             $(this).val('').addClass('is-invalid');
+        //             return false;
+        //             return false;
+        //         }else if(moment($(this).val()).format('YYYY-MM-DD HH:mm') <= moment($('.val_start').val()).format('YYYY-MM-DD HH:mm')) {
+        //             Swal({
+        //                 type: "warning",
+        //                 html: "เวลาเริ่มต้น <b>ต้องน้อยกว่า</b> เวลาสิ้นสุด",
+        //                 // html: text,
+        //                 allowOutsideClick: false
+        //             });
+        //             $(this).val('').addClass('is-invalid');
+        //             return false;
+        //         }else {
+        //             $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm')).removeClass('is-invalid');
+        //         }
+        //     }else {
+        //         $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm')).removeClass('is-invalid');
+        //     }
+        // });
     });
 
     $('#submit_fromTo').click(function() {
+        if ($(".val_start").val() == "") {
+            $(".val_start").addClass('is-invalid');
+            return false;
+        }else{
+            $(".val_start").removeClass('is-invalid');
+        }
+        if ($(".val_end").val() == "") {
+            $(".val_end").addClass('is-invalid');
+            return false;
+        }else{
+            $(".val_end").removeClass('is-invalid');
+        }
+        if ($(".val_start").val() >= $(".val_end").val()) {
+            $(".val_start").addClass('is-invalid');
+            $(".val_end").addClass('is-invalid');
+            Swal({
+                type: "warning",
+                html: "เวลาเริ่มต้น <b>ต้องน้อยกว่า</b> เวลาสิ้นสุด",
+                // html: text,
+                allowOutsideClick: false
+            });
+            return false;
+        }
+        if(moment($(".val_start").val()).format('YYYY-MM-DD HH:mm') > moment($('.val_end').val()).add(31, 'days').format('YYYY-MM-DD HH:mm')) {
+            Swal({
+                type: "warning",
+                html: "เลือกวันได้สูงสุด<b> ไม่เกิน 31</b> วัน/ครั้ง",
+                // html: text,
+                allowOutsideClick: false
+            });
+            $(".val_start").addClass('is-invalid');
+            $(".val_end").addClass('is-invalid');
+            return false;
+        }
+        else{
+            $(".val_start").removeClass('is-invalid');
+            $(".val_end").removeClass('is-invalid');
+        }
+        // +++++++++++++++++++++++++++++++++
         if($('#mode_report').val() != 're_sensor'){
-            if ($(".val_start").val() === "") {
-                $(".val_start").addClass('is-invalid');
-                return false;
-            }else{
-                $(".val_start").removeClass('is-invalid');
-            }
-            if ($(".val_end").val() === "") {
-                $(".val_end").addClass('is-invalid');
-                return false;
-            }else{
-                $(".val_end").removeClass('is-invalid');
-            }
-            if ($(".val_start").val() >= $(".val_end").val()) {
-                $(".val_start").addClass('is-invalid');
-                $(".val_end").addClass('is-invalid');
-                Swal({
-                    type: "warning",
-                    html: "เวลาเริ่มต้น <b>ต้องน้อยกว่า</b> เวลาสิ้นสุด",
-                    // html: text,
-                    allowOutsideClick: false
-                });
-                return false;
-            }else{
-                $(".val_start").removeClass('is-invalid');
-                $(".val_end").removeClass('is-invalid');
-            }
             // alert($(".val_start").val()+' - '+$(".val_end").val())
             $("#Modal_select_sn").modal("hide");
             if($('#mode_report').val() === 're_cn'){
@@ -570,7 +591,8 @@
             }else if($('#mode_report').val() === 're_cnManual'){
                 report_cnManual_table('from_to')
             }
-        }else {
+        }
+        else {
             report_sn('')
             // $('.new_mode_dwm')
         }
@@ -969,7 +991,8 @@
                     config_cn : val,
                     val_start : $(".val_start").val(),
                     val_end : $(".val_end").val(),
-                    sel_all_every : $("#sel_all_every").val()
+                    sel_all_every : $("#sel_all_every").val(),
+                    eq: eq
                 },
                 // dataType: 'json',
                 success: function(res) {
@@ -1255,6 +1278,7 @@
                     val_start : $(".val_start").val(),
                     val_end : $(".val_end").val(),
                     sel_all_every : $("#sel_all_every").val(),
+                    eq: eq
                     // ct_mode: 'chart'
                 },
                 dataType: 'json',
@@ -1595,4 +1619,5 @@
             }
         });
     }
+
 </script>

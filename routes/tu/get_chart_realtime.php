@@ -13,7 +13,12 @@ $channel = 'round(data_temp_out_'.$numb.',1) AS temp_out,
             round(data_soil_in_'.$numb.',1) AS soil_in';
 // echo $channel;
 // exit();
-$sql = "SELECT data_timestamp, $channel FROM tbn_data_tu WHERE data_sn = 'TUSMT' AND data_timestamp BETWEEN '$start_day' AND '$stop_day' ORDER BY data_timestamp ";
+if($_POST['eq'] == 0){
+    $tb_name = 'tbn_data_tu';
+}else {
+    $tb_name = 'tbn_data_tu_eq';
+}
+$sql = "SELECT data_timestamp, $channel FROM $tb_name WHERE data_sn = 'TUSMT' AND data_timestamp BETWEEN '$start_day' AND '$stop_day' ORDER BY data_timestamp ";
 $stmt = $dbcon->query($sql);
 $data0 = [];
 while ($row = $stmt->fetch()) {

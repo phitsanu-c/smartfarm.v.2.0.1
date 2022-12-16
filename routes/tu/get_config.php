@@ -71,5 +71,11 @@
         'set_maxmin' => $set_maxmin,
         'sensor' => $sensor,
         'userLevel'=> $account_status,
-        $_SESSION['account_id'] => ['account_id' => $_SESSION['account_id'], 'account_name' => $_SESSION["account_user"], 'dt' => date("Y-m-d H:i:s", strtotime('3 hour')), 'siteID' => $_SESSION["sn"]['siteID'], 'count_site' => $_SESSION['sn']['count_site']]
+        $_SESSION['account_id'] => [
+            'account_id' => $_SESSION['account_id'],
+            'account_name' => $_SESSION["account_user"],
+            'dt' => date("Y-m-d H:i:s", strtotime('3 hour')),
+            'siteID' => $_SESSION["sn"]['siteID'],
+            'count_site' => $_SESSION['sn']['count_site']
+        ]
     ]);

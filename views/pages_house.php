@@ -130,7 +130,7 @@
                                 if($row_online == ''){
                                     echo '<h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">สถานะ : <B class="text-danger"> ออฟไลน์</B>';
                                 }else {
-                                    if($row_online[0] == 'online' ){
+                                    if($row_online[0] == 'connected' ){
                                         echo '<h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">สถานะ : <B class="text-success"> ออนไลน์</B> ';
                                     }else {
                                         echo '<h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">สถานะ : <B class="text-danger"> ออฟไลน์</B>';
