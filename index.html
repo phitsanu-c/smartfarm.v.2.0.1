@@ -106,9 +106,8 @@
             padding-left: 0;
         }
 
-        .text_font_size {
-            font-size: 13.5px;
-        }
+        .text_font_size {font-size: 13.5px;}
+        .text_blur{opacity: .5;}
     </style>
 </head>
 
@@ -441,6 +440,7 @@
         $(".logout").click(function() {
             logout()
         });
+        $("#dtBox").DateTimePicker();
         if (house_master.length == 8) {
             var loading = verticalNoTitle();
             if (url[0] == 2) {
@@ -3656,10 +3656,7 @@
                             $('.hidden_select_sw_auto').val(12);
                         }
 
-                        var temp_c = [];
-                        var hum_c = [];
-                        var light_c = [];
-                        var soil_c = [];
+                        var temp_c = [], hum_c = [], light_c = [], soil_c = [];
                         for (var i = 1; i <= 7; i++) {
                             if (res.config_sn['sn_sensor_' + i] == 1) {
                                 temp_c.push(1);

@@ -576,87 +576,93 @@
                                                 <input type="text" class="range_soil"/>
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input check_ check_d_1" type="checkbox">
-                                                    <label class="form-check-label check_dl_1" style="font-size:13.5px"></label>
+                                                    <label class="form-check-label check_dl_1"></label>
                                                 </div>
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input check_ check_d_2" type="checkbox">
-                                                    <label class="form-check-label check_dl_2" style="font-size:13.5px"></label>
+                                                    <label class="form-check-label check_dl_2"></label>
                                                 </div>
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input check_ check_d_3" type="checkbox">
-                                                    <label class="form-check-label check_dl_3" style="font-size:13.5px"></label>
+                                                    <label class="form-check-label check_dl_3"></label>
                                                 </div>
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input check_ check_d_4" type="checkbox">
-                                                    <label class="form-check-label check_dl_4" style="font-size:13.5px"></label>
+                                                    <label class="form-check-label check_dl_4"></label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="card radius-10 border">
-                                            <div class="card-body text-center">
-                                                <h5>ความชื้นอากาศ (%Rh)</h5>
-                                                <input type="text" class="range_hum"/>
-                                            </div>
-                                            <div class="col-12 text-center">
-                                                <label class="form-check-label text-center text_soil" for=""></label>
-                                                <label class="form-check-label check_fgl_1" for=""></label>
-                                                <label class="form-check-label check_spl" for=""></label>
-                                                <!-- <div class="form-check form-switch">
-                                                    <input class="form-check-input check_fg_1" type="checkbox">
-                                                    <label class="form-check-label check_fgl_1" for=""></label>
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center mb-2 mt-2">
+                                                    <div class="pt-2"><b><h5>ความชื้นอากาศ (%Rh)</h5></b></div>
+                                                    <div class="ms-auto">
+                                                        <img class="img_swST imgST_2" src="" alt="">
+                                                        <div class="sw_toggleST">
+                                                            <input class="input_checkST" type="checkbox" id="swST_2" data-toggle="toggle" data-onstyle="success" data-size="sm" data-offstyle="secondary" data-style="ios">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="form-check form-switch">
-                                                    <input class="form-check-input check_fg_2" type="checkbox">
-                                                    <label class="form-check-label check_fgl_2" for=""></label>
-                                                </div>
-                                                <div class="form-check form-switch">
-                                                    <input class="form-check-input check_sp" type="checkbox">
-                                                    <label class="form-check-label check_spl" for=""></label>
-                                                </div> -->
+                                                <input type="text" class="range_hum"/><br>
+                                                <label class="form-check-label text_chum text_soil"></label><br>
+                                                <label class="form-check-label text_chum check_fgl_1"></label><br>
+                                                <label class="form-check-label text_chum check_spl"></label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="card radius-10 border">
-                                            <div class="card-body text-center">
-                                                <h5>อุณหภูมิ (℃)</h5>
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center mb-2 mt-2">
+                                                    <div class="pt-2"><b><h5>อุณหภูมิ (℃)</h5></b></div>
+                                                    <div class="ms-auto">
+                                                        <img class="img_swST imgST_3">
+                                                        <div class="sw_toggleST">
+                                                            <input class="input_checkST" type="checkbox" id="swST_3" data-toggle="toggle" data-onstyle="success" data-size="sm" data-offstyle="secondary" data-style="ios">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <input type="text" class="range_temp"/>
-                                            </div>
-                                            <div class="col-12">
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input check_ check_fn_1" type="checkbox">
-                                                    <label class="form-check-label check_fnl_1" for=""></label>
+                                                    <label class="form-check-label check_fnl_1"></label>
                                                 </div>
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input check_ check_fn_2" type="checkbox">
-                                                    <label class="form-check-label check_fnl_2" for=""></label>
+                                                    <label class="form-check-label check_fnl_2"></label>
                                                 </div>
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input check_ check_fn_3" type="checkbox">
-                                                    <label class="form-check-label check_fnl_3" for=""></label>
+                                                    <label class="form-check-label check_fnl_3"></label>
                                                 </div>
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input check_ check_fn_4" type="checkbox">
-                                                    <label class="form-check-label check_fnl_4" for=""></label>
-                                                </div>
-                                                <h6 class="text-center">เปิดพัดลมผ่านไป 5 นาที แล้วอุณหภูมิยังไม่ลด</h6>
-                                                <h6 class="text-center text_soil"></h6>
-                                                <h6 class="text-center text_hum"></h6>
-                                                <h6 class="text-center check_fgl_1t"></h6>
-                                                <h6 class="text-center check_splt"></h6>
+                                                    <label class="form-check-label check_fnl_4"></label>
+                                                </div><hr/>
+                                                <h6 class="text-center text_ctemp">เปิดพัดลมผ่านไป 5 นาที แต่อุณหภูมิยังไม่ลด</h6>
+                                                <h6 class="text-center text_ctemp text_soil"></h6>
+                                                <h6 class="text-center text_ctemp text_hum"></h6>
+                                                <h6 class="text-center text_ctemp check_fgl_1t"></h6>
+                                                <h6 class="text-center text_ctemp check_splt"></h6>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="card radius-10 border">
-                                            <div class="card-body text-center">
-                                                <h5 class="title_l"></h5>
-                                                <input type="text" class="range_light" />
-                                            </div>
-                                            <div class="col-12">
-                                                <h6 class="text-center text_light"></h6>
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center mb-2 mt-2">
+                                                    <div class="pt-2"><b><h5 class="title_l"></h5></b></div>
+                                                    <div class="ms-auto">
+                                                        <img class="img_swST imgST_4" src="" alt="">
+                                                        <div class="sw_toggleST">
+                                                            <input class="input_checkST" type="checkbox" id="swST_4" data-toggle="toggle" data-onstyle="success" data-size="sm" data-offstyle="secondary" data-style="ios">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <input type="text" class="range_light"/>
+                                                <label class="form-check-label text_light"></label>
                                             </div>
                                         </div>
                                     </div>
@@ -795,15 +801,7 @@
         var set_maxmin = $.parseJSON('<?= json_encode($set_maxmin) ?>');
         var sensor = $.parseJSON('<?= json_encode($sensor) ?>');
         var s_sensor = $.parseJSON('<?= json_encode($s_sensor) ?>');
-        $("#dtBox").DateTimePicker();
-        // $('.input_tSet').bootstrapMaterialDatePicker({
-        //     date: false,
-        //     format: 'HH:mm'
-        // });
-        // $('.input_tL').bootstrapMaterialDatePicker({
-        //     date: false,
-        //     format: 'HH:mm'
-        // });
+        
         var status_dripper = [];
         var status_fan = [];
         var status_foggy = [];
@@ -818,85 +816,38 @@
         status_foggy.push(parseInt(config_cn.cn_status_9))
         status_foggy.push(parseInt(config_cn.cn_status_10))
 
-        var range1 = $(".range_temp"), range_instance1;
+        var range1 = $(".range_soil"), range_instance1;
         var range2 = $(".range_hum"), range_instance2;
-        var range3 = $(".range_light"), range_instance3;
-        var range4 = $(".range_soil"), range_instance4;
+        var range3 = $(".range_temp"), range_instance3;
+        var range4 = $(".range_light"), range_instance4;
 
-        range4.ionRangeSlider({
+        range1.ionRangeSlider({
             type: "double",
-            min: 0,
-            max: 100,
             grid: true,
-            onChange: function (data) {
+            // onChange: function (data) {
                 // console.log(data);
                 // check_load($('.check_d_1').prop('checked'), 'dl_1', 1, ' -> เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+data.from+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+data.to+' %')
                 // check_load($('.check_d_2').prop('checked'), 'dl_2', 2, ' -> เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+data.from+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+data.to+' %')
                 // check_load($('.check_d_3').prop('checked'), 'dl_3', 3, ' -> เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+data.from+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+data.to+' %')
                 // check_load($('.check_d_4').prop('checked'), 'dl_4', 4, ' -> เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+data.from+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+data.to+' %')
-            }
+            // }
         });
-        range_instance4 = range4.data("ionRangeSlider");
+        range_instance1 = range1.data("ionRangeSlider");
         range2.ionRangeSlider({
             type: "double",
-            min: 0,
-            max: 100,
             grid: true,
         });
         range_instance2 = range2.data("ionRangeSlider");
-        range1.ionRangeSlider({
+        range3.ionRangeSlider({
             type: "double",
             grid: true
         });
-        range_instance1 = range1.data("ionRangeSlider");
-        range3.ionRangeSlider({
+        range_instance3 = range3.data("ionRangeSlider");
+        range4.ionRangeSlider({
             type: "double",
             grid: true,
         });
-        range_instance3 = range3.data("ionRangeSlider");
-        // alert(countElement(1,status_fan))//
-        // var data_temp_out = [];
-        // var data_temp_in = [];
-        // var data_hum_out = [];
-        // var data_hum_in = [];
-        // var data_light_out = [];
-        // var data_light_in = [];
-        // var data_soil_in = [];
-        // console.log(Number(house_master.substring(5,10)))
-
-        // ++++++++++++++++++++++++++++++++++
-
-        // if(s_sensor.s_btnT > 0){
-        //     $('.btn_ch_t').addClass('active');
-        //     // $('#hreft_temp').addClass('active show');
-        //     // $('#chart1').show()
-        //     // $('#chart2').hide()
-        //     // $('#chart3').hide()
-        //     // $('#chart4').hide()
-        // }
-        // else {
-        //     $('.btn_ch_t').hide();
-        //     if(s_sensor.s_btnH > 0){
-        //         $('.btn_ch_h').addClass('active');
-        //         // $('#hreft_hum').addClass('active show');
-        //     }else {
-        //         $('.btn_ch_h').hide();
-        //         if(s_sensor.s_btnL > 0){
-        //             $('.btn_ch_l').addClass('active');
-        //             // $('#hreft_light').addClass('active show');
-        //         }else {
-        //             $('.btn_ch_l').hide();
-        //             if(s_sensor.s_btnS > 0){
-        //                 $('.btn_ch_s').addClass('active');
-        //                 // $('#hreft_soil').addClass('active show');
-        //             }else {
-        //                 $('.btn_ch_s').hide();
-        //             }
-        //         }
-        //     }
-        // }
-        // ++++++--------+++++++++
-        // alert($('#Modal_control').hasClass('show'))
+        range_instance4 = range4.data("ionRangeSlider");
         $('.memu_control').click(function() {
             $.getJSON("routes/tu/check_level_user.php?siteID=" + url[1] + "&house_master=" + house_master, function(res_j) {
                 if (res_j.user_level > 2) {
@@ -910,7 +861,6 @@
                         return false;
                     }
                 }
-                // alert(res_j)
 
                 $(".memu_dash").show().addClass("mm-active");
                 $(this).removeClass("mm-active");
@@ -2764,17 +2714,21 @@
                             cancelButtonText: 'ยกเลิก'
                         }).
                         then((result) => {
-                            var Rmx1 = $(".range_temp").val().split(";");
+                            if($('#swST_1').prop('checked') == true){ var sw_1 = 1; }else { var sw_1 = 0; }
+                            if($('#swST_2').prop('checked') == true){ var sw_2 = 1; }else { var sw_2 = 0; }
+                            if($('#swST_3').prop('checked') == true){ var sw_3 = 1; }else { var sw_3 = 0; }
+                            if($('#swST_4').prop('checked') == true){ var sw_4 = 1; }else { var sw_4 = 0; }
+                            var Rmx1 = $(".range_soil").val().split(";");
                             var Rmx2 = $(".range_hum").val().split(";");
-                            var Rmx3 = $(".range_light").val().split(";");
+                            var Rmx3 = $(".range_temp").val().split(";");
+                            var Rmx4 = $(".range_light").val().split(";");
                             if(parseInt(config_sn.sn_sensor_6) == 5){
-                                var newl_min = ((Rmx3[0]*54)/1000).toFixed();
-                                var newl_max = ((Rmx3[1]*54)/1000).toFixed();
+                                var newl_min = ((Rmx4[0]*54)/1000).toFixed();
+                                var newl_max = ((Rmx4[1]*54)/1000).toFixed();
                             }else {
-                                var newl_min = Rmx3[0];
-                                var newl_max = Rmx3[1];
+                                var newl_min = Rmx4[0];
+                                var newl_max = Rmx4[1];
                             }
-                            var Rmx4 = $(".range_soil").val().split(";");
                             if($('.check_d_1').prop('checked') == true){ var drip_1 = 'ON'; }else { var drip_1 = 'OFF'; }
                             if($('.check_d_2').prop('checked') == true){ var drip_2 = 'ON'; }else { var drip_2 = 'OFF'; }
                             if($('.check_d_3').prop('checked') == true){ var drip_3 = 'ON'; }else { var drip_3 = 'OFF'; }
@@ -2788,14 +2742,18 @@
                             if (parseInt(config_cn.cn_status_11) == 1) {var spr = 'ON'; }else { var spr = 'OFF'; }
                             if (parseInt(config_cn.cn_status_12) == 1) {var shr = 'ON'; }else { var shr = 'OFF'; }
                             var new_data = {
-                                "temp_min": Number(Rmx1[0]),
-                                "temp_max": Number(Rmx1[1]),
+                                "status_1": Number(sw_1),
+                                "status_2": Number(sw_2),
+                                "status_3": Number(sw_3),
+                                "status_4": Number(sw_4),
+                                "soil_min": Number(Rmx1[0]),
+                                "soil_max": Number(Rmx1[1]),
                                 "hum_min":  Number(Rmx2[0]),
                                 "hum_max":  Number(Rmx2[1]),
+                                "temp_min": Number(Rmx3[0]),
+                                "temp_max": Number(Rmx3[1]),
                                 "light_min":Number(newl_min),
                                 "light_max":Number(newl_max),
-                                "soil_min": Number(Rmx4[0]),
-                                "soil_max": Number(Rmx4[1]),
                                 "dripper_1":drip_1,
                                 "dripper_2":drip_2,
                                 "dripper_3":drip_3,
@@ -2809,7 +2767,8 @@
                                 "spray":    spr,
                                 "shading":  shr
                             };
-                            console.log(JSON.stringify(new_data));
+                            // console.log(JSON.stringify(new_data));
+                            // return false;
                             $.ajax({
                                 type: "POST",
                                 url: "routes/tu/save_config_mqtt.php",
@@ -2824,7 +2783,7 @@
                                     console.log(res)
                                     if (res.status == "Insert_Success") {
                                         $('.menu_config_auto2').show();
-                                        range_auto_mode(true);
+                                        range_auto_mode('dash');
                                         $(".sw_mode_Auto").attr('disabled', false);
                                         $(".sw_mode_Manual").attr('disabled', false);
                                         $('.sw_mode_tracking').prop('disabled', false)
@@ -2931,219 +2890,280 @@
 
                 // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                 $('.menu_config_auto2').show();
-                range_auto_mode(true);
-                function range_auto_mode(de) {
+                range_auto_mode('dash');
+                function range_auto_mode(mode) {
                     var tracking = JSON.parse($('#val_config').val()).config_tracking;
-                    range_instance4.update({
+                    if(mode == 'dash'){
+                        var de = true;
+                        $('.img_swST').show();
+                        $('.sw_toggleST').hide();
+                        $('.text_soil').html('เมื่อความชื้นดินต่ำกว่า '+tracking.soil_max+' %');
+                        $('.text_hum').html('และเมื่อความชื้นอากาศต่ำกว่า '+tracking.hum_max+' %Rh');
+                        // $('.text_ctemp').addClass('text_blur');
+                        // $('.text_chum').addClass('text_blur');
+                    }
+                    else {
+                        var de = false;
+                        $('.img_swST').hide();
+                        $('.sw_toggleST').show();
+                        $('.text_soil').html('เมื่อความชื้นดินต่ำกว่า '+tracking.soil_max+' %');
+                        $('.text_hum').html('และเมื่อความชื้นอากาศต่ำกว่า '+tracking.hum_max+' %Rh');
+                    }
+                    for(var i = 1; i <= 4; i++){
+                        if (parseInt(tracking['status_'+i]) == 1) {
+                            $('.imgST_'+i).attr("src", "public/images/control/switck_on.png");
+                            $('#swST_'+i).bootstrapToggle('on');
+                        }
+                        else {
+                            $('.imgST_'+i).attr("src", "public/images/control/switck_off.png");
+                            $('#swST_'+i).bootstrapToggle('off');
+                        }
+                        // ====================
+                        if (parseInt(tracking['status_1']) == 1) {
+                            if (parseInt(config_cn['cn_status_'+i]) == 1) {
+                                if(tracking['dripper_'+i] == 'ON'){
+                                    var ched = true, dis = de, val = 'เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+tracking.soil_min+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+tracking.soil_max+' %';
+                                }
+                                else {
+                                    var ched = false, dis = de, val = 'ปิด';
+                                }
+                            }
+                            else {
+                                var ched = false, dis = true, val = 'ไม่ใช้งาน';
+                            }
+                        }
+                        else {
+                            var ched_1 = false, dis_1 = true, val_1 = 'ไม่ใช้งาน';
+                        }
+                        $('.check_d_'+i).prop({'checked': ched,'disabled': dis});
+                        $('.check_dl_'+i).html('น้ำหยด '+i+' ('+config_cn['cn_name_'+i]+') : '+val);
+                        // ===========================
+                        // if (parseInt(tracking['status_3']) == 1) {
+                        //     if (parseInt(config_cn['cn_status_'+(i+4)]) == 1) {
+                        //         if(tracking['fan_'+i] == 'ON'){
+                        //             var ched_3 = true, dis_3 = de, val_3 = 'เปิดเมื่ออุอุณหภูมิสูงกว่า '+tracking.temp_max+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+tracking.temp_min+' ℃';
+                        //         }else {
+                        //             var ched_3 = false, dis_3 = de, val_3 = 'ปิด';
+                        //         }
+                        //     }
+                        //     else {
+                        //         var ched_3 = false, dis_3 = true, val_3 = 'ไม่ใช้งาน';
+                        //     }
+                        // }
+                        // else {
+                        //     var ched_3 = false, dis_3 = true, val_3 = 'ไม่ใช้งาน';
+                        // }
+                        // // console.log(dis_3);
+                        // $('.check_fn_'+i).prop({'checked': ched_3,'disabled': dis_3});
+                        // $('.check_fnl_'+i).html('พัดลม '+i+' ('+config_cn['cn_name_'+(i+4)]+') : '+val_3);
+                    }
+                    if (parseInt(tracking['status_1']) == 1) {
+                        var ndde = de;
+                    }else {
+                        var ndde = true;
+                    }
+                    range_instance1.update({
                         min: 0,
                         max: 100,
                         from: tracking.soil_min,
                         to: tracking.soil_max,
-                        disable: de
+                        disable: ndde
                     });
+                    // foggy
+                    if (parseInt(tracking['status_2']) == 1) {
+                        var nfgde = de;
+                        if (parseInt(config_cn.cn_status_9) == 1) {
+                            if(tracking.foggy_1 == 'ON'){
+                                var val_fg = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : เปิดเมื่อความชื้นอากาศต่ำกว่า '+tracking.hum_min+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+(tracking.hum_max-10)+' %Rh', val_fg2 = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : เปิด และปิดเมื่อความชื้นอากาศสูงกว่า '+(tracking.hum_max-10)+' %Rh';
+                            }else {
+                                var val_fg = val_fg2 = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ปิด';
+                            }
+                        }
+                        else {
+                            var val_fg = val_fg2 = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ไม่ใช้งาน';
+                        }
+                        // spray
+                        if (parseInt(config_cn.cn_status_11) == 1) {
+                            if(tracking.spray == 'ON'){
+                                var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : เปิดเมื่อความชื้นอากาศ '+(tracking.hum_max-10)+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+tracking.hum_max+' %Rh';
+                            }else {
+                                var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ปิด';
+                            }
+                        }
+                        else {
+                            var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ไม่ใช้งาน'
+                        }
+                    }
+                    else {
+                        var nfgde = true;
+                        var val_fg = val_fg2 = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ไม่ใช้งาน';
+                        var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ไม่ใช้งาน';
+                    }
+                    $('.check_fgl_1').html(val_fg);
+                    $('.check_fgl_1t').html(val_fg2);
+                    $('.check_spl').html(val_sp);
+                    $('.check_splt').html(val_sp);
                     range_instance2.update({
                         min: 0,
                         max: 100,
                         from: tracking.hum_min,
                         to: tracking.hum_max,
-                        disable: de
+                        disable: nfgde
                     });
-                    range_instance1.update({
+                    // FAN
+                    if (parseInt(tracking['status_3']) == 1) {
+                        var nfde = de;
+                        if (parseInt(config_cn['cn_status_5']) == 1) {
+                            if(tracking['fan_1'] == 'ON'){
+                                var ched_1 = true, dis_1 = de, val_1 = 'เปิดเมื่ออุอุณหภูมิสูงกว่า '+tracking.temp_max+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+tracking.temp_min+' ℃';
+                            }else {
+                                var ched_1 = false, dis_1 = de, val_1 = 'ปิด';
+                            }
+                        }
+                        else {
+                            var ched_1 = false, dis_1 = true, val_1 = 'ไม่ใช้งาน';
+                        }
+                        if (parseInt(config_cn['cn_status_6']) == 1) {
+                            if(tracking['fan_2'] == 'ON'){
+                                var ched_2 = true, dis_2 = de, val_2 = 'เปิดเมื่ออุอุณหภูมิสูงกว่า '+tracking.temp_max+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+tracking.temp_min+' ℃';
+                            }else {
+                                var ched_2 = false, dis_2 = de, val_2 = 'ปิด';
+                            }
+                        }
+                        else {
+                            var ched_2 = false, dis_2 = true, val_2 = 'ไม่ใช้งาน';
+                        }
+                        if (parseInt(config_cn['cn_status_7']) == 1) {
+                            if(tracking['fan_3'] == 'ON'){
+                                var ched_3 = true, dis_3 = de, val_3 = 'เปิดเมื่ออุอุณหภูมิสูงกว่า '+tracking.temp_max+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+tracking.temp_min+' ℃';
+                            }else {
+                                var ched_3 = false, dis_3 = de, val_3 = 'ปิด';
+                            }
+                        }
+                        else {
+                            var ched_3 = false, dis_3 = true, val_3 = 'ไม่ใช้งาน';
+                        }
+                        if (parseInt(config_cn['cn_status_8']) == 1) {
+                            if(tracking['fan_4'] == 'ON'){
+                                var ched_4 = true, dis_4 = de, val_4 = 'เปิดเมื่ออุอุณหภูมิสูงกว่า '+tracking.temp_max+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+tracking.temp_min+' ℃';
+                            }else {
+                                var ched_4 = false, dis_4 = de, val_4 = 'ปิด';
+                            }
+                        }
+                        else {
+                            var ched_4 = false, dis_4 = true, val_4 = 'ไม่ใช้งาน';
+                        }
+                    }
+                    else {
+                        var nfde = true;
+                        var ched_1 = false, dis_1 = true, val_1 = 'ไม่ใช้งาน';
+                        var ched_2 = false, dis_2 = true, val_2 = 'ไม่ใช้งาน';
+                        var ched_3 = false, dis_3 = true, val_3 = 'ไม่ใช้งาน';
+                        var ched_4 = false, dis_4 = true, val_4 = 'ไม่ใช้งาน';
+                    }
+                    $('.check_fn_1').prop({'checked': ched_1,'disabled': dis_1});
+                    $('.check_fnl_1').html('พัดลม 1 ('+config_cn['cn_name_5']+') : '+val_1);
+                    $('.check_fn_2').prop({'checked': ched_2,'disabled': dis_2});
+                    $('.check_fnl_2').html('พัดลม 2 ('+config_cn['cn_name_6']+') : '+val_2);
+                    $('.check_fn_3').prop({'checked': ched_3,'disabled': dis_3});
+                    $('.check_fnl_3').html('พัดลม 3 ('+config_cn['cn_name_7']+') : '+val_3);
+                    $('.check_fn_4').prop({'checked': ched_4,'disabled': dis_4});
+                    $('.check_fnl_4').html('พัดลม 4 ('+config_cn['cn_name_8']+') : '+val_4);
+                    range_instance3.update({
                         min: 20,
                         max: 50,
                         from: tracking.temp_min,
                         to: tracking.temp_max,
-                        disable: de
+                        disable: nfde
                     });
-                    // dripper
-                    if (parseInt(config_cn.cn_status_1) == 1) {
-                        if(tracking.dripper_1 == 'ON'){
-                            $('.check_d_1').attr('checked', true).prop('disabled', true);
-                            $('.check_dl_1').html('น้ำหยด 1 ('+config_cn.cn_name_1+') : ใช้งาน -> เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+tracking.soil_min+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+tracking.soil_max+' %');
-                        }else {
-                            $('.check_d_1').attr('checked', false).prop('disabled', true);
-                            $('.check_dl_1').html('น้ำหยด 1 ('+config_cn.cn_name_1+') : ไม่ใช้งาน');
-                        }
-                    }
-                    else {
-                        $('.check_d_1').attr('checked', false).prop('disabled', true);
-                        $('.check_dl_1').html('น้ำหยด 1 ('+config_cn.cn_name_1+') : โหลดไม่ถูกต่อใช้งาน');
-                    }
-                    if (parseInt(config_cn.cn_status_2) == 1) {
-                        if(tracking.dripper_2 == 'ON'){
-                            $('.check_d_2').attr('checked', true).prop('disabled', true);
-                            $('.check_dl_2').html('น้ำหยด 2 ('+config_cn.cn_name_2+') : ใช้งาน -> เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+tracking.soil_min+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+tracking.soil_max+' %');
-                        }else {
-                            $('.check_d_2').attr('checked', false).prop('disabled', true);
-                            $('.check_dl_2').html('น้ำหยด 2 ('+config_cn.cn_name_2+') : ไม่ใช้งาน');
-                        }
-                    }
-                    else {
-                        $('.check_d_2').attr('checked', false).prop('disabled', true);
-                        $('.check_dl_2').html('น้ำหยด 2 ('+config_cn.cn_name_2+') : โหลดไม่ถูกต่อใช้งาน');
-                    }
-                    if (parseInt(config_cn.cn_status_3) == 1) {
-                        if(tracking.dripper_3 == 'ON'){
-                            $('.check_d_3').attr('checked', true).prop('disabled', true);
-                            $('.check_dl_3').html('น้ำหยด 3 ('+config_cn.cn_name_3+') : ใช้งาน -> เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+tracking.soil_min+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+tracking.soil_max+' %');
-                        }else {
-                            $('.check_d_3').attr('checked', false).prop('disabled', true);
-                            $('.check_dl_3').html('น้ำหยด 3 ('+config_cn.cn_name_3+') : ไม่ใช้งาน');
-                        }
-                    }
-                    else {
-                        $('.check_d_3').attr('checked', false).prop('disabled', true);
-                        $('.check_dl_3').html('น้ำหยด 3 ('+config_cn.cn_name_3+') : โหลดไม่ถูกต่อใช้งาน');
-                    }
-                    if (parseInt(config_cn.cn_status_4) == 1) {
-                        if(tracking.dripper_4 == 'ON'){
-                            $('.check_d_4').attr('checked', true).prop('disabled', true);
-                            $('.check_dl_4').html('น้ำหยด 4 ('+config_cn.cn_name_4+') : ใช้งาน -> เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+tracking.soil_min+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+tracking.soil_max+' %');
-                        }else {
-                            $('.check_d_4').attr('checked', false).prop('disabled', true);
-                            $('.check_dl_4').html('น้ำหยด 4 ('+config_cn.cn_name_4+') : ไม่ใช้งาน');
-                        }
-                    }
-                    else {
-                        $('.check_d_4').attr('checked', false).prop('disabled', true);
-                        $('.check_dl_4').html('น้ำหยด 4 ('+config_cn.cn_name_4+') : โหลดไม่ถูกต่อใช้งาน');
-                    }
-                    // foggy
-                    if (parseInt(config_cn.cn_status_9) == 1) {
-                        if(tracking.foggy_1 == 'ON'){
-                            $('.check_fgl_1').html('พ่นหมอก 1 ('+config_cn.cn_name_9+') : เปิดเมื่อความชื้นอากาศต่ำกว่า '+tracking.hum_min+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+(tracking.hum_max-10)+' %Rh');
-                            $('.check_fgl_1t').html('พ่นหมอก 1 ('+config_cn.cn_name_9+') : เปิด และปิดเมื่อความชื้นอากาศสูงกว่า '+(tracking.hum_max-10)+' %Rh');
-                        }else {
-                            $('.check_fgl_1').html('พ่นหมอก 1 ('+config_cn.cn_name_9+') : ไม่ใช้งาน');
-                            $('.check_fgl_1t').html('พ่นหมอก 1 ('+config_cn.cn_name_9+') : ไม่ใช้งาน');
-                        }
-                    }
-                    else {
-                        $('.check_fgl_1').html('พ่นหมอก 1 ('+config_cn.cn_name_9+') : โหลดไม่ถูกต่อใช้งาน');
-                        $('.check_fgl_1t').html('พ่นหมอก 1 ('+config_cn.cn_name_9+') : ไม่ใช้งาน');
-                    }
-                    // spray
-                    if (parseInt(config_cn.cn_status_11) == 1) {
-                        if(tracking.spray == 'ON'){
-                            $('.check_spl').html('สเปรย์ ('+config_cn.cn_name_11+') : เปิดเมื่อความชื้นอากาศ '+(tracking.hum_max-10)+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+tracking.hum_max+' %Rh');
-                            $('.check_splt').html('สเปรย์ ('+config_cn.cn_name_11+') : เปิดเมื่อความชื้นอากาศ '+(tracking.hum_max-10)+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+tracking.hum_max+' %Rh');
-                        }else {
-                            $('.check_spl').html('สเปรย์ ('+config_cn.cn_name_11+') : ไม่ใช้งาน');
-                            $('.check_splt').html('สเปรย์ ('+config_cn.cn_name_11+') : ไม่ใช้งาน');
-                        }
-                    }
-                    else {
-                        $('.check_spl').html('สเปรย์ ('+config_cn.cn_name_11+') : โหลดไม่ถูกต่อใช้งาน');
-                        $('.check_splt').html('สเปรย์ ('+config_cn.cn_name_11+') : ไม่ใช้งาน');
-                    }
-                    // Fan
-                    if (parseInt(config_cn.cn_status_5) == 1) {
-                        if(tracking.fan_1 == 'ON'){
-                            $('.check_fn_1').attr('checked', true).prop('disabled', true);
-                            $('.check_fnl_1').html('พัดลม 1 ('+config_cn.cn_name_5+') : ใช้งาน -> เปิดเมื่ออุณหภูมิสูงกว่า '+tracking.temp_max+' ℃ และปิดเมื่ออุณหภูมิต่ำกว่า '+tracking.Temp_min+' ℃');
-                        }else {
-                            $('.check_fn_1').attr('checked', false).prop('disabled', true);
-                            $('.check_fnl_1').html('พัดลม 1 ('+config_cn.cn_name_5+') : ไม่ใช้งาน');
-                        }
-                    }
-                    else {
-                        $('.check_fn_1').attr('checked', false).prop('disabled', true);
-                        $('.check_fnl_1').html('พัดลม 1 ('+config_cn.cn_name_5+') : โหลดไม่ถูกต่อใช้งาน');
-                    }
-                    if (parseInt(config_cn.cn_status_6) == 1) {
-                        if(tracking.fan_2 == 'ON'){
-                            $('.check_fn_2').attr('checked', true).prop('disabled', true);
-                            $('.check_fnl_2').html('พัดลม 2 ('+config_cn.cn_name_6+') : ใช้งาน -> เปิดเมื่ออุณหภูมิสูงกว่า '+tracking.temp_max+' ℃ และปิดเมื่ออุณหภูมิต่ำกว่า '+tracking.Temp_min+' ℃');
-                        }else {
-                            $('.check_fn_2').attr('checked', false).prop('disabled', true);
-                            $('.check_fnl_2').html('พัดลม 2 ('+config_cn.cn_name_6+') : ไม่ใช้งาน');
-                        }
-                    }
-                    else {
-                        $('.check_fn_2').attr('checked', false).prop('disabled', true);
-                        $('.check_fnl_2').html('พัดลม 2 ('+config_cn.cn_name_6+') : โหลดไม่ถูกต่อใช้งาน');
-                    }
-                    if (parseInt(config_cn.cn_status_7) == 1) {
-                        if(tracking.fan_3 == 'ON'){
-                            $('.check_fn_3').attr('checked', true).prop('disabled', true);
-                            $('.check_fnl_3').html('พัดลม 3 ('+config_cn.cn_name_7+') : ใช้งาน -> เปิดเมื่ออุณหภูมิสูงกว่า '+tracking.temp_max+' ℃ และปิดเมื่ออุณหภูมิต่ำกว่า '+tracking.Temp_min+' ℃');
-                        }else {
-                            $('.check_fn_3').attr('checked', false).prop('disabled', true);
-                            $('.check_fnl_3').html('พัดลม 3 ('+config_cn.cn_name_7+') : ไม่ใช้งาน');
-                        }
-                    }
-                    else {
-                        $('.check_fn_3').attr('checked', false).prop('disabled', true);
-                        $('.check_fnl_3').html('พัดลม 3 ('+config_cn.cn_name_7+') : โหลดไม่ถูกต่อใช้งาน');
-                    }
-                    if (parseInt(config_cn.cn_status_8) == 1) {
-                        if(tracking.fan_4 == 'ON'){
-                            $('.check_fn_4').attr('checked', true).prop('disabled', true);
-                            $('.check_fnl_4').html('พัดลม 4 ('+config_cn.cn_name_8+') : ใช้งาน -> เปิดเมื่ออุณหภูมิสูงกว่า '+tracking.temp_max+' ℃ และปิดเมื่ออุณหภูมิต่ำกว่า '+tracking.Temp_min+' ℃');
-                        }else {
-                            $('.check_fn_4').attr('checked', false).prop('disabled', true);
-                            $('.check_fnl_4').html('พัดลม 4 ('+config_cn.cn_name_8+') : ไม่ใช้งาน');
-                        }
-                    }
-                    else {
-                        $('.check_fn_4').attr('checked', false).prop('disabled', true);
-                        $('.check_fnl_4').html('พัดลม 4 ('+config_cn.cn_name_8+') : โหลดไม่ถูกต่อใช้งาน');
-                    }
                     // shading
-                    if (parseInt(config_cn.cn_status_12) == 1) {
-                        if(tracking.shading == 'ON'){
-                            if(parseInt(config_sn.sn_sensor_6) == 5){
-                                var maxL = (100000/54).toFixed();
-                                var unitl = "µmol m<sup>-2</sup>s<sup>-1</sup>";
-                                var minl = ((tracking.light_min*1000)/54).toFixed();
-                                var maxl = ((tracking.light_max*1000)/54).toFixed();
-                            }else { // KLUX
-                                var maxL = 100;
-                                var unitl = "KLux";
-                                var minl = tracking.light_min;
-                                var maxl = tracking.light_max;
+                    if(parseInt(config_sn.sn_sensor_6) == 5){
+                        var maxL = (100000/54).toFixed();
+                        var unitl = "µmol m<sup>-2</sup>s<sup>-1</sup>";
+                        var minl = ((tracking.light_min*1000)/54).toFixed();
+                        var maxl = ((tracking.light_max*1000)/54).toFixed();
+                    }
+                    else { // KLUX
+                        var maxL = 100;
+                        var unitl = "KLux";
+                        var minl = tracking.light_min;
+                        var maxl = tracking.light_max;
+                    }
+                    if (parseInt(tracking['status_4']) == 1) {
+                        var nlde = de;
+                        if (parseInt(config_cn.cn_status_12) == 1) {
+                            if(tracking.shading == 'ON'){
+                                $('.title_l').html('แสง ('+unitl+')');
+                                var val_lig = 'ม่านพรางแสง : เปิดม่านเมื่อความเข้มแสงต่ำกว่า '+minl+' '+unitl+' <br>และปิดม่านเมื่อความเข้มแสงสูงกว่า '+maxl+' '+unitl;
+                            }else {
+                                var val_lig = 'ม่านพรางแสง : เปิดรับแสง';
                             }
-                            range_instance3.update({
-                                min: minl,
-                                max: maxl,
-                                from: minl,
-                                to: maxl,
-                                disable: de
-                            });
-                            $('.title_l').html('แสง ('+unitl+')');
-                            $('.text_light').html('ม่านพรางแสง : ปิดม่านเมื่อความเข้มแสงต่ำกว่า '+minl+' '+unitl+' <br>และเปิดม่านเมื่อความเข้มแสงสูงกว่า '+maxl+' '+unitl);
-                        }else {
-                            $('.text_light').html('ม่านพรางแสง : ไม่ใช้งาน');
+                        }
+                        else {
+                            var val_lig = 'ม่านพรางแสง : ไม่ใช้งาน';
                         }
                     }
                     else {
-                        $('.check_spl').html('สเปรย์ ('+config_cn.cn_name_12+') : โหลดไม่ถูกต่อใช้งาน');
+                        var nlde = true;
+                        var val_lig = 'ม่านพรางแสง : ไม่ใช้งาน';
                     }
-                    $('.text_soil').html('เมื่อความชื้นดินต่ำกว่า '+tracking.soil_max+' %');
-                    $('.text_hum').html('และเมื่อความชื้นอากาศต่ำกว่า '+tracking.hum_max+' %Rh');
+                    range_instance4.update({
+                        min: 0,
+                        max: maxL,
+                        from: minl,
+                        to: maxl,
+                        disable: nlde
+                    });
+                    if (mode == 'dash') {
+                        $('.text_chum').addClass('text_blur');
+                        $('.text_ctemp').addClass('text_blur');
+                        $('.text_light').html(val_lig).addClass('text_blur');
+                    }
+                    else {
+                        $('.text_chum').removeClass('text_blur');
+                        $('.text_ctemp').removeClass('text_blur');
+                        $('.text_light').html(val_lig).removeClass('text_blur');
+                    }
                 }
                 function check_load(input, cls, name, val){
                     if(input == true){
-                        $('.check_'+cls).html(name+' : ใช้งาน'+val);
+                        $('.check_'+cls).html(name+' : '+val);
                     }else {
-                        $('.check_'+cls).html(name+' : ไม่ใช้งาน')
+                        $('.check_'+cls).html(name+' : ปิด')
                     }
                     fn_check_auto_tracking_save('');
                 }
                 function fn_check_auto_tracking_save(mode) {
                     var df_log = JSON.parse($('#val_config').val()).config_tracking;
                     delete df_log['user_control'];
+                    if (parseInt(config_cn.cn_status_1) != 1){ df_log['dripper_1'] = 'OFF'; }
+                    if (parseInt(config_cn.cn_status_2) != 1){ df_log['dripper_2'] = 'OFF'; }
+                    if (parseInt(config_cn.cn_status_3) != 1){ df_log['dripper_3'] = 'OFF'; }
+                    if (parseInt(config_cn.cn_status_4) != 1){ df_log['dripper_4'] = 'OFF'; }
+                    if (parseInt(config_cn.cn_status_5) != 1){ df_log['fan_1'] = 'OFF'; }
+                    if (parseInt(config_cn.cn_status_6) != 1){ df_log['fan_2'] = 'OFF'; }
+                    if (parseInt(config_cn.cn_status_7) != 1){ df_log['fan_3'] = 'OFF'; }
+                    if (parseInt(config_cn.cn_status_8) != 1){ df_log['fan_4'] = 'OFF'; }
+                    if (parseInt(config_cn.cn_status_9) != 1){ df_log['foggy_1'] = 'OFF'; }
+                    if (parseInt(config_cn.cn_status_10) != 1){ df_log['foggy_2'] = 'OFF'; }
+                    if (parseInt(config_cn.cn_status_11) != 1){ df_log['spray'] = 'OFF'; }
+                    if (parseInt(config_cn.cn_status_12) != 1){ df_log['shading'] = 'OFF'; }
                     var Rmx1 = $(".range_temp").val().split(";");
                     var Rmx2 = $(".range_hum").val().split(";");
                     var Rmx3 = $(".range_light").val().split(";");
                     if(parseInt(config_sn.sn_sensor_6) == 5){
                         var newl_min = ((Rmx3[0]*54)/1000).toFixed();
                         var newl_max = ((Rmx3[1]*54)/1000).toFixed();
-                    }else {
+                    }
+                    else {
                         var newl_min = Rmx3[0];
                         var newl_max = Rmx3[1];
                     }
                     var Rmx4 = $(".range_soil").val().split(";");
+                    if($('#swST_1').prop('checked') == true){ var sw_1 = 1; }else { var sw_1 = 0; }
+                    if($('#swST_2').prop('checked') == true){ var sw_2 = 1; }else { var sw_2 = 0; }
+                    if($('#swST_3').prop('checked') == true){ var sw_3 = 1; }else { var sw_3 = 0; }
+                    if($('#swST_4').prop('checked') == true){ var sw_4 = 1; }else { var sw_4 = 0; }
                     if($('.check_d_1').prop('checked') == true){ var drip_1 = 'ON'; }else { var drip_1 = 'OFF'; }
                     if($('.check_d_2').prop('checked') == true){ var drip_2 = 'ON'; }else { var drip_2 = 'OFF'; }
                     if($('.check_d_3').prop('checked') == true){ var drip_3 = 'ON'; }else { var drip_3 = 'OFF'; }
@@ -3157,6 +3177,10 @@
                     if (parseInt(config_cn.cn_status_11) == 1) {var spr = 'ON'; }else { var spr = 'OFF'; }
                     if (parseInt(config_cn.cn_status_12) == 1) {var shr = 'ON'; }else { var shr = 'OFF'; }
                     var new_data = {
+                        "status_1": Number(sw_1),
+                        "status_2": Number(sw_2),
+                        "status_3": Number(sw_3),
+                        "status_4": Number(sw_4),
                         "temp_min": Number(Rmx1[0]),
                         "temp_max": Number(Rmx1[1]),
                         "hum_min":  Number(Rmx2[0]),
@@ -3183,7 +3207,7 @@
                     if (mode == 'close') {
                         if (JSON.stringify(df_log) == JSON.stringify(new_data)) {
                             $('.menu_config_auto2').show();
-                            range_auto_mode(true);
+                            range_auto_mode('dash');
                             $(".sw_mode_Auto").attr('disabled', false);
                             $(".sw_mode_Manual").attr('disabled', false);
                             $('.sw_mode_tracking').prop('disabled', false)
@@ -3208,7 +3232,7 @@
                             }).then((result) => {
                                 if (result.value) {
                                     $('.menu_config_auto2').show();
-                                    range_auto_mode(true);
+                                    range_auto_mode('dash');
                                     $(".sw_mode_Auto").attr('disabled', false);
                                     $(".sw_mode_Manual").attr('disabled', false);
                                     $('.sw_mode_tracking').prop('disabled', false)
@@ -3240,89 +3264,276 @@
                     $(".close_modal").hide();
                     $(this).hide();
                     $("#close_auto_cont").show();
-                    // var tracking = JSON.parse($('#val_config').val()).config_tracking;
-                    range_instance4.update({
-                        // from: tracking.soil_min,
-                        // to: tracking.soil_max,
-                        "disable": false
+                    range_auto_mode('config');
+                    $('#swST_1').change(function(){
+                        var tracking = JSON.parse($('#val_config').val()).config_tracking;
+                        // var Rmx = $(".range_soil").val().split(";");
+                        if ($(this).prop('checked') == true){
+                            var de = false;
+                            if (parseInt(config_cn.cn_status_1) == 1) {
+                                if(tracking.dripper_1 == 'ON'){
+                                    var ched_1 = true, dis_1 = false, val_1 = 'เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+tracking.soil_min+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+tracking.soil_max+' %';
+                                }else {
+                                    var ched_1 = false, dis_1 = false, val_1 = 'ปิด';
+                                }
+                            }else {
+                                var ched_1 = false, dis_1 = true, val_1 = 'ไม่ใช้งาน';
+                            }
+                            if (parseInt(config_cn.cn_status_2) == 1) {
+                                if(tracking.dripper_2 == 'ON'){
+                                    var ched_2 = true, dis_2 = false, val_2 = 'เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+tracking.soil_min+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+tracking.soil_max+' %';
+                                }else {
+                                    var ched_2 = false, dis_2 = false, val_2 = 'ปิด';
+                                }
+                            }else {
+                                var ched_2 = false, dis_2 = true, val_2 = 'ไม่ใช้งาน';
+                            }
+                            if (parseInt(config_cn.cn_status_3) == 1) {
+                                if(tracking.dripper_3 == 'ON'){
+                                    var ched_3 = true, dis_3 = false, val_3 = 'เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+tracking.soil_min+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+tracking.soil_max+' %';
+                                }else {
+                                    var ched_3 = false, dis_3 = false, val_3 = 'ปิด';
+                                }
+                            }else {
+                                var ched_3 = false, dis_3 = true, val_3 = 'ไม่ใช้งาน';
+                            }
+                            if (parseInt(config_cn.cn_status_4) == 1) {
+                                if(tracking.dripper_4 == 'ON'){
+                                    var ched_4 = true, dis_4 = false, val_4 = 'เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+tracking.soil_min+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+tracking.soil_max+' %';
+                                }else {
+                                    var ched_4 = false, dis_4 = false, val_4 = 'ปิด';
+                                }
+                            }else {
+                                var ched_4 = false, dis_4 = true, val_4 = 'ไม่ใช้งาน';
+                            }
+                        }
+                        else {
+                            var de = true;
+                            if (parseInt(config_cn.cn_status_1) == 1) {
+                                var ched_1 = false, dis_1 = true, val_1 = 'ปิด';
+                            }else {
+                                var ched_1 = false, dis_1 = true, val_1 = 'ไม่ใช้งาน';
+                            }
+                            if (parseInt(config_cn.cn_status_2) == 1) {
+                                var ched_2 = false, dis_2 = true, val_2 = 'ปิด';
+                            }else {
+                                var ched_2 = false, dis_2 = true, val_2 = 'ไม่ใช้งาน';
+                            }
+                            if (parseInt(config_cn.cn_status_3) == 1) {
+                                var ched_3 = false, dis_3 = true, val_3 = 'ปิด';
+                            }else {
+                                var ched_3 = false, dis_3 = true, val_3 = 'ไม่ใช้งาน';
+                            }
+                            if (parseInt(config_cn.cn_status_4) == 1) {
+                                var ched_4 = false, dis_4 = true, val_4 = 'ปิด';
+                            }else {
+                                var ched_4 = false, dis_4 = true, val_4 = 'ไม่ใช้งาน';
+                            }
+                        }
+                        $('.check_d_1').prop({'checked': ched_1,'disabled': dis_1});
+                        $('.check_dl_1').html('น้ำหยด 1 ('+config_cn.cn_name_1+') : '+val_1);
+                        $('.check_d_2').prop({'checked': ched_2,'disabled': dis_2});
+                        $('.check_dl_2').html('น้ำหยด 2 ('+config_cn.cn_name_2+') : '+val_2);
+                        $('.check_d_3').prop({'checked': ched_3, 'disabled': dis_3});
+                        $('.check_dl_3').html('น้ำหยด 3 ('+config_cn.cn_name_3+') : '+val_3);
+                        $('.check_d_4').prop({'checked': ched_4, 'disabled': dis_4});
+                        $('.check_dl_4').html('น้ำหยด 4 ('+config_cn.cn_name_4+') : '+val_4);
+                        range_instance1.update({
+                            min: 0,
+                            max: 100,
+                            from: tracking.soil_min,
+                            to: tracking.soil_max,
+                            disable: de
+                        });
+                        fn_check_auto_tracking_save('');
                     });
-                    range_instance2.update({
-                        // from: tracking.hum_min,
-                        // to: tracking.hum_max,
-                        "disable": false
+                    $('#swST_2').change(function(){
+                        var tracking = JSON.parse($('#val_config').val()).config_tracking;
+                        // var Rmx = $(".range_hum").val().split(";");
+                        if ($(this).prop('checked') == true){
+                            var de = false;
+                            if (parseInt(config_cn.cn_status_9) == 1) {
+                                if(tracking.foggy_1 == 'ON'){
+                                    var val_fg = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : เปิดเมื่อความชื้นอากาศต่ำกว่า '+tracking.hum_min+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+(tracking.hum_max-10)+' %Rh',
+                                       val_fg2 = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : เปิด และปิดเมื่อความชื้นอากาศสูงกว่า '+(tracking.hum_max-10)+' %Rh';
+
+                                }else {
+                                    var val_fg = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ปิด', val_fg2 = val_fg;
+                                }
+                            }
+                            else {
+                                var val_fg = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ไม่ใช้งาน', val_fg2 = val_fg;
+                            }
+                            // spray
+                            if (parseInt(config_cn.cn_status_11) == 1) {
+                                if(tracking.spray == 'ON'){
+                                    var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : เปิดเมื่อความชื้นอากาศ '+(tracking.hum_max-10)+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+tracking.hum_max+' %Rh';
+                                }else {
+                                    var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ปิด';
+                                }
+                            }
+                            else {
+                                var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ไม่ใช้งาน';
+                            }
+
+                            $('.check_fgl_1').html(val_fg)
+                            $('.check_fgl_1t').html(val_fg2)
+                            $('.check_spl').html(val_sp)
+                            $('.check_splt').html(val_sp)
+                            $('.text_chum').removeClass('text_blur');
+                        }
+                        else {
+                            var val_fg = val_fg2 = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ไม่ใช้งาน';
+                            var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ไม่ใช้งาน';
+                            var de = true;
+                            $('.check_fgl_1').html(val_fg)
+                            $('.check_fgl_1t').html(val_fg2)
+                            $('.check_spl').html(val_sp)
+                            $('.check_splt').html(val_sp)
+                            $('.text_chum').addClass('text_blur');
+                        }
+                        range_instance2.update({
+                            min: 0,
+                            max: 100,
+                            from: tracking.hum_min,
+                            to: tracking.hum_max,
+                            disable: de
+                        });
+                        fn_check_auto_tracking_save('');
                     });
-                    range_instance1.update({
-                        // from: tracking.temp_min,
-                        // to: tracking.temp_max,
-                        "disable": false
+                    $('#swST_3').change(function(){
+                        var tracking = JSON.parse($('#val_config').val()).config_tracking;
+                        // var Rmx = $(".range_temp").val().split(";");
+                        if ($(this).prop('checked') == true){
+                            $('.text_ctemp').removeClass('text_blur');
+                            var de = false;
+                            if (parseInt(config_cn.cn_status_5) == 1) {
+                                if(tracking.fan_1 == 'ON'){
+                                    var ched_1 = true, dis_1 = false, val_1 = 'เปิดเมื่ออุอุณหภูมิสูงกว่า '+tracking.temp_max+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+tracking.temp_min+' ℃';
+                                }else {
+                                    var ched_1 = false, dis_1 = false, val_1 = 'ปิด';
+                                }
+                            }else {
+                                var ched_1 = false, dis_1 = true, val_1 = 'ไม่ใช้งาน';
+                            }
+                            if (parseInt(config_cn.cn_status_6) == 1) {
+                                if(tracking.fan_2 == 'ON'){
+                                    var ched_2 = true, dis_2 = false, val_2 = 'เปิดเมื่ออุอุณหภูมิสูงกว่า '+tracking.temp_max+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+tracking.temp_min+' ℃';
+                                }else {
+                                    var ched_2 = false, dis_2 = false, val_2 = 'ปิด';
+                                }
+                            }else {
+                                var ched_2 = false, dis_2 = true, val_2 = 'ไม่ใช้งาน';
+                            }
+                            if (parseInt(config_cn.cn_status_7) == 1) {
+                                if(tracking.fan_3 == 'ON'){
+                                    var ched_3 = true, dis_3 = false, val_3 = 'เปิดเมื่ออุอุณหภูมิสูงกว่า '+tracking.temp_max+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+tracking.temp_min+' ℃';
+                                }else {
+                                    var ched_3 = false, dis_3 = false, val_3 = 'ปิด';
+                                }
+                            }else {
+                                var ched_3 = false, dis_3 = true, val_3 = 'ไม่ใช้งาน';
+                            }
+                            if (parseInt(config_cn.cn_status_8) == 1) {
+                                if(tracking.fan_4 == 'ON'){
+                                var ched_4 = true, dis_4 = false, val_4 = 'เปิดเมื่ออุอุณหภูมิสูงกว่า '+tracking.temp_max+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+tracking.temp_min+' ℃';
+                                }else {
+                                    var ched_4 = false, dis_4 = false, val_4 = 'ปิด';
+                                }
+                            }else {
+                                var ched_4 = false, dis_4 = true, val_4 = 'ไม่ใช้งาน';
+                            }
+                        }
+                        else {
+                            $('.text_ctemp').addClass('text_blur');
+                            var de = true;
+                            if (parseInt(config_cn.cn_status_5) == 1) {
+                                var ched_1 = false, dis_1 = true, val_1 = 'ปิด';
+                            }else {
+                                var ched_1 = false, dis_1 = true, val_1 = 'ไม่ใช้งาน';
+                            }
+                            if (parseInt(config_cn.cn_status_6) == 1) {
+                                var ched_2 = false, dis_2 = true, val_2 = 'ปิด';
+                            }else {
+                                var ched_2 = false, dis_2 = true, val_2 = 'ไม่ใช้งาน';
+                            }
+                            if (parseInt(config_cn.cn_status_7) == 1) {
+                                var ched_3 = false, dis_3 = true, val_3 = 'ปิด';
+                            }else {
+                                var ched_3 = false, dis_3 = true, val_3 = 'ไม่ใช้งาน';
+                            }
+                            if (parseInt(config_cn.cn_status_8) == 1) {
+                                var ched_4 = false, dis_4 = true, val_4 = 'ปิด';
+                            }else {
+                                var ched_4 = false, dis_4 = true, val_4 = 'ไม่ใช้งาน';
+                            }
+                        }
+                        $('.check_fn_1').prop({'checked': ched_1,'disabled': dis_1});
+                        $('.check_fnl_1').html('พัดลม 1 ('+config_cn.cn_name_5+') : '+val_1);
+                        $('.check_fn_2').prop({'checked': ched_2,'disabled': dis_2});
+                        $('.check_fnl_2').html('พัดลม 2 ('+config_cn.cn_name_6+') : '+val_2);
+                        $('.check_fn_3').prop({'checked': ched_3, 'disabled': dis_3});
+                        $('.check_fnl_3').html('พัดลม 3 ('+config_cn.cn_name_7+') : '+val_3);
+                        $('.check_fn_4').prop({'checked': ched_4, 'disabled': dis_4});
+                        $('.check_fnl_4').html('พัดลม 4 ('+config_cn.cn_name_8+') : '+val_4);
+                        range_instance3.update({
+                            min: 20,
+                            max: 50,
+                            from: tracking.temp_min,
+                            to: tracking.temp_max,
+                            disable: de
+                        });
+                        fn_check_auto_tracking_save('');
                     });
-                    range_instance3.update({
-                        // from: tracking.light_min,
-                        // to: tracking.light_max,
-                        "disable": false
+                    $('#swST_4').change(function(){
+                        var tracking = JSON.parse($('#val_config').val()).config_tracking;
+                        // var Rmx = $(".range_light").val().split(";");
+                        if(parseInt(config_sn.sn_sensor_6) == 5){
+                            var maxL = (100000/54).toFixed();
+                            var unitl = "µmol m<sup>-2</sup>s<sup>-1</sup>";
+                            var minl = ((tracking.light_min*1000)/54).toFixed();
+                            var maxl = ((tracking.light_max*1000)/54).toFixed();
+                        }
+                        else { // KLUX
+                            var maxL = 100,
+                            unitl = "KLux",
+                            minl = tracking.light_min,
+                            maxl = tracking.light_max;
+                        }
+                        if ($(this).prop('checked') == true){
+                            var de = false;
+                            if (parseInt(config_cn.cn_status_12) == 1) {
+                                if(tracking.shading == 'ON'){
+                                    var val_lig = 'ม่านพรางแสง : เปิดม่านเมื่อความเข้มแสงต่ำกว่า '+minl+' '+unitl+' <br>และปิดม่านเมื่อความเข้มแสงสูงกว่า '+maxl+' '+unitl;
+                                }else {
+                                    var val_lig = 'ม่านพรางแสง : เปิดรับแสง';
+                                }
+                                $('.text_light').html(val_lig).removeClass('text_blur')
+                            }
+                            else {
+                                $('.text_light').html('ม่านพรางแสง : ไม่ใช้งาน').addClass('text_blur');
+                            }
+                        }
+                        else {
+                            $('.text_light').html('ม่านพรางแสง : ไม่ใช้งาน').addClass('text_blur');
+                            var de = true;
+                        }
+                        $('.title_l').html('แสง ('+unitl+')');
+                        range_instance4.update({
+                            min: 0,
+                            max: maxL,
+                            from: minl,
+                            to: maxl,
+                            disable: de
+                        });
+                        fn_check_auto_tracking_save('');
                     });
-                    if (parseInt(config_cn.cn_status_1) == 1) {
-                        $('.check_d_1').prop('disabled', false);
-                        $('.check_d_1').change(function(){
-                            var Rmx4 = $(".range_soil").val().split(";")
-                            check_load($('.check_d_1').prop('checked'), 'dl_1', 'น้ำหยด 1 ('+config_cn["cn_name_1"]+')', ' -> เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+Rmx4[0]+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+Rmx4[1]+' %');
-                        });
-                    }
-                    if (parseInt(config_cn.cn_status_2) == 1) {
-                        $('.check_d_2').prop('disabled', false);
-                        $('.check_d_2').change(function(){
-                            var Rmx4 = $(".range_soil").val().split(";")
-                            check_load($('.check_d_2').prop('checked'), 'dl_2', 'น้ำหยด 2 ('+config_cn["cn_name_2"]+')', ' -> เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+Rmx4[0]+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+Rmx4[1]+' %');
-                        });
-                    }
-                    if (parseInt(config_cn.cn_status_3) == 1) {
-                        $('.check_d_3').prop('disabled', false);
-                        $('.check_d_3').change(function(){
-                            var Rmx4 = $(".range_soil").val().split(";")
-                            check_load($('.check_d_3').prop('checked'), 'dl_3', 'น้ำหยด 3 ('+config_cn["cn_name_3"]+')', ' -> เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+Rmx4[0]+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+Rmx4[1]+' %');
-                        });
-                    }
-                    if (parseInt(config_cn.cn_status_4) == 1) {
-                        $('.check_d_4').prop('disabled', false);
-                        $('.check_d_4').change(function(){
-                            var Rmx4 = $(".range_soil").val().split(";")
-                            check_load($('.check_d_4').prop('checked'), 'dl_4', 'น้ำหยด 4 ('+config_cn["cn_name_4"]+')', ' -> เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+Rmx4[0]+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+Rmx4[1]+' %');
-                        });
-                    }
-                    if (parseInt(config_cn.cn_status_5) == 1) {
-                        $('.check_fn_1').prop('disabled', false);
-                        $('.check_fn_1').change(function(){
-                            var Rmx1 = $(".range_temp").val().split(";")
-                            check_load($('.check_fn_1').prop('checked'), 'fnl_1', 'พัดลม 1 ('+config_cn["cn_name_5"]+')', ' -> เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx1[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx1[0]+' ℃');
-                        });
-                    }
-                    if (parseInt(config_cn.cn_status_6) == 1) {
-                        $('.check_fn_2').prop('disabled', false);
-                        $('.check_fn_2').change(function(){
-                            var Rmx1 = $(".range_temp").val().split(";")
-                            check_load($('.check_fn_2').prop('checked'), 'fnl_2', 'พัดลม 2 ('+config_cn["cn_name_6"]+')', ' -> เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx1[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx1[0]+' ℃');
-                        });
-                    }
-                    if (parseInt(config_cn.cn_status_7) == 1) {
-                        $('.check_fn_3').prop('disabled', false);
-                        $('.check_fn_3').change(function(){
-                            var Rmx1 = $(".range_temp").val().split(";")
-                            check_load($('.check_fn_3').prop('checked'), 'fnl_3', 'พัดลม 3 ('+config_cn["cn_name_7"]+')', ' -> เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx1[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx1[0]+' ℃');
-                        });
-                    }
-                    if (parseInt(config_cn.cn_status_8) == 1) {
-                        $('.check_fn_4').prop('disabled', false);
-                        $('.check_fn_4').change(function(){
-                            var Rmx1 = $(".range_temp").val().split(";")
-                            check_load($('.check_fn_4').prop('checked'), 'fnl_4', 'พัดลม 4 ('+config_cn["cn_name_8"]+')', ' -> เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx1[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx1[0]+' ℃');
-                        });
-                    }
                     $(".range_soil").change(function(){
                         var Rmx4 = $(".range_soil").val().split(";")
-                        check_load($('.check_d_1').prop('checked'), 'dl_1', 'น้ำหยด 1 ('+config_cn["cn_name_1"]+')', ' -> เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+Rmx4[0]+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+Rmx4[1]+' %')
-                        check_load($('.check_d_2').prop('checked'), 'dl_2', 'น้ำหยด 2 ('+config_cn["cn_name_2"]+')', ' -> เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+Rmx4[0]+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+Rmx4[1]+' %')
-                        check_load($('.check_d_3').prop('checked'), 'dl_3', 'น้ำหยด 3 ('+config_cn["cn_name_3"]+')', ' -> เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+Rmx4[0]+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+Rmx4[1]+' %')
-                        check_load($('.check_d_4').prop('checked'), 'dl_4', 'น้ำหยด 4 ('+config_cn["cn_name_4"]+')', ' -> เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+Rmx4[0]+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+Rmx4[1]+' %')
+                        check_load($('.check_d_1').prop('checked'), 'dl_1', 'น้ำหยด 1 ('+config_cn["cn_name_1"]+')', ' เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+Rmx4[0]+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+Rmx4[1]+' %')
+                        check_load($('.check_d_2').prop('checked'), 'dl_2', 'น้ำหยด 2 ('+config_cn["cn_name_2"]+')', ' เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+Rmx4[0]+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+Rmx4[1]+' %')
+                        check_load($('.check_d_3').prop('checked'), 'dl_3', 'น้ำหยด 3 ('+config_cn["cn_name_3"]+')', ' เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+Rmx4[0]+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+Rmx4[1]+' %')
+                        check_load($('.check_d_4').prop('checked'), 'dl_4', 'น้ำหยด 4 ('+config_cn["cn_name_4"]+')', ' เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+Rmx4[0]+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+Rmx4[1]+' %')
                         $('.text_soil').html('เมื่อความชื้นดินต่ำกว่า '+Rmx4[1]+' %');
                         fn_check_auto_tracking_save('');
                     });
@@ -3334,14 +3545,14 @@
                         fn_check_auto_tracking_save('');
                     });
                     $(".range_temp").change(function(){
-                        var Rmx1 = $(".range_temp").val().split(";")
-                        check_load($('.check_fn_1').prop('checked'), 'fnl_1', 'พัดลม 1 ('+config_cn["cn_name_5"]+')', ' -> เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx1[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx1[0]+' ℃');
-                        check_load($('.check_fn_2').prop('checked'), 'fnl_2', 'พัดลม 2 ('+config_cn["cn_name_6"]+')', ' -> เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx1[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx1[0]+' ℃');
-                        check_load($('.check_fn_3').prop('checked'), 'fnl_3', 'พัดลม 3 ('+config_cn["cn_name_7"]+')', ' -> เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx1[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx1[0]+' ℃');
-                        check_load($('.check_fn_4').prop('checked'), 'fnl_4', 'พัดลม 4 ('+config_cn["cn_name_8"]+')', ' -> เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx1[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx1[0]+' ℃');
+                        var Rmx = $(".range_temp").val().split(";")
+                        check_load($('.check_fn_1').prop('checked'), 'fnl_1', 'พัดลม 1 ('+config_cn["cn_name_5"]+')', ' เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx[0]+' ℃');
+                        check_load($('.check_fn_2').prop('checked'), 'fnl_2', 'พัดลม 2 ('+config_cn["cn_name_6"]+')', ' เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx[0]+' ℃');
+                        check_load($('.check_fn_3').prop('checked'), 'fnl_3', 'พัดลม 3 ('+config_cn["cn_name_7"]+')', ' เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx[0]+' ℃');
+                        check_load($('.check_fn_4').prop('checked'), 'fnl_4', 'พัดลม 4 ('+config_cn["cn_name_8"]+')', ' เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx[0]+' ℃');
                         fn_check_auto_tracking_save('');
                     });
-                    $(".range_light").change(function(e){
+                    $(".range_light").change(function(){
                         var Rmx = $(".range_light").val().split(";");
                         if(parseInt(config_sn.sn_sensor_6) == 5){
                             var unitl = "µmol m<sup>-2</sup>s<sup>-1</sup>";
@@ -3352,132 +3563,46 @@
                             var minl = Rmx[0];
                             var maxl = Rmx[1];
                         }
-                        $('.title_l').html('คว่มเข้าแสง ('+unitl+')');
-                        $('.text_light').html('ม่านพรางแสง : ปิดม่านเมื่อความเข้มแสงต่ำกว่า '+minl+' '+unitl+' <br>และเปิดม่านเมื่อความเข้มแสงสูงกว่า '+maxl+' '+unitl);
+                        $('.title_l').html('แสง ('+unitl+')');
+                        $('.text_light').html('ม่านพรางแสง : เปิดม่านเมื่อความเข้มแสงต่ำกว่า '+minl+' '+unitl+' <br>และปิดม่านเมื่อความเข้มแสงสูงกว่า '+maxl+' '+unitl);
                         fn_check_auto_tracking_save('');
                     });
-                });
-                // $('.check_d_1');
-                // $('.check_d_2').prop('disabled', true);
-                // $('.check_d_3').prop('disabled', true);
-                // $('.check_d_4').prop('disabled', true);
-                // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-                // range_instance1.update({
-                //     from: tracking.temp_min,
-                //     to: tracking.temp_max,
-                //     "disable": true
-                // });
 
-                // function range_auto_mode(disb, config_parse) {
-                //     var tracking = config_parse.config_tracking;
-                //     // config_cn
-                //     var $range1 = $(".range_temp"), range_instance1;
-                //     $range1.ionRangeSlider({
-                //         type: "double",
-                //         min: 20,
-                //         max: 50,
-                //         from: tracking.temp_min,
-                //         to: tracking.temp_max,
-                //         grid: true,
-                //         // disable: true
-                //     });
-                //     range_instance1 = $range1.data("ionRangeSlider");
-                //     range_instance1.update({
-                //         from: tracking.temp_min,
-                //         to: tracking.temp_max,
-                //         "disable": disb
-                //     });
-                //
-                //     var $range2 = $(".range_hum"), range_instance2;
-                //     $range2.ionRangeSlider({
-                //         type: "double",
-                //         min: 0,
-                //         max: 100,
-                //         from: tracking.hum_min,
-                //         to: tracking.hum_max,
-                //         grid: true,
-                //         // disable: true
-                //     });
-                //     range_instance2 = $range2.data("ionRangeSlider");
-                //     range_instance2.update({
-                //         from: tracking.hum_min,
-                //         to: tracking.hum_max,
-                //         "disable": disb
-                //     });
-                //
-                //     var $range3 = $(".range_light"), range_instance3;
-                //     $range3.ionRangeSlider({
-                //         type: "double",
-                //         min: 0,
-                //         max: 100,
-                //         from: tracking.light_min,
-                //         to: tracking.light_max,
-                //         grid: true,
-                //         // disable: true
-                //     });
-                //     range_instance3 = $range3.data("ionRangeSlider");
-                //     range_instance3.update({
-                //         from: tracking.light_min,
-                //         to: tracking.light_max,
-                //         "disable": disb
-                //     });
-                //
-                //     var $range4 = $(".range_soil"), range_instance4;
-                //     $range4.ionRangeSlider({
-                //         type: "double",
-                //         min: 0,
-                //         max: 100,
-                //         from: tracking.soil_min,
-                //         to: tracking.soil_max,
-                //         grid: true,
-                //         // disable: true
-                //     });
-                //     range_instance4 = $range4.data("ionRangeSlider");
-                //     range_instance4.update({
-                //         from: tracking.soil_min,
-                //         to: tracking.soil_max,
-                //         "disable": disb
-                //     });
-                //     if(tracking.dripper_1 == 'ON'){
-                //         $('.check_d_1').attr('checked', true);
-                //         $('.check_dl_1').html(config_cn.cn_name_1+' : ใช้งาน');
-                //     }else {
-                //         $('.check_d_1').attr('checked', false);
-                //         $('.check_dl_1').html(config_cn.cn_name_1+' : ไม่ใช้งาน');
-                //     }
-                //     if(tracking.dripper_2 == 'ON'){
-                //         $('.check_d_2').attr('checked', true);
-                //         $('.check_dl_2').html(config_cn.cn_name_2+' : ใช้งาน');
-                //     }else {
-                //         $('.check_d_2').attr('checked', false);
-                //         $('.check_dl_2').html(config_cn.cn_name_2+' : ไม่ใช้งาน');
-                //     }
-                //     if(tracking.dripper_3 == 'ON'){
-                //         $('.check_d_3').attr('checked', true);
-                //         $('.check_dl_3').html(config_cn.cn_name_3+' : ใช้งาน');
-                //     }else {
-                //         $('.check_d_3').attr('checked', false);
-                //         $('.check_dl_3').html(config_cn.cn_name_3+' : ไม่ใช้งาน');
-                //     }
-                //     if(tracking.dripper_4 == 'ON'){
-                //         $('.check_d_4').attr('checked', true);
-                //         $('.check_dl_4').html(config_cn.cn_name_4+' : ใช้งาน');
-                //     }else {
-                //         $('.check_d_4').attr('checked', false);
-                //         $('.check_dl_4').html(config_cn.cn_name_4+' : ไม่ใช้งาน');
-                //     }
-                //     if(disb == true){
-                //         $('.check_d_1').prop('disabled', true);
-                //         $('.check_d_2').prop('disabled', true);
-                //         $('.check_d_3').prop('disabled', true);
-                //         $('.check_d_4').prop('disabled', true);
-                //     }else {
-                //         $('.check_d_1').prop('disabled', false);
-                //         $('.check_d_2').prop('disabled', false);
-                //         $('.check_d_3').prop('disabled', false);
-                //         $('.check_d_4').prop('disabled', false);
-                //     }
-                // }
+                    $('.check_d_1').change(function(){
+                        var Rmx = $(".range_soil").val().split(";")
+                        check_load($('.check_d_1').prop('checked'), 'dl_1', 'น้ำหยด 1 ('+config_cn["cn_name_1"]+')', ' เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+Rmx[0]+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+Rmx[1]+' %');
+                    });
+                    $('.check_d_2').change(function(){
+                        var Rmx = $(".range_soil").val().split(";")
+                        check_load($('.check_d_2').prop('checked'), 'dl_2', 'น้ำหยด 2 ('+config_cn["cn_name_2"]+')', ' เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+Rmx[0]+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+Rmx[1]+' %');
+                    });
+                    $('.check_d_3').change(function(){
+                        var Rmx = $(".range_soil").val().split(";")
+                        check_load($('.check_d_3').prop('checked'), 'dl_3', 'น้ำหยด 3 ('+config_cn["cn_name_3"]+')', ' เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+Rmx[0]+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+Rmx[1]+' %');
+                    });
+                    $('.check_d_4').change(function(){
+                        var Rmx = $(".range_soil").val().split(";")
+                        check_load($('.check_d_4').prop('checked'), 'dl_4', 'น้ำหยด 4 ('+config_cn["cn_name_4"]+')', ' เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+Rmx[0]+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+Rmx[1]+' %');
+                    });
+                    $('.check_fn_1').change(function(){
+                        var Rmx = $(".range_temp").val().split(";")
+                        check_load($('.check_fn_1').prop('checked'), 'fnl_1', 'พัดลม 1 ('+config_cn["cn_name_5"]+')', ' เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx[0]+' ℃');
+                    });
+                    $('.check_fn_2').change(function(){
+                        var Rmx = $(".range_temp").val().split(";")
+                        check_load($('.check_fn_2').prop('checked'), 'fnl_2', 'พัดลม 2 ('+config_cn["cn_name_6"]+')', ' เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx[0]+' ℃');
+                    });
+                    $('.check_fn_3').change(function(){
+                        var Rmx = $(".range_temp").val().split(";")
+                        check_load($('.check_fn_3').prop('checked'), 'fnl_3', 'พัดลม 3 ('+config_cn["cn_name_7"]+')', ' เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx[0]+' ℃');
+                    });
+                    $('.check_fn_4').change(function(){
+                        var Rmx = $(".range_temp").val().split(";")
+                        check_load($('.check_fn_4').prop('checked'), 'fnl_4', 'พัดลม 4 ('+config_cn["cn_name_8"]+')', ' เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx[0]+' ℃');
+                    });
+                });
+                // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
 
                 // Mode_Manual ================================================
                 // Manual

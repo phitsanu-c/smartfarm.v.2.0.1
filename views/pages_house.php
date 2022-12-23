@@ -1,32 +1,51 @@
+<?php
+    require '../routes/connectdb.php';
+    $siteID = $_POST["s"];
+    $url_host = 'http://' . $_SERVER['HTTP_HOST'];
+    $url_part = explode("/", $_SERVER["PHP_SELF"]);
+    $url_link = $url_host . '/' . $url_part[1];
+    // echo $_GET["s"];
+    // exit();
+    // $_SESSION["Username"] ;
+    // $_SESSION["login_status"]  ;
 
+    function encode($string){
+        return str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($string . 'zasn'));
+    }
+
+    // function decode($string) {
+    //     return base64_decode(str_replace(['-','_'], ['+','/'], $string));
+    // }
+    // echo ;
+    // exit();
+?>
 <div class="page-content">
     <!--breadcrumb-->
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">เลือกโรงเรือน</div>
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-1">
+        <?php if($siteID == 10){
+            echo '
+            <div class="breadcrumb-title pe-3 d-none d-sm-block">
+                <h5><img src="public/images/logo/768px-Emblem_of_Thammasat_University.png" style="height: 38px; border: 0 solid #e5e5e5; padding: 0;">
+                    '.$dbcon->query("SELECT site_name FROM tbn_site WHERE site_id = '$siteID' LIMIT 1")->fetch()[0].'
+                </h5>
+            </div>
+            <div class="ps-3 d-none d-sm-block">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 p-0">
+                        <li class="breadcrumb-item"><a href="javascript:;"><i class="-alt"></i></a> </li>
+                        <li class="breadcrumb-item" aria-current="page">
+                            <h5>เลือกโรงเรือน</h5>
+                        </li>
+                    </ol>
+                </nav>
+            </div>';
+        } else {
+            echo '<div class="breadcrumb-title pe-3">เลือกโรงเรือน</div>';
+        } ?>
     </div>
     <!--end breadcrumb-->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-4">
-
-
-    <?php
-        $siteID = $_POST["s"];
-        $url_host = 'http://' . $_SERVER['HTTP_HOST'];
-        $url_part = explode("/", $_SERVER["PHP_SELF"]);
-        $url_link = $url_host . '/' . $url_part[1];
-        // echo $_GET["s"];
-        // exit();
-        // $_SESSION["Username"] ;
-        // $_SESSION["login_status"]  ;
-
-        function encode($string){
-            return str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($string . 'zasn'));
-        }
-
-        // function decode($string) {
-        //     return base64_decode(str_replace(['-','_'], ['+','/'], $string));
-        // }
-        // echo ;
-        // exit();
+        <?php
         if($siteID == 3){ require '../routes/connectdb.php'; ?>
             <div class="col-12 col-sm-12 col-md-4 col-lg-4  col-xl-3">
                 <a href="javascript:;" class="sw_house" url="<?= '#'.encode('2,3,KMUMT001') ?>">
@@ -106,7 +125,6 @@
                 </div>
         <?php }
         elseif ($siteID == 10) {
-            require '../routes/connectdb.php';
             $accountID = $_SESSION['account_id'];
             $house_sn = 'TUSMT';
             $drow_ = $dbcon->query("SELECT * FROM tbn_data_tu WHERE data_sn = '$house_sn' ORDER BY data_timestamp DESC limit 1")->fetch();

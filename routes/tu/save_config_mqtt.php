@@ -340,6 +340,10 @@
         elseif ($mode == 'Sensor_Tracking') {
             $decode = json_decode(substr($mqtt->subscribeAndWaitForMessage($house_master.'/control/set_config', 1), 2), true);
             $decode['config_tracking'] = [
+                "status_1" => floor($mess['status_1']),
+                "status_2" => floor($mess['status_2']),
+                "status_3" => floor($mess['status_3']),
+                "status_4" => floor($mess['status_4']),
                 "temp_min"  => floor($mess['temp_min']),
                 "temp_max"  => floor($mess['temp_max']),
                 "hum_min"   => floor($mess['hum_min']),
@@ -363,9 +367,11 @@
                 "user_control" => $_SESSION["account_user"]
             ];
             // echo json_encode($decode['config_tracking']);
+            // exit();
             $mqtt->publish( $house_master.'/control/set_config', json_encode($decode), 1);
             $decode['config_tracking']['sn'] = $house_master;
-            $dbcon->prepare("INSERT INTO `tbn_control_auto_sensor`(`auto_sensor_sn`, `auto_sensor_user`,
+            $dbcon->prepare("INSERT INTO `tbn_control_sensor_tracking`(`auto_sensor_sn`, `auto_sensor_user`,
+                `auto_sensor_status_1`, `auto_sensor_status_2`, `auto_sensor_status_3`, `auto_sensor_status_4`,
                 `auto_sensor_temp_min`, `auto_sensor_temp_max`,
                 `auto_sensor_hum_min`, `auto_sensor_hum_max`,
                 `auto_sensor_light_min`, `auto_sensor_light_max`,
@@ -374,6 +380,7 @@
                 `auto_sensor_fn_1`, `auto_sensor_fn_2`, `auto_sensor_fn_3`, `auto_sensor_fn_4`,
                 `auto_sensor_fg_1`, `auto_sensor_fg_2`, `auto_sensor_sp`, `auto_sensor_sh`)
                 VALUES (:sn, :user_control,
+                 :status_1, :status_2, :status_3, :status_4,
                  :temp_min, :temp_max, :hum_min, :hum_max, :light_min, :light_max, :soil_min, :soil_max,
                  :dripper_1, :dripper_2, :dripper_3, :dripper_4,
                  :fan_1, :fan_2, :fan_3, :fan_4,
