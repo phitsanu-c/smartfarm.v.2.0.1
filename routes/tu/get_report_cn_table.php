@@ -40,7 +40,7 @@
     // $numb = intval(substr($house_master, 5,10));
     // $channel =  if($config_cn['cn_status_1'] == 1){echo "cs_dripper_1 AS dripper_1,";};
     // $channel[] = "ROW_NUMBER() OVER (ORDER BY cn_id ) AS row_num";
-    if($_POST['mode_report'] == 're_cn'){ // re_cn
+    // if($_POST['mode_report'] == 're_cn'){ // re_cn
     //     $channel[] = "SUBSTRING(cn_timestamp,1,10) AS nDate";
     //     $channel[] = "SUBSTRING(cn_timestamp,-8, 5) AS nTime";
     //     $channel[] = "cn_user";
@@ -125,36 +125,36 @@
     //        // $data0['soil_in'][]   = $row['soil_in'];
     //        $i++;
     //     }
-    }
-    elseif ($_POST['mode_report'] == 're_cnAuto') { // re_cnManual
-        $table_name = 'tbn_control_au'.$_POST['load_select'];
-        $channel[] = "SUBSTRING(load_timestamp,1,10) AS nDate";
-        $channel[] = "SUBSTRING(load_timestamp,-8, 8) AS nTime";
-        $channel[] = "load_user";
-        $channel[] = "load_s_1";
-        $channel[] = "load_e_1";
-        $channel[] = "load_s_2";
-        $channel[] = "load_e_2";
-        $channel[] = "load_s_3";
-        $channel[] = "load_e_3";
-        $channel[] = "load_s_4";
-        $channel[] = "load_e_4";
-        $channel[] = "load_s_5";
-        $channel[] = "load_e_5";
-        $channel[] = "load_s_6";
-        $channel[] = "load_e_6";
-
-        $channel1 = implode(', ',$channel);
-        // exit();
-        $sql = "SELECT $channel1 FROM $table_name WHERE load_sn = '$house_master' AND load_timestamp BETWEEN '$start_day' AND '$stop_day' ORDER BY load_timestamp DESC";
-        $stmt = $dbcon->query($sql);
-        $data0 = array();
-        $i=1;
-        while ($row = $stmt->fetch()) {
-            $data0[] = $row;
-        }
-        echo json_encode($data0);
-    }
+    // }
+    // elseif ($_POST['mode_report'] == 're_cnAuto') { // re_cnManual
+    //     $table_name = 'tbn_control_au'.$_POST['load_select'];
+    //     $channel[] = "SUBSTRING(load_timestamp,1,10) AS nDate";
+    //     $channel[] = "SUBSTRING(load_timestamp,-8, 8) AS nTime";
+    //     $channel[] = "load_user";
+    //     $channel[] = "load_s_1";
+    //     $channel[] = "load_e_1";
+    //     $channel[] = "load_s_2";
+    //     $channel[] = "load_e_2";
+    //     $channel[] = "load_s_3";
+    //     $channel[] = "load_e_3";
+    //     $channel[] = "load_s_4";
+    //     $channel[] = "load_e_4";
+    //     $channel[] = "load_s_5";
+    //     $channel[] = "load_e_5";
+    //     $channel[] = "load_s_6";
+    //     $channel[] = "load_e_6";
+    //
+    //     $channel1 = implode(', ',$channel);
+    //     // exit();
+    //     $sql = "SELECT $channel1 FROM $table_name WHERE load_sn = '$house_master' AND load_timestamp BETWEEN '$start_day' AND '$stop_day' ORDER BY load_timestamp DESC";
+    //     $stmt = $dbcon->query($sql);
+    //     $data0 = array();
+    //     $i=1;
+    //     while ($row = $stmt->fetch()) {
+    //         $data0[] = $row;
+    //     }
+    //     echo json_encode($data0);
+    // }
     // elseif ($_POST['mode_report'] == 're_cnManual') { // re_cnManual
     //     $channel[] = "SUBSTRING(mn_timestamp,1,10) AS nDate";
     //     $channel[] = "SUBSTRING(mn_timestamp,-8, 5) AS nTime";
@@ -196,7 +196,8 @@
     //         $data0[] = $data1;
     //     }
     // }
-    elseif ($_POST['mode_report'] == 're_sensor') { // re_sensor
+    // else
+    if ($_POST['mode_report'] == 're_sensor') { // re_sensor
         $numb = intval(substr($house_master, 5,10));
         $data_channel = [];
         $channel[] = "SUBSTRING(data_timestamp,1,16) AS nDate";

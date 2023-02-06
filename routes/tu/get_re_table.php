@@ -144,6 +144,7 @@
     </table>
 </div>
 <script type="text/javascript">
+    var a = $(window).height(), b = $('.simplebar-content').height();
     var data0 = <?= json_encode($data0) ?>;
     // alert(data0.length)
     var currentdate = new Date();
@@ -155,7 +156,7 @@
                 // + currentdate.getSeconds();
 
     var table = $('#table_compare').DataTable({
-        "scrollY": '90vh',
+        "scrollY": (a-b-150),//'90vh',
         "scrollX": true,
         "scrollCollapse": false,
         "paging":    false,

@@ -1,4 +1,4 @@
-<?php
+    <?php
     require "../connectdb.php";
     $siteID = $_GET['s'];
     $house_master1 = 'TUSMT006';
@@ -633,43 +633,45 @@
     });
 
     $('#submit_fromTo').click(function() {
-        if ($(".val_start").val() == "") {
-            $(".val_start").addClass('is-invalid');
-            return false;
-        }else{
-            $(".val_start").removeClass('is-invalid');
-        }
-        if ($(".val_end").val() == "") {
-            $(".val_end").addClass('is-invalid');
-            return false;
-        }else{
-            $(".val_end").removeClass('is-invalid');
-        }
-        if ($(".val_start").val() >= $(".val_end").val()) {
-            $(".val_start").addClass('is-invalid');
-            $(".val_end").addClass('is-invalid');
-            Swal({
-                type: "warning",
-                html: "เวลาเริ่มต้น <b>ต้องน้อยกว่า</b> เวลาสิ้นสุด",
-                // html: text,
-                allowOutsideClick: false
-            });
-            return false;
-        }
-        if(moment($(".val_start").val()).format('YYYY-MM-DD HH:mm') > moment($('.val_end').val()).add(31, 'days').format('YYYY-MM-DD HH:mm')) {
-            Swal({
-                type: "warning",
-                html: "เลือกวันได้สูงสุด<b> ไม่เกิน 31</b> วัน/ครั้ง",
-                // html: text,
-                allowOutsideClick: false
-            });
-            $(".val_start").addClass('is-invalid');
-            $(".val_end").addClass('is-invalid');
-            return false;
-        }
-        else{
-            $(".val_start").removeClass('is-invalid');
-            $(".val_end").removeClass('is-invalid');
+        if($(".mode_dwm").val() == 'from_to'){
+            if ($(".val_start").val() == "") {
+                $(".val_start").addClass('is-invalid');
+                return false;
+            }else{
+                $(".val_start").removeClass('is-invalid');
+            }
+            if ($(".val_end").val() == "") {
+                $(".val_end").addClass('is-invalid');
+                return false;
+            }else{
+                $(".val_end").removeClass('is-invalid');
+            }
+            if ($(".val_start").val() >= $(".val_end").val()) {
+                $(".val_start").addClass('is-invalid');
+                $(".val_end").addClass('is-invalid');
+                Swal({
+                    type: "warning",
+                    html: "เวลาเริ่มต้น <b>ต้องน้อยกว่า</b> เวลาสิ้นสุด",
+                    // html: text,
+                    allowOutsideClick: false
+                });
+                return false;
+            }
+            if(moment($(".val_start").val()).format('YYYY-MM-DD HH:mm') > moment($('.val_end').val()).add(31, 'days').format('YYYY-MM-DD HH:mm')) {
+                Swal({
+                    type: "warning",
+                    html: "เลือกวันได้สูงสุด<b> ไม่เกิน 31</b> วัน/ครั้ง",
+                    // html: text,
+                    allowOutsideClick: false
+                });
+                $(".val_start").addClass('is-invalid');
+                $(".val_end").addClass('is-invalid');
+                return false;
+            }
+            else{
+                $(".val_start").removeClass('is-invalid');
+                $(".val_end").removeClass('is-invalid');
+            }
         }
         report_sn('')
     });

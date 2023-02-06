@@ -565,7 +565,7 @@
                                         <div class="card radius-10 border">
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center mb-2 mt-2">
-                                                    <div class="pt-2"><b><h5>ความชื้นดิน (%)</h5></b></div>
+                                                    <div class="pt-2"><b><h5>ควบคุมความชื้นดิน (%)</h5></b></div>
                                                     <div class="ms-auto">
                                                         <img class="img_swST imgST_1" src="" alt="">
                                                         <div class="sw_toggleST">
@@ -574,11 +574,20 @@
                                                     </div>
                                                 </div>
                                                 <input type="text" class="range_soil"/>
-                                                <div class="form-check form-switch">
-                                                    <input class="form-check-input check_ check_d_1" type="checkbox">
-                                                    <label class="form-check-label check_dl_1"></label>
+                                                <div class="text-center">
+                                                    <h6 class="form-check-label">ควบคุมการทำงานน้ำหยด</h6>
+                                                    <?php for($i =1; $i < 5; $i++){
+                                                        echo '<div class="form-check form-switch">
+                                                                <input class="form-check-input check_ check_d_'.$i.'" type="checkbox">
+                                                                <label class="form-check-label">น้ำหยด '.$i.' ('. $config_cn['cn_name_'.$i] .')</label>
+                                                            </div>';
+                                                        }
+                                                    ?>
+                                                    <button type="button" class="btn btn-primary waves-light view_tracking" id="st_1">
+                                                        <i class="fadeIn animated bx bx-list-check"></i> เงื่อนไขการทำงาน
+                                                    </button>
                                                 </div>
-                                                <div class="form-check form-switch">
+                                                <!-- <div class="form-check form-switch">
                                                     <input class="form-check-input check_ check_d_2" type="checkbox">
                                                     <label class="form-check-label check_dl_2"></label>
                                                 </div>
@@ -589,7 +598,7 @@
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input check_ check_d_4" type="checkbox">
                                                     <label class="form-check-label check_dl_4"></label>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -597,7 +606,7 @@
                                         <div class="card radius-10 border">
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center mb-2 mt-2">
-                                                    <div class="pt-2"><b><h5>ความชื้นอากาศ (%Rh)</h5></b></div>
+                                                    <div class="pt-2"><b><h5>ควบคุมความชื้นอากาศ (%Rh)</h5></b></div>
                                                     <div class="ms-auto">
                                                         <img class="img_swST imgST_2" src="" alt="">
                                                         <div class="sw_toggleST">
@@ -605,10 +614,25 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <input type="text" class="range_hum"/><br>
-                                                <label class="form-check-label text_chum text_soil"></label><br>
+                                                <input type="text" class="range_hum"/>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text">ปิดพ่นหมอก และเปิดสเปรย์เมื่อ <b>ความชื้นอากาศสูงกว่า </b></span>
+                									<input type="number" class="form-control text_chum2" placeholder="">
+                                                    <span class="input-group-text">%Rh</span>
+                                                    <div class="invalid-feedback">ต้องมากกว่าความชื้นอากาศ Min และน้อยกว่าความชื้นอากาศ Max</div>
+                								</div>
+                                                <div class="text-center">
+                                                    <h6 class="form-check-label">ควบคุมการทำงาน พ่นหมอก 1 (<?= $config_cn['cn_name_9'] ?>) และสเปรย์ (<?= $config_cn['cn_name_11'] ?>)</h6>
+                                                    <button type="button" class="btn btn-primary waves-light view_tracking" id="st_2">
+                                                        <i class="fadeIn animated bx bx-list-check"></i> เงื่อนไขการทำงาน
+                                                    </button>
+                                                </div>
+                                                <!--
+                                                <label class="form-check-label text_chum">กรณีความชื้นดินสูงกว่า <span class="text_soil"></span></label><br>
+                                                <label class="form-check-label text_chum check_spl"></label><br>
+                                                <label class="form-check-label text_chum">กรณีความชื้นดินต่ำกว่า <span class="text_soil"></span></label><br>
                                                 <label class="form-check-label text_chum check_fgl_1"></label><br>
-                                                <label class="form-check-label text_chum check_spl"></label>
+                                                <label class="form-check-label text_chum check_spl"></label> -->
                                             </div>
                                         </div>
                                     </div>
@@ -616,7 +640,7 @@
                                         <div class="card radius-10 border">
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center mb-2 mt-2">
-                                                    <div class="pt-2"><b><h5>อุณหภูมิ (℃)</h5></b></div>
+                                                    <div class="pt-2"><b><h5>ควบคุมอุณหภูมิ (℃)</h5></b></div>
                                                     <div class="ms-auto">
                                                         <img class="img_swST imgST_3">
                                                         <div class="sw_toggleST">
@@ -625,27 +649,40 @@
                                                     </div>
                                                 </div>
                                                 <input type="text" class="range_temp"/>
-                                                <div class="form-check form-switch">
-                                                    <input class="form-check-input check_ check_fn_1" type="checkbox">
-                                                    <label class="form-check-label check_fnl_1"></label>
+                                                <div class="text-center">
+                                                    <h6 class="form-check-label">ควบคุมการทำงาน พัดลม (<?= $config_cn['cn_name_5'] ?>), พ่นหมอก 1 (<?= $config_cn['cn_name_9'] ?>) และสเปรย์ (<?= $config_cn['cn_name_11'] ?>)</h6>
+                                                    <div class="form-check form-switch" style="display:none">
+                                                        <input class="form-check-input check_ check_fn_1" type="checkbox">
+                                                        <label class="form-check-label check_fnl_1"></label>
+                                                    </div>
+                                                    <div class="form-check form-switch" style="display:none">
+                                                        <input class="form-check-input check_ check_fn_2" type="checkbox">
+                                                        <label class="form-check-label check_fnl_2"></label>
+                                                    </div>
+                                                    <div class="form-check form-switch" style="display:none">
+                                                        <input class="form-check-input check_ check_fn_3" type="checkbox">
+                                                        <label class="form-check-label check_fnl_3"></label>
+                                                    </div>
+                                                    <div class="form-check form-switch" style="display:none">
+                                                        <input class="form-check-input check_ check_fn_4" type="checkbox">
+                                                        <label class="form-check-label check_fnl_4"></label>
+                                                    </div><!-- <hr/> -->
+                                                    <button type="button" class="btn btn-primary waves-light view_tracking" id="st_3">
+                                                        <i class="fadeIn animated bx bx-list-check"></i> เงื่อนไขการทำงาน
+                                                    </button>
                                                 </div>
-                                                <div class="form-check form-switch">
-                                                    <input class="form-check-input check_ check_fn_2" type="checkbox">
-                                                    <label class="form-check-label check_fnl_2"></label>
-                                                </div>
-                                                <div class="form-check form-switch">
-                                                    <input class="form-check-input check_ check_fn_3" type="checkbox">
-                                                    <label class="form-check-label check_fnl_3"></label>
-                                                </div>
-                                                <div class="form-check form-switch">
-                                                    <input class="form-check-input check_ check_fn_4" type="checkbox">
-                                                    <label class="form-check-label check_fnl_4"></label>
-                                                </div><hr/>
-                                                <h6 class="text-center text_ctemp">เปิดพัดลมผ่านไป 5 นาที แต่อุณหภูมิยังไม่ลด</h6>
-                                                <h6 class="text-center text_ctemp text_soil"></h6>
-                                                <h6 class="text-center text_ctemp text_hum"></h6>
-                                                <h6 class="text-center text_ctemp check_fgl_1t"></h6>
-                                                <h6 class="text-center text_ctemp check_splt"></h6>
+                                                <!-- <h6 class="text_ctemp">เปิดพัดลมผ่านไป 15 นาที แต่อุณหภูมิยังมากกว่า MAX</h6>
+                                                <h6 class="text_ctemp">กรณีความชื้นดินต่ำกว่า <span class="text_soil"></span></h6>
+                                                <h6 class="text_ctemp">&ensp; - เมื่อความชื้นอากาศต่ำกว่า <span class="text_humT"></span></h6>
+                                                <h6 class="text_ctemp">&emsp;&emsp; - <span class="check_fgl_1t"></span> ทำงานต่อเนื่อง (เปิด 2 นาที และปิด 13 นาที)</h6>
+                                                <h6 class="text_ctemp">&emsp;&emsp; - <span class="check_splt"></span> หยุดทำงาน</h6>
+                                                <h6 class="text_ctemp">&ensp; - เมื่อความชื้นอากาศสูงกว่า <span class="text_humT"></span></h6>
+                                                <h6 class="text_ctemp">&emsp;&emsp; - <span class="check_fgl_1t"></span> หยุดทำงาน</h6>
+                                                <h6 class="text_ctemp">&emsp;&emsp; - <span class="check_splt"></span> ทำงานต่อเนื่อง (เปิด 5 นาที และปิด 5 นาที)</h6>
+                                                <h6 class="text_ctemp">กรณีความชื้นดินสูงกว่า <span class="text_soil"></span></h6>
+                                                <h6 class="text_ctemp">&ensp; - เมื่อความชื้นอากาศต่ำกว่า <span class="text_humT"></span></h6>
+                                                <h6 class="text_ctemp">&emsp;&emsp; - <span class="check_fgl_1t"></span> หยุดทำงาน</h6>
+                                                <h6 class="text_ctemp">&emsp;&emsp; - <span class="check_splt"></span> ทำงานต่อเนื่อง (เปิด 5 นาที และปิด 5 นาที)</h6> -->
                                             </div>
                                         </div>
                                     </div>
@@ -662,7 +699,13 @@
                                                     </div>
                                                 </div>
                                                 <input type="text" class="range_light"/>
-                                                <label class="form-check-label text_light"></label>
+                                                <div class="text-center">
+                                                    <h6 class="form-check-label">ควบคุมการทำงานม่านพรางแสง</h6>
+                                                    <button type="button" class="btn btn-primary waves-light view_tracking" id="st_4">
+                                                        <i class="fadeIn animated bx bx-list-check"></i> เงื่อนไขการทำงาน
+                                                    </button>
+                                                </div>
+                                                <!-- <label class="form-check-label text_light"></label> -->
                                             </div>
                                         </div>
                                     </div>
@@ -801,7 +844,7 @@
         var set_maxmin = $.parseJSON('<?= json_encode($set_maxmin) ?>');
         var sensor = $.parseJSON('<?= json_encode($sensor) ?>');
         var s_sensor = $.parseJSON('<?= json_encode($s_sensor) ?>');
-        
+
         var status_dripper = [];
         var status_fan = [];
         var status_foggy = [];
@@ -822,8 +865,8 @@
         var range4 = $(".range_light"), range_instance4;
 
         range1.ionRangeSlider({
-            type: "double",
-            grid: true,
+            'type': "double",
+            'grid': true,
             // onChange: function (data) {
                 // console.log(data);
                 // check_load($('.check_d_1').prop('checked'), 'dl_1', 1, ' -> เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+data.from+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+data.to+' %')
@@ -834,18 +877,18 @@
         });
         range_instance1 = range1.data("ionRangeSlider");
         range2.ionRangeSlider({
-            type: "double",
-            grid: true,
+            'type': "double",
+            'grid': true,
         });
         range_instance2 = range2.data("ionRangeSlider");
         range3.ionRangeSlider({
-            type: "double",
-            grid: true
+            'type': "double",
+            'grid': true
         });
         range_instance3 = range3.data("ionRangeSlider");
         range4.ionRangeSlider({
-            type: "double",
-            grid: true,
+            'type': "double",
+            'grid': true,
         });
         range_instance4 = range4.data("ionRangeSlider");
         $('.memu_control').click(function() {
@@ -853,9 +896,9 @@
                 if (res_j.user_level > 2) {
                     if (res_j.count_level > 0) {
                         Swal.fire({
-                            type: 'warning',
-                            title: '<strong><b>ผู้ดูแลระบบกำลังใช้งาน</b></strong>',
-                            html: 'ขณะนี้ <b>ผู้ดูแลระบบ</b> กำลังใช้งาน <br> คุณไม่สามารถสั่งงานอุปกรณ์ได้ !',
+                            'type': 'warning',
+                            'title': '<strong><b>ผู้ดูแลระบบกำลังใช้งาน</b></strong>',
+                            'html': 'ขณะนี้ <b>ผู้ดูแลระบบ</b> กำลังใช้งาน <br> คุณไม่สามารถสั่งงานอุปกรณ์ได้ !',
                             // footer: '<a href="">Why do I have this issue?</a>'
                         });
                         return false;
@@ -1605,8 +1648,8 @@
                 fn_df_logdata_auto($('.hidden_select_sw_auto').val())
                 $("#save_auto_cont").hide();
                 $("#close_auto_cont").hide();
-                $('.sw_mode_timeSet').prop('disabled', true)
-                $('.sw_mode_timeLoop').prop('disabled', true)
+                $('.sw_mode_timeSet').prop('disabled', true);
+                $('.sw_mode_timeLoop').prop('disabled', true);
                 $(".menu_config_auto").show();
                 $(".menu_config_auto").click(function() { // เมนูตั้งค่า
                     fn_df_checkbox_auto($('.hidden_select_sw_auto').val());
@@ -1718,23 +1761,23 @@
                 $('.sw_sel_load_auto').click(function() { // เลือกโหลด_auto
                     if ($('.menu_config_auto').is(":hidden") == true) {
                         swal({
-                            title: 'ข้อผิดพลาด !',
-                            text: "กรุณาบันทึกหรือยกเลิกการตั้งค่าก่อน !!!",
-                            type: 'warning',
-                            allowOutsideClick: false,
-                            confirmButtonColor: '#32CD32',
-                            confirmButtonText: 'ตกลง',
+                            'title': 'ข้อผิดพลาด !',
+                            'text': "กรุณาบันทึกหรือยกเลิกการตั้งค่าก่อน !!!",
+                            'type': 'warning',
+                            'allowOutsideClick': false,
+                            'confirmButtonColor': '#32CD32',
+                            'confirmButtonText': 'ตกลง',
                         });
                     } else {
                         var numb = $(this).attr('id');
                         if (parseInt(config_cn['cn_status_' + numb]) == 0) {
                             swal({
-                                title: 'โหลดนี้ไม่ถูกต่อใช้งาน !!!',
-                                text: "กรุณาเลือกโหลดอื่น",
-                                type: 'warning',
-                                allowOutsideClick: false,
-                                confirmButtonColor: '#32CD32',
-                                confirmButtonText: 'ตกลง',
+                                'title': 'โหลดนี้ไม่ถูกต่อใช้งาน !!!',
+                                'text': "กรุณาเลือกโหลดอื่น",
+                                'type': 'warning',
+                                'allowOutsideClick': false,
+                                'confirmButtonColor': '#32CD32',
+                                'confirmButtonText': 'ตกลง',
                             });
                         } else {
                             $('.hidden_select_sw_auto').val(numb)
@@ -1785,25 +1828,25 @@
                 });
                 function switch_mode(sw_name, mess, channel, mode) { // หังก์ชั่นส่งค่าไปยัง mqtt
                     swal({
-                        title: 'เปลี่ยนโหมดการทำงาน !',
-                        text: "คุณต้องการเปลี่ยนเป็นไปใช้โหมด " + sw_name + " ?",
-                        type: 'warning',
-                        allowOutsideClick: false,
-                        showCancelButton: true,
-                        confirmButtonColor: '#32CD32',
-                        cancelButtonColor: '#FF3333',
-                        confirmButtonText: 'ใช่',
-                        cancelButtonText: 'ยกเลิก'
+                        'title': 'เปลี่ยนโหมดการทำงาน !',
+                        'text': "คุณต้องการเปลี่ยนเป็นไปใช้โหมด " + sw_name + " ?",
+                        'type': 'warning',
+                        'allowOutsideClick': false,
+                        'showCancelButton': true,
+                        'confirmButtonColor': '#32CD32',
+                        'cancelButtonColor': '#FF3333',
+                        'confirmButtonText': 'ใช่',
+                        'cancelButtonText': 'ยกเลิก'
                     }).then((result) => {
                         if (result.value) {
                             $.ajax({
-                                type: "POST",
-                                url: "routes/tu/save_config_mqtt.php",
-                                data: {
-                                    house_master: house_master,
-                                    mess: mess,
-                                    channel: channel,
-                                    mode: mode
+                                'type': "POST",
+                                'url': "routes/tu/save_config_mqtt.php",
+                                'data': {
+                                    'house_master': house_master,
+                                    'mess': mess,
+                                    'channel': channel,
+                                    'mode': mode
                                 },
                                 dataType: 'json',
                                 success: function(res) {
@@ -1812,18 +1855,18 @@
                                     if (res.status == "Insert_Success") {
                                         fn_df_checkbox_auto($('.hidden_select_sw_auto').val());
                                         swal({
-                                            title: 'ส่งข้อมูลสำเร็จ',
-                                            type: 'success',
-                                            allowOutsideClick: false,
-                                            confirmButtonColor: '#32CD32'
+                                            'title': 'ส่งข้อมูลสำเร็จ',
+                                            'type': 'success',
+                                            'allowOutsideClick': false,
+                                            'confirmButtonColor': '#32CD32'
                                         });
                                     } else {
                                         swal({
-                                            title: 'Error !',
-                                            text: "เกิดข้อผิดพลาด ?",
-                                            type: 'error',
-                                            allowOutsideClick: false,
-                                            confirmButtonColor: '#32CD32'
+                                            'title': 'Error !',
+                                            'text': "เกิดข้อผิดพลาด ?",
+                                            'type': 'error',
+                                            'allowOutsideClick': false,
+                                            'confirmButtonColor': '#32CD32'
                                         }).then((result) => {
                                             if (result.value) {
                                                 location.reload();
@@ -2006,8 +2049,8 @@
                                 var res = config_parse.config_timeLoop;
                                 for(var s = 1; s <= 6; s++){
                                     if ($("#swchL_"+s).prop('checked') == true) {
-                                        sw[s] = "1";
-                                        cy[s] = $("#time_cy_"+s).val()
+                                        sw[s] = 1;
+                                        cy[s] = parseFloat($("#time_cy_"+s).val());
                                         if($("#time_on1_" + s).val() == "" && $("#time_on2_" + s).val() != ""){
                                             Ton[s] = $("#time_on2_" + s).val();
                                         }else if($("#time_on1_" + s).val() != "" && $("#time_on2_" + s).val() == ""){
@@ -2035,8 +2078,8 @@
                                         $('.span_se_'+s).html('ตั้งเวลา '+s+' เริ่มทำงานเวลา '+se_data['s_1']+' - '+se_data['e_'+parseInt($("#time_cy_"+s).val())]+' น.');
                                     }
                                     else {
-                                        sw[s] = "0";
-                                        cy[s] = "0";
+                                        sw[s] = 0;
+                                        cy[s] = 0;
                                         Ton[s] = "";
                                         Toff[s] = "";
                                         $('.span_se_'+s).html('ตั้งเวลา '+s+' ปิดใช้งาน');
@@ -2061,36 +2104,36 @@
                                 // });
                                 // console.log(se_data2);
                                 var sw_gd2 = {
-                                    load_st_1: sw[1],
-                                    load_st_2: sw[2],
-                                    load_st_3: sw[3],
-                                    load_st_4: sw[4],
-                                    load_st_5: sw[5],
-                                    load_st_6: sw[6],
-                                    load_s_1: $("#time_sL_1").val(),
-                                    load_s_2: $("#time_sL_2").val(),
-                                    load_s_3: $("#time_sL_3").val(),
-                                    load_s_4: $("#time_sL_4").val(),
-                                    load_s_5: $("#time_sL_5").val(),
-                                    load_s_6: $("#time_sL_6").val(),
-                                    load_cycle_1: cy[1],
-                                    load_cycle_2: cy[2],
-                                    load_cycle_3: cy[3],
-                                    load_cycle_4: cy[4],
-                                    load_cycle_5: cy[5],
-                                    load_cycle_6: cy[6],
-                                    load_on_1: Ton[1].toString(),
-                                    load_on_2: Ton[2].toString(),
-                                    load_on_3: Ton[3].toString(),
-                                    load_on_4: Ton[4].toString(),
-                                    load_on_5: Ton[5].toString(),
-                                    load_on_6: Ton[6].toString(),
-                                    load_off_1: Toff[1].toString(),
-                                    load_off_2: Toff[2].toString(),
-                                    load_off_3: Toff[3].toString(),
-                                    load_off_4: Toff[4].toString(),
-                                    load_off_5: Toff[5].toString(),
-                                    load_off_6: Toff[6].toString()
+                                    'load_st_1': sw[1],
+                                    'load_st_2': sw[2],
+                                    'load_st_3': sw[3],
+                                    'load_st_4': sw[4],
+                                    'load_st_5': sw[5],
+                                    'load_st_6': sw[6],
+                                    'load_s_1': $("#time_sL_1").val(),
+                                    'load_s_2': $("#time_sL_2").val(),
+                                    'load_s_3': $("#time_sL_3").val(),
+                                    'load_s_4': $("#time_sL_4").val(),
+                                    'load_s_5': $("#time_sL_5").val(),
+                                    'load_s_6': $("#time_sL_6").val(),
+                                    'load_cycle_1': cy[1],
+                                    'load_cycle_2': cy[2],
+                                    'load_cycle_3': cy[3],
+                                    'load_cycle_4': cy[4],
+                                    'load_cycle_5': cy[5],
+                                    'load_cycle_6': cy[6],
+                                    'load_on_1': Ton[1].toString(),
+                                    'load_on_2': Ton[2].toString(),
+                                    'load_on_3': Ton[3].toString(),
+                                    'load_on_4': Ton[4].toString(),
+                                    'load_on_5': Ton[5].toString(),
+                                    'load_on_6': Ton[6].toString(),
+                                    'load_off_1': Toff[1].toString(),
+                                    'load_off_2': Toff[2].toString(),
+                                    'load_off_3': Toff[3].toString(),
+                                    'load_off_4': Toff[4].toString(),
+                                    'load_off_5': Toff[5].toString(),
+                                    'load_off_6': Toff[6].toString()
                                 };
                                 df_log = res['load_'+channel];
                                 delete df_log["user_control"];
@@ -2123,15 +2166,15 @@
                                         }
                                     } else {
                                         swal({
-                                            title: 'คุณแน่ใจหรือไม่?',
-                                            text: "คุณต้องการยกเลิกการตั้งค่า?",
-                                            type: 'warning',
-                                            allowOutsideClick: false,
-                                            showCancelButton: true,
-                                            confirmButtonColor: '#da3444',
-                                            cancelButtonColor: '#8e8e8e',
-                                            confirmButtonText: 'ยืนยัน',
-                                            cancelButtonText: 'ยกเลิก',
+                                            'title': 'คุณแน่ใจหรือไม่?',
+                                            'text': "คุณต้องการยกเลิกการตั้งค่า?",
+                                            'type': 'warning',
+                                            'allowOutsideClick': false,
+                                            'showCancelButton': true,
+                                            'confirmButtonColor': '#da3444',
+                                            'cancelButtonColor': '#8e8e8e',
+                                            'confirmButtonText': 'ยืนยัน',
+                                            'cancelButtonText': 'ยกเลิก',
                                         }).then((result) => {
                                             if (result.value) {
                                                 $(".img_sw").show();
@@ -2140,6 +2183,10 @@
                                                 $(".menu_config_auto").show();
                                                 $(".sw_mode_Auto").attr('disabled', false);
                                                 $(".sw_mode_Manual").attr('disabled', false);
+                                                $('.sw_mode_tracking').prop('disabled', false)
+                                                $('.sw_mode_timer').prop('disabled', false)
+                                                $('.sw_mode_timeSet').prop('disabled', true)
+                                                $('.sw_mode_timeLoop').prop('disabled', true)
                                                 $(".close_modal").show();
                                                 fn_df_logdata_auto(channel);
                                                 $("#save_auto_cont").hide();
@@ -2173,7 +2220,7 @@
                         var res = config_parse.config_timeSet;
                         for (var i = 1; i <= 6; i++) {
                             if ($("#swch_" + i).prop('checked') == true) {
-                                sw_gd['load_st_' + i] = "1";
+                                sw_gd['load_st_' + i] = 1;
                                 if($("#time_s_" + i).val().length > 5){
                                     sw_gd['load_s_' + i] = $("#time_s_" + i).val();
                                 }else {
@@ -2186,7 +2233,7 @@
                                 }
                             }
                             else {
-                                sw_gd['load_st_' + i] = "0";
+                                sw_gd['load_st_' + i] = 0;
                                 sw_gd['load_s_' + i] = "";
                                 sw_gd['load_e_' + i] = "";
                             }
@@ -2247,6 +2294,8 @@
                             'load_e_5': sw_gd['load_e_5'],
                             'load_e_6': sw_gd['load_e_6']
                         };
+                        // console.log(df_log2);
+                        // console.log(sw_gd2);
                         if (mode == 'close') {
                             if (JSON.stringify(df_log2) == JSON.stringify(sw_gd2)) {
                                 $(".img_sw").show();
@@ -2266,17 +2315,18 @@
                                     $('#time_s_' + i).removeClass('is-invalid');
                                     $('#time_e_' + i).removeClass('is-invalid');
                                 }
-                            } else {
+                            }
+                            else {
                                 swal({
-                                    title: 'คุณแน่ใจหรือไม่?',
-                                    text: "คุณต้องการยกเลิกการตั้งค่า?",
-                                    type: 'warning',
-                                    allowOutsideClick: false,
-                                    showCancelButton: true,
-                                    confirmButtonColor: '#da3444',
-                                    cancelButtonColor: '#8e8e8e',
-                                    confirmButtonText: 'ยืนยัน',
-                                    cancelButtonText: 'ยกเลิก',
+                                    'title': 'คุณแน่ใจหรือไม่?',
+                                    'text': "คุณต้องการยกเลิกการตั้งค่า?",
+                                    'type': 'warning',
+                                    'allowOutsideClick': false,
+                                    'showCancelButton': true,
+                                    'confirmButtonColor': '#da3444',
+                                    'cancelButtonColor': '#8e8e8e',
+                                    'confirmButtonText': 'ยืนยัน',
+                                    'cancelButtonText': 'ยกเลิก',
                                 }).then((result) => {
                                     if (result.value) {
                                         $(".img_sw").show();
@@ -2349,24 +2399,24 @@
                                 }
                                 mode = 'config_timeSet';
                                 mess = {
-                                    load_st_1: sw[1],
-                                    load_st_2: sw[2],
-                                    load_st_3: sw[3],
-                                    load_st_4: sw[4],
-                                    load_st_5: sw[5],
-                                    load_st_6: sw[6],
-                                    load_s_1: $("#time_s_1").val(),
-                                    load_s_2: $("#time_s_2").val(),
-                                    load_s_3: $("#time_s_3").val(),
-                                    load_s_4: $("#time_s_4").val(),
-                                    load_s_5: $("#time_s_5").val(),
-                                    load_s_6: $("#time_s_6").val(),
-                                    load_e_1: $("#time_e_1").val(),
-                                    load_e_2: $("#time_e_2").val(),
-                                    load_e_3: $("#time_e_3").val(),
-                                    load_e_4: $("#time_e_4").val(),
-                                    load_e_5: $("#time_e_5").val(),
-                                    load_e_6: $("#time_e_6").val()
+                                    'load_st_1': sw[1],
+                                    'load_st_2': sw[2],
+                                    'load_st_3': sw[3],
+                                    'load_st_4': sw[4],
+                                    'load_st_5': sw[5],
+                                    'load_st_6': sw[6],
+                                    'load_s_1': $("#time_s_1").val(),
+                                    'load_s_2': $("#time_s_2").val(),
+                                    'load_s_3': $("#time_s_3").val(),
+                                    'load_s_4': $("#time_s_4").val(),
+                                    'load_s_5': $("#time_s_5").val(),
+                                    'load_s_6': $("#time_s_6").val(),
+                                    'load_e_1': $("#time_e_1").val(),
+                                    'load_e_2': $("#time_e_2").val(),
+                                    'load_e_3': $("#time_e_3").val(),
+                                    'load_e_4': $("#time_e_4").val(),
+                                    'load_e_5': $("#time_e_5").val(),
+                                    'load_e_6': $("#time_e_6").val()
                                 };
                             }
                             else { // TLoop;
@@ -2424,16 +2474,18 @@
                                         for (v = 1; v <= cy[i]; v++) {
                                             if(v == 1){
                                                 se_data['s_'+v] = moment($("#time_sL_"+i).val(),'HH:mm').format('DD HH:mm:ss');
-                                                se_data['e_'+v] = moment(se_data['s_'+v], 'HH:mm:ss').add(Ton[i], 'seconds').format('DD HH:mm:ss');
+                                                se_data['e_'+v] = moment(se_data['s_'+v], 'DD HH:mm:ss').add(Ton[i], 'seconds').format('DD HH:mm:ss');
                                             }else {
-                                                se_data['s_'+v] = moment(se_data['e_'+parseFloat(v-1)], 'HH:mm:ss').add(Toff[i], 'seconds').format('DD HH:mm:ss');
-                                                se_data['e_'+v] = moment(se_data['s_'+v], 'HH:mm:ss').add(Ton[i], 'seconds').format('DD HH:mm:ss');
+                                                se_data['s_'+v] = moment(se_data['e_'+parseFloat(v-1)], 'DD HH:mm:ss').add(Toff[i], 'seconds').format('DD HH:mm:ss');
+                                                se_data['e_'+v] = moment(se_data['s_'+v], 'DD HH:mm:ss').add(Ton[i], 'seconds').format('DD HH:mm:ss');
                                             }
                                         }
-                                        // if(se_data['s_1'] > se_data['e_'+cy[i]]){
-                                        //     swal_c('error', 'Error...', 'ตั้งเวลา ' + i + ' : <b>เวลาจบการทำงานต้องไม่เกิน 23:59:59 น. ของวัน</b> !');
-                                        //     return false;
-                                        // }
+                                        if(se_data['s_1'].substring(0, 2) != se_data['e_'+cy[i]].substring(0, 2)){
+                                            alert(se_data['s_1'].substring(0, 2) +' != '+ se_data['e_'+cy[i]])
+                                            swal_c('error', 'Error...', 'ตั้งเวลา ' + i + ' : <b>เวลาจบการทำงาน<br>ต้องไม่เกิน 23:59:59 น. ของวัน</b>!');
+                                            return false;
+                                        }
+                                        console.log(se_data);
                                         se_data2[i] = se_data;
                                     }
                                     else {
@@ -2445,36 +2497,36 @@
                                 } // exit_for
                                 mode = 'config_timeLoop';
                                 mess = {
-                                    load_st_1: sw[1],
-                                    load_st_2: sw[2],
-                                    load_st_3: sw[3],
-                                    load_st_4: sw[4],
-                                    load_st_5: sw[5],
-                                    load_st_6: sw[6],
-                                    load_s_1: $("#time_sL_1").val(),
-                                    load_s_2: $("#time_sL_2").val(),
-                                    load_s_3: $("#time_sL_3").val(),
-                                    load_s_4: $("#time_sL_4").val(),
-                                    load_s_5: $("#time_sL_5").val(),
-                                    load_s_6: $("#time_sL_6").val(),
-                                    load_cycle_1: cy[1],
-                                    load_cycle_2: cy[2],
-                                    load_cycle_3: cy[3],
-                                    load_cycle_4: cy[4],
-                                    load_cycle_5: cy[5],
-                                    load_cycle_6: cy[6],
-                                    load_on_1: Ton[1],
-                                    load_on_2: Ton[2],
-                                    load_on_3: Ton[3],
-                                    load_on_4: Ton[4],
-                                    load_on_5: Ton[5],
-                                    load_on_6: Ton[6],
-                                    load_off_1: Toff[1],
-                                    load_off_2: Toff[2],
-                                    load_off_3: Toff[3],
-                                    load_off_4: Toff[4],
-                                    load_off_5: Toff[5],
-                                    load_off_6: Toff[6]
+                                    'load_st_1': sw[1],
+                                    'load_st_2': sw[2],
+                                    'load_st_3': sw[3],
+                                    'load_st_4': sw[4],
+                                    'load_st_5': sw[5],
+                                    'load_st_6': sw[6],
+                                    'load_s_1': $("#time_sL_1").val(),
+                                    'load_s_2': $("#time_sL_2").val(),
+                                    'load_s_3': $("#time_sL_3").val(),
+                                    'load_s_4': $("#time_sL_4").val(),
+                                    'load_s_5': $("#time_sL_5").val(),
+                                    'load_s_6': $("#time_sL_6").val(),
+                                    'load_cycle_1': cy[1],
+                                    'load_cycle_2': cy[2],
+                                    'load_cycle_3': cy[3],
+                                    'load_cycle_4': cy[4],
+                                    'load_cycle_5': cy[5],
+                                    'load_cycle_6': cy[6],
+                                    'load_on_1': Ton[1],
+                                    'load_on_2': Ton[2],
+                                    'load_on_3': Ton[3],
+                                    'load_on_4': Ton[4],
+                                    'load_on_5': Ton[5],
+                                    'load_on_6': Ton[6],
+                                    'load_off_1': Toff[1],
+                                    'load_off_2': Toff[2],
+                                    'load_off_3': Toff[3],
+                                    'load_off_4': Toff[4],
+                                    'load_off_5': Toff[5],
+                                    'load_off_6': Toff[6]
                                 };
                             }
                         }
@@ -2512,34 +2564,34 @@
                             }
                             mode = 'config_timeSet';
                             mess = {
-                                load_st_1: sw[1],
-                                load_st_2: sw[2],
-                                load_st_3: sw[3],
-                                load_st_4: sw[4],
-                                load_st_5: sw[5],
-                                load_st_6: sw[6],
-                                load_s_1: $("#time_s_1").val(),
-                                load_s_2: $("#time_s_2").val(),
-                                load_s_3: $("#time_s_3").val(),
-                                load_s_4: $("#time_s_4").val(),
-                                load_s_5: $("#time_s_5").val(),
-                                load_s_6: $("#time_s_6").val(),
-                                load_e_1: $("#time_e_1").val(),
-                                load_e_2: $("#time_e_2").val(),
-                                load_e_3: $("#time_e_3").val(),
-                                load_e_4: $("#time_e_4").val(),
-                                load_e_5: $("#time_e_5").val(),
-                                load_e_6: $("#time_e_6").val()
+                                'load_st_1': sw[1],
+                                'load_st_2': sw[2],
+                                'load_st_3': sw[3],
+                                'load_st_4': sw[4],
+                                'load_st_5': sw[5],
+                                'load_st_6': sw[6],
+                                'load_s_1': $("#time_s_1").val(),
+                                'load_s_2': $("#time_s_2").val(),
+                                'load_s_3': $("#time_s_3").val(),
+                                'load_s_4': $("#time_s_4").val(),
+                                'load_s_5': $("#time_s_5").val(),
+                                'load_s_6': $("#time_s_6").val(),
+                                'load_e_1': $("#time_e_1").val(),
+                                'load_e_2': $("#time_e_2").val(),
+                                'load_e_3': $("#time_e_3").val(),
+                                'load_e_4': $("#time_e_4").val(),
+                                'load_e_5': $("#time_e_5").val(),
+                                'load_e_6': $("#time_e_6").val()
                             };
                         }
                         function swal_c(type, title, text) {
                             Swal({
-                                type: type,
-                                title: title,
-                                html: text,
-                                allowOutsideClick: false,
-                                confirmButtonColor: '#FF3333',
-                                confirmButtonText: 'ปิด'
+                                'type': type,
+                                'title': title,
+                                'html': text,
+                                'allowOutsideClick': false,
+                                'confirmButtonColor': '#FF3333',
+                                'confirmButtonText': 'ปิด'
                             });
                         }
                         if(mess['load_st_1'] == 1){
@@ -2611,9 +2663,19 @@
                             }
                             else {
                                 // console.log('min1 '+se_data2[min]['s_1']+' max1 '+se_data2[min]['e_'+mess['load_cycle_'+min]]+' <br> min2 '+se_data2[max]['s_1']+' max2 '+se_data2[max]['e_'+mess['load_cycle_'+max]])
-                                if ((se_data2[min]['s_1'] < se_data2[max]['s_1']) && (se_data2[min]['s_1'] < se_data2[max]['e_'+mess['load_cycle_'+max]]) && (se_data2[min]['e_'+mess['load_cycle_'+min]] < se_data2[max]['s_1']) && (se_data2[min]['e_'+mess['load_cycle_'+min]] < se_data2[max]['e_'+mess['load_cycle_'+max]])) {
+                                if (
+                                    (se_data2[min]['s_1'] < se_data2[max]['s_1']) &&
+                                    (se_data2[min]['s_1'] < se_data2[max]['e_'+mess['load_cycle_'+max]]) &&
+                                    (se_data2[min]['e_'+mess['load_cycle_'+min]] < se_data2[max]['s_1']) &&
+                                    (se_data2[min]['e_'+mess['load_cycle_'+min]] < se_data2[max]['e_'+mess['load_cycle_'+max]])
+                                ) {
                                     return 1;
-                                }else if ((se_data2[min]['s_1'] > se_data2[max]['s_1']) && (se_data2[min]['s_1'] > se_data2[max]['e_'+mess['load_cycle_'+max]]) && (se_data2[min]['e_'+mess['load_cycle_'+min]] > se_data2[max]['s_1']) && (se_data2[min]['e_'+mess['load_cycle_'+min]] > se_data2[max]['e_'+mess['load_cycle_'+max]])) {
+                                }else if (
+                                    (se_data2[min]['s_1'] > se_data2[max]['s_1']) &&
+                                    (se_data2[min]['s_1'] > se_data2[max]['e_'+mess['load_cycle_'+max]]) &&
+                                    (se_data2[min]['e_'+mess['load_cycle_'+min]] > se_data2[max]['s_1']) &&
+                                    (se_data2[min]['e_'+mess['load_cycle_'+min]] > se_data2[max]['e_'+mess['load_cycle_'+max]])
+                                ) {
                                     return 1;
                                 }else {
                                     swal_c('error', 'Error...', '<b>ตั้งเวลา '+min+' เวลาทับซ้อนกับ ตั้งเวลา '+max+'</b> !');
@@ -2622,28 +2684,28 @@
                             }
                         }
                         swal({
-                            title: 'บันทึกการเปลี่ยนแปลง',
-                            text: "คุณต้องการบันทึกการเปลี่ยนแปลง ?",
-                            type: 'warning',
-                            allowOutsideClick: false,
-                            showCancelButton: true,
-                            confirmButtonColor: '#32CD32',
-                            cancelButtonColor: '#FF3333',
-                            confirmButtonText: 'ใช่',
-                            cancelButtonText: 'ยกเลิก'
+                            'title': 'บันทึกการเปลี่ยนแปลง',
+                            'text': "คุณต้องการบันทึกการเปลี่ยนแปลง ?",
+                            'type': 'warning',
+                            'allowOutsideClick': false,
+                            'showCancelButton': true,
+                            'confirmButtonColor': '#32CD32',
+                            'cancelButtonColor': '#FF3333',
+                            'confirmButtonText': 'ใช่',
+                            'cancelButtonText': 'ยกเลิก'
                         }).
                         then((result) => {
                             if (result.value) {
                                 // console.log(mess);
                                 // return false
                                 $.ajax({
-                                    type: "POST",
-                                    url: "routes/tu/save_config_mqtt.php",
-                                    data: {
-                                        house_master: house_master,
-                                        mess: mess,
-                                        channel: channel,
-                                        mode: mode
+                                    'type': "POST",
+                                    'url': "routes/tu/save_config_mqtt.php",
+                                    'data': {
+                                        'house_master': house_master,
+                                        'mess': mess,
+                                        'channel': channel,
+                                        'mode': mode
                                     },
                                     dataType: 'json',
                                     success: function(res) {
@@ -2676,19 +2738,19 @@
                                                 }
                                             }
                                             swal({
-                                                title: 'บันทึกข้อมูลสำเร็จ',
-                                                type: 'success',
-                                                allowOutsideClick: false,
-                                                confirmButtonColor: '#32CD32'
+                                                'title': 'บันทึกข้อมูลสำเร็จ',
+                                                'type': 'success',
+                                                'allowOutsideClick': false,
+                                                'confirmButtonColor': '#32CD32'
                                             });
                                         }
                                         else {
                                             swal({
-                                                title: 'Error !',
-                                                text: "เกิดข้อผิดพลาด ?",
-                                                type: 'error',
-                                                allowOutsideClick: false,
-                                                confirmButtonColor: '#32CD32'
+                                                'title': 'Error !',
+                                                'text': "เกิดข้อผิดพลาด ?",
+                                                'type': 'error',
+                                                'allowOutsideClick': false,
+                                                'confirmButtonColor': '#32CD32'
                                             }).then((result) => {
                                                 if (result.value) {
                                                     location.reload();
@@ -2702,120 +2764,131 @@
                         });
                     }
                     else{ // Sensor_Tracking
+                        if($('#swST_1').prop('checked') == true){ var sw_1 = 1; }else { var sw_1 = 0; }
+                        if($('#swST_2').prop('checked') == true){ var sw_2 = 1; }else { var sw_2 = 0; }
+                        if($('#swST_3').prop('checked') == true){ var sw_3 = 1; }else { var sw_3 = 0; }
+                        if($('#swST_4').prop('checked') == true){ var sw_4 = 1; }else { var sw_4 = 0; }
+                        var Rmx1 = $(".range_soil").val().split(";");
+                        var Rmx2 = $(".range_hum").val().split(";");
+                        var Rmx3 = $(".range_temp").val().split(";");
+                        var Rmx4 = $(".range_light").val().split(";");
+                        if(Number(sw_2) == 1){
+                            if(Number(Rmx2[0]) > Number($('.text_chum2').val()) || Number(Rmx2[1]) < Number($('.text_chum2').val())){
+                                $('.text_chum2').addClass('is-invalid');
+                                return false;
+                            }
+                        }
+                        $('.text_chum2').removeClass('is-invalid');
                         swal({
-                            title: 'บันทึกการเปลี่ยนแปลง',
-                            text: "คุณต้องการบันทึกการเปลี่ยนแปลง ?",
-                            type: 'warning',
-                            allowOutsideClick: false,
-                            showCancelButton: true,
-                            confirmButtonColor: '#32CD32',
-                            cancelButtonColor: '#FF3333',
-                            confirmButtonText: 'ใช่',
-                            cancelButtonText: 'ยกเลิก'
+                            'title': 'บันทึกการเปลี่ยนแปลง',
+                            'text': "คุณต้องการบันทึกการเปลี่ยนแปลง ?",
+                            'type': 'warning',
+                            'allowOutsideClick': false,
+                            'showCancelButton': true,
+                            'confirmButtonColor': '#32CD32',
+                            'cancelButtonColor': '#FF3333',
+                            'confirmButtonText': 'ใช่',
+                            'cancelButtonText': 'ยกเลิก'
                         }).
                         then((result) => {
-                            if($('#swST_1').prop('checked') == true){ var sw_1 = 1; }else { var sw_1 = 0; }
-                            if($('#swST_2').prop('checked') == true){ var sw_2 = 1; }else { var sw_2 = 0; }
-                            if($('#swST_3').prop('checked') == true){ var sw_3 = 1; }else { var sw_3 = 0; }
-                            if($('#swST_4').prop('checked') == true){ var sw_4 = 1; }else { var sw_4 = 0; }
-                            var Rmx1 = $(".range_soil").val().split(";");
-                            var Rmx2 = $(".range_hum").val().split(";");
-                            var Rmx3 = $(".range_temp").val().split(";");
-                            var Rmx4 = $(".range_light").val().split(";");
-                            if(parseInt(config_sn.sn_sensor_6) == 5){
-                                var newl_min = ((Rmx4[0]*54)/1000).toFixed();
-                                var newl_max = ((Rmx4[1]*54)/1000).toFixed();
-                            }else {
-                                var newl_min = Rmx4[0];
-                                var newl_max = Rmx4[1];
-                            }
-                            if($('.check_d_1').prop('checked') == true){ var drip_1 = 'ON'; }else { var drip_1 = 'OFF'; }
-                            if($('.check_d_2').prop('checked') == true){ var drip_2 = 'ON'; }else { var drip_2 = 'OFF'; }
-                            if($('.check_d_3').prop('checked') == true){ var drip_3 = 'ON'; }else { var drip_3 = 'OFF'; }
-                            if($('.check_d_4').prop('checked') == true){ var drip_4 = 'ON'; }else { var drip_4 = 'OFF'; }
-                            if($('.check_fn_1').prop('checked') == true){ var fn_1 = 'ON'; }else { var fn_1 = 'OFF'; }
-                            if($('.check_fn_2').prop('checked') == true){ var fn_2 = 'ON'; }else { var fn_2 = 'OFF'; }
-                            if($('.check_fn_3').prop('checked') == true){ var fn_3 = 'ON'; }else { var fn_3 = 'OFF'; }
-                            if($('.check_fn_4').prop('checked') == true){ var fn_4 = 'ON'; }else { var fn_4 = 'OFF'; }
-                            if (parseInt(config_cn.cn_status_9) == 1) {var fg_1 = 'ON'; }else { var fg_1 = 'OFF'; }
-                            var fg_2 = 'OFF'; // if (parseInt(config_cn.cn_status_10) == 1) {var fg_2 = 'ON'; }else { var fg_2 = 'OFF'; }
-                            if (parseInt(config_cn.cn_status_11) == 1) {var spr = 'ON'; }else { var spr = 'OFF'; }
-                            if (parseInt(config_cn.cn_status_12) == 1) {var shr = 'ON'; }else { var shr = 'OFF'; }
-                            var new_data = {
-                                "status_1": Number(sw_1),
-                                "status_2": Number(sw_2),
-                                "status_3": Number(sw_3),
-                                "status_4": Number(sw_4),
-                                "soil_min": Number(Rmx1[0]),
-                                "soil_max": Number(Rmx1[1]),
-                                "hum_min":  Number(Rmx2[0]),
-                                "hum_max":  Number(Rmx2[1]),
-                                "temp_min": Number(Rmx3[0]),
-                                "temp_max": Number(Rmx3[1]),
-                                "light_min":Number(newl_min),
-                                "light_max":Number(newl_max),
-                                "dripper_1":drip_1,
-                                "dripper_2":drip_2,
-                                "dripper_3":drip_3,
-                                "dripper_4":drip_4,
-                                "fan_1":    fn_1,
-                                "fan_2":    fn_2,
-                                "fan_3":    fn_3,
-                                "fan_4":    fn_4,
-                                "foggy_1":  fg_1,
-                                "foggy_2":  fg_2,
-                                "spray":    spr,
-                                "shading":  shr
-                            };
-                            // console.log(JSON.stringify(new_data));
-                            // return false;
-                            $.ajax({
-                                type: "POST",
-                                url: "routes/tu/save_config_mqtt.php",
-                                data: {
-                                    house_master: house_master,
-                                    mess: new_data,
-                                    channel: '',
-                                    mode: 'Sensor_Tracking'
-                                },
-                                dataType: 'json',
-                                success: function(res) {
-                                    console.log(res)
-                                    if (res.status == "Insert_Success") {
-                                        $('.menu_config_auto2').show();
-                                        range_auto_mode('dash');
-                                        $(".sw_mode_Auto").attr('disabled', false);
-                                        $(".sw_mode_Manual").attr('disabled', false);
-                                        $('.sw_mode_tracking').prop('disabled', false)
-                                        $('.sw_mode_timer').prop('disabled', false)
-                                        $('.sw_mode_timeSet').prop('disabled', true)
-                                        $('.sw_mode_timeLoop').prop('disabled', true)
-                                        $(".close_modal").show();
-                                        $("#close_auto_cont").hide();
-                                        $("#save_auto_cont").hide();
-                                        swal({
-                                            title: 'บันทึกข้อมูลสำเร็จ',
-                                            type: 'success',
-                                            allowOutsideClick: false,
-                                            confirmButtonColor: '#32CD32'
-                                        });
-                                    }
-                                    else {
-                                        swal({
-                                            title: 'Error !',
-                                            text: "เกิดข้อผิดพลาด ?",
-                                            type: 'error',
-                                            allowOutsideClick: false,
-                                            confirmButtonColor: '#32CD32'
-                                        }).then((result) => {
-                                            if (result.value) {
-                                                location.reload();
-                                                return false;
-                                            }
-                                        });
-                                    }
+                            if (result.value) {
+                                if(parseInt(config_sn.sn_sensor_6) == 5){
+                                    var newl_min = ((Rmx4[0]*54)/1000).toFixed();
+                                    var newl_max = ((Rmx4[1]*54)/1000).toFixed();
+                                }else {
+                                    var newl_min = Rmx4[0];
+                                    var newl_max = Rmx4[1];
                                 }
-                            });
+                                if($('.check_d_1').prop('checked') == true){ var drip_1 = 'ON'; }else { var drip_1 = 'OFF'; }
+                                if($('.check_d_2').prop('checked') == true){ var drip_2 = 'ON'; }else { var drip_2 = 'OFF'; }
+                                if($('.check_d_3').prop('checked') == true){ var drip_3 = 'ON'; }else { var drip_3 = 'OFF'; }
+                                if($('.check_d_4').prop('checked') == true){ var drip_4 = 'ON'; }else { var drip_4 = 'OFF'; }
+                                if($('.check_fn_1').prop('checked') == true){ var fn_1 = 'ON'; }else { var fn_1 = 'OFF'; }
+                                if($('.check_fn_2').prop('checked') == true){ var fn_2 = 'ON'; }else { var fn_2 = 'OFF'; }
+                                if($('.check_fn_3').prop('checked') == true){ var fn_3 = 'ON'; }else { var fn_3 = 'OFF'; }
+                                if($('.check_fn_4').prop('checked') == true){ var fn_4 = 'ON'; }else { var fn_4 = 'OFF'; }
+                                if (parseInt(config_cn.cn_status_9) == 1) {var fg_1 = 'ON'; }else { var fg_1 = 'OFF'; }
+                                var fg_2 = 'OFF'; // if (parseInt(config_cn.cn_status_10) == 1) {var fg_2 = 'ON'; }else { var fg_2 = 'OFF'; }
+                                if (parseInt(config_cn.cn_status_11) == 1) {var spr = 'ON'; }else { var spr = 'OFF'; }
+                                if (parseInt(config_cn.cn_status_12) == 1) {var shr = 'ON'; }else { var shr = 'OFF'; }
+                                var new_data = {
+                                    "status_1": Number(sw_1),
+                                    "status_2": Number(sw_2),
+                                    "status_3": Number(sw_3),
+                                    "status_4": Number(sw_4),
+                                    "soil_min": Number(Rmx1[0]),
+                                    "soil_max": Number(Rmx1[1]),
+                                    "hum_min":  Number(Rmx2[0]),
+                                    "hum_max":  Number(Rmx2[1]),
+                                    "hum_max2": Number($('.text_chum2').val()),
+                                    "temp_min": Number(Rmx3[0]),
+                                    "temp_max": Number(Rmx3[1]),
+                                    "light_min":Number(newl_min),
+                                    "light_max":Number(newl_max),
+                                    "dripper_1":drip_1,
+                                    "dripper_2":drip_2,
+                                    "dripper_3":drip_3,
+                                    "dripper_4":drip_4,
+                                    "fan_1":    fn_1,
+                                    "fan_2":    fn_2,
+                                    "fan_3":    fn_3,
+                                    "fan_4":    fn_4,
+                                    "foggy_1":  fg_1,
+                                    "foggy_2":  fg_2,
+                                    "spray":    spr,
+                                    "shading":  shr,
+                                    "light_in_mode": Number(config_sn.sn_sensor_6)
+                                };
+                                // console.log(JSON.stringify(new_data));
+                                // return false;
+                                $.ajax({
+                                    'type': "POST",
+                                    'url': "routes/tu/save_config_mqtt.php",
+                                    'data': {
+                                        'house_master': house_master,
+                                        'mess': new_data,
+                                        'channel': '',
+                                        'mode': 'Sensor_Tracking'
+                                    },
+                                    'dataType': 'json',
+                                    success: function(res) {
+                                        console.log(res)
+                                        if (res.status == "Insert_Success") {
+                                            $('.menu_config_auto2').show();
+                                            range_auto_mode('dash');
+                                            $(".sw_mode_Auto").attr('disabled', false);
+                                            $(".sw_mode_Manual").attr('disabled', false);
+                                            $('.sw_mode_tracking').prop('disabled', false)
+                                            $('.sw_mode_timer').prop('disabled', false)
+                                            $('.sw_mode_timeSet').prop('disabled', true)
+                                            $('.sw_mode_timeLoop').prop('disabled', true)
+                                            $(".close_modal").show();
+                                            $("#close_auto_cont").hide();
+                                            $("#save_auto_cont").hide();
+                                            swal({
+                                                title: 'บันทึกข้อมูลสำเร็จ',
+                                                type: 'success',
+                                                allowOutsideClick: false,
+                                                confirmButtonColor: '#32CD32'
+                                            });
+                                        }
+                                        else {
+                                            swal({
+                                                'title': 'Error !',
+                                                'text': "เกิดข้อผิดพลาด ?",
+                                                'type': 'error',
+                                                'allowOutsideClick': false,
+                                                'confirmButtonColor': '#32CD32'
+                                            }).then((result) => {
+                                                if (result.value) {
+                                                    location.reload();
+                                                    return false;
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+                            }
                         });
                     }
                 }); // exit_save_Auto
@@ -2880,11 +2953,11 @@
                     // console.log(n_data);
                     Swal({
                         // type: type,
-                        title: 'เวลาทำงานของ '+name,
-                        html: n_data.join(' '),
-                        allowOutsideClick: false,
-                        confirmButtonColor: '#FF3333',
-                        confirmButtonText: 'ปิด'
+                        'title': 'เวลาทำงานของ '+name,
+                        'html': n_data.join(' '),
+                        'allowOutsideClick': false,
+                        'confirmButtonColor': '#FF3333',
+                        'confirmButtonText': 'ปิด'
                     });
                 });
 
@@ -2897,8 +2970,9 @@
                         var de = true;
                         $('.img_swST').show();
                         $('.sw_toggleST').hide();
-                        $('.text_soil').html('เมื่อความชื้นดินต่ำกว่า '+tracking.soil_max+' %');
-                        $('.text_hum').html('และเมื่อความชื้นอากาศต่ำกว่า '+tracking.hum_max+' %Rh');
+                        // $('.text_soil').html(tracking.soil_max+' %');
+                        // $('.text_hum').html(tracking.hum_max+' %Rh');
+                        // $('.text_humT').html(tracking.hum_max2+' %Rh');
                         // $('.text_ctemp').addClass('text_blur');
                         // $('.text_chum').addClass('text_blur');
                     }
@@ -2906,8 +2980,9 @@
                         var de = false;
                         $('.img_swST').hide();
                         $('.sw_toggleST').show();
-                        $('.text_soil').html('เมื่อความชื้นดินต่ำกว่า '+tracking.soil_max+' %');
-                        $('.text_hum').html('และเมื่อความชื้นอากาศต่ำกว่า '+tracking.hum_max+' %Rh');
+                        // $('.text_soil').html(tracking.soil_max+' %');
+                        // $('.text_hum').html(tracking.hum_max+' %Rh');
+                        // $('.text_humT').html(tracking.hum_max2+' %Rh');
                     }
                     for(var i = 1; i <= 4; i++){
                         if (parseInt(tracking['status_'+i]) == 1) {
@@ -2918,50 +2993,67 @@
                             $('.imgST_'+i).attr("src", "public/images/control/switck_off.png");
                             $('#swST_'+i).bootstrapToggle('off');
                         }
-                        // ====================
-                        if (parseInt(tracking['status_1']) == 1) {
-                            if (parseInt(config_cn['cn_status_'+i]) == 1) {
-                                if(tracking['dripper_'+i] == 'ON'){
-                                    var ched = true, dis = de, val = 'เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+tracking.soil_min+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+tracking.soil_max+' %';
-                                }
-                                else {
-                                    var ched = false, dis = de, val = 'ปิด';
-                                }
-                            }
-                            else {
-                                var ched = false, dis = true, val = 'ไม่ใช้งาน';
+                    }
+
+                    // dripper
+                    if (parseInt(tracking['status_1']) == 1) {
+                        var ndde = de;
+                        if (parseInt(config_cn['cn_status_1']) == 1) {
+                            if(tracking['dripper_1'] == 'ON'){
+                                var ched_1 = true, dis_1 = de, val_1 = 'เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+tracking.soil_min+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+tracking.soil_max+' %';
+                            }else {
+                                var ched_1 = false, dis_1 = de, val_1 = 'ปิด';
                             }
                         }
                         else {
                             var ched_1 = false, dis_1 = true, val_1 = 'ไม่ใช้งาน';
                         }
-                        $('.check_d_'+i).prop({'checked': ched,'disabled': dis});
-                        $('.check_dl_'+i).html('น้ำหยด '+i+' ('+config_cn['cn_name_'+i]+') : '+val);
-                        // ===========================
-                        // if (parseInt(tracking['status_3']) == 1) {
-                        //     if (parseInt(config_cn['cn_status_'+(i+4)]) == 1) {
-                        //         if(tracking['fan_'+i] == 'ON'){
-                        //             var ched_3 = true, dis_3 = de, val_3 = 'เปิดเมื่ออุอุณหภูมิสูงกว่า '+tracking.temp_max+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+tracking.temp_min+' ℃';
-                        //         }else {
-                        //             var ched_3 = false, dis_3 = de, val_3 = 'ปิด';
-                        //         }
-                        //     }
-                        //     else {
-                        //         var ched_3 = false, dis_3 = true, val_3 = 'ไม่ใช้งาน';
-                        //     }
-                        // }
-                        // else {
-                        //     var ched_3 = false, dis_3 = true, val_3 = 'ไม่ใช้งาน';
-                        // }
-                        // // console.log(dis_3);
-                        // $('.check_fn_'+i).prop({'checked': ched_3,'disabled': dis_3});
-                        // $('.check_fnl_'+i).html('พัดลม '+i+' ('+config_cn['cn_name_'+(i+4)]+') : '+val_3);
+                        if (parseInt(config_cn['cn_status_2']) == 1) {
+                            if(tracking['dripper_2'] == 'ON'){
+                                var ched_2 = true, dis_2 = de, val_2 = 'เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+tracking.soil_min+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+tracking.soil_max+' %';
+                            }else {
+                                var ched_2 = false, dis_2 = de, val_2 = 'ปิด';
+                            }
+                        }
+                        else {
+                            var ched_2 = false, dis_2 = true, val_2 = 'ไม่ใช้งาน';
+                        }
+                        if (parseInt(config_cn['cn_status_3']) == 1) {
+                            if(tracking['dripper_3'] == 'ON'){
+                                var ched_3 = true, dis_3 = de, val_3 = 'เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+tracking.soil_min+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+tracking.soil_max+' %';
+                            }else {
+                                var ched_3 = false, dis_3 = de, val_3 = 'ปิด';
+                            }
+                        }
+                        else {
+                            var ched_3 = false, dis_3 = true, val_3 = 'ไม่ใช้งาน';
+                        }
+                        if (parseInt(config_cn['cn_status_4']) == 1) {
+                            if(tracking['dripper_4'] == 'ON'){
+                                var ched_4 = true, dis_4 = de, val_4 = 'เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+tracking.soil_min+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+tracking.soil_max+' %';
+                            }else {
+                                var ched_4 = false, dis_4 = de, val_4 = 'ปิด';
+                            }
+                        }
+                        else {
+                            var ched_4 = false, dis_4 = true, val_4 = 'ไม่ใช้งาน';
+                        }
                     }
-                    if (parseInt(tracking['status_1']) == 1) {
-                        var ndde = de;
-                    }else {
+                    else {
                         var ndde = true;
+                        var ched_1 = false, dis_1 = true, val_1 = 'ไม่ใช้งาน';
+                        var ched_2 = false, dis_2 = true, val_2 = 'ไม่ใช้งาน';
+                        var ched_3 = false, dis_3 = true, val_3 = 'ไม่ใช้งาน';
+                        var ched_4 = false, dis_4 = true, val_4 = 'ไม่ใช้งาน';
                     }
+                    $('.check_d_1').prop({'checked': ched_1,'disabled': dis_1});
+                    // $('.check_dl_1').html('น้ำหยด 1 ('+config_cn['cn_name_1']+') : '+val_1);
+                    $('.check_d_2').prop({'checked': ched_2,'disabled': dis_2});
+                    // $('.check_dl_2').html('น้ำหยด 2 ('+config_cn['cn_name_2']+') : '+val_2);
+                    $('.check_d_3').prop({'checked': ched_3,'disabled': dis_3});
+                    // $('.check_dl_3').html('น้ำหยด 3 ('+config_cn['cn_name_3']+') : '+val_3);
+                    $('.check_d_4').prop({'checked': ched_4,'disabled': dis_4});
+                    // $('.check_dl_4').html('น้ำหยด 4 ('+config_cn['cn_name_4']+') : '+val_4);
                     range_instance1.update({
                         min: 0,
                         max: 100,
@@ -2972,37 +3064,37 @@
                     // foggy
                     if (parseInt(tracking['status_2']) == 1) {
                         var nfgde = de;
-                        if (parseInt(config_cn.cn_status_9) == 1) {
-                            if(tracking.foggy_1 == 'ON'){
-                                var val_fg = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : เปิดเมื่อความชื้นอากาศต่ำกว่า '+tracking.hum_min+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+(tracking.hum_max-10)+' %Rh', val_fg2 = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : เปิด และปิดเมื่อความชื้นอากาศสูงกว่า '+(tracking.hum_max-10)+' %Rh';
-                            }else {
-                                var val_fg = val_fg2 = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ปิด';
-                            }
-                        }
-                        else {
-                            var val_fg = val_fg2 = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ไม่ใช้งาน';
-                        }
-                        // spray
-                        if (parseInt(config_cn.cn_status_11) == 1) {
-                            if(tracking.spray == 'ON'){
-                                var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : เปิดเมื่อความชื้นอากาศ '+(tracking.hum_max-10)+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+tracking.hum_max+' %Rh';
-                            }else {
-                                var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ปิด';
-                            }
-                        }
-                        else {
-                            var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ไม่ใช้งาน'
-                        }
+                    //     if (parseInt(config_cn.cn_status_9) == 1) {
+                    //         if(tracking.foggy_1 == 'ON'){
+                    //             var val_fg = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : เปิดเมื่อความชื้นอากาศต่ำกว่า '+tracking.hum_min+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+tracking.hum_max2+' %Rh', val_fg2 = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : เปิด และปิดเมื่อความชื้นอากาศสูงกว่า '+tracking.hum_max2+' %Rh';
+                    //         }else {
+                    //             var val_fg = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ปิด';
+                    //         }
+                    //     }
+                    //     else {
+                    //         var val_fg = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ไม่ใช้งาน';
+                    //     }
+                    //     // spray
+                    //     if (parseInt(config_cn.cn_status_11) == 1) {
+                    //         if(tracking.spray == 'ON'){
+                    //             var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : เปิดเมื่อความชื้นอากาศ '+tracking.hum_max2+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+tracking.hum_max+' %Rh';
+                    //         }else {
+                    //             var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ปิด';
+                    //         }
+                    //     }
+                    //     else {
+                    //         var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ไม่ใช้งาน'
+                    //     }
                     }
                     else {
                         var nfgde = true;
-                        var val_fg = val_fg2 = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ไม่ใช้งาน';
-                        var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ไม่ใช้งาน';
+                    //     var val_fg = val_fg2 = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ไม่ใช้งาน';
+                    //     var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ไม่ใช้งาน';
                     }
-                    $('.check_fgl_1').html(val_fg);
-                    $('.check_fgl_1t').html(val_fg2);
-                    $('.check_spl').html(val_sp);
-                    $('.check_splt').html(val_sp);
+                    // $('.check_fgl_1').html(' - '+val_fg);
+                    // $('.check_fgl_1t').html('พ่นหมอก 1 ('+config_cn.cn_name_9+')');
+                    // $('.check_spl').html(' - '+val_sp);
+                    // $('.check_splt').html('สเปรย์ ('+config_cn.cn_name_11+')');
                     range_instance2.update({
                         min: 0,
                         max: 100,
@@ -3010,6 +3102,7 @@
                         to: tracking.hum_max,
                         disable: nfgde
                     });
+                    $('.text_chum2').val(tracking.hum_max2).prop({'disabled': nfgde});
                     // FAN
                     if (parseInt(tracking['status_3']) == 1) {
                         var nfde = de;
@@ -3062,13 +3155,13 @@
                         var ched_4 = false, dis_4 = true, val_4 = 'ไม่ใช้งาน';
                     }
                     $('.check_fn_1').prop({'checked': ched_1,'disabled': dis_1});
-                    $('.check_fnl_1').html('พัดลม 1 ('+config_cn['cn_name_5']+') : '+val_1);
+                    // $('.check_fnl_1').html('พัดลม 1 ('+config_cn['cn_name_5']+') : '+val_1);
                     $('.check_fn_2').prop({'checked': ched_2,'disabled': dis_2});
-                    $('.check_fnl_2').html('พัดลม 2 ('+config_cn['cn_name_6']+') : '+val_2);
+                    // $('.check_fnl_2').html('พัดลม 2 ('+config_cn['cn_name_6']+') : '+val_2);
                     $('.check_fn_3').prop({'checked': ched_3,'disabled': dis_3});
-                    $('.check_fnl_3').html('พัดลม 3 ('+config_cn['cn_name_7']+') : '+val_3);
+                    // $('.check_fnl_3').html('พัดลม 3 ('+config_cn['cn_name_7']+') : '+val_3);
                     $('.check_fn_4').prop({'checked': ched_4,'disabled': dis_4});
-                    $('.check_fnl_4').html('พัดลม 4 ('+config_cn['cn_name_8']+') : '+val_4);
+                    // $('.check_fnl_4').html('พัดลม 4 ('+config_cn['cn_name_8']+') : '+val_4);
                     range_instance3.update({
                         min: 20,
                         max: 50,
@@ -3078,34 +3171,33 @@
                     });
                     // shading
                     if(parseInt(config_sn.sn_sensor_6) == 5){
-                        var maxL = (100000/54).toFixed();
+                        var maxL = (200000/54).toFixed();
                         var unitl = "µmol m<sup>-2</sup>s<sup>-1</sup>";
                         var minl = ((tracking.light_min*1000)/54).toFixed();
                         var maxl = ((tracking.light_max*1000)/54).toFixed();
                     }
                     else { // KLUX
-                        var maxL = 100;
+                        var maxL = 200;
                         var unitl = "KLux";
                         var minl = tracking.light_min;
                         var maxl = tracking.light_max;
                     }
                     if (parseInt(tracking['status_4']) == 1) {
                         var nlde = de;
-                        if (parseInt(config_cn.cn_status_12) == 1) {
-                            if(tracking.shading == 'ON'){
-                                $('.title_l').html('แสง ('+unitl+')');
-                                var val_lig = 'ม่านพรางแสง : เปิดม่านเมื่อความเข้มแสงต่ำกว่า '+minl+' '+unitl+' <br>และปิดม่านเมื่อความเข้มแสงสูงกว่า '+maxl+' '+unitl;
-                            }else {
-                                var val_lig = 'ม่านพรางแสง : เปิดรับแสง';
-                            }
-                        }
-                        else {
-                            var val_lig = 'ม่านพรางแสง : ไม่ใช้งาน';
-                        }
+                        // if (parseInt(config_cn.cn_status_12) == 1) {
+                            // if(tracking.shading == 'ON'){
+                            //     var val_lig = 'ม่านพรางแสง : เปิดม่านเมื่อความเข้มแสงต่ำกว่า '+minl+' '+unitl+' <br>และปิดม่านเมื่อความเข้มแสงสูงกว่า '+maxl+' '+unitl;
+                            // }else {
+                            //     var val_lig = 'ม่านพรางแสง : เปิดรับแสง';
+                            // }
+                        // }
+                        // else {
+                        //     var val_lig = 'ม่านพรางแสง : ไม่ใช้งาน';
+                        // }
                     }
                     else {
                         var nlde = true;
-                        var val_lig = 'ม่านพรางแสง : ไม่ใช้งาน';
+                        // var val_lig = 'ม่านพรางแสง : ไม่ใช้งาน';
                     }
                     range_instance4.update({
                         min: 0,
@@ -3114,28 +3206,30 @@
                         to: maxl,
                         disable: nlde
                     });
+                    $('.title_l').html('ควบคุมแสง ('+unitl+')');
                     if (mode == 'dash') {
                         $('.text_chum').addClass('text_blur');
-                        $('.text_ctemp').addClass('text_blur');
-                        $('.text_light').html(val_lig).addClass('text_blur');
+                        // $('.text_ctemp').addClass('text_blur');
+                    //     $('.text_light').html(val_lig).addClass('text_blur');
                     }
                     else {
                         $('.text_chum').removeClass('text_blur');
-                        $('.text_ctemp').removeClass('text_blur');
-                        $('.text_light').html(val_lig).removeClass('text_blur');
+                    //     $('.text_ctemp').removeClass('text_blur');
+                    //     $('.text_light').html(val_lig).removeClass('text_blur');
                     }
                 }
                 function check_load(input, cls, name, val){
-                    if(input == true){
-                        $('.check_'+cls).html(name+' : '+val);
-                    }else {
-                        $('.check_'+cls).html(name+' : ปิด')
-                    }
+                    // if(input == true){
+                    //     $('.check_'+cls).html(name+' : '+val);
+                    // }else {
+                    //     $('.check_'+cls).html(name+' : ปิด')
+                    // }
                     fn_check_auto_tracking_save('');
                 }
                 function fn_check_auto_tracking_save(mode) {
                     var df_log = JSON.parse($('#val_config').val()).config_tracking;
                     delete df_log['user_control'];
+                    delete df_log['light_in_mode'];
                     if (parseInt(config_cn.cn_status_1) != 1){ df_log['dripper_1'] = 'OFF'; }
                     if (parseInt(config_cn.cn_status_2) != 1){ df_log['dripper_2'] = 'OFF'; }
                     if (parseInt(config_cn.cn_status_3) != 1){ df_log['dripper_3'] = 'OFF'; }
@@ -3185,6 +3279,7 @@
                         "temp_max": Number(Rmx1[1]),
                         "hum_min":  Number(Rmx2[0]),
                         "hum_max":  Number(Rmx2[1]),
+                        "hum_max2": Number($('.text_chum2').val()),
                         "light_min":Number(newl_min),
                         "light_max":Number(newl_max),
                         "soil_min": Number(Rmx4[0]),
@@ -3220,15 +3315,15 @@
                         }
                         else {
                             swal({
-                                title: 'คุณแน่ใจหรือไม่?',
-                                text: "คุณต้องการยกเลิกการตั้งค่า?",
-                                type: 'warning',
-                                allowOutsideClick: false,
-                                showCancelButton: true,
-                                confirmButtonColor: '#da3444',
-                                cancelButtonColor: '#8e8e8e',
-                                confirmButtonText: 'ยืนยัน',
-                                cancelButtonText: 'ยกเลิก',
+                                'title': 'คุณแน่ใจหรือไม่?',
+                                'text': "คุณต้องการยกเลิกการตั้งค่า?",
+                                'type': 'warning',
+                                'allowOutsideClick': false,
+                                'showCancelButton': true,
+                                'confirmButtonColor': '#da3444',
+                                'cancelButtonColor': '#8e8e8e',
+                                'confirmButtonText': 'ยืนยัน',
+                                'cancelButtonText': 'ยกเลิก',
                             }).then((result) => {
                                 if (result.value) {
                                     $('.menu_config_auto2').show();
@@ -3331,13 +3426,13 @@
                             }
                         }
                         $('.check_d_1').prop({'checked': ched_1,'disabled': dis_1});
-                        $('.check_dl_1').html('น้ำหยด 1 ('+config_cn.cn_name_1+') : '+val_1);
+                        // $('.check_dl_1').html('น้ำหยด 1 ('+config_cn.cn_name_1+') : '+val_1);
                         $('.check_d_2').prop({'checked': ched_2,'disabled': dis_2});
-                        $('.check_dl_2').html('น้ำหยด 2 ('+config_cn.cn_name_2+') : '+val_2);
+                        // $('.check_dl_2').html('น้ำหยด 2 ('+config_cn.cn_name_2+') : '+val_2);
                         $('.check_d_3').prop({'checked': ched_3, 'disabled': dis_3});
-                        $('.check_dl_3').html('น้ำหยด 3 ('+config_cn.cn_name_3+') : '+val_3);
+                        // $('.check_dl_3').html('น้ำหยด 3 ('+config_cn.cn_name_3+') : '+val_3);
                         $('.check_d_4').prop({'checked': ched_4, 'disabled': dis_4});
-                        $('.check_dl_4').html('น้ำหยด 4 ('+config_cn.cn_name_4+') : '+val_4);
+                        // $('.check_dl_4').html('น้ำหยด 4 ('+config_cn.cn_name_4+') : '+val_4);
                         range_instance1.update({
                             min: 0,
                             max: 100,
@@ -3352,44 +3447,44 @@
                         // var Rmx = $(".range_hum").val().split(";");
                         if ($(this).prop('checked') == true){
                             var de = false;
-                            if (parseInt(config_cn.cn_status_9) == 1) {
-                                if(tracking.foggy_1 == 'ON'){
-                                    var val_fg = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : เปิดเมื่อความชื้นอากาศต่ำกว่า '+tracking.hum_min+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+(tracking.hum_max-10)+' %Rh',
-                                       val_fg2 = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : เปิด และปิดเมื่อความชื้นอากาศสูงกว่า '+(tracking.hum_max-10)+' %Rh';
+                            // if (parseInt(config_cn.cn_status_9) == 1) {
+                            //     if(tracking.foggy_1 == 'ON'){
+                            //         var val_fg = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : เปิดเมื่อความชื้นอากาศต่ำกว่า '+tracking.hum_min+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+tracking.hum_max2+' %Rh',
+                            //            val_fg2 = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : เปิด และปิดเมื่อความชื้นอากาศสูงกว่า '+tracking.hum_max2+' %Rh';
+                            //
+                            //     }else {
+                            //         var val_fg = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ปิด', val_fg2 = val_fg;
+                            //     }
+                            // }
+                            // else {
+                            //     var val_fg = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ไม่ใช้งาน', val_fg2 = val_fg;
+                            // }
+                            // // spray
+                            // if (parseInt(config_cn.cn_status_11) == 1) {
+                            //     if(tracking.spray == 'ON'){
+                            //         var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : เปิดเมื่อความชื้นอากาศ '+(tracking.hum_max-10)+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+tracking.hum_max+' %Rh';
+                            //     }else {
+                            //         var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ปิด';
+                            //     }
+                            // }
+                            // else {
+                            //     var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ไม่ใช้งาน';
+                            // }
 
-                                }else {
-                                    var val_fg = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ปิด', val_fg2 = val_fg;
-                                }
-                            }
-                            else {
-                                var val_fg = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ไม่ใช้งาน', val_fg2 = val_fg;
-                            }
-                            // spray
-                            if (parseInt(config_cn.cn_status_11) == 1) {
-                                if(tracking.spray == 'ON'){
-                                    var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : เปิดเมื่อความชื้นอากาศ '+(tracking.hum_max-10)+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+tracking.hum_max+' %Rh';
-                                }else {
-                                    var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ปิด';
-                                }
-                            }
-                            else {
-                                var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ไม่ใช้งาน';
-                            }
-
-                            $('.check_fgl_1').html(val_fg)
-                            $('.check_fgl_1t').html(val_fg2)
-                            $('.check_spl').html(val_sp)
-                            $('.check_splt').html(val_sp)
+                            // $('.check_fgl_1').html(' - '+val_fg)
+                            // $('.check_fgl_1t').html(' - '+val_fg2)
+                            // $('.check_spl').html(' - '+val_sp)
+                            // $('.check_splt').html(' - '+val_sp)
                             $('.text_chum').removeClass('text_blur');
                         }
                         else {
-                            var val_fg = val_fg2 = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ไม่ใช้งาน';
-                            var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ไม่ใช้งาน';
                             var de = true;
-                            $('.check_fgl_1').html(val_fg)
-                            $('.check_fgl_1t').html(val_fg2)
-                            $('.check_spl').html(val_sp)
-                            $('.check_splt').html(val_sp)
+                            // var val_fg = val_fg2 = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ไม่ใช้งาน';
+                            // var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ไม่ใช้งาน';
+                            // $('.check_fgl_1').html(' - '+val_fg)
+                            // $('.check_fgl_1t').html(' - '+val_fg2)
+                            // $('.check_spl').html(' - '+val_sp)
+                            // $('.check_splt').html(' - '+val_sp)
                             $('.text_chum').addClass('text_blur');
                         }
                         range_instance2.update({
@@ -3469,13 +3564,13 @@
                             }
                         }
                         $('.check_fn_1').prop({'checked': ched_1,'disabled': dis_1});
-                        $('.check_fnl_1').html('พัดลม 1 ('+config_cn.cn_name_5+') : '+val_1);
+                        // $('.check_fnl_1').html('พัดลม 1 ('+config_cn.cn_name_5+') : '+val_1);
                         $('.check_fn_2').prop({'checked': ched_2,'disabled': dis_2});
-                        $('.check_fnl_2').html('พัดลม 2 ('+config_cn.cn_name_6+') : '+val_2);
+                        // $('.check_fnl_2').html('พัดลม 2 ('+config_cn.cn_name_6+') : '+val_2);
                         $('.check_fn_3').prop({'checked': ched_3, 'disabled': dis_3});
-                        $('.check_fnl_3').html('พัดลม 3 ('+config_cn.cn_name_7+') : '+val_3);
+                        // $('.check_fnl_3').html('พัดลม 3 ('+config_cn.cn_name_7+') : '+val_3);
                         $('.check_fn_4').prop({'checked': ched_4, 'disabled': dis_4});
-                        $('.check_fnl_4').html('พัดลม 4 ('+config_cn.cn_name_8+') : '+val_4);
+                        // $('.check_fnl_4').html('พัดลม 4 ('+config_cn.cn_name_8+') : '+val_4);
                         range_instance3.update({
                             min: 20,
                             max: 50,
@@ -3502,23 +3597,23 @@
                         }
                         if ($(this).prop('checked') == true){
                             var de = false;
-                            if (parseInt(config_cn.cn_status_12) == 1) {
-                                if(tracking.shading == 'ON'){
-                                    var val_lig = 'ม่านพรางแสง : เปิดม่านเมื่อความเข้มแสงต่ำกว่า '+minl+' '+unitl+' <br>และปิดม่านเมื่อความเข้มแสงสูงกว่า '+maxl+' '+unitl;
-                                }else {
-                                    var val_lig = 'ม่านพรางแสง : เปิดรับแสง';
-                                }
-                                $('.text_light').html(val_lig).removeClass('text_blur')
-                            }
-                            else {
-                                $('.text_light').html('ม่านพรางแสง : ไม่ใช้งาน').addClass('text_blur');
-                            }
+                            // if (parseInt(config_cn.cn_status_12) == 1) {
+                            //     if(tracking.shading == 'ON'){
+                            //         var val_lig = 'ม่านพรางแสง : เปิดม่านเมื่อความเข้มแสงต่ำกว่า '+minl+' '+unitl+' <br>และปิดม่านเมื่อความเข้มแสงสูงกว่า '+maxl+' '+unitl;
+                            //     }else {
+                            //         var val_lig = 'ม่านพรางแสง : เปิดรับแสง';
+                            //     }
+                            //     $('.text_light').html(val_lig).removeClass('text_blur')
+                            // }
+                            // else {
+                            //     $('.text_light').html('ม่านพรางแสง : ไม่ใช้งาน').addClass('text_blur');
+                            // }
                         }
                         else {
-                            $('.text_light').html('ม่านพรางแสง : ไม่ใช้งาน').addClass('text_blur');
+                            // $('.text_light').html('ม่านพรางแสง : ไม่ใช้งาน').addClass('text_blur');
                             var de = true;
                         }
-                        $('.title_l').html('แสง ('+unitl+')');
+                        // $('.title_l').html('แสง ('+unitl+')');
                         range_instance4.update({
                             min: 0,
                             max: maxL,
@@ -3534,22 +3629,33 @@
                         check_load($('.check_d_2').prop('checked'), 'dl_2', 'น้ำหยด 2 ('+config_cn["cn_name_2"]+')', ' เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+Rmx4[0]+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+Rmx4[1]+' %')
                         check_load($('.check_d_3').prop('checked'), 'dl_3', 'น้ำหยด 3 ('+config_cn["cn_name_3"]+')', ' เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+Rmx4[0]+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+Rmx4[1]+' %')
                         check_load($('.check_d_4').prop('checked'), 'dl_4', 'น้ำหยด 4 ('+config_cn["cn_name_4"]+')', ' เปิดน้ำเมื่อความชื้นดินต่ำกว่า '+Rmx4[0]+' % และปิดน้ำเมื่อความชื้นดินสูงกว่า '+Rmx4[1]+' %')
-                        $('.text_soil').html('เมื่อความชื้นดินต่ำกว่า '+Rmx4[1]+' %');
+                        $('.text_soil').html(Rmx4[1]+' %');
                         fn_check_auto_tracking_save('');
                     });
                     $(".range_hum").change(function(){
                         var Rmx2 = $(".range_hum").val().split(";")
-                        $('.check_fgl_1').html('พ่นหมอก 1 ('+config_cn.cn_name_9+') : เปิดเมื่อความชื้นอากาศต่ำกว่า '+Rmx2[0]+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+(Rmx2[1]-10)+' %Rh');
-                        $('.check_spl').html('สเปรย์ ('+config_cn.cn_name_11+') : เปิดเมื่อความชื้นอากาศ '+(Rmx2[1]-10)+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+Rmx2[1]+' %Rh');
-                        $('.text_hum').html('และเมื่อความชื้นอากาศต่ำกว่า '+Rmx2[1]+' %Rh');
+                        // $('.check_fgl_1').html(' - พ่นหมอก 1 ('+config_cn.cn_name_9+') : เปิดเมื่อความชื้นอากาศต่ำกว่า '+Rmx2[0]+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+$(".text_chum2").val()+' %Rh');
+                        // $('.check_spl').html(' - สเปรย์ ('+config_cn.cn_name_11+') : เปิดเมื่อความชื้นอากาศ '+$(".text_chum2").val()+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+Rmx2[1]+' %Rh');
+                        // $('.text_hum').html(Rmx2[1]+' %Rh');
+                        // $('.text_humT').html(Rmx2[1]-10+' %Rh');
+                        $(".text_chum2").val(Rmx2[1]-10)
+                        // $('.check_fgl_1').html(' - พ่นหมอก 1 ('+config_cn.cn_name_9+') : เปิดเมื่อความชื้นอากาศต่ำกว่า '+Rmx2[0]+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+(Rmx2[1]-10)+' %Rh');
+                        // $('.check_spl').html(' - สเปรย์ ('+config_cn.cn_name_11+') : เปิดเมื่อความชื้นอากาศ '+(Rmx2[1]-10)+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+Rmx2[1]+' %Rh');
+                        fn_check_auto_tracking_save('');
+                    });
+                    $(".text_chum2").change(function(){
+                        var Rmx2 = $(".range_hum").val().split(";")
+                        // $('.text_humT').html($(this).val()+' %Rh');
+                        // $('.check_fgl_1').html(' - พ่นหมอก 1 ('+config_cn.cn_name_9+') : เปิดเมื่อความชื้นอากาศต่ำกว่า '+Rmx2[0]+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+$(this).val()+' %Rh');
+                        // $('.check_spl').html(' - สเปรย์ ('+config_cn.cn_name_11+') : เปิดเมื่อความชื้นอากาศ '+$(this).val()+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+Rmx2[1]+' %Rh');
                         fn_check_auto_tracking_save('');
                     });
                     $(".range_temp").change(function(){
                         var Rmx = $(".range_temp").val().split(";")
-                        check_load($('.check_fn_1').prop('checked'), 'fnl_1', 'พัดลม 1 ('+config_cn["cn_name_5"]+')', ' เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx[0]+' ℃');
-                        check_load($('.check_fn_2').prop('checked'), 'fnl_2', 'พัดลม 2 ('+config_cn["cn_name_6"]+')', ' เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx[0]+' ℃');
-                        check_load($('.check_fn_3').prop('checked'), 'fnl_3', 'พัดลม 3 ('+config_cn["cn_name_7"]+')', ' เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx[0]+' ℃');
-                        check_load($('.check_fn_4').prop('checked'), 'fnl_4', 'พัดลม 4 ('+config_cn["cn_name_8"]+')', ' เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx[0]+' ℃');
+                        // check_load($('.check_fn_1').prop('checked'), 'fnl_1', 'พัดลม 1 ('+config_cn["cn_name_5"]+')', ' เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx[0]+' ℃');
+                        // check_load($('.check_fn_2').prop('checked'), 'fnl_2', 'พัดลม 2 ('+config_cn["cn_name_6"]+')', ' เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx[0]+' ℃');
+                        // check_load($('.check_fn_3').prop('checked'), 'fnl_3', 'พัดลม 3 ('+config_cn["cn_name_7"]+')', ' เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx[0]+' ℃');
+                        // check_load($('.check_fn_4').prop('checked'), 'fnl_4', 'พัดลม 4 ('+config_cn["cn_name_8"]+')', ' เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx[0]+' ℃');
                         fn_check_auto_tracking_save('');
                     });
                     $(".range_light").change(function(){
@@ -3563,8 +3669,8 @@
                             var minl = Rmx[0];
                             var maxl = Rmx[1];
                         }
-                        $('.title_l').html('แสง ('+unitl+')');
-                        $('.text_light').html('ม่านพรางแสง : เปิดม่านเมื่อความเข้มแสงต่ำกว่า '+minl+' '+unitl+' <br>และปิดม่านเมื่อความเข้มแสงสูงกว่า '+maxl+' '+unitl);
+                        // $('.title_l').html('แสง ('+unitl+')');
+                        // $('.text_light').html('ม่านพรางแสง : เปิดม่านเมื่อความเข้มแสงต่ำกว่า '+minl+' '+unitl+' <br>และปิดม่านเมื่อความเข้มแสงสูงกว่า '+maxl+' '+unitl);
                         fn_check_auto_tracking_save('');
                     });
 
@@ -3601,6 +3707,85 @@
                         check_load($('.check_fn_4').prop('checked'), 'fnl_4', 'พัดลม 4 ('+config_cn["cn_name_8"]+')', ' เปิดเมื่ออุอุณหภูมิสูงกว่า '+Rmx[1]+' ℃ และปิดเมื่ออุอุณหภูมิต่ำกว่า '+Rmx[0]+' ℃');
                     });
                 });
+                $('.view_tracking').click(function(){
+                    var id = $(this).attr('id'), name, n_data=[];
+                    n_data.push('<div style="text-align: left">');
+                    if (id == 'st_1') {
+                        name = 'ความชื้นดิน';
+                        var Rmx = $(".range_soil").val().split(";")
+                        n_data.push('<span>1. ระบบเริ่มทำงานเวลา 07:00 - 18:00 น.</span><br>');
+                        n_data.push('<span>2. เปิดน้ำหยดเมื่อความชื้นดินต่ำกว่า '+Rmx[0]+' %</span><br>');
+                        n_data.push('<span>3. ปิดน้ำหยดเมื่อความชื้นดินสูงกว่า '+Rmx[1]+' %</span><br>');
+                    }else if (id == 'st_2') {
+                        name = 'ความชื้นอากาศ';
+                        var Rmx = $(".range_soil").val().split(";")
+                        var Rmx1 = $(".range_hum").val().split(";")
+                        n_data.push('<span>1. ระบบเริ่มทำงานเวลา 07:00 - 18:00 น.</span><br>');
+                        n_data.push('<span>2. กรณีความชื้นดินต่ำกว่า '+Rmx[1]+' %</span><br>');
+                        n_data.push('<span>&emsp;2.1. เมื่อความชื้นอากาศต่ำกว่า '+Rmx1[0]+' %Rh</span><br>');
+                        n_data.push('<span>&emsp;&emsp;&emsp;- เปิดพ่นหมอก 1 ('+config_cn["cn_name_9"]+')</span><br>');
+                        n_data.push('<span>&emsp;&emsp;&emsp;- ปิดสเปรย์ ('+config_cn["cn_name_11"]+')</span><br>');
+                        n_data.push('<span>&emsp;2.2. เมื่อความชื้นอากาศสูงกว่า '+$('.text_chum2').val()+' %Rh</span><br>');
+                        n_data.push('<span>&emsp;&emsp;&emsp;- ปิดพ่นหมอก 1 ('+config_cn["cn_name_9"]+')</span><br>');
+                        n_data.push('<span>&emsp;&emsp;&emsp;- เปิดสเปรย์ ('+config_cn["cn_name_11"]+')</span><br>');
+                        n_data.push('<span>&emsp;2.3. เมื่อความชื้นอากาศสูงกว่า '+Rmx1[1]+' %Rh</span><br>');
+                        n_data.push('<span>&emsp;&emsp;&emsp;- ปิดพ่นหมอก 1 ('+config_cn["cn_name_9"]+')</span><br>');
+                        n_data.push('<span>&emsp;&emsp;&emsp;- ปิดสเปรย์ ('+config_cn["cn_name_11"]+')</span><br>');
+                        n_data.push('<span>3. กรณีความชื้นดินสูงกว่า '+Rmx[1]+' %</span><br>');
+                        n_data.push('<span>&emsp;3.1. เมื่อความชื้นอากาศต่ำกว่า '+$('.text_chum2').val()+' %Rh</span><br>');
+                        n_data.push('<span>&emsp;&emsp;&emsp;- ปิดพ่นหมอก 1 ('+config_cn["cn_name_9"]+')</span><br>');
+                        n_data.push('<span>&emsp;&emsp;&emsp;- เปิดสเปรย์ ('+config_cn["cn_name_11"]+')</span><br>');
+                        n_data.push('<span>&emsp;3.2. เมื่อความชื้นอากาศสูงกว่า '+Rmx1[1]+' %Rh</span><br>');
+                        n_data.push('<span>&emsp;&emsp;&emsp;- ปิดพ่นหมอก 1 ('+config_cn["cn_name_9"]+')</span><br>');
+                        n_data.push('<span>&emsp;&emsp;&emsp;- ปิดสเปรย์ ('+config_cn["cn_name_11"]+')</span><br>');
+                    }else if (id == 'st_3') {
+                        name = 'อุณหภูมิ';
+                        var Rmx = $(".range_soil").val().split(";")
+                        var Rmx1 = $(".range_hum").val().split(";")
+                        var Rmx2 = $(".range_temp").val().split(";")
+                        n_data.push('<span>1. เมื่ออุณหภูมิสูงกว่า '+Rmx[1]+' ℃ เปิดพัดลม</span><br>');
+                        n_data.push('<span>2. เมื่ออุณหภูมิต่ำกว่า '+Rmx[0]+' ℃ ปิดพัดลม</span><br>');
+                        n_data.push('<span>3. กรณีอุณหภูมิสูงกว่า '+Rmx[1]+' ℃ และเปิดพัดลมผ่านไป 15 นาที</span><br>');
+                        n_data.push('<span>&emsp;3.1. กรณีอยู่ในช่วงเวลา 07:00 - 18:00 น.</span><br>');
+                        n_data.push('<span>&emsp;3.2. กรณีความชื้นดินต่ำกว่า '+Rmx[1]+' %</span><br>');
+                        n_data.push('<span>&emsp;&emsp;3.2.1. เมื่อความชื้นอากาศต่ำกว่า '+$('.text_chum2').val()+' %Rh</span><br>');
+                        n_data.push('<span>&emsp;&emsp;&emsp;- พ่นหมอก 1 ('+config_cn["cn_name_9"]+') ทำงานต่อเนื่อง (เปิด 2 นาที และปิด 13 นาที)</span><br>');
+                        n_data.push('<span>&emsp;&emsp;&emsp;- ปิดสเปรย์ ('+config_cn["cn_name_11"]+')</span><br>');
+                        n_data.push('<span>&emsp;&emsp;3.2.2. เมื่อความชื้นอากาศสูงกว่า '+$('.text_chum2').val()+' %Rh และต่ำกว่า '+Rmx1[1]+' %Rh</span><br>');
+                        n_data.push('<span>&emsp;&emsp;&emsp;- ปิดพ่นหมอก 1 ('+config_cn["cn_name_9"]+')</span><br>');
+                        n_data.push('<span>&emsp;&emsp;&emsp;- สเปรย์ ('+config_cn["cn_name_11"]+') ทำงานต่อเนื่อง (เปิด 5 นาที และปิด 5 นาที)</span><br>');
+                        n_data.push('<span>&emsp;&emsp;3.2.3. เมื่อความชื้นอากาศสูงกว่า '+Rmx1[1]+' %Rh</span><br>');
+                        n_data.push('<span>&emsp;&emsp;&emsp;- ปิดพ่นหมอก 1 ('+config_cn["cn_name_9"]+')</span><br>');
+                        n_data.push('<span>&emsp;&emsp;&emsp;- ปิดสเปรย์ ('+config_cn["cn_name_11"]+')</span><br>');
+                        n_data.push('<span>&emsp;3.3. กรณีความชื้นดินสูงกว่า '+Rmx[1]+' %</span><br>');
+                        n_data.push('<span>&emsp;&emsp;3.3.1. เมื่อความชื้นอากาศต่ำกว่า '+Rmx1[1]+' %Rh</span><br>');
+                        n_data.push('<span>&emsp;&emsp;&emsp;- ปิดพ่นหมอก 1 ('+config_cn["cn_name_9"]+')</span><br>');
+                        n_data.push('<span>&emsp;&emsp;&emsp;- สเปรย์ ('+config_cn["cn_name_11"]+') ทำงานต่อเนื่อง (เปิด 5 นาที และปิด 5 นาที)</span><br>');
+                        n_data.push('<span>&emsp;&emsp;3.3.2. เมื่อความชื้นอากาศสูงกว่า '+Rmx1[1]+' %Rh</span><br>');
+                        n_data.push('<span>&emsp;&emsp;&emsp;- ปิดพ่นหมอก 1 ('+config_cn["cn_name_9"]+')</span><br>');
+                        n_data.push('<span>&emsp;&emsp;&emsp;- ปิดสเปรย์ ('+config_cn["cn_name_11"]+')</span><br>');
+                    }else if (id == 'st_4') {
+                        name = 'แสง';
+                        if(parseInt(config_sn.sn_sensor_6) == 5){
+                            var unitl = "µmol m<sup>-2</sup>s<sup>-1</sup>";
+                        }else { // KLUX
+                            var unitl = "KLux";
+                        }
+                        var Rmx = $(".range_light").val().split(";")
+                        n_data.push('<span>1. ระบบเริ่มทำงานเวลา 07:00 - 18:00 น.</span><br>');
+                        n_data.push('<span>2. เปิดม่านพรางแสงเมื่อความเข้มแสงต่ำกว่า '+Rmx[0]+' '+unitl+'</span><br>');
+                        n_data.push('<span>3. ปิดม่านพรางแสงเมื่อความเข้มแสงสูงกว่า '+Rmx[1]+' '+unitl+'</span><br>');
+                    }
+                    n_data.push('</div>');
+                    Swal({
+                        // type: type,
+                        'title': 'เงื่อนไขการควบคุม '+name,
+                        'html': n_data.join(' '),
+                        'allowOutsideClick': false,
+                        'confirmButtonColor': '#FF3333',
+                        'confirmButtonText': 'ปิด'
+                    });
+                });
                 // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 
@@ -3615,72 +3800,72 @@
                     var numb = Number($(this).attr('id').substring(1));
                     if ($('#close_manual_cont').is(":hidden") == false) {
                         swal({
-                            title: 'ข้อผิดพลาด !',
-                            text: "กรุณาบันทึกหรือยกเลิกการตั้งค่าก่อน !!!",
-                            type: 'warning',
-                            allowOutsideClick: false,
-                            confirmButtonColor: '#32CD32',
-                            confirmButtonText: 'ตกลง',
+                            'title': 'ข้อผิดพลาด !',
+                            'text': "กรุณาบันทึกหรือยกเลิกการตั้งค่าก่อน !!!",
+                            'type': 'warning',
+                            'allowOutsideClick': false,
+                            'confirmButtonColor': '#32CD32',
+                            'confirmButtonText': 'ตกลง',
                         });
                         return false;
                     } else {
                         if (numb == 1) {
                             if (countElement(1, status_dripper) == 0) {
                                 swal({
-                                    title: 'โหลดนี้ไม่ถูกต่อใช้งาน !!!',
-                                    text: "กรุณาเลือกโหลดอื่น",
-                                    type: 'warning',
-                                    allowOutsideClick: false,
-                                    confirmButtonColor: '#32CD32',
-                                    confirmButtonText: 'ตกลง',
+                                    'title': 'โหลดนี้ไม่ถูกต่อใช้งาน !!!',
+                                    'text': "กรุณาเลือกโหลดอื่น",
+                                    'type': 'warning',
+                                    'allowOutsideClick': false,
+                                    'confirmButtonColor': '#32CD32',
+                                    'confirmButtonText': 'ตกลง',
                                 });
                                 return false;
                             }
                         } else if (numb == 2) {
                             if (countElement(1, status_fan) == 0) {
                                 swal({
-                                    title: 'โหลดนี้ไม่ถูกต่อใช้งาน !!!',
-                                    text: "กรุณาเลือกโหลดอื่น",
-                                    type: 'warning',
-                                    allowOutsideClick: false,
-                                    confirmButtonColor: '#32CD32',
-                                    confirmButtonText: 'ตกลง',
+                                    'title': 'โหลดนี้ไม่ถูกต่อใช้งาน !!!',
+                                    'text': "กรุณาเลือกโหลดอื่น",
+                                    'type': 'warning',
+                                    'allowOutsideClick': false,
+                                    'confirmButtonColor': '#32CD32',
+                                    'confirmButtonText': 'ตกลง',
                                 });
                                 return false;
                             }
                         } else if (numb == 3) {
                             if (countElement(1, status_foggy) == 0) {
                                 swal({
-                                    title: 'โหลดนี้ไม่ถูกต่อใช้งาน !!!',
-                                    text: "กรุณาเลือกโหลดอื่น",
-                                    type: 'warning',
-                                    allowOutsideClick: false,
-                                    confirmButtonColor: '#32CD32',
-                                    confirmButtonText: 'ตกลง',
+                                    'title': 'โหลดนี้ไม่ถูกต่อใช้งาน !!!',
+                                    'text': "กรุณาเลือกโหลดอื่น",
+                                    'type': 'warning',
+                                    'allowOutsideClick': false,
+                                    'confirmButtonColor': '#32CD32',
+                                    'confirmButtonText': 'ตกลง',
                                 });
                                 return false;
                             }
                         } else if (numb == 4) {
                             if (parseInt(config_cn.cn_status_11) == 0) {
                                 swal({
-                                    title: 'โหลดนี้ไม่ถูกต่อใช้งาน !!!',
-                                    text: "กรุณาเลือกโหลดอื่น",
-                                    type: 'warning',
-                                    allowOutsideClick: false,
-                                    confirmButtonColor: '#32CD32',
-                                    confirmButtonText: 'ตกลง',
+                                    'title': 'โหลดนี้ไม่ถูกต่อใช้งาน !!!',
+                                    'text': "กรุณาเลือกโหลดอื่น",
+                                    'type': 'warning',
+                                    'allowOutsideClick': false,
+                                    'confirmButtonColor': '#32CD32',
+                                    'confirmButtonText': 'ตกลง',
                                 });
                                 return false;
                             }
                         } else if (numb == 5) {
                             if (parseInt(config_cn.cn_status_12) == 0) {
                                 swal({
-                                    title: 'โหลดนี้ไม่ถูกต่อใช้งาน !!!',
-                                    text: "กรุณาเลือกโหลดอื่น",
-                                    type: 'warning',
-                                    allowOutsideClick: false,
-                                    confirmButtonColor: '#32CD32',
-                                    confirmButtonText: 'ตกลง',
+                                    'title': 'โหลดนี้ไม่ถูกต่อใช้งาน !!!',
+                                    'text': "กรุณาเลือกโหลดอื่น",
+                                    'type': 'warning',
+                                    'allowOutsideClick': false,
+                                    'confirmButtonColor': '#32CD32',
+                                    'confirmButtonText': 'ตกลง',
                                 });
                                 return false;
                             }
@@ -3700,12 +3885,12 @@
                             var name = 'พ่นหมอก';
                         }
                         swal({
-                            title: 'ข้อผิดพลาด !',
-                            text: "กรุณาปิด " + name + " ก่อน !!!",
-                            type: 'warning',
-                            allowOutsideClick: false,
-                            confirmButtonColor: '#32CD32',
-                            confirmButtonText: 'ตกลง',
+                            'title': 'ข้อผิดพลาด !',
+                            'text': "กรุณาปิด " + name + " ก่อน !!!",
+                            'type': 'warning',
+                            'allowOutsideClick': false,
+                            'confirmButtonColor': '#32CD32',
+                            'confirmButtonText': 'ตกลง',
                         });
                         return false;
                     }
@@ -4103,15 +4288,15 @@
                                 fn_df_sw_manual(numb);
                             } else {
                                 swal({
-                                    title: 'คุณแน่ใจหรือไม่?',
-                                    text: "คุณต้องการยกเลิกการตั้งค่า?",
-                                    type: 'warning',
-                                    allowOutsideClick: false,
-                                    showCancelButton: true,
-                                    confirmButtonColor: '#da3444',
-                                    cancelButtonColor: '#8e8e8e',
-                                    confirmButtonText: 'ยืนยัน',
-                                    cancelButtonText: 'ยกเลิก',
+                                    'title': 'คุณแน่ใจหรือไม่?',
+                                    'text': "คุณต้องการยกเลิกการตั้งค่า?",
+                                    'type': 'warning',
+                                    'allowOutsideClick': false,
+                                    'showCancelButton': true,
+                                    'confirmButtonColor': '#da3444',
+                                    'cancelButtonColor': '#8e8e8e',
+                                    'confirmButtonText': 'ยืนยัน',
+                                    'cancelButtonText': 'ยกเลิก',
                                 }).then((result) => {
                                     if (result.value) {
                                         $(".menu_config_manual").show();
@@ -4269,11 +4454,11 @@
                         }
                         if (countElement(1, n_countSB) == 0) {
                             swal({
-                                    html: 'ต้องมีอุปกรณ์เปิดใช้งาน<br>อย่างน้อย 1 ตัว !',
+                                    'html': 'ต้องมีอุปกรณ์เปิดใช้งาน<br>อย่างน้อย 1 ตัว !',
                                     // text: "ต้องมีอุปกรณ์เปิดใช้งานอย่างน้อย 1 ตัว !",
-                                    type: 'warning',
-                                    allowOutsideClick: false,
-                                    confirmButtonColor: '#32CD32'
+                                    'type': 'warning',
+                                    'allowOutsideClick': false,
+                                    'confirmButtonColor': '#32CD32'
                                 })
                                 // then((result) => {
                                 //     if (result.value) {
@@ -4284,15 +4469,15 @@
                         }
                         else {
                             swal({
-                                title: 'บันทึกการเปลี่ยนแปลง',
-                                text: "คุณต้องการบันทึกการเปลี่ยนแปลง ?",
-                                type: 'warning',
-                                allowOutsideClick: false,
-                                showCancelButton: true,
-                                confirmButtonColor: '#32CD32',
-                                cancelButtonColor: '#FF3333',
-                                confirmButtonText: 'ใช่',
-                                cancelButtonText: 'ยกเลิก'
+                                'title': 'บันทึกการเปลี่ยนแปลง',
+                                'text': "คุณต้องการบันทึกการเปลี่ยนแปลง ?",
+                                'type': 'warning',
+                                'allowOutsideClick': false,
+                                'showCancelButton': true,
+                                'confirmButtonColor': '#32CD32',
+                                'cancelButtonColor': '#FF3333',
+                                'confirmButtonText': 'ใช่',
+                                'cancelButtonText': 'ยกเลิก'
                             }).then((result) => {
                                 if (result.value) {
                                     var log_data = {
@@ -4303,23 +4488,23 @@
                                     };
                                     // console.log(log_data)
                                     $.ajax({
-                                        type: "POST",
-                                        url: "routes/tu/save_config_mqtt.php",
-                                        data: {
-                                            house_master: house_master,
-                                            mess: log_data,
-                                            channel: numb,
-                                            mode: 'set_manual'
+                                        'type': "POST",
+                                        'url': "routes/tu/save_config_mqtt.php",
+                                        'data': {
+                                            'house_master': house_master,
+                                            'mess': log_data,
+                                            'channel': numb,
+                                            'mode': 'set_manual'
                                         },
-                                        dataType: 'json',
+                                        'dataType': 'json',
                                         success: function(res) {
                                             console.log(res)
                                             if (res.status == "Insert_Success") {
                                                 swal({
-                                                    title: 'บันทึกข้อมูลสำเร็จ',
-                                                    type: 'success',
-                                                    allowOutsideClick: false,
-                                                    confirmButtonColor: '#32CD32'
+                                                    'title': 'บันทึกข้อมูลสำเร็จ',
+                                                    'type': 'success',
+                                                    'allowOutsideClick': false,
+                                                    'confirmButtonColor': '#32CD32'
                                                 });
                                                 $(".menu_config_manual").show();
                                                 $('.status_config_manual').hide();
@@ -4331,11 +4516,11 @@
                                                 fn_label_manual($('.hidden_select_sw_manual').val());
                                             } else {
                                                 swal({
-                                                    title: 'Error !',
-                                                    text: "เกิดข้อผิดพลาด ?",
-                                                    type: 'error',
-                                                    allowOutsideClick: false,
-                                                    confirmButtonColor: '#32CD32'
+                                                    'title': 'Error !',
+                                                    'text': "เกิดข้อผิดพลาด ?",
+                                                    'type': 'error',
+                                                    'allowOutsideClick': false,
+                                                    'confirmButtonColor': '#32CD32'
                                                 }).then((result) => {
                                                     if (result.value) {
                                                         location.reload();
@@ -4640,15 +4825,15 @@
                         var sw_4 = 0;
                     }
                     swal({
-                        title: 'คุณต้องการ ' + status + ' ' + name + ' ?',
+                        'title': 'คุณต้องการ ' + status + ' ' + name + ' ?',
                         // text: "คุณต้องการเปลี่ยนไปใช้โหมด Manual !!!",
-                        type: 'warning',
-                        allowOutsideClick: false,
-                        showCancelButton: true,
-                        confirmButtonColor: '#32CD32',
-                        cancelButtonColor: '#FF3333',
-                        confirmButtonText: 'ใช่',
-                        cancelButtonText: 'ยกเลิก'
+                        'type': 'warning',
+                        'allowOutsideClick': false,
+                        'showCancelButton': true,
+                        'confirmButtonColor': '#32CD32',
+                        'cancelButtonColor': '#FF3333',
+                        'confirmButtonText': 'ใช่',
+                        'cancelButtonText': 'ยกเลิก'
                     }).then((result) => {
                         // console.log(result)
                         if (result.value) {
@@ -4656,31 +4841,31 @@
                             // return false;
 
                             $.ajax({
-                                type: "POST",
-                                url: "routes/tu/save_config_mqtt.php",
-                                data: {
-                                    house_master: house_master,
-                                    mess: sts,
-                                    channel: val,
-                                    mode: 'manual_load'
+                                'type': "POST",
+                                'url': "routes/tu/save_config_mqtt.php",
+                                'data': {
+                                    'house_master': house_master,
+                                    'mess': sts,
+                                    'channel': val,
+                                    'mode': 'manual_load'
                                 },
-                                dataType: 'json',
+                                'dataType': 'json',
                                 success: function(res) {
                                     console.log(res)
                                     if (res.status == "Insert_Success") {
                                         swal({
-                                            title: 'ส่งข้อมูลสำเร็จ',
-                                            type: 'success',
-                                            allowOutsideClick: false,
-                                            confirmButtonColor: '#32CD32'
+                                            'title': 'ส่งข้อมูลสำเร็จ',
+                                            'type': 'success',
+                                            'allowOutsideClick': false,
+                                            'confirmButtonColor': '#32CD32'
                                         });
                                     } else {
                                         swal({
-                                            title: 'Error !',
-                                            text: "เกิดข้อผิดพลาด ?",
-                                            type: 'error',
-                                            allowOutsideClick: false,
-                                            confirmButtonColor: '#32CD32'
+                                            'title': 'Error !',
+                                            'text': "เกิดข้อผิดพลาด ?",
+                                            'type': 'error',
+                                            'allowOutsideClick': false,
+                                            'confirmButtonColor': '#32CD32'
                                         }).then((result) => {
                                             if (result.value) {
                                                 location.reload();
@@ -4706,45 +4891,45 @@
                 });
                 function switch_mode_lock(sw_name, mess, channel, mode) { // หังก์ชั่น lock_panel
                     swal({
-                        title: 'ตั้งค่าปุ่มกดหน้าตู้ !',
-                        text: "คุณต้องการ " + sw_name + " ?",
-                        type: 'warning',
-                        allowOutsideClick: false,
-                        showCancelButton: true,
-                        confirmButtonColor: '#32CD32',
-                        cancelButtonColor: '#FF3333',
-                        confirmButtonText: 'ใช่',
-                        cancelButtonText: 'ยกเลิก'
+                        'title': 'ตั้งค่าปุ่มกดหน้าตู้ !',
+                        'text': "คุณต้องการ " + sw_name + " ?",
+                        'type': 'warning',
+                        'allowOutsideClick': false,
+                        'showCancelButton': true,
+                        'confirmButtonColor': '#32CD32',
+                        'cancelButtonColor': '#FF3333',
+                        'confirmButtonText': 'ใช่',
+                        'cancelButtonText': 'ยกเลิก'
                     }).then((result) => {
                         if (result.value) {
                             $.ajax({
-                                type: "POST",
-                                url: "routes/tu/save_config_mqtt.php",
-                                data: {
-                                    house_master: house_master,
-                                    mess: mess,
-                                    channel: channel,
-                                    mode: mode
+                                'type': "POST",
+                                'url': "routes/tu/save_config_mqtt.php",
+                                'data': {
+                                    'house_master': house_master,
+                                    'mess': mess,
+                                    'channel': channel,
+                                    'mode': mode
                                 },
-                                dataType: 'json',
+                                'dataType': 'json',
                                 success: function(res) {
                                     // console.log(res)
                                     // return false;
                                     if (res.status == "Insert_Success") {
                                         fn_df_checkbox_auto($('.hidden_select_sw_auto').val());
                                         swal({
-                                            title: 'ส่งข้อมูลสำเร็จ',
-                                            type: 'success',
-                                            allowOutsideClick: false,
-                                            confirmButtonColor: '#32CD32'
+                                            'title': 'ส่งข้อมูลสำเร็จ',
+                                            'type': 'success',
+                                            'allowOutsideClick': false,
+                                            'confirmButtonColor': '#32CD32'
                                         });
                                     } else {
                                         swal({
-                                            title: 'Error !',
-                                            text: "เกิดข้อผิดพลาด ?",
-                                            type: 'error',
-                                            allowOutsideClick: false,
-                                            confirmButtonColor: '#32CD32'
+                                            'title': 'Error !',
+                                            'text': "เกิดข้อผิดพลาด ?",
+                                            'type': 'error',
+                                            'allowOutsideClick': false,
+                                            'confirmButtonColor': '#32CD32'
                                         }).then((result) => {
                                             if (result.value) {
                                                 location.reload();
@@ -4760,3 +4945,29 @@
             });
         });
     </script>
+    <!-- // Swal.fire({
+    //     title: '<strong><b>ระบุเวลา</b><br><i class="fadeIn animated bx bx-time" style="font-size:5em;"></i></strong>',
+    //     html://'<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>'+
+    //     '<div class="input-group">'+
+    //         '<input type="number" class="form-control text-center" id="time_on0" placeholder="ชั่วโมง" min="0" max="23" onchange="if(Math.round(this.value) > 23){this.value = 23;}else if(this.value < 0){this.value = 0;}else { this.value = Math.round(this.value); }">'+// style="background-color: #fff; text-color: #191919">'+
+    //         '<span class="input-group-text">:</span>'+
+    //         '<input type="number" class="form-control text-center" id="time_on1" placeholder="นาที" min="0" max="59" onchange="if(Math.round(this.value) > 59){this.value = 59;}else if(this.value < 0){this.value = 0;}else { this.value = Math.round(this.value); }">'+ //style="background-color: #fff; text-color: #191919">'+
+    //         '<span class="input-group-text">:</span>'+
+    //         '<input type="number" class="form-control text-center" id="time_on2" placeholder="วินาที"  min="0" max="59"  onchange="if(Math.round(this.value) > 59 ){this.value = 59; }else if(this.value < 0){this.value = 0;}else { this.value = Math.round(this.value); }">'+ //style="background-color: #fff; text-color: #191919"">'+// <span class="input-group-text"></span>'+
+    //     '</div><br>',
+    //     allowOutsideClick: false,
+    //     showCancelButton: true,
+    //     confirmButtonColor: '#32CD32',
+    //     cancelButtonColor: '#FF3333',
+    //     confirmButtonText: 'ตกลง',
+    //     cancelButtonText: 'ยกเลิก'
+    // }).
+    // then((result) => {
+    //     if (result.value) {
+    //
+    //     }
+    // });
+    // if($("body").css("background-color") != 'rgb(247, 247, 255)'){
+    //     $(".swal2-modal").css('background-color', '#21214bf3');//Optional changes the color of the sweetalert
+    //     $(".swal2-title").css('color','#c0c8d1');
+    // } -->

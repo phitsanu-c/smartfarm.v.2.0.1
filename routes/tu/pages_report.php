@@ -15,7 +15,7 @@
 ?>
 <div class="page-content">
     <!--breadcrumb-->
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3 azaz">
         <div class="breadcrumb-title pe-3 te_st"></div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
@@ -66,6 +66,7 @@
                             <button type="button" class="col-3 btn btn-outline-secondary px-2 all_week">7 วัน</button>
                             <button type="button" class="col-3 btn btn-outline-secondary px-2 all_month">30 วัน</button>
                             <button type="button" class="col-3 btn btn-outline-secondary px-2 all_from_to">กำหนดเอง</button>
+                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_last">last 100 data</button>
                     </div>
                     <ul class="ms-auto col-lg-3 col-md-4 col-xl-3 col-12 nav nav-pills mode_sn" role="tablist">
                         <li class="nav-item col-6" role="presentation">
@@ -81,7 +82,7 @@
                     </ul>
                 </div><br>
                 <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills_report_sn" role="tabpanel">
+                    <div class="tab-pane fade show active" id="pills_report_sn" role="tabpanel" style="height: 100%; overflow: hidden;">
                         <div id="report_sensor">
                             <div class="tab-content">
                                 <div class="tab-pane fade show active chart" id="p-chart" role="tabpanel">
@@ -97,106 +98,141 @@
                         <div id="table_report_control"></div>
                     </div>
                     <div class="tab-pane fade" id="pills_report_cnAuto" role="tabpanel">
-                        <ul class="nav nav-pills" role="tablist">
-                            <!-- <li class="col-4 col-lg-1 col-xl-1  nav-item text-center" role="presentation">
-                                <a class="nav-link rec_auto" rec_auto="1" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
-                                    <div class="tab-title">น้ำหยด 1</div>
-                                </a>
-                            </li> -->
-                            <?php
-                             for($i=1; $i <= 12; $i++){
-                                if($config_cn['cn_status_'.$i] == 1){
-                                    if($i <= 4){
-                                        echo '<li class="col-4 col-lg-1 col-xl-1  nav-item text-center" role="presentation">
-                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
-                                                    <div class="tab-title">น้ำหยด '.$i.'</div>
-                                                </a>
-                                            </li>';
-                                    }elseif ($i > 4 && $i <= 8) {
-                                        echo '<li class="col-4 col-lg-1 col-xl-1  nav-item text-center" role="presentation">
-                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
-                                                    <div class="tab-title">พัดลม '.($i-4).'</div>
-                                                </a>
-                                            </li>';
-                                    }elseif ($i > 8 && $i <= 10) {
-                                        echo '<li class="col-4 col-lg-1 col-xl-1  nav-item text-center" role="presentation">
-                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
-                                                    <div class="tab-title">พ่นหมอก '.($i-8).'</div>
-                                                </a>
-                                            </li>';
-                                    }elseif ($i == 11) {
-                                        echo '<li class="col-4 col-lg-1 col-xl-1  nav-item text-center" role="presentation">
-                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
-                                                    <div class="tab-title">สเปรย์</div>
-                                                </a>
-                                            </li>';
-                                    }elseif ($i == 12) {
-                                        echo '<li class="col-4 col-lg-1 col-xl-1  nav-item text-center" role="presentation">
-                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
-                                                    <div class="tab-title">พรางแสง</div>
-                                                </a>
-                                            </li>';
-                                    }
-                                }
-                            }?>
-                        </ul>
-                        <input type="hidden" id="AutoMode_select">
-                        <div class="table-responsive m-t-10">
-                            <table id="table_re_cnAuto" class="table table-striped table-bordered dataTable" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <!-- <th rowspan="2" class="text-center">#</th> -->
-                                        <th colspan="3" class="text-center"><b class="text_autoTable"></b></th>
-                                        <th colspan="2" class="text-center">ตั้งเวลา 1</th>
-                                        <th colspan="2" class="text-center">ตั้งเวลา 2</th>
-                                        <th colspan="2" class="text-center">ตั้งเวลา 3</th>
-                                        <th colspan="2" class="text-center">ตั้งเวลา 4</th>
-                                        <th colspan="2" class="text-center">ตั้งเวลา 5</th>
-                                        <th colspan="2" class="text-center">ตั้งเวลา 6</th>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-center">วัน </th>
-                                        <th class="text-center">เวลา</th>
-                                        <th class="text-center">ผู้บันทึก</th>
-                                        <th class="text-center tL_start">  </th>
-                                        <th class="text-center tL_stop"> </th>
-                                        <th class="text-center tL_start">  </th>
-                                        <th class="text-center tL_stop"> </th>
-                                        <th class="text-center tL_start">  </th>
-                                        <th class="text-center tL_stop"> </th>
-                                        <th class="text-center tL_start">  </th>
-                                        <th class="text-center tL_stop"> </th>
-                                        <th class="text-center tL_start">  </th>
-                                        <th class="text-center tL_stop"> </th>
-                                        <th class="text-center tL_start">  </th>
-                                        <th class="text-center tL_stop"> </th>
-                                    </tr>
-                                </thead>
-                            </table>
-                            <div id="hide_table">
-                                <table id="table_re_cnAuto2" class="table table-striped table-bordered dataTable" style="width:100%">
+                        <div class="row">
+                            <div class="col-12">
+                                <ul class="nav nav-pills mb-1" role="tablist">
+                                    <li class="nav-item col-12 col-sm-6 col-lg-3 col-xl-3 mb-1" role="presentation">
+                                        <a class="nav-link re_mode text-center" href="javaScript:;" style="border: 1px solid transparent; border-color: #6c757d;">
+                                            <div class="tab-title">การเปลี่ยนโหมด</div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item col-12 col-sm-6 col-lg-3 col-xl-3 mb-1" role="presentation">
+                                        <a class="nav-link re_tr text-center" href="javaScript:;" style="border: 1px solid transparent; border-color: #6c757d;">
+                                            <div class="tab-title">การตั้งค่าโหมดตามเซนเซอร์</div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item col-12 col-sm-6 col-lg-3 col-xl-3 mb-1" role="presentation">
+                                        <a class="nav-link re_tm text-center" href="javaScript:;" style="border: 1px solid transparent; border-color: #6c757d;">
+                                            <div class="tab-title">การตั้งค่าโหมดตั้งเวลาทำงาน</div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item col-12 col-sm-6 col-lg-3 col-xl-3 mb-1" role="presentation">
+                                        <a class="nav-link re_tml text-center" href="javaScript:;" style="border: 1px solid transparent; border-color: #6c757d;">
+                                            <div class="tab-title">การตั้งค่าโหมดตั้งเวลาทำงานต่อเนื่อง</div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <input type="hidden" id="AutoMode_select_ul">
+                        <!-- <input type="hidden" id="AutoMode_sub_select"> -->
+                        <!-- <div class="tab-content">
+                            <div class="tab-pane fade table-responsive m-t-10" id="re_submode" >
+
+                            </div>
+                            <div class="tab-pane fade table-responsive m-t-10" id="re_tracking" >
+
+                            </div>
+                            <div class="tab-pane fade table-responsive m-t-10" id="re_time" >
+
+                            </div>
+                            <div class="tab-pane fade table-responsive m-t-10" id="re_time_loop" >
+                                <table id="table_re_cnAuto_loop" class="table table-striped table-bordered dataTable" style="width:100%">
                                     <thead>
+                                        <tr>
+                                            <th colspan="3" class="text-center"><b class="text_autoTable"></b></th>
+                                            <th colspan="2" class="text-center">ตั้งเวลา 1</th>
+                                            <th colspan="2" class="text-center">ตั้งเวลา 2</th>
+                                            <th colspan="2" class="text-center">ตั้งเวลา 3</th>
+                                            <th colspan="2" class="text-center">ตั้งเวลา 4</th>
+                                            <th colspan="2" class="text-center">ตั้งเวลา 5</th>
+                                            <th colspan="2" class="text-center">ตั้งเวลา 6</th>
+                                        </tr>
                                         <tr>
                                             <th class="text-center">วัน </th>
                                             <th class="text-center">เวลา</th>
                                             <th class="text-center">ผู้บันทึก</th>
-                                            <th class="text-center" >ตั้งเวลา 1 <div class="tL_start"></div> </th>
-                                            <th class="text-center" >ตั้งเวลา 1 <div class="tL_stop"></div></th>
-                                            <th class="text-center" >ตั้งเวลา 2 <div class="tL_start"></div> </th>
-                                            <th class="text-center" >ตั้งเวลา 2 <div class="tL_stop"></div></th>
-                                            <th class="text-center" >ตั้งเวลา 3 <div class="tL_start"></div> </th>
-                                            <th class="text-center" >ตั้งเวลา 3 <div class="tL_stop"></div></th>
-                                            <th class="text-center" >ตั้งเวลา 4 <div class="tL_start"></div> </th>
-                                            <th class="text-center" >ตั้งเวลา 4 <div class="tL_stop"></div></th>
-                                            <th class="text-center" >ตั้งเวลา 5 <div class="tL_start"></div> </th>
-                                            <th class="text-center" >ตั้งเวลา 5 <div class="tL_stop"></div></th>
-                                            <th class="text-center" >ตั้งเวลา 6 <div class="tL_start"></div> </th>
-                                            <th class="text-center" >ตั้งเวลา 6 <div class="tL_stop"></div></th>
+                                            <th class="text-center tL_start">  </th>
+                                            <th class="text-center tL_stop"> </th>
+                                            <th class="text-center tL_start">  </th>
+                                            <th class="text-center tL_stop"> </th>
+                                            <th class="text-center tL_start">  </th>
+                                            <th class="text-center tL_stop"> </th>
+                                            <th class="text-center tL_start">  </th>
+                                            <th class="text-center tL_stop"> </th>
+                                            <th class="text-center tL_start">  </th>
+                                            <th class="text-center tL_stop"> </th>
+                                            <th class="text-center tL_start">  </th>
+                                            <th class="text-center tL_stop"> </th>
                                         </tr>
                                     </thead>
                                 </table>
+                                <div id="hide_table_loop">
+                                    <table id="table_re_cnAuto_loop2" class="table table-striped table-bordered dataTable" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">วัน </th>
+                                                <th class="text-center">เวลา</th>
+                                                <th class="text-center">ผู้บันทึก</th>
+                                                <th class="text-center" >ตั้งเวลา 1 <div class="tL_start"></div> </th>
+                                                <th class="text-center" >ตั้งเวลา 1 <div class="tL_stop"></div></th>
+                                                <th class="text-center" >ตั้งเวลา 2 <div class="tL_start"></div> </th>
+                                                <th class="text-center" >ตั้งเวลา 2 <div class="tL_stop"></div></th>
+                                                <th class="text-center" >ตั้งเวลา 3 <div class="tL_start"></div> </th>
+                                                <th class="text-center" >ตั้งเวลา 3 <div class="tL_stop"></div></th>
+                                                <th class="text-center" >ตั้งเวลา 4 <div class="tL_start"></div> </th>
+                                                <th class="text-center" >ตั้งเวลา 4 <div class="tL_stop"></div></th>
+                                                <th class="text-center" >ตั้งเวลา 5 <div class="tL_start"></div> </th>
+                                                <th class="text-center" >ตั้งเวลา 5 <div class="tL_stop"></div></th>
+                                                <th class="text-center" >ตั้งเวลา 6 <div class="tL_start"></div> </th>
+                                                <th class="text-center" >ตั้งเวลา 6 <div class="tL_stop"></div></th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
+                        </div> -->
+                        <ul class="nav nav-pills rec_auto_ul" role="tablist">
+                            <?php
+                                for($i=1; $i <= 12; $i++){
+                                    if($config_cn['cn_status_'.$i] == 1){
+                                        if($i <= 4){
+                                            echo '<li class="col-4 col-lg-1 col-xl-1 nav-item text-center" role="presentation">
+                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
+                                                    <div class="tab-title">น้ำหยด '.$i.'</div>
+                                                </a>
+                                            </li>';
+                                        }elseif ($i > 4 && $i <= 8) {
+                                            echo '<li class="col-4 col-lg-1 col-xl-1 nav-item text-center li_loop" role="presentation">
+                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
+                                                    <div class="tab-title">พัดลม '.($i-4).'</div>
+                                                </a>
+                                            </li>';
+                                        }elseif ($i > 8 && $i <= 10) {
+                                            echo '<li class="col-4 col-lg-1 col-xl-1 nav-item text-center" role="presentation">
+                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
+                                                    <div class="tab-title">พ่นหมอก '.($i-8).'</div>
+                                                </a>
+                                            </li>';
+                                        }elseif ($i == 11) {
+                                            echo '<li class="col-4 col-lg-1 col-xl-1 nav-item text-center" role="presentation">
+                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
+                                                    <div class="tab-title">สเปรย์</div>
+                                                </a>
+                                            </li>';
+                                        }elseif ($i == 12) {
+                                            echo '<li class="col-4 col-lg-1 col-xl-1 nav-item text-center li_loop" role="presentation">
+                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
+                                                    <div class="tab-title">พรางแสง</div>
+                                                </a>
+                                            </li>';
+                                        }
+                                    }
+                                }
+                            ?>
+                        </ul>
+                        <div id="table_report_control_Auto"></div>
                     </div>
                     <div class="tab-pane fade" id="pills_report_cnManual" role="tabpanel">
                         <div id="table_report_control_Manual"></div>
@@ -419,7 +455,7 @@
     //        cancelLabel: 'Close'
     //     },
     // });
-
+    $(".all_last").hide();
     $('.mode_sn').show()
     ch_radio('temp');
     $(".mode_dwm").val('');
@@ -428,17 +464,14 @@
     // $('#hide0').css( 'display', 'none' );
     $('#chart_report').html('')
     $('#table_report').html('')
-    $("#table_report_control").html('');
-    $("#table_report_control_Manual").html('')
+
+    // $("#table_report_control_Manual").html('')
     $(".all_day").click(function() {
-        // alert($('#mode_report').val())
         $(".mode_dwm").val('day');
-        if($('#mode_report').val() === 're_cn'){
-            report_cn_table('day')
-        }else if($('#mode_report').val() === 're_cnAuto'){
-            report_cnAuto_table('day')
-        }else if($('#mode_report').val() === 're_cnManual'){
-            report_cnManual_table('day')
+        if( $('#mode_report').val() == 're_conteol_log' || $('#mode_report').val() == 're_conteol_Auto_Submode' ||
+            $('#mode_report').val() == 're_conteol_Auto_Tracking' || $('#mode_report').val() == 're_conteol_Auto_Timer' ||
+            $('#mode_report').val() == 're_conteol_Auto_Timer_loop' || $('#mode_report').val() == 're_conteol_Manual'){
+            report_control('day');
         }else {
             $(".title_mod").html('แสดงข้อมูลย้อนหลัง 1 วัน');
             $(".hide_dwm").hide();
@@ -447,12 +480,10 @@
     });
     $(".all_week").click(function() {
         $(".mode_dwm").val('week');
-        if($('#mode_report').val() === 're_cn'){
-            report_cn_table('week')
-        }else if($('#mode_report').val() === 're_cnAuto'){
-            report_cnAuto_table('week')
-        }else if($('#mode_report').val() === 're_cnManual'){
-            report_cnManual_table('week')
+        if( $('#mode_report').val() == 're_conteol_log' || $('#mode_report').val() == 're_conteol_Auto_Submode' ||
+            $('#mode_report').val() == 're_conteol_Auto_Tracking' || $('#mode_report').val() == 're_conteol_Auto_Timer' ||
+            $('#mode_report').val() == 're_conteol_Auto_Timer_loop' || $('#mode_report').val() == 're_conteol_Manual'){
+            report_control('week');
         }else {
             $(".title_mod").html('แสดงข้อมูลย้อนหลัง 7 วัน');
             $(".hide_dwm").hide();
@@ -461,12 +492,10 @@
     });
     $(".all_month").click(function() {
         $(".mode_dwm").val('month');
-        if($('#mode_report').val() === 're_cn'){
-            report_cn_table('month')
-        }else if($('#mode_report').val() === 're_cnAuto'){
-            report_cnAuto_table('month')
-        }else if($('#mode_report').val() === 're_cnManual'){
-            report_cnManual_table('month')
+        if( $('#mode_report').val() == 're_conteol_log' || $('#mode_report').val() == 're_conteol_Auto_Submode' ||
+            $('#mode_report').val() == 're_conteol_Auto_Tracking' || $('#mode_report').val() == 're_conteol_Auto_Timer' ||
+            $('#mode_report').val() == 're_conteol_Auto_Timer_loop' || $('#mode_report').val() == 're_conteol_Manual'){
+            report_control('month');
         }else {
             $(".title_mod").html('แสดงข้อมูลย้อนหลัง 30 วัน');
             $(".hide_dwm").hide();
@@ -478,126 +507,75 @@
         $(".title_mod").html('แสดงข้อมูลย้อนหลัง &nbsp; &nbsp;&nbsp;');
         $(".hide_dwm").show();
         $("#Modal_select_sn").modal("show");
-
-        // $('.dtpicker-buttonSet').click(function(e) {
-        //     // alert(this.val())
-        //     // $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm'));
-        //     // if($('.val_end').val() != ''){
-        //     //     if(moment($(this).val()).format('YYYY-MM-DD HH:mm') < moment($('.val_end').val()).add(-31, 'days').format('YYYY-MM-DD HH:mm')) {
-        //     //         Swal({
-        //     //             type: "warning",
-        //     //             html: "เลือกวันได้สูงสุด<b> ไม่เกิน 31</b> วัน/ครั้ง",
-        //     //             // html: text,
-        //     //             allowOutsideClick: false
-        //     //         });
-        //     //         $(this).val('').addClass('is-invalid');
-        //     //         return false;
-        //     //     }else if(moment($(this).val()).format('YYYY-MM-DD HH:mm') >= moment($('.val_end').val()).format('YYYY-MM-DD HH:mm')) {
-        //     //         Swal({
-        //     //             type: "warning",
-        //     //             html: "เวลาเริ่มต้น <b>ต้องน้อยกว่า</b> เวลาสิ้นสุด",
-        //     //             // html: text,
-        //     //             allowOutsideClick: false
-        //     //         });
-        //     //         $(this).val('').addClass('is-invalid');
-        //     //         return false;
-        //     //     }else {
-        //     //         $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm')).removeClass('is-invalid');
-        //     //     }
-        //     // }else {
-        //     //     $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm')).removeClass('is-invalid');
-        //     // }
-        // });
-        //
-        // $('.val_end').on('apply.daterangepicker', function(ev, picker) {
-        //     $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm'));
-        //     // console.log(moment($(this).val()).format('YYYY-MM-DD') +' ++ '+moment($('.val_start').val()).format('YYYY-MM-DD') )
-        //     if($('.val_start').val() != ''){
-        //         if(moment($(this).val()).format('YYYY-MM-DD HH:mm') > moment($('.val_start').val()).add(31, 'days').format('YYYY-MM-DD HH:mm')) {
-        //             Swal({
-        //                 type: "warning",
-        //                 html: "เลือกวันได้สูงสุด<b> ไม่เกิน 31</b> วัน/ครั้ง",
-        //                 // html: text,
-        //                 allowOutsideClick: false
-        //             });
-        //             $(this).val('').addClass('is-invalid');
-        //             return false;
-        //             return false;
-        //         }else if(moment($(this).val()).format('YYYY-MM-DD HH:mm') <= moment($('.val_start').val()).format('YYYY-MM-DD HH:mm')) {
-        //             Swal({
-        //                 type: "warning",
-        //                 html: "เวลาเริ่มต้น <b>ต้องน้อยกว่า</b> เวลาสิ้นสุด",
-        //                 // html: text,
-        //                 allowOutsideClick: false
-        //             });
-        //             $(this).val('').addClass('is-invalid');
-        //             return false;
-        //         }else {
-        //             $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm')).removeClass('is-invalid');
-        //         }
-        //     }else {
-        //         $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm')).removeClass('is-invalid');
-        //     }
-        // });
     });
 
     $('#submit_fromTo').click(function() {
-        if ($(".val_start").val() == "") {
-            $(".val_start").addClass('is-invalid');
-            return false;
-        }else{
-            $(".val_start").removeClass('is-invalid');
-        }
-        if ($(".val_end").val() == "") {
-            $(".val_end").addClass('is-invalid');
-            return false;
-        }else{
-            $(".val_end").removeClass('is-invalid');
-        }
-        if ($(".val_start").val() >= $(".val_end").val()) {
-            $(".val_start").addClass('is-invalid');
-            $(".val_end").addClass('is-invalid');
-            Swal({
-                type: "warning",
-                html: "เวลาเริ่มต้น <b>ต้องน้อยกว่า</b> เวลาสิ้นสุด",
-                // html: text,
-                allowOutsideClick: false
-            });
-            return false;
-        }
-        if(moment($(".val_start").val()).format('YYYY-MM-DD HH:mm') > moment($('.val_end').val()).add(31, 'days').format('YYYY-MM-DD HH:mm')) {
-            Swal({
-                type: "warning",
-                html: "เลือกวันได้สูงสุด<b> ไม่เกิน 31</b> วัน/ครั้ง",
-                // html: text,
-                allowOutsideClick: false
-            });
-            $(".val_start").addClass('is-invalid');
-            $(".val_end").addClass('is-invalid');
-            return false;
-        }
-        else{
-            $(".val_start").removeClass('is-invalid');
-            $(".val_end").removeClass('is-invalid');
+        if($(".mode_dwm").val() == 'from_to'){
+            if ($(".val_start").val() == "") {
+                $(".val_start").addClass('is-invalid');
+                return false;
+            }else{
+                $(".val_start").removeClass('is-invalid');
+            }
+            if ($(".val_end").val() == "") {
+                $(".val_end").addClass('is-invalid');
+                return false;
+            }else{
+                $(".val_end").removeClass('is-invalid');
+            }
+            if ($(".val_start").val() >= $(".val_end").val()) {
+                $(".val_start").addClass('is-invalid');
+                $(".val_end").addClass('is-invalid');
+                Swal({
+                    type: "warning",
+                    html: "เวลาเริ่มต้น <b>ต้องน้อยกว่า</b> เวลาสิ้นสุด",
+                    // html: text,
+                    allowOutsideClick: false
+                });
+                return false;
+            }
+            if(moment($(".val_start").val()).format('YYYY-MM-DD HH:mm') > moment($('.val_end').val()).add(31, 'days').format('YYYY-MM-DD HH:mm')) {
+                Swal({
+                    type: "warning",
+                    html: "เลือกวันได้สูงสุด<b> ไม่เกิน 31</b> วัน/ครั้ง",
+                    // html: text,
+                    allowOutsideClick: false
+                });
+                $(".val_start").addClass('is-invalid');
+                $(".val_end").addClass('is-invalid');
+                return false;
+            }
+            else{
+                $(".val_start").removeClass('is-invalid');
+                $(".val_end").removeClass('is-invalid');
+            }
         }
         // +++++++++++++++++++++++++++++++++
         if($('#mode_report').val() != 're_sensor'){
             // alert($(".val_start").val()+' - '+$(".val_end").val())
             $("#Modal_select_sn").modal("hide");
-            if($('#mode_report').val() === 're_cn'){
-                report_cn_table('from_to')
-            }else if($('#mode_report').val() === 're_cnAuto'){
-                report_cnAuto_table('from_to')
-            }else if($('#mode_report').val() === 're_cnManual'){
-                report_cnManual_table('from_to')
+            if( $('#mode_report').val() == 're_conteol_log' || $('#mode_report').val() == 're_conteol_Auto_Submode' ||
+                $('#mode_report').val() == 're_conteol_Auto_Tracking' || $('#mode_report').val() == 're_conteol_Auto_Timer' ||
+                $('#mode_report').val() == 're_conteol_Auto_Timer_loop' || $('#mode_report').val() == 're_conteol_Manual'){
+                report_control('from_to');
             }
         }
         else {
-            report_sn('')
-            // $('.new_mode_dwm')
+            report_sn('');
         }
     });
-
+    $(".all_last").click(function() {
+        $(".mode_dwm").val('last_100');
+        if( $('#mode_report').val() == 're_conteol_log' || $('#mode_report').val() == 're_conteol_Auto_Submode' ||
+            $('#mode_report').val() == 're_conteol_Auto_Tracking' || $('#mode_report').val() == 're_conteol_Auto_Timer' ||
+            $('#mode_report').val() == 're_conteol_Auto_Timer_loop' || $('#mode_report').val() == 're_conteol_Manual'){
+            report_control('last_100');
+        }else {
+            $(".title_mod").html('แสดงข้อมูลย้อนหลัง 1 วัน');
+            $(".hide_dwm").hide();
+            $("#Modal_select_sn").modal("show");
+        }
+    });
     $("#checkbox_all_sn").change(function () {
         if($(this).prop( "checked") == true){
             $("#radio_temp").attr("disabled", true);
@@ -636,7 +614,8 @@
             if( $(".all_day").hasClass("active") != false ||
                 $(".all_week").hasClass("active") != false ||
                 $(".all_month").hasClass("active") != false ||
-                $(".all_from_to").hasClass("active") != false
+                $(".all_from_to").hasClass("active") != false ||
+                $(".all_last").hasClass("active") != false
             ){ report_sn('click_chart_menu'); }
         }
     });
@@ -647,7 +626,8 @@
             if( $(".all_day").hasClass("active") != false ||
                 $(".all_week").hasClass("active") != false ||
                 $(".all_month").hasClass("active") != false ||
-                $(".all_from_to").hasClass("active") != false
+                $(".all_from_to").hasClass("active") != false ||
+                $(".all_last").hasClass("active") != false
             ){report_sn('');}
         }
     });
@@ -1350,26 +1330,37 @@
             $(".all_week").removeClass('active')
             $(".all_month").removeClass('active')
             $(".all_from_to").removeClass('active')
+            $(".all_last").removeClass('active')
         }else if(mode_dwm === 'week'){
             $(".all_day").removeClass('active')
             $(".all_week").addClass('active')
             $(".all_month").removeClass('active')
             $(".all_from_to").removeClass('active')
+            $(".all_last").removeClass('active')
         }else if(mode_dwm === 'month'){
             $(".all_day").removeClass('active')
             $(".all_week").removeClass('active')
             $(".all_month").addClass('active')
             $(".all_from_to").removeClass('active')
+            $(".all_last").removeClass('active')
         }else if(mode_dwm === 'from_to'){
             $(".all_day").removeClass('active')
             $(".all_week").removeClass('active')
             $(".all_month").removeClass('active')
             $(".all_from_to").addClass('active')
+            $(".all_last").removeClass('active')
+        }else if (mode_dwm === 'last_100') {
+            $(".all_day").removeClass('active')
+            $(".all_week").removeClass('active')
+            $(".all_month").removeClass('active')
+            $(".all_from_to").removeClass('active')
+            $(".all_last").addClass('active')
         }
     }
 </script>
 <script type="text/javascript">
     $('.r_reSensor').click(function(){
+        $(".all_last").hide();
         $('.mode_sn').show()
         ch_radio('temp');
         $(".mode_dwm").val('');
@@ -1378,6 +1369,7 @@
         $(".all_week").removeClass('active')
         $(".all_month").removeClass('active')
         $(".all_from_to").removeClass('active')
+        $(".all_last").removeClass('active')
         $('#chart_report').html('')
         $('#table_report').html('')
         // $('#table_re_Sensor').wrap('<div id="hide0" style="display:none"/></div>');
@@ -1386,12 +1378,14 @@
         $('.val_end').val('').removeClass('is-invalid');
     })
     $('.r_reControl').click(function(){
+        $(".all_last").show();
         $('.mode_sn').hide()
-        $('#mode_report').val('re_cn');
+        $('#mode_report').val('re_conteol_log');
         $(".all_day").removeClass('active')
         $(".all_week").removeClass('active')
         $(".all_month").removeClass('active')
         $(".all_from_to").removeClass('active')
+        $(".all_last").removeClass('active')
         $(".mode_dwm").val('');
         // $('#tb_re_cn').wrap('<div id="hide" style="display:none"/>');
         // $('#hide').css( 'display', 'none' );
@@ -1400,51 +1394,117 @@
         $('.val_end').val('').removeClass('is-invalid');
     })
     $('.r_reAutoControl').click(function(){
-        $('.mode_sn').hide()
-        $('#mode_report').val('re_cnAuto');
-        $(".all_day").removeClass('active')
-        $(".all_week").removeClass('active')
-        $(".all_month").removeClass('active')
-        $(".all_from_to").removeClass('active')
-        $(".mode_dwm").val('');
-        $("#AutoMode_select").val(1)
-        $(".rec_auto").removeClass('active');
-        $("a[rec_auto=1]").addClass('active');
-        $('.text_autoTable').html('ประวัต ิน้ำหยด 1 '+config_cn['cn_name_1'])
-        $('#hide_table').hide();
-        $('#table_re_cnAuto').wrap('<div id="hide2" style="display:none"/></div>');
-        $('#hide2').css( 'display', 'none' );
+        $(".all_last").show();
+        $('.mode_sn').hide();
+        menu_re_auto();
         $('.val_start').val('').removeClass('is-invalid');
         $('.val_end').val('').removeClass('is-invalid');
+        $('.rec_auto_ul').hide();
+        $('.re_mode').addClass('active');
+        $('.re_tr').removeClass('active');
+        $('.re_tm').removeClass('active');
+        $('.re_tml').removeClass('active');
+        $('#mode_report').val('re_conteol_Auto_Submode');
+        $('.re_mode').click(function(){
+            if($(this).hasClass('active') == false){
+                $('.rec_auto_ul').hide();
+                menu_re_auto();
+                $(this).addClass('active');
+                $('.re_tr').removeClass('active');
+                $('.re_tm').removeClass('active');
+                $('.re_tml').removeClass('active');
+                $('#mode_report').val('re_conteol_Auto_Submode');
+                if( $(".all_day").hasClass("active") != false ||
+                    $(".all_week").hasClass("active") != false ||
+                    $(".all_month").hasClass("active") != false ||
+                    $(".all_from_to").hasClass("active") != false ||
+                    $(".all_last").hasClass("active") != false
+                ){ report_control($('.mode_dwm').val()) }
+            }
+        });
+        $('.re_tr').click(function(){
+            if($(this).hasClass('active') == false){
+                $('.rec_auto_ul').hide();
+                menu_re_auto();
+                $('.re_mode').removeClass('active');
+                $(this).addClass('active');
+                $('.re_tm').removeClass('active');
+                $('.re_tml').removeClass('active');
+                $('#mode_report').val('re_conteol_Auto_Tracking');
+                if( $(".all_day").hasClass("active") != false ||
+                    $(".all_week").hasClass("active") != false ||
+                    $(".all_month").hasClass("active") != false ||
+                    $(".all_from_to").hasClass("active") != false ||
+                    $(".all_last").hasClass("active") != false
+                ){ report_control($('.mode_dwm').val()) }
+            }
+        });
+        $('.re_tm').click(function(){
+            if($(this).hasClass('active') == false){
+                menu_re_auto();
+                $('.rec_auto_ul').show();
+                $('.li_loop').show();
+                $('.re_mode').removeClass('active');
+                $('.re_tr').removeClass('active');
+                $(this).addClass('active');
+                $('.re_tml').removeClass('active');
+                $('#mode_report').val('re_conteol_Auto_Timer');
+                if( $(".all_day").hasClass("active") != false ||
+                    $(".all_week").hasClass("active") != false ||
+                    $(".all_month").hasClass("active") != false ||
+                    $(".all_from_to").hasClass("active") != false ||
+                    $(".all_last").hasClass("active") != false
+                ){ report_control($('.mode_dwm').val()); }
+            }
+        });
+        $('.re_tml').click(function(){
+            if($(this).hasClass('active') == false){
+                menu_re_auto();
+                $('.rec_auto_ul').show();
+                $('.li_loop').hide();
+                $('.re_mode').removeClass('active');
+                $('.re_tr').removeClass('active');
+                $('.re_tm').removeClass('active');
+                $(this).addClass('active');
+                $('#mode_report').val('re_conteol_Auto_Timer_loop');
+                if( $(".all_day").hasClass("active") != false ||
+                    $(".all_week").hasClass("active") != false ||
+                    $(".all_month").hasClass("active") != false ||
+                    $(".all_from_to").hasClass("active") != false ||
+                    $(".all_last").hasClass("active") != false
+                ){ report_control($('.mode_dwm').val()); }
+            }
+        });
         $('.rec_auto').click(function(){
             // alert($(this).attr('rec_auto'));
-            $("#AutoMode_select").val($(this).attr('rec_auto'))
-            if($(this).attr('rec_auto') <= 4){
-                $('.text_autoTable').html('ประวัติ น้ำหยด '+$(this).attr('rec_auto')+' '+config_cn['cn_name_'+$(this).attr('rec_auto')])
-            }else if ($(this).attr('rec_auto') > 4 && $(this).attr('rec_auto') <= 8) {
-                $('.text_autoTable').html('ประวัติ พัดลม '+($(this).attr('rec_auto')-4)+' '+config_cn['cn_name_'+$(this).attr('rec_auto')])
-            }else if ($(this).attr('rec_auto') > 8 && $(this).attr('rec_auto') <= 10) {
-                $('.text_autoTable').html('ประวัติ พ่นหมอก '+($(this).attr('rec_auto')-8)+' '+config_cn['cn_name_'+$(this).attr('rec_auto')])
-            }else if ($(this).attr('rec_auto') == 11) {
-                $('.text_autoTable').html('ประวัติ สเปรย์'+config_cn['cn_name_'+$(this).attr('rec_auto')])
-            }else if ($(this).attr('rec_auto') == 12) {
-                $('.text_autoTable').html('ประวัติ ม่านพรางแสง')
-            }
-            // $('.text_autoTable').html(config_cn['cn_name_'+$(this).attr('rec_auto')])
+            $("#AutoMode_select_ul").val($(this).attr('rec_auto'))
             $('.rec_auto').removeClass('active')
             $(this).addClass('active')
             if($(".mode_dwm").val() != ''){
-                report_cnAuto_table($(".mode_dwm").val());
+                report_control($('.mode_dwm').val());
             }
         });
+        function menu_re_auto(){
+            $('.mode_dwm').val('');
+            $('.rec_auto').removeClass('active')
+            $(".all_day").removeClass('active')
+            $(".all_week").removeClass('active')
+            $(".all_month").removeClass('active')
+            $(".all_from_to").removeClass('active')
+            $(".all_last").removeClass('active')
+            $("#table_report_control_Auto").html('');
+            $("#AutoMode_select_ul").val('');
+        }
     })
     $('.r_reManualControl').click(function(){
+        $(".all_last").show();
         $('.mode_sn').hide()
-        $('#mode_report').val('re_cnManual');
+        $('#mode_report').val('re_conteol_Manual');
         $(".all_day").removeClass('active')
         $(".all_week").removeClass('active')
         $(".all_month").removeClass('active')
         $(".all_from_to").removeClass('active')
+        $(".all_last").removeClass('active')
         $(".mode_dwm").val('');
         $("#table_report_control_Manual").html('')
         // $('#table_re_cnManual').wrap('<div id="hide3" style="display:none"/>');
@@ -1452,21 +1512,29 @@
         $('.val_start').val('').removeClass('is-invalid');
         $('.val_end').val('').removeClass('is-invalid');
     })
-    var currentdate = new Date();
-    var datetime = currentdate.getFullYear() + "-"
-                + (currentdate.getMonth()+1)  + "-"
-                + currentdate.getDate() + "_"
-                + currentdate.getHours() + "."
-                + currentdate.getMinutes(); //+ ":"
-                // + currentdate.getSeconds();
 
-    function report_cn_table(mode_dwm){
+    function report_control(mode_dwm){
+        if($('#mode_report').val() == 're_conteol_Auto_Timer' || $('#mode_report').val() == 're_conteol_Auto_Timer_loop'){
+            if($("#AutoMode_select_ul").val() == ''){
+                Swal({
+                    type: "warning",
+                    title: "กรุณาเลือกโหลด",
+                    // html: text,
+                    allowOutsideClick: false
+                });
+                return false;
+            }
+        }
         var loading = verticalNoTitle();
         // $('#hide').css( 'display', 'block' );
-        $("#table_report_control").html('');
+        if($('#mode_report').val() == 're_conteol_log'){
+            $("#table_report_control").html('');
+        }else if($('#mode_report').val() == 're_conteol_Manual'){
+            $("#table_report_control_Manual").html('')
+        }else {
+            $("#table_report_control_Auto").html('');
+        }
         active_btn(mode_dwm);
-        // table.button('.btnexport').nodes().css("display", "none")
-        // table.clear().draw();
         $.ajax({
             type: "POST",
             url: "routes/tu/get_report_control.php",
@@ -1477,147 +1545,20 @@
                 config_cn : config_cn,
                 val_start : $(".val_start").val(),
                 val_end : $(".val_end").val(),
+                load_select:$("#AutoMode_select_ul").val()
             },
             // dataType: 'json',
             success: function(res) {
                 // console.log(res);
-                $('#table_report_control').html(res);
-                loadingOut(loading);
-                // if(res.length > 0){
-                //     table.button('.btnexport').nodes().css("display", "block")
-                // }
-                // table.clear().rows.add(res).draw();
-            }
-        });
-    }
-    function report_cnAuto_table(mode_dwm){
-        var loading = verticalNoTitle();
-        $('#hide2').css( 'display', 'block' );
-        active_btn(mode_dwm);
-        var table2 = $('#table_re_cnAuto').DataTable({
-            "scrollY": 330,
-            "scrollX": true,
-            "scrollCollapse": false,
-            "paging":    false,
-            "searching": false,
-            "destroy": true,
-            "order": [
-                [0, "desc"]
-            ],
-          //   "processing": true,
-          //   'language':{
-          //     "loadingRecords": "&nbsp;",
-          //     "processing": "Loading..."
-          // },
-            "columnDefs": [
-                {
-                    // "targets": [ 1 ],
-                    // render: $.fn.dataTable.render.moment( 'X', 'YYYY/MM/DD' ),
-                    // "render": $.fn.dataTable.render.moment( 'YYYY/MM/DD' ),
-                    "visible": false,
-                    "searchable": false,
-                },
-            ],
-            dom: "<'floatRight'B><'clear'>frtip",
-            buttons: [{
-                    text: 'Export csv',
-                    // title: "Smart Farm Report Control",
-                    // charset: 'UTF-8',
-                    // extension: '.csv',
-                    className:'btn btn-outline-success px-5 btnexport2',
-                    // extend: 'csv',
-                    // format: 'YYYY/MM/dd',
-                    // // fieldSeparator: ';',
-                    // // fieldBoundary: '',
-                    // filename: 'smart_farm_control_'+datetime,
-                    // // className: 'btn-info',
-                    // bom: true
+                if($('#mode_report').val() == 're_conteol_log'){
+                    $("#table_report_control").html(res);
+                }else if($('#mode_report').val() === 're_conteol_Manual'){
+                    $("#table_report_control_Manual").html(res)
+                }else {
+                    $("#table_report_control_Auto").html(res);
                 }
-            ]
-        });
-        table2.button('.btnexport2').nodes().css("display", "none")
-        table2.clear().draw();
-
-        // alert($("#AutoMode_select").val())
-        if($("#AutoMode_select").val() == 12){
-            $('.tL_start').html('เปิดรับแสง');
-            $('.tL_stop').html('ปิดรับแสง');
-        }else {
-            $('.tL_start').html('เริ่ม');
-            $('.tL_stop').html('สิ้นสุด');
-        }
-        $.ajax({
-            type: "POST",
-            url: "routes/tu/get_report_cn_table.php",
-            data: {
-                house_master: house_master,
-                mode : mode_dwm,
-                mode_report: $('#mode_report').val(),
-                load_select:$("#AutoMode_select").val(),
-                config_cn : config_cn,
-                val_start : $(".val_start").val(),
-                val_end : $(".val_end").val(),
-            },
-            dataType: 'json',
-            success: function(res) {
-                // console.log(res);
-                if(res.length > 0){
-                    table2.button('.btnexport2').nodes().css("display", "block")
-                }
-                table2.clear().rows.add(res).draw();
-                loadingOut(loading);
-                $('.btnexport2').on('click', function() {
-                    var table22 = $('#table_re_cnAuto2').DataTable({
-                        data: res,
-                        destroy: true,
-                        dom: "<'floatRight'B><'clear'>frtip",
-                        buttons: [{
-                                text: 'Export csv',
-                                className:'btn btn-outline-success px-5 btnexport22',
-                                title: "Smart Farm Report Control",
-                                charset: 'UTF-8',
-                                extension: '.csv',
-                                extend: 'csv',
-                                format: 'YYYY-MM-dd',
-                                // fieldSeparator: ';',
-                                // fieldBoundary: '',
-                                filename: 'smart_farm_control_'+datetime,
-                                bom: true
-                            }
-                        ],drawCallback: function() {
-                    $('.btnexport22').click()
-                    setTimeout(function() {
-                            $('#table_re_cnAuto2').DataTable().destroy(false);
-                            }, 200)
-                        }
-                    });
-                })
-            }
-        });
-    }
-    function report_cnManual_table(mode_dwm){
-        var loading = verticalNoTitle();
-        // $('#hide3').css( 'display', 'block' );
-        $("#table_report_control_Manual").html('')
-        active_btn(mode_dwm);
-        $.ajax({
-            type: "POST",
-            url:'routes/tu/get_report_controlManual.php',
-            data: {
-                house_master: house_master,
-                mode : mode_dwm,
-                mode_report: $('#mode_report').val(),
-                config_cn : config_cn,
-                val_start : $(".val_start").val(),
-                val_end : $(".val_end").val(),
-            },
-            // dataType: 'json',
-            success: function(res) {
-                // console.log(res);
-                $("#table_report_control_Manual").html(res);
                 loadingOut(loading);
             }
         });
     }
-
 </script>

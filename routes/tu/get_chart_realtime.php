@@ -4,18 +4,25 @@ $house_master = $_POST["house_master"];
 $start_day = date("Y-m-d H:i:s", strtotime('-1 day'));//'-6 hour'));
 $stop_day = date("Y-m-d H:i:s");
 $numb = intval(substr($house_master, 5,10));
-$channel = 'round(data_temp_out_'.$numb.',1) AS temp_out,
-            round(data_hum_out_'.$numb.',1) AS hum_out,
-            round((data_light_out_'.$numb.'/54),1) AS light_out,
-            round(data_temp_in_'.$numb.',1) AS temp_in,
-            round(data_hum_in_'.$numb.',1) AS hum_in,
-            round((data_light_in_'.$numb.'/54),1) AS light_in,
-            round(data_soil_in_'.$numb.',1) AS soil_in';
 // echo $channel;
 // exit();
 if($_POST['eq'] == 0){
     $tb_name = 'tbn_data_tu';
+    $channel = 'round(data_temp_out_'.$numb.',1) AS temp_out,
+                round(data_hum_out_'.$numb.',1) AS hum_out,
+                round((data_light_out_'.$numb.'/1000),1) AS light_out,
+                round(data_temp_in_'.$numb.',1) AS temp_in,
+                round(data_hum_in_'.$numb.',1) AS hum_in,
+                round((data_light_in_'.$numb.'/1000),1) AS light_in,
+                round(data_soil_in_'.$numb.',1) AS soil_in';
 }else {
+    $channel = 'round(data_temp_out_'.$numb.',1) AS temp_out,
+                round(data_hum_out_'.$numb.',1) AS hum_out,
+                round((data_light_out_'.$numb.'/54),1) AS light_out,
+                round(data_temp_in_'.$numb.',1) AS temp_in,
+                round(data_hum_in_'.$numb.',1) AS hum_in,
+                round((data_light_in_'.$numb.'/54),1) AS light_in,
+                round(data_soil_in_'.$numb.',1) AS soil_in';
     $tb_name = 'tbn_data_tu_eq';
 }
 $sql = "SELECT data_timestamp, $channel FROM $tb_name WHERE data_sn = 'TUSMT' AND data_timestamp BETWEEN '$start_day' AND '$stop_day' ORDER BY data_timestamp ";

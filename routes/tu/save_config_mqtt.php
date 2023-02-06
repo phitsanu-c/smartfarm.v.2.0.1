@@ -113,8 +113,8 @@
                 // echo json_encode($decode2);
                 $mqtt->publish( $house_master.'/control/config/time_auto', json_encode($decode2), 1);
             }
-            $dbcon->prepare("INSERT INTO `tbn_control_config`(`cc_sn`, `cc_user`, `cc_submode`, `cc_submode_1`, `cc_submode_2`, `cc_submode_3`, `cc_submode_4`, `cc_submode_9`, `cc_submode_10`, `cc_submode_11`) VALUES (:sn, :user_control, :sub_mode, :sub_mode_1, :sub_mode_2, :sub_mode_3, :sub_mode_4, :sub_mode_9, :sub_mode_10, :sub_mode_11)")->execute($decode['sub_mode']);
             $mqtt->publish($house_master.'/control/set_config', json_encode($decode), 1);
+            $dbcon->prepare("INSERT INTO `tbn_control_config`(`cc_sn`, `cc_user`, `cc_submode`, `cc_submode_1`, `cc_submode_2`, `cc_submode_3`, `cc_submode_4`, `cc_submode_9`, `cc_submode_10`, `cc_submode_11`) VALUES (:sn, :user_control, :sub_mode, :sub_mode_1, :sub_mode_2, :sub_mode_3, :sub_mode_4, :sub_mode_9, :sub_mode_10, :sub_mode_11)")->execute($decode['sub_mode']);
             echo json_encode(['status' => "Insert_Success", 'data' => $mess ], JSON_UNESCAPED_UNICODE );
         }
         // เปลี่ยนโหมด
@@ -203,6 +203,7 @@
             // ];
             // }
             $mqtt->publish($house_master.'/control/loads/user_control', $_SESSION["account_user"], 1);
+            $mqtt->publish($house_master.'/control/config/time_auto', json_encode($decode2), 1);
             $mqtt->publish($house_master.'/control/set_config', json_encode($decode), 1);
             $decode['config_timeSet']['load_'.$channel]['sn'] = $house_master;
             $tb_name = 'tbn_control_au'.$channel;
@@ -213,8 +214,6 @@
                 :load_st_1,  :load_st_2,  :load_st_3,  :load_st_4,  :load_st_5,  :load_st_6,
                 :load_s_1,   :load_s_2,   :load_s_3,   :load_s_4,   :load_s_5,   :load_s_6,
                 :load_e_1,   :load_e_2,   :load_e_3,   :load_e_4,   :load_e_5,   :load_e_6)")->execute($decode['config_timeSet']['load_'.$channel]);
-
-            $mqtt->publish( $house_master.'/control/config/time_auto', json_encode($decode2), 1);
             echo json_encode(['status' => "Insert_Success", 'config_data' => $decode, 'config_time' => $decode2]);
         }
         // คั้งค่า time_Loop
@@ -255,29 +254,7 @@
                 'user_control' => $_SESSION["account_user"]
             ];
             $mqtt->publish($house_master.'/control/loads/user_control', $_SESSION["account_user"], 1);
-            $mqtt->publish( $house_master.'/control/set_config', json_encode($decode), 1);
-            $decode['config_timeLoop']['load_'.$channel]['sn'] = $house_master;
-            $tb_name = 'tbn_control_ausub_'.$channel;
-            $dbcon->prepare("INSERT INTO $tb_name (`load_sn`, `load_user`,
-                `load_st_1`, `load_st_2`, `load_st_3`, `load_st_4`, `load_st_5`, `load_st_6`,
-                `load_s_1`, `load_s_2`, `load_s_3`, `load_s_4`, `load_s_5`, `load_s_6`,
-                `load_cycle_1`, `load_cycle_2`, `load_cycle_3`, `load_cycle_4`, `load_cycle_5`, `load_cycle_6`,
-                `load_on_1`, `load_on_2`, `load_on_3`, `load_on_4`, `load_on_5`, `load_on_6`,
-                `load_off_1`, `load_off_2`, `load_off_3`, `load_off_4`, `load_off_5`, `load_off_6`)
-                VALUES (:sn, :user_control,
-                :load_st_1,     :load_st_2,     :load_st_3,     :load_st_4,     :load_st_5,     :load_st_6,
-                :load_s_1,      :load_s_2,      :load_s_3,      :load_s_4,      :load_s_5,      :load_s_6,
-                :load_cycle_1,  :load_cycle_2,  :load_cycle_3,  :load_cycle_4,  :load_cycle_5,  :load_cycle_6,
-                :load_on_1,     :load_on_2,     :load_on_3,     :load_on_4,     :load_on_5,     :load_on_6,
-                :load_off_1,    :load_off_2,    :load_off_3,    :load_off_4,    :load_off_5,    :load_off_6)")->execute($decode['config_timeLoop']['load_'.$channel]);
-
-            // $decode2['load_'.$channel]['load_st_1'] = floor($mess['load_st_1']);
-            // $decode2['load_'.$channel]['load_st_2'] = floor($mess['load_st_2']);
-            // $decode2['load_'.$channel]['load_st_3'] = floor($mess['load_st_3']);
-            // $decode2['load_'.$channel]['load_st_4'] = floor($mess['load_st_4']);
-            // $decode2['load_'.$channel]['load_st_5'] = floor($mess['load_st_5']);
-            // $decode2['load_'.$channel]['load_st_6'] = floor($mess['load_st_6']);
-            $decode2['load_'.$channel] = [];
+            $mqtt->publish( $house_master.'/control/set_config', json_encode($decode), 1);$decode2['load_'.$channel] = [];
             function add_auto($i, $num, $cycle, $channel_p, $mess, $decode2){
                 for ($v = 1; $v <= $cycle; $v++) {
                     if($num == 0){
@@ -334,6 +311,28 @@
                 $decode2 = add_auto($channel, array_sum($num6), $mess['load_cycle_6'], 6, $mess, $decode2);
             }
             $mqtt->publish( $house_master.'/control/config/time_auto', json_encode($decode2), 1);
+
+            $decode['config_timeLoop']['load_'.$channel]['sn'] = $house_master;
+            $tb_name = 'tbn_control_ausub_'.$channel;
+            $dbcon->prepare("INSERT INTO $tb_name (`load_sn`, `load_user`,
+                `load_st_1`, `load_st_2`, `load_st_3`, `load_st_4`, `load_st_5`, `load_st_6`,
+                `load_s_1`, `load_s_2`, `load_s_3`, `load_s_4`, `load_s_5`, `load_s_6`,
+                `load_cycle_1`, `load_cycle_2`, `load_cycle_3`, `load_cycle_4`, `load_cycle_5`, `load_cycle_6`,
+                `load_on_1`, `load_on_2`, `load_on_3`, `load_on_4`, `load_on_5`, `load_on_6`,
+                `load_off_1`, `load_off_2`, `load_off_3`, `load_off_4`, `load_off_5`, `load_off_6`)
+                VALUES (:sn, :user_control,
+                :load_st_1,     :load_st_2,     :load_st_3,     :load_st_4,     :load_st_5,     :load_st_6,
+                :load_s_1,      :load_s_2,      :load_s_3,      :load_s_4,      :load_s_5,      :load_s_6,
+                :load_cycle_1,  :load_cycle_2,  :load_cycle_3,  :load_cycle_4,  :load_cycle_5,  :load_cycle_6,
+                :load_on_1,     :load_on_2,     :load_on_3,     :load_on_4,     :load_on_5,     :load_on_6,
+                :load_off_1,    :load_off_2,    :load_off_3,    :load_off_4,    :load_off_5,    :load_off_6)")->execute($decode['config_timeLoop']['load_'.$channel]);
+
+            // $decode2['load_'.$channel]['load_st_1'] = floor($mess['load_st_1']);
+            // $decode2['load_'.$channel]['load_st_2'] = floor($mess['load_st_2']);
+            // $decode2['load_'.$channel]['load_st_3'] = floor($mess['load_st_3']);
+            // $decode2['load_'.$channel]['load_st_4'] = floor($mess['load_st_4']);
+            // $decode2['load_'.$channel]['load_st_5'] = floor($mess['load_st_5']);
+            // $decode2['load_'.$channel]['load_st_6'] = floor($mess['load_st_6']);
             echo json_encode(['status' => "Insert_Success", 'config_data' => $decode, 'config_time' => $decode2]);
         }
         // ตั้งค่า Sensor_Tracking
@@ -348,6 +347,7 @@
                 "temp_max"  => floor($mess['temp_max']),
                 "hum_min"   => floor($mess['hum_min']),
                 "hum_max"   => floor($mess['hum_max']),
+                "hum_max2"   => floor($mess['hum_max2']),
                 "light_min" => floor($mess['light_min']),
                 "light_max" => floor($mess['light_max']),
                 "soil_min"  => floor($mess['soil_min']),
@@ -364,16 +364,18 @@
                 "foggy_2"   => $mess['foggy_2'],
                 "spray"     => $mess['spray'],
                 "shading"   => $mess['shading'],
-                "user_control" => $_SESSION["account_user"]
+                "user_control" => $_SESSION["account_user"],
+                "light_in_mode" => floor($mess['light_in_mode'])
             ];
             // echo json_encode($decode['config_tracking']);
             // exit();
             $mqtt->publish( $house_master.'/control/set_config', json_encode($decode), 1);
+            unset($decode['config_tracking']['light_in_mode']);
             $decode['config_tracking']['sn'] = $house_master;
             $dbcon->prepare("INSERT INTO `tbn_control_sensor_tracking`(`auto_sensor_sn`, `auto_sensor_user`,
                 `auto_sensor_status_1`, `auto_sensor_status_2`, `auto_sensor_status_3`, `auto_sensor_status_4`,
                 `auto_sensor_temp_min`, `auto_sensor_temp_max`,
-                `auto_sensor_hum_min`, `auto_sensor_hum_max`,
+                `auto_sensor_hum_min`, `auto_sensor_hum_max`, `auto_sensor_hum_2`,
                 `auto_sensor_light_min`, `auto_sensor_light_max`,
                 `auto_sensor_soil_min`, `auto_sensor_soil_max`,
                 `auto_sensor_d_1`, `auto_sensor_d_2`, `auto_sensor_d_3`, `auto_sensor_d_4`,
@@ -381,7 +383,10 @@
                 `auto_sensor_fg_1`, `auto_sensor_fg_2`, `auto_sensor_sp`, `auto_sensor_sh`)
                 VALUES (:sn, :user_control,
                  :status_1, :status_2, :status_3, :status_4,
-                 :temp_min, :temp_max, :hum_min, :hum_max, :light_min, :light_max, :soil_min, :soil_max,
+                 :temp_min, :temp_max,
+                 :hum_min, :hum_max, :hum_max2,
+                 :light_min, :light_max,
+                 :soil_min, :soil_max,
                  :dripper_1, :dripper_2, :dripper_3, :dripper_4,
                  :fan_1, :fan_2, :fan_3, :fan_4,
                  :foggy_1, :foggy_2, :spray, :shading)

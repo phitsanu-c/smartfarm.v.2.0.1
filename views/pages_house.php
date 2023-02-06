@@ -46,7 +46,7 @@
     <!--end breadcrumb-->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-4">
         <?php
-        if($siteID == 3){ require '../routes/connectdb.php'; ?>
+        if($siteID == 3){ //require '../routes/connectdb.php'; ?>
             <div class="col-12 col-sm-12 col-md-4 col-lg-4  col-xl-3">
                 <a href="javascript:;" class="sw_house" url="<?= '#'.encode('2,3,KMUMT001') ?>">
                     <div class="card" style="padding: 1.25rem;  border-radius:20px">
@@ -174,7 +174,7 @@
             }
         }
         else {
-            require '../routes/connectdb.php';
+            // require '../routes/connectdb.php';
             $accountID = $_SESSION['account_id'];
             if ($_SESSION["sn"]['account_status'] == 1) {
                 $site_stmt = $dbcon->query("SELECT * FROM tbn_house WHERE house_siteID = '$siteID' ");
