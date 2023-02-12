@@ -447,7 +447,7 @@
                                                                                     <small class="form-control-feedback text_font_size L_start"> เริ่ม </small>
                                                                                 </div>
                                                                                 <div class="col-md-8">
-                                                                                    <input type="text" id="time_s_'.$i.'" class="form-control input_tSet" data-field="time" data-view="Popup" data-format="hh:mm:ss">
+                                                                                    <input type="text" id="time_s_'.$i.'" class="form-control input_tSet"><!--  data-field="time" data-view="Popup" data-format="hh:mm:ss" -->
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -459,7 +459,7 @@
                                                                                     <small class="form-control-feedback text_font_size L_stop"> สิ้นสุด </small>
                                                                                 </div>
                                                                                 <div class="col-md-8">
-                                                                                    <input type="text" id="time_e_'.$i.'" class="form-control input_tSet" data-field="time" data-view="Popup" data-format="hh:mm:ss">
+                                                                                    <input type="text" id="time_e_'.$i.'" class="form-control input_tSet"><!--  data-field="time" data-view="Popup" data-format="hh:mm:ss" -->
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -491,7 +491,7 @@
                                                                                 <small class="form-control-feedback text_font_size"> เริ่ม </small>
                                                                             </div>
                                                                             <div class="col-md-9">
-                                                                                <input type="text" id="time_sL_'.$i.'" class="form-control input_tLoop input_tL" data-field="time" data-view="Popup" data-format="hh:mm">
+                                                                                <input type="text" id="time_sL_'.$i.'" class="form-control input_tLoop input_tL"><!-- data-field="time" data-view="Popup" data-format="hh:mm" -->
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -836,7 +836,6 @@
         </div>
         <!-- exit Modal Control -->
     <?php } ?>
-
     <script>
         var house_master = '<?= $s_master["house_master"] ?>';
         var config_sn = $.parseJSON('<?= json_encode($config_sn) ?>');
@@ -908,6 +907,9 @@
                 $(".memu_dash").show().addClass("mm-active");
                 $(this).removeClass("mm-active");
                 $("#Modal_control").modal('show');
+                $('#Modal_control').on('shown.bs.modal', function() {
+                    $(document).off('focusin.modal');
+                });
                 // var client = null;
                 // // These are configs
                 // var hostname = "203.150.37.144"; //'103.2.115.15'; // 203.150.37.144   decccloud.com
@@ -3064,32 +3066,32 @@
                     // foggy
                     if (parseInt(tracking['status_2']) == 1) {
                         var nfgde = de;
-                    //     if (parseInt(config_cn.cn_status_9) == 1) {
-                    //         if(tracking.foggy_1 == 'ON'){
-                    //             var val_fg = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : เปิดเมื่อความชื้นอากาศต่ำกว่า '+tracking.hum_min+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+tracking.hum_max2+' %Rh', val_fg2 = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : เปิด และปิดเมื่อความชื้นอากาศสูงกว่า '+tracking.hum_max2+' %Rh';
-                    //         }else {
-                    //             var val_fg = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ปิด';
-                    //         }
-                    //     }
-                    //     else {
-                    //         var val_fg = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ไม่ใช้งาน';
-                    //     }
-                    //     // spray
-                    //     if (parseInt(config_cn.cn_status_11) == 1) {
-                    //         if(tracking.spray == 'ON'){
-                    //             var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : เปิดเมื่อความชื้นอากาศ '+tracking.hum_max2+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+tracking.hum_max+' %Rh';
-                    //         }else {
-                    //             var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ปิด';
-                    //         }
-                    //     }
-                    //     else {
-                    //         var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ไม่ใช้งาน'
-                    //     }
+                        // if (parseInt(config_cn.cn_status_9) == 1) {
+                        //     if(tracking.foggy_1 == 'ON'){
+                        //         var val_fg = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : เปิดเมื่อความชื้นอากาศต่ำกว่า '+tracking.hum_min+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+tracking.hum_max2+' %Rh', val_fg2 = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : เปิด และปิดเมื่อความชื้นอากาศสูงกว่า '+tracking.hum_max2+' %Rh';
+                        //     }else {
+                        //         var val_fg = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ปิด';
+                        //     }
+                        // }
+                        // else {
+                        //     var val_fg = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ไม่ใช้งาน';
+                        // }
+                        // // spray
+                        // if (parseInt(config_cn.cn_status_11) == 1) {
+                        //     if(tracking.spray == 'ON'){
+                        //         var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : เปิดเมื่อความชื้นอากาศ '+tracking.hum_max2+' %Rh และปิดเมื่อความชื้นอากาศสูงกว่า '+tracking.hum_max+' %Rh';
+                        //     }else {
+                        //         var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ปิด';
+                        //     }
+                        // }
+                        // else {
+                        //     var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ไม่ใช้งาน'
+                        // }
                     }
                     else {
                         var nfgde = true;
-                    //     var val_fg = val_fg2 = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ไม่ใช้งาน';
-                    //     var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ไม่ใช้งาน';
+                        // var val_fg = val_fg2 = 'พ่นหมอก 1 ('+config_cn.cn_name_9+') : ไม่ใช้งาน';
+                        // var val_sp = 'สเปรย์ ('+config_cn.cn_name_11+') : ไม่ใช้งาน';
                     }
                     // $('.check_fgl_1').html(' - '+val_fg);
                     // $('.check_fgl_1t').html('พ่นหมอก 1 ('+config_cn.cn_name_9+')');
@@ -3210,12 +3212,12 @@
                     if (mode == 'dash') {
                         $('.text_chum').addClass('text_blur');
                         // $('.text_ctemp').addClass('text_blur');
-                    //     $('.text_light').html(val_lig).addClass('text_blur');
+                        // $('.text_light').html(val_lig).addClass('text_blur');
                     }
                     else {
                         $('.text_chum').removeClass('text_blur');
-                    //     $('.text_ctemp').removeClass('text_blur');
-                    //     $('.text_light').html(val_lig).removeClass('text_blur');
+                        // $('.text_ctemp').removeClass('text_blur');
+                        // $('.text_light').html(val_lig).removeClass('text_blur');
                     }
                 }
                 function check_load(input, cls, name, val){
@@ -4944,30 +4946,139 @@
                 }
             });
         });
+        $('.input_tL').click(function(){
+            var val = $(this).val(), id = $(this).attr('id'), val_h, val_m;
+            // alert(val)
+            if (val == '') {
+                val_h = moment(new Date()).format('HH:mm').split(":")[0];
+                val_m = moment(new Date()).format('HH:mm').split(":")[1];
+            }else {
+                val_h = val.split(":")[0];
+                val_m = val.split(":")[1];
+            }
+            // var list_oh = [];
+            // for(var i = 0; i < 24; i++){
+            //     list_oh.push('<option value="'+i+'">');
+            // }
+            $('#Modal_control').modal('hide')
+            Swal.fire({
+                title: '<strong><b>ตั้งเวลา</b><br><i class="fadeIn animated bx bx-time" style="font-size:5em;"></i></strong>',
+                html://'<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>'+
+                '<div class="input-group">'+
+                    // '<input class="input-group-text form-control" type="text" readonly value="ระบุเวลา">'+
+                    '<input type="number" class="form-control text-center" id="time_h" placeholder="ชั่วโมง" min="0" max="23" value="'+val_h+'" onchange="if(Math.round(this.value) > 23){this.value = 23;}else if(this.value < 0){this.value = 0;}else { this.value = Math.round(this.value); }">'+// style="background-color: #fff; text-color: #191919">'+
+                    // '<option id="list_h">'+
+                    //     list_oh.join(" ")+
+                    //     // '<option value="0">'+
+                    //   '</option>'+
+                    '<span class="input-group-text">:</span>'+
+                    '<input type="number" class="form-control text-center" id="time_m" placeholder="นาที" min="0" max="59" value="'+val_m+'" onchange="if(Math.round(this.value) > 59){this.value = 59;}else if(this.value < 0){this.value = 0;}else { this.value = Math.round(this.value); }">'+ //style="background-color: #fff; text-color: #191919">'+
+                    // '<span class="input-group-text">:</span>'+
+                    // '<input type="number" class="form-control text-center" id="time_s" placeholder="วินาที"  min="0" max="59"  onchange="if(Math.round(this.value) > 59 ){this.value = 59; }else if(this.value < 0){this.value = 0;}else { this.value = Math.round(this.value); }">'+ //style="background-color: #fff; text-color: #191919"">'+// <span class="input-group-text"></span>'+
+                '</div><br>',
+                // '<input list="list_h" id="time_h"> : <input list="ice-cream-flavors" id="time_m"> : <input list="list_h" id="time_s">'+
+                // '<datalist id="ice-cream-flavors"><option value="Chocolate"><option value="Coconut"><option value="Mint"><option value="Strawberry"><option value="Vanilla"></datalist>',
+                'allowOutsideClick': false,
+                'showCancelButton': true,
+                'confirmButtonColor': '#32CD32',
+                'cancelButtonColor': '#FF3333',
+                'confirmButtonText': 'ตกลง',
+                'cancelButtonText': 'ยกเลิก',
+                'focusConfirm': false,
+                preConfirm: () => {
+                    const time_h = Swal.getPopup().querySelector('#time_h').value
+                    const time_m = Swal.getPopup().querySelector('#time_m').value
+                    // const time_s = Swal.getPopup().querySelector('#time_s').value
+                    if (!time_h) {
+                        Swal.showValidationMessage(`กรุณาระบุชั่วโมง`)
+                    }
+                    else if (!time_m) {
+                        Swal.showValidationMessage(`กรุณาระบุนาที`)
+                    }
+                    else {
+                        return { time_h: time_h, time_m: time_m }
+                    }
+                }
+            }).then((result) => {
+                // alert(Swal.DismissReason.cancel)
+                // console.log(result)
+                if (result.value) {
+                    $('#'+id).val(result.value.time_h+':'+result.value.time_m);
+                    $('#Modal_control').modal('show')
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    $('#Modal_control').modal('show')
+                }
+            });
+        });
+        $('.input_tSet').click(function(){
+            var val = $(this).val(), id = $(this).attr('id'), val_h, val_m, ntime_s;
+            // alert(val)
+            if (val == '') {
+                val_h = moment(new Date()).format('HH:mm:ss').split(":")[0];
+                val_m = moment(new Date()).format('HH:mm:ss').split(":")[1];
+                val_s = '00'//moment(new Date()).format('HH:mm:ss').split(":")[2];
+            }else {
+                val_h = val.split(":")[0];
+                val_m = val.split(":")[1];
+                val_s = val.split(":")[2];
+            }
+            // var list_oh = [];
+            // for(var i = 0; i < 24; i++){
+            //     list_oh.push('<option value="'+i+'">');
+            // }
+            $('#Modal_control').modal('hide')
+            Swal.fire({
+                title: '<strong><b>ตั้งเวลา</b><br><i class="fadeIn animated bx bx-time" style="font-size:5em;"></i></strong>',
+                html://'<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>'+
+                '<div class="input-group">'+
+                    // '<input class="input-group-text form-control" type="text" readonly value="ระบุเวลา">'+
+                    '<input type="number" class="form-control text-center" id="time_h" placeholder="ชั่วโมง" min="0" max="23" value="'+val_h+'" onchange="if(Math.round(this.value) > 23){this.value = 23;}else if(this.value < 0){this.value = 0;}else { this.value = Math.round(this.value); }">'+// style="background-color: #fff; text-color: #191919">'+
+                    // '<option id="list_h">'+
+                    //     list_oh.join(" ")+
+                    //     // '<option value="0">'+
+                    //   '</option>'+
+                    '<span class="input-group-text">:</span>'+
+                    '<input type="number" class="form-control text-center" id="time_m" placeholder="นาที" min="0" max="59" value="'+val_m+'" onchange="if(Math.round(this.value) > 59){this.value = 59;}else if(this.value < 0){this.value = 0;}else { this.value = Math.round(this.value); }">'+ //style="background-color: #fff; text-color: #191919">'+
+                    '<span class="input-group-text">:</span>'+
+                    '<input type="number" class="form-control text-center" id="time_s" placeholder="วินาที"  min="0" max="59" value="'+val_s+'" onchange="if(Math.round(this.value) > 59 ){this.value = 59; }else if(this.value < 0){this.value = 0;}else { this.value = Math.round(this.value); }">'+ //style="background-color: #fff; text-color: #191919"">'+// <span class="input-group-text"></span>'+
+                '</div><br>',
+                // '<input list="list_h" id="time_h"> : <input list="ice-cream-flavors" id="time_m"> : <input list="list_h" id="time_s">'+
+                // '<datalist id="ice-cream-flavors"><option value="Chocolate"><option value="Coconut"><option value="Mint"><option value="Strawberry"><option value="Vanilla"></datalist>',
+                'allowOutsideClick': false,
+                'showCancelButton': true,
+                'confirmButtonColor': '#32CD32',
+                'cancelButtonColor': '#FF3333',
+                'confirmButtonText': 'ตกลง',
+                'cancelButtonText': 'ยกเลิก',
+                'focusConfirm': false,
+                preConfirm: () => {
+                    const time_h = Swal.getPopup().querySelector('#time_h').value
+                    const time_m = Swal.getPopup().querySelector('#time_m').value
+                    const time_s = Swal.getPopup().querySelector('#time_s').value
+                    if (!time_h) {
+                        Swal.showValidationMessage(`กรุณาระบุชั่วโมง`)
+                    }
+                    else if (!time_m) {
+                        Swal.showValidationMessage(`กรุณาระบุนาที`)
+                    }
+                    else {
+                        if(time_s == ''){
+                            ntime_s = '00';
+                        }else {
+                            ntime_s = time_s
+                        }
+                        return { 'time_h': time_h, 'time_m': time_m, 'time_s': ntime_s}
+                    }
+                }
+            }).then((result) => {
+                // alert(Swal.DismissReason.cancel)
+                // console.log(result)
+                if (result.value) {
+                    $('#'+id).val(result.value.time_h+':'+result.value.time_m+':'+result.value.time_s);
+                    $('#Modal_control').modal('show')
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    $('#Modal_control').modal('show')
+                }
+            });
+        });
     </script>
-    <!-- // Swal.fire({
-    //     title: '<strong><b>ระบุเวลา</b><br><i class="fadeIn animated bx bx-time" style="font-size:5em;"></i></strong>',
-    //     html://'<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>'+
-    //     '<div class="input-group">'+
-    //         '<input type="number" class="form-control text-center" id="time_on0" placeholder="ชั่วโมง" min="0" max="23" onchange="if(Math.round(this.value) > 23){this.value = 23;}else if(this.value < 0){this.value = 0;}else { this.value = Math.round(this.value); }">'+// style="background-color: #fff; text-color: #191919">'+
-    //         '<span class="input-group-text">:</span>'+
-    //         '<input type="number" class="form-control text-center" id="time_on1" placeholder="นาที" min="0" max="59" onchange="if(Math.round(this.value) > 59){this.value = 59;}else if(this.value < 0){this.value = 0;}else { this.value = Math.round(this.value); }">'+ //style="background-color: #fff; text-color: #191919">'+
-    //         '<span class="input-group-text">:</span>'+
-    //         '<input type="number" class="form-control text-center" id="time_on2" placeholder="วินาที"  min="0" max="59"  onchange="if(Math.round(this.value) > 59 ){this.value = 59; }else if(this.value < 0){this.value = 0;}else { this.value = Math.round(this.value); }">'+ //style="background-color: #fff; text-color: #191919"">'+// <span class="input-group-text"></span>'+
-    //     '</div><br>',
-    //     allowOutsideClick: false,
-    //     showCancelButton: true,
-    //     confirmButtonColor: '#32CD32',
-    //     cancelButtonColor: '#FF3333',
-    //     confirmButtonText: 'ตกลง',
-    //     cancelButtonText: 'ยกเลิก'
-    // }).
-    // then((result) => {
-    //     if (result.value) {
-    //
-    //     }
-    // });
-    // if($("body").css("background-color") != 'rgb(247, 247, 255)'){
-    //     $(".swal2-modal").css('background-color', '#21214bf3');//Optional changes the color of the sweetalert
-    //     $(".swal2-title").css('color','#c0c8d1');
-    // } -->

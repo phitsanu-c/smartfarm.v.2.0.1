@@ -424,6 +424,7 @@
 
 </div>
 <script>
+
     var house_master = '<?= $house_master ?>';
     var login_user = '<?= $account_user ?>';
     var config_sn = $.parseJSON('<?= json_encode($config_sn) ?>');
