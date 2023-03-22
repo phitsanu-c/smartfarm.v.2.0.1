@@ -1,5 +1,5 @@
 <?php
-require '../connectdb2.php';
+require '../connectdb.php';
 $house_master = $_POST["house_master"];
 $start_day = date("Y/m/d - H:i:s", strtotime('-5 day'));//'-6 hour'));
 $stop_day = date("Y/m/d - H:i:s");

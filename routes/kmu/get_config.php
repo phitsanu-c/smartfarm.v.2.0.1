@@ -1,6 +1,6 @@
 <?php
     // session_start();
-    require "../connectdb2.php";
+    require "../connectdb.php";
 
     $house_master = $_POST["house_master"];
     $row_1 = $dbcon->query("SELECT * FROM tbn_house INNER JOIN tbn_site ON tbn_house.house_siteID = tbn_site.site_id WHERE house_master = '$house_master'")->fetch();

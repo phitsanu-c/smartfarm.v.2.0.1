@@ -49,14 +49,16 @@
     <script src="public/javascripts/decode.js"></script>
     <script src="routes/chack_login.js"></script>
     <!-- Bootstrap SW Toggle -->
-    <link rel="stylesheet" href="public/plugins/bootstrap4-toggle/bootstrap4-toggle.min.css">
-    <script src="public/plugins/bootstrap4-toggle/bootstrap4-toggle.min.js" charset="utf-8"></script>
+    <!-- <link rel="stylesheet" href="public/plugins/bootstrap4-toggle/bootstrap4-toggle.min.css">
+    <script src="public/plugins/bootstrap4-toggle/bootstrap4-toggle.min.js" charset="utf-8"></script> -->
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
-    <!-- Date time Picker Report -->
+    <!-- Date time Picker Report daterangepicker -->
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> -->
-    <!-- <link rel="stylesheet" href="public/stylesheets/daterangepicker.css">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script> -->
+    <link rel="stylesheet" href="public/stylesheets/daterangepicker.css">
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script> -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     <!-- datetime_control -->
     <!-- <link rel="stylesheet" href="public/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.min.css"> -->
@@ -64,8 +66,8 @@
     <!-- <script src="public/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.min.js"></script> -->
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-      <!-- <script src="//code.jquery.com/jquery-1.12.4.js"></script> -->
-      <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="//code.jquery.com/jquery-1.12.4.js"></script> -->
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!-- sweetalert2 -->
     <!-- <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet"> -->
     <!-- <link rel="stylesheet" href="@sweetalert2/theme-bootstrap-4/bootstrap-4.css"> -->
@@ -372,7 +374,7 @@
 
         <div id="dtBox"></div>
         <footer class="page-footer d-flex">
-            <p class="mb-0">© 2021 Smart Green House v.4.3.2</p>
+            <p class="mb-0">© 2021 Smart Green House v.2.1.2</p>
             <div class="ms-auto">
                 <img src="public/images/logo/decc.png" style="height: 20px; border: 0 solid #e5e5e5; padding: 0;">
                 <img src="public/images/logo/Ai5.0Agriculture.png" style="height: 38px; border: 0 solid #e5e5e5; padding: 0;">
@@ -417,9 +419,9 @@
     <!-- <script type="text/javascript" src="public/javascripts/echarts.4.8.0.js"></script> -->
 
     <!-- mqtt_plugin -->
-    <script src="public/plugins/mqtt_plugin/lib/mqttws31.js"></script>
+    <!-- <script src="public/plugins/mqtt_plugin/lib/mqttws31.js"></script> -->
     <!-- <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.js" type="text/javascript"></script>
 
     <!-- mqtt_plugin -->
     <!-- <script src="public/plugins/paho.javascript-1.1.0/lib/mqttws31.js"></script> -->
@@ -451,7 +453,7 @@
 
     <script src="public/plugins/apexcharts-bundle/js/apexcharts.js"></script>
 
-    <script src="routes/memu.js"></script>
+    <!-- <script src="routes/memu.js"></script> -->
     <!-- <script src="https://unpkg.com/bootstrap?@4.3.1/dist/js/bootstrap.min.js"></script> -->
     <script>
         // alert(url[0])
@@ -516,11 +518,11 @@
                                 // These are configs
                                 var hostname = "203.150.37.144"; //'103.2.115.15'; // 203.150.37.144   decccloud.com
                                 var port = "8083";
-                                var clientId = "mqtt_js_3074" + parseInt(Math.random() * 100000, 10);
+                                var clientId = "mqtt_js_5" + parseInt(Math.random() * 100000, 15);
                                 var count = 0;
 
                                 function connect() {
-                                    client = new Paho.MQTT.Client(hostname, Number(port), clientId);
+                                    client = new Paho.MQTT.Client(hostname, Number(port), '/mqtt', clientId);
                                     console.info('Connecting to Server: Hostname: ', hostname, '. Port: ', port, '. Client ID: ', clientId);
 
                                     client.onConnectionLost = onConnectionLost;
@@ -1109,11 +1111,11 @@
                                 // These are configs
                                 var hostname = "203.150.37.144"; //'103.2.115.15'; // 203.150.37.144   decccloud.com
                                 var port = "8083";
-                                var clientId = "mqtt_js_3074" + parseInt(Math.random() * 100000, 10);
+                                var clientId = "mqtt_js_4" + parseInt(Math.random() * 100000, 10);
                                 var count = 0;
 
                                 function connect() {
-                                    client = new Paho.MQTT.Client(hostname, Number(port), clientId);
+                                    client = new Paho.MQTT.Client(hostname, Number(port), '/mqtt', clientId);
                                     console.info('Connecting to Server: Hostname: ', hostname, '. Port: ', port, '. Client ID: ', clientId);
 
                                     client.onConnectionLost = onConnectionLost;
@@ -1138,7 +1140,7 @@
                                             // setInterval(function() {
                                             //     location.reload();
                                             // }, 30000);
-                                            console.log("subscribed");
+                                            console.log("subscribed "+house_master);
                                         }
                                     }
                                     client.subscribe(house_master + "/1/data_update/data_filter", options);
@@ -3616,7 +3618,7 @@
                     },
                     dataType: "json",
                     success: function(res) {
-                        console.log(res);
+                        // console.log(res);
                         var config_sn = res.config_sn;
                         var config_cn = res.config_cn;
                         var set_maxmin = res.set_maxmin;
@@ -3738,36 +3740,10 @@
                                 var port = "8083";
                                 var clientId = "mqtt_js_3074" + parseInt(Math.random() * 100000, 10);
 
-                                // var options = {
-                                //     port: '2096',
-                                //     host: 'ws://mqtt.deccbigdata.ml',
-                                //     keyPath: 'public/plugins/mqtt_plugin/key/key1.pem',
-                                //     certPath: 'public/plugins/mqtt_plugin/key/cert1.pem',
-                                //     rejectUnauthorized : false,
-                                //     //The CA list will be used to determine if server is authorized
-                                //     ca: ['public/plugins/mqtt_plugin/key/ca1.pem'],
-                                //     // protocol: 'wss',
-                                //     protocolId: 'MQTT',
-                                //     // username: 'qqq',
-                                //     // password: 'bbb',
-                                //     clientId: 'mqttjs_' + Math.random().toString(16).substr(2, 8)
-                                // };
-                                //
-                                // var client = mqtt.connect(options);
-                                //
-                                // // // client.subscribe('messages');
-                                // // // client.publish('messages', 'Current time is: ' + new Date());
-                                // // // client.on('message', function(topic, message) {
-                                // // console.log(message);
-                                // // });
-                                //
-                                // client.on('connect', function(){
-                                //     console.log('Connected');
-                                // });
                                 // return false
                                 function connect() {
                                     client = new Paho.MQTT.Client(hostname, Number(port), '/mqtt', clientId);
-                                    console.info('Connecting to Server: Hostname: ', hostname, '. Port: ', port, '. Client ID: ', clientId);
+                                    // console.info('Connecting to Server: Hostname: ', hostname, '. Port: ', port, '. Client ID: ', clientId);
 
                                     client.onConnectionLost = onConnectionLost;
                                     client.onMessageArrived = onMessageArrived;
@@ -3805,7 +3781,7 @@
                                     }
                                     client.subscribe(house_master + "/control/response", options);
                                     // client.subscribe(house_master + "/control/config/auto", options);
-                                    client.subscribe(house_master + "/monitor/_hardware/realtime", options);
+                                    client.subscribe("connect/status/"+house_master, options);
                                     client.subscribe("web_system", options);
                                     client.subscribe(house_master + "/control/loads/spanel", options);
                                 }
@@ -4245,7 +4221,7 @@
                                         var result = message.payloadString;
                                         var parseJSON = $.parseJSON(result);
                                         $('#val_config').val(result);
-                                        // console.log(parseJSON.mode);
+                                        // console.log(parseJSON);
                                         if(parseJSON.mode != "Manual"){ // auto
                                             var sub_mode = parseJSON.sub_mode;
                                             // $('#val_sw_manual').val(JSON.stringify(parseJSON.config_manual));
@@ -4357,26 +4333,31 @@
                                         $('.sw_mode_timeSet').prop('disabled', true);
                                         $('.sw_mode_timeLoop').prop('disabled', true);
                                     }
-                                    if(message.destinationName == house_master + "/monitor/_hardware/realtime"){
+                                    if(message.destinationName == "connect/status/"+house_master){
                                         var result = message.payloadString;
-                                        var parseJSON = $.parseJSON(result);
+                                        if(result == 'online' ){
+                                            $('.status_timeUpdate').html('ออนไลน์').removeClass('text-danger').addClass('text-success')
+                                        }else {
+                                            $('.status_timeUpdate').html('ออฟไลน์').removeClass('text-success').addClass('text-danger')
+                                        }
+                                        // var parseJSON = $.parseJSON(result);
                                         // var time_t = parseJSON['time'];
                                         // var ntime = time_t.substring(0, 5);
                                         // $(".time").html(ntime);
                                         // var data_ = parseJSON['data']
                                         // console.log(parseJSON);
                                         // alert(moment(new Date()).add(-5, 'minutes').format('YYYY-MM-DD HH:mm'));
-                                        if(timeoutId2 != 0){clearInterval(timeoutId2);}
-                                        timeoutId2 = setInterval(function() {
-                                            // console.log( moment(new Date(parseJSON['date']+' '+parseJSON['time'])).format('YYYY-MM-DD HH:mm:ss') +' >= '+ moment(new Date()).add(-1, 'minutes').format('YYYY-MM-DD HH:mm:ss'))
-                                            if(moment(new Date(parseJSON['date']+' '+parseJSON['time'])).format('YYYY-MM-DD HH:mm:ss') >= moment(new Date()).add(-1, 'minutes').format('YYYY-MM-DD HH:mm:ss') ){
-                                                $('.status_timeUpdate').html('ออนไลน์').removeClass('text-danger').addClass('text-success')
-                                                // console.log('a');
-                                            }else {
-                                                $('.status_timeUpdate').html('ออฟไลน์').removeClass('text-success').addClass('text-danger')
-                                                // console.log('b');
-                                            }
-                                        }, 1000);
+                                        // if(timeoutId2 != 0){clearInterval(timeoutId2);}
+                                        // timeoutId2 = setInterval(function() {
+                                        //     // console.log( moment(new Date(parseJSON['date']+' '+parseJSON['time'])).format('YYYY-MM-DD HH:mm:ss') +' >= '+ moment(new Date()).add(-1, 'minutes').format('YYYY-MM-DD HH:mm:ss'))
+                                        //     if(moment(new Date(parseJSON['date']+' '+parseJSON['time'])).format('YYYY-MM-DD HH:mm:ss') >= moment(new Date()).add(-1, 'minutes').format('YYYY-MM-DD HH:mm:ss') ){
+                                        //         $('.status_timeUpdate').html('ออนไลน์').removeClass('text-danger').addClass('text-success')
+                                        //         // console.log('a');
+                                        //     }else {
+                                        //         $('.status_timeUpdate').html('ออฟไลน์').removeClass('text-success').addClass('text-danger')
+                                        //         // console.log('b');
+                                        //     }
+                                        // }, 1000);
                                     }
                                     if(eq == 0){
                                         if(message.destinationName == house_master + "/data_sensor/filter") {
@@ -4939,12 +4920,13 @@
                                         // console.log(parseJSON)
 
                                         var parseJSON2 = $.parseJSON($('#val_config').val());
-                                        // console.log(parseJSON2)
+                                        var tracking = parseJSON2.config_tracking;
+                                        // console.log(tracking)
                                         // console.log($('#val_sw_manual').val());
                                         // return false;
                                         // alert($('.menu_config_auto').is(":hidden"))
                                         if (parseJSON.mode === 'Manual') {
-                                            $('.dash_mode').html('โหมด : กำหนดเอง').removeClass('btn-outline-primary').addClass('btn-outline-success')
+                                            $('.dash_mode').html('โหมด : กำหนดเอง').removeClass('btn-primary').addClass('btn-success')
                                             $('.sw_mode_Auto').removeClass('btn-success').addClass('btn-outline-success');
                                             $('.sw_mode_Manual').addClass('btn-success').removeClass('btn-outline-success');
                                             $('.ul_Auto').hide();
@@ -5151,7 +5133,7 @@
                                             }
                                         }
                                         else { // โหมดอัตโนมัติ
-                                            $('.dash_mode').html('โหมด : อัตโนมัติ').removeClass('btn-outline-success').addClass('btn-outline-primary')
+                                            $('.dash_mode').html('โหมด : อัตโนมัติ').removeClass('btn-success').addClass('btn-primary')
                                             $('.sw_mode_Auto').addClass('btn-success').removeClass('btn-outline-success')
                                             $('.sw_mode_Manual').removeClass('btn-success').addClass('btn-outline-success')
                                             $('.ul_Auto').show()
@@ -5255,10 +5237,10 @@
                                                 }
                                             }
                                             else { // Tracking
-                                                for (var i = 1; i <= 12; i++) {
-                                                    if (i <= 4) {
+                                                if (tracking.status_1 == 1) {
+                                                    for (var i = 1; i <= 4; i++) {
                                                         if (config_cn['cn_status_' + i] == 1) {
-                                                            if (parseJSON2.config_tracking['dripper_' + i] === 'ON') {
+                                                            if (tracking['dripper_' + i] === 'ON') {
                                                                 if (parseJSON['dripper_' + i] === 'OFF') {
                                                                     $(".dash_img_con_" + i).attr("src", "public/images/control/TU/sprinkler-off.svg");
                                                                 } else {
@@ -5272,56 +5254,137 @@
                                                             $(".dash_img_con_" + i).attr("src", "public/images/control/TU/Sprinkler_disable.svg");
                                                         }
                                                     }
-                                                    if (i > 4 && i <= 8) {
+                                                }
+                                                else {
+                                                    for (var i = 1; i <= 4; i++) {
+                                                        $(".dash_img_con_" + i).attr("src", "public/images/control/TU/Sprinkler_disable.svg");
+                                                    }
+                                                }
+                                                if (tracking.status_2 == 1 || tracking.status_3 == 1) {
+                                                    if (config_cn['cn_status_9'] == 1) {
+                                                        if (parseJSON['foggy_1'] === 'OFF') {
+                                                            $(".dash_img_con_9").attr("src", "public/images/control/TU/foggy-off.svg");
+                                                        } else {
+                                                            $(".dash_img_con_9").attr("src", "public/images/control/TU/foggy-on.svg");
+                                                        }
+                                                    }else {
+                                                        $(".dash_img_con_9").attr("src", "public/images/control/TU/foggy-disable.svg");
+                                                    }
+                                                    $(".dash_img_con_10").attr("src", "public/images/control/TU/foggy-disable.svg");
+                                                    if (config_cn['cn_status_11'] == 1) {
+                                                        if (parseJSON['spray'] === 'OFF') {
+                                                            $(".dash_img_con_11").attr("src", "public/images/control/TU/spray-off.svg");
+                                                        } else {
+                                                            $(".dash_img_con_11").attr("src", "public/images/control/TU/spray-on.svg");
+                                                        }
+                                                    }else {
+                                                        $(".dash_img_con_11").attr("src", "public/images/control/TU/spray-disable.svg");
+                                                    }
+                                                }else {
+                                                    $(".dash_img_con_9").attr("src", "public/images/control/TU/foggy-disable.svg");
+                                                    $(".dash_img_con_10").attr("src", "public/images/control/TU/foggy-disable.svg");
+                                                    $(".dash_img_con_11").attr("src", "public/images/control/TU/spray-disable.svg");
+                                                }
+                                                if (tracking.status_3 == 1) {
+                                                    for (var i = 1; i <= 4; i++) {
                                                         if (config_cn['cn_status_' + i] == 1) {
-                                                            if (parseJSON2.config_tracking['fan_' + (i - 4)] === 'ON') {
-                                                                if (parseJSON['fan_' + (i - 4)] === 'OFF') {
-                                                                    $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-off.svg");
+                                                            if (tracking['fan_' + i] === 'ON') {
+                                                                if (parseJSON['fan_' + i] === 'OFF') {
+                                                                    $(".dash_img_con_" + (i + 4)).attr("src", "public/images/control/TU/fan-off.svg");
                                                                 } else {
-                                                                    $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-on.svg");
+                                                                    $(".dash_img_con_" + (i + 4)).attr("src", "public/images/control/TU/fan-on.svg");
                                                                 }
                                                             } else {
-                                                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-disable.svg");
+                                                                $(".dash_img_con_" + (i + 4)).attr("src", "public/images/control/TU/fan-disable.svg");
                                                             }
                                                         }else {
-                                                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-disable.svg");
-                                                        }
-                                                    }
-                                                    if (i == 9) {
-                                                        if (config_cn['cn_status_' + i] == 1) {
-                                                            if (parseJSON['foggy_' + (i - 8)] === 'OFF') {
-                                                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-off.svg");
-                                                            } else {
-                                                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-on.svg");
-                                                            }
-                                                        }else {
-                                                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-disable.svg");
-                                                        }
-                                                    }
-                                                    if(i == 10){
-                                                        $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-disable.svg");
-                                                    }
-                                                    if (i == 11) {
-                                                        if (config_cn['cn_status_' + i] == 1) {
-                                                            if (parseJSON['spray'] === 'OFF') {
-                                                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/spray-off.svg");
-                                                            } else {
-                                                                $(".dash_img_con_" + i).attr("src", "public/images/control/TU/spray-on.svg");
-                                                            }
-                                                        }else {
-                                                            $(".dash_img_con_" + i).attr("src", "public/images/control/TU/spray-disable.svg");
-                                                        }
-                                                    }
-                                                    if (i == 12) {
-                                                        if (config_cn['cn_status_' + i] == 1) {
-                                                            if (parseJSON['shading'] === 'OFF') {
-                                                                $(".dash_img_con_" + i).attr("src", "public/images/control/Roof_ON2.png");
-                                                            } else {
-                                                                $(".dash_img_con_" + i).attr("src", "public/images/control/Roof_OFF2.png");
-                                                            }
+                                                            $(".dash_img_con_" + (i + 4)).attr("src", "public/images/control/TU/fan-disable.svg");
                                                         }
                                                     }
                                                 }
+                                                else {
+                                                    for (var i = 5; i <= 8; i++) {
+                                                        $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-disable.svg");
+                                                    }
+                                                }
+                                                if (tracking.status_4 == 1) {
+                                                    if (config_cn['cn_status_12'] == 1) {
+                                                        if (parseJSON['shading'] === 'OFF') {
+                                                            $(".dash_img_con_12").attr("src", "public/images/control/Roof_ON2.png");
+                                                        } else {
+                                                            $(".dash_img_con_12").attr("src", "public/images/control/Roof_OFF2.png");
+                                                        }
+                                                    }
+                                                }else {
+                                                    $(".dash_img_con_12").attr("src", "public/images/control/Roof_ON2.png");
+                                                }
+                                                // for (var i = 1; i <= 12; i++) {
+                                                //     if (i <= 4) {
+                                                //         if (config_cn['cn_status_' + i] == 1) {
+                                                //             if (tracking.config_tracking['dripper_' + i] === 'ON') {
+                                                //                 if (parseJSON['dripper_' + i] === 'OFF') {
+                                                //                     $(".dash_img_con_" + i).attr("src", "public/images/control/TU/sprinkler-off.svg");
+                                                //                 } else {
+                                                //                     $(".dash_img_con_" + i).attr("src", "public/images/control/TU/sprinkler-on.svg");
+                                                //                 }
+                                                //             } else {
+                                                //                 $(".dash_img_con_" + i).attr("src", "public/images/control/TU/Sprinkler_disable.svg");
+                                                //             }
+                                                //         }
+                                                //         else {
+                                                //             $(".dash_img_con_" + i).attr("src", "public/images/control/TU/Sprinkler_disable.svg");
+                                                //         }
+                                                //     }
+                                                //     if (i > 4 && i <= 8) {
+                                                //         if (config_cn['cn_status_' + i] == 1) {
+                                                //             if (tracking.config_tracking['fan_' + (i - 4)] === 'ON') {
+                                                //                 if (parseJSON['fan_' + (i - 4)] === 'OFF') {
+                                                //                     $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-off.svg");
+                                                //                 } else {
+                                                //                     $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-on.svg");
+                                                //                 }
+                                                //             } else {
+                                                //                 $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-disable.svg");
+                                                //             }
+                                                //         }else {
+                                                //             $(".dash_img_con_" + i).attr("src", "public/images/control/TU/fan-disable.svg");
+                                                //         }
+                                                //     }
+                                                //     if (i == 9) {
+                                                //         if (config_cn['cn_status_' + i] == 1) {
+                                                //             if (parseJSON['foggy_' + (i - 8)] === 'OFF') {
+                                                //                 $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-off.svg");
+                                                //             } else {
+                                                //                 $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-on.svg");
+                                                //             }
+                                                //         }else {
+                                                //             $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-disable.svg");
+                                                //         }
+                                                //     }
+                                                //     if(i == 10){
+                                                //         $(".dash_img_con_" + i).attr("src", "public/images/control/TU/foggy-disable.svg");
+                                                //     }
+                                                //     if (i == 11) {
+                                                //         if (config_cn['cn_status_' + i] == 1) {
+                                                //             if (parseJSON['spray'] === 'OFF') {
+                                                //                 $(".dash_img_con_" + i).attr("src", "public/images/control/TU/spray-off.svg");
+                                                //             } else {
+                                                //                 $(".dash_img_con_" + i).attr("src", "public/images/control/TU/spray-on.svg");
+                                                //             }
+                                                //         }else {
+                                                //             $(".dash_img_con_" + i).attr("src", "public/images/control/TU/spray-disable.svg");
+                                                //         }
+                                                //     }
+                                                //     if (i == 12) {
+                                                //         if (config_cn['cn_status_' + i] == 1) {
+                                                //             if (parseJSON['shading'] === 'OFF') {
+                                                //                 $(".dash_img_con_" + i).attr("src", "public/images/control/Roof_ON2.png");
+                                                //             } else {
+                                                //                 $(".dash_img_con_" + i).attr("src", "public/images/control/Roof_OFF2.png");
+                                                //             }
+                                                //         }
+                                                //     }
+                                                // }
                                             }
                                         }
                                     }
@@ -5329,11 +5392,11 @@
                                         var result = message.payloadString;
                                         // alert(house_master)
                                         if(result == 'lock'){
-                                            $('.dash_panel_mode').html('ปุ่มกดหน้าตู้ : ล็อค').removeClass('btn-outline-info').addClass('btn-outline-warning');
+                                            $('.dash_panel_mode').html('ปุ่มกดหน้าตู้ : ล็อค').removeClass('btn-info').addClass('btn-warning');
                                             $('.sw_mode_lock').addClass('active');
                                             $('.sw_mode_unlock').removeClass('active');
                                         }else {
-                                            $('.dash_panel_mode').html('ปุ่มกดหน้าตู้ : ปลดล็อค').removeClass('btn-outline-warning').addClass('btn-outline-info');
+                                            $('.dash_panel_mode').html('ปุ่มกดหน้าตู้ : ปลดล็อค').removeClass('btn-warning').addClass('btn-info');
                                             $('.sw_mode_lock').removeClass('active');
                                             $('.sw_mode_unlock').addClass('active');
                                         }
@@ -5824,7 +5887,134 @@
         // var date = moment(new Date()).add(-10, 'minutes').format('YYYY/MM/DD - HH:mm:ss');
         // console.log(date);
     </script>
+    <script type="text/javascript">
+        $(".memu_site").click(function() {
+            $(this).addClass('mm-active');
+            // $("#load_pages_site").load('views/pages_site.php');
+            if(url[1] == ''){
+                $(".memu_house").hide();
+                $(".memu_dash").hide();
+            }else{
+                $(".memu_house").removeClass("mm-active")
+                if(house_master === '' || house_master.length != 8){
+                    $(".memu_dash").hide();
+                }else{
+                    $(".memu_dash").show().removeClass("mm-active")
+                }
+            }
+            $(".memu_report").hide()
+            $('.memu_control').hide()
+            // if(url[0] == 4){
+            //     $(".memu_compare").show();
+            // }else{
+                $(".memu_compare").hide();
+            // }
+            $('#load_pages_site').show();
+            $('#load_pages_house').hide();
+            $('#load_pages_compare').hide();
+            $('#load_pages_dashboard').hide();
+            $('#load_pages_report').hide();
+            $('#load_pages_profile').hide();
+            $('.memu_setting').hide()
+        });
+        $(".memu_house").click(function() {
+            $(this).addClass('mm-active');
+            if(house_master === '' || house_master.length != 8){
+                $(".memu_dash").hide();
+            }else{
+                $(".memu_dash").removeClass("mm-active")
+            }
+            $(".memu_report").hide()
+            $('.memu_control').hide()
+            if(url[0] == 4){
+                $(".memu_compare").show();
+            }else{
+                $(".memu_compare").hide();
+            }
+            $('#load_pages_site').hide();
+            $('#load_pages_house').show();
+            $('#load_pages_compare').hide();
+            $('#load_pages_dashboard').hide();
+            $('#load_pages_report').hide();
+            $('#load_pages_profile').hide();
+            // $("#load_pages").load('views/pages_house.php?s='+url[1]);
+            $.ajax({
+                url: "views/pages_house.php",
+                method: "POST",
+                data: {
+                    s: url[1]
+                },
+                // dataType: "json",
+                success: function(res_dash) {
+                    $("#load_pages_house").html(res_dash);
+                    $('.sw_house').click(function(){
+                        window.location.hash = $(this).attr("url");
+                        location.reload();
+                        // alert($(this).attr("url"))
+                        // window.location.href = $(this).attr("url");
+                    })
+                }
+            })
+            $('.memu_setting').hide()
+        });
+        $(".memu_compare").click(function(){
+            $(this).addClass('mm-active');
+            $(".memu_house").removeClass("mm-active")
+            $('#load_pages_site').hide();
+            $('#load_pages_house').hide();
+            $("#load_pages_compare").show().load('routes/tu/pages_compare.php?s='+url[1]);
+            $('#load_pages_profile').hide();
+            $('.memu_setting').hide()
+        })
+        $(".memu_dash").click(function() {
+            $(this).addClass('mm-active');
+            $(".memu_report").show();
+            $(".memu_compare").hide();
 
+            $('#load_pages_site').hide();
+            $('#load_pages_house').hide();
+            $('#load_pages_compare').hide();
+            $('#load_pages_dashboard').show();
+            $('#load_pages_report').hide();
+            $('#load_pages_profile').hide();
+            $('.memu_setting').hide()
+        });
+        $(".memu_report").click(function() {
+            $('.memu_control').hide()
+            $(this).addClass('mm-active');
+            $(".memu_dash").show().removeClass("mm-active");
+            $('#load_pages_dashboard').hide();
+            $('#load_pages_report').show();
+            $('#load_pages_profile').hide();
+            $('.memu_setting').hide()
+        });
+        $(".menu_setting").click(function() {
+            $('.memu_setting').show().addClass('mm-active');
+            $(".memu_site").removeClass('mm-active');
+            $(".memu_house").removeClass("mm-active")
+            $(".memu_dash").removeClass('mm-active');
+            $('.memu_control').hide()
+            $(".memu_report").removeClass('mm-active');
+            $('#load_pages_site').hide();
+            $('#load_pages_house').hide();
+            $('#load_pages_compare').hide();
+            $('#load_pages_dashboard').hide();
+            $('#load_pages_report').hide();
+            $("#load_pages_profile").show();
+            $.ajax({
+                url: "routes/profile/setting_profile.php",
+                method: "post",
+                data: {
+                    // s_master: res.s_master,
+                    pt: $(this).attr('menu')
+                },
+                // dataType: "json",
+                success: function(resp) {
+                    $("#load_pages_profile").html(resp);
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

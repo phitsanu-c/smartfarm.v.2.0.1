@@ -1,5 +1,5 @@
 <?php
-    require "connectdb.php";
+    require "../connectdb.php";
     $siteID = $_GET["siteID"];
     $userID = $_SESSION['account_id'];
     if(!isset($_GET['us'])){

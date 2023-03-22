@@ -3,8 +3,24 @@
 require "../connectdb.php";
 $house_master = $_POST["house_master"];
 // $channel = $_POST["channel"];
+
 $row_master = $dbcon->query("SELECT * FROM tbn_house INNER JOIN tbn_site ON tbn_house.house_siteID = tbn_site.site_id WHERE house_master = '$house_master'")->fetch();
-$row_2 = $dbcon->query("SELECT * FROM tbn_dashstatus WHERE dashstatus_sn = '$house_master'")->fetch();
+$row_2 = $dbcon->query("SELECT *
+    -- dashstatus_sn,
+    -- dashstatus_1_1, dashstatus_1_2, dashstatus_1_3, dashstatus_1_4,
+    -- dashstatus_2_1, dashstatus_2_2, dashstatus_2_3, dashstatus_2_4,
+    -- dashstatus_3_1, dashstatus_3_2, dashstatus_3_3, dashstatus_3_4,
+    -- dashstatus_4_1, dashstatus_4_2, dashstatus_4_3, dashstatus_4_4,
+    -- dashstatus_5_1, dashstatus_5_2, dashstatus_5_3, dashstatus_5_4,
+    -- dashstatus_6_1, dashstatus_6_2, dashstatus_6_3, dashstatus_6_4,
+    -- dashstatus_7_1, dashstatus_7_2, dashstatus_7_3, dashstatus_7_4,
+    -- dashstatus_8_1, dashstatus_8_2, dashstatus_8_3, dashstatus_8_4,
+    -- dashstatus_9_1, dashstatus_9_2, dashstatus_9_3, dashstatus_9_4,
+    -- dashstatus_10_1, dashstatus_10_2, dashstatus_10_3, dashstatus_10_4
+ FROM tbn_dashstatus WHERE dashstatus_sn = '$house_master'")->fetch();
+// echo json_encode($row_2);
+// echo $row_2[42];
+// exit();
 $row_3 = $dbcon->query("SELECT * FROM tbn_dashname WHERE dashname_sn = '$house_master'")->fetch();
 $row_4 = $dbcon->query("SELECT * FROM tbn_dashchannel WHERE dashchannel_sn = '$house_master'")->fetch();
 $row_5 = $dbcon->query("SELECT * FROM tbn_dashmode WHERE dashmode_sn = '$house_master'")->fetch();
@@ -12,6 +28,7 @@ $row_9 = $dbcon->query("SELECT * FROM tbn_map_img WHERE map_sn = '$house_master'
 
 for($i = 1; $i <= 40; $i++){
     // if($row_2[($i+1)] == 1){
+    // echo ($i+4).'<br>';
         $dashStatus[$i] = intval($row_2[($i+1)]);
         $dashName[$i] = $row_3[($i+41)]; // บน
         $dashName2[$i] = $row_3[($i+1)];  // ล่าง
@@ -20,7 +37,7 @@ for($i = 1; $i <= 40; $i++){
         $imgMap[$i] = $row_9[($i+1)];
     // }
 }
-
+// exit();
 $row_sn = $dbcon->query("SELECT * FROM tb_sensor");
 foreach ($row_sn as $row_) {
     $sensor[] = $row_;
@@ -67,6 +84,7 @@ $set_maxmin = [
 ];
 echo json_encode([
     's_master'=> $row_master,
+    'dashStatus1'=> $row_2,
     'dashStatus'=> $dashStatus,
     'dashName'=> $dashName,
     'dashName2'=> $dashName2,

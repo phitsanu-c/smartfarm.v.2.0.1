@@ -62,7 +62,7 @@
                 $count_house = $dbcon->query("SELECT count(userST_houseID) FROM tbn_userst WHERE userST_accountID = '$accountID' AND userST_siteID ='$siteID'")->fetch(PDO::FETCH_BOTH);
             }
     ?>
-        <div class="col-12 col-sm-12 col-md-4 col-lg-4  col-xl-3">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-4  col-xl-3">
             <a href="
                 <?php
                     if($count_house[0] != 1){
@@ -74,7 +74,7 @@
                             echo $url_link .'#'.encode($row_['nWebv'].','.$row_["site_id"].','.$row_["house_master"]);
                         // }
                     } ?>">
-                <div class="card" style="padding: 1.25rem; border-radius:20px"><!-- height:350px; -->
+                <div class="card" style="padding: 1.25rem; border-radius:20px;     flex-direction: column;"><!-- height:350px; -->
                     <img src="public/images/site/<?= $row_["site_img"] ?>" style="height: 20vh; width: 100%;" class="card-img-top img-fluid" alt="site01">
                     <!-- <div class="card"> -->
                     <h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 15px; font-size 1vw">สถานที่ : <B><?= $row_["site_name"] ?></B></h6>

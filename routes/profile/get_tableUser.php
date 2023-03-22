@@ -1,5 +1,5 @@
 <?php
-    require "../routes/connectdb.php";
+    require "../connectdb.php";
     $user_id = $_SESSION['account_id'];
     $siteID = $_GET["siteID"];
     // echo $siteID;
@@ -25,7 +25,7 @@
         <tbody>
             <?php
             if ($_SESSION["sn"]['account_status'] == 1) {
-                $stmt = $dbcon->prepare("SELECT * FROM tbn_userst INNER JOIN tbn_account ON tbn_userst.userST_accountID = tbn_account.account_id INNER JOIN tbn_house ON tbn_userst.userST_houseID = tbn_house.house_id WHERE userST_siteID='$siteID' GROUP BY userST_accountID ");
+                $stmt = $dbcon->prepare("SELECT * FROM tbn_userst INNER JOIN tbn_account ON tbn_userst.userST_accountID = tbn_account.account_id INNER JOIN tbn_house ON tbn_userst.userST_houseID = tbn_house.house_id WHERE userST_siteID='$siteID'  "); //GROUP BY userST_accountID
             } else {
                 $stmt = $dbcon->prepare("SELECT * FROM tbn_userst INNER JOIN tbn_account ON tbn_userst.userST_accountID = tbn_account.account_id INNER JOIN tbn_house ON tbn_userst.userST_houseID = tbn_house.house_id WHERE userST_siteID='$siteID' AND userST_main='$user_id'  ");
             }
@@ -94,7 +94,7 @@
         $(".title_mUser").html("แก้ไขผู้ใช้งาน");
         $(".us_user_sel").show();
         $(".use_site").val($(".sel_main_site").val());
-        $(".use_house").load("routes/op_house.php?siteID="+$(".sel_main_site").val()+'&us=1').attr("disabled",true);
+        $(".use_house").load("routes/profile/op_house.php?siteID="+$(".sel_main_site").val()+'&us=1').attr("disabled",true);
         setTimeout(function() {
             $(".use_house").val(houseID);
             // alert(houseID)
@@ -139,7 +139,7 @@
             }).then((result) => {
             if (result.value) {
                 $.ajax({
-                    url: 'routes/save_setting.php',
+                    url: 'routes/profile/save_setting.php',
                     type: 'POST',
                     data: {
                         userST_id : $(this).attr('userST_id'),
@@ -164,7 +164,7 @@
                             return false;
                         }
                         if (data.status == "Delete_success"){
-                            $("#user_access").load("routes/get_tableUser.php?siteID="+$(".sel_main_site").val() );
+                            $("#user_access").load("routes/profile/get_tableUser.php?siteID="+$(".sel_main_site").val() );
                             if(data.count_userST === 0){
                                 swal({
                                     title: 'ลบข้อมูลสำเร็จ.',
@@ -187,7 +187,7 @@
                                             }).then((result) => {
                                             if (result.value) {
                                                 $.ajax({
-                                                    url: 'routes/save_setting.php',
+                                                    url: 'routes/profile/save_setting.php',
                                                     type: 'POST',
                                                     data: {
                                                         user_id : user_id,

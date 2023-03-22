@@ -47,9 +47,9 @@
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-4">
         <?php
         if($siteID == 3){ //require '../routes/connectdb.php'; ?>
-            <div class="col-12 col-sm-12 col-md-4 col-lg-4  col-xl-3">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
                 <a href="javascript:;" class="sw_house" url="<?= '#'.encode('2,3,KMUMT001') ?>">
-                    <div class="card" style="padding: 1.25rem;  border-radius:20px">
+                    <div class="card" style="padding: 1.25rem;  border-radius:20px; flex-direction: column;">
                         <img src="public/images/site/kmutt.jpg" style="height: 20vh; width: 100%;" class="card-img-top img-fluid" alt="site01">
                         <h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 15px">ชื่อ : <B>มจธ Master</B></h6>
                         <h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">ขนาด : <B>6x12</B></h6>
@@ -66,9 +66,9 @@
                     </div>
                 </a>
             </div>
-            <div class="col-12 col-sm-12 col-md-4 col-lg-4  col-xl-3">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4  col-xl-3">
                 <a href="javascript:;" class="sw_house" url="<?= '#'.encode('3,3,KMUWE001') ?>">
-                    <div class="card" style="padding: 1.25rem;  border-radius:20px">
+                    <div class="card" style="padding: 1.25rem; border-radius:20px; flex-direction: column;">
                         <img src="public/images/site/kmutt.jpg" style="height: 20vh; width: 100%;" class="card-img-top img-fluid" alt="site01">
                         <h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 15px">ชื่อ : <B>Wemos 1 มจธ.</B></h6>
                         <h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">ขนาด : <B>6x12</B></h6>
@@ -85,9 +85,10 @@
                     </div>
                 </a>
             </div>
-            <div class="col-12 col-sm-12 col-md-4 col-lg-4  col-xl-3">
+            <?php if($_SESSION['account_id'] != 5){ ?>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4  col-xl-3">
                 <a href="javascript:;" class="sw_house" url="<?= '#'.encode('3,3,KMUWE002') ?>">
-                    <div class="card" style="padding: 1.25rem;  border-radius:20px">
+                    <div class="card" style="padding: 1.25rem; border-radius:20px; flex-direction: column;">
                         <img src="public/images/site/kmutt.jpg" style="height: 20vh; width: 100%;" class="card-img-top img-fluid" alt="site01">
                         <h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 15px">ชื่อ : <B>Wemos 2 มจธ.</B></h6>
                         <h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">ขนาด : <B>6x12</B></h6>
@@ -104,26 +105,26 @@
                     </div>
                 </a>
             </div>
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4  col-xl-3">
-                    <a href="javascript:;" class="sw_house" url="<?= '#'.encode('2,3,KMUMT002') ?>">
-                        <div class="card" style="padding: 1.25rem;  border-radius:20px">
-                            <img src="public/images/site/kmutt.jpg" style="height: 20vh; width: 100%;" class="card-img-top img-fluid" alt="site01">
-                            <h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 15px">ชื่อ : <B>มจธ Master 2</B></h6>
-                            <h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">ขนาด : <B>6x12</B></h6>
-                            <?php
-                                $house_master = "KMUMT001";
-                                // echo $house_master;
-                                $row_t = $dbcon->query("SELECT data_timestamp FROM tb_data_sensor WHERE data_sn = '$house_master' ORDER BY data_timestamp DESC")->fetch();
-                                if(DateTime::createFromFormat("Y/m/d - H:i:s", $row_t[0])->format("Y-m-d H:i:s") > date("Y-m-d H:i:s", strtotime('-30 minute')) ){
-                                    echo '<h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">สถานะ : <B class="text-success"> ออนไลน์</B> ';
-                                }else {
-                                    echo '<h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">สถานะ : <B class="text-danger"> ออฟไลน์</B>';
-                                }
-                            ?>
-                        </div>
-                    </a>
-                </div>
-        <?php }
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4  col-xl-3">
+                <a href="javascript:;" class="sw_house" url="<?= '#'.encode('2,3,KMUMT002') ?>">
+                    <div class="card" style="padding: 1.25rem;  border-radius:20px; flex-direction: column;">
+                        <img src="public/images/site/kmutt.jpg" style="height: 20vh; width: 100%;" class="card-img-top img-fluid" alt="site01">
+                        <h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 15px">ชื่อ : <B>มจธ Master 2</B></h6>
+                        <h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">ขนาด : <B>6x12</B></h6>
+                        <?php
+                            $house_master = "KMUMT001";
+                            // echo $house_master;
+                            $row_t = $dbcon->query("SELECT data_timestamp FROM tb_data_sensor WHERE data_sn = '$house_master' ORDER BY data_timestamp DESC")->fetch();
+                            if(DateTime::createFromFormat("Y/m/d - H:i:s", $row_t[0])->format("Y-m-d H:i:s") > date("Y-m-d H:i:s", strtotime('-30 minute')) ){
+                                echo '<h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">สถานะ : <B class="text-success"> ออนไลน์</B> ';
+                            }else {
+                                echo '<h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">สถานะ : <B class="text-danger"> ออฟไลน์</B>';
+                            }
+                        ?>
+                    </div>
+                </a>
+            </div>
+        <?php }}
         elseif ($siteID == 10) {
             $accountID = $_SESSION['account_id'];
             $house_sn = 'TUSMT';
@@ -135,9 +136,9 @@
             }
             // for($i = 1; $i<=8; #$i++){ }
             foreach ($site_stmt as $row_) {?>
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4  col-xl-3">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4  col-xl-3">
                     <a href="javascript:;" class="sw_house" url="<?= '#'.encode($row_['house_webv'].','.$row_["house_siteID"].','.$row_["house_master"] ) ?>">
-                        <div class="card" style="padding: 1.25rem;  border-radius:20px">
+                        <div class="card" style="padding: 1.25rem;  border-radius:20px; flex-direction: column;">
                             <img src="<?php if($row_["house_img"] == ""){echo "public/images/default.jpg";}else{echo "public/images/house/".$row_["house_img"];} ?>" style="height: 20vh; width: 100%;" class="card-img-top img-fluid" alt="site01">
                             <h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 15px">ชื่อ : <B><?= $row_["house_name"] ?></B></h6>
                             <h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">ขนาด : <B><?= substr($row_["house_size"],9,13) ?></B></h6>
@@ -148,7 +149,7 @@
                                 if($row_online == ''){
                                     echo '<h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">สถานะ : <B class="text-danger"> ออฟไลน์</B>';
                                 }else {
-                                    if($row_online[0] == 'connected' ){
+                                    if($row_online[0] == 'online' ){
                                         echo '<h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">สถานะ : <B class="text-success"> ออนไลน์</B> ';
                                     }else {
                                         echo '<h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">สถานะ : <B class="text-danger"> ออฟไลน์</B>';
@@ -193,9 +194,9 @@
                 // echo $url_link;
                 // echo substr($row_["house_master"],0,3);
                 // $url_link . ?>
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4  col-xl-3">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4  col-xl-3">
                     <a href="javascript:;" class="sw_house" url="<?= '#'.encode($row_['house_webv'].','.$row_["house_siteID"].','.$row_["house_master"] ) ?>">
-                        <div class="card" style="padding: 1.25rem;  border-radius:20px">
+                        <div class="card" style="padding: 1.25rem;  border-radius:20px; flex-direction: column;">
                             <img src="<?php if($row_["house_img"] == ""){echo "public/images/default.jpg";}else{echo "public/images/house/".$row_["house_img"];} ?>" style="height: 20vh; width: 100%;" class="card-img-top img-fluid" alt="site01">
                             <h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 15px">ชื่อ : <B><?= $row_["house_name"] ?></B></h6>
                             <h6 class="card-title text-bold text-responsive3 text-center" style="margin-top: 10px">ขนาด : <B><?= substr($row_["house_size"],9,13) ?></B></h6>

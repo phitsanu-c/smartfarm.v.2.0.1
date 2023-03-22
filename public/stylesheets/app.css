@@ -1961,7 +1961,7 @@ input.search-control-2::placeholder {
     align-items: center;
     height: 60px;
     border-left: 1px solid #f0f0f0;
-    margin-left: 1rem
+    /* margin-left: 1rem */
 }
 
 .dropdown-large {
@@ -2227,21 +2227,12 @@ input.search-control-2::placeholder {
     cursor: pointer
 }
 
-@media only screen and (min-width: 921px) {
+@media only screen and (max-width: 500px) {
     .text-responsive {
-        font-size: 1.5vw
+        font-size: 22px
     }
-    .text-responsive2 {
-        font-size: 1.2vw
-    }
-    .text-responsive3 {
-        font-size: 1.1vw
-    }
-    .img-hight {
-        height: 25vh;
-    }
-    .sensor-responsive {
-        width: 10vh
+    .control-mode .row {
+        --bs-gutter-x: 0;
     }
 }
 
@@ -2249,38 +2240,14 @@ input.search-control-2::placeholder {
     .text-responsive {
         font-size: 20px
     }
-    .text-responsive2 {
-        font-size: 22px
-    }
-    .text-responsive3 {
-        font-size: 22px
-    }
-    .sensor-responsive {
-        width: 88px
-    }
-    .control-text {
-        font-size: 13.5px
-    }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (min-width: 921px) {
     .text-responsive {
-        font-size: 22px
+        font-size: 1.5vw
     }
-    .text-responsive2 {
-        font-size: 22px
-    }
-    .text-responsive3 {
-        font-size: 22px
-    }
-    .sensor-responsive {
-        width: 80px
-    }
-    .control-text {
-        font-size: 10px
-    }
-    .control-mode .row {
-        --bs-gutter-x: 0;
+    .img-hight {
+        height: 25vh;
     }
 }
 
@@ -2489,5 +2456,181 @@ input.search-control-2::placeholder {
         .chat-top-header-menu {
             display: none
         }
+    }
+}
+/* ---------------------------------------------------- */
+.dash_img_con {
+    width:10vw
+}
+.text_re {
+    border: 1px solid transparent;
+    border-color: #6c757d;
+    text-align: center!important;
+    font-size: 14px;
+}
+.rec_auto {
+    border: 1px solid transparent;
+    border-color: #6c757d; font-size:12px;
+    text-align: center!important;
+    font-size: 14px;
+}
+.text_chtb {
+    border: 1px solid transparent;
+    border-color: #6c757d;
+    text-align: center!important;
+    font-size: 14px;
+}
+.text_L {
+    border: 1px solid transparent;
+    border-color: #6c757d;
+    text-align: center!important;
+    font-size: 14px;
+}
+@media only screen and (max-width: 1559px) {
+    .text_re { font-size: 12px; }
+    .rec_auto { font-size: 12px; }
+}
+@media only screen and (max-width: 1448px) {
+    .text_re { font-size: 0.75vw; }
+    .rec_auto { font-size: 0.75vw; }
+}
+@media only screen and (max-width: 1399px) {
+    .text_re { font-size: 14px; }
+    .rec_auto { font-size: 14px; }
+}
+@media only screen and (min-width: 1200px) {
+    .text-responsive2 {
+        font-size: 1.04vw
+    }
+    .text-fontsize {
+        font-size: 1.43vw
+    }
+    .img-responsive {
+        width: 5vw;
+    }
+}
+@media only screen and (max-width: 1199px) { /* min 1169px */
+    .text-responsive2 {
+        font-size: 1vw
+    }
+    .text-fontsize {
+        font-size: 1.35vw
+    }
+    .img-responsive {
+        width: 5vw;
+    }
+    @media only screen and (max-width: 1174px) {
+        .text_re { font-size: 12px; }
+    }
+}
+@media only screen and (max-width: 1168px) { /* min 1025px */
+    .text-responsive2 {
+        font-size: 0.74vw
+    }
+    .text-fontsize {
+        font-size: 1vw
+    }
+    .img-responsive {
+        width: 5vw;
+    }
+    @media only screen and (max-width: 1100px) {
+        .text_L { font-size: 12px; }
+        @media only screen and (max-width: 1079px) {
+            .text_re { font-size: 11.6px; }
+        }
+        @media only screen and (max-width: 1063px) {
+            .text_re { font-size: 13px; }
+        }
+    }
+    @media only screen and (max-width: 1042px) {
+        .text_chtb { font-size: 13px; }
+    }
+}
+@media only screen and (max-width: 1024px) { /* min 992px */
+    .text-responsive2 { font-size: 1.37vw }
+    .text-fontsize { font-size: 1.88vw }
+    .img-responsive { width: 7vw; }
+    .text_chtb { font-size: 14px; }
+    .text_L { font-size: 14px; }
+    .text_re { font-size: 14px; }
+}
+@media only screen and (max-width: 991px) { /* min 855px */
+    .text-responsive2 {
+        font-size: 1.5vw
+    }
+    .text-fontsize {
+        font-size: 2.04vw
+    }
+    .img-responsive {
+        width: 7vw;
+    }
+}
+@media only screen and (max-width: 854px) { /* min 768px */
+    .text-responsive2 { font-size: 1.3vw }
+    .text-fontsize { font-size: 1.78vw }
+    .img-responsive { width: 7vw; }
+    @media only screen and (max-width: 793px) {
+        .text_chtb { font-size: 13px; }
+    }
+}
+@media only screen and (max-width: 767px) {
+    .text-responsive2 { font-size: 1.54vw; }
+    .text-fontsize { font-size: 2.11vw; }
+    .img-responsive { width: 10vw; }
+    .text_re { font-size: 2vw; }
+    .rec_auto { font-size: 2vw; }
+    .text_chtb { font-size: 14px; }
+    @media only screen and (max-width: 608px) {
+        .text_chtb { font-size: 12px; }
+    }
+    @media only screen and (max-width: 590px) {
+        .text_L { font-size: 12px; }
+    }
+    @media only screen and (max-width: 566px) {
+        .text_chtb { font-size: 11px; }
+    }
+    @media only screen and (max-width: 545px) {
+        .text_chtb { font-size: 10px; }
+    }
+}
+@media only screen and (max-width: 539px) {
+    .text-responsive2 { font-size: 4vw }
+    .text-fontsize { font-size: 5vw }
+    .img-responsive { width: 30vw; }
+    .dash_img_con { width: 30vw; }
+    h5 { font-size: 5vw; }
+    .btn-group-lg>.btn, .btn-lg {
+        padding: 0.5rem 1rem;
+        font-size: 1.25vw;
+        border-radius: 0.3rem;
+    }
+    .text_re { font-size: 12px; }
+    .rec_auto { font-size: 10px; }
+    .text_chtb { font-size: 14px; }
+    .text_L { font-size: 13px; }
+    @media only screen and (max-width: 416px) {
+        .rec_auto { font-size: 7.5px; }
+        .text_L { font-size: 12px; }
+    }
+}
+
+.control-text {
+    font-size: 13.5px;
+}
+@media only screen and (max-width: 991px) {
+    .control-text { font-size: 12px; }
+}
+@media only screen and (max-width: 626px) {
+    .control-text { font-size: 2vw; }
+}
+.text_btn{
+    font-size: 0.83em;
+}
+@media only screen and (max-width: 322px) {
+    .control-text {
+        font-size: 1.7vw;
+    }
+    .text_btn{
+        font-size: 10px;
     }
 }

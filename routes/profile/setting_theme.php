@@ -1,6 +1,6 @@
 <?php
     // session_start();
-    require "connectdb.php";
+    require "../connectdb.php";
 
         if($_POST["theme"] == "light-theme" || $_POST["theme"] == "dark-theme" || $_POST["theme"] == "semi-dark" || $_POST["theme"] == "minimal-theme"){
             $postdata = $_POST["theme"];

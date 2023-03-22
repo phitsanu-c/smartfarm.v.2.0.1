@@ -1,5 +1,5 @@
 <?php
-    require "connectdb.php";
+    require "../connectdb.php";
     $user_id = $_SESSION['account_id'];
     // echo $_POST["mode_insert"];
     // exit();
@@ -833,12 +833,12 @@
             'p5' => $n_img,
             'p6' => $n_pass2
         ];
-        // echo json_encode($data);
+        // echo json_encode($_POST["u_house"]);
         // exit();
         $sql = "INSERT INTO `tbn_account` (`account_user`, `account_pass`, `account_email`, `account_tel`, `account_img`, `account_pa`) VALUE (:p1, :p2, :p3,:p4, :p5, :p6)";
         if ($dbcon->prepare($sql)->execute($data) === TRUE) {
             $last_id = $dbcon->lastInsertId();
-            if($_POST["u_house"] != 0){
+            if(intval($_POST["u_house"]) != 0){
                 $data2 = [
                     'p1' => $last_id,
                     'p2' => $_POST["u_site"],
@@ -853,8 +853,15 @@
                 }
             }else {
                 $siteID = $_POST["u_site"];
-                $_stmt = $dbcon->query("SELECT * FROM tbn_userst INNER JOIN tbn_house ON tbn_userst.userST_houseID = tbn_house.house_id WHERE tbn_userst.userST_accountID='$user_id' AND tbn_userst.userST_siteID = '$siteID' GROUP BY `userST_houseID` ");
+                // echo "SELECT * FROM tbn_userst INNER JOIN tbn_house ON tbn_userst.userST_houseID = tbn_house.house_id WHERE tbn_userst.userST_accountID='$user_id' AND tbn_userst.userST_siteID = '$siteID' GROUP BY `userST_houseID` ";
+
+                if ($_SESSION["sn"]['account_status'] == 1) {
+                    $_stmt = $dbcon->query("SELECT * FROM tbn_house WHERE house_siteID = '$siteID'");
+                }else {
+                    $_stmt = $dbcon->query("SELECT * FROM tbn_userst INNER JOIN tbn_house ON tbn_userst.userST_houseID = tbn_house.house_id WHERE tbn_userst.userST_accountID='$user_id' AND tbn_userst.userST_siteID = '$siteID' GROUP BY `userST_houseID` ");
+                }
                 foreach ($_stmt as $row_) {
+                    // echo $row_["house_id"];
                     $data2 = [
                         'p1' => $last_id,
                         'p2' => $siteID,
@@ -870,8 +877,8 @@
                 }
             }
             // exit();
-            echo json_encode(['status' => "Insert_success", "data" => ""], JSON_UNESCAPED_UNICODE );
-            // exit();
+            echo json_encode(['status' => "Insert_success", "data" => $data2], JSON_UNESCAPED_UNICODE );
+            exit();
         }else{
             echo json_encode(['status' => "Insert_Error"], JSON_UNESCAPED_UNICODE );
             exit();
@@ -921,7 +928,7 @@
         $puser_id = $_POST['user_id'];
         if ($dbcon->prepare("DELETE FROM tbn_userst WHERE userST_id = :id")->execute(['id'=>$_POST["userST_id"]]) === TRUE) {
             $chack_user = $dbcon->query("SELECT COUNT('userST_id') FROM tbn_userst WHERE userST_accountID = '$puser_id' ")->fetch();
-            echo json_encode(['status' => "Delete_success",'count_userST' => 0/*$chack_user[0]*/], JSON_UNESCAPED_UNICODE );
+            echo json_encode(['status' => "Delete_success",'count_userST' => $chack_user[0]], JSON_UNESCAPED_UNICODE );
         }
     }
     if($_POST["mode_insert"] == "delete_account"){

@@ -1,22 +1,12 @@
 <?php
     session_start();
 
-    $db["host"] = "deccbigdata.com";
-    // $db["host"] = "203.159.93.76";
+        // $db["host"] = "103.2.115.246";
+    $db["host"] = "192.168.1.221";
     $db["user"] = "root2";
-    $db["pass"] = "Tt@67235520";
-    $db["name"] = "db_smartfarm"; //"inet_mqtt_smart_farm"; //"smart_farm_mqtt";
+    $db["pass"] = "";
+    $db["name"] = "db_smartfarm";
 
-    // $db["host"] = "203.150.37.144/";
-    // $db["user"] = "root";
-    // $db["pass"] = "67235520";
-    // $db["name"] = "test_query_data";
-
-    // new decc
-    // $db["host"] = "203.150.37.144/";
-    // $db["user"] = "root";
-    // $db["pass"] = "";
-    // $db["name"] = "smart_farm_mqtt";
     try{
         $dbcon = new PDO( "mysql:host=".$db["host"]."; dbname=".$db["name"]."", $db["user"], $db["pass"],
         array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8" ));
@@ -27,9 +17,10 @@
 
     //วันที่
     date_default_timezone_set('Asia/Bangkok');
-    $today_date=date("d-m-Y");
-    $day_date=date("Y/m/d");
+    // $today_date=date("d-m-Y");
+    // $day_date=date("Y/m/d");
     $today_time=date("H:i");
+    echo '<br>'.date("H:i");
 
 
 

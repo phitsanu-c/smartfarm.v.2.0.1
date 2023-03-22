@@ -1,6 +1,5 @@
 <?php
-    // session_start();
-require "connectdb.php";
+require "../connectdb.php";
 $user_id = $_SESSION['account_id'];
 $houseID = $_GET["houseID"];
     echo '<option value="0">เลือกผู้ใช้งาน</option>';

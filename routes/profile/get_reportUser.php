@@ -1,5 +1,5 @@
 <?php
-    require "connectdb.php";
+    require "../connectdb.php";
     $siteID = $_POST['siteID'];
     $status = $_POST['status'];
 ?>

@@ -14,7 +14,7 @@ console.log(house_master);
 // Chack user_status
 
 $.getJSON('routes/login.php', function(msg) {
-    console.log(msg);
+    // console.log(msg);
     // return false;
     $(".user-img").attr("src", "public/images/users/" + msg.image);
     $(".user_name").html(msg.name_login);
@@ -276,7 +276,7 @@ function toggleTheme(val) {
         var theme = "light-theme";
     }
     $.ajax({
-        url: "routes/setting_theme.php",
+        url: "routes/profile/setting_theme.php",
         method: "post",
         data: {
             theme: theme

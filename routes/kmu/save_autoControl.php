@@ -1,5 +1,5 @@
 <?php
-    require '../connectdb2.php';
+    require '../connectdb.php';
     require '../tu/phpMQTT.php';
     $host = '203.150.37.144';     // change if necessary
     $port = 1883;                     // change if necessary

@@ -35,23 +35,23 @@
                 <div class="row">
                     <div class="col-12">
                         <ul class="nav nav-pills mb-1" role="tablist">
-                            <li class="nav-item col-12 col-sm-6 col-lg-3 col-xl-3 mb-1" role="presentation">
-                                <a class="nav-link active r_reSensor text-center" data-bs-toggle="pill" href="#pills_report_sn" role="tab" aria-selected="true" style="border: 1px solid transparent; border-color: #6c757d;">
+                            <li class="nav-item col-12 col-sm-6 cols-lgs-3-1 mb-1" role="presentation">
+                                <a class="nav-link active r_reSensor text_L" data-bs-toggle="pill" href="#pills_report_sn" role="tab" aria-selected="true">
                                     <div class="tab-title">ข้อมูลสภาพแวดล้อม</div>
                                 </a>
                             </li>
-                            <li class="nav-item col-12 col-sm-6 col-lg-3 col-xl-3 mb-1" role="presentation">
-                                <a class="nav-link r_reControl text-center" data-bs-toggle="pill" href="#pills_report_cn" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
+                            <li class="nav-item col-12 col-sm-6 cols-lgs-3-1 mb-1" role="presentation">
+                                <a class="nav-link r_reControl text_L" data-bs-toggle="pill" href="#pills_report_cn" role="tab" aria-selected="false">
                                     <div class="tab-title">ประวัติการทำงาน</div>
                                 </a>
                             </li>
-                            <li class="nav-item col-12 col-sm-6 col-lg-3 col-xl-3 mb-1" role="presentation">
-                                <a class="nav-link r_reAutoControl text-center" data-bs-toggle="pill" href="#pills_report_cnAuto" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
+                            <li class="nav-item col-12 col-sm-6 cols-lgs-3-2 mb-1" role="presentation">
+                                <a class="nav-link r_reAutoControl text_L" data-bs-toggle="pill" href="#pills_report_cnAuto" role="tab" aria-selected="false">
                                     <div class="tab-title">ประวัติการตั้งค่าโหมดอัตโนมัติ</div>
                                 </a>
                             </li>
-                            <li class="nav-item col-12 col-sm-6 col-lg-3 col-xl-3 mb-1" role="presentation">
-                                <a class="nav-link r_reManualControl text-center" data-bs-toggle="pill" href="#pills_report_cnManual" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
+                            <li class="nav-item col-12 col-sm-6 cols-lgs-3-2 mb-1" role="presentation">
+                                <a class="nav-link r_reManualControl text_L" data-bs-toggle="pill" href="#pills_report_cnManual" role="tab" aria-selected="false">
                                     <div class="tab-title">ประวัติการตั้งค่าโหมดกำหนดเอง</div>
                                 </a>
                             </li>
@@ -60,23 +60,23 @@
                     </div>
                 </div>
 
-                <div class="d-sm-flex">
-                    <div class="d-flex col-lg-6 col-xl-6 col-sm-12">
-                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_day">24 ชั่วโมง</button>
-                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_week">7 วัน</button>
-                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_month">30 วัน</button>
-                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_from_to">กำหนดเอง</button>
-                            <button type="button" class="col-3 btn btn-outline-secondary px-2 all_last">last 100 data</button>
+                <div class="d-sm-flex row">
+                    <div class="d-flex col-lg-9 col-xl-9 col-md-9 col-sm-8 col-12">
+                        <button type="button" class="btn btn-outline-secondary px-2 text_L all_day">24 ชั่วโมง</button>
+                        <button type="button" class="btn btn-outline-secondary px-2 text_L all_week">7 วัน</button>
+                        <button type="button" class="btn btn-outline-secondary px-2 text_L all_month">30 วัน</button>
+                        <button type="button" class="btn btn-outline-secondary px-2 text_L all_from_to">กำหนดเอง</button>
+                        <button type="button" class="btn btn-outline-secondary px-2 text_L all_last">last 100 data</button>
                     </div>
-                    <ul class="ms-auto col-lg-3 col-md-4 col-xl-3 col-12 nav nav-pills mode_sn" role="tablist">
+                    <ul class="ms-auto col-xl-3 col-lg-3 col-md-3 col-sm-4 col-12 nav nav-pills mode_sn mt-1" role="tablist">
                         <li class="nav-item col-6" role="presentation">
-                            <a class="nav-link active text-center re_ch" data-bs-toggle="pill" href="#p-chart" role="tab" aria-selected="true" style="border: 1px solid transparent; border-color: #6c757d;">
-                                <i class="fadeIn animated bx bx-line-chart"></i> กราฟ
+                            <a class="nav-link active text_chtb re_ch" data-bs-toggle="pill" href="#p-chart" role="tab" aria-selected="true">
+                                <i class="fadeIn animated bx bx-line-chart"></i>กราฟ
                             </a>
                         </li>
                         <li class="nav-item col-6" role="presentation">
-                            <a class="nav-link text-center re_tb" data-bs-toggle="pill" href="#p-table" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
-                                <i class="fadeIn animated bx bx-table"></i> ตาราง
+                            <a class="nav-link text_chtb re_tb" data-bs-toggle="pill" href="#p-table" role="tab" aria-selected="false">
+                                <i class="fadeIn animated bx bx-table"></i>ตาราง
                             </a>
                         </li>
                     </ul>
@@ -101,23 +101,23 @@
                         <div class="row">
                             <div class="col-12">
                                 <ul class="nav nav-pills mb-1" role="tablist">
-                                    <li class="nav-item col-12 col-sm-6 col-lg-3 col-xl-3 mb-1" role="presentation">
-                                        <a class="nav-link re_mode text-center" href="javaScript:;" style="border: 1px solid transparent; border-color: #6c757d;">
+                                    <li class="nav-item col-12 col-sm-6 col-lg-2 col-xl-2 mb-1" role="presentation">
+                                        <a class="nav-link text_re re_mode" href="javaScript:;">
                                             <div class="tab-title">การเปลี่ยนโหมด</div>
                                         </a>
                                     </li>
                                     <li class="nav-item col-12 col-sm-6 col-lg-3 col-xl-3 mb-1" role="presentation">
-                                        <a class="nav-link re_tr text-center" href="javaScript:;" style="border: 1px solid transparent; border-color: #6c757d;">
+                                        <a class="nav-link text_re re_tr" href="javaScript:;">
                                             <div class="tab-title">การตั้งค่าโหมดตามเซนเซอร์</div>
                                         </a>
                                     </li>
                                     <li class="nav-item col-12 col-sm-6 col-lg-3 col-xl-3 mb-1" role="presentation">
-                                        <a class="nav-link re_tm text-center" href="javaScript:;" style="border: 1px solid transparent; border-color: #6c757d;">
+                                        <a class="nav-link text_re re_tm" href="javaScript:;">
                                             <div class="tab-title">การตั้งค่าโหมดตั้งเวลาทำงาน</div>
                                         </a>
                                     </li>
-                                    <li class="nav-item col-12 col-sm-6 col-lg-3 col-xl-3 mb-1" role="presentation">
-                                        <a class="nav-link re_tml text-center" href="javaScript:;" style="border: 1px solid transparent; border-color: #6c757d;">
+                                    <li class="nav-item col-12 col-sm-6 col-lg-4 col-xl-4 mb-1" role="presentation">
+                                        <a class="nav-link text_re re_tml" href="javaScript:;">
                                             <div class="tab-title">การตั้งค่าโหมดตั้งเวลาทำงานต่อเนื่อง</div>
                                         </a>
                                     </li>
@@ -198,32 +198,32 @@
                                 for($i=1; $i <= 12; $i++){
                                     if($config_cn['cn_status_'.$i] == 1){
                                         if($i <= 4){
-                                            echo '<li class="col-4 col-lg-1 col-xl-1 nav-item text-center" role="presentation">
-                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
+                                            echo '<li class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 col-xxl-1 nav-item text-center" role="presentation">
+                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;">
                                                     <div class="tab-title">น้ำหยด '.$i.'</div>
                                                 </a>
                                             </li>';
                                         }elseif ($i > 4 && $i <= 8) {
-                                            echo '<li class="col-4 col-lg-1 col-xl-1 nav-item text-center li_loop" role="presentation">
-                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
+                                            echo '<li class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 col-xxl-1 nav-item text-center li_loop" role="presentation">
+                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;">
                                                     <div class="tab-title">พัดลม '.($i-4).'</div>
                                                 </a>
                                             </li>';
                                         }elseif ($i > 8 && $i <= 10) {
-                                            echo '<li class="col-4 col-lg-1 col-xl-1 nav-item text-center" role="presentation">
-                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
+                                            echo '<li class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 col-xxl-1 nav-item text-center" role="presentation">
+                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;">
                                                     <div class="tab-title">พ่นหมอก '.($i-8).'</div>
                                                 </a>
                                             </li>';
                                         }elseif ($i == 11) {
-                                            echo '<li class="col-4 col-lg-1 col-xl-1 nav-item text-center" role="presentation">
-                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
+                                            echo '<li class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 col-xxl-1 nav-item text-center" role="presentation">
+                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;">
                                                     <div class="tab-title">สเปรย์</div>
                                                 </a>
                                             </li>';
                                         }elseif ($i == 12) {
-                                            echo '<li class="col-4 col-lg-1 col-xl-1 nav-item text-center li_loop" role="presentation">
-                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;" style="border: 1px solid transparent; border-color: #6c757d; font-size:12px;">
+                                            echo '<li class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 col-xxl-1 nav-item text-center li_loop" role="presentation">
+                                                <a class="nav-link rec_auto" rec_auto="'.$i.'" href="javascript:;">
                                                     <div class="tab-title">พรางแสง</div>
                                                 </a>
                                             </li>';
@@ -1360,17 +1360,13 @@
     }
 </script>
 <script type="text/javascript">
+    sw_dwm_active(1);
     $('.r_reSensor').click(function(){
-        $(".all_last").hide();
         $('.mode_sn').show()
         ch_radio('temp');
         $(".mode_dwm").val('');
         $('#mode_report').val('re_sensor');
-        $(".all_day").removeClass('active')
-        $(".all_week").removeClass('active')
-        $(".all_month").removeClass('active')
-        $(".all_from_to").removeClass('active')
-        $(".all_last").removeClass('active')
+        sw_dwm_active(1)
         $('#chart_report').html('')
         $('#table_report').html('')
         // $('#table_re_Sensor').wrap('<div id="hide0" style="display:none"/></div>');
@@ -1379,14 +1375,9 @@
         $('.val_end').val('').removeClass('is-invalid');
     })
     $('.r_reControl').click(function(){
-        $(".all_last").show();
         $('.mode_sn').hide()
         $('#mode_report').val('re_conteol_log');
-        $(".all_day").removeClass('active')
-        $(".all_week").removeClass('active')
-        $(".all_month").removeClass('active')
-        $(".all_from_to").removeClass('active')
-        $(".all_last").removeClass('active')
+        sw_dwm_active(2);
         $(".mode_dwm").val('');
         // $('#tb_re_cn').wrap('<div id="hide" style="display:none"/>');
         // $('#hide').css( 'display', 'none' );
@@ -1395,9 +1386,8 @@
         $('.val_end').val('').removeClass('is-invalid');
     })
     $('.r_reAutoControl').click(function(){
-        $(".all_last").show();
         $('.mode_sn').hide();
-        menu_re_auto();
+        sw_dwm_active(3);
         $('.val_start').val('').removeClass('is-invalid');
         $('.val_end').val('').removeClass('is-invalid');
         $('.rec_auto_ul').hide();
@@ -1409,7 +1399,7 @@
         $('.re_mode').click(function(){
             if($(this).hasClass('active') == false){
                 $('.rec_auto_ul').hide();
-                menu_re_auto();
+                sw_dwm_active(3);
                 $(this).addClass('active');
                 $('.re_tr').removeClass('active');
                 $('.re_tm').removeClass('active');
@@ -1426,7 +1416,7 @@
         $('.re_tr').click(function(){
             if($(this).hasClass('active') == false){
                 $('.rec_auto_ul').hide();
-                menu_re_auto();
+                sw_dwm_active(3);
                 $('.re_mode').removeClass('active');
                 $(this).addClass('active');
                 $('.re_tm').removeClass('active');
@@ -1442,7 +1432,7 @@
         });
         $('.re_tm').click(function(){
             if($(this).hasClass('active') == false){
-                menu_re_auto();
+                sw_dwm_active(3);
                 $('.rec_auto_ul').show();
                 $('.li_loop').show();
                 $('.re_mode').removeClass('active');
@@ -1460,7 +1450,7 @@
         });
         $('.re_tml').click(function(){
             if($(this).hasClass('active') == false){
-                menu_re_auto();
+                sw_dwm_active(3);
                 $('.rec_auto_ul').show();
                 $('.li_loop').hide();
                 $('.re_mode').removeClass('active');
@@ -1485,27 +1475,12 @@
                 report_control($('.mode_dwm').val());
             }
         });
-        function menu_re_auto(){
-            $('.mode_dwm').val('');
-            $('.rec_auto').removeClass('active')
-            $(".all_day").removeClass('active')
-            $(".all_week").removeClass('active')
-            $(".all_month").removeClass('active')
-            $(".all_from_to").removeClass('active')
-            $(".all_last").removeClass('active')
-            $("#table_report_control_Auto").html('');
-            $("#AutoMode_select_ul").val('');
-        }
-    })
+    });
     $('.r_reManualControl').click(function(){
         $(".all_last").show();
         $('.mode_sn').hide()
         $('#mode_report').val('re_conteol_Manual');
-        $(".all_day").removeClass('active')
-        $(".all_week").removeClass('active')
-        $(".all_month").removeClass('active')
-        $(".all_from_to").removeClass('active')
-        $(".all_last").removeClass('active')
+        sw_dwm_active(4);
         $(".mode_dwm").val('');
         $("#table_report_control_Manual").html('')
         // $('#table_re_cnManual').wrap('<div id="hide3" style="display:none"/>');
@@ -1561,5 +1536,27 @@
                 loadingOut(loading);
             }
         });
+    }
+    function sw_dwm_active(num){
+        // alert($(window).width())
+        if(num == 1){
+            $(".all_day").addClass("col").removeClass('active');
+            $(".all_week").addClass("col").removeClass('active');
+            $(".all_month").addClass("col").removeClass('active');
+            $(".all_from_to").addClass("col").removeClass('active');
+            $(".all_last").hide().removeClass('active');
+        }else {
+            $(".all_day").removeClass('col active');
+            $(".all_week").removeClass('col active');
+            $(".all_month").removeClass('col active');
+            $(".all_from_to").removeClass('col active');
+            $(".all_last").show().removeClass('active');
+        }
+        if(num == 3){
+            $('.mode_dwm').val('');
+            $('.rec_auto').removeClass('active')
+            $("#table_report_control_Auto").html('');
+            $("#AutoMode_select_ul").val('');
+        }
     }
 </script>

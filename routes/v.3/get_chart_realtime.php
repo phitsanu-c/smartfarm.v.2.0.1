@@ -1,5 +1,5 @@
 <?php
-require '../connectdb2.php';
+require '../connectdb.php';
 $house_master = $_POST["house_master"];
 $start_day = date("Y/m/d - H:i:s", strtotime('-1 day'));//'-6 hour'));
 $stop_day = date("Y/m/d - H:i:s");
@@ -124,7 +124,7 @@ echo json_encode([
     'soil'  => $data3,
     'Nsoil' => $NameS,
     'UnitS' => $unitS,
-    
+
     'light' => $data4,
     'Nlight' => $NameL,
     'UnitL'  => $unitL
