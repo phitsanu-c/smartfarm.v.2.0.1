@@ -64,71 +64,37 @@
         <div class="col-xl-4 col-lg-4 col-md-3 col-sm-12 col-12 d-flex">
             <div class="card radius-10">
                 <div class="card-body row">
-                    <div class="card col-md-12 col-sm-6 radius-10 shadow-none ">
+                    <div class="card col-md-12 col-sm-6 radius-10 shadow-none " style="flex-direction:row">
                         <?php if($s_master["house_img"] == ''){echo '<img src="public/images/site/'. $house_img .'" alt="..." class="card-img ">';}
                         else {echo '<img src="public/images/house/'. $s_master["house_img"] .'" alt="..." class="card-img ">';} ?>
                     </div>
                     <div class="card col-md-12 col-sm-6 radius-10 shadow-none">
                         <div class="card-body border radius-10 shadow-none mb-3">
-                            <!-- <div class="col-12"> -->
-                                <div class="d-flex">
-                                    <h5 class="text-responsive2">สถานที่ : <b>
-                                            <?= $s_master["site_name"] ?>
-                                        </b></h5>
-                                </div>
-                            <!-- </div> -->
-                            <!-- <div class="col-12"> -->
-                                <div class="d-flex">
-                                    <h5 class="text-responsive2">โรงเรือน : <b>
-                                            <?= $s_master["house_name"] ?>
-                                        </b></h5>
-                                </div>
-                            <!-- </div> -->
-                            <!-- <div class="col-12"> -->
-                                <!-- <div class="card-body radius-10 shadow-none"> -->
-                                <div class="d-flex">
-                                    <h5 class="text-responsive2">ที่ตั้ง : <b>
-                                            <?= $s_master["site_address"] ?>
-                                        </b></h5>
-                                </div>
-                                <!-- </div> -->
-                            <!-- </div> -->
-                            <!-- <div class="col-12"> -->
-                                <!-- <div class="card-body radius-10 shadow-none"> -->
-                                <div class="d-flex">
-                                    <h5 class="text-responsive2">สถานะโรงเรือน : <b class="status_timeUpdate"></b></h5>
-                                </div>
-                                <!-- </div> -->
-                            <!-- </div> -->
-                            <!-- <div class="col-12"> -->
-                                <!-- <div class="card-body radius-10 shadow-none"> -->
-                                <div class="d-flex">
-                                    <h5 class="text-responsive2">ขนาดโรงเรือน : <b><?= substr($s_master["house_size"],9,13) ?></b> เมตร</h5>
-                                </div>
-                                <!-- </div> -->
-                            <!-- </div> -->
+                            <div class="d-flex">
+                                <span class="text-responsive2">สถานที่ : <b> <?= $s_master["site_name"] ?> </b></span>
+                            </div>
+                            <div class="d-flex">
+                                <span class="text-responsive2">โรงเรือน : <b> <?= $s_master["house_name"] ?> </b></span>
+                            </div>
+                            <div class="d-flex">
+                                <span class="text-responsive2">ที่ตั้ง : <b> <?= $s_master["site_address"] ?> </b></span>
+                            </div>
+                            <div class="d-flex">
+                                <span class="text-responsive2">สถานะโรงเรือน : <b class="status_timeUpdate"></b></span>
+                            </div>
+                            <div class="d-flex">
+                                <span class="text-responsive2">ขนาดโรงเรือน : <b><?= substr($s_master["house_size"],9,13) ?></b> เมตร</span>
+                            </div>
                             <?php if($config['userLevel'] < 3){?>
-                            <!-- <div class="col-12"> -->
-                                <!-- <div class="card-body radius-10 shadow-none"> -->
                                 <div class="d-flex">
-                                    <h5 class="text-responsive2">ระบบอินเตอร์เน็ต : <b>Internet SIM</b></h5>
+                                    <span class="text-responsive2">ระบบอินเตอร์เน็ต : <b>Internet SIM</b></span>
                                 </div>
-                                <!-- </div> -->
-                            <!-- </div> -->
-                            <!-- <div class="col-12"> -->
-                                <!-- <div class="card-body radius-10 shadow-none"> -->
                                 <div class="d-flex">
-                                    <h5 class="text-responsive2">หมายเลขอินเตอร์เน็ต : <b><?php if($s_master["site_internet"] != ''){echo $s_master["site_internet"];}else {echo $s_master['house_internet']; } ?></b></h5>
+                                    <span class="text-responsive2">หมายเลขอินเตอร์เน็ต : <b><?php if($s_master["site_internet"] != ''){echo $s_master["site_internet"];}else {echo $s_master['house_internet']; } ?></b></span>
                                 </div>
-                                <!-- </div> -->
-                            <!-- </div>
-                            <div class="col-12"> -->
-                                <!-- <div class="card-body radius-10 shadow-none"> -->
                                 <div class="d-flex">
-                                    <h5 class="text-responsive2">วันหมดอายุ : <b><?php if($s_master["site_internetO"] != ''){echo $s_master["site_internetO"];}else {echo $s_master['house_internetO']; } ?></b></h5>
+                                    <span class="text-responsive2">วันหมดอายุ : <b><?php if($s_master["site_internetO"] != ''){echo $s_master["site_internetO"];}else {echo $s_master['house_internetO']; } ?></b></span>
                                 </div>
-                                <!-- </div> -->
-                            <!-- </div> -->
                             <?php } ?>
                             <!-- <div class="col-12">
                                 <div class="d-flex">
@@ -184,28 +150,22 @@
                     <?php if($config_sn['sn_status_1'] == 1 || $config_sn['sn_status_2'] == 1 || $config_sn['sn_status_3'] == 1){?>
                         <div class="card radius-10 border shadow-none">
                             <div class="card-body">
-                                <h5 class="card-title text-center">ข้อมูลเซนเซอร์นอกโรงเรือน</h5>
+                                <h5 class="card-title text-center"><b>ข้อมูลเซนเซอร์นอกโรงเรือน</b></h5>
                                 <div class="row text-center">
                                     <?php for($i = 1; $i <= 3; $i++){
                                             if($config_sn['sn_status_'.$i] == 1){ ?>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-12">
                                         <div class="card-body border radius-10 shadow-none mb-3">
                                             <div class="col">
-                                                <h5 class="card-title text-responsive2 mt-2 ">
-                                                    <B>
-                                                        <?php //$config_sn['sn_name_'.$i]
-                                                            if($i == 1){echo "อุณหภูมิ";}elseif($i == 2){ echo "ความชื้น"; }elseif($i == 3){ echo "ความเข้มแสง"; }
-                                                        ?>
-                                                    </B>
-                                                </h5>
+                                                <b class="text-nameSN"> <?php if($i == 1){echo "อุณหภูมิ";}elseif($i == 2){ echo "ความชื้น"; }elseif($i == 3){ echo "ความเข้มแสง"; } ?> </b>
                                                 <div class="ms-auto mt-2 image-popups">
                                                     <?php if($config_sn["sn_imgMap_".$i] != ""){
                                                         echo '<a href="public/images/img_map/'.$config_sn["sn_imgMap_".$i].'"><i class="lni lni-map-marker "></i></a>';
                                                     }?>
                                                 </div>
                                             </div>
-                                            <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle img-responsive" style=" margin-top:10px; text-align: center!important;">
-                                            <h5 class="card-text text-center dash_data__<?= $i ?> text-fontsize" style="margin-top:20px;">
+                                            <img src="" alt="..." class="dash_img_<?= $i ?> img-resSN">
+                                            <h5 class="text-data dash_data__<?= $i ?>">
                                             </h5>
                                         </div>
                                     </div>
@@ -217,24 +177,22 @@
                     <?php } ?>
                     <div class="card radius-10 border shadow-none">
                         <div class="card-body">
-                            <h5 class="card-title text-center">ข้อมูลเซนเซอร์ในโรงเรือน</h5>
+                            <h5 class="card-title text-center"><b>ข้อมูลเซนเซอร์ในโรงเรือน</b></h5>
                             <div class="row text-center">
                                 <?php for($i = 4; $i <= 7; $i++){
                                     if($config_sn['sn_status_'.$i] == 1){ ?>
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-12">
                                     <div class="card-body border radius-10 shadow-none mb-3">
                                         <div class="col">
-                                            <h5 class="card-title text-responsive2 text-center mt-2 ">
-                                                <B> <?php if($i == 4){echo "อุณหภูมิ";}elseif($i == 5){ echo "ความชื้น"; }elseif($i == 6){ echo "ความเข้มแสง"; }elseif($i == 7){ echo "ความชื้นดิน"; } ?> </B>
-                                            </h5>
+                                            <B class="text-nameSN"> <?php if($i == 4){echo "อุณหภูมิ";}elseif($i == 5){ echo "ความชื้น"; }elseif($i == 6){ echo "ความเข้มแสง"; }elseif($i == 7){ echo "ความชื้นดิน"; } ?> </B>
                                             <div class="ms-auto mt-2 image-popups">
                                                 <?php if($config_sn["sn_imgMap_".$i] != ""){
                                                         echo '<a href="public/images/img_map/'.$config_sn["sn_imgMap_".$i].'"><i class="lni lni-map-marker"></i></a>';
                                                     }?>
                                             </div>
                                         </div>
-                                        <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle img-responsive" style="margin-top:10px; text-align: center!important;">
-                                        <p class="card-text text-center  dash_data__<?= $i ?> text-fontsize" style="margin-top:20px;">
+                                        <img src="" alt="..." class="dash_img_<?= $i ?> img-resSN">
+                                        <p class="text-data dash_data__<?= $i ?>">
                                         </p>
                                     </div>
                                 </div>
@@ -256,8 +214,9 @@
                         <!-- <h5 class="card-title text-center"><b>โหมดอัตโนมัติ </b></h5> -->
                         <!-- <div class="row g-2"> -->
                         <!-- <div class="col-lg-6 col-xl-6 col-sm-12 col-12" > -->
-                        <button type="button" class="btn px-5 radius-30 dash_mode text_btn" disabled></button>
-                        <button type="button" class="btn px-5 radius-30 dash_panel_mode text_btn" disabled></button>
+                        <!-- <div class="row"> -->
+                            <button type="button" class="btn px-5 radius-30 dash_mode text_btn" disabled></button>
+                            <button type="button" class="btn px-5 radius-30 dash_panel_mode text_btn" disabled></button>
                         <!-- </div> -->
                         <!-- <div class="col-lg-6 col-xl-6 col-sm-12 col-12">
                                         <button type="button" class="col-lg-6 col-xl-6 col-sm-12 col-12 btn btn-outline-info px-5 radius-30 sw_mode_Manual" style="font-size:18px">โหมดสั่งงานด้วยตนเอง</button>
@@ -269,15 +228,14 @@
                                 // if($config_cn['cn_status_'.$i] == 1){ ?>
                         <div class="col-xl-3 col-lg-3 col-mb-3 col-sm-4 col-12">
                             <div class="card-body border radius-10 shadow-none mb-3">
-                                <div class="text-center"><b>
-                                                <?php
-                                                    if($i <= 4){echo 'น้ำหยด '.$i;}
-                                                    elseif($i > 4 && $i <= 8){echo 'พัดลม '.($i-4);}
-                                                    elseif($i > 8 && $i <= 10){echo 'พ่นหมอก '.($i-8);}
-                                                    elseif($i == 11){echo 'สเปรย์';}
-                                                    elseif($i == 12){echo 'ม่านพรางแสง';}
-                                                ?></b>
-                                </div>
+                                <h6 class="text-center"><b>
+                                    <?php if($i <= 4){echo 'น้ำหยด '.$i;}
+                                        elseif($i > 4 && $i <= 8){echo 'พัดลม '.($i-4);}
+                                        elseif($i > 8 && $i <= 10){echo 'พ่นหมอก '.($i-8);}
+                                        elseif($i == 11){echo 'สเปรย์';}
+                                        elseif($i == 12){echo 'ม่านพรางแสง';}
+                                    ?> </b>
+                                </h6>
                                 <h6 class="text-center">
                                     <?php if($config_cn['cn_name_'.$i] == ''){echo "<br>";}else {echo $config_cn['cn_name_'.$i];} ?></h6>
                                 <div class="text-center">
@@ -329,10 +287,10 @@
                             <?php if ($config['userLevel'] < 3) {?>
                                 <div class="row" style="padding-left: 12px; padding-right: 12px; padding-top: 12px">
                                 <div class="d-flex align-items-center ridge" style="height: 50px; text-align: justify;">
-                                    <b class=" text_btn">ปุ่มกดหน้าตู้</b>
+                                    <b class=" ">ปุ่มกดหน้าตู้</b>
                                     <div class="ms-auto">
-                                        <button type="button" class="btn btn-sm btn-outline-primary sw_mode_lock"><i class="fadeIn animated bx bx-lock-alt"></i></button>
-                                        <button type="button" class="btn btn-sm btn-outline-primary sw_mode_unlock"><i class="fadeIn animated bx bx-lock-open-alt"></i></button>
+                                        <button type="button" class="btn btn-sm btn-outline-primary sw_mode_ sw_mode_lock"><i class="fadeIn animated bx bx-lock-alt"></i></button>
+                                        <button type="button" class="btn btn-sm btn-outline-primary sw_mode_ sw_mode_unlock"><i class="fadeIn animated bx bx-lock-open-alt"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -349,7 +307,7 @@
                                                 <?php
                                                     for($i=1; $i <=4; $i++){
                                                         echo '<div class="col-3 col-lg-6">
-                                                             <button class="btn btn-control sw_sel_load_auto"  id="'.$i.'">
+                                                             <button class="btn btn-control sw_sel_load_auto" id="'.$i.'">
                                                                 <div class="control-text">น้ำหยด '.$i.'</div>
                                                                  <img class="img_sw_sel_load_auto'.$i.'" src="" width="100%" />
                                                              </button>
@@ -403,9 +361,9 @@
                                     <div class="col-12 ridge">
                                         <div class="row">
                                             <div class="d-flex align-items-center user-box" style="background-color: #283A6C; height: 50px; text-align: justify;">
-                                                <a class="col-8"><b class="title_load_auto" style="color:#FFF; font-size:20px"> </b></a>
+                                                <a class="col-8"><b class="title_load_auto"> </b></a>
                                                 <div class="ms-auto">
-                                                    <a class="menu_config_auto btn btn-sm btn-primary px-2 radius-30" style="color:#FFF; font-size:16px" href="javascript:void(0)"><b> <i class='bx bx-cog user-info'></i> ตั้งค่า</b></a>
+                                                    <a class="menu_config_auto btn btn-sm btn-primary px-2 radius-30" href="javascript:void(0)"><b> <i class='bx bx-cog user-info'></i> ตั้งค่า</b></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -414,16 +372,16 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="row">
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                                        <button type="button" class="btn btn-sm text_btn sw_mode_timeSet" style="width: 100%; ">
+                                                    <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-12"> -->
+                                                        <button type="button" class="btn btn-sm text_btn sw_mode_timeSet">
                                                             <i class='bx bx-time font-18 me-1'></i> ตั้งเวลาทำงาน
                                                         </button>
-                                                    </div>
-                                                    <div class="col-lg-6 ccol-md-6 col-sm-12">
-                                                        <button type="button" class="btn btn-sm text_btn sw_mode_timeLoop" style="width: 100%; ">
+                                                    <!-- </div> -->
+                                                    <!-- <div class="col-lg-6 ccol-md-6 col-sm-6 col-12"> -->
+                                                        <button type="button" class="btn btn-sm text_btn sw_mode_timeLoop">
                                                             <i class='bx bx-timer font-18 me-1'></i> ตั้งเวลาการทำงานต่อเนื่อง
                                                         </button>
-                                                    </div>
+                                                    <!-- </div> -->
                                                 </div>
                                                 <!-- ตั้งเวลาทำงาน เริ่ม---------->
                                                 <div class="ul_mode_timeSet">
@@ -443,7 +401,7 @@
                                                                         <div class="form-group text-left">
                                                                             <div class="row">
                                                                                 <div class="col-md-4 mt-2 text-center ">
-                                                                                    <small class="form-control-feedback text_font_size L_start"> เริ่ม </small>
+                                                                                    <small class="form-control-feedback L_start"> เริ่ม </small>
                                                                                 </div>
                                                                                 <div class="col-md-8">
                                                                                     <input type="text" id="time_s_'.$i.'" class="form-control text-center input_tSet"><!--  data-field="time" data-view="Popup" data-format="hh:mm:ss" -->
@@ -455,7 +413,7 @@
                                                                         <div class="form-group text-left">
                                                                             <div class="row">
                                                                                 <div class="col-md-4 mt-2 text-center ">
-                                                                                    <small class="form-control-feedback text_font_size L_stop"> สิ้นสุด </small>
+                                                                                    <small class="form-control-feedback L_stop"> สิ้นสุด </small>
                                                                                 </div>
                                                                                 <div class="col-md-8">
                                                                                     <input type="text" id="time_e_'.$i.'" class="form-control text-center input_tSet"><!--  data-field="time" data-view="Popup" data-format="hh:mm:ss" -->
@@ -487,7 +445,7 @@
                                                                     <div class="form-group text-left">
                                                                         <div class="row">
                                                                             <div class="col-md-3 mt-2 text-center ">
-                                                                                <small class="form-control-feedback text_font_size"> เริ่ม </small>
+                                                                                <small class="form-control-feedback"> เริ่ม </small>
                                                                             </div>
                                                                             <div class="col-md-9">
                                                                                 <input type="text" id="time_sL_'.$i.'" class="form-control text-center input_tLoop input_tL"><!-- data-field="time" data-view="Popup" data-format="hh:mm" -->
@@ -499,7 +457,7 @@
                                                                     <div class="form-group text-left">
                                                                         <div class="row">
                                                                             <div class="col-md-3 mt-2 text-center ">
-                                                                                <small class="form-control-feedback text_font_size"> จำนวน </small>
+                                                                                <small class="form-control-feedback"> จำนวน </small>
                                                                             </div>
                                                                             <div class="col-md-9"><div class="input-group">
                                                                                 <input type="text" class="form-control text-center input_tLoop" id="time_cy_'.$i.'" placeholder="รอบ" min="0" onchange="if(this.value < 0){this.value = 0;}else { this.value = Math.round(this.value); }"> <span class="input-group-text">รอบ</span>
@@ -513,7 +471,7 @@
                                                                     <div class="form-group text-left">
                                                                         <div class="row">
                                                                             <div class="col-md-3 mt-2 text-center ">
-                                                                                <small class="form-control-feedback text_font_size"> เปิด </small>
+                                                                                <small class="form-control-feedback"> เปิด </small>
                                                                             </div>
                                                                             <div class="col-md-9">
                                                                                 <div class="input-group">
@@ -528,7 +486,7 @@
                                                                     <div class="form-group text-left">
                                                                         <div class="row">
                                                                             <div class="col-md-3 mt-2 text-center ">
-                                                                                <small class="form-control-feedback text_font_size"> ปิด </small>
+                                                                                <small class="form-control-feedback"> ปิด </small>
                                                                             </div>
                                                                             <div class="col-md-9">
                                                                                 <div class="input-group">
@@ -714,59 +672,40 @@
                         </div>
                         <!-- ================================ -->
                         <div class="container ul_Manual">
-                            <div class="col-12">
-                                <div class="row cols-10 text-center mt-2 mb-2 ">
-                                    <?php
-                                        // if($config_cn['cn_status_1'] == 1 || $config_cn['cn_status_2'] == 1 || $config_cn['cn_status_3'] == 1 || $config_cn['cn_status_4'] == 1){
-                                            echo '<div class="cols-3 cols-lg-5">
-                                                    <button class="btn btn-control sw_sel_load_manual" style="width:100% border-radius:20px;" id="s1">
-                                                        <div class="text_font_size">น้ำหยด</div>
-                                                        <img class="img_sw_sel_load_manual_1" width="70"  src=""  />
-                                                    </button>
-                                               </div>';
-                                        // }
-                                        // if($config_cn['cn_status_9'] == 1 || $config_cn['cn_status_10'] == 1){
-                                            echo '<div class="cols-3 cols-lg-5" >
-                                                    <button class="btn btn-control sw_sel_load_manual" style="width:100% border-radius:20px" id="s3">
-                                                        <div class="text_font_size">พ่นหมอก</div>
-                                                        <img class="img_sw_sel_load_manual_3" src="" width="70" />
-                                                    </button>
-                                               </div>';
-                                        // }
-                                        // if($config_cn['cn_status_11'] == 1){
-                                            echo '<div class="cols-3 cols-lg-5">
-                                                    <button class="btn btn-control sw_sel_load_manual" style="width:100% border-radius:20px" id="s4">
-                                                        <div class="text_font_size">สเปรย์</div>
-                                                        <img class="img_sw_sel_load_manual_4" src="" width="70" />
-                                                    </button>
-                                               </div>';
-                                        // }
-                                        // if($config_cn['cn_status_5'] == 1 || $config_cn['cn_status_6'] == 1 || $config_cn['cn_status_7'] == 1 || $config_cn['cn_status_8'] == 1){
-                                            echo '<div class="cols-3 cols-lg-5">
-                                                    <button class="btn btn-control sw_sel_load_manual" style="width:100% border-radius:20px" id="s2">
-                                                        <div class="text_font_size">พัดลม</div>
-                                                        <img class="img_sw_sel_load_manual_2" src="" width="70" />
-                                                    </button>
-                                               </div>';
-                                        // }
-                                        // if($config_cn['cn_status_12'] == 1){
-                                            echo '<div class="cols-3 cols-lg-5">
-                                                    <button class="btn btn-control sw_sel_load_manual" style="width:100% border-radius:20px" id="s5">
-                                                        <div class="text_font_size ">พรางแสง</div>
-                                                        <img class="img_sw_sel_load_manual_5" src="" width="70" />
-                                                    </button>
-                                               </div>';
-                                        // }
+                            <!-- <div class="col-12 text-center  "> -->
+                                <div class="row mt-2 mb-2">
+                                    <?php echo '
+                                            <button class="btn btn-control sw_sel_load_manual" id="s1">
+                                                <div class="text_icon_manual">น้ำหยด</div>
+                                                <img class="img_m img_sw_sel_load_manual_1" src="" />
+                                            </button>
+                                            <button class="btn btn-control sw_sel_load_manual" id="s3">
+                                                <div class="text_icon_manual">พ่นหมอก</div>
+                                                <img class="img_m img_sw_sel_load_manual_3" src="" />
+                                            </button>
+                                            <button class="btn btn-control sw_sel_load_manual" id="s4">
+                                                <div class="text_icon_manual">สเปรย์</div>
+                                                <img class="img_m img_sw_sel_load_manual_4" src="" />
+                                            </button>
+                                            <button class="btn btn-control sw_sel_load_manual" id="s2">
+                                                <div class="text_icon_manual">พัดลม</div>
+                                                <img class="img_m img_sw_sel_load_manual_2" src="" />
+                                            </button>
+                                            <button class="btn btn-control sw_sel_load_manual" style="width:100% border-radius:20px" id="s5">
+                                                <div class="text_icon_manual ">พรางแสง</div>
+                                                <img class="img_m img_sw_sel_load_manual_5" src="" />
+                                            </button>
+                                        ';
                                     ?>
                                 </div>
-                            </div>
+                            <!-- </div> -->
                             <div class="row ridge">
                                 <h3 class="text-center title_load_manual" style="background-color: #283A6C; color:#FFF"></h3>
                                 <div class="col text-end  me-2 mb-3 mt-2">
-                                    <button class="btn sw_manual_on"></button>
+                                    <button class="btn sw_manual_on"><img src="public/images/icons/menu_control/on_off.png" class="img_sw_manl"></button>
                                 </div>
                                 <div class="col text-start ms-2 mb-3 mt-2">
-                                    <button class="btn sw_manual_off"></button>
+                                    <button class="btn sw_manual_off active"><img src="public/images/icons/menu_control/off_on.png" class="img_sw_manl"></button>
                                 </div>
                             </div>
                         </div>
@@ -789,11 +728,11 @@
                             <div class="d-flex align-items-center">
                                 <div class="form-check status_config_manual">
                                     <input class="form-check-input " type="checkbox" id="checkbox_all_manual">
-                                    <label class="form-check-label text_font_size ">เลือกทั้งหมด</label>
+                                    <label class="form-check-label">เลือกทั้งหมด</label>
                                 </div>
                                 <div class="ms-auto">
                                     <a class="menu_config_manual btn btn-sm btn-primary px-2 radius-30" style="color:#FFF; font-size:16px" href="javascript:void(0)"><b> <i class='bx bx-cog'></i> ตั้งค่า</b></a>
-                                    <!-- <button type="button" class="btn btn-primary px-2 radius-30 menu_config_manual"><label class="text_font_size">ตั้งค่า</label></button> -->
+                                    <!-- <button type="button" class="btn btn-primary px-2 radius-30 menu_config_manual"><label>ตั้งค่า</label></button> -->
                                     <button type="button" id="save_manual_cont" class="btn btn-success waves-light">
                                         <i class="fadeIn animated bx bx-save"></i> บันทึก
                                     </button>
@@ -804,32 +743,31 @@
                             </div>
                             <div class="row mt-3 mb-3">
                                 <div class="col-3 text-center">
-                                    <label class="text_font_size label_1"></label>
+                                    <label class="text_icon_manual label_1"></label>
                                     <div class="status_config_manual">
                                         <input class="input_check2" type="checkbox" id="label_1" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
                                     </div>
                                 </div>
                                 <div class="col-3 text-center">
-                                    <label class="text_font_size label_2"></label>
+                                    <label class="text_icon_manual label_2"></label>
                                     <div class="status_config_manual">
                                         <input class="input_check2" type="checkbox" id="label_2" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
                                     </div>
                                 </div>
                                 <div class="col-3 text-center">
-                                    <label class="text_font_size label_3"></label>
+                                    <label class="text_icon_manual label_3"></label>
                                     <div class="status_config_manual status_config_manual_3">
                                         <input class="input_check2" type="checkbox" id="label_3" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
                                     </div>
                                 </div>
                                 <div class="col-3 text-center">
-                                    <label class="text_font_size label_4"></label>
+                                    <label class="text_icon_manual label_4"></label>
                                     <div class="status_config_manual status_config_manual_4">
                                         <input class="input_check2" type="checkbox" id="label_4" data-toggle="toggle" data-onstyle="success" data-size="mini" data-offstyle="secondary" data-style="ios">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="ul_sub_sensor"></div> -->
                     </div>
                 </div>
             </div>

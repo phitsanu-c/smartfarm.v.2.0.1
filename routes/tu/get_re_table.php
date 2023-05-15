@@ -37,10 +37,14 @@
         $stop_day = $_POST["val_end"].':00';
     }
 
-    // $numb = intval(substr($house_master, 5,10));
+    $numb = intval(substr($house_master, 5,10));
     $data_channel = [];
-    $channel[] = "SUBSTRING(data_timestamp,1,16) AS nDate";
-    // $channel[] = "SUBSTRING(data_timestamp,1,10) AS nDate";
+    //
+    if($_POST['mode_report'] == 'compare'){
+        $channel[] = "SUBSTRING(data_timestamp,1,10) AS nDate";
+    }else {
+        $channel[] = "SUBSTRING(data_timestamp_".$numb.",1,16) AS nDate";
+    }
     // $channel[] = "SUBSTRING(data_timestamp,-8, 5) AS nTime";
     $count_columns = count($config_cn[2]);
 

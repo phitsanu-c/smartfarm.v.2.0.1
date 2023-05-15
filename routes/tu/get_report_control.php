@@ -64,7 +64,7 @@
                         ?>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody>0
                     <?php
                         $channel[] = "SUBSTRING(cn_timestamp,1,10) AS nDate";
                         $channel[] = "SUBSTRING(cn_timestamp,-8, 8) AS nTime";
@@ -103,19 +103,32 @@
                             if($row[4] == 'Time_set'){echo '<td class="text-center">ตั้งเวลา</td>';}
                             elseif($row[4] == 'Time_loop'){ echo '<td class="text-center">ตั้งเวลาต่อเนื่อง</td>'; }
                             elseif($row[4] == 'Manual'){ echo '<td class="text-center">-</td>'; }
+                            elseif($row[4] == 'tracking'){ echo '<td class="text-center">ตามเซนเซอร์</td>'; }
                             else {echo '<td class="text-center">'.$row[4].'</td>';}
-                            if($colcount >= 6){ if($row[5] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
-                            if($colcount >= 7){ if($row[6] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
-                            if($colcount >= 8){ if($row[7] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
-                            if($colcount >= 9){ if($row[8] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
-                            if($colcount >= 10){ if($row[9] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
-                            if($colcount >= 11){ if($row[10] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
-                            if($colcount >= 12){ if($row[11] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
-                            if($colcount >= 13){ if($row[12] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
-                            if($colcount >= 14){ if($row[13] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
-                            if($colcount >= 15){ if($row[14] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
-                            if($colcount >= 16){ if($row[15] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
-                            if($colcount >= 17){ if($row[16] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                            if($config_cn['cn_status_1'] == 1){ if($row['dripper_1'] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                            if($config_cn['cn_status_2'] == 1){ if($row['dripper_2'] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                            if($config_cn['cn_status_3'] == 1){ if($row['dripper_3'] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                            if($config_cn['cn_status_4'] == 1){ if($row['dripper_4'] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                            if($config_cn['cn_status_5'] == 1){ if($row['fan_1'] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                            if($config_cn['cn_status_6'] == 1){ if($row['fan_2'] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                            if($config_cn['cn_status_7'] == 1){ if($row['fan_3'] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                            if($config_cn['cn_status_8'] == 1){ if($row['fan_4'] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                            if($config_cn['cn_status_9'] == 1){ if($row['foggy_1'] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                            if($config_cn['cn_status_10'] == 1){ if($row['foggy_2'] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                            if($config_cn['cn_status_11'] == 1){ if($row['spray'] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                            if($config_cn['cn_status_12'] == 1){ if($row['shading'] == 'ON'){ echo '<td class="text-center text-danger">ปิดรับแสง</td>'; }else { echo '<td class="text-center text-success">เปิดรับแสง</td>'; } }
+                            // if($colcount >= 6){ if($row[5] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                            // if($colcount >= 7){ if($row[6] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                            // if($colcount >= 8){ if($row[7] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                            // if($colcount >= 9){ if($row[8] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                            // if($colcount >= 10){ if($row[9] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                            // if($colcount >= 11){ if($row[10] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                            // if($colcount >= 12){ if($row[11] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                            // if($colcount >= 13){ if($row[12] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                            // if($colcount >= 14){ if($row[13] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                            // if($colcount >= 15){ if($row[14] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                            // if($colcount >= 16){ if($row[15] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
+                            // if($colcount >= 17){ if($row[16] == 'ON'){ echo '<td class="text-center text-success">เปิด</td>'; }else { echo '<td class="text-center text-danger">ปิด</td>'; } }
                             echo '</tr>';
                         }
                     ?>
