@@ -1,7 +1,7 @@
 <?php
     // session_start();
-    
-    $db["host"] = 'localhost';//'deccbigdata.com';//"203.159.93.76";
+
+    $db["host"] = "203.154.83.117";//'deccbigdata.com';//"203.159.93.76";
     $db["user"] = "root2";
     $db["pass"] = "Tt@67235520";
     $db["name"] = 'db_smartfarm';//"smartfarm_2020_05";
@@ -9,7 +9,7 @@
     // $db["host"] = "203.150.37.144/";
     // $db["user"] = "root";
     // $db["pass"] = "67235520";
-    // $db["name"] = "test_query_data"; 
+    // $db["name"] = "test_query_data";
 
     // new decc
     // $db["host"] = "203.150.37.144/";
@@ -28,9 +28,9 @@
     $today_date=date("d-m-Y");
     $day_date=date("Y/m/d");
     $today_time=date("H:i");
-    
-    
-    
+
+
+
 
 
 

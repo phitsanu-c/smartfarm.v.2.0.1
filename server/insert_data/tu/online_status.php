@@ -1,7 +1,7 @@
 <?php
 require '../../phpMQTT.php';
-$host = '203.150.37.144';     // change if necessary
-$port = 1883;                     // change if necessary
+$host = '203.154.83.117';     // change if necessary
+$port = 4563;                     // change if necessary
 $username = '';                   // set your username
 $password = '';                   // set your password
 

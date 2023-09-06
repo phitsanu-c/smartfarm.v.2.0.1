@@ -1,22 +1,5 @@
 <?php
-    require "../connectdb.php";
-    require 'phpMQTT.php';
-    $host = '203.150.37.144';     // change if necessary
-    $port = 1883;                     // change if necessary
-    $username = '';                   // set your username
-    $password = '';                   // set your password
-    $topic = "web_system";
-    $mqtt = new bluerhinos\phpMQTT($host, $port, "ClientID".rand());
-    //
-    if ($mqtt->connect(true,NULL,$username,$password)) {
-        $data_mq = $mqtt->subscribeAndWaitForMessage($topic, 1);
-        $decodedJson = json_decode(substr($data_mq, 2), true);
-        $new_dt = ['account_id' => $_SESSION['account_id'], 'name' => $_SESSION["account_user"], 'dt' => date("Y-m-d H:i:s", strtotime('3 hour')), 'siteID' => $_SESSION["sn"]['siteID'], 'count_site' => $_SESSION['sn']['count_site']]; // '-6 hour'));
-        $decodedJson[$_SESSION['account_id']] = $new_dt;
-        $message = json_encode($decodedJson);
-        $mqtt->publish($topic,$message, 1);
-        $mqtt->close();
-    }
+    require "connect_mqtt_uptime.php";
 
     $house_master = $_POST["house_master"];
     $config_cn = $_POST["config_cn"];
@@ -64,7 +47,7 @@
                         ?>
                     </tr>
                 </thead>
-                <tbody>0
+                <tbody>
                     <?php
                         $channel[] = "SUBSTRING(cn_timestamp,1,10) AS nDate";
                         $channel[] = "SUBSTRING(cn_timestamp,-8, 8) AS nTime";
@@ -251,10 +234,14 @@
                         $channel[] = "auto_sensor_status_1";
                         $channel[] = "auto_sensor_soil_min";
                         $channel[] = "auto_sensor_soil_max";
-                        if($config_cn['cn_status_1'] == 1){$channel[] = "auto_sensor_d_1 AS dripper_1";}
-                        if($config_cn['cn_status_2'] == 1){$channel[] = "auto_sensor_d_2 AS dripper_2";}
-                        if($config_cn['cn_status_3'] == 1){$channel[] = "auto_sensor_d_3 AS dripper_3";}
-                        if($config_cn['cn_status_4'] == 1){$channel[] = "auto_sensor_d_4 AS dripper_4";}
+                        $channel[] = "auto_sensor_d_1 AS dripper_1";
+                        $channel[] = "auto_sensor_d_2 AS dripper_2";
+                        $channel[] = "auto_sensor_d_3 AS dripper_3";
+                        $channel[] = "auto_sensor_d_4 AS dripper_4";
+                        // if($config_cn['cn_status_1'] == 1){$channel[] = "auto_sensor_d_1 AS dripper_1";}
+                        // if($config_cn['cn_status_2'] == 1){$channel[] = "auto_sensor_d_2 AS dripper_2";}
+                        // if($config_cn['cn_status_3'] == 1){$channel[] = "auto_sensor_d_3 AS dripper_3";}
+                        // if($config_cn['cn_status_4'] == 1){$channel[] = "auto_sensor_d_4 AS dripper_4";}
                         $channel[] = "auto_sensor_status_2";
                         $channel[] = "auto_sensor_hum_min";
                         $channel[] = "auto_sensor_hum_2";
@@ -262,10 +249,14 @@
                         $channel[] = "auto_sensor_status_3";
                         $channel[] = "auto_sensor_temp_max";
                         $channel[] = "auto_sensor_temp_min";
-                        if($config_cn['cn_status_5'] == 1){$channel[] = "auto_sensor_fn_1 AS fan_1";}
-                        if($config_cn['cn_status_6'] == 1){$channel[] = "auto_sensor_fn_2 AS fan_2";}
-                        if($config_cn['cn_status_7'] == 1){$channel[] = "auto_sensor_fn_3 AS fan_3";}
-                        if($config_cn['cn_status_8'] == 1){$channel[] = "auto_sensor_fn_4 AS fan_4";}
+                        $channel[] = "auto_sensor_fn_1 AS fan_1";
+                        $channel[] = "auto_sensor_fn_2 AS fan_2";
+                        $channel[] = "auto_sensor_fn_3 AS fan_3";
+                        $channel[] = "auto_sensor_fn_4 AS fan_4";
+                        // if($config_cn['cn_status_5'] == 1){$channel[] = "auto_sensor_fn_1 AS fan_1";}
+                        // if($config_cn['cn_status_6'] == 1){$channel[] = "auto_sensor_fn_2 AS fan_2";}
+                        // if($config_cn['cn_status_7'] == 1){$channel[] = "auto_sensor_fn_3 AS fan_3";}
+                        // if($config_cn['cn_status_8'] == 1){$channel[] = "auto_sensor_fn_4 AS fan_4";}
                         $channel[] = "auto_sensor_status_4";
                         $channel[] = "auto_sensor_light_min";
                         $channel[] = "auto_sensor_light_max";

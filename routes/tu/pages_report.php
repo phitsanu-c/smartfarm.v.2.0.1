@@ -299,8 +299,8 @@
                                 <div class="col-lg-3 col-xl-3 col-sm-12 d-flex">
                                     <div class="card-body border radius-10 shadow-none mb-3">
                                         <div class="form-check">
-                                            <input class="form-check-input" name="radio_c" id="radio_temp" type="radio" onchange="ch_radio('temp')" <?php if($s_sensor['s_btnT'] > 0){echo 'checked';}?>>
-                                            <h5>อุณหภูมิ</h5>
+                                            <input class="form-check-input" style="float: left;" name="radio_c" id="radio_temp" type="radio" onchange="ch_radio('temp')" <?php if($s_sensor['s_btnT'] > 0){echo 'checked';}?>>
+                                            <h5>อุณหภูมิ (℃)</h5>
                                             <div class="form-check mb-3">
                                                 <input type="checkbox" class="form-check-input" name="checkbox_all_temp" onchange="checkbox_all('temp')" <?php if($s_sensor['s_btnT'] > 0){echo 'checked';}?>>
                                                 <label class="form-check-label">เลือกทั้งหมด </label>
@@ -321,8 +321,8 @@
                                 <div class="col-lg-3 col-xl-3 col-sm-12 d-flex">
                                     <div class="card-body border radius-10 shadow-none mb-3">
                                         <div class="form-check">
-                                            <input class="form-check-input" name="radio_c" id="radio_hum" type="radio" onchange="ch_radio('hum')" <?php if($s_sensor['s_btnT'] == 0 && $s_sensor['s_btnH'] == 1){echo 'checked';}?>>
-                                            <h5>ความชื้นอากาศ</h5>
+                                            <input class="form-check-input" style="float: left;" name="radio_c" id="radio_hum" type="radio" onchange="ch_radio('hum')" <?php if($s_sensor['s_btnT'] == 0 && $s_sensor['s_btnH'] == 1){echo 'checked';}?>>
+                                            <h5>ความชื้นอากาศ (%Rh)</h5>
                                             <div class="form-check mb-3">
                                                 <input type="checkbox" class="form-check-input" name="checkbox_all_hum" onchange="checkbox_all('hum')" <?php if($s_sensor['s_btnT'] == 0 && $s_sensor['s_btnH'] > 0){echo 'checked';}?>>
                                                 <label class="form-check-label">เลือกทั้งหมด</label>
@@ -343,8 +343,21 @@
                                 <div class="col-lg-3 col-xl-3 col-sm-12 d-flex">
                                     <div class="card-body border radius-10 shadow-none mb-3">
                                         <div class="form-check">
-                                            <input class="form-check-input" name="radio_c" id="radio_light" type="radio" onchange="ch_radio('light')" <?php if($s_sensor['s_btnT'] == 0 && $s_sensor['s_btnH'] == 0 && $s_sensor['s_btnS'] == 0 && $s_sensor['s_btnL'] > 0){echo 'checked';}?>>
+                                            <input class="form-check-input" name="radio_c" style="float: left;" id="radio_light" type="radio" onchange="ch_radio('light')" <?php if($s_sensor['s_btnT'] == 0 && $s_sensor['s_btnH'] == 0 && $s_sensor['s_btnS'] == 0 && $s_sensor['s_btnL'] > 0){echo 'checked';}?>>
                                             <h5>ความเข้มแสง</h5>
+                                            <div class="form-check">
+                                                <input class="form-check-input" name="unit_reL" type="radio" id="unit_reL1" checked="">
+                                                <label class="form-check-label" for="unit_reL1">
+                                                    KLux
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" name="unit_reL" type="radio" id="unit_reL2">
+                                                <label class="form-check-label" for="unit_reL2">
+                                                    µmol m<sup>-2</sup>s<sup>-1</sup>
+                                                </label>
+                                            </div>
+                                            <hr/>
                                             <div class="form-check mb-3">
                                                 <input type="checkbox" class="form-check-input" name="checkbox_all_light" onchange="checkbox_all('light')" <?php if($s_sensor['s_btnT'] == 0 && $s_sensor['s_btnH'] == 0 && $s_sensor['s_btnS'] == 0 && $s_sensor['s_btnL'] > 0){echo 'checked';}?>>
                                                 <label class="form-check-label">เลือกทั้งหมด</label>
@@ -352,19 +365,20 @@
                                             <hr/>
                                             <?php for($i=1; $i <= 7; $i++ ){
                                                 if($config_sn['sn_status_'.$i] == 1){
-                                                    if($config_sn['sn_sensor_'.$i] == 4){
+                                                    if($config_sn['sn_sensor_'.$i] >= 4 && $config_sn['sn_sensor_'.$i] <= 7){
                                                         echo '<div class="form-check mb-3">
-                                                                <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="'.$config_sn['sn_channel_'.$i] .'" d_name="'. $config_sn['sn_name_'.$i].' (KLux)" d_mode="'. $config_sn['sn_sensor_'.$i] .'" onchange="checkbox_check('. $s_sensor['s_btnL'] .' ,"light")" ';
-                                                                if($s_sensor['s_btnT'] == 0 && $s_sensor['s_btnH'] == 0 && $s_sensor['s_btnS'] == 0 && $s_sensor['s_btnL'] == 1){echo 'checked';} echo '>';
-                                                                echo '<label class="form-check-label">'.$config_sn['sn_name_'.$i].'</label>
-                                                            </div>';
-                                                    }else if($config_sn['sn_sensor_'.$i] == 5){
-                                                        echo '<div class="form-check mb-3">
-                                                                <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="'.$config_sn['sn_channel_'.$i] .'" d_name="'. $config_sn['sn_name_'.$i].' (µmol m<sup>-2</sup>s<sup>-1</sup>)" d_mode="'. $config_sn['sn_sensor_'.$i] .'" onchange="checkbox_check('. $s_sensor['s_btnL'] .' ,"light")" ';
+                                                                <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="'.$config_sn['sn_channel_'.$i] .'" d_name="'. $config_sn['sn_name_'.$i] .'" d_mode="'. $config_sn['sn_sensor_'.$i] .'" onchange="checkbox_check('. $s_sensor['s_btnL'] .' ,"light")" ';
                                                                 if($s_sensor['s_btnT'] == 0 && $s_sensor['s_btnH'] == 0 && $s_sensor['s_btnS'] == 0 && $s_sensor['s_btnL'] == 1){echo 'checked';} echo '>';
                                                                 echo '<label class="form-check-label">'.$config_sn['sn_name_'.$i].'</label>
                                                             </div>';
                                                     }
+                                                    // else if($config_sn['sn_sensor_'.$i] == 5){
+                                                    //     echo '<div class="form-check mb-3">
+                                                    //             <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="'.$config_sn['sn_channel_'.$i] .'" d_name="'. $config_sn['sn_name_'.$i] .'" d_mode="'. $config_sn['sn_sensor_'.$i] .'" onchange="checkbox_check('. $s_sensor['s_btnL'] .' ,"light")" ';
+                                                    //             if($s_sensor['s_btnT'] == 0 && $s_sensor['s_btnH'] == 0 && $s_sensor['s_btnS'] == 0 && $s_sensor['s_btnL'] == 1){echo 'checked';} echo '>';
+                                                    //             echo '<label class="form-check-label">'.$config_sn['sn_name_'.$i].'</label>
+                                                    //         </div>';
+                                                    // }
                                                     // }else if($config_sn['sn_sensor_'.$i] == 6){
                                                     //     echo '<div class="form-check mb-3">
                                                     //             <input type="checkbox" class="form-check-input" name="checkbox_light[]" value="'.$config_sn['sn_channel_'.$i] .'" d_name="'. $config_sn['sn_name_'.$i].' (KLux)" d_mode="'. $config_sn['sn_sensor_'.$i] .'" onchange="checkbox_check('. $s_sensor['s_btnL'] .' ,"light")" ';
@@ -387,8 +401,8 @@
                                 <div class="col-lg-3 col-xl-3 col-sm-12 d-flex">
                                     <div class="card-body border radius-10 shadow-none mb-3">
                                         <div class="form-check">
-                                            <input class="form-check-input" name="radio_c" id="radio_soil" type="radio" onchange="ch_radio('soil')" <?php if($s_sensor['s_btnT'] == 0 && $s_sensor['s_btnH'] == 0 && $s_sensor['s_btnS'] > 0){echo 'checked';}?>>
-                                            <h5>ความชื้นในดิน</h5>
+                                            <input class="form-check-input" name="radio_c" style="float: left;" id="radio_soil" type="radio" onchange="ch_radio('soil')" <?php if($s_sensor['s_btnT'] == 0 && $s_sensor['s_btnH'] == 0 && $s_sensor['s_btnS'] > 0){echo 'checked';}?>>
+                                            <h5>ความชื้นในดิน (%)</h5>
                                             <div class="form-check mb-3">
                                                 <input type="checkbox" class="form-check-input" name="checkbox_all_soil" onchange="checkbox_all('soil')" <?php if($s_sensor['s_btnT'] == 0 && $s_sensor['s_btnH'] == 0 && $s_sensor['s_btnS'] > 0){echo 'checked';}?>>
                                                 <label class="form-check-label">เลือกทั้งหมด</label>
@@ -425,7 +439,7 @@
 </div>
 <script>
 
-    var house_master = '<?= $house_master ?>';
+    // var house_master = '<?// $house_master ?>';
     var login_user = '<?= $account_user ?>';
     var config_sn = $.parseJSON('<?= json_encode($config_sn) ?>');
     var config_cn = $.parseJSON('<?= json_encode($config_cn) ?>');
@@ -579,6 +593,8 @@
     });
     $("#checkbox_all_sn").change(function () {
         if($(this).prop( "checked") == true){
+            $("input[name='unit_reL']").attr("disabled", false).prop( "checked", false );
+            $("#unit_reL1").prop( "checked", true );
             $("#radio_temp").attr("disabled", true);
             $("#radio_hum").attr("disabled", true);
             $("#radio_light").attr("disabled", true);
@@ -595,6 +611,7 @@
             $("input[name='checkbox_other[]']").attr("disabled", false).prop( "checked", true );
             $("input[name='checkbox_all_other']").attr("disabled", false).prop( "checked", true );
         }else{
+            $("input[name='unit_reL']").attr("disabled", true).prop( "checked", false );
             $("#radio_temp").attr("disabled", false);
             $("#radio_hum").attr("disabled", false);
             $("#radio_light").attr("disabled", false);
@@ -658,9 +675,12 @@
         if ($("#radio_light").prop('checked') == true) {
             $("input[name='checkbox_light[]']").attr("disabled", false).prop( "checked", true );
             $("input[name='checkbox_all_light']").attr("disabled", false).prop( "checked", true );
+            $("input[name='unit_reL']").attr("disabled", false).prop( "checked", false );
+            $("#unit_reL1").prop( "checked", true );
         }else{
             $("input[name='checkbox_light[]']").attr("disabled", true).prop( "checked", false );
             $("input[name='checkbox_all_light']").attr("disabled", true).prop( "checked", false );
+            $("input[name='unit_reL']").attr("disabled", true).prop( "checked", false );
         }
         // if ($("#radio_other").prop('checked') == true) {
         //     $("input[name='checkbox_other[]']").attr("disabled", false).prop( "checked", true );
@@ -712,11 +732,17 @@
             });
             $("input[name='checkbox_light[]']:checked").map(function (){
                 checked.push($(this).val());
-                if($(this).attr("d_mode") == 5 || $(this).attr("d_mode") == 7){
-                    d_name.push($(this).attr("d_name"));//(µmol m[baseline-shift: super; font-size: 10;]-2[baseline-shift: baseline;]s[baseline-shift: super; font-size: 10;]-1[baseline-shift: baseline;])");
-                }else{
-                    d_name.push($(this).attr("d_name"));
+                // if($(this).attr("d_mode") == 5 || $(this).attr("d_mode") == 7){
+                //     d_name.push($(this).attr("d_name"));//(µmol m[baseline-shift: super; font-size: 10;]-2[baseline-shift: baseline;]s[baseline-shift: super; font-size: 10;]-1[baseline-shift: baseline;])");
+                // }else{
+                //     d_name.push($(this).attr("d_name"));
+                // }
+                if($("#unit_reL1").prop("checked") == true){
+                    var reL_unit = ' (KLux)'
+                }else {
+                    var reL_unit = ' (µmol m<sup>-2</sup>s<sup>-1</sup>)';
                 }
+                d_name.push($(this).attr("d_name")+reL_unit);
                 d_mode.push($(this).attr("d_mode"));
             });
             $("input[name='checkbox_soil[]']:checked").map(function (){
@@ -758,8 +784,14 @@
                     // if($(this).attr("d_mode") == 5){
                     //     d_name.push($(this).attr("d_name"));//(µmol m[baseline-shift: super; font-size: 10;]-2[baseline-shift: baseline;]s[baseline-shift: super; font-size: 10;]-1[baseline-shift: baseline;])");
                     // }else{
-                        d_name.push($(this).attr("d_name"));
+                        // d_name.push($(this).attr("d_name"));
                     // }
+                    if($("#unit_reL1").prop("checked") == true){
+                        var reL_unit = ' (KLux)'
+                    }else {
+                        var reL_unit = ' (µmol m<sup>-2</sup>s<sup>-1</sup>)';
+                    }
+                    d_name.push($(this).attr("d_name")+reL_unit);
                     d_mode.push($(this).attr("d_mode"));
                 });
                 ch_value.push(checked);
@@ -973,7 +1005,8 @@
                     val_start : $(".val_start").val(),
                     val_end : $(".val_end").val(),
                     sel_all_every : $("#sel_all_every").val(),
-                    eq: eq
+                    eq: eq,
+                    unit_light: $("#unit_reL1").prop("checked"),
                 },
                 // dataType: 'json',
                 success: function(res) {
@@ -1259,7 +1292,8 @@
                     val_start : $(".val_start").val(),
                     val_end : $(".val_end").val(),
                     sel_all_every : $("#sel_all_every").val(),
-                    eq: eq
+                    eq: eq,
+                    unit_light: $("#unit_reL1").prop("checked"),
                     // ct_mode: 'chart'
                 },
                 dataType: 'json',
@@ -1292,7 +1326,12 @@
                             }else if($('#radio_hum').prop('checked') == true){
                                 var title_chart = 'ความชื้นอากาศ (%Rh)';
                             }else if ($('#radio_light').prop('checked') == true) {
-                                var title_chart = 'ความเข้มแสง';
+                                if($("#unit_reL1").prop("checked") == true){
+                                    var reL_unit = ' (KLux)'
+                                }else {
+                                    var reL_unit = ' (µmol m^-2 s^-1';
+                                }
+                                var title_chart = 'ความเข้มแสง'+reL_unit;
                             }else if ($('#radio_soil').prop('checked') == true) {
                                 var title_chart = 'ความชื้นดิน (%)';
                             }else {

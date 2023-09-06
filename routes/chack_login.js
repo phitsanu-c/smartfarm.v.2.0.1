@@ -1,12 +1,12 @@
 
-var url = $.base64.decode(window.location.hash.substring(1))
+let url = $.base64.decode(window.location.hash.substring(1))
 if (url === "") {
     url = ',,'.split(',')
 } else {
     url = url.split(',')
 }
 // alert(window.location.hash)
-var house_master = url[2].substring(0, 8);
+let house_master = url[2].substring(0, 8);
 // alert(url[0])
 console.log(house_master);
 // console.log($.base64.encode('TSPWM001zasn'));
@@ -37,6 +37,8 @@ $.getJSON('routes/login.php', function(msg) {
     $('#load_pages_report').hide();
     $('.memu_setting').hide();
     $("#load_pages_profile").hide();
+    // $('#load_pages_sprout').load('routes/tu/page_sprout.php');
+    $('#load_pages_sprout').hide();
     if (msg.sn['account_status'] == 1) { // supportadmin
         $("#load_pages_site").load('views/pages_site.php');
         if (url[1] === '') { // site = nail
@@ -199,6 +201,13 @@ $.getJSON('routes/login.php', function(msg) {
         $('.menu4').hide();
         $('.menu5').hide();
     }
+    if(msg.sn['account_status'] <= 2){
+        $('.menu6').show();
+        $('.menu7').show();
+    }else {
+        $('.menu6').hide();
+        $('.menu7').hide();
+    }
     // theme
     if (msg.theme === "dark-theme") {
         $("#toggleTheme").attr('checked', true);
@@ -256,7 +265,7 @@ function logout() {
 }
 
 function verticalNoTitle() {
-    var loading = new Loading({
+    let loading = new Loading({
         discription: 'Loading...',
         defaultApply: true,
     });

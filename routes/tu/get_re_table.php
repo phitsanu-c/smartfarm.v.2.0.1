@@ -1,22 +1,5 @@
 <?php
-    require "../connectdb.php";
-    require 'phpMQTT.php';
-    $host = '203.150.37.144';     // change if necessary
-    $port = 1883;                     // change if necessary
-    $username = '';                   // set your username
-    $password = '';                   // set your password
-    $topic = "web_system";
-    $mqtt = new bluerhinos\phpMQTT($host, $port, "ClientID".rand());
-    //
-    if ($mqtt->connect(true,NULL,$username,$password)) {
-        $data_mq = $mqtt->subscribeAndWaitForMessage($topic, 1);
-        $decodedJson = json_decode(substr($data_mq, 2), true);
-        $new_dt = ['account_id' => $_SESSION['account_id'], 'name' => $_SESSION["account_user"], 'dt' => date("Y-m-d H:i:s", strtotime('3 hour')), 'siteID' => $_SESSION["sn"]['siteID'], 'count_site' => $_SESSION['sn']['count_site']]; // '-6 hour'));
-        $decodedJson[$_SESSION['account_id']] = $new_dt;
-        $message = json_encode($decodedJson);
-        $mqtt->publish($topic,$message, 1);
-        $mqtt->close();
-    }
+    require "connect_mqtt_uptime.php";
 
     $house_master = $_POST["house_master"];
     $config_cn = $_POST["config_cn"];
@@ -41,19 +24,26 @@
     $data_channel = [];
     //
     if($_POST['mode_report'] == 'compare'){
-        $channel[] = "SUBSTRING(data_timestamp,1,10) AS nDate";
+        $channel[] = "DISTINCT SUBSTRING(data_timestamp,1,16) AS nDate";
+        $where_time = "data_timestamp";
     }else {
-        $channel[] = "SUBSTRING(data_timestamp_".$numb.",1,16) AS nDate";
+        $channel[] = "DISTINCT SUBSTRING(data_timestamp_".$numb.",1,16) AS nDate";
+        $where_time = "data_timestamp_".$numb;
     }
     // $channel[] = "SUBSTRING(data_timestamp,-8, 5) AS nTime";
     $count_columns = count($config_cn[2]);
 
     if($_POST['mode_report'] == 'compare'){
         for($i=0; $i < $count_columns; $i++){
-            if ($config_cn[3][$i] == 4) {
-                $channel[] = 'round('.$config_cn[1][$i].'/1000, 1) AS data_cn'.($i+1);
-            } elseif ($config_cn[3][$i] == 5) {
-                $channel[] = 'round('.$config_cn[1][$i].'/54, 1) AS data_cn'.($i+1);
+            if ($config_cn[3][$i] == 4 || $config_cn[3][$i] == 5) {
+                // $channel[] = 'round('.$config_cn[1][$i].'/1000, 1) AS data_cn'.($i+1);
+                if($_POST['unit_light'] == 'true'){
+                    $channel[] = 'round('.$config_cn[1][$i].'/1000, 1) AS data_cn'.($i+1);
+                }else {
+                    $channel[] = 'round('.$config_cn[1][$i].'/54, 1) AS data_cn'.($i+1);
+                }
+            // } elseif ($config_cn[3][$i] == 5) {
+            //     $channel[] = 'round('.$config_cn[1][$i].'/54, 1) AS data_cn'.($i+1);
             } else {
                 $channel[] = 'round('.$config_cn[1][$i].', 1) AS data_cn'.($i+1);
             }
@@ -63,9 +53,14 @@
         $numb = intval(substr($house_master, 5,10));
         for($i=0; $i < $count_columns; $i++){
             if ($config_cn[3][$i] == 4) {
-                $channel[] = 'round('.$config_cn[1][$i].'/1000, 1) AS data_cn'.($i+1);
-            } elseif ($config_cn[3][$i] == 5) {
-                $channel[] = 'round('.$config_cn[1][$i].'/54, 1) AS data_cn'.($i+1);
+                if($_POST['unit_light'] == 'true'){
+                    $channel[] = 'round('.$config_cn[1][$i].'/1000, 1) AS data_cn'.($i+1);
+                }else {
+                    $channel[] = 'round('.$config_cn[1][$i].'/54, 1) AS data_cn'.($i+1);
+                }
+            //     $channel[] = 'round('.$config_cn[1][$i].'/1000, 1) AS data_cn'.($i+1);
+            // } elseif ($config_cn[3][$i] == 5) {
+            //     $channel[] = 'round('.$config_cn[1][$i].'/54, 1) AS data_cn'.($i+1);
             } else {
                 $channel[] = 'round('.$config_cn[1][$i].', 1) AS data_cn'.($i+1);
             }
@@ -77,6 +72,7 @@
     // $start_day2 = date("Y/m/d H:i:s",strtotime($start_day));
     // $stop_day2 = date("Y/m/d H:i:s",strtotime($stop_day));
     // echo $channel1;
+    // echo json_encode($config_cn[2]);
     // exit();
 
 ?>
@@ -103,45 +99,47 @@
                 }else {
                     $tb_name = 'tbn_data_tu_eq';
                 }
-                $sql = "SELECT $channel1 FROM $tb_name WHERE data_sn = '$house_master2' AND data_timestamp BETWEEN '$start_day' AND '$stop_day' AND mod(minute(`data_timestamp`),'$sel_all_every') = 0 ORDER BY data_timestamp ";
+                $sql = "SELECT $channel1 FROM $tb_name WHERE data_sn = '$house_master2' AND `data_timestamp` BETWEEN '$start_day' AND '$stop_day' AND mod(minute(`data_timestamp`), '$sel_all_every') = 0 ORDER BY `data_timestamp` ";
                 $stmt = $dbcon->query($sql);
                 $data0 = array();
                 $i=1;
                 // echo $sql;
                 // exit();
                 while ($row = $stmt->fetch()) {
-                    $data0[] = $row;
-                    echo '<tr>
-                        <td>'.$i.'</td>
-                        <td>'.$row["nDate"].'</td>
-                        <td>'.substr($row["nDate"], 0 ,10).'</td>
-                        <td>'.substr($row["nDate"], 11 ,18).'</td>';
-                        if ($count_columns >= 1) {
-                            echo '<td>'.$row["data_cn1"].'</td>';
-                        }
-                        if ($count_columns >= 2) {
-                            echo '<td>'.$row["data_cn2"].'</td>';
-                        }
-                        if ($count_columns >= 3) {
-                            echo '<td>'.$row["data_cn3"].'</td>';
-                        }
-                        if ($count_columns >= 4) {
-                            echo '<td>'.$row["data_cn4"].'</td>';
-                        }
-                        if ($count_columns >= 5) {
-                            echo '<td>'.$row["data_cn5"].'</td>';
-                        }
-                        if ($count_columns >= 6) {
-                            echo '<td>'.$row["data_cn6"].'</td>';
-                        }
-                        if ($count_columns >= 7) {
-                            echo '<td>'.$row["data_cn7"].'</td>';
-                        }
-                        if ($count_columns >= 8) {
-                            echo '<td>'.$row["data_cn8"].'</td>';
-                        }
-                    echo "</tr>";
-                   $i++;
+                    if($row["nDate"] != ""){
+                        $data0[] = $row;
+                        echo '<tr>
+                            <td>'.$i.'</td>
+                            <td>'.$row["nDate"].'</td>
+                            <td>'.substr($row["nDate"], 0 ,10).'</td>
+                            <td>'.substr($row["nDate"], 11 ,18).'</td>';
+                            if ($count_columns >= 1) {
+                                echo '<td>'.$row["data_cn1"].'</td>';
+                            }
+                            if ($count_columns >= 2) {
+                                echo '<td>'.$row["data_cn2"].'</td>';
+                            }
+                            if ($count_columns >= 3) {
+                                echo '<td>'.$row["data_cn3"].'</td>';
+                            }
+                            if ($count_columns >= 4) {
+                                echo '<td>'.$row["data_cn4"].'</td>';
+                            }
+                            if ($count_columns >= 5) {
+                                echo '<td>'.$row["data_cn5"].'</td>';
+                            }
+                            if ($count_columns >= 6) {
+                                echo '<td>'.$row["data_cn6"].'</td>';
+                            }
+                            if ($count_columns >= 7) {
+                                echo '<td>'.$row["data_cn7"].'</td>';
+                            }
+                            if ($count_columns >= 8) {
+                                echo '<td>'.$row["data_cn8"].'</td>';
+                            }
+                        echo "</tr>";
+                    }
+                    $i++;
                }
             ?>
         </tbody>

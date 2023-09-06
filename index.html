@@ -52,7 +52,7 @@
     <!-- <link rel="stylesheet" href="public/plugins/bootstrap4-toggle/bootstrap4-toggle.min.css">
     <script src="public/plugins/bootstrap4-toggle/bootstrap4-toggle.min.js" charset="utf-8"></script> -->
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
     <!-- Date time Picker Report daterangepicker -->
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> -->
@@ -135,6 +135,12 @@
                         <div class="menu-title">รายงาน </div>
                     </a>
                 </li>
+                <li class="memu_sprout">
+                    <a href="javascript:;">
+                        <div class="parent-icon"><i class='lni lni-sprout'></i></div>
+                        <div class="menu-title">การเจริญเติบโตของพืช</div>
+                    </a>
+                </li>
                 <li class="memu_setting">
                     <a href="javascript:;">
                         <div class="parent-icon"><i class="bx bx-cog bx-spin"></i></div>
@@ -176,6 +182,9 @@
                             <li><a class="dropdown-item menu_setting menu3" menu="3" href="javascript:;"><i class="bx bx-cog"></i><span>ตั้งค่าโรงเรือน</span></a></li> -->
                             <li><a class="dropdown-item menu_setting menu4" menu="4" href="javascript:;"><i class="bx bx-cog"></i><span>กำหนดสิทธิ์ผู้ใช้งาน</span></a></li>
                             <li><a class="dropdown-item menu_setting menu5" menu="5" href="javascript:;"><i class="bx bx-cog"></i><span>ประวัติการเข้าสู่ระบบ</span></a></li>
+                            <!-- <li><a class="dropdown-item menu_setting menu6" menu="6" href="javascript:;"><i class="bx bx-cog"></i><span>ตั้งค่าหน้า Dashboard และสมการ</span></a></li> -->
+                            <li><a class="dropdown-item menu_setting menu7" menu="7" href="javascript:;"><i class="bx bx-cog"></i><span>จัดการข้อมูลการเจริการเจริญเติบโตของพืช</span></a></li>
+                            <li><a class="dropdown-item manual_d" href="public/file/manual_V.1.4.pdf" target="_blank"><i class="bx bx-book"></i><span>คู่มือการใช้งาน</span></a></li>
                             <!-- <li><a class="dropdown-item btn_modal_sg" href="javascript:"><i class="lni lni-headphone-alt"></i><span>รายงานปัญหา</span></a></li> -->
 
                             <li>
@@ -183,6 +192,7 @@
                             </li>
                             <li><a class="dropdown-item logout" href="javascript:;"><i class='bx bx-log-out-circle'></i><span>ลงชื่อออก</span></a></li>
                         </ul>
+                        <a class="align-items-center nav-link" href="public/file/manual_V.1.4.pdf" target="_blank"><i class="lni lni-help"></i></a>
                         <label id="switch2" class="switch2 ">
                             <input type="checkbox" id="toggleTheme" onchange="toggleTheme($(this).prop('checked'))" >
                             <span class="slider2 round"></span>
@@ -199,6 +209,7 @@
             <div id="load_pages_compare"></div>
             <div id="load_pages_profile"></div>
             <div id="load_pages_report"></div>
+            <div id="load_pages_sprout"></div>
             <div id="load_pages_dashboard">
                 <div class="page-content">
                     <div id="load_pages"></div>
@@ -330,7 +341,7 @@
 
         <div id="dtBox"></div>
         <footer class="page-footer d-flex">
-            <p class="mb-0">© 2021 Smart Green House v.2.1.3</p>
+            <p class="mb-0">© 2021 Smart Green House v.2.1.4</p>
             <div class="ms-auto">
                 <img src="public/images/logo/decc.png" style="height: 20px; border: 0 solid #e5e5e5; padding: 0;">
                 <img src="public/images/logo/Ai5.0Agriculture.png" style="height: 38px; border: 0 solid #e5e5e5; padding: 0;">
@@ -417,7 +428,7 @@
         });
         $("#dtBox").DateTimePicker();
         if (house_master.length == 8) {
-            var loading = verticalNoTitle();
+            let loading = verticalNoTitle();
             if (url[0] == 2) {
                 $.ajax({
                     url: "routes/kmu/get_config.php",
@@ -471,8 +482,8 @@
                                 // Global variables
                                 var client = null;
                                 // These are configs
-                                var hostname = "203.150.37.144"; //'103.2.115.15'; // 203.150.37.144   decccloud.com
-                                var port = "8083";
+                                var hostname = "203.154.83.117";
+                                var port = "6838";
                                 var clientId = "mqtt_js_5" + parseInt(Math.random() * 100000, 15);
                                 var count = 0;
 
@@ -842,7 +853,8 @@
                             url: "routes/kmu/get_chart_realtime.php",
                             method: "post",
                             data: {
-                                house_master: house_master
+                                house_master: house_master,
+                                data_temp_in
                             },
                             dataType: "json",
                             success: function(res) {
@@ -3574,18 +3586,19 @@
                     dataType: "json",
                     success: function(res) {
                         // console.log(res);
-                        var config_sn = res.config_sn;
-                        var config_cn = res.config_cn;
-                        var set_maxmin = res.set_maxmin;
-                        var sensor = res.sensor;
-                        var data_temp_out = [];
-                        var data_temp_in = [];
-                        var data_hum_out = [];
-                        var data_hum_in = [];
-                        var data_light_out = [];
-                        var data_light_in = [];
-                        var data_soil_in = [];
-                        var eq = res.s_master.house_eq;
+                        let config_sn = res.config_sn;
+                        let config_cn = res.config_cn;
+                        let set_maxmin = res.set_maxmin;
+                        let sensor = res.sensor;
+                        let data_temp_out = [];
+                        let data_temp_in = [];
+                        let data_hum_out = [];
+                        let data_hum_in = [];
+                        let data_light_out = [];
+                        let data_light_in = [];
+                        let data_soil_in = [];
+                        let eq = res.s_master.house_eq;
+                        let control_V = res.s_master.house_control_V;
                         // alert(eq)
                         if(config_cn.cn_status_1 == 1 || config_cn.cn_status_2 == 1 || config_cn.cn_status_3 == 1 || config_cn.cn_status_4 == 1){
                             $('.hidden_select_sw_manual').val(1);
@@ -3631,8 +3644,8 @@
                             $('.hidden_select_sw_auto').val(12);
                         }
 
-                        var temp_c = [], hum_c = [], light_c = [], soil_c = [];
-                        for (var i = 1; i <= 7; i++) {
+                        let temp_c = [], hum_c = [], light_c = [], soil_c = [];
+                        for (let i = 1; i <= 7; i++) {
                             if (res.config_sn['sn_sensor_' + i] == 1) {
                                 temp_c.push(1);
                             } else if (res.config_sn['sn_sensor_' + i] == 2) {
@@ -3669,7 +3682,7 @@
                         }
                         $(".memu_compare").hide();
                         $('#load_pages_dashboard').show();
-                        var s_sensor = {
+                        let s_sensor = {
                             s_btnT: getArraySum(temp_c),
                             s_btnH: getArraySum(hum_c),
                             s_btnS: getArraySum(soil_c),
@@ -3691,9 +3704,10 @@
                                 // These are configs
                                 // var hostname = 'mqtt.deccbigdata.ml:2096'
                                 // var port = '2096'
-                                var hostname = "203.150.37.144"; //'103.2.115.15'; // 203.150.37.144   decccloud.com
-                                var port = "8083";
-                                var clientId = "mqtt_js_3074" + parseInt(Math.random() * 100000, 10);
+
+                                var hostname = "203.154.83.117";
+                                var port = "6838";
+                                var clientId = "mqtt_" + parseInt(Math.random() * 100000, 10);
 
                                 // return false
                                 function connect() {
@@ -4316,7 +4330,7 @@
                                     }
                                     if(eq == 0){
                                         if(message.destinationName == house_master + "/data_sensor/filter") {
-                                            var result = message.payloadString;
+                                            let result = message.payloadString;
                                             var parseJSON = $.parseJSON(result);
                                             // console.log(parseJSON)
                                             var time_t = parseJSON['time'];
@@ -4330,24 +4344,120 @@
                                             // ======================================================================
                                             for (var i = 1; i <= 7; i++) {
                                                 if (config_sn['sn_status_' + i] == 1) {
-                                                    if (config_sn['sn_sensor_'+i] == 1) {
-                                                        dash_status(( data_[config_sn['sn_channel_'+i].substring(5, (config_sn['sn_channel_'+i].length -2) )] *1).toFixed(1), set_maxmin.Tmax, set_maxmin.Tmin, config_sn['sn_sensor_'+i], i);
+                                                    if(control_V == 2){ // V อ.อร
+                                                        // alert(control_V)
+                                                        // if (config_sn['sn_sensor_'+i] == 1) {
+                                                            dash_status_v2(data_[config_sn['sn_channel_'+i].substring(5, (config_sn['sn_channel_'+i].length -2) )], set_maxmin.Tmax, set_maxmin.Tmin, config_sn['sn_sensor_'+i], i);
+                                                        // }
+                                                        // else if (config_sn['sn_sensor_'+i] == 2) {
+                                                        //     dash_status_v2((  data_[config_sn['sn_channel_'+i].substring(5, (config_sn['sn_channel_'+i].length -2) )] * 1).toFixed(1), set_maxmin.Hmax, set_maxmin.Hmin, config_sn['sn_sensor_'+i], i);
+                                                        // }
+                                                        // else if (config_sn['sn_sensor_'+i] == 3) {
+                                                        //     dash_status_v2((  data_[config_sn['sn_channel_'+i].substring(5, (config_sn['sn_channel_'+i].length -2) )] * 1).toFixed(1), set_maxmin.Smax, set_maxmin.Smin, config_sn['sn_sensor_'+i], i);
+                                                        // }
+                                                        // else if (config_sn['sn_sensor_'+i] == 4) {
+                                                        //     dash_status_v2(( data_[config_sn['sn_channel_'+i].substring(5, (config_sn['sn_channel_'+i].length -2) )] / 1000).toFixed(1), set_maxmin.Lmax, set_maxmin.Lmin, config_sn['sn_sensor_'+i], i);
+                                                        // }
+                                                        // else if (config_sn['sn_sensor_'+i] == 5) {
+                                                        //     dash_status_v2((  data_[config_sn['sn_channel_'+i].substring(5, (config_sn['sn_channel_'+i].length -2) )] / 54).toFixed(1), set_maxmin.Lmax,set_maxmin.Lmi, config_sn['sn_sensor_'+i], i);
+                                                        // }
                                                     }
-                                                    else if (config_sn['sn_sensor_'+i] == 2) {
-                                                        dash_status((  data_[config_sn['sn_channel_'+i].substring(5, (config_sn['sn_channel_'+i].length -2) )] * 1).toFixed(1), set_maxmin.Hmax, set_maxmin.Hmin, config_sn['sn_sensor_'+i], i);
-                                                    }
-                                                    else if (config_sn['sn_sensor_'+i] == 3) {
-                                                        dash_status((  data_[config_sn['sn_channel_'+i].substring(5, (config_sn['sn_channel_'+i].length -2) )] * 1).toFixed(1), set_maxmin.Smax, set_maxmin.Smin, config_sn['sn_sensor_'+i], i);
-                                                    }
-                                                    else if (config_sn['sn_sensor_'+i] == 4) {
-                                                        dash_status(( data_[config_sn['sn_channel_'+i].substring(5, (config_sn['sn_channel_'+i].length -2) )] / 1000).toFixed(1), set_maxmin.Lmax, set_maxmin.Lmin, config_sn['sn_sensor_'+i], i);
-                                                    }
-                                                    else if (config_sn['sn_sensor_'+i] == 5) {
-                                                        dash_status((  data_[config_sn['sn_channel_'+i].substring(5, (config_sn['sn_channel_'+i].length -2) )] / 54).toFixed(1), set_maxmin.Lmax,set_maxmin.Lmi, config_sn['sn_sensor_'+i], i);
+                                                    else { // ไม่ใช่ V อ.อร
+                                                        if (config_sn['sn_sensor_'+i] == 1) {
+                                                            dash_status_v2(( data_[config_sn['sn_channel_'+i].substring(5, (config_sn['sn_channel_'+i].length -2) )] *1).toFixed(1), set_maxmin.Tmax, set_maxmin.Tmin, config_sn['sn_sensor_'+i], i);
+                                                        }
+                                                        else if (config_sn['sn_sensor_'+i] == 2) {
+                                                            dash_status_v2((  data_[config_sn['sn_channel_'+i].substring(5, (config_sn['sn_channel_'+i].length -2) )] * 1).toFixed(1), set_maxmin.Hmax, set_maxmin.Hmin, config_sn['sn_sensor_'+i], i);
+                                                        }
+                                                        else if (config_sn['sn_sensor_'+i] == 3) {
+                                                            dash_status_v2((  data_[config_sn['sn_channel_'+i].substring(5, (config_sn['sn_channel_'+i].length -2) )] * 1).toFixed(1), set_maxmin.Smax, set_maxmin.Smin, config_sn['sn_sensor_'+i], i);
+                                                        }
+                                                        else if (config_sn['sn_sensor_'+i] == 4) {
+                                                            dash_status_v2(( data_[config_sn['sn_channel_'+i].substring(5, (config_sn['sn_channel_'+i].length -2) )] / 1000).toFixed(1), set_maxmin.Lmax, set_maxmin.Lmin, config_sn['sn_sensor_'+i], i);
+                                                        }
+                                                        else if (config_sn['sn_sensor_'+i] == 5) {
+                                                            dash_status_v2((  data_[config_sn['sn_channel_'+i].substring(5, (config_sn['sn_channel_'+i].length -2) )] / 54).toFixed(1), set_maxmin.Lmax,set_maxmin.Lmi, config_sn['sn_sensor_'+i], i);
+                                                        }
                                                     }
                                                 }
                                             }
-
+                                            function dash_status_v2(sn_data, max, min, mode, i) {
+                                                if(mode == 4 || mode == 5){
+                                                    if(moment(new Date()).format('HH:mm') > moment('18:40','HH:mm').format('HH:mm') || moment(new Date()).format('HH:mm') < moment('05:40','HH:mm').format('HH:mm')){
+                                                        $(".dash_img_" + i).attr("src", "public/images/Sensor/Light_Night.svg");
+                                                    }else {
+                                                        if (parseFloat(sn_data) >= parseFloat(max)) {
+                                                            $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(mode - 1)].sensor_imgMax);
+                                                        } else if (parseFloat(sn_data) < parseFloat(min)) {
+                                                            $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(mode - 1)].sensor_imgMin);
+                                                        } else {
+                                                            $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(mode - 1)].sensor_imgNor);
+                                                        }
+                                                    }
+                                                }
+                                                else {
+                                                    if (parseFloat(sn_data) >= parseFloat(max)) {
+                                                        $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(mode - 1)].sensor_imgMax);
+                                                    } else if (parseFloat(sn_data) < parseFloat(min)) {
+                                                        $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(mode - 1)].sensor_imgMin);
+                                                    } else {
+                                                        $(".dash_img_" + i).attr("src", "public/images/Sensor/" + sensor[(mode - 1)].sensor_imgNor);
+                                                    }
+                                                }
+                                                // data
+                                                if(mode <= 3){
+                                                    let n_data_ = (sn_data *1).toFixed(1)
+                                                    if(parseFloat(n_data_) == 0){
+                                                        if (sensor[(mode - 1)].sensor_unit == 1) {
+                                                            $(".dash_data__" + i).html( n_data_ + " ℃<br>&nbsp;").addClass('text-danger');
+                                                        }else {
+                                                            $(".dash_data__" + i).html( n_data_ + " "+ sensor[(mode - 1)].sensor_unit+'<br>&nbsp;').addClass('text-danger');
+                                                        }
+                                                    }else { // data != 0
+                                                        if (sensor[(mode - 1)].sensor_unit == 1) {
+                                                            $(".dash_data__" + i).html( sn_data + " ℃<br>&nbsp;").removeClass('text-danger');
+                                                        }else {
+                                                            $(".dash_data__" + i).html( sn_data + " "+ sensor[(mode - 1)].sensor_unit+'<br>&nbsp;').removeClass('text-danger');
+                                                        }
+                                                    }
+                                                    $(".dash_data__l_" + i).html('&nbsp;')
+                                                }
+                                                else if(mode > 3 && mode <= 7){
+                                                    let n_data_K = (sn_data /1000).toFixed(1)
+                                                    let n_data_U = (sn_data /54).toFixed(1)
+                                                    if(moment(new Date()).format('HH:mm') > moment('18:40','HH:mm').format('HH:mm') || moment(new Date()).format('HH:mm') < moment('05:40','HH:mm').format('HH:mm')){
+                                                        // กลางคืน
+                                                        if(parseFloat(n_data_K) == 0){
+                                                            $(".dash_data__l_" + i).html( n_data_U + "<br>µmol m<sup>-2</sup>s<sup>-1</sup>")//.addClass('text-danger');
+                                                            $(".dash_data__" + i).html( '('+n_data_K + " "+ sensor[(mode - 1)].sensor_unit+')')//.addClass('text-danger');
+                                                        }else {
+                                                            if(parseFloat(n_data_K) == 262.1){
+                                                                $(".dash_data__l_" + i).html( n_data_U + "<br>µmol m<sup>-2</sup>s<sup>-1</sup>").addClass('text-danger');
+                                                                $(".dash_data__" + i).html( '('+n_data_K + " "+ sensor[(mode - 1)].sensor_unit+')').addClass('text-danger');
+                                                            }else {
+                                                                $(".dash_data__l_" + i).html( n_data_U + "<br>µmol m<sup>-2</sup>s<sup>-1</sup>").removeClass('text-danger');
+                                                                $(".dash_data__" + i).html( '('+n_data_K + " "+ sensor[(mode - 1)].sensor_unit+')').removeClass('text-danger');
+                                                            }
+                                                        }
+                                                    }else { // กลางวัย
+                                                        if(parseFloat(n_data_K) == 0){
+                                                            $(".dash_data__l_" + i).html( n_data_U + "<br>µmol m<sup>-2</sup>s<sup>-1</sup>").addClass('text-danger');
+                                                            $(".dash_data__" + i).html( '('+n_data_K + " "+ sensor[(mode - 1)].sensor_unit+')').addClass('text-danger');
+                                                        }else {
+                                                            if(parseFloat(n_data_K) == 262.1){
+                                                                $(".dash_data__l_" + i).html( n_data_U + "<br>µmol m<sup>-2</sup>s<sup>-1</sup>").addClass('text-danger');
+                                                                $(".dash_data__" + i).html( '('+n_data_K + " "+ sensor[(mode - 1)].sensor_unit+')').addClass('text-danger');
+                                                            }else {
+                                                                $(".dash_data__l_" + i).html( n_data_U + "<br>µmol m<sup>-2</sup>s<sup>-1</sup>").removeClass('text-danger');
+                                                                $(".dash_data__" + i).html( '('+n_data_K + " "+ sensor[(mode - 1)].sensor_unit+')').removeClass('text-danger');
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                else {
+                                                    $(".dash_data__" + i).html( sn_data + " "+ sensor[(mode - 1)].sensor_unit).removeClass('text-danger');
+                                                }
+                                            }
                                             function dash_status(sn_data, max, min, mode, i) {
                                                 if(mode == 4 || mode == 5){
                                                     if(moment(new Date()).format('HH:mm') > moment('18:40','HH:mm').format('HH:mm') || moment(new Date()).format('HH:mm') < moment('05:40','HH:mm').format('HH:mm')){
@@ -4534,37 +4644,52 @@
                                             if(data_light_in.length > 0){
                                                 data_light_out.shift();
                                                 data_light_in.shift();
-                                                if(config_sn['sn_sensor_3'] == 4){
-                                                    data_light_out.push({
-                                                        x: parseJSON['date']+' '+ntime,
-                                                        y:(data_['light_out'] / 1000).toFixed(1)
-                                                    })
-                                                }else if(config_sn['sn_sensor_3'] == 5){
+                                                if(control_V == 2){// Vอ.อร
                                                     data_light_out.push({
                                                         x: parseJSON['date']+' '+ntime,
                                                         y:(data_['light_out'] / 54).toFixed(1)
                                                     })
-                                                }else {
-                                                    data_light_out.push({
-                                                        x: parseJSON['date']+' '+ntime,
-                                                        y:data_['light_out'].toFixed(1)
-                                                    })
-                                                }
-                                                if(config_sn['sn_sensor_6'] == 4){
-                                                    data_light_in.push({
-                                                        x: parseJSON['date']+' '+ntime,
-                                                        y:(data_['light_in'] / 1000).toFixed(1)
-                                                    })
-                                                }else if(config_sn['sn_sensor_6'] == 5){
                                                     data_light_in.push({
                                                         x: parseJSON['date']+' '+ntime,
                                                         y:(data_['light_in'] / 54).toFixed(1)
                                                     })
                                                 }else {
-                                                    data_light_in.push({
-                                                        x: parseJSON['date']+' '+ntime,
-                                                        y: data_['light_in'].toFixed(1)
-                                                    })
+                                                    if(config_sn['sn_sensor_3'] == 4){
+                                                        data_light_out.push({
+                                                            x: parseJSON['date']+' '+ntime,
+                                                            y:(data_['light_out'] / 1000).toFixed(1)
+                                                        })
+                                                    }
+                                                    else if(config_sn['sn_sensor_3'] == 5){
+                                                        data_light_out.push({
+                                                            x: parseJSON['date']+' '+ntime,
+                                                            y:(data_['light_out'] / 54).toFixed(1)
+                                                        })
+                                                    }
+                                                    else {
+                                                        data_light_out.push({
+                                                            x: parseJSON['date']+' '+ntime,
+                                                            y:data_['light_out'].toFixed(1)
+                                                        })
+                                                    }
+                                                    if(config_sn['sn_sensor_6'] == 4){
+                                                        data_light_in.push({
+                                                            x: parseJSON['date']+' '+ntime,
+                                                            y:(data_['light_in'] / 1000).toFixed(1)
+                                                        })
+                                                    }
+                                                    else if(config_sn['sn_sensor_6'] == 5){
+                                                        data_light_in.push({
+                                                            x: parseJSON['date']+' '+ntime,
+                                                            y:(data_['light_in'] / 54).toFixed(1)
+                                                        })
+                                                    }
+                                                    else {
+                                                        data_light_in.push({
+                                                            x: parseJSON['date']+' '+ntime,
+                                                            y: data_['light_in'].toFixed(1)
+                                                        })
+                                                    }
                                                 }
                                                 chartLine3.updateSeries([
                                                     {
@@ -4811,37 +4936,48 @@
                                             if(data_light_in.length > 0){
                                                 data_light_out.shift();
                                                 data_light_in.shift();
-                                                if(config_sn['sn_sensor_3'] == 4){
-                                                    data_light_out.push({
-                                                        x: parseJSON['date']+' '+ntime,
-                                                        y:(data_['light_out'] / 1000).toFixed(1)
-                                                    })
-                                                }else if(config_sn['sn_sensor_3'] == 5){
+                                                if(control_V == 2){// Vอ.อร
                                                     data_light_out.push({
                                                         x: parseJSON['date']+' '+ntime,
                                                         y:(data_['light_out'] / 54).toFixed(1)
                                                     })
-                                                }else {
-                                                    data_light_out.push({
-                                                        x: parseJSON['date']+' '+ntime,
-                                                        y:data_['light_out'].toFixed(1)
-                                                    })
-                                                }
-                                                if(config_sn['sn_sensor_6'] == 4){
-                                                    data_light_in.push({
-                                                        x: parseJSON['date']+' '+ntime,
-                                                        y:(data_['light_in'] / 1000).toFixed(1)
-                                                    })
-                                                }else if(config_sn['sn_sensor_6'] == 5){
                                                     data_light_in.push({
                                                         x: parseJSON['date']+' '+ntime,
                                                         y:(data_['light_in'] / 54).toFixed(1)
                                                     })
                                                 }else {
-                                                    data_light_in.push({
-                                                        x: parseJSON['date']+' '+ntime,
-                                                        y: data_['light_in'].toFixed(1)
-                                                    })
+                                                    if(config_sn['sn_sensor_3'] == 4){
+                                                        data_light_out.push({
+                                                            x: parseJSON['date']+' '+ntime,
+                                                            y:(data_['light_out'] / 1000).toFixed(1)
+                                                        })
+                                                    }else if(config_sn['sn_sensor_3'] == 5){
+                                                        data_light_out.push({
+                                                            x: parseJSON['date']+' '+ntime,
+                                                            y:(data_['light_out'] / 54).toFixed(1)
+                                                        })
+                                                    }else {
+                                                        data_light_out.push({
+                                                            x: parseJSON['date']+' '+ntime,
+                                                            y:data_['light_out'].toFixed(1)
+                                                        })
+                                                    }
+                                                    if(config_sn['sn_sensor_6'] == 4){
+                                                        data_light_in.push({
+                                                            x: parseJSON['date']+' '+ntime,
+                                                            y:(data_['light_in'] / 1000).toFixed(1)
+                                                        })
+                                                    }else if(config_sn['sn_sensor_6'] == 5){
+                                                        data_light_in.push({
+                                                            x: parseJSON['date']+' '+ntime,
+                                                            y:(data_['light_in'] / 54).toFixed(1)
+                                                        })
+                                                    }else {
+                                                        data_light_in.push({
+                                                            x: parseJSON['date']+' '+ntime,
+                                                            y: data_['light_in'].toFixed(1)
+                                                        })
+                                                    }
                                                 }
                                                 chartLine3.updateSeries([
                                                     {
@@ -4886,7 +5022,6 @@
                                             $('.sw_mode_Manual').addClass('btn-success').removeClass('btn-outline-success');
                                             $('.ul_Auto').hide();
                                             $('.ul_Manual').show();
-                                            $('.menu_config_manual').show();
                                             $('.status_config_manual').hide();
                                             $('#save_manual_cont').hide();
                                             $('#close_manual_cont').hide();
@@ -4929,6 +5064,7 @@
                                             fn_check_sw_on_off($('.hidden_select_sw_manual').val());
                                             function fn_check_sw_on_off(val){
                                                 if(val == 1){ // dripper
+                                                    $('.menu_config_manual').show();
                                                     if(countElement(1,count_sw1) == countElement(1,count_stats1_on)){
                                                         $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" class="img_sw_manl" />');
                                                         $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" class="img_sw_manl" />');
@@ -4939,6 +5075,7 @@
                                                     }
                                                 }
                                                 else if(val == 2){ // FAN
+                                                    $('.menu_config_manual').show();
                                                     if(countElement(1,count_sw2) == countElement(1,count_stats2_on)){
                                                         $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" class="img_sw_manl" />');
                                                         $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" class="img_sw_manl" />');
@@ -4948,6 +5085,7 @@
                                                     }
                                                 }
                                                 else if(val == 3){ // foggy
+                                                    $('.menu_config_manual').show();
                                                     if(countElement(1,count_sw3) == countElement(1,count_stats3_on)){
                                                         $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" class="img_sw_manl" />');
                                                         $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" class="img_sw_manl" />');
@@ -4957,6 +5095,7 @@
                                                     }
                                                 }
                                                 else if(val == 4){ // spray
+                                                    $('.menu_config_manual').hide();
                                                     if(parseJSON.spray == 'ON'){
                                                         $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" class="img_sw_manl" />');
                                                         $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" class="img_sw_manl" />');
@@ -4966,6 +5105,7 @@
                                                     }
                                                 }
                                                 else if(val == 5){ // shading
+                                                    $('.menu_config_manual').hide();
                                                     if(parseJSON.shading == 'ON'){
                                                         $('.sw_manual_on').addClass('active').html('<img src="public/images/icons/menu_control/on_on.png" class="img_sw_manl" />');
                                                         $('.sw_manual_off').removeClass('active').html('<img src="public/images/icons/menu_control/off_off.png" class="img_sw_manl" />');
@@ -5515,7 +5655,8 @@
                             data: {
                                 house_master: house_master,
                                 config_sn: config_sn,
-                                eq: eq
+                                eq: eq,
+                                control_V: control_V
                             },
                             dataType: "json",
                             success: function(res) {
@@ -5595,37 +5736,51 @@
                                             data: data_light_in
                                         }
                                     ]);
-                                    if(config_sn['sn_sensor_3'] == 4 || config_sn['sn_sensor_6'] == 4){
-                                        chartLine3.updateOptions({
-                                            title:  {text: 'ความเข้มแสง'},
-                                            tooltip: {
-                                                y: {
-                                                    formatter: function (val) {
-                                                        return  val + " Klux"
+                                    if(control_V == 1){
+                                        if(config_sn['sn_sensor_3'] == 4 || config_sn['sn_sensor_6'] == 4){
+                                            chartLine3.updateOptions({
+                                                title:  {text: 'ความเข้มแสง'},
+                                                tooltip: {
+                                                    y: {
+                                                        formatter: function (val) {
+                                                            return  val + " Klux"
+                                                        }
                                                     }
-                                                }
-                                            },
-                                            // subtitle: {
-                                            //     text: '(Klux)',
-                                            //     offsetY: 55,
-                                            //     offsetX: 10
-                                            // },
-                                        })
-                                    }else if(config_sn['sn_sensor_3'] == 5 || config_sn['sn_sensor_6'] == 5){
+                                                },
+                                                // subtitle: {
+                                                //     text: '(Klux)',
+                                                //     offsetY: 55,
+                                                //     offsetX: 10
+                                                // },
+                                            })
+                                        }
+                                        else if(config_sn['sn_sensor_3'] == 5 || config_sn['sn_sensor_6'] == 5){
+                                            chartLine3.updateOptions({
+                                                title:  {text: 'ความเข้มแสง'},
+                                                tooltip: {
+                                                    y: {
+                                                        formatter: function (val) {
+                                                            return  val + " µmol m<sup>-2</sup>s<sup>-1</sup>"
+                                                        }
+                                                    }
+                                                },
+                                                // subtitle: {
+                                                //     text: '(Klux)',
+                                                //     offsetY: 55,
+                                                //     offsetX: 10
+                                                // },
+                                            })
+                                        }
+                                    }else { // V อ.อร
                                         chartLine3.updateOptions({
-                                            title:  {text: 'ความเข้มแสง'},
+                                            title:  {text: 'แสง'},
                                             tooltip: {
                                                 y: {
                                                     formatter: function (val) {
                                                         return  val + " µmol m<sup>-2</sup>s<sup>-1</sup>"
                                                     }
                                                 }
-                                            },
-                                            // subtitle: {
-                                            //     text: '(Klux)',
-                                            //     offsetY: 55,
-                                            //     offsetX: 10
-                                            // },
+                                            }
                                         })
                                     }
                                 // }
@@ -5730,7 +5885,7 @@
         }
         // count array by value
         function countElement(item,array) {
-            var count = 0;
+            let count = 0;
             $.each(array, function(i,v) { if (v === item) count++; });
             return count;
         }
@@ -5870,7 +6025,10 @@
             $('#load_pages_dashboard').hide();
             $('#load_pages_report').hide();
             $('#load_pages_profile').hide();
-            $('.memu_setting').hide()
+            $('.memu_setting').hide();
+            $(".memu_sprout").removeClass("mm-active")
+            $('#load_pages_sprout').hide();
+            ch_tu()
         });
         $(".memu_house").click(function() {
             $(this).addClass('mm-active');
@@ -5910,7 +6068,10 @@
                     })
                 }
             })
-            $('.memu_setting').hide()
+            $('.memu_setting').hide();
+            $(".memu_sprout").removeClass("mm-active")
+            $('#load_pages_sprout').hide();
+            ch_tu()
         });
         $(".memu_compare").click(function(){
             $(this).addClass('mm-active');
@@ -5919,7 +6080,10 @@
             $('#load_pages_house').hide();
             $("#load_pages_compare").show().load('routes/tu/pages_compare.php?s='+url[1]);
             $('#load_pages_profile').hide();
-            $('.memu_setting').hide()
+            $('.memu_setting').hide();
+            $(".memu_sprout").removeClass("mm-active")
+            $('#load_pages_sprout').hide();
+            ch_tu()
         })
         $(".memu_dash").click(function() {
             $(this).addClass('mm-active');
@@ -5933,6 +6097,9 @@
             $('#load_pages_report').hide();
             $('#load_pages_profile').hide();
             $('.memu_setting').hide()
+            $(".memu_sprout").removeClass("mm-active")
+            $('#load_pages_sprout').hide();
+            ch_tu()
         });
         $(".memu_report").click(function() {
             $('.memu_control').hide()
@@ -5942,6 +6109,9 @@
             $('#load_pages_report').show();
             $('#load_pages_profile').hide();
             $('.memu_setting').hide()
+            $(".memu_sprout").removeClass("mm-active")
+            $('#load_pages_sprout').hide();
+            ch_tu()
         });
         $(".menu_setting").click(function() {
             $('.memu_setting').show().addClass('mm-active');
@@ -5956,6 +6126,8 @@
             $('#load_pages_dashboard').hide();
             $('#load_pages_report').hide();
             $("#load_pages_profile").show();
+            $(".memu_sprout").removeClass("mm-active")
+            $('#load_pages_sprout').hide();
             $.ajax({
                 url: "routes/profile/setting_profile.php",
                 method: "post",
@@ -5968,7 +6140,46 @@
                     $("#load_pages_profile").html(resp);
                 }
             });
+            ch_tu()
         });
+        $(".memu_sprout").click(function() {
+            $(this).addClass("mm-active")
+            if(url[1] == ''){
+                $(".memu_house").hide();
+                $(".memu_dash").hide();
+                $(".memu_compare").hide();
+                $(".memu_report").hide();
+            }else{
+                if(house_master === '' || house_master.length != 8){
+                    $(".memu_dash").hide();
+                }else{
+                    $(".memu_dash").removeClass("mm-active")
+                }
+            }
+            $('#load_pages_site').hide();
+            $('#load_pages_house').hide();
+            $('#load_pages_compare').hide();
+            $('#load_pages_dashboard').hide();
+            $('#load_pages_report').hide();
+            $('#load_pages_profile').hide();
+            $('.memu_setting').hide()
+
+            // $("#load_pages_sprout").show()//.html('routes/tu/page_sprout.php?s='+url[1]);
+            $('#load_pages_sprout').html('');
+            $('#load_pages_sprout').show().load('routes/tu/page_sprout.php');
+            // $.get('routes/tu/page_sprout.php',function(req){
+            //     $('#load_pages_sprout').show().html(req);
+            // })
+
+            // alert('aaaaaผผผผผผผผผผผผผผq')
+        });
+        ch_tu()
+        function ch_tu(){
+            if (url[0] != 4) {
+                $(".memu_sprout").hide()
+            }
+            // console.log("url[0]"+url[0]);
+        }
     </script>
 </body>
 

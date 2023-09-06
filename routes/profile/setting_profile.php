@@ -28,7 +28,7 @@
                                 ข้อมูลผู้ใช้งาน
                             </a>
                         </li>
-                        <?php if ($_SESSION["sn"]['account_status'] < 3) {?>
+                        <?php if ($_SESSION["sn"]['account_status'] <= 2) { // 1=supperadmin 2=admin?>
                             <!-- <li class="nav-item6" role="presentation">
                                 <a class="nav-link text-center <?php// if($_POST['pt'] == 2){echo 'active';} ?>" data-bs-toggle="pill" href="#p-st" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
                                     สถานที่
@@ -49,11 +49,14 @@
                                     ประวัติการเข้าสู่ระบบ
                                 </a>
                             </li>
-                        <?php } ?>
-                        <?php if ($_SESSION["sn"]['account_status'] == 1) {?>
-                            <li class="nav-item6" role="presentation">
-                                <a class="nav-link text-center" data-bs-toggle="pill" href="#p-ct" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
+                            <!-- <li class="nav-item6" role="presentation">
+                                <a class="nav-link text-center <?php //if($_POST['pt'] == 6){echo 'active';} ?>" data-bs-toggle="pill" href="#p-ct" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
                                     ตั้งค่าหน้า Dashboard และสมการ
+                                </a>
+                            </li> -->
+                            <li class="nav-item6" role="presentation">
+                                <a class="nav-link text-center <?php if($_POST['pt'] == 7){echo 'active';} ?>" data-bs-toggle="pill" href="#p-spr" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;">
+                                    จัดการข้อมูลการเจริการเจริญเติบโตของพืช
                                 </a>
                             </li>
                         <?php } ?>
@@ -292,7 +295,7 @@
                             <div class="d-sm-flex">
                                 <div class="ps-3">
                                     <h5>เลือกสถานที &nbsp;
-                                    <select class="btn btn-outline-info me-1 sel_main_site">
+                                    <select class="form-control btn btn-outline-info me-1 sel_main_site">
                                         <?php
                                             if ($_SESSION["sn"]['account_status'] != 1) {
                                                 $site_stmt = $dbcon->prepare("SELECT * FROM `tbn_userst` INNER JOIN tbn_site ON tbn_userst.userST_siteID = tbn_site.site_id WHERE tbn_userst.userST_accountID = '$user_id' GROUP BY userST_siteID ");
@@ -325,20 +328,58 @@
                             <div id="user_report"></div>
                         </div>
                     <?php } ?>
-                    <?php if ($_SESSION["sn"]['account_status'] == 1) {?>
-                        <div class="tab-pane fade" id="p-ct" role="tabpanel">
-                            <select class="cont_sel" name="">
-                                <option value="">เลือก</option>
-                                <option value="TUSMT006">โรง 1 โซนหน้า</option>
+                    <?php if ($_SESSION["sn"]['account_status'] <= 2) {?>
+                        <div class="tab-pane fade <?php if($_POST['pt'] == 6){echo "show active";} ?>" id="p-ct" role="tabpanel">
+                            <select class="form-control cont_sel">
+                                <option value="">เลือกโรงเรือน</option>
+                                <?php
+                                $siteID = 10;
+                                if ($_SESSION["sn"]['account_status'] == 1){
+                                    $house_stmt = $dbcon->prepare("SELECT * FROM tbn_house WHERE house_siteID ='$siteID' ");
+                                }else {
+                                    $house_stmt = $dbcon->prepare("SELECT * FROM tbn_userst INNER JOIN tbn_house ON tbn_userst.userST_houseID = tbn_house.house_id WHERE userST_accountID = '$user_id' AND house_siteID ='$siteID' ");
+                                }
+                                $house_stmt->execute();
+                                while ($row_house = $house_stmt->fetch(PDO::FETCH_BOTH)) {
+                                    echo '<option value="'.$row_house["house_master"].'">'.$row_house["house_name"].'</option>';
+                                } ?>
+                                <!-- <option value="TUSMT006">โรง 1 โซนหน้า</option>
                                 <option value="TUSMT007">โรง 1 โซนหลัง</option>
                                 <option value="TUSMT003">โรง 2</option>
                                 <option value="TUSMT004">โรง 3</option>
                                 <option value="TUSMT005">โรง 4</option>
                                 <option value="TUSMT001">โรง 5</option>
                                 <option value="TUSMT002">โรง 6</option>
-                                <option value="TUSMT008">โรง Test </option>
+                                <option value="TUSMT008">โรง Test </option> -->
                             </select>
                             <div id="get_set_cont"></div>
+                        </div>
+                        <div class="tab-pane fade <?php if($_POST['pt'] == 7){echo "show active";} ?>" id="p-spr" role="tabpanel">
+                            <div class="d-sm-flex">
+                                <div class="d-flex col-6  ">
+                                    <button type="button" class="btn btn-outline-secondary px-2 add_spr"><i class="lni lni-circle-plus"></i> เพิ่ม</button>
+                                </div>
+                                <ul class="ms-auto col-6 nav nav-pills" role="tablist">
+                                    <li class="nav-item col-6" role="presentation">
+                                        <a class="nav-link active text-center" data-bs-toggle="pill" href="#p-spr1" role="tab" aria-selected="true" style="border: 1px solid transparent; border-color: #6c757d;" onclick="get_tb_spr2(1)">
+                                            ชนิดพืช
+                                        </a>
+                                    </li>
+                                    <li class="nav-item col-6" role="presentation">
+                                        <a class="nav-link text-center" data-bs-toggle="pill" href="#p-spr2" role="tab" aria-selected="false" style="border: 1px solid transparent; border-color: #6c757d;" onclick="get_tb_spr2(2)">
+                                            ข้อมูลพืช
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div><br>
+                            <div class="tab-content chart">
+                                <div class="tab-pane fade show active" id="p-spr1" role="tabpanel">
+                                    <div id="tb_spr1"></div>
+                                </div>
+                                <div class="tab-pane fade" id="p-spr2" role="tabpanel">
+                                    <div id="tb_spr2"></div>
+                                </div>
+                            </div>
                         </div>
                     <?php } ?>
                 </div>
@@ -802,6 +843,98 @@
             </div>
             <div class="modal-footer text-right">
                 <button type="button" id="submit_fromTo" class="btn btn-success waves-light">
+                <i class="fadeIn animated bx bx-check"></i> ตกลง
+                </button>
+                <button type="button" class="btn btn-danger waves-effect" data-bs-dismiss="modal">
+                    <i class="fadeIn animated bx bx-window-close"></i> ยกเลิก
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="Modal_spr" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog-scrollable modal-dialog modal-dialog-centered modal-mb" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title"> <b class="spr_mtitle"></b> </h4>
+            </div>
+            <div class="modal-body">
+                <div id="m_spr1">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text col-sm-4" >ชื่อพืช</span>
+                        <input type="text" class="form-control text-center val_spr_1" placeholder="ชื่อพืช" aria-label="ชื่อพืช">
+                        <div class="invalid-feedback">กรุณาระบุชื่อพืช</div>
+                        <input type="hidden" id="val_hide_1">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text col-sm-4">คอล์ปที่ต้องการแสดง</span>
+                        <select class="form-control text-center val_colp">
+                            <option value="1">1</option>
+                            <?php
+                                // require('../connectdb.php');
+                                // $stmtt = $dbcon->query("SELECT plantD_colp FROM `tbn_plant_data` WHERE `plantD_sid` = '$id' GROUP BY `plantD_colp` ");
+                                // $rowCount = $stmtt->rowCount();
+                                // while ($row_spr = $stmtt->fetch()) {
+                                //     echo '<option value="'.$row_spr[0].'" n_name="'.$row_spr[2].'">'.$row_spr[2].'</option>';
+                                // }
+                            ?>
+                        </select>
+                        <!-- <input type="number" class="form-control text-center val_colp" placeholder="คอล์ป" aria-label="คอล์ป"> -->
+                        <div class="invalid-feedback">กรุณาระบุคอล์ป</div>
+                    </div>
+                </div>
+                <div id="m_spr2">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text col-sm-4">ชื่อพืช</span>
+                        <select class="form-control text-center val_spr_n"></select>
+                        <div class="invalid-feedback">กรุณาเลือกชนิดพืช</div>
+                        <input type="hidden" id="val_hide_2">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text col-sm-4">คอล์ป</span>
+                        <input type="number" class="form-control text-center val_spr_c" placeholder="คอล์ป" aria-label="คอล์ป">
+                        <div class="invalid-feedback">กรุณาระบุคอล์ป</div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text col-sm-4">วันหลังปลูก</span>
+                        <input type="number" class="form-control text-center val_spr_d" placeholder="วันหลังปลูก" aria-label="วันหลังปลูก">
+                        <div class="invalid-feedback">กรุณาระบุวันหลังปลูก</div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text col-sm-4">ความสูง (cm.)</span>
+                        <input type="number" class="form-control text-center val_spr_h" placeholder="ความสูง" aria-label="ความสูง">
+                        <div class="invalid-feedback">กรุณาระบุความสูง</div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text col-sm-4">ความกว้างทรงพุ่ม (cm.)</span>
+                        <input type="number" class="form-control text-center val_spr_w" placeholder="ความกว้างทรงพุ่ม" aria-label="ความกว้างทรงพุ่ม">
+                        <div class="invalid-feedback">กรุณาระบุความกว้างทรงพุ่ม</div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text col-sm-4">จำนวนใบ (ใบ)</span>
+                        <input type="number" class="form-control text-center val_spr_b" placeholder="จำนวนใบ" aria-label="จำนวนใบ">
+                        <div class="invalid-feedback">กรุณาระบุจำนวนใบ</div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text col-sm-4">พื้นที่ใบ (cm<sup>2</sup>)</span>
+                        <input type="number" class="form-control text-center val_spr_p" placeholder="พื้นที่ใบ" aria-label="พื้นที่ใบ">
+                        <div class="invalid-feedback">กรุณาระบุพื้นที่ใบ</div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text col-sm-4">น้ำหนักสดต้น (g.)</span>
+                        <input type="number" class="form-control text-center val_spr_g" placeholder="น้ำหนักสดต้น" aria-label="น้ำหนักสดต้น">
+                        <div class="invalid-feedback">กรุณาระบุน้ำหนักสดต้น</div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text col-sm-4">หมายเหตุ</span>
+                        <textarea class="form-control text-center val_note" aria-label="With textarea"></textarea>
+                        <!-- <input type="number" class="form-control text-center val_spr_g" placeholder="น้ำหนักสดต้น" aria-label="น้ำหนักสดต้น"> -->
+                        <!-- <div class="invalid-feedback">กรุณาระบุน้ำหนักสดต้น</div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-right">
+                <button type="button" id="submit_add_spr" class="btn btn-success waves-light">
                 <i class="fadeIn animated bx bx-check"></i> ตกลง
                 </button>
                 <button type="button" class="btn btn-danger waves-effect" data-bs-dismiss="modal">
@@ -2287,9 +2420,10 @@
 <script type="text/javascript"> // ตั้งค่า config
     $('.cont_sel').change(function() {
         // var sn = $(this).val();
+        $('#get_set_cont').html("");
         if($(this).val() !== ''){
             $.ajax({
-                url: "routes/tu/get_page_profile_config.php",
+                url: "routes/profile/get_page_profile_config.php",
                 method: "post",
                 data: {
                     sn: $(this).val()
@@ -2297,6 +2431,198 @@
                 // dataType: "json",
                 success: function(res) {
                     $('#get_set_cont').html(res);
+                }
+            });
+        }
+    });
+</script>
+
+<script type="text/javascript">
+    get_tb_spr2(1)
+    function get_tb_spr2(val){
+        if(val == 1){
+            $.get('routes/profile/get_tb_spr2.php?id=1', function(req){
+                setTimeout(function () {$('#tb_spr1').html(req);}, 1000);
+            });
+        }else {
+            $.get('routes/profile/get_tb_spr2.php?id=2', function(req){
+                setTimeout(function () {$('#tb_spr2').html(req);}, 1000);
+            });
+        }
+    }
+    $('.add_spr').click(function(){
+        $('#Modal_spr').modal('show')
+        if($('#p-spr1').hasClass('active') == true){
+            $('.spr_mtitle').html('เพิ่มชนิดพืช')
+            $('#m_spr1').show()
+            $('#m_spr2').hide()
+            $('.val_spr_1').val('')
+            $('#val_hide_1').val('')
+            $('.val_colp').attr("disabled", true).val(1)
+        }else {
+            $('.spr_mtitle').html('เพิ่มข้อมูลพืช')
+            $.get('routes/tu/get_corp_sel.php?s_mode=1',function(req){
+                $('.val_spr_n').html(req);
+            });
+            $('#m_spr1').hide()
+            $('#m_spr2').show()
+            $('.val_spr_n').val(0)
+            $('.val_spr_c').val('')
+            $('.val_spr_d').val('')
+            $('.val_spr_h').val('')
+            $('.val_spr_w').val('')
+            $('.val_spr_b').val('')
+            $('.val_spr_p').val('')
+            $('.val_spr_g').val('')
+            $('#val_hide_2').val('')
+            $('.val_note').val('')
+        }
+    });
+    $('#submit_add_spr').click(function(){
+        if($('#p-spr1').hasClass('active') == true){
+            if ($('.val_spr_1').val() == '') {
+                $('.val_spr_1').addClass('is-invalid');
+                return false;
+            }
+            $('.val_spr_1').removeClass('is-invalid');
+            // console.log({'mode': 1,
+            //     'name': $('.val_spr_1').val(),
+            //     'colp': $('.val_colp').val(),
+            //     'id': $('#val_hide_1').val()
+            // });
+            // return false
+            $.ajax({
+                type: "POST",
+                url: "routes/profile/save_sprout.php",
+                data: {
+                    'mode': 1,
+                    'name': $('.val_spr_1').val(),
+                    'colp': $('.val_colp').val(),
+                    'id': $('#val_hide_1').val()
+                },
+                dataType: 'json',
+                success: function(res) {
+                    console.log(res);
+                    if (res.status == 'sum') {
+                        Swal({
+                            type: "warning",
+                            title: 'มีรายชื่อนี้แล้ว!',
+                            text: "กรุณาระบุรายชื่อใหม่",
+                            // html: text,
+                            allowOutsideClick: false
+                        });
+                        return false;
+                    }else if (res.status == 'success') {
+                        get_tb_spr2(1)
+                        Swal({
+                            type: "success",
+                            title: 'บันทึกข้อมูลสำเร็จ!',
+                            // text: "กรุณาระบุรายชื่อใหม่",
+                            // html: text,
+                            allowOutsideClick: false
+                        });
+                        $('#Modal_spr').modal('hide');
+                    }else {
+                        swal({
+                            title: 'เกิดข้อผลิดพลาด !',
+                            text: "บันทึกไม่สำเร็จ !!!",
+                            type: 'error',
+                            allowOutsideClick: false,
+                            confirmButtonColor: '#32CD32'
+                        }).then((result) => {
+                            if (result.value) {
+                                location.reload();
+                            }
+                        });
+                        return false;
+                    }
+                }
+            });
+        }
+        else {
+            if ($('.val_spr_n').val() == 0) {
+                $('.val_spr_n').addClass('is-invalid');
+                return false;
+            }
+            $('.val_spr_n').removeClass('is-invalid');
+            if ($('.val_spr_c').val() == '') {
+                $('.val_spr_c').addClass('is-invalid');
+                return false;
+            }
+            $('.val_spr_c').removeClass('is-invalid');
+            if ($('.val_spr_n').val() == '') {
+                $('.val_spr_n').addClass('is-invalid');
+                return false;
+            }
+            $('.val_spr_d').removeClass('is-invalid');
+            if ($('.val_spr_h').val() == '') {
+                $('.val_spr_h').addClass('is-invalid');
+                return false;
+            }
+            $('.val_spr_h').removeClass('is-invalid');
+            if ($('.val_spr_w').val() == '') {
+                $('.val_spr_w').addClass('is-invalid');
+                return false;
+            }
+            $('.val_spr_w').removeClass('is-invalid');
+            if ($('.val_spr_b').val() == '') {
+                $('.val_spr_b').addClass('is-invalid');
+                return false;
+            }
+            $('.val_spr_b').removeClass('is-invalid');
+            if ($('.val_spr_p').val() == '') {
+                $('.val_spr_p').addClass('is-invalid');
+                return false;
+            }
+            $('.val_spr_p').removeClass('is-invalid');
+            if ($('.val_spr_g').val() == '') {
+                $('.val_spr_g').addClass('is-invalid');
+                return false;
+            }
+            $('.val_spr_g').removeClass('is-invalid');
+            $.ajax({
+                type: "POST",
+                url: "routes/profile/save_sprout.php",
+                data: {
+                    'mode': 2,
+                    'vel_s': $('.val_spr_n').val(),
+                    'vel_c': $('.val_spr_c').val(),
+                    'vel_d': $('.val_spr_d').val(),
+                    'vel_h': $('.val_spr_h').val(),
+                    'vel_w': $('.val_spr_w').val(),
+                    'vel_b': $('.val_spr_b').val(),
+                    'vel_p': $('.val_spr_p').val(),
+                    'vel_g': $('.val_spr_g').val(),
+                    'id': $('#val_hide_2').val(),
+                    'note': $('.val_note').val()
+                },
+                dataType: 'json',
+                success: function(res) {
+                    console.log(res);
+                    if (res.status == 'success') {
+                        get_tb_spr2(2)
+                        Swal({
+                            type: "success",
+                            title: 'บันทึกข้อมูลสำเร็จ!',
+                            // text: "กรุณาระบุรายชื่อใหม่",
+                            // html: text,
+                            allowOutsideClick: false
+                        });
+                        $('#Modal_spr').modal('hide');
+                    }else {
+                        swal({
+                            title: 'เกิดข้อผลิดพลาด !',
+                            text: "บันทึกไม่สำเร็จ !!!",
+                            type: 'error',
+                            allowOutsideClick: false,
+                            confirmButtonColor: '#32CD32'
+                        }).then((result) => {
+                            if (result.value) {
+                                location.reload();
+                            }
+                        });
+                        return false;
+                    }
                 }
             });
         }

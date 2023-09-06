@@ -202,7 +202,7 @@
                                                             }?>
                                                     </div>
                                                 </div>
-                                                <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle sensor-responsive" style=" margin-top:10px; text-align: center!important;">
+                                                <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle sensor-responsive" style=" margin-top:10px; text-align: center!important;"  width="50%">
                                                 <h5 class="card-text text-center dash_data__<?= $i ?> text-responsive" style="margin-top:20px;">
                                                 </h5>
                                             </div>
@@ -232,7 +232,7 @@
                                                             }?>
                                                     </div>
                                                 </div>
-                                                <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle sensor-responsive" style=" margin-top:10px; text-align: center!important;">
+                                                <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle sensor-responsive" style=" margin-top:10px; text-align: center!important;"  width="50%">
                                                 <h5 class="card-text text-center dash_data__<?= $i ?> text-responsive" style="margin-top:20px;">
                                                 </h5>
                                             </div>
@@ -251,7 +251,7 @@
                                                             }?>
                                                     </div>
                                                 </div>
-                                                <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle sensor-responsive" style=" margin-top:10px; text-align: center!important;">
+                                                <img src="" alt="..." class="dash_img_<?= $i ?> rounded-circle sensor-responsive" style=" margin-top:10px; text-align: center!important;"  width="30%">
                                                 <h5 class="card-text text-center dash_data__<?= $i ?> text-responsive" style="margin-top:20px;">
                                                 </h5>
                                             </div>
@@ -468,7 +468,7 @@
 <script src="dist/plugin/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider-init.js"></script> -->
 
 <script>
-    var house_master = '<?= $s_master["house_master"] ?>';
+    // var house_master = '<?// $s_master["house_master"] ?>';
     var user = '<?= $account_user ?>';
     // alert(user)
     $('.memu_control').click(function () {

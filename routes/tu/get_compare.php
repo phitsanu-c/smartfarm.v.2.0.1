@@ -1,27 +1,16 @@
 <?php
-    require "../connectdb.php";
-    require 'phpMQTT.php';
-    $host = '203.150.37.144';     // change if necessary
-    $port = 1883;                     // change if necessary
-    $username = '';                   // set your username
-    $password = '';                   // set your password
-    $topic = "web_system";
-    $mqtt = new bluerhinos\phpMQTT($host, $port, "ClientID".rand());
-    //
-    if ($mqtt->connect(true,NULL,$username,$password)) {
-        $data_mq = $mqtt->subscribeAndWaitForMessage($topic, 1);
-        $decodedJson = json_decode(substr($data_mq, 2), true);
-        $new_dt = ['account_id' => $_SESSION['account_id'], 'name' => $_SESSION["account_user"], 'dt' => date("Y-m-d H:i:s", strtotime('3 hour')), 'siteID' => $_SESSION["sn"]['siteID'], 'count_site' => $_SESSION['sn']['count_site']]; // '-6 hour'));
-        $decodedJson[$_SESSION['account_id']] = $new_dt;
-        $message = json_encode($decodedJson);
-        $mqtt->publish($topic,$message, 1);
-        $mqtt->close();
-    }
+    require "connect_mqtt_uptime.php";
 
     $house_master = $_POST["house_master"];
     $config_cn = $_POST["config_cn"];
     // echo $config_cn["cn_status_1"];
-    // // exit();
+    // if($_POST['unit_light'] == 'true'){
+    //     echo "klux";
+    // }else {
+    //     echo "mol";
+    // }
+    // echo $_POST['unit_light'];
+    // exit();
 
     if ($_POST["mode"] == 'day') {
         $start_day = date("Y-m-d H:i:s", strtotime('-1 day'));
@@ -45,18 +34,30 @@
     $count_columns = count($config_cn[2]);
     for($i=0; $i < $count_columns; $i++){
         if ($config_cn[3][$i] == 4 || $config_cn[3][$i] == 5) {
-            if($house_master == 'KMUMT001'){
-                $channel[] = 'round('.$config_cn[1][$i].', 1) AS data_cn'.($i+1);
-            }else{
+            // if($house_master == 'KMUMT001'){
+            //     $channel[] = 'round('.$config_cn[1][$i].', 1) AS data_cn'.($i+1);
+            // }else{
+            //     $channel[] = 'round('.$config_cn[1][$i].'/1000, 1) AS data_cn'.($i+1);
+            // }
+            if($_POST['unit_light'] == 'true'){
                 $channel[] = 'round('.$config_cn[1][$i].'/1000, 1) AS data_cn'.($i+1);
+            }else {
+                $channel[] = 'round('.$config_cn[1][$i].'/54, 1) AS data_cn'.($i+1);
             }
 
         } elseif ($config_cn[3][$i] == 6 || $config_cn[3][$i] == 7) {
-            $channel[] = 'round('.$config_cn[1][$i].'/54, 1) AS data_cn'.($i+1);
+            // $channel[] = 'round('.$config_cn[1][$i].'/54, 1) AS data_cn'.($i+1);
+            if($_POST['unit_light'] == 'true'){
+                $channel[] = 'round('.$config_cn[1][$i].'/1000, 1) AS data_cn'.($i+1);
+            }else {
+                $channel[] = 'round('.$config_cn[1][$i].'/54, 1) AS data_cn'.($i+1);
+            }
         } else {
             $channel[] = 'round('.$config_cn[1][$i].', 1) AS data_cn'.($i+1);
         }
     }
+    // echo json_encode($channel);
+    // exit();
     // $config_cn
     // $channel[] = "SUBSTRING(mn_timestamp,1,10) AS nDate";
     // $channel[] = "SUBSTRING(mn_timestamp,-8, 5) AS nTime";
@@ -110,8 +111,8 @@
         }
        $i++;
     }
- // DATE_FORMAT(NOW(),'%Y-%m-%d %H-%i-%s')
-// echo $sql;
-// echo $channel1;
-// exit();
+    // DATE_FORMAT(NOW(),'%Y-%m-%d %H-%i-%s')
+    // echo $sql;
+    // echo $channel1;
+    // exit();
    echo json_encode($data0);

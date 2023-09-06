@@ -280,7 +280,7 @@
     <!-- exit Modal_select_sn -->
 </div>
 <script>
-    var house_master = '<?= $house_master ?>';
+    // var house_master = '<?// $house_master ?>';
     var login_user = '<?= $account_user ?>';
     var config_sn = $.parseJSON('<?= json_encode($config_sn) ?>');
     var config_cn = $.parseJSON('<?= json_encode($config_cn) ?>');

@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    $db["host"] = "deccbigdata.com";
+    $db["host"] = "203.154.83.117";//"decc-bigdata.com";
     // $db["host"] = "203.159.93.76";
     $db["user"] = "root2";
     $db["pass"] = "Tt@67235520";

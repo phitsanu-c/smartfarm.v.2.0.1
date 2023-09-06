@@ -12,7 +12,7 @@
         return is_array($data) ? array_map(__FUNCTION__, $data) : $data;
     }
     $json = toArray (json_decode($_POST['output']));
-    
+
     // echo json_encode($newData['serial_id']);
     // exit();
 
@@ -20,8 +20,8 @@
         $submode = 'Manual';
     }elseif($_POST['mode'] == 'Auto'){
         require '../../phpMQTT.php';
-        $host = '203.150.37.144';     // change if necessary
-        $port = 1883;                     // change if necessary
+        $host = '203.154.83.117';     // change if necessary
+        $port = 4563;                     // change if necessary
         $username = '';                   // set your username
         $password = '';                   // set your password
 
@@ -39,8 +39,8 @@
                 }else{ // 5 6 7 8 11 12
                     $submode = 'Time_set';
                 }
-                
-                
+
+
             }else{
                 $submode = 'tracking';
             }
@@ -87,5 +87,3 @@
     }else{
         echo json_encode(['status' => 'Error','data' => "Insert_Error"] , JSON_UNESCAPED_UNICODE );
     }
-
-    

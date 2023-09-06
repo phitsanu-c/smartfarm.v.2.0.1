@@ -1,8 +1,8 @@
 <?php
     require '../../phpMQTT.php';
     require "../connectdb.php";
-    $host = '203.150.37.144';     // change if necessary
-    $port = 1883;                     // change if necessary
+    $host = '203.154.83.117';     // change if necessary
+    $port = 4563;                     // change if necessary
     $username = '';                   // set your username
     $password = '';                   // set your password
 
@@ -42,7 +42,8 @@
                 }else{
                     echo json_encode(['status' => 'Error','data' => "Insert_Error"] , JSON_UNESCAPED_UNICODE );
                 }
-            }else{
+            }
+            else{
                 $load = json_decode($_POST['load']);
                 $status = json_decode($_POST['status']);
                 $mqtt->publish($sn.'/control/loads/user_control', $_POST['user'], 1);

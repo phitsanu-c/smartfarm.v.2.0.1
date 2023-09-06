@@ -35,7 +35,8 @@
                 "on_7"  => $_POST["on_7"],
                 "off_7"  => $_POST["off_7"]
             ];
-        }else if($channel == 11){
+        }
+        else if($channel == 11){
             $post_data = [
                 "sw_1" => $_POST["sw_1"],
                 "sw_2" => $_POST["sw_2"],
@@ -56,7 +57,8 @@
                 "e_5"  => $_POST["se_5"],
                 "e_6"  => $_POST["se_6"]
             ];
-        }else{
+        }
+        else{
             $post_data = [
                 "sw_1" => $_POST["sw_1"],
                 "sw_2" => $_POST["sw_2"],
@@ -112,7 +114,8 @@
                         :sw_1, :sw_2, :sw_3, :sw_4, :sw_5, :sw_6, :sw_7,
                         :s_1, :s_2, :s_3, :s_4, :s_5, :s_6, :s_7,
                         :e_1, :e_2, :e_3, :e_4, :e_5, :e_6, :e_7, :on_7, :off_7 )';
-        }else{
+        }
+        else{
             $colume = '(load_'.$channel.'_sn,
                         load_'.$channel.'_user,
                         load_'.$channel.'_st_1,

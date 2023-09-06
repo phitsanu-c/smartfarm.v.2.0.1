@@ -15,6 +15,8 @@ $channel = 'round(dataST_2_3, 1) AS temp_out,
 // echo $channel;
 // exit();
 $sql = "SELECT data_timestamp, $channel FROM tb_data_sensor WHERE data_sn = '$house_master' AND data_timestamp BETWEEN '$start_day' AND '$stop_day' ORDER BY data_timestamp ";
+// echo $sql;
+// exit();
 $stmt = $dbcon->query($sql);
 $data0 = [];
 while ($row = $stmt->fetch()) {

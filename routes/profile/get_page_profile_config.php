@@ -13,51 +13,53 @@
 <br>
 <div class="col-12">
     <h3 Class="text-center"><?= $row_3["house_name"] ?></h3>
-    <div class="card-body border radius-10 shadow-none mb-3">
-        <div class="d-flex">
-            <h4 class="mt-2">ระบบควบคุม</h4>
-            <div class="ms-auto">
-                <button class="btn btn-info me-1 cn_edit me-3" val=""><i class="bi bi-plus-square"></i> แก้ไข</button>
-                <button class="btn btn-success me-1 cn_save me-3" val=""><i class="bi bi-plus-square"></i> บันทึก</button>
-                <button class="btn btn-danger me-1 cn_close me-3" val=""><i class="bi bi-plus-square"></i> ยกเลิก</button>
+    <?php if ($_SESSION["sn"]['account_status'] == 1){ ?>
+        <div class="card-body border radius-10 shadow-none mb-3">
+            <div class="d-flex">
+                <h4 class="mt-2">ระบบควบคุม</h4>
+                <div class="ms-auto">
+                    <button class="btn btn-info me-1 cn_edit me-3" val=""><i class="bi bi-plus-square"></i> แก้ไข</button>
+                    <button class="btn btn-success me-1 cn_save me-3" val=""><i class="bi bi-plus-square"></i> บันทึก</button>
+                    <button class="btn btn-danger me-1 cn_close me-3" val=""><i class="bi bi-plus-square"></i> ยกเลิก</button>
+                </div>
             </div>
-        </div>
-        <div class="col-12 col-lg-12 col-xl-12 col-sm-12 d-flex">
-            <div class="row">
-                <form class="row g-3" id="config_control_from" enctype="multipart/form-data" onSubmit="return false;">
-                    <input type="hidden" name="mode" value="control">
-                    <input type="hidden" name="house_master" value="<?= $house_master ?>">
-                    <?php for($i=1; $i<=12; $i++){?>
-                        <div class="col-lg-3 col-xl-3 col-sm-12">
-                            <div class="card-body border radius-10 shadow-none mb-3">
-                                <div class="text-center text-responsive2"><b>
-                                    <?php
-                                    if($i <= 4){echo 'น้ำหยด '.$i;}
-                                    elseif($i > 4 && $i <= 8){echo 'พัดลม '.($i-4);}
-                                    elseif($i > 8 && $i <= 10){echo 'พ่นหมอก '.($i-8);}
-                                    elseif($i == 11){echo 'สเปรย์';}
-                                    elseif($i == 12){echo 'ม่านพรางแสง';}
-                                    // if ($i == 12) { echo "<br><br>"; }else{ echo '<br>'.$row_3['cn_name_'.$i];}?></b>
+            <div class="col-12 col-lg-12 col-xl-12 col-sm-12 d-flex">
+                <div class="row">
+                    <form class="row g-3" id="config_control_from" enctype="multipart/form-data" onSubmit="return false;">
+                        <input type="hidden" name="mode" value="control">
+                        <input type="hidden" name="house_master" value="<?= $house_master ?>">
+                        <?php for($i=1; $i<=12; $i++){?>
+                            <div class="col-lg-3 col-xl-3 col-sm-12">
+                                <div class="card-body border radius-10 shadow-none mb-3">
+                                    <div class="text-center text-responsive2"><b>
+                                        <?php
+                                        if($i <= 4){echo 'น้ำหยด '.$i;}
+                                        elseif($i > 4 && $i <= 8){echo 'พัดลม '.($i-4);}
+                                        elseif($i > 8 && $i <= 10){echo 'พ่นหมอก '.($i-8);}
+                                        elseif($i == 11){echo 'สเปรย์';}
+                                        elseif($i == 12){echo 'ม่านพรางแสง';}
+                                        // if ($i == 12) { echo "<br><br>"; }else{ echo '<br>'.$row_3['cn_name_'.$i];}?></b>
+                                    </div>
+    								<div class="input-group mb-3">
+    									<label class="input-group-text" for="">Status </label>
+    									<select class="form-select sel_<?= $i ?> sel_" name="sel_<?= $i ?>">
+    										<option value="0">ปิดใช้งาน</option>
+    										<option value="1">เปิดใช้งาน</option>
+    									</select>
+    								</div>
+                                    <div class="input-group mb-3">
+    									<label class="input-group-text" for="">Name </label>
+    									<input class="form-control name_<?= $i ?> name_" name="name_<?= $i ?>">
+    								</div>
                                 </div>
-								<div class="input-group mb-3">
-									<label class="input-group-text" for="">Status </label>
-									<select class="form-select sel_<?= $i ?> sel_" name="sel_<?= $i ?>">
-										<option value="0">ปิดใช้งาน</option>
-										<option value="1">เปิดใช้งาน</option>
-									</select>
-								</div>
-                                <div class="input-group mb-3">
-									<label class="input-group-text" for="">Name </label>
-									<input class="form-control name_<?= $i ?> name_" name="name_<?= $i ?>">
-								</div>
                             </div>
-                        </div>
 
-                    <?php } ?>
-                </form>
+                        <?php } ?>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+    <?php } ?>
     <div class="card-body border radius-10 shadow-none mb-3">
         <div class="d-flex">
             <h4 class="mt-2">เซนเซอร์</h4>
@@ -70,6 +72,18 @@
         <div class="col-12 col-lg-12 col-xl-12 col-sm-12 d-flex">
             <div class="row">
                 <form class="row g-3" id="config_sensor_from" enctype="multipart/form-data" onSubmit="return false;">
+                    <div class="card-body border radius-10 shadow-none mb-3">
+                        <div class="row mb-2">
+                            <label class="col-sm-6 col-form-label text-center">ข้อมูลเซนเซอร์ที่แสดงบนเว็บ</label>
+                            <div class="col-sm-6">
+                                <select class="form-control" id="house_eq" name="house_eq" disabled>
+                                    <option value="0">ข้อมูลจริงจากเซนเซอร์ไม่ผ่านสมการ</option>
+                                    <option value="1">ข้อมูลเซนเซอร์ผ่านสมการ</option>
+                                </select>
+                                <!-- <input type="hidden" id="df_data_sn" value="<?// json_encode($row_2) ?>"> -->
+                            </div>
+                        </div>
+                    </div>
                     <input type="hidden" name="mode" value="sensor">
                     <input type="hidden" name="df_val" class="df_val">
                     <input type="hidden" name="df_val_eq" class="df_val_eq">
@@ -96,42 +110,44 @@
                                         <input class="form-control name_sn_<?= $i ?> name_sn_" name="name_sn_<?= $i ?>">
                                     </div>
 								</div>
-                                <div class="row mb-2">
-                                    <label class="col-sm-4 col-form-label">ช่อง </label>
-                                    <div class="col-sm-8">
-                                        <select class="form-select channel_sn_<?= $i ?> channel_sn_" name="channel_sn_<?= $i ?>">
-                                            <?php for($a = 1; $a < 8; $a++){ ?>
-                                                <option value="data_temp_out_<?= $a ?>">data_temp_out_<?= $a ?></option>
-                                                <option value="data_hum_out_<?= $a ?>">data_hum_out_<?= $a ?></option>
-                                                <option value="data_light_out_<?= $a ?>">data_light_out_<?= $a ?></option>
-                                                <option value="data_temp_in_<?= $a ?>">data_temp_in_<?= $a ?></option>
-                                                <option value="data_hum_in_<?= $a ?>">data_hum_in_<?= $a ?></option>
-                                                <option value="data_light_in_<?= $a ?>">data_light_in_<?= $a ?></option>
-                                                <option value="data_soil_in_<?= $a ?>">data_soil_in_<?= $a ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-								</div>
-                                <div class="row mb-2">
-                                    <label class="col-sm-4 col-form-label">โหมด </label>
-                                    <div class="col-sm-8">
-                                        <select class="form-select mode_sn_<?= $i ?> mode_sn_" name="mode_sn_<?= $i ?>">
-                                            <?php
-                                                for ($j=0; $j < count($sensor); $j++) {
-                                                    echo '<option value="'. $sensor[$j]['sensor_id'] .'">'. $sensor[$j]['sensor_name'];
-                                                    if ($sensor[$j]['sensor_unit'] == 1) {
-                                                        echo ' (℃)';
-                                                    }elseif ($sensor[$j]['sensor_unit'] == '') {
+                                <?php if ($_SESSION["sn"]['account_status'] == 1){ ?>
+                                    <div class="row mb-2">
+                                        <label class="col-sm-4 col-form-label">ช่อง </label>
+                                        <div class="col-sm-8">
+                                            <select class="form-select channel_sn_<?= $i ?> channel_sn_" name="channel_sn_<?= $i ?>">
+                                                <?php for($a = 1; $a < 8; $a++){ ?>
+                                                    <option value="data_temp_out_<?= $a ?>">data_temp_out_<?= $a ?></option>
+                                                    <option value="data_hum_out_<?= $a ?>">data_hum_out_<?= $a ?></option>
+                                                    <option value="data_light_out_<?= $a ?>">data_light_out_<?= $a ?></option>
+                                                    <option value="data_temp_in_<?= $a ?>">data_temp_in_<?= $a ?></option>
+                                                    <option value="data_hum_in_<?= $a ?>">data_hum_in_<?= $a ?></option>
+                                                    <option value="data_light_in_<?= $a ?>">data_light_in_<?= $a ?></option>
+                                                    <option value="data_soil_in_<?= $a ?>">data_soil_in_<?= $a ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+    								</div>
+                                    <div class="row mb-2">
+                                        <label class="col-sm-4 col-form-label">โหมด </label>
+                                        <div class="col-sm-8">
+                                            <select class="form-select mode_sn_<?= $i ?> mode_sn_" name="mode_sn_<?= $i ?>">
+                                                <?php
+                                                    for ($j=0; $j < count($sensor); $j++) {
+                                                        echo '<option value="'. $sensor[$j]['sensor_id'] .'">'. $sensor[$j]['sensor_name'];
+                                                        if ($sensor[$j]['sensor_unit'] == 1) {
+                                                            echo ' (℃)';
+                                                        }elseif ($sensor[$j]['sensor_unit'] == '') {
 
-                                                    }else {
-                                                        echo ' ('.$sensor[$j]['sensor_unit'].')';
+                                                        }else {
+                                                            echo ' ('.$sensor[$j]['sensor_unit'].')';
+                                                        }
+                                                        echo '</option>';
                                                     }
-                                                    echo '</option>';
-                                                }
-                                            ?>
-    									</select>
-                                    </div>
-								</div>
+                                                ?>
+        									</select>
+                                        </div>
+    								</div>
+                                <?php } ?>
                                 <div class="row mb-2">
                                     <label class="col-sm-4 col-form-label">สมการ </label>
                                     <div class="col-sm-8">
@@ -164,42 +180,44 @@
                                         <input class="form-control name_sn_<?= $i ?> name_sn_" name="name_sn_<?= $i ?>">
                                     </div>
 								</div>
-                                <div class="row mb-2">
-                                    <label class="col-sm-4 col-form-label">ช่อง </label>
-                                    <div class="col-sm-8">
-                                        <select class="form-select channel_sn_<?= $i ?> channel_sn_" name="channel_sn_<?= $i ?>">
-                                            <?php for($a = 1; $a < 8; $a++){ ?>
-                                                <option value="data_temp_out_<?= $a ?>">data_temp_out_<?= $a ?></option>
-                                                <option value="data_hum_out_<?= $a ?>">data_hum_out_<?= $a ?></option>
-                                                <option value="data_light_out_<?= $a ?>">data_light_out_<?= $a ?></option>
-                                                <option value="data_temp_in_<?= $a ?>">data_temp_in_<?= $a ?></option>
-                                                <option value="data_hum_in_<?= $a ?>">data_hum_in_<?= $a ?></option>
-                                                <option value="data_light_in_<?= $a ?>">data_light_in_<?= $a ?></option>
-                                                <option value="data_soil_in_<?= $a ?>">data_soil_in_<?= $a ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-								</div>
-                                <div class="row mb-2">
-                                    <label class="col-sm-4 col-form-label">โหมด </label>
-                                    <div class="col-sm-8">
-                                        <select class="form-select mode_sn_<?= $i ?> mode_sn_" name="mode_sn_<?= $i ?>">
-                                            <?php
-                                                for ($j=0; $j < count($sensor); $j++) {
-                                                    echo '<option value="'. $sensor[$j]['sensor_id'] .'">'. $sensor[$j]['sensor_name'];
-                                                    if ($sensor[$j]['sensor_unit'] == 1) {
-                                                        echo ' (℃)';
-                                                    }elseif ($sensor[$j]['sensor_unit'] == '') {
+                                <?php //if ($_SESSION["sn"]['account_status'] == 1){ ?>
+                                    <div class="row mb-2">
+                                        <label class="col-sm-4 col-form-label">ช่อง</label>
+                                        <div class="col-sm-8">
+                                            <select class="form-select channel_sn_<?= $i ?> channel_sn_" name="channel_sn_<?= $i ?>">
+                                                <?php for($a = 1; $a < 8; $a++){ ?>
+                                                    <option value="data_temp_out_<?= $a ?>">data_temp_out_<?= $a ?></option>
+                                                    <option value="data_hum_out_<?= $a ?>">data_hum_out_<?= $a ?></option>
+                                                    <option value="data_light_out_<?= $a ?>">data_light_out_<?= $a ?></option>
+                                                    <option value="data_temp_in_<?= $a ?>">data_temp_in_<?= $a ?></option>
+                                                    <option value="data_hum_in_<?= $a ?>">data_hum_in_<?= $a ?></option>
+                                                    <option value="data_light_in_<?= $a ?>">data_light_in_<?= $a ?></option>
+                                                    <option value="data_soil_in_<?= $a ?>">data_soil_in_<?= $a ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+    								</div>
+                                    <div class="row mb-2">
+                                        <label class="col-sm-4 col-form-label">โหมด </label>
+                                        <div class="col-sm-8">
+                                            <select class="form-select mode_sn_<?= $i ?> mode_sn_" name="mode_sn_<?= $i ?>">
+                                                <?php
+                                                    for ($j=0; $j < count($sensor); $j++) {
+                                                        echo '<option value="'. $sensor[$j]['sensor_id'] .'">'. $sensor[$j]['sensor_name'];
+                                                        if ($sensor[$j]['sensor_unit'] == 1) {
+                                                            echo ' (℃)';
+                                                        }elseif ($sensor[$j]['sensor_unit'] == '') {
 
-                                                    }else {
-                                                        echo ' ('.$sensor[$j]['sensor_unit'].')';
+                                                        }else {
+                                                            echo ' ('.$sensor[$j]['sensor_unit'].')';
+                                                        }
+                                                        echo '</option>';
                                                     }
-                                                    echo '</option>';
-                                                }
-                                            ?>
-    									</select>
-                                    </div>
-								</div>
+                                                ?>
+        									</select>
+                                        </div>
+    								</div>
+                                <?php //} ?>
                                 <div class="row mb-2">
                                     <label class="col-sm-4 col-form-label">สมการ </label>
                                     <div class="col-sm-8">
@@ -264,18 +282,25 @@
 
 
 <script type="text/javascript">
-    var data_sn = <?= json_encode($row_2) ?>;
+    // let data_sn, data_equation, house_eq, account_status
+    var data_sn = <?php echo json_encode($row_2); ?>;
     var data_equation = <?= json_encode($row_4) ?>;
+    var house_eq = <?= $row_3['house_eq'] ?>;
+    var account_status = <?= $_SESSION["sn"]['account_status'] ?>;
+    $("#house_eq").val(data_sn)
     $('.df_val').val(JSON.stringify(data_sn))
     $('.df_val_eq').val(JSON.stringify(data_equation));
-    // console.log(data_equation)
-    for(var i=1; i<= 7; i++){
-        $('.status_sn_'+i).val(data_sn['sn_status_'+i]);
-        $('.name_sn_'+i).val(data_sn['sn_name_'+i]);
-        $('.channel_sn_'+i).val(data_sn['sn_channel_'+i]);
-        $('.mode_sn_'+i).val(data_sn['sn_sensor_'+i]);
-        $('.equation_sn_'+i).val(data_equation['equation_ch_'+i]);
-    }
+    console.log(data_sn
+    //     setTimeout(() => $('#df_data_sn').val(), 1000)
+    )
+    // return false
+    // for(var i=1; i<= 7; i++){
+    //     $('.status_sn_'+i).val(data_sn['sn_status_'+i]);
+    //     $('.name_sn_'+i).val(data_sn['sn_name_'+i]);
+    //     $('.channel_sn_'+i).val(data_sn['sn_channel_'+i]);
+    //     $('.mode_sn_'+i).val(data_sn['sn_sensor_'+i]);
+    //     $('.equation_sn_'+i).val(data_equation['equation_ch_'+i]);
+    // }
     $('.status_sn_').prop('disabled', true);
     $('.name_sn_').prop('disabled', true);
     $('.channel_sn_').prop('disabled', true);
@@ -288,9 +313,15 @@
         $(this).hide();
         $('.status_sn_').prop('disabled', false);
         $('.name_sn_').prop('disabled', false);
-        $('.channel_sn_').prop('disabled', false);
-        $('.mode_sn_').prop('disabled', false);
+        if(account_status == 1){ // supperadmin
+            $('.channel_sn_').prop('disabled', false);
+            $('.mode_sn_').prop('disabled', false);
+        }else {
+            $('.channel_sn_').prop('disabled', true);
+            $('.mode_sn_').prop('disabled', true);
+        }
         $('.equation_sn_').prop('disabled', false);
+        $("#house_eq").prop('disabled', false);
         $('.sn_save').show();
         $('.sn_close').show();
     })
@@ -307,6 +338,7 @@
         $('.channel_sn_').prop('disabled', true);
         $('.mode_sn_').prop('disabled', true);
         $('.equation_sn_').prop('disabled', true).removeClass('is-invalid');
+        $("#house_eq").val(house_eq).prop('disabled', true);
         $('.sn_edit').show();
         $('.sn_save').hide();
         $('.sn_close').hide();
@@ -349,7 +381,7 @@
             if (result.value) {
                 $.ajax({
                     type: "POST",
-                    url: "routes/tu/save_config_profile_config.php",
+                    url: "routes/profile/save_config_profile_config.php",
                     data: new FormData($("#config_sensor_from")[0]),
                     contentType: false,
                     cache: false,
@@ -383,7 +415,7 @@
                             }).then((result) => {
                                 if (result.value) {
                                     $.ajax({
-                                        url: "routes/tu/get_page_profile_config.php",
+                                        url: "routes/profile/get_page_profile_config.php",
                                         method: "post",
                                         data: {
                                             sn: $('.cont_sel').val()
@@ -403,11 +435,11 @@
         // }
     });
     // ------------ Control
-    var val = <?= json_encode($row_3)?>;//$(this).attr('val')
-    for(var i=1; i<= 12; i++){
-        $('.sel_'+i).val(val['cn_status_'+i]);
-        $('.name_'+i).val(val['cn_name_'+i]);
-    }
+    // var val = <?= json_encode($row_3)?>;//$(this).attr('val')
+    // for(var i=1; i<= 12; i++){
+    //     $('.sel_'+i).val(val['cn_status_'+i]);
+    //     $('.name_'+i).val(val['cn_name_'+i]);
+    // }
     $('.sel_').prop('disabled', true);
     $('.name_').prop('disabled', true);
     $('.cn_edit').show();
@@ -423,7 +455,7 @@
     $('.cn_save').click(function(){
         $.ajax({
             type: "POST",
-            url: "routes/tu/save_config_profile_config.php",
+            url: "routes/profile/save_config_profile_config.php",
             data: new FormData($("#config_control_from")[0]),
             contentType: false,
             cache: false,
@@ -455,7 +487,7 @@
                     }).then((result) => {
                         if (result.value) {
                             $.ajax({
-                                url: "routes/tu/get_page_profile_config.php",
+                                url: "routes/profile/get_page_profile_config.php",
                                 method: "post",
                                 data: {
                                     sn: $('.cont_sel').val()

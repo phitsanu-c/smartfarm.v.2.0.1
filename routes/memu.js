@@ -26,6 +26,8 @@ $(".memu_site").click(function() {
     $('#load_pages_report').hide();
     $('#load_pages_profile').hide();
     $('.memu_setting').hide()
+    $(".memu_sprout").removeClass("mm-active")
+    $('#load_pages_sprout').hide();
 });
 $(".memu_house").click(function() {
     $(this).addClass('mm-active');
@@ -41,6 +43,8 @@ $(".memu_house").click(function() {
     }else{
         $(".memu_compare").hide();
     }
+    $(".memu_sprout").removeClass("mm-active")
+    $('#load_pages_sprout').hide();
     $('#load_pages_site').hide();
     $('#load_pages_house').show();
     $('#load_pages_compare').hide();
@@ -75,11 +79,15 @@ $(".memu_compare").click(function(){
     $("#load_pages_compare").show().load('routes/tu/pages_compare.php?s='+url[1]);
     $('#load_pages_profile').hide();
     $('.memu_setting').hide()
+    $(".memu_sprout").removeClass("mm-active")
+    $('#load_pages_sprout').hide();
 })
 $(".memu_dash").click(function() {
     $(this).addClass('mm-active');
     $(".memu_report").show();
     $(".memu_compare").hide();
+    $(".memu_sprout").removeClass("mm-active")
+    $('#load_pages_sprout').hide();
 
     $('#load_pages_site').hide();
     $('#load_pages_house').hide();
@@ -97,6 +105,24 @@ $(".memu_report").click(function() {
     $('#load_pages_report').show();
     $('#load_pages_profile').hide();
     $('.memu_setting').hide()
+    $(".memu_sprout").removeClass("mm-active")
+    $('#load_pages_sprout').hide();
+});
+$(".memu_sprout").click(function() {
+    $(this).addClass("mm-active")
+
+    $(".memu_report").show();
+    $(".memu_compare").addClass("mm-active")
+
+    $('#load_pages_site').hide();
+    $('#load_pages_house').hide();
+    $('#load_pages_compare').hide();
+    $('#load_pages_dashboard').show();
+    $('#load_pages_report').hide();
+    $('#load_pages_profile').hide();
+    $('.memu_setting').hide()
+    $('#load_pages_sprout').show();
+    alert('aaaaaq')
 });
 // $(".memu_report").click(function() {
 //     $(this).addClass('mm-active');
@@ -126,6 +152,8 @@ $(".menu_setting").click(function() {
     $('#load_pages_dashboard').hide();
     $('#load_pages_report').hide();
     $("#load_pages_profile").show();
+    $(".memu_sprout").removeClass("mm-active")
+    $('#load_pages_sprout').hide();
     $.ajax({
         url: "views/setting_profile.php",
         method: "post",

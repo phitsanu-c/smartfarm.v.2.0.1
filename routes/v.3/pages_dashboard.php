@@ -223,29 +223,53 @@
                             <div class="card-body">
                                 <h5 class="text-center text-responsive2">ข้อมูลเซนเซอร์นอกโรงเรือน</h5>
                                 <div class="row text-center">
-                                    <?php for($i = 1; $i <= 3; $i++){
-                                        if($dashStatus[$i] == 1){ ?>
-                                            <div class="<?php if($dashStatus[3] == 1 ){echo "col-lg-4 col-xl-4";}else { echo "col-lg-6 col-xl-6"; } ?> col-sm-12">
-                                                <div class="card-body border radius-10 shadow-none mb-3">
-                                                    <h5 class="card-title text-responsive2 mt-2 "><B><?= $dashName[$i] ?></B></h5>
-                                                    <h6 class="card-title"><?= $dashName2[$i] ?></h6>
-                                                    <div class="image-popups">
-                                                        <?php if($imgMap[$i] != ""){
-                                                                echo '<a href="public/images/img_map/'.$imgMap[$i].'"><img src="" alt="..." class="dash_img_'. $i .' rounded-circle sensor-responsive" style=" margin-top:10px; text-align: center!important;"></a>';
-                                                            }else {
-                                                                echo '<img src="" alt="..." class="dash_img_'. $i .' rounded-circle sensor-responsive" style=" margin-top:10px; text-align: center!important;">';
-                                                            }?>
+                                    <?php if ($s_master['house_master'] == "TSPWM001") {
+                                        for($i = 1; $i <= 4; $i++){
+                                            if($dashStatus[$i] == 1){ ?>
+                                                <div class="<?php if($dashStatus[3] == 1 ){echo "col-lg-3 col-xl-3";}else { echo "col-lg-6 col-xl-6"; } ?> col-sm-12">
+                                                    <div class="card-body border radius-10 shadow-none mb-3">
+                                                        <h5 class="card-title text-responsive2 mt-2 "><B><?= $dashName[$i] ?></B></h5>
+                                                        <h6 class="card-title"><?= $dashName2[$i] ?></h6>
+                                                        <?php if($i == 4){ echo "<br>";} ?>
+                                                        <div class="image-popups">
+                                                            <?php if($imgMap[$i] != ""){
+                                                                    echo '<a href="public/images/img_map/'.$imgMap[$i].'"><img src="" alt="..." class="dash_img_'. $i .' rounded-circle sensor-responsive" style=" margin-top:10px; text-align: center!important;"></a>';
+                                                                }else {
+                                                                    echo '<img src="" alt="..." class="dash_img_'. $i .' rounded-circle sensor-responsive" style=" margin-top:10px; text-align: center!important;" width="80%">';
+                                                                }?>
+                                                        </div>
+                                                        <?php if($i == 4){ echo "<br>";} ?>
+                                                        <h5 class="card-text text-center dash_data__<?= $i ?> text-responsive" style="margin-top:20px;"></h5>
                                                     </div>
-                                                    <h5 class="card-text text-center dash_data__<?= $i ?> text-responsive" style="margin-top:20px;"></h5>
                                                 </div>
-                                            </div>
-                                        <?php }
+                                            <?php }
+                                        }
+                                    }else {
+                                        for($i = 1; $i <= 3; $i++){
+                                            if($dashStatus[$i] == 1){ ?>
+                                                <div class="<?php if($dashStatus[3] == 1 ){echo "col-lg-4 col-xl-4";}else { echo "col-lg-6 col-xl-6"; } ?> col-sm-12">
+                                                    <div class="card-body border radius-10 shadow-none mb-3">
+                                                        <h5 class="card-title text-responsive2 mt-2 "><B><?= $dashName[$i] ?></B></h5>
+                                                        <h6 class="card-title"><?= $dashName2[$i] ?></h6>
+                                                        <div class="image-popups">
+                                                            <?php if($imgMap[$i] != ""){
+                                                                    echo '<a href="public/images/img_map/'.$imgMap[$i].'"><img src="" alt="..." class="dash_img_'. $i .' rounded-circle sensor-responsive" style=" margin-top:10px; text-align: center!important;"  width="80%"></a>';
+                                                                }else {
+                                                                    echo '<img src="" alt="..." class="dash_img_'. $i .' rounded-circle sensor-responsive" style=" margin-top:10px; text-align: center!important;"  width="80%">';
+                                                                }?>
+                                                        </div>
+                                                        <h5 class="card-text text-center dash_data__<?= $i ?> text-responsive" style="margin-top:20px;"></h5>
+                                                    </div>
+                                                </div>
+                                            <?php }
+                                        }
                                     } ?>
                                 </div>
                             </div>
                         </div>
                     <?php } ?>
-                    <?php if(count($n_dash) > 0){?>
+                    <?php if(count($n_dash) > 0){
+                        if ($s_master['house_master'] != "TSPWM001") {?>
                         <div class="card radius-10 border shadow-none">
                             <div class="card-body">
                                 <h5 class="text-center text-responsive2">ข้อมูลเซนเซอร์ในโรงเรือน</h5>
@@ -258,9 +282,9 @@
                                                     <h6 class="card-title"><?= $dashName2[$i] ?></h6>
                                                     <div class="image-popups">
                                                         <?php if($imgMap[$i] != ""){
-                                                                echo '<a href="public/images/img_map/'.$imgMap[$i].'"><img src="" alt="..." class="dash_img_'. $i .' rounded-circle sensor-responsive" style=" margin-top:10px; text-align: center!important;"></a>';
+                                                                echo '<a href="public/images/img_map/'.$imgMap[$i].'"><img src="" alt="..." class="dash_img_'. $i .' rounded-circle sensor-responsive" style=" margin-top:10px; text-align: center!important;"  width="80%"></a>';
                                                             }else {
-                                                                echo '<img src="" alt="..." class="dash_img_'. $i .' rounded-circle sensor-responsive" style=" margin-top:10px; text-align: center!important;">';
+                                                                echo '<img src="" alt="..." class="dash_img_'. $i .' rounded-circle sensor-responsive" style=" margin-top:10px; text-align: center!important;"  width="80%">';
                                                             }?>
                                                     </div>
                                                     <p class="card-text text-center  dash_data__<?= $i ?> text-responsive" style="margin-top:20px;">
@@ -271,7 +295,7 @@
                                 </div>
                             </div>
                         </div>
-                    <?php } ?>
+                    <?php } } ?>
                 </div>
             </div>
         </div>

@@ -86,7 +86,7 @@
 			else {
 				if($i == count($log_token)){
 					$result_ = json_decode($result, true);
-					echo "status : ".$result_['status']; 
+					echo "status : ".$result_['status'];
           echo "message : ". $Message;
 				}
 			}
@@ -96,8 +96,8 @@
 		// send mqtt_online_status
 		if($status == 'connected'){
 			require '../phpMQTT.php';
-			$host = '203.150.37.144';     // change if necessary
-			$port = 1883;                     // change if necessary
+			$host = '203.154.83.117';     // change if necessary
+			$port = 6838;                     // change if necessary
 			$username = '';                   // set your username
 			$password = '';                   // set your password
 
@@ -131,7 +131,6 @@
 	}
 	else{
 		echo 'sum';
-
 	}
 
 ?>

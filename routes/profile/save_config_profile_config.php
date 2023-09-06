@@ -1,10 +1,10 @@
 <?php
     require "../connectdb.php";
-    require 'phpMQTT.php';
+    require '../tu/phpMQTT.php';
     $house_master = $_POST['house_master'];
 
-    $host = '203.150.37.144';     // change if necessary
-    $port = 1883;                     // change if necessary
+    $host = '203.154.83.117';     // change if necessary
+    $port = 4563;                    // change if necessary
     $username = '';                   // set your username
     $password = '';                   // set your password
     $mqtt = new bluerhinos\phpMQTT($host, $port, "ClientID".rand());
@@ -104,8 +104,8 @@
                 'e_7' => $_POST['equation_sn_7'],
                 'user'=> $_SESSION["account_user"]
             ];
-            // print_r($data);
-            // exit();
+            print_r($data);
+            exit();
             if (implode(",", $df_data) != implode(",", $data)) {
                 $sql = "UPDATE `tbn_status_sn` SET
                     `sn_status_1`  = :s_1, `sn_status_2`  = :s_2, `sn_status_3`  = :s_3, `sn_status_4`  = :s_4, `sn_status_5`  = :s_5, `sn_status_6`  = :s_6, `sn_status_7`  = :s_7,
