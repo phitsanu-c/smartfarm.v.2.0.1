@@ -1,18 +1,23 @@
 
 let url = $.base64.decode(window.location.hash.substring(1))
+// alert(window.location.hash)
 if (url === "") {
-    url = ',,'.split(',')
+    url = ',,,'.split(',')
 } else {
     url = url.split(',')
+    if(url.length == 3){
+        url.push('')
+    }
+    // alert(url.length)
 }
 // alert(window.location.hash)
 let house_master = url[2].substring(0, 8);
 // alert(url[0])
+console.log(url);
 console.log(house_master);
 // console.log($.base64.encode('TSPWM001zasn'));
-// console.log($.base64.decode('S083TVQwMDF6YXNu'))
+// console.log($.base64.decode('LCwsLHZpZXdfYWxs'))
 // Chack user_status
-
 $.getJSON('routes/login.php', function(msg) {
     // console.log(msg);
     // return false;
@@ -41,56 +46,81 @@ $.getJSON('routes/login.php', function(msg) {
     $('#load_pages_sprout').hide();
     if (msg.sn['account_status'] == 1) { // supportadmin
         $("#load_pages_site").load('views/pages_site.php');
-        if (url[1] === '') { // site = nail
-            $(".memu_site").addClass("mm-active")
-            $(".memu_house").hide();
+        if (url[3] === "view_all") {
+            $(".memu_site").removeClass("mm-active")
+            $(".memu_viewall").addClass('mm-active');
+            if(url[1] == ''){
+                $(".memu_house").hide();
+            }else{
+                $(".memu_house").removeClass("mm-active")
+            }
             $(".memu_dash").hide();
-            $(".memu_report").hide();
-            $('.memu_control').hide();
-            $('.memu_compare').hide();
-            $('#load_pages_site').show();
-        }
-        else { // site != nail
+            $(".memu_report").hide()
+            $('.memu_control').hide()
+            $(".memu_compare").show().removeClass("mm-active")
+
+            $('#load_pages_house').hide();
+            $('#load_pages_compare').hide();
+            $('#load_pages_dashboard').hide();
+            $('#load_pages_report').hide();
+            $('#load_pages_profile').hide();
+            $('.memu_setting').hide();
+            $(".memu_sprout").removeClass("mm-active")
+            $('#load_pages_sprout').hide();
             $('#load_pages_site').hide();
-            $.ajax({
-                url: "views/pages_house.php",
-                method: "POST",
-                data: {
-                    s: url[1]
-                },
-                // dataType: "json",
-                success: function(res_dash) {
-                    $("#load_pages_house").html(res_dash);
-                    // $('.sw_house').click(function(){
-                    //     window.location.hash =$(this).attr("url");
-                    //     location.reload();
-                    //     // alert($(this).attr("url"))
-                    //     // window.location.href = $(this).attr("url");
-                    // })
-                }
-            })
-            if (house_master === '' || house_master.length != 8) { // chack sn != nail or ไม่ถูกต้อง
-                $(".memu_site").removeClass("mm-active")
-                $(".memu_house").show().addClass("mm-active")
+        }else {
+            if (url[1] === '') { // site = nail
+                $(".memu_site").addClass("mm-active")
+                $(".memu_house").hide();
                 $(".memu_dash").hide();
                 $(".memu_report").hide();
                 $('.memu_control').hide();
                 $('.memu_compare').hide();
-                // $("#load_pages_house").load('views/pages_house.php?s=' + url[1]);
-                $('#load_pages_house').show();
-                $('#load_pages_compare').hide();
-                $('#load_pages_profile').hide();
+                $('#load_pages_site').show();
             }
-            else {
-                $(".memu_site").removeClass("mm-active")
-                $(".memu_house").removeClass("mm-active")
-                $('#load_pages_house').hide();
+            else { // site != nail
+                $('#load_pages_site').hide();
+                $.ajax({
+                    url: "views/pages_house.php",
+                    method: "POST",
+                    data: {
+                        s: url[1]
+                    },
+                    // dataType: "json",
+                    success: function(res_dash) {
+                        $("#load_pages_house").html(res_dash);
+                        // $('.sw_house').click(function(){
+                        //     window.location.hash =$(this).attr("url");
+                        //     location.reload();
+                        //     // alert($(this).attr("url"))
+                        //     // window.location.href = $(this).attr("url");
+                        // })
+                    }
+                })
+                if (house_master === '' || house_master.length != 8) { // chack sn != nail or ไม่ถูกต้อง
+                    $(".memu_site").removeClass("mm-active")
+                    $(".memu_house").show().addClass("mm-active")
+                    $(".memu_dash").hide();
+                    $(".memu_report").hide();
+                    $('.memu_control').hide();
+                    $('.memu_compare').hide();
+                    // $("#load_pages_house").load('views/pages_house.php?s=' + url[1]);
+                    $('#load_pages_house').show();
+                    $('#load_pages_compare').hide();
+                    $('#load_pages_profile').hide();
+                }
+                else {
+                    $(".memu_site").removeClass("mm-active")
+                    $(".memu_house").removeClass("mm-active")
+                    $('#load_pages_house').hide();
+                }
+                if (url[0] == 4) {
+                    $(".memu_compare").show();
+                } else {
+                    $(".memu_compare").hide();
+                }
             }
-            if (url[0] == 4) {
-                $(".memu_compare").show();
-            } else {
-                $(".memu_compare").hide();
-            }
+            $('.memu_viewall').show();
         }
     }
     else { // user and admin != supportadmin
@@ -189,6 +219,7 @@ $.getJSON('routes/login.php', function(msg) {
             }
             // }
         }
+        $('.memu_viewall').hide();
     }
     if (msg.sn['account_status'] < 3) {
         $('.menu2').show();
@@ -245,8 +276,26 @@ $.getJSON('routes/login.php', function(msg) {
     //     }
     //     // $("#test_timr").html("countdown : " + number);
     // }
-});
+    // alert(msg.view_all)
+    // alert(document.URL.substring(0, document.URL.length-1))
 
+
+    $('.memu_viewall').click(function(){
+        // alert(url[3])
+        if(url[3] === ""){
+            url[3] = 'view_all';
+            console.log(url.toString());
+            console.log(document.URL.split('#')[0]);
+            console.log(document.URL);
+            // alert(document.URL.split('#').length)
+            window.location.href = document.URL.split('#')[0]+"#"+$.base64.encode(url.toString()) //document.URL.substring(0, document.URL.length-1)+"#"+$.base64.encode(url.toString())
+            window.location.reload();
+            // window.location.href = window.location.host+window.location.pathname+"#"+$.base64.encode(url.toString())
+        }else {
+            window.location.reload();
+        }
+    })
+});
 function logout() {
     $.ajax({
         url: 'routes/login.php',
@@ -296,3 +345,5 @@ function toggleTheme(val) {
         }
     });
 }
+
+// console.log($.base64.encode(url.toString()));

@@ -225,27 +225,29 @@
         $i=1;
         while ($row = $stmt->fetch()) {
             // $data0[] = $row;
-            $data0['timestamp'][] = $row['nDate'];
-            if($count_columns >= 1){
-                $data0['data_cn1'][]  = $row['data_cn1'];
-            }
-            if($count_columns >= 2){
-                $data0['data_cn2'][]   = $row['data_cn2'];
-            }
-            if($count_columns >= 3){
-                $data0['data_cn3'][] = $row['data_cn3'];
-            }
-            if($count_columns >= 4){
-                $data0['data_cn4'][]   = $row['data_cn4'];
-            }
-            if($count_columns >= 5){
-                $data0['data_cn5'][]    = $row['data_cn5'];
-            }
-            if($count_columns >= 6){
-                $data0['data_cn6'][]  = $row['data_cn6'];
-            }
-            if($count_columns >= 7){
-                $data0['data_cn7'][]   = $row['data_cn7'];
+            if($row['nDate'] != ""){
+                $data0['timestamp'][] = $row['nDate'];
+                if($count_columns >= 1){
+                    $data0['data_cn1'][]  = $row['data_cn1'];
+                }
+                if($count_columns >= 2){
+                    $data0['data_cn2'][]   = $row['data_cn2'];
+                }
+                if($count_columns >= 3){
+                    $data0['data_cn3'][] = $row['data_cn3'];
+                }
+                if($count_columns >= 4){
+                    $data0['data_cn4'][]   = $row['data_cn4'];
+                }
+                if($count_columns >= 5){
+                    $data0['data_cn5'][]    = $row['data_cn5'];
+                }
+                if($count_columns >= 6){
+                    $data0['data_cn6'][]  = $row['data_cn6'];
+                }
+                if($count_columns >= 7){
+                    $data0['data_cn7'][]   = $row['data_cn7'];
+                }
             }
            $i++;
         }

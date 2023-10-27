@@ -126,13 +126,15 @@ if ($mqtt->connect(true,NULL,$username,$password)) {
         $_SESSION["account_tel"] = $row_count["account_tel"];
         $_SESSION["account_token"] = $row_count["account_token"];
         $_SESSION["account_status"] = $row_count["account_status"];
-        $log_re = [
-            'dt'   => date("Y-m-d H:i:s"),
-            'userID'  => $_SESSION['account_id'],
-            'siteID'  => $_SESSION['sn']['siteID'],
-            'le'      => 0
-        ];
-        $dbcon->prepare("INSERT INTO `tbn_login_re`(`re_datetime`, `re_userID`, `re_siteID`,`re_level`) VALUES (:dt, :userID, :siteID,:le)")->execute($log_re);
+        if($row_count["account_status"] != 1){
+            $log_re = [
+                'dt'   => date("Y-m-d H:i:s"),
+                'userID'  => $_SESSION['account_id'],
+                'siteID'  => $_SESSION['sn']['siteID'],
+                'le'      => 0
+            ];
+            $dbcon->prepare("INSERT INTO `tbn_login_re`(`re_datetime`, `re_userID`, `re_siteID`,`re_level`) VALUES (:dt, :userID, :siteID,:le)")->execute($log_re);
+        }
         $new_dt = ['account_id' => $_SESSION['account_id'], 'dt' => date("Y-m-d H:i:s", strtotime('3 hour')), 'siteID' => $_SESSION["sn"]['siteID'], 'count_site' => $_SESSION['sn']['count_site']]; // '-6 hour minute'));
         $decodedJson[$_SESSION['account_id']] = $new_dt;
         $message = json_encode($decodedJson);

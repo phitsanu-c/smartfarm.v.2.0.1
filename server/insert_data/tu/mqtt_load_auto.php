@@ -38,7 +38,7 @@
                         :dt, :sn, :mode, :submode,
                         :load, :status, :user, :num_)";
                 if ($dbcon->prepare($sql)->execute($data) === TRUE) {
-                    echo json_encode(['status' => "OK",'data' => "Insert_Success" ], JSON_UNESCAPED_UNICODE );
+                    echo json_encode(['status' => "OK",'data' => "Insert_Success",'log' => $data ], JSON_UNESCAPED_UNICODE );
                 }else{
                     echo json_encode(['status' => 'Error','data' => "Insert_Error"] , JSON_UNESCAPED_UNICODE );
                 }

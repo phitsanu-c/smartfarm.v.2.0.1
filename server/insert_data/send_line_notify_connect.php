@@ -2,7 +2,7 @@
 	require "connectdb.php";
     $house_master = $_POST["sn"];
 	$status = $_POST["status"];
-	$log_token = [];
+	$log_token = []; //123
 
 	$df_status = $dbcon->query("SELECT `hw_connect_status` FROM `tbn_hardware_connect` WHERE `hw_connect_sn` = '$house_master' ORDER BY hw_connect_timestamp DESC LIMIT 1")->fetch();
 	if($df_status == '' || $status != $df_status[0]){
@@ -79,58 +79,102 @@
 			$result = curl_exec( $chOne );
 
 			//Result error
-			if(curl_error($chOne))
-			{
+			if(curl_error($chOne)){
 				echo 'error:' . curl_error($chOne);
 			}
 			else {
 				if($i == count($log_token)){
-					$result_ = json_decode($result, true);
-					echo "status : ".$result_['status'];
-          echo "message : ". $Message;
+					// $result_ = json_decode($result, true);
+					// echo "status : ".$result_['status'];
+          			// echo "message : ". $Message;
+					echo json_encode([
+						'status' => $status,
+						'house_master' => $house_master
+					]);
 				}
 			}
 			curl_close( $chOne );
 		}
 
 		// send mqtt_online_status
-		if($status == 'connected'){
-			require '../phpMQTT.php';
-			$host = '203.154.83.117';     // change if necessary
-			$port = 6838;                     // change if necessary
-			$username = '';                   // set your username
-			$password = '';                   // set your password
+		// if($status == 'online'){
+		// 	exit();
 
-			$mqtt = new bluerhinos\phpMQTT($host, $port, "ClientID".rand());
-			if ($mqtt->connect(true,NULL,$username,$password)) {
-				$data_mq = $mqtt->subscribeAndWaitForMessage($house_master."/control/response", 1);
-				$decodedJson = json_decode(substr($data_mq, 2), true);
-				// $mqtt->publish($house_master.'/control/response', json_encode($control_response), 1);
-				// echo json_encode($decodedJson);
-				// echo $decodedJson['mode'];
-				if($decodedJson['mode'] == 'Auto'){
-					$mqtt->publish($house_master.'/control/loads_auto/dripper_1', $decodedJson['dripper_1'], 1);
-			        $mqtt->publish($house_master.'/control/loads_auto/dripper_2', $decodedJson['dripper_2'], 1);
-			        $mqtt->publish($house_master.'/control/loads_auto/dripper_3', $decodedJson['dripper_3'], 1);
-			        $mqtt->publish($house_master.'/control/loads_auto/dripper_4', $decodedJson['dripper_4'], 1);
-			        $mqtt->publish($house_master.'/control/loads_auto/fan_1',     $decodedJson['fan_1'], 1);
-			        $mqtt->publish($house_master.'/control/loads_auto/fan_2',     $decodedJson['fan_2'], 1);
-			        $mqtt->publish($house_master.'/control/loads_auto/fan_3',     $decodedJson['fan_3'], 1);
-			        $mqtt->publish($house_master.'/control/loads_auto/fan_4',     $decodedJson['fan_4'], 1);
-			        $mqtt->publish($house_master.'/control/loads_auto/foggy_1',   $decodedJson['foggy_1'], 1);
-			        $mqtt->publish($house_master.'/control/loads_auto/foggy_2',   $decodedJson['foggy_2'], 1);
-			        $mqtt->publish($house_master.'/control/loads_auto/spray',     $decodedJson['spray'], 1);
-			        $mqtt->publish($house_master.'/control/loads_auto/shading',   $decodedJson['shading'], 1);
-				}
-				else { // manual
-			        $mqtt->publish($house_master.'/control/loads/shading',      $decodedJson['shading'], 1);
-				}
-			}
-			$mqtt->close();
-		}
+		// 	// $url = 'http://localhost/smartfarm.v.2.0.1/server/insert_data/tu/get_config.php';
+		// 	$url = 'http://decc-bigdata.com/smartfarm/server/insert_data/tu/get_config.php';
+		// 	$data = array(
+		// 	    'house_master' => $house_master,
+		// 	    'syst' => 1
+		// 	);
+
+		// 	// Initialize cURL session
+		// 	$ch = curl_init($url);
+
+		// 	// Set cURL options
+		// 	curl_setopt($ch, CURLOPT_POST, 1);
+		// 	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+		// 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		// 	curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36');
+
+		// 	// Add option to follow redirects
+		// 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+
+
+
+		// 	// Execute cURL request
+		// 	$response = curl_exec($ch);
+
+		// 	// Check for cURL errors
+		// 	if (curl_errno($ch)) {
+		// 	    echo 'cURL error: ' . curl_error($ch);
+		// 	}
+
+		// 	// Close cURL session
+		// 	curl_close($ch);
+
+		// 	// Process the response
+		// 	if ($response !== false) {
+		// 	    echo 'Response: ' . $response;
+		// 	} else {
+		// 	    echo 'Failed to send POST request.';
+		// 	}
+
+		// 	// require '../phpMQTT.php';
+		// 	// $host = '203.154.83.117';     // change if necessary
+		// 	// $port = 6838;                     // change if necessary
+		// 	// $username = '';                   // set your username
+		// 	// $password = '';                   // set your password
+		// 	//
+		// 	// $mqtt = new bluerhinos\phpMQTT($host, $port, "ClientID".rand());
+		// 	// if ($mqtt->connect(true,NULL,$username,$password)) {
+		// 	// 	$data_mq = $mqtt->subscribeAndWaitForMessage($house_master."/control/response", 1);
+		// 	// 	$decodedJson = json_decode(substr($data_mq, 2), true);
+		// 	// 	// $mqtt->publish($house_master.'/control/response', json_encode($control_response), 1);
+		// 	// 	// echo json_encode($decodedJson);
+		// 	// 	// echo $decodedJson['mode'];
+		// 	// 	if($decodedJson['mode'] == 'Auto'){
+		// 	// 		$mqtt->publish($house_master.'/control/loads_auto/dripper_1', $decodedJson['dripper_1'], 1);
+		// 	//         $mqtt->publish($house_master.'/control/loads_auto/dripper_2', $decodedJson['dripper_2'], 1);
+		// 	//         $mqtt->publish($house_master.'/control/loads_auto/dripper_3', $decodedJson['dripper_3'], 1);
+		// 	//         $mqtt->publish($house_master.'/control/loads_auto/dripper_4', $decodedJson['dripper_4'], 1);
+		// 	//         $mqtt->publish($house_master.'/control/loads_auto/fan_1',     $decodedJson['fan_1'], 1);
+		// 	//         $mqtt->publish($house_master.'/control/loads_auto/fan_2',     $decodedJson['fan_2'], 1);
+		// 	//         $mqtt->publish($house_master.'/control/loads_auto/fan_3',     $decodedJson['fan_3'], 1);
+		// 	//         $mqtt->publish($house_master.'/control/loads_auto/fan_4',     $decodedJson['fan_4'], 1);
+		// 	//         $mqtt->publish($house_master.'/control/loads_auto/foggy_1',   $decodedJson['foggy_1'], 1);
+		// 	//         $mqtt->publish($house_master.'/control/loads_auto/foggy_2',   $decodedJson['foggy_2'], 1);
+		// 	//         $mqtt->publish($house_master.'/control/loads_auto/spray',     $decodedJson['spray'], 1);
+		// 	//         $mqtt->publish($house_master.'/control/loads_auto/shading',   $decodedJson['shading'], 1);
+		// 	// 	}
+		// 	// 	else { // manual
+		// 	//         $mqtt->publish($house_master.'/control/loads/shading',      $decodedJson['shading'], 1);
+		// 	// 	}
+		// 	// }
+		// 	// $mqtt->close();
+		// }
 	}
 	else{
-		echo 'sum';
+		echo json_encode(['status' => 'sum']);
 	}
 
 ?>
