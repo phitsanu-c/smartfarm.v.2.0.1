@@ -1,0 +1,660 @@
+[
+    {
+        "id": "50aa9e4048b91a29",
+        "type": "tab",
+        "label": "Insert_Vannoy_bigdata",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "226c78885fc0a273",
+        "type": "inject",
+        "z": "50aa9e4048b91a29",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "WNOWM001",
+        "payloadType": "str",
+        "x": 200,
+        "y": 120,
+        "wires": [
+            [
+                "4eeacf000369f4dc"
+            ]
+        ]
+    },
+    {
+        "id": "4eeacf000369f4dc",
+        "type": "function",
+        "z": "50aa9e4048b91a29",
+        "name": "Initial Last Data from DB",
+        "func": "var output = msg.payload;\n// var pase_json = output.control_status;\n// var parseJSON = JSON.parse(output);\n// msg.payload =output;\n    \nmsg.headers = {};\nmsg.method = \"POST\";\nmsg.url = \"http://decc-bigdata.com/smartfarm/server/insert_data/other/get_config.php\"; \nmsg.payload = {house_master:output}\nmsg.headers[\"content-type\"] = \"application/x-www-form-urlencoded\";\nmsg.headers[\"X-Requested-With\"] = \"XMLHttpRequest\";\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 120,
+        "wires": [
+            [
+                "18f3a339a347d1f3"
+            ]
+        ]
+    },
+    {
+        "id": "879c2d02eb077e96",
+        "type": "function",
+        "z": "50aa9e4048b91a29",
+        "name": "Change Topic to \"config\"",
+        "func": "var output = msg.payload;\nmsg.topic = \"config\";\nmsg.payload = output;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 120,
+        "wires": [
+            [
+                "0fd437acef8cfc31",
+                "153bdf3f2e0cc2aa",
+                "dc6d04b0e97ac727"
+            ]
+        ]
+    },
+    {
+        "id": "788a476014c3d391",
+        "type": "moment",
+        "z": "50aa9e4048b91a29",
+        "name": "timer",
+        "topic": "",
+        "input": "",
+        "inputType": "date",
+        "inTz": "Asia/Bangkok",
+        "adjAmount": 0,
+        "adjType": "hours",
+        "adjDir": "subtract",
+        "format": "YYYY/MM/DD - HH:mm:ss",
+        "locale": "C",
+        "output": "timer",
+        "outputType": "msg",
+        "outTz": "Asia/Bangkok",
+        "x": 550,
+        "y": 180,
+        "wires": [
+            [
+                "0fd437acef8cfc31",
+                "ad7c4234cf9155c7",
+                "d0c3847c6ee03d21"
+            ]
+        ]
+    },
+    {
+        "id": "115b7f6e20c97cd0",
+        "type": "mqtt in",
+        "z": "50aa9e4048b91a29",
+        "name": "",
+        "topic": "wemos_wangnoi",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "8116f63f.e78778",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 360,
+        "y": 180,
+        "wires": [
+            [
+                "788a476014c3d391"
+            ]
+        ]
+    },
+    {
+        "id": "0fd437acef8cfc31",
+        "type": "function",
+        "z": "50aa9e4048b91a29",
+        "name": "",
+        "func": "var get_config;\nvar data_log = [];\nif (msg.topic == \"config\"){\n    context.set('get_config',msg.payload);\n}\nvar n_config = context.get('get_config') || 0;\n\nif(n_config !== 0){\n    // ----------------------\n    if(msg.topic == \"wemos_wangnoi\"){\n        var output = msg.payload;\n        var obj = JSON.parse(output);\n        var station = (obj.Station);\n        var hum = (obj.Humidity);\n        var temp = (obj.Temperature);\n        \n        if(station == 'K1HT' ){\n            context.set('K1_T',temp);\n            context.set('K1_H',hum);\n        }\n        if(station == 'K1DS' ){\n            context.set('K1_DS',temp);\n            // context.set('data_st1_2_hum',hum);\n        }\n        if(station == 'K2HT' ){\n            context.set('K2_T',temp);\n            context.set('K2_H',hum);\n        }\n        // if(station == 'K2DS' ){\n        //     context.set('K2_DS',temp);\n        //     // context.set('data_st2_1_hum',hum);\n        // }\n        if(station == 'K3HT' ){\n            context.set('K3_T',temp);\n            context.set('K3_H',hum);\n        }\n        if(station == 'K3DS' ){\n            context.set('K3_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        if(station == 'K4HT' ){\n            context.set('K4_T',temp);\n            context.set('K4_H',hum);\n        }\n        // if(station == 'K4DS' ){\n        //     context.set('K4_DS',temp);\n        //     // context.set('data_st2_1_hum',hum);\n        // }\n        if(station == 'K5HT' ){\n            context.set('K5_T',temp);\n            context.set('K5_H',hum);\n        }\n        if(station == 'K5DS' ){\n            context.set('K5_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        if(station == 'K6HT' ){\n            context.set('K6_T',temp);\n            context.set('K6_H',hum);\n        }\n        // if(station == 'K6DS' ){\n        //     context.set('K6_DS',temp);\n        //     // context.set('data_st2_1_hum',hum);\n        // }\n        if(station == 'K7HT' ){\n            context.set('K7_T',temp);\n            context.set('K7_H',hum);\n        }\n        if(station == 'K7DS' ){\n            context.set('K7_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        if(station == 'K8HT' ){\n            context.set('K8_T',temp);\n            context.set('K8_H',hum);\n        }\n        // if(station == 'K8DS' ){\n        //     context.set('K8_DS',temp);\n        //     // context.set('data_st2_1_hum',hum);\n        // }\n        if(station == 'K9HT' ){\n            context.set('K9_T',temp);\n            context.set('K9_H',hum);\n        }\n        if(station == 'K9DS' ){\n            context.set('K9_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        if(station == 'K10HT' ){\n            context.set('K10_T',temp);\n            context.set('K10_H',hum);\n        }\n        // if(station == 'K10_DS' ){\n        //     context.set('K10_DS',temp);\n        //     // context.set('data_st2_1_hum',hum);\n        // }\n        if(station == 'K11HT' ){\n            context.set('K11_T',temp);\n            context.set('K11_H',hum);\n        }\n        if(station == 'K11DS' ){\n            context.set('K11_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        if(station == 'OutHT' ){\n            context.set('O1_T',temp);\n            context.set('O1_H',hum);\n        }\n        if(station == 'OutDS' ){\n            context.set('O1_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        if(station == 'Out2HT' ){\n            context.set('O2_T',temp);\n            context.set('O2_H',hum);\n        }\n        if(station == 'Out2DS' ){\n            context.set('O2_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        if(station == 'Out3HT' ){\n            context.set('O3_T',temp);\n            context.set('O3_H',hum);\n        }\n        if(station == 'Out3DS' ){\n            context.set('O3_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        \n        var timestamp = msg.timer;\n        var ntime = timestamp.split(\" - \");\n        var nowtime = ntime[1];\n        var ndate = timestamp.split(\" - \");\n        var nowdate = ndate[0];\n        \n        var nminute = nowtime.split(\":\");\n        var nowminute = Number(nminute[1]);\n        var old_minute = context.get('old_nowminute')||0;\n        old_minute = Number(old_minute)\n        var msg2 = {payload: old_minute};\n        \n    //     var st1_1_temp = context.get('data_st1_1_temp') || n_config.data_json.data.dataST_1_1;\n    //     var st1_1_hum = context.get('data_st1_1_hum') || n_config.data_json.data.dataST_1_2;\n    //     var st1_2_temp = context.get('data_st1_2_temp') || n_config.data_json.data.dataST_1_3;\n    //     var st1_2_hum = context.get('data_st1_2_hum') || n_config.data_json.data.dataST_1_4;\n    //     var st1_3_temp = context.get('data_st1_3_temp') || n_config.data_json.data.dataST_2_1;\n    //     var st1_3_hum = context.get('data_st1_3_hum') || n_config.data_json.data.dataST_2_2;\n        \n    //     var st2_1_temp = context.get('data_st2_1_temp') || n_config.data_json.data.dataST_2_3;\n    //     var st2_1_hum = context.get('data_st2_1_hum') || n_config.data_json.data.dataST_2_4;\n    //     var st2_2_temp = context.get('data_st2_2_temp') || n_config.data_json.data.dataST_3_1;\n    //     var st2_2_hum = context.get('data_st2_2_hum') || n_config.data_json.data.dataST_3_2;\n    //     var st2_3_temp = context.get('data_st2_3_temp') || n_config.data_json.data.dataST_3_3;\n    //     var st2_3_hum = context.get('data_st2_3_hum') || 0;\n    //  msg.payload =  n_config.data_json.serial_id;\n    // return msg;\n    // return false\n    //     var jsonstring ={};\n    //     jsonstring = {\n    //         \"serial_id\": \"KO7WM001\",\n    //         \"date_time\": timestamp,\n    //         \"date\": nowdate,\n    //         \"time\": nowtime,\"data\": {\n    //             \"dataST_1_1\": st1_1_temp,\n    //             \"dataST_1_2\": st1_1_hum,\n    //             \"dataST_1_3\": st1_2_temp,\n    //             \"dataST_1_4\": st1_2_hum,\n    //             \"dataST_2_1\": st1_3_temp,\n    //             \"dataST_2_2\": st1_3_hum,\n    //             \"dataST_2_3\": st2_1_temp,\n    //             \"dataST_2_4\": st2_1_hum,\n    //             \"dataST_3_1\": st2_2_temp,\n    //             \"dataST_3_2\": st2_2_hum,\n    //             \"dataST_3_3\": st2_3_temp,\n    //             \"dataST_3_4\": st2_3_hum\n    //         }\n    //     };\n    //     msg.payload = JSON.stringify(jsonstring);\n    //     if(old_minute != nowminute){\n    //         context.set('old_nowminute',nowminute);\n    //         msg.topic = 'KO7WM001/1/data_update/data_filter'\n    //         return msg;\n    //     }\n    \n        var K1_T = context.get('K1_T') || n_config.data_json.data.dataST_1_1;\n        var K1_H = context.get('K1_H') || n_config.data_json.data.dataST_1_2;\n        var K1_DS = context.get('K1_DS') || n_config.data_json.data.dataST_1_3;\n        var K2_T = context.get('K2_T') || n_config.data_json.data.dataST_1_4;\n        var K2_H = context.get('K2_H') || n_config.data_json.data.dataST_1_5;\n        // var K2_DS = context.get('K2_DS') || 0;\n        var K3_T = context.get('K3_T') || n_config.data_json.data.dataST_2_1;\n        var K3_H = context.get('K3_H') || n_config.data_json.data.dataST_2_2;\n        var K3_DS = context.get('K3_DS') || n_config.data_json.data.dataST_2_3;\n        var K4_T = context.get('K4_T') || n_config.data_json.data.dataST_2_4;\n        var K4_H = context.get('K4_H') || n_config.data_json.data.dataST_2_5;\n        // var K4_DS = context.get('K4_DS') || 0;\n        var K5_T = context.get('K5_T') || n_config.data_json.data.dataST_3_1;\n        var K5_H = context.get('K5_H') || n_config.data_json.data.dataST_3_2;\n        var K5_DS = context.get('K5_DS') || n_config.data_json.data.dataST_3_3;\n        var K6_T = context.get('K6_T') || n_config.data_json.data.dataST_3_4;\n        var K6_H = context.get('K6_H') || n_config.data_json.data.dataST_3_5;\n        // var K6_DS = context.get('K6_DS') || 0;\n        var K7_T = context.get('K7_T') || n_config.data_json.data.dataST_4_1;\n        var K7_H = context.get('K7_H') || n_config.data_json.data.dataST_4_2;\n        var K7_DS = context.get('K7_DS') || n_config.data_json.data.dataST_4_3;\n        var K8_T = context.get('K8_T') || n_config.data_json.data.dataST_4_4;\n        var K8_H = context.get('K8_H') || n_config.data_json.data.dataST_4_5;\n        // var K8_DS = context.get('K8_DS') || 0;\n        var K9_T = context.get('K9_T') || n_config.data_json.data.dataST_5_1;\n        var K9_H = context.get('K9_H') || n_config.data_json.data.dataST_5_2;\n        var K9_DS = context.get('K9_DS') || n_config.data_json.data.dataST_5_3;\n        var K10_T = context.get('K10_T') || n_config.data_json.data.dataST_5_4;\n        var K10_H = context.get('K10_H') || n_config.data_json.data.dataST_5_5;\n        // var K10_DS = context.get('K10_DS') || 0;\n        var K11_T = context.get('K11_T') || n_config.data_json.data.dataST_6_1;\n        var K11_H = context.get('K11_H') || n_config.data_json.data.dataST_6_2;\n        var K11_DS = context.get('K11_DS') || n_config.data_json.data.dataST_6_3;\n        var O1_T = context.get('O1_T') || n_config.data_json.data.dataST_6_4;\n        var O1_H = context.get('O1_H') || n_config.data_json.data.dataST_6_5;\n        var O1_DS = context.get('O1_DS') || n_config.data_json.data.dataST_7_1;\n        var O2_T = context.get('O2_T') || n_config.data_json.data.dataST_7_2;\n        var O2_H = context.get('O2_H') || n_config.data_json.data.dataST_7_3;\n        var O2_DS = context.get('O2_DS') || n_config.data_json.data.dataST_7_4;\n        var O3_T = context.get('O3_T') || n_config.data_json.data.dataST_7_5;\n        var O3_H = context.get('O3_H') || n_config.data_json.data.dataST_8_1;\n        var O3_DS = context.get('O3_DS') || n_config.data_json.data.dataST_8_2;\n        // -----------------------\n        \n        var jsonstring ={};\n        jsonstring = {\n            \"serial_id\": n_config.data_json.serial_id,\n            \"date_time\": timestamp,\n            \"date\": nowdate,\n            \"time\": nowtime,\"data\": {\n                \"dataST_1_1\": K1_T,\n                \"dataST_1_2\": K1_H,\n                \"dataST_1_3\": K1_DS,\n                \"dataST_1_4\": K2_T,\n                \"dataST_1_5\": K2_H,\n                \"dataST_2_1\": K3_T,\n                \"dataST_2_2\": K3_H,\n                \"dataST_2_3\": K3_DS,\n                \"dataST_2_4\": K4_T,\n                \"dataST_2_5\": K4_H,\n                \"dataST_3_1\": K5_T,\n                \"dataST_3_2\": K5_H,\n                \"dataST_3_3\": K5_DS,\n                \"dataST_3_4\": K6_T,\n                \"dataST_3_5\": K6_H,\n                \"dataST_4_1\": K7_T,\n                \"dataST_4_2\": K7_H,\n                \"dataST_4_3\": K7_DS,\n                \"dataST_4_4\": K8_T,\n                \"dataST_4_5\": K8_H,\n                \"dataST_5_1\": K9_T,\n                \"dataST_5_2\": K9_H,\n                \"dataST_5_3\": K9_DS,\n                \"dataST_5_4\": K10_T,\n                \"dataST_5_5\": K10_H,\n                \"dataST_6_1\": K11_T,\n                \"dataST_6_2\": K11_H,\n                \"dataST_6_3\": K11_DS,\n                \"dataST_6_4\": O1_T,\n                \"dataST_6_5\": O1_H,\n                \"dataST_7_1\": O1_DS,\n                \"dataST_7_2\": O2_T,\n                \"dataST_7_3\": O2_H,\n                \"dataST_7_4\": O2_DS,\n                \"dataST_7_5\": O3_T,\n                \"dataST_8_1\": O3_H,\n                \"dataST_8_2\": O3_DS\n            }\n        };\n        msg.payload = JSON.stringify(jsonstring);\n        if(old_minute != nowminute){\n            context.set('old_nowminute',nowminute);\n            msg.topic = 'insert_data_filter'\n            return msg;\n        }\n    }\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 180,
+        "wires": [
+            [
+                "153bdf3f2e0cc2aa",
+                "ab432c46562c909c"
+            ]
+        ]
+    },
+    {
+        "id": "b2d3d4eef1c6447b",
+        "type": "debug",
+        "z": "50aa9e4048b91a29",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1350,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "ab432c46562c909c",
+        "type": "mqtt out",
+        "z": "50aa9e4048b91a29",
+        "name": "",
+        "topic": "WNOWM001/1/data_update/data_filter",
+        "qos": "1",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8116f63f.e78778",
+        "x": 1150,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "153bdf3f2e0cc2aa",
+        "type": "function",
+        "z": "50aa9e4048b91a29",
+        "name": "",
+        "func": "var get_config;\nvar get_mqtt;\nvar data_log = [];\nif (msg.topic == \"config\"){\n    context.set('get_config',msg.payload);\n}            \nif (msg.topic == \"insert_data_filter\"){\n    context.set('get_mqtt',msg.payload);\n}\nvar result = context.get('get_mqtt') || 0;\nvar n_config = context.get('get_config') || 0;\n\nif(n_config !== 0){\n    if(result !== 0){\n        var parseJSON = JSON.parse(result);\n        var chann = [];\n        if(n_config.data === \"nodata\"){\n            \n            // var n_count_set = 0;\n             context.set('time_log', parseJSON.date_time.substring(0, 18));\n            msg.headers = {};\n            msg.method = \"POST\";\n            msg.url = \"http://decc-bigdata.com/smartfarm/server/insert_data/other/insert_data.php\"; \n            msg.payload = {data_array:result,count_set:0}\n            msg.headers[\"content-type\"] = \"application/x-www-form-urlencoded\";\n            msg.headers[\"X-Requested-With\"] = \"XMLHttpRequest\";\n            return msg;\n        }else{\n            var time_log = context.get('time_log') || n_config.data_json.date_time.substring(0, 18); // เวลาล่าสุดจาก db\n            //  msg.payload = parseJSON\n            //         return msg;\n            //         return false\n        \n            if(time_log !== parseJSON.date_time.substring(0, 18)){\n                 context.set('time_log', parseJSON.date_time.substring(0, 18));\n                // var n_count_set = 0;\n                \n                // msg.payload = time_log\n                //     return msg;\n                //     return false\n                    \n                msg.headers = {};\n                msg.method = \"POST\";\n                msg.url = \"http://decc-bigdata.com/smartfarm/server/insert_data/other/insert_data.php\"; \n                msg.payload = {data_array:result,count_set:0}\n                msg.headers[\"content-type\"] = \"application/x-www-form-urlencoded\";\n                msg.headers[\"X-Requested-With\"] = \"XMLHttpRequest\";\n                return msg;\n            }\n        }\n    }\n}\nfunction getArraySum(a) {\n    // count array\n    var total = 0;\n    for (var i in a) {\n        total += a[i];\n    }\n    return total;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 240,
+        "wires": [
+            [
+                "9c47c8fc6b256062"
+            ]
+        ]
+    },
+    {
+        "id": "ad7c4234cf9155c7",
+        "type": "function",
+        "z": "50aa9e4048b91a29",
+        "name": "",
+        "func": "var get_config;\nvar data_log = [];\nif (msg.topic == \"config\"){\n    context.set('get_config',msg.payload);\n}\nvar n_config = context.get('get_config') || 0;\n\nif(n_config !== 0){\n    // ----------------------\n    if(msg.topic == \"wemos_wangnoi\"){\n        var output = msg.payload;\n        var obj = JSON.parse(output);\n        var station = (obj.Station);\n        var hum = (obj.Humidity);\n        var temp = (obj.Temperature);\n        \n        if(station == 'K1HT' ){\n            context.set('K1_T',temp);\n            context.set('K1_H',hum);\n        }\n        if(station == 'K1DS' ){\n            context.set('K1_DS',temp);\n            // context.set('data_st1_2_hum',hum);\n        }\n        if(station == 'K2HT' ){\n            context.set('K2_T',temp);\n            context.set('K2_H',hum);\n        }\n        // if(station == 'K2DS' ){\n        //     context.set('K2_DS',temp);\n        //     // context.set('data_st2_1_hum',hum);\n        // }\n        if(station == 'K3HT' ){\n            context.set('K3_T',temp);\n            context.set('K3_H',hum);\n        }\n        if(station == 'K3DS' ){\n            context.set('K3_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        if(station == 'K4HT' ){\n            context.set('K4_T',temp);\n            context.set('K4_H',hum);\n        }\n        // if(station == 'K4DS' ){\n        //     context.set('K4_DS',temp);\n        //     // context.set('data_st2_1_hum',hum);\n        // }\n        if(station == 'K5HT' ){\n            context.set('K5_T',temp);\n            context.set('K5_H',hum);\n        }\n        if(station == 'K5DS' ){\n            context.set('K5_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        if(station == 'K6HT' ){\n            context.set('K6_T',temp);\n            context.set('K6_H',hum);\n        }\n        // if(station == 'K6DS' ){\n        //     context.set('K6_DS',temp);\n        //     // context.set('data_st2_1_hum',hum);\n        // }\n        if(station == 'K7HT' ){\n            context.set('K7_T',temp);\n            context.set('K7_H',hum);\n        }\n        if(station == 'K7DS' ){\n            context.set('K7_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        if(station == 'K8HT' ){\n            context.set('K8_T',temp);\n            context.set('K8_H',hum);\n        }\n        // if(station == 'K8DS' ){\n        //     context.set('K8_DS',temp);\n        //     // context.set('data_st2_1_hum',hum);\n        // }\n        if(station == 'K9HT' ){\n            context.set('K9_T',temp);\n            context.set('K9_H',hum);\n        }\n        if(station == 'K9DS' ){\n            context.set('K9_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        if(station == 'K10HT' ){\n            context.set('K10_T',temp);\n            context.set('K10_H',hum);\n        }\n        // if(station == 'K10_DS' ){\n        //     context.set('K10_DS',temp);\n        //     // context.set('data_st2_1_hum',hum);\n        // }\n        if(station == 'K11HT' ){\n            context.set('K11_T',temp);\n            context.set('K11_H',hum);\n        }\n        if(station == 'K11DS' ){\n            context.set('K11_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        if(station == 'OutHT' ){\n            context.set('O1_T',temp);\n            context.set('O1_H',hum);\n        }\n        if(station == 'OutDS' ){\n            context.set('O1_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        if(station == 'Out2HT' ){\n            context.set('O2_T',temp);\n            context.set('O2_H',hum);\n        }\n        if(station == 'Out2DS' ){\n            context.set('O2_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        if(station == 'Out3HT' ){\n            context.set('O3_T',temp);\n            context.set('O3_H',hum);\n        }\n        if(station == 'Out3DS' ){\n            context.set('O3_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        \n        var timestamp = msg.timer;\n        var ntime = timestamp.split(\" - \");\n        var nowtime = ntime[1];\n        var ndate = timestamp.split(\" - \");\n        var nowdate = ndate[0];\n        \n        var nminute = nowtime.split(\":\");\n        var nowminute = Number(nminute[1]);\n        var old_minute = context.get('old_nowminute')||0;\n        old_minute = Number(old_minute)\n        var msg2 = {payload: old_minute};\n        \n    //     var st1_1_temp = context.get('data_st1_1_temp') || n_config.data_json.data.dataST_1_1;\n    //     var st1_1_hum = context.get('data_st1_1_hum') || n_config.data_json.data.dataST_1_2;\n    //     var st1_2_temp = context.get('data_st1_2_temp') || n_config.data_json.data.dataST_1_3;\n    //     var st1_2_hum = context.get('data_st1_2_hum') || n_config.data_json.data.dataST_1_4;\n    //     var st1_3_temp = context.get('data_st1_3_temp') || n_config.data_json.data.dataST_2_1;\n    //     var st1_3_hum = context.get('data_st1_3_hum') || n_config.data_json.data.dataST_2_2;\n        \n    //     var st2_1_temp = context.get('data_st2_1_temp') || n_config.data_json.data.dataST_2_3;\n    //     var st2_1_hum = context.get('data_st2_1_hum') || n_config.data_json.data.dataST_2_4;\n    //     var st2_2_temp = context.get('data_st2_2_temp') || n_config.data_json.data.dataST_3_1;\n    //     var st2_2_hum = context.get('data_st2_2_hum') || n_config.data_json.data.dataST_3_2;\n    //     var st2_3_temp = context.get('data_st2_3_temp') || n_config.data_json.data.dataST_3_3;\n    //     var st2_3_hum = context.get('data_st2_3_hum') || 0;\n    //  msg.payload =  n_config.data_json.serial_id;\n    // return msg;\n    // return false\n    //     var jsonstring ={};\n    //     jsonstring = {\n    //         \"serial_id\": \"KO7WM001\",\n    //         \"date_time\": timestamp,\n    //         \"date\": nowdate,\n    //         \"time\": nowtime,\"data\": {\n    //             \"dataST_1_1\": st1_1_temp,\n    //             \"dataST_1_2\": st1_1_hum,\n    //             \"dataST_1_3\": st1_2_temp,\n    //             \"dataST_1_4\": st1_2_hum,\n    //             \"dataST_2_1\": st1_3_temp,\n    //             \"dataST_2_2\": st1_3_hum,\n    //             \"dataST_2_3\": st2_1_temp,\n    //             \"dataST_2_4\": st2_1_hum,\n    //             \"dataST_3_1\": st2_2_temp,\n    //             \"dataST_3_2\": st2_2_hum,\n    //             \"dataST_3_3\": st2_3_temp,\n    //             \"dataST_3_4\": st2_3_hum\n    //         }\n    //     };\n    //     msg.payload = JSON.stringify(jsonstring);\n    //     if(old_minute != nowminute){\n    //         context.set('old_nowminute',nowminute);\n    //         msg.topic = 'KO7WM001/1/data_update/data_filter'\n    //         return msg;\n    //     }\n    \n        var K1_T = context.get('K1_T') || n_config.data_json.data.dataST_1_1;\n        var K1_H = context.get('K1_H') || n_config.data_json.data.dataST_1_2;\n        // var K1_DS = context.get('K1_DS') || n_config.data_json.data.dataST_1_3;\n        // var K2_T = context.get('K2_T') || n_config.data_json.data.dataST_1_4;\n        // var K2_H = context.get('K2_H') || n_config.data_json.data.dataST_1_5;\n        // // var K2_DS = context.get('K2_DS') || 0;\n        // var K3_T = context.get('K3_T') || n_config.data_json.data.dataST_2_1;\n        // var K3_H = context.get('K3_H') || n_config.data_json.data.dataST_2_2;\n        // var K3_DS = context.get('K3_DS') || n_config.data_json.data.dataST_2_3;\n        // var K4_T = context.get('K4_T') || n_config.data_json.data.dataST_2_4;\n        // var K4_H = context.get('K4_H') || n_config.data_json.data.dataST_2_5;\n        // // var K4_DS = context.get('K4_DS') || 0;\n        var K5_T = context.get('K5_T') || n_config.data_json.data.dataST_3_1;\n        var K5_H = context.get('K5_H') || n_config.data_json.data.dataST_3_2;\n        var K5_DS = context.get('K5_DS') || n_config.data_json.data.dataST_3_3;\n        // var K6_T = context.get('K6_T') || n_config.data_json.data.dataST_3_4;\n        // var K6_H = context.get('K6_H') || n_config.data_json.data.dataST_3_5;\n        // // var K6_DS = context.get('K6_DS') || 0;\n        // var K7_T = context.get('K7_T') || n_config.data_json.data.dataST_4_1;\n        // var K7_H = context.get('K7_H') || n_config.data_json.data.dataST_4_2;\n        // var K7_DS = context.get('K7_DS') || n_config.data_json.data.dataST_4_3;\n        // var K8_T = context.get('K8_T') || n_config.data_json.data.dataST_4_4;\n        // var K8_H = context.get('K8_H') || n_config.data_json.data.dataST_4_5;\n        // // var K8_DS = context.get('K8_DS') || 0;\n        // var K9_T = context.get('K9_T') || n_config.data_json.data.dataST_5_1;\n        // var K9_H = context.get('K9_H') || n_config.data_json.data.dataST_5_2;\n        // var K9_DS = context.get('K9_DS') || n_config.data_json.data.dataST_5_3;\n        var K10_T = context.get('K10_T') || n_config.data_json.data.dataST_5_4;\n        var K10_H = context.get('K10_H') || n_config.data_json.data.dataST_5_5;\n        // // var K10_DS = context.get('K10_DS') || 0;\n        // var K11_T = context.get('K11_T') || n_config.data_json.data.dataST_6_1;\n        // var K11_H = context.get('K11_H') || n_config.data_json.data.dataST_6_2;\n        // var K11_DS = context.get('K11_DS') || n_config.data_json.data.dataST_6_3;\n        var O1_T = context.get('O1_T') || n_config.data_json.data.dataST_6_4;\n        var O1_H = context.get('O1_H') || n_config.data_json.data.dataST_6_5;\n        // var O1_DS = context.get('O1_DS') || n_config.data_json.data.dataST_7_1;\n        // var O2_T = context.get('O2_T') || n_config.data_json.data.dataST_7_2;\n        // var O2_H = context.get('O2_H') || n_config.data_json.data.dataST_7_3;\n        // var O2_DS = context.get('O2_DS') || n_config.data_json.data.dataST_7_4;\n        // var O3_T = context.get('O3_T') || n_config.data_json.data.dataST_7_5;\n        // var O3_H = context.get('O3_H') || n_config.data_json.data.dataST_8_1;\n        // var O3_DS = context.get('O3_DS') || n_config.data_json.data.dataST_8_2;\n        // -----------------------\n        \n        var jsonstring ={};\n        jsonstring = {\n            \"serial_id\": n_config.data_json.serial_id,\n            \"date_time\": timestamp,\n            \"date\": nowdate,\n            \"time\": nowtime,\"data\": {\n                \"dataST_1_1\": K1_T,\n                \"dataST_1_2\": K1_H,\n                // \"dataST_1_3\": K1_DS,\n                // \"dataST_1_4\": K2_T,\n                // \"dataST_1_5\": K2_H,\n                // \"dataST_2_1\": K3_T,\n                // \"dataST_2_2\": K3_H,\n                // \"dataST_2_3\": K3_DS,\n                // \"dataST_2_4\": K4_T,\n                // \"dataST_2_5\": K4_H,\n                \"dataST_3_1\": K5_T,\n                \"dataST_3_2\": K5_H,\n                \"dataST_3_3\": K5_DS,\n                // \"dataST_3_4\": K6_T,\n                // \"dataST_3_5\": K6_H,\n                // \"dataST_4_1\": K7_T,\n                // \"dataST_4_2\": K7_H,\n                // \"dataST_4_3\": K7_DS,\n                // \"dataST_4_4\": K8_T,\n                // \"dataST_4_5\": K8_H,\n                // \"dataST_5_1\": K9_T,\n                // \"dataST_5_2\": K9_H,\n                // \"dataST_5_3\": K9_DS,\n                \"dataST_5_4\": K10_T,\n                \"dataST_5_5\": K10_H,\n                // \"dataST_6_1\": K11_T,\n                // \"dataST_6_2\": K11_H,\n                // \"dataST_6_3\": K11_DS,\n                \"dataST_6_4\": O1_T,\n                \"dataST_6_5\": O1_H,\n                // \"dataST_7_1\": O1_DS,\n                // \"dataST_7_2\": O2_T,\n                // \"dataST_7_3\": O2_H,\n                // \"dataST_7_4\": O2_DS,\n                // \"dataST_7_5\": O3_T,\n                // \"dataST_8_1\": O3_H,\n                // \"dataST_8_2\": O3_DS\n            }\n        };\n        msg.payload = JSON.stringify(jsonstring);\n        if(old_minute != nowminute){\n            context.set('old_nowminute',nowminute);\n            msg.topic = 'insert_data_filter'\n            return msg;\n        }\n    }\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 440,
+        "wires": [
+            [
+                "6ba68c6c5ecb510b",
+                "9036026ba443624c"
+            ]
+        ]
+    },
+    {
+        "id": "ee3704649d9484b5",
+        "type": "inject",
+        "z": "50aa9e4048b91a29",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "KO7WM003",
+        "payloadType": "str",
+        "x": 200,
+        "y": 380,
+        "wires": [
+            [
+                "51922571dae7a070"
+            ]
+        ]
+    },
+    {
+        "id": "51922571dae7a070",
+        "type": "function",
+        "z": "50aa9e4048b91a29",
+        "name": "Initial Last Data from DB",
+        "func": "var output = msg.payload;\n// var pase_json = output.control_status;\n// var parseJSON = JSON.parse(output);\n// msg.payload =output;\n    \nmsg.headers = {};\nmsg.method = \"POST\";\nmsg.url = \"http://decc-bigdata.com/smartfarm/server/insert_data/other/get_config.php\"; \nmsg.payload = {house_master:output}\nmsg.headers[\"content-type\"] = \"application/x-www-form-urlencoded\";\nmsg.headers[\"X-Requested-With\"] = \"XMLHttpRequest\";\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 380,
+        "wires": [
+            [
+                "df36a40d0b668b39"
+            ]
+        ]
+    },
+    {
+        "id": "773a5027a67f7d56",
+        "type": "function",
+        "z": "50aa9e4048b91a29",
+        "name": "Change Topic to \"config\"",
+        "func": "var output = msg.payload;\nmsg.topic = \"config\";\nmsg.payload = output;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 380,
+        "wires": [
+            [
+                "ad7c4234cf9155c7",
+                "6ba68c6c5ecb510b"
+            ]
+        ]
+    },
+    {
+        "id": "dce17178e68cd74e",
+        "type": "debug",
+        "z": "50aa9e4048b91a29",
+        "name": "KO7WM003",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1330,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "9036026ba443624c",
+        "type": "mqtt out",
+        "z": "50aa9e4048b91a29",
+        "name": "",
+        "topic": "KO7WM003/1/data_update/data_filter",
+        "qos": "1",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8116f63f.e78778",
+        "x": 1150,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "6ba68c6c5ecb510b",
+        "type": "function",
+        "z": "50aa9e4048b91a29",
+        "name": "",
+        "func": "var get_config;\nvar get_mqtt;\nvar data_log = [];\nif (msg.topic == \"config\"){\n    context.set('get_config',msg.payload);\n}            \nif (msg.topic == \"insert_data_filter\"){\n    context.set('get_mqtt',msg.payload);\n}\nvar result = context.get('get_mqtt') || 0;\nvar n_config = context.get('get_config') || 0;\n\nif(n_config !== 0){\n    if(result !== 0){\n        var parseJSON = JSON.parse(result);\n        var chann = [];\n        if(n_config.data === \"nodata\"){\n            \n            // var n_count_set = 0;\n             context.set('time_log', parseJSON.date_time.substring(0, 18));\n            msg.headers = {};\n            msg.method = \"POST\";\n            msg.url = \"http://decc-bigdata.com/node-red_insert_data_smartfarm/node-red_insert_data.php\"; \n            msg.payload = {data_array:result,count_set:0}\n            msg.headers[\"content-type\"] = \"application/x-www-form-urlencoded\";\n            msg.headers[\"X-Requested-With\"] = \"XMLHttpRequest\";\n            return msg;\n        }else{\n            var time_log = context.get('time_log') || n_config.data_json.date_time.substring(0, 18); // เวลาล่าสุดจาก db\n            //  msg.payload = parseJSON\n            //         return msg;\n            //         return false\n        \n            if(time_log !== parseJSON.date_time.substring(0, 18)){\n                 context.set('time_log', parseJSON.date_time.substring(0, 18));\n                // var n_count_set = 0;\n                \n                // msg.payload = time_log\n                //     return msg;\n                //     return false\n                    \n                msg.headers = {};\n                msg.method = \"POST\";\n                msg.url = \"http://decc-bigdata.com/smartfarm/server/insert_data/other/insert_data.php\"; \n                msg.payload = {data_array:result,count_set:0}\n                msg.headers[\"content-type\"] = \"application/x-www-form-urlencoded\";\n                msg.headers[\"X-Requested-With\"] = \"XMLHttpRequest\";\n                return msg;\n            }\n        }\n    }\n}\nfunction getArraySum(a) {\n    // count array\n    var total = 0;\n    for (var i in a) {\n        total += a[i];\n    }\n    return total;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 500,
+        "wires": [
+            [
+                "addad1475592bbaf"
+            ]
+        ]
+    },
+    {
+        "id": "57356a2e3cfb2331",
+        "type": "function",
+        "z": "50aa9e4048b91a29",
+        "name": "Initial Last Data from DB",
+        "func": "var output = msg.payload;\n// var pase_json = output.control_status;\n// var parseJSON = JSON.parse(output);\n// msg.payload =output;\n    \nmsg.headers = {};\nmsg.method = \"POST\";\nmsg.url = \"http://decc-bigdata.com/smartfarm/server/insert_data/other/get_config.php\"; \nmsg.payload = {house_master:output}\nmsg.headers[\"content-type\"] = \"application/x-www-form-urlencoded\";\nmsg.headers[\"X-Requested-With\"] = \"XMLHttpRequest\";\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 600,
+        "wires": [
+            [
+                "a8ee27cda171b1ac"
+            ]
+        ]
+    },
+    {
+        "id": "d0c3847c6ee03d21",
+        "type": "function",
+        "z": "50aa9e4048b91a29",
+        "name": "",
+        "func": "var get_config;\nvar data_log = [];\nif (msg.topic == \"config\"){\n    context.set('get_config',msg.payload);\n}\nvar n_config = context.get('get_config') || 0;\n\nif(n_config !== 0){\n    // ----------------------\n    if(msg.topic == \"wemos_wangnoi\"){\n        var output = msg.payload;\n        var obj = JSON.parse(output);\n        var station = (obj.Station);\n        var hum = (obj.Humidity);\n        var temp = (obj.Temperature);\n        \n        if(station == 'K1HT' ){\n            context.set('K1_T',temp);\n            context.set('K1_H',hum);\n        }\n        if(station == 'K1DS' ){\n            context.set('K1_DS',temp);\n            // context.set('data_st1_2_hum',hum);\n        }\n        if(station == 'K2HT' ){\n            context.set('K2_T',temp);\n            context.set('K2_H',hum);\n        }\n        // if(station == 'K2DS' ){\n        //     context.set('K2_DS',temp);\n        //     // context.set('data_st2_1_hum',hum);\n        // }\n        if(station == 'K3HT' ){\n            context.set('K3_T',temp);\n            context.set('K3_H',hum);\n        }\n        if(station == 'K3DS' ){\n            context.set('K3_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        if(station == 'K4HT' ){\n            context.set('K4_T',temp);\n            context.set('K4_H',hum);\n        }\n        // if(station == 'K4DS' ){\n        //     context.set('K4_DS',temp);\n        //     // context.set('data_st2_1_hum',hum);\n        // }\n        if(station == 'K5HT' ){\n            context.set('K5_T',temp);\n            context.set('K5_H',hum);\n        }\n        if(station == 'K5DS' ){\n            context.set('K5_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        if(station == 'K6HT' ){\n            context.set('K6_T',temp);\n            context.set('K6_H',hum);\n        }\n        // if(station == 'K6DS' ){\n        //     context.set('K6_DS',temp);\n        //     // context.set('data_st2_1_hum',hum);\n        // }\n        if(station == 'K7HT' ){\n            context.set('K7_T',temp);\n            context.set('K7_H',hum);\n        }\n        if(station == 'K7DS' ){\n            context.set('K7_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        if(station == 'K8HT' ){\n            context.set('K8_T',temp);\n            context.set('K8_H',hum);\n        }\n        // if(station == 'K8DS' ){\n        //     context.set('K8_DS',temp);\n        //     // context.set('data_st2_1_hum',hum);\n        // }\n        if(station == 'K9HT' ){\n            context.set('K9_T',temp);\n            context.set('K9_H',hum);\n        }\n        if(station == 'K9DS' ){\n            context.set('K9_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        if(station == 'K10HT' ){\n            context.set('K10_T',temp);\n            context.set('K10_H',hum);\n        }\n        // if(station == 'K10_DS' ){\n        //     context.set('K10_DS',temp);\n        //     // context.set('data_st2_1_hum',hum);\n        // }\n        if(station == 'K11HT' ){\n            context.set('K11_T',temp);\n            context.set('K11_H',hum);\n        }\n        if(station == 'K11DS' ){\n            context.set('K11_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        if(station == 'OutHT' ){\n            context.set('O1_T',temp);\n            context.set('O1_H',hum);\n        }\n        if(station == 'OutDS' ){\n            context.set('O1_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        if(station == 'Out2HT' ){\n            context.set('O2_T',temp);\n            context.set('O2_H',hum);\n        }\n        if(station == 'Out2DS' ){\n            context.set('O2_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        if(station == 'Out3HT' ){\n            context.set('O3_T',temp);\n            context.set('O3_H',hum);\n        }\n        if(station == 'Out3DS' ){\n            context.set('O3_DS',temp);\n            // context.set('data_st2_1_hum',hum);\n        }\n        \n        var timestamp = msg.timer;\n        var ntime = timestamp.split(\" - \");\n        var nowtime = ntime[1];\n        var ndate = timestamp.split(\" - \");\n        var nowdate = ndate[0];\n        \n        var nminute = nowtime.split(\":\");\n        var nowminute = Number(nminute[1]);\n        var old_minute = context.get('old_nowminute')||0;\n        old_minute = Number(old_minute)\n        var msg2 = {payload: old_minute};\n        \n    //     var st1_1_temp = context.get('data_st1_1_temp') || n_config.data_json.data.dataST_1_1;\n    //     var st1_1_hum = context.get('data_st1_1_hum') || n_config.data_json.data.dataST_1_2;\n    //     var st1_2_temp = context.get('data_st1_2_temp') || n_config.data_json.data.dataST_1_3;\n    //     var st1_2_hum = context.get('data_st1_2_hum') || n_config.data_json.data.dataST_1_4;\n    //     var st1_3_temp = context.get('data_st1_3_temp') || n_config.data_json.data.dataST_2_1;\n    //     var st1_3_hum = context.get('data_st1_3_hum') || n_config.data_json.data.dataST_2_2;\n        \n    //     var st2_1_temp = context.get('data_st2_1_temp') || n_config.data_json.data.dataST_2_3;\n    //     var st2_1_hum = context.get('data_st2_1_hum') || n_config.data_json.data.dataST_2_4;\n    //     var st2_2_temp = context.get('data_st2_2_temp') || n_config.data_json.data.dataST_3_1;\n    //     var st2_2_hum = context.get('data_st2_2_hum') || n_config.data_json.data.dataST_3_2;\n    //     var st2_3_temp = context.get('data_st2_3_temp') || n_config.data_json.data.dataST_3_3;\n    //     var st2_3_hum = context.get('data_st2_3_hum') || 0;\n    //  msg.payload =  n_config.data_json.serial_id;\n    // return msg;\n    // return false\n    //     var jsonstring ={};\n    //     jsonstring = {\n    //         \"serial_id\": \"KO7WM001\",\n    //         \"date_time\": timestamp,\n    //         \"date\": nowdate,\n    //         \"time\": nowtime,\"data\": {\n    //             \"dataST_1_1\": st1_1_temp,\n    //             \"dataST_1_2\": st1_1_hum,\n    //             \"dataST_1_3\": st1_2_temp,\n    //             \"dataST_1_4\": st1_2_hum,\n    //             \"dataST_2_1\": st1_3_temp,\n    //             \"dataST_2_2\": st1_3_hum,\n    //             \"dataST_2_3\": st2_1_temp,\n    //             \"dataST_2_4\": st2_1_hum,\n    //             \"dataST_3_1\": st2_2_temp,\n    //             \"dataST_3_2\": st2_2_hum,\n    //             \"dataST_3_3\": st2_3_temp,\n    //             \"dataST_3_4\": st2_3_hum\n    //         }\n    //     };\n    //     msg.payload = JSON.stringify(jsonstring);\n    //     if(old_minute != nowminute){\n    //         context.set('old_nowminute',nowminute);\n    //         msg.topic = 'KO7WM001/1/data_update/data_filter'\n    //         return msg;\n    //     }\n    \n        var K1_T = context.get('K1_T') || n_config.data_json.data.dataST_1_1;\n        var K1_H = context.get('K1_H') || n_config.data_json.data.dataST_1_2;\n        var K1_DS = context.get('K1_DS') || n_config.data_json.data.dataST_1_3;\n        var K2_T = context.get('K2_T') || n_config.data_json.data.dataST_1_4;\n        var K2_H = context.get('K2_H') || n_config.data_json.data.dataST_1_5;\n        // var K2_DS = context.get('K2_DS') || 0;\n        var K3_T = context.get('K3_T') || n_config.data_json.data.dataST_2_1;\n        var K3_H = context.get('K3_H') || n_config.data_json.data.dataST_2_2;\n        var K3_DS = context.get('K3_DS') || n_config.data_json.data.dataST_2_3;\n        var K4_T = context.get('K4_T') || n_config.data_json.data.dataST_2_4;\n        var K4_H = context.get('K4_H') || n_config.data_json.data.dataST_2_5;\n        // var K4_DS = context.get('K4_DS') || 0;\n        var K5_T = context.get('K5_T') || n_config.data_json.data.dataST_3_1;\n        var K5_H = context.get('K5_H') || n_config.data_json.data.dataST_3_2;\n        var K5_DS = context.get('K5_DS') || n_config.data_json.data.dataST_3_3;\n        var K6_T = context.get('K6_T') || n_config.data_json.data.dataST_3_4;\n        var K6_H = context.get('K6_H') || n_config.data_json.data.dataST_3_5;\n        // var K6_DS = context.get('K6_DS') || 0;\n        var K7_T = context.get('K7_T') || n_config.data_json.data.dataST_4_1;\n        var K7_H = context.get('K7_H') || n_config.data_json.data.dataST_4_2;\n        var K7_DS = context.get('K7_DS') || n_config.data_json.data.dataST_4_3;\n        var K8_T = context.get('K8_T') || n_config.data_json.data.dataST_4_4;\n        var K8_H = context.get('K8_H') || n_config.data_json.data.dataST_4_5;\n        // var K8_DS = context.get('K8_DS') || 0;\n        var K9_T = context.get('K9_T') || n_config.data_json.data.dataST_5_1;\n        var K9_H = context.get('K9_H') || n_config.data_json.data.dataST_5_2;\n        var K9_DS = context.get('K9_DS') || n_config.data_json.data.dataST_5_3;\n        var K10_T = context.get('K10_T') || n_config.data_json.data.dataST_5_4;\n        var K10_H = context.get('K10_H') || n_config.data_json.data.dataST_5_5;\n        // var K10_DS = context.get('K10_DS') || 0;\n        var K11_T = context.get('K11_T') || n_config.data_json.data.dataST_6_1;\n        var K11_H = context.get('K11_H') || n_config.data_json.data.dataST_6_2;\n        var K11_DS = context.get('K11_DS') || n_config.data_json.data.dataST_6_3;\n        var O1_T = context.get('O1_T') || n_config.data_json.data.dataST_6_4;\n        var O1_H = context.get('O1_H') || n_config.data_json.data.dataST_6_5;\n        var O1_DS = context.get('O1_DS') || n_config.data_json.data.dataST_7_1;\n        var O2_T = context.get('O2_T') || n_config.data_json.data.dataST_7_2;\n        var O2_H = context.get('O2_H') || n_config.data_json.data.dataST_7_3;\n        var O2_DS = context.get('O2_DS') || n_config.data_json.data.dataST_7_4;\n        var O3_T = context.get('O3_T') || n_config.data_json.data.dataST_7_5;\n        var O3_H = context.get('O3_H') || n_config.data_json.data.dataST_8_1;\n        var O3_DS = context.get('O3_DS') || n_config.data_json.data.dataST_8_2;\n        // -----------------------\n        \n        var jsonstring ={};\n        jsonstring = {\n            \"serial_id\": n_config.data_json.serial_id,\n            \"date_time\": timestamp,\n            \"date\": nowdate,\n            \"time\": nowtime,\"data\": {\n                // \"dataST_1_1\": K1_T,\n                // \"dataST_1_2\": K1_H,\n                \"dataST_1_3\": K1_DS,\n                // \"dataST_1_4\": K2_T,\n                // \"dataST_1_5\": K2_H,\n                \"dataST_2_1\": K3_T,\n                \"dataST_2_2\": K3_H,\n                \"dataST_2_3\": K3_DS,\n                // \"dataST_2_4\": K4_T,\n                // \"dataST_2_5\": K4_H,\n                // \"dataST_3_1\": K5_T,\n                // \"dataST_3_2\": K5_H,\n                // \"dataST_3_3\": K5_DS,\n                // \"dataST_3_4\": K6_T,\n                // \"dataST_3_5\": K6_H,\n                \"dataST_4_1\": K7_T,\n                \"dataST_4_2\": K7_H,\n                \"dataST_4_3\": K7_DS,\n                // \"dataST_4_4\": K8_T,\n                // \"dataST_4_5\": K8_H,\n                // \"dataST_5_1\": K9_T,\n                // \"dataST_5_2\": K9_H,\n                // \"dataST_5_3\": K9_DS,\n                // \"dataST_5_4\": K10_T,\n                // \"dataST_5_5\": K10_H,\n                // \"dataST_6_1\": K11_T,\n                // \"dataST_6_2\": K11_H,\n                // \"dataST_6_3\": K11_DS,\n                // \"dataST_6_4\": O1_T,\n                // \"dataST_6_5\": O1_H,\n                \"dataST_7_1\": O1_DS,\n                // \"dataST_7_2\": O2_T,\n                // \"dataST_7_3\": O2_H,\n                // \"dataST_7_4\": O2_DS,\n                // \"dataST_7_5\": O3_T,\n                // \"dataST_8_1\": O3_H,\n                // \"dataST_8_2\": O3_DS\n            }\n        };\n        msg.payload = JSON.stringify(jsonstring);\n        if(old_minute != nowminute){\n            context.set('old_nowminute',nowminute);\n            msg.topic = 'insert_data_filter'\n            return msg;\n        }\n    }\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 660,
+        "wires": [
+            [
+                "1f650b42d707ce53",
+                "292146f4e97f666e"
+            ]
+        ]
+    },
+    {
+        "id": "be39eccec764e958",
+        "type": "inject",
+        "z": "50aa9e4048b91a29",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "TURWM001",
+        "payloadType": "str",
+        "x": 200,
+        "y": 600,
+        "wires": [
+            [
+                "57356a2e3cfb2331"
+            ]
+        ]
+    },
+    {
+        "id": "2d654eff8591cb55",
+        "type": "function",
+        "z": "50aa9e4048b91a29",
+        "name": "Change Topic to \"config\"",
+        "func": "var output = msg.payload;\nmsg.topic = \"config\";\nmsg.payload = output;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 600,
+        "wires": [
+            [
+                "d0c3847c6ee03d21",
+                "1f650b42d707ce53"
+            ]
+        ]
+    },
+    {
+        "id": "0d7eb7d1aed7e682",
+        "type": "debug",
+        "z": "50aa9e4048b91a29",
+        "name": "TURWM001",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1350,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "292146f4e97f666e",
+        "type": "mqtt out",
+        "z": "50aa9e4048b91a29",
+        "name": "",
+        "topic": "TURWM001/1/data_update/data_filter",
+        "qos": "1",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8116f63f.e78778",
+        "x": 1150,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "1f650b42d707ce53",
+        "type": "function",
+        "z": "50aa9e4048b91a29",
+        "name": "",
+        "func": "var get_config;\nvar get_mqtt;\nvar data_log = [];\nif (msg.topic == \"config\"){\n    context.set('get_config',msg.payload);\n}            \nif (msg.topic == \"insert_data_filter\"){\n    context.set('get_mqtt',msg.payload);\n}\nvar result = context.get('get_mqtt') || 0;\nvar n_config = context.get('get_config') || 0;\n\nif(n_config !== 0){\n    if(result !== 0){\n        var parseJSON = JSON.parse(result);\n        var chann = [];\n        if(n_config.data === \"nodata\"){\n            \n            // var n_count_set = 0;\n             context.set('time_log', parseJSON.date_time.substring(0, 18));\n            msg.headers = {};\n            msg.method = \"POST\";\n            msg.url = \"http://decc-bigdata.com/smartfarm/server/insert_data/other/insert_data.php\"; \n            msg.payload = {data_array:result,count_set:0}\n            msg.headers[\"content-type\"] = \"application/x-www-form-urlencoded\";\n            msg.headers[\"X-Requested-With\"] = \"XMLHttpRequest\";\n            return msg;\n        }else{\n            var time_log = context.get('time_log') || n_config.data_json.date_time.substring(0, 18); // เวลาล่าสุดจาก db\n            //  msg.payload = parseJSON\n            //         return msg;\n            //         return false\n        \n            if(time_log !== parseJSON.date_time.substring(0, 18)){\n                 context.set('time_log', parseJSON.date_time.substring(0, 18));\n                // var n_count_set = 0;\n                \n                // msg.payload = time_log\n                //     return msg;\n                //     return false\n                    \n                msg.headers = {};\n                msg.method = \"POST\";\n                msg.url = \"http://decc-bigdata.com/smartfarm/server/insert_data/other/insert_data.php\"; \n                msg.payload = {data_array:result,count_set:0}\n                msg.headers[\"content-type\"] = \"application/x-www-form-urlencoded\";\n                msg.headers[\"X-Requested-With\"] = \"XMLHttpRequest\";\n                return msg;\n            }\n        }\n    }\n}\nfunction getArraySum(a) {\n    // count array\n    var total = 0;\n    for (var i in a) {\n        total += a[i];\n    }\n    return total;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 720,
+        "wires": [
+            [
+                "517a53134c395bf6"
+            ]
+        ]
+    },
+    {
+        "id": "18f3a339a347d1f3",
+        "type": "http request",
+        "z": "50aa9e4048b91a29",
+        "name": "",
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 670,
+        "y": 120,
+        "wires": [
+            [
+                "879c2d02eb077e96"
+            ]
+        ]
+    },
+    {
+        "id": "df36a40d0b668b39",
+        "type": "http request",
+        "z": "50aa9e4048b91a29",
+        "name": "",
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 670,
+        "y": 380,
+        "wires": [
+            [
+                "773a5027a67f7d56"
+            ]
+        ]
+    },
+    {
+        "id": "a8ee27cda171b1ac",
+        "type": "http request",
+        "z": "50aa9e4048b91a29",
+        "name": "",
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 670,
+        "y": 600,
+        "wires": [
+            [
+                "2d654eff8591cb55"
+            ]
+        ]
+    },
+    {
+        "id": "517a53134c395bf6",
+        "type": "http request",
+        "z": "50aa9e4048b91a29",
+        "name": "",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1130,
+        "y": 720,
+        "wires": [
+            [
+                "0d7eb7d1aed7e682"
+            ]
+        ]
+    },
+    {
+        "id": "addad1475592bbaf",
+        "type": "http request",
+        "z": "50aa9e4048b91a29",
+        "name": "",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1130,
+        "y": 500,
+        "wires": [
+            [
+                "dce17178e68cd74e"
+            ]
+        ]
+    },
+    {
+        "id": "9c47c8fc6b256062",
+        "type": "http request",
+        "z": "50aa9e4048b91a29",
+        "name": "",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1130,
+        "y": 240,
+        "wires": [
+            [
+                "b2d3d4eef1c6447b"
+            ]
+        ]
+    },
+    {
+        "id": "dc6d04b0e97ac727",
+        "type": "debug",
+        "z": "50aa9e4048b91a29",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1180,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "8116f63f.e78778",
+        "type": "mqtt-broker",
+        "name": "new_DECC_Bigdata",
+        "broker": "203.154.83.117",
+        "port": "4563",
+        "clientid": "node-red_all_site",
+        "autoConnect": true,
+        "usetls": false,
+        "compatmode": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]

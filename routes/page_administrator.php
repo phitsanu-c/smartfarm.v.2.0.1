@@ -414,3 +414,6 @@
         <!-- </div> -->
     <!-- </div> -->
 <!-- </div> -->
+<!-- KMUMT001/1/control/control_st_5 on -->
+<!-- KMUMT001/1/control/control_user Hardware -->
+<!-- KMUMT001/1/control/mode off -->

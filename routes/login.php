@@ -2,6 +2,7 @@
 // session_start();
 require "connectdb.php";
 require 'tu/phpMQTT.php';
+
 $host = '203.154.83.117';//'decc-bigdata.com';     // change if necessary
 $port = 4563; //6838                    // change if necessary
 $username = '';                   // set your username
@@ -9,6 +10,8 @@ $password = '';                   // set your password
 $topic = "web_system";
 $mqtt = new bluerhinos\phpMQTT($host, $port, "ClientID".rand());
 //
+// echo $_POST['name'];
+// exit();
 if ($mqtt->connect(true,NULL,$username,$password)) {
     $data_mq = $mqtt->subscribeAndWaitForMessage($topic, 1);
     // echo $data_mq;

@@ -269,7 +269,7 @@
             					</div>
             				</div>
                             <!-- <div class="chartdiv" id="chart_realtime"></div> -->
-                        </dic>
+                        </div>
                     </div>
                     <input type="hidden" class="hidden_select_sw_manual">
                     <input type="hidden" class="hidden_select_sw_auto">
@@ -452,7 +452,7 @@
 
                     var hostname = "203.154.83.117";
                     var port = "6838";
-                    var clientId = "mqtt_" + parseInt(Math.random() * 100000, 10);
+                    var clientId = "mqtt_web_" + parseInt(Math.random() * 100000, 10);
 
                     // return false
                     function connect() {
@@ -528,7 +528,7 @@
                     }
                     var timeoutId = 0;
                     var timeoutId2 = 0;
-                    let resp = [], resp_config = []
+                    let resp = [], resp_config = [], auto_load = []
                     function onConnectionLost(responseObject) {
                         if (responseObject.errorCode !== 0) {
                             console.log("Connection Lost: " + responseObject.errorMessage);
@@ -580,6 +580,7 @@
                                 // let result = //'{"serial_id":"TUSMT008","timestamp":"2022-09-29 20:13:31.673963","version":"1.3.2.3r2","mode":"Auto","dripper_1":"ON","dripper_2":"ON","dripper_3":"ON","dripper_4":"ON","fan_1":"OFF","fan_2":"OFF","fan_3":"OFF","fan_4":"OFF","foggy_1":"OFF","foggy_2":"OFF","spray":"OFF","shading":"ON","user_control":"xzenzza"}' //
                                 let result = message.payloadString;
                                 let parseJSON = $.parseJSON(result);
+                                // console.log(parseJSON);
                                 resp[i] = parseJSON.mode;
                                 $('.am_user_'+i).html(parseJSON.user_control)
                                 if (parseJSON.mode === 'Manual') {
@@ -618,30 +619,53 @@
                                     $(".img_sl_" + i).removeClass('bg-success').addClass('bg-danger').html('OFF')
                                 }
                             }
-                            if(resp[i] === "Auto"){
-                                for (let j = 1; j < 5; j++) {
-                                    if(message.destinationName == "TUSMT00"+i  + "/control/loads_auto/fan_"+j){
-                                        let result = message.payloadString;
-                                        // console.log("TUSMT00"+i  + " = "+ result);
+                            // let log2 = [], log = []
+                            for (let j = 1; j < 5; j++) {
+
+                                if(message.destinationName == "TUSMT00"+i  + "/control/loads_auto/fan_"+j){
+                                    let result = message.payloadString;
+                                    // console.log("TUSMT00"+i  + " = "+ result);
+
+                                    // auto_load.push({title : link});
+                                    // log["fan_"+j] = result
+                                    // auto_load[i]
+                                    // log.push(result)
+                                    // auto_load[i].push({'name':result})
+                                    // if(isset(auto_load[i]["fan_"+j])){
+                                    //     alert('a')
+                                    //     auto_load[i]["fan_"+j] = result
+                                    // }else {
+                                    //     let name = "fan_"+j
+                                    //     auto_load[i] = {name:result}
+                                    // }
+
+                                    if(resp[i] === "Auto"){
                                         if (result === 'ON') {
                                             $(".am_real_f"+j+"_"+ i).removeClass('bg-danger').addClass('bg-success')//.html('ON')
                                         } else {
                                             $(".am_real_f"+j+"_"+ i).removeClass('bg-success').addClass('bg-danger')//.html('OFF')
                                         }
                                     }
-                                    if(message.destinationName == "TUSMT00"+i  + "/control/loads_auto/dripper_"+j){
-                                        let result = message.payloadString;
-                                        // console.log("TUSMT00"+i  + " = "+ result);
+                                }
+                                // log2[i]=log
+                                // console.log(log2);
+                                // auto_load[i] = log
+                                if(message.destinationName == "TUSMT00"+i  + "/control/loads_auto/dripper_"+j){
+                                    let result = message.payloadString;
+                                    // console.log("TUSMT00"+i  + " = "+ result);
+                                    if(resp[i] === "Auto"){
                                         if (result === 'ON') {
                                             $(".am_real_d"+j+"_"+ i).removeClass('bg-danger').addClass('bg-success')//.html('ON')
                                         } else {
                                             $(".am_real_d"+j+"_"+ i).removeClass('bg-success').addClass('bg-danger')//.html('OFF')
                                         }
                                     }
-                                    if(j < 3){
-                                        if(message.destinationName == "TUSMT00"+i  + "/control/loads_auto/foggy_"+j){
-                                            let result = message.payloadString;
-                                            // console.log("TUSMT00"+i  + " = "+ result);
+                                }
+                                if(j < 3){
+                                    if(message.destinationName == "TUSMT00"+i  + "/control/loads_auto/foggy_"+j){
+                                        let result = message.payloadString;
+                                        // console.log("TUSMT00"+i  + " = "+ result);
+                                        if(resp[i] === "Auto"){
                                             if (result === 'ON') {
                                                 $(".am_real_fg"+j+"_"+ i).removeClass('bg-danger').addClass('bg-success')//.html('ON')
                                             } else {
@@ -650,18 +674,22 @@
                                         }
                                     }
                                 }
-                                if(message.destinationName == "TUSMT00"+i  + "/control/loads_auto/spray"){
-                                    let result = message.payloadString;
-                                    // console.log("TUSMT00"+i  + " = "+ result);
+                            }
+                            if(message.destinationName == "TUSMT00"+i  + "/control/loads_auto/spray"){
+                                let result = message.payloadString;
+                                // console.log("TUSMT00"+i  + " = "+ result);
+                                if(resp[i] === "Auto"){
                                     if (result === 'ON') {
                                         $(".am_real_sp_"+ i).removeClass('bg-danger').addClass('bg-success')//.html('ON')
                                     } else {
                                         $(".am_real_sp_"+ i).removeClass('bg-success').addClass('bg-danger')//.html('OFF')
                                     }
                                 }
-                                if(message.destinationName == "TUSMT00"+i  + "/control/loads_auto/shading"){
-                                    let result = message.payloadString;
-                                    // console.log("TUSMT00"+i  + " = "+ result);
+                            }
+                            if(message.destinationName == "TUSMT00"+i  + "/control/loads_auto/shading"){
+                                let result = message.payloadString;
+                                // console.log("TUSMT00"+i  + " = "+ result);
+                                if(resp[i] === "Auto"){
                                     if (result === 'ON') {
                                         $(".am_real_sl_"+ i).removeClass('bg-danger').addClass('bg-success')//.html('ON')
                                     } else {
@@ -669,16 +697,16 @@
                                     }
                                 }
                             }
-                            else { // Manual
-                                if(message.destinationName == "TUSMT00"+i + "/control/set_config"){
-                                    let result = message.payloadString;
-                                    let parseJSON = $.parseJSON(result);
-                                    resp_config[i] = parseJSON.config_manual;
-                                }
-                                // console.log(resp_config);
-                                if(message.destinationName == "TUSMT00"+i + "/control/loads/dripper"){
-                                    let result = message.payloadString;
-                                    // console.log(resp_config[i].dripper_1);
+                            if(message.destinationName == "TUSMT00"+i + "/control/set_config"){
+                                let result = message.payloadString;
+                                let parseJSON = $.parseJSON(result);
+                                resp_config[i] = parseJSON.config_manual;
+                            }
+                            // console.log(resp_config);
+                            if(message.destinationName == "TUSMT00"+i + "/control/loads/dripper"){
+                                let result = message.payloadString;
+                                // console.log(resp_config[i].dripper_1);
+                                if(resp[i] !== "Auto"){
                                     for(let k = 1; k < 5; k++){
                                         if(result === "ON"){
                                             if(resp_config[i]['dripper_'+k] === "ON"){
@@ -691,9 +719,11 @@
                                         }
                                     }
                                 }
-                                if(message.destinationName == "TUSMT00"+i + "/control/loads/fan"){
-                                    let result = message.payloadString;
-                                    // console.log(resp_config[i].dripper_1);
+                            }
+                            if(message.destinationName == "TUSMT00"+i + "/control/loads/fan"){
+                                let result = message.payloadString;
+                                // console.log(resp_config[i].dripper_1);
+                                if(resp[i] !== "Auto"){
                                     for(let k = 1; k < 5; k++){
                                         if(result === "ON"){
                                             if(resp_config[i]['fan_'+k] === "ON"){
@@ -706,9 +736,11 @@
                                         }
                                     }
                                 }
-                                if(message.destinationName == "TUSMT00"+i + "/control/loads/foggy"){
-                                    let result = message.payloadString;
-                                    // console.log(resp_config[i].dripper_1);
+                            }
+                            if(message.destinationName == "TUSMT00"+i + "/control/loads/foggy"){
+                                let result = message.payloadString;
+                                // console.log(resp_config[i].dripper_1);
+                                if(resp[i] !== "Auto"){
                                     for(let k = 1; k < 3; k++){
                                         if(result === "ON"){
                                             if(resp_config[i]['foggy_'+k] === "ON"){
@@ -721,8 +753,10 @@
                                         }
                                     }
                                 }
-                                if(message.destinationName == "TUSMT00"+i + "/control/loads/spray"){
-                                    let result = message.payloadString;
+                            }
+                            if(message.destinationName == "TUSMT00"+i + "/control/loads/spray"){
+                                let result = message.payloadString;
+                                if(resp[i] !== "Auto"){
                                     if(result === "ON"){
                                         if(resp_config[i]['spray'] === "ON"){
                                             $(".am_real_sp_"+i).removeClass('bg-danger').addClass('bg-success')//.html('ON')
@@ -733,20 +767,24 @@
                                         $(".am_real_sp_"+ i).removeClass('bg-success').addClass('bg-danger')//.html('OFF')
                                     }
                                 }
-                                if(message.destinationName == "TUSMT00"+i + "/control/loads/shading"){
+                            }
+                            if(message.destinationName == "TUSMT00"+i + "/control/loads/shading"){
                                     let result = message.payloadString;
-                                    if(result === "ON"){
-                                        if(resp_config[i]['shading'] === "ON"){
-                                            $(".am_real_sl_"+i).removeClass('bg-danger').addClass('bg-success')//.html('ON')
-                                        } else {
-                                            $(".am_real_sl_"+i).removeClass('bg-success').addClass('bg-danger')//.html('OFF')
+                                    if(resp[i] !== "Auto"){
+                                        if(result === "ON"){
+                                            if(resp_config[i]['shading'] === "ON"){
+                                                $(".am_real_sl_"+i).removeClass('bg-danger').addClass('bg-success')//.html('ON')
+                                            } else {
+                                                $(".am_real_sl_"+i).removeClass('bg-success').addClass('bg-danger')//.html('OFF')
+                                            }
+                                        }else {
+                                            $(".am_real_sl_"+ i).removeClass('bg-success').addClass('bg-danger')//.html('OFF')
                                         }
-                                    }else {
-                                        $(".am_real_sl_"+ i).removeClass('bg-success').addClass('bg-danger')//.html('OFF')
                                     }
                                 }
-                            }
+
                         }
+                        // console.log(auto_load);
                         // ---------KMUTT
                         if(message.destinationName == "KMUMT001/1/data_update/data_filter") {
                             let result = message.payloadString;
@@ -842,7 +880,7 @@
             // alert('zzzz')
             $("#load_pages_administrator").hide();
             if (house_master.length == 8) {
-                let loading = verticalNoTitle();
+                    let loading = verticalNoTitle();
                 if (url[0] == 2) {
                     $.ajax({
                         url: "routes/kmu/get_config.php",
